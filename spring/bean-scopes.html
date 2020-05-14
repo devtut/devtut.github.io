@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring - Bean scopes</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Additional scopes in web-aware contexts, Prototype scope, Singleton scope">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Spring - Bean scopes">
+    <meta property="og:description" content="Additional scopes in web-aware contexts, Prototype scope, Singleton scope">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/spring/bean-scopes.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Spring - Bean scopes">
+    <meta name="twitter:description" content="Additional scopes in web-aware contexts, Prototype scope, Singleton scope">
+    <meta name="twitter:url" content="/spring/bean-scopes.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3195.69119c55.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Spring Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/spring/" class="sidebar-link">Disclaimer</a></li><li><a href="/spring/getting-started-with-spring.html" class="sidebar-link">Getting started with spring</a></li><li><a href="/spring/spring-core.html" class="sidebar-link">Spring Core</a></li><li><a href="/spring/spring-expression-language-spel.html" class="sidebar-link">Spring Expression Language (SpEL)</a></li><li><a href="/spring/obtaining-a-sqlrowset-from-simplejdbccall.html" class="sidebar-link">Obtaining a SqlRowSet from SimpleJdbcCall</a></li><li><a href="/spring/creating-and-using-beans.html" class="sidebar-link">Creating and using beans</a></li><li><a href="/spring/bean-scopes.html" class="active sidebar-link">Bean scopes</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/spring/bean-scopes.html#additional-scopes-in-web-aware-contexts" class="sidebar-link">Additional scopes in web-aware contexts</a></li><li class="sidebar-sub-header"><a href="/spring/bean-scopes.html#prototype-scope" class="sidebar-link">Prototype scope</a></li><li class="sidebar-sub-header"><a href="/spring/bean-scopes.html#singleton-scope" class="sidebar-link">Singleton scope</a></li></ul></li><li><a href="/spring/conditional-bean-registration-in-spring.html" class="sidebar-link">Conditional bean registration in Spring</a></li><li><a href="/spring/spring-jsr-303-bean-validation.html" class="sidebar-link">Spring JSR 303 Bean Validation</a></li><li><a href="/spring/applicationcontext-configuration.html" class="sidebar-link">ApplicationContext Configuration</a></li><li><a href="/spring/resttemplate.html" class="sidebar-link">RestTemplate</a></li><li><a href="/spring/task-execution-and-scheduling.html" class="sidebar-link">Task Execution and Scheduling</a></li><li><a href="/spring/spring-lazy-initialization.html" class="sidebar-link">Spring Lazy Initialization</a></li><li><a href="/spring/property-source.html" class="sidebar-link">Property Source</a></li><li><a href="/spring/dependency-injection-di-and-inversion-of-control-ioc.html" class="sidebar-link">Dependency Injection (DI) and Inversion of Control (IoC)</a></li><li><a href="/spring/jdbctemplate.html" class="sidebar-link">JdbcTemplate</a></li><li><a href="/spring/soap-ws-consumption.html" class="sidebar-link">SOAP WS Consumption</a></li><li><a href="/spring/spring-profile.html" class="sidebar-link">Spring profile</a></li><li><a href="/spring/understanding-the-dispatcher-servlet-xml.html" class="sidebar-link">Understanding the dispatcher-servlet.xml</a></li><li><a href="/spring/getting-started-with-spring-mvc.html" class="sidebar-link">Getting started with spring-mvc</a></li><li><a href="/spring/spring-mvc-with-annotations.html" class="sidebar-link">Spring-MVC with annotations</a></li><li><a href="/spring/spring-mvc-validation.html" class="sidebar-link">Spring MVC Validation</a></li><li><a href="/spring/file-upload.html" class="sidebar-link">File Upload</a></li><li><a href="/spring/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/spring/global-exception-handling.html" class="sidebar-link">Global Exception Handling</a></li><li><a href="/spring/getting-started-with-spring-boot.html" class="sidebar-link">Getting started with spring-boot</a></li><li><a href="/spring/installing-the-spring-boot-cli.html" class="sidebar-link">Installing the Spring Boot CLI</a></li><li><a href="/spring/controllers.html" class="sidebar-link">Controllers</a></li><li><a href="/spring/package-scanning.html" class="sidebar-link">Package scanning</a></li><li><a href="/spring/rest-services.html" class="sidebar-link">REST Services</a></li><li><a href="/spring/create-and-use-of-multiple-application-properties-files.html" class="sidebar-link">Create and Use of multiple application.properties files</a></li><li><a href="/spring/threadpooltaskexecutor-configuration-and-usage.html" class="sidebar-link">ThreadPoolTaskExecutor: configuration and usage</a></li><li><a href="/spring/fully-responsive-spring-boot-web-application-with-jhipster.html" class="sidebar-link">Fully-Responsive Spring Boot Web Application with JHipster</a></li><li><a href="/spring/connecting-a-spring-boot-application-to-mysql.html" class="sidebar-link">Connecting a spring-boot application to MySQL</a></li><li><a href="/spring/caching-with-redis-using-spring-boot-for-mongodb.html" class="sidebar-link">Caching with Redis Using Spring Boot for MongoDB</a></li><li><a href="/spring/deploying-sample-application-using-spring-boot-on-amazon-elastic-beanstalk.html" class="sidebar-link">Deploying Sample application using Spring-boot on Amazon Elastic Beanstalk</a></li><li><a href="/spring/testing-in-spring-boot.html" class="sidebar-link">Testing in Spring Boot</a></li><li><a href="/spring/spring-boot-hibernate-web-ui-thymeleaf.html" class="sidebar-link">Spring boot + Hibernate + Web UI (Thymeleaf)</a></li><li><a href="/spring/spring-boot-hibernate-rest-integration.html" class="sidebar-link">Spring Boot- Hibernate-REST Integration</a></li><li><a href="/spring/spring-boot-microservice-with-jpa.html" class="sidebar-link">Spring-Boot Microservice with JPA</a></li><li><a href="/spring/spring-boot-jpa-rest.html" class="sidebar-link">Spring Boot + JPA + REST</a></li><li><a href="/spring/spring-boot-jdbc.html" class="sidebar-link">Spring-Boot + JDBC</a></li><li><a href="/spring/spring-boot-jpa-mongodb.html" class="sidebar-link">Spring boot + JPA + mongoDB</a></li><li><a href="/spring/spring-boot-spring-data-elasticsearch.html" class="sidebar-link">Spring Boot + Spring Data Elasticsearch</a></li><li><a href="/spring/spring-boot-spring-data-jpa.html" class="sidebar-link">Spring boot + Spring Data JPA</a></li><li><a href="/spring/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="bean-scopes"><a href="#bean-scopes" class="header-anchor">#</a> Bean scopes</h1> <h2 id="additional-scopes-in-web-aware-contexts"><a href="#additional-scopes-in-web-aware-contexts" class="header-anchor">#</a> Additional scopes in web-aware contexts</h2> <p>There are several scopes that are available only in a web-aware application context:</p> <ul><li><strong>request</strong> - new bean instance is created per HTTP request</li> <li><strong>session</strong> - new bean instance is created per HTTP session</li> <li><strong>application</strong> - new bean instance is created per <code>ServletContext</code></li> <li><strong>globalSession</strong> - new bean instance is created per global session in Portlet environment (in Servlet environment global session scope is equal to session scope)</li> <li><strong>websocket</strong> - new bean instance is created per WebSocket session</li></ul> <p>No additional setup is required to declare and access web-scoped beans in Spring Web MVC environment.</p> <h3 id="xml-configuration"><a href="#xml-configuration" class="header-anchor">#</a> XML Configuration</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;myRequestBean&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;OneClass&quot;</span> scope<span class="token operator">=</span><span class="token string">&quot;request&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;mySessionBean&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;AnotherClass&quot;</span> scope<span class="token operator">=</span><span class="token string">&quot;session&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;myApplicationBean&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;YetAnotherClass&quot;</span> scope<span class="token operator">=</span><span class="token string">&quot;application&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;myGlobalSessionBean&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;OneMoreClass&quot;</span> scope<span class="token operator">=</span><span class="token string">&quot;globalSession&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+
+</code></pre></div><h3 id="java-configuration-prior-to-spring-4-3"><a href="#java-configuration-prior-to-spring-4-3" class="header-anchor">#</a> Java Configuration (prior to Spring 4.3)</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyConfiguration</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token class-name">WebApplicationContext</span><span class="token punctuation">.</span>SCOPE_REQUEST<span class="token punctuation">,</span> proxyMode <span class="token operator">=</span> <span class="token class-name">ScopedProxyMode</span><span class="token punctuation">.</span>TARGET_CLASS<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">OneClass</span> <span class="token function">myRequestBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">OneClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token class-name">WebApplicationContext</span><span class="token punctuation">.</span>SCOPE_SESSION<span class="token punctuation">,</span> proxyMode <span class="token operator">=</span> <span class="token class-name">ScopedProxyMode</span><span class="token punctuation">.</span>TARGET_CLASS<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">AnotherClass</span> <span class="token function">mySessionBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">AnotherClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token class-name">WebApplicationContext</span><span class="token punctuation">.</span>SCOPE_APPLICATION<span class="token punctuation">,</span> proxyMode <span class="token operator">=</span> <span class="token class-name">ScopedProxyMode</span><span class="token punctuation">.</span>TARGET_CLASS<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">YetAnotherClass</span> <span class="token function">myApplicationBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">YetAnotherClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token class-name">WebApplicationContext</span><span class="token punctuation">.</span>SCOPE_GLOBAL_SESSION<span class="token punctuation">,</span> proxyMode <span class="token operator">=</span> <span class="token class-name">ScopedProxyMode</span><span class="token punctuation">.</span>TARGET_CLASS<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">OneMoreClass</span> <span class="token function">myGlobalSessionBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">OneMoreClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="java-configuration-after-spring-4-3"><a href="#java-configuration-after-spring-4-3" class="header-anchor">#</a> Java Configuration (after Spring 4.3)</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyConfiguration</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@RequestScope</span>
+    <span class="token keyword">public</span> <span class="token class-name">OneClass</span> <span class="token function">myRequestBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">OneClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@SessionScope</span>
+    <span class="token keyword">public</span> <span class="token class-name">AnotherClass</span> <span class="token function">mySessionBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">AnotherClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@ApplicationScope</span>
+    <span class="token keyword">public</span> <span class="token class-name">YetAnotherClass</span> <span class="token function">myApplicationBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">YetAnotherClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="annotation-driven-components"><a href="#annotation-driven-components" class="header-anchor">#</a> Annotation-Driven Components</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Component</span>
+<span class="token annotation punctuation">@RequestScope</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OneClass</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token annotation punctuation">@SessionScope</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AnotherClass</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token annotation punctuation">@ApplicationScope</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">YetAnotherClass</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span>scopeName <span class="token operator">=</span> <span class="token class-name">WebApplicationContext</span><span class="token punctuation">.</span>SCOPE_GLOBAL_SESSION<span class="token punctuation">,</span> proxyMode <span class="token operator">=</span> <span class="token class-name">ScopedProxyMode</span><span class="token punctuation">.</span>TARGET_CLASS<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OneMoreClass</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span>scopeName <span class="token operator">=</span> <span class="token string">&quot;websocket&quot;</span><span class="token punctuation">,</span> proxyMode <span class="token operator">=</span> <span class="token class-name">ScopedProxyMode</span><span class="token punctuation">.</span>TARGET_CLASS<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AndOneMoreClass</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="prototype-scope"><a href="#prototype-scope" class="header-anchor">#</a> Prototype scope</h2> <p>A prototype-scoped bean is not pre-created on Spring container startup. Instead, a new fresh instance will be created every time a request to retrieve this bean is sent to the container. This scope is recommended for stateful objects, since its state won't be shared by other components.</p> <p>In order to define a prototype-scoped bean, we need to add the @Scope annotation, specifying the type of scope we want.</p> <p>Given the following MyBean class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyBean</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> LOGGER <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">MyBean</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> property<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">MyBean</span><span class="token punctuation">(</span><span class="token class-name">String</span> property<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>property <span class="token operator">=</span> property<span class="token punctuation">;</span>
+        LOGGER<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;Initializing {} bean...&quot;</span><span class="token punctuation">,</span> property<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>property<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setProperty</span><span class="token punctuation">(</span><span class="token class-name">String</span> property<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>property <span class="token operator">=</span> property<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>We define a bean definition, stating its scope as prototype:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PrototypeConfiguration</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span><span class="token string">&quot;prototype&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">MyBean</span> <span class="token function">prototypeBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">MyBean</span><span class="token punctuation">(</span><span class="token string">&quot;prototype&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>In order to see how it works, we retrieve the bean from the Spring container and set a different value for its property field. Next, we will again retrieve the bean from the container and look up its value:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name">MyBean</span> prototypeBean1 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;prototypeBean&quot;</span><span class="token punctuation">,</span> <span class="token class-name">MyBean</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+prototypeBean1<span class="token punctuation">.</span><span class="token function">setProperty</span><span class="token punctuation">(</span><span class="token string">&quot;changed property&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">MyBean</span> prototypeBean2 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;prototypeBean&quot;</span><span class="token punctuation">,</span> <span class="token class-name">MyBean</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+logger<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;Prototype bean 1 property: &quot;</span> <span class="token operator">+</span> prototypeBean1<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+logger<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;Prototype bean 2 property: &quot;</span> <span class="token operator">+</span> prototypeBean2<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Looking at the following result, we can see how a new instance has been created on each bean request:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name">Initializing</span> prototype bean<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token class-name">Initializing</span> prototype bean<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token class-name">Prototype</span> bean <span class="token number">1</span> property<span class="token operator">:</span> changed property
+<span class="token class-name">Prototype</span> bean <span class="token number">2</span> property<span class="token operator">:</span> prototype
+
+</code></pre></div><p>A common mistake is to assume that the bean is recreated per invocation or per thread, this is <strong>NOT</strong> the case.  Instead an instance is created PER INJECTION (or retrieval from the context).  If a Prototype scoped bean is only ever injected into a single singleton bean, there will only ever be one instance of that Prototype scoped bean.</p> <p>Spring does not manage the complete lifecycle of a prototype bean: the container instantiates, configures, decorates and otherwise assembles a prototype object, hands it to the client and then has no further knowledge of that prototype instance.</p> <h2 id="singleton-scope"><a href="#singleton-scope" class="header-anchor">#</a> Singleton scope</h2> <p>If a bean is defined with singleton scope, there will only be one single object instance initialized in the Spring container. All requests to this bean will return the same shared instance. This is the default scope when defining a bean.</p> <p>Given the following MyBean class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyBean</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> LOGGER <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">MyBean</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> property<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">MyBean</span><span class="token punctuation">(</span><span class="token class-name">String</span> property<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>property <span class="token operator">=</span> property<span class="token punctuation">;</span>
+        LOGGER<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;Initializing {} bean...&quot;</span><span class="token punctuation">,</span> property<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>property<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setProperty</span><span class="token punctuation">(</span><span class="token class-name">String</span> property<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>property <span class="token operator">=</span> property<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>We can define a singleton bean with the @Bean annotation:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SingletonConfiguration</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">MyBean</span> <span class="token function">singletonBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">MyBean</span><span class="token punctuation">(</span><span class="token string">&quot;singleton&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The following example retrieves the same bean twice from the Spring context:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name">MyBean</span> singletonBean1 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;singletonBean&quot;</span><span class="token punctuation">,</span> <span class="token class-name">MyBean</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+singletonBean1<span class="token punctuation">.</span><span class="token function">setProperty</span><span class="token punctuation">(</span><span class="token string">&quot;changed property&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">MyBean</span> singletonBean2 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;singletonBean&quot;</span><span class="token punctuation">,</span> <span class="token class-name">MyBean</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>When logging the singletonBean2 property, the message <strong>&quot;changed property&quot;</strong> will be shown, since we just retrieved the same shared instance.</p> <p>Since the instance is shared among different components, it is recommended to define singleton scope for stateless objects.</p> <h3 id="lazy-singleton-beans"><a href="#lazy-singleton-beans" class="header-anchor">#</a> Lazy singleton beans</h3> <p>By default, singleton beans are pre-instantiated. Hence, the shared object instance will be created when the Spring container is created. If we start the application, the <strong>&quot;Initializing singleton bean...&quot;</strong> message will be shown.</p> <p>If we don't want the bean to be pre-instantiated, we can add the @Lazy annotation to the bean definition. This will prevent the bean from being created until it is first requested.</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Bean</span>
+<span class="token annotation punctuation">@Lazy</span>
+<span class="token keyword">public</span> <span class="token class-name">MyBean</span> <span class="token function">lazySingletonBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">MyBean</span><span class="token punctuation">(</span><span class="token string">&quot;lazy singleton&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Now, if we start the Spring container, no <strong>&quot;Initializing lazy singleton bean...&quot;</strong> message will appear. The bean won't be created until it is requested for the first time:</p> <div class="language-java extra-class"><pre class="language-java"><code>logger<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;Retrieving lazy singleton bean...&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;lazySingletonBean&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>If we run the application with both singleton and lazy singleton beans defined, It will produce the following messages:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name">Initializing</span> singleton bean<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token class-name">Retrieving</span> lazy singleton bean<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token class-name">Initializing</span> lazy singleton bean<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/spring/bean-scopes.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/spring/creating-and-using-beans.html" class="prev">
+        Creating and using beans
+      </a></span> <span class="next"><a href="/spring/conditional-bean-registration-in-spring.html">
+        Conditional bean registration in Spring
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3195.69119c55.js" defer></script>
+  </body>
+</html>

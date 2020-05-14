@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C++ | Exceptions</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Catching exceptions, Rethrow (propagate) exception, Best practice: throw by value, catch by const reference, std::uncaught_exceptions, Custom exception, Function Try Block for regular function, Nested exception, Function Try Blocks In constructor, Function Try Blocks In destructor">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C++ | Exceptions">
+    <meta property="og:description" content="Catching exceptions, Rethrow (propagate) exception, Best practice: throw by value, catch by const reference, std::uncaught_exceptions, Custom exception, Function Try Block for regular function, Nested exception, Function Try Blocks In constructor, Function Try Blocks In destructor">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/cpp/exceptions.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C++ | Exceptions">
+    <meta name="twitter:description" content="Catching exceptions, Rethrow (propagate) exception, Best practice: throw by value, catch by const reference, std::uncaught_exceptions, Custom exception, Function Try Block for regular function, Nested exception, Function Try Blocks In constructor, Function Try Blocks In destructor">
+    <meta name="twitter:url" content="/cpp/exceptions.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/647.4221f771.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C++</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cpp/" class="sidebar-link">Disclaimer</a></li><li><a href="/cpp/getting-started-with-cpp.html" class="sidebar-link">Getting started with C++</a></li><li><a href="/cpp/literals.html" class="sidebar-link">Literals</a></li><li><a href="/cpp/operator-precedence.html" class="sidebar-link">operator precedence</a></li><li><a href="/cpp/floating-point-arithmetic.html" class="sidebar-link">Floating Point Arithmetic</a></li><li><a href="/cpp/bit-operators.html" class="sidebar-link">Bit Operators</a></li><li><a href="/cpp/bit-manipulation.html" class="sidebar-link">Bit Manipulation</a></li><li><a href="/cpp/bit-fields.html" class="sidebar-link">Bit fields</a></li><li><a href="/cpp/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/cpp/iterators.html" class="sidebar-link">Iterators</a></li><li><a href="/cpp/basic-input-output-in-c.html" class="sidebar-link">Basic input/output in c++</a></li><li><a href="/cpp/loops.html" class="sidebar-link">Loops</a></li><li><a href="/cpp/file-i-o.html" class="sidebar-link">File I/O</a></li><li><a href="/cpp/cpp-streams.html" class="sidebar-link">C++ Streams</a></li><li><a href="/cpp/stream-manipulators.html" class="sidebar-link">Stream manipulators</a></li><li><a href="/cpp/flow-control.html" class="sidebar-link">Flow Control</a></li><li><a href="/cpp/metaprogramming.html" class="sidebar-link">Metaprogramming</a></li><li><a href="/cpp/const-keyword.html" class="sidebar-link">const keyword</a></li><li><a href="/cpp/mutable-keyword.html" class="sidebar-link">mutable keyword</a></li><li><a href="/cpp/friend-keyword.html" class="sidebar-link">Friend keyword</a></li><li><a href="/cpp/type-keywords.html" class="sidebar-link">Type Keywords</a></li><li><a href="/cpp/basic-type-keywords.html" class="sidebar-link">Basic Type Keywords</a></li><li><a href="/cpp/variable-declaration-keywords.html" class="sidebar-link">Variable Declaration Keywords</a></li><li><a href="/cpp/keywords.html" class="sidebar-link">Keywords</a></li><li><a href="/cpp/returning-several-values-from-a-function.html" class="sidebar-link">Returning several values from a function</a></li><li><a href="/cpp/polymorphism.html" class="sidebar-link">Polymorphism</a></li><li><a href="/cpp/references.html" class="sidebar-link">References</a></li><li><a href="/cpp/value-and-reference-semantics.html" class="sidebar-link">Value and Reference Semantics</a></li><li><a href="/cpp/c-function-call-by-value-vs-call-by-reference.html" class="sidebar-link">C++ function &quot;call by value&quot; vs. &quot;call by reference&quot;</a></li><li><a href="/cpp/copying-vs-assignment.html" class="sidebar-link">Copying vs Assignment</a></li><li><a href="/cpp/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/cpp/pointers-to-members.html" class="sidebar-link">Pointers to members</a></li><li><a href="/cpp/the-this-pointer.html" class="sidebar-link">The This Pointer</a></li><li><a href="/cpp/smart-pointers.html" class="sidebar-link">Smart Pointers</a></li><li><a href="/cpp/classes-structures.html" class="sidebar-link">Classes/Structures</a></li><li><a href="/cpp/function-overloading.html" class="sidebar-link">Function Overloading</a></li><li><a href="/cpp/operator-overloading.html" class="sidebar-link">Operator Overloading</a></li><li><a href="/cpp/function-template-overloading.html" class="sidebar-link">Function Template Overloading</a></li><li><a href="/cpp/virtual-member-functions.html" class="sidebar-link">Virtual Member Functions</a></li><li><a href="/cpp/inline-functions.html" class="sidebar-link">Inline functions</a></li><li><a href="/cpp/special-member-functions.html" class="sidebar-link">Special Member Functions</a></li><li><a href="/cpp/non-static-member-functions.html" class="sidebar-link">Non-Static Member Functions</a></li><li><a href="/cpp/constant-class-member-functions.html" class="sidebar-link">Constant class member functions</a></li><li><a href="/cpp/c-containers.html" class="sidebar-link">C++ Containers</a></li><li><a href="/cpp/namespaces.html" class="sidebar-link">Namespaces</a></li><li><a href="/cpp/header-files.html" class="sidebar-link">Header Files</a></li><li><a href="/cpp/using-declaration.html" class="sidebar-link">Using declaration</a></li><li><a href="/cpp/std-string.html" class="sidebar-link">std::string</a></li><li><a href="/cpp/std-array.html" class="sidebar-link">std::array</a></li><li><a href="/cpp/std-vector.html" class="sidebar-link">std::vector</a></li><li><a href="/cpp/std-map.html" class="sidebar-link">std::map</a></li><li><a href="/cpp/std-optional.html" class="sidebar-link">std::optional</a></li><li><a href="/cpp/std-function-to-wrap-any-element-that-is-callable.html" class="sidebar-link">std::function: To wrap any element that is callable</a></li><li><a href="/cpp/std-forward-list.html" class="sidebar-link">std::forward_list</a></li><li><a href="/cpp/std-pair.html" class="sidebar-link">std::pair</a></li><li><a href="/cpp/std-atomics.html" class="sidebar-link">std::atomics</a></li><li><a href="/cpp/std-variant.html" class="sidebar-link">std::variant</a></li><li><a href="/cpp/std-iomanip.html" class="sidebar-link">std::iomanip</a></li><li><a href="/cpp/std-any.html" class="sidebar-link">std::any</a></li><li><a href="/cpp/std-set-and-std-multiset.html" class="sidebar-link">std::set and std::multiset</a></li><li><a href="/cpp/std-integer-sequence.html" class="sidebar-link">std::integer_sequence</a></li><li><a href="/cpp/using-std-unordered-map.html" class="sidebar-link">Using std::unordered_map</a></li><li><a href="/cpp/standard-library-algorithms.html" class="sidebar-link">Standard Library Algorithms</a></li><li><a href="/cpp/the-iso-c-standard.html" class="sidebar-link">The ISO C++ Standard</a></li><li><a href="/cpp/inline-variables.html" class="sidebar-link">Inline variables</a></li><li><a href="/cpp/random-number-generation.html" class="sidebar-link">Random number generation</a></li><li><a href="/cpp/date-and-time-using-chrono-header.html" class="sidebar-link">Date and time using  header</a></li><li><a href="/cpp/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/cpp/enumeration.html" class="sidebar-link">Enumeration</a></li><li><a href="/cpp/iteration.html" class="sidebar-link">Iteration</a></li><li><a href="/cpp/regular-expressions.html" class="sidebar-link">Regular expressions</a></li><li><a href="/cpp/implementation-defined-behavior.html" class="sidebar-link">Implementation-defined behavior</a></li><li><a href="/cpp/exceptions.html" class="active sidebar-link">Exceptions</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/cpp/exceptions.html#catching-exceptions" class="sidebar-link">Catching exceptions</a></li><li class="sidebar-sub-header"><a href="/cpp/exceptions.html#rethrow-propagate-exception" class="sidebar-link">Rethrow (propagate) exception</a></li><li class="sidebar-sub-header"><a href="/cpp/exceptions.html#best-practice-throw-by-value-catch-by-const-reference" class="sidebar-link">Best practice: throw by value, catch by const reference</a></li><li class="sidebar-sub-header"><a href="/cpp/exceptions.html#std-uncaught-exceptions" class="sidebar-link">std::uncaught_exceptions</a></li><li class="sidebar-sub-header"><a href="/cpp/exceptions.html#custom-exception" class="sidebar-link">Custom exception</a></li><li class="sidebar-sub-header"><a href="/cpp/exceptions.html#function-try-block-for-regular-function" class="sidebar-link">Function Try Block for regular function</a></li><li class="sidebar-sub-header"><a href="/cpp/exceptions.html#nested-exception" class="sidebar-link">Nested exception</a></li><li class="sidebar-sub-header"><a href="/cpp/exceptions.html#function-try-blocks-in-constructor" class="sidebar-link">Function Try Blocks In constructor</a></li><li class="sidebar-sub-header"><a href="/cpp/exceptions.html#function-try-blocks-in-destructor" class="sidebar-link">Function Try Blocks In destructor</a></li></ul></li><li><a href="/cpp/lambdas.html" class="sidebar-link">Lambdas</a></li><li><a href="/cpp/value-categories.html" class="sidebar-link">Value Categories</a></li><li><a href="/cpp/preprocessor.html" class="sidebar-link">Preprocessor</a></li><li><a href="/cpp/data-structures-in-c.html" class="sidebar-link">Data Structures in C++</a></li><li><a href="/cpp/templates.html" class="sidebar-link">Templates</a></li><li><a href="/cpp/expression-templates.html" class="sidebar-link">Expression templates</a></li><li><a href="/cpp/curiously-recurring-template-pattern-crtp.html" class="sidebar-link">Curiously Recurring Template Pattern (CRTP)</a></li><li><a href="/cpp/threading.html" class="sidebar-link">Threading</a></li><li><a href="/cpp/thread-synchronization-structures.html" class="sidebar-link">Thread synchronization structures</a></li><li><a href="/cpp/the-rule-of-three-five-and-zero.html" class="sidebar-link">The Rule of Three, Five, And Zero</a></li><li><a href="/cpp/raii-resource-acquisition-is-initialization.html" class="sidebar-link">RAII: Resource Acquisition Is Initialization</a></li><li><a href="/cpp/rtti-run-time-type-information.html" class="sidebar-link">RTTI: Run-Time Type Information</a></li><li><a href="/cpp/mutexes.html" class="sidebar-link">Mutexes</a></li><li><a href="/cpp/recursive-mutex.html" class="sidebar-link">Recursive Mutex</a></li><li><a href="/cpp/semaphore.html" class="sidebar-link">Semaphore</a></li><li><a href="/cpp/futures-and-promises.html" class="sidebar-link">Futures and Promises</a></li><li><a href="/cpp/atomic-types.html" class="sidebar-link">Atomic Types</a></li><li><a href="/cpp/type-erasure.html" class="sidebar-link">Type Erasure</a></li><li><a href="/cpp/explicit-type-conversions.html" class="sidebar-link">Explicit type conversions</a></li><li><a href="/cpp/unnamed-types.html" class="sidebar-link">Unnamed types</a></li><li><a href="/cpp/type-traits.html" class="sidebar-link">Type Traits</a></li><li><a href="/cpp/return-type-covariance.html" class="sidebar-link">Return Type Covariance</a></li><li><a href="/cpp/layout-of-object-types.html" class="sidebar-link">Layout of object types</a></li><li><a href="/cpp/type-inference.html" class="sidebar-link">Type Inference</a></li><li><a href="/cpp/typedef-and-type-aliases.html" class="sidebar-link">Typedef and type aliases</a></li><li><a href="/cpp/type-deduction.html" class="sidebar-link">type deduction</a></li><li><a href="/cpp/trailing-return-type.html" class="sidebar-link">Trailing return type</a></li><li><a href="/cpp/alignment.html" class="sidebar-link">Alignment</a></li><li><a href="/cpp/perfect-forwarding.html" class="sidebar-link">Perfect Forwarding</a></li><li><a href="/cpp/decltype.html" class="sidebar-link">decltype</a></li><li><a href="/cpp/sfinae-substitution-failure-is-not-an-error.html" class="sidebar-link">SFINAE (Substitution Failure Is Not An Error)</a></li><li><a href="/cpp/undefined-behavior.html" class="sidebar-link">Undefined Behavior</a></li><li><a href="/cpp/overload-resolution.html" class="sidebar-link">Overload resolution</a></li><li><a href="/cpp/move-semantics.html" class="sidebar-link">Move Semantics</a></li><li><a href="/cpp/pimpl-idiom.html" class="sidebar-link">Pimpl Idiom</a></li><li><a href="/cpp/auto.html" class="sidebar-link">auto</a></li><li><a href="/cpp/copy-elision.html" class="sidebar-link">Copy Elision</a></li><li><a href="/cpp/fold-expressions.html" class="sidebar-link">Fold Expressions</a></li><li><a href="/cpp/unions.html" class="sidebar-link">Unions</a></li><li><a href="/cpp/design-pattern-implementation-in-c.html" class="sidebar-link">Design pattern implementation in C++</a></li><li><a href="/cpp/singleton-design-pattern.html" class="sidebar-link">Singleton Design Pattern</a></li><li><a href="/cpp/user-defined-literals.html" class="sidebar-link">User-Defined Literals</a></li><li><a href="/cpp/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/cpp/c-11-memory-model.html" class="sidebar-link">C++11 Memory Model</a></li><li><a href="/cpp/scopes.html" class="sidebar-link">Scopes</a></li><li><a href="/cpp/static-assert.html" class="sidebar-link">static_assert</a></li><li><a href="/cpp/constexpr.html" class="sidebar-link">constexpr</a></li><li><a href="/cpp/one-definition-rule-odr.html" class="sidebar-link">One Definition Rule (ODR)</a></li><li><a href="/cpp/unspecified-behavior.html" class="sidebar-link">Unspecified behavior</a></li><li><a href="/cpp/argument-dependent-name-lookup.html" class="sidebar-link">Argument Dependent Name Lookup</a></li><li><a href="/cpp/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/cpp/recursion-in-c.html" class="sidebar-link">Recursion in C++</a></li><li><a href="/cpp/arithmitic-metaprogramming.html" class="sidebar-link">Arithmitic Metaprogramming</a></li><li><a href="/cpp/callable-objects.html" class="sidebar-link">Callable Objects</a></li><li><a href="/cpp/client-server-examples.html" class="sidebar-link">Client server examples</a></li><li><a href="/cpp/const-correctness.html" class="sidebar-link">Const Correctness</a></li><li><a href="/cpp/parameter-packs.html" class="sidebar-link">Parameter packs</a></li><li><a href="/cpp/build-systems.html" class="sidebar-link">Build Systems</a></li><li><a href="/cpp/concurrency-with-openmp.html" class="sidebar-link">Concurrency With OpenMP</a></li><li><a href="/cpp/resource-management.html" class="sidebar-link">Resource Management</a></li><li><a href="/cpp/storage-class-specifiers.html" class="sidebar-link">Storage class specifiers</a></li><li><a href="/cpp/linkage-specifications.html" class="sidebar-link">Linkage specifications</a></li><li><a href="/cpp/digit-separators.html" class="sidebar-link">Digit separators</a></li><li><a href="/cpp/c-incompatibilities.html" class="sidebar-link">C incompatibilities</a></li><li><a href="/cpp/side-by-side-comparisons-of-classic-c-examples-solved-via-c-vs-c-11-vs-c-14-vs-c-17.html" class="sidebar-link">Side by Side Comparisons of classic C++ examples solved via C++ vs C++11 vs C++14 vs C++17</a></li><li><a href="/cpp/compiling-and-building.html" class="sidebar-link">Compiling and Building</a></li><li><a href="/cpp/common-compile-linker-errors-gcc.html" class="sidebar-link">Common compile/linker errors (GCC)</a></li><li><a href="/cpp/more-undefined-behaviors-in-c.html" class="sidebar-link">More undefined behaviors in C++</a></li><li><a href="/cpp/unit-testing-in-c.html" class="sidebar-link">Unit Testing in C++</a></li><li><a href="/cpp/c-debugging-and-debug-prevention-tools-techniques.html" class="sidebar-link">C++ Debugging and Debug-prevention Tools &amp; Techniques</a></li><li><a href="/cpp/optimization-in-c.html" class="sidebar-link">Optimization in C++</a></li><li><a href="/cpp/optimization.html" class="sidebar-link">Optimization</a></li><li><a href="/cpp/profiling.html" class="sidebar-link">Profiling</a></li><li><a href="/cpp/refactoring-techniques.html" class="sidebar-link">Refactoring Techniques</a></li><li><a href="/cpp/internationalization-in-c.html" class="sidebar-link">Internationalization in C++</a></li><li><a href="/cpp/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="exceptions"><a href="#exceptions" class="header-anchor">#</a> Exceptions</h1> <h2 id="catching-exceptions"><a href="#catching-exceptions" class="header-anchor">#</a> Catching exceptions</h2> <p>A <code>try/catch</code> block is used to catch exceptions. The code in the <code>try</code> section is the code that may throw an exception, and the code in the <code>catch</code> clause(s) handles the exception.</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdexcept&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  std<span class="token operator">::</span>string <span class="token function">str</span><span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">try</span> <span class="token punctuation">{</span>
+      str<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// access element, may throw std::out_of_range</span>
+  <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>out_of_range<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token comment">// what() is inherited from std::exception and contains an explanatory message</span>
+      std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Multiple <code>catch</code> clauses may be used to handle multiple exception types. If multiple <code>catch</code> clauses are present, the exception handling mechanism tries to match them <strong>in order</strong> of their appearance in the code:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>std<span class="token operator">::</span>string <span class="token function">str</span><span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+    str<span class="token punctuation">.</span><span class="token function">reserve</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// reserve extra capacity, may throw std::length_error</span>
+    str<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// access element, may throw std::out_of_range</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>length_error<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>out_of_range<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Exception classes which are derived from a common base class can be caught with a single <code>catch</code> clause for the common base class. The above example can replace the two <code>catch</code> clauses for <code>std::length_error</code> and <code>std::out_of_range</code> with a single clause for <code>std:exception</code>:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>std<span class="token operator">::</span>string <span class="token function">str</span><span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+    str<span class="token punctuation">.</span><span class="token function">reserve</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// reserve extra capacity, may throw std::length_error</span>
+    str<span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// access element, may throw std::out_of_range</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>exception<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Because the <code>catch</code> clauses are tried in order, be sure to write more specific catch clauses first, otherwise your exception handling code might never get called:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* Code throwing exceptions omitted. */</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>exception<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* Handle all exceptions of type std::exception. */</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>runtime_error<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* This block of code will never execute, because std::runtime_error inherits
+       from std::exception, and all exceptions of type std::exception were already
+       caught by the previous catch clause. */</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Another possibility is the catch-all handler, which will catch any thrown object:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;caught an exception&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="rethrow-propagate-exception"><a href="#rethrow-propagate-exception" class="header-anchor">#</a> Rethrow (propagate) exception</h2> <p>Sometimes you want to do something with the exception you catch (like write to log or print a warning) and let it bubble up to the upper scope to be handled. To do so, you can rethrow any exception you catch:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token comment">// some code here</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> SomeException<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;caught an exception&quot;</span><span class="token punctuation">;</span>
+    <span class="token keyword">throw</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Using <code>throw;</code> without arguments will re-throw the currently caught exception.</p> <p>To rethrow a managed <code>std::exception_ptr</code>, the C++ Standard Library has the <code>rethrow_exception</code> function that can be used by including the <code>&lt;exception&gt;</code> header in your program.</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;exception&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdexcept&gt;</span></span>
+ 
+<span class="token keyword">void</span> <span class="token function">handle_eptr</span><span class="token punctuation">(</span>std<span class="token operator">::</span>exception_ptr eptr<span class="token punctuation">)</span> <span class="token comment">// passing by value is ok</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>eptr<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            std<span class="token operator">::</span><span class="token function">rethrow_exception</span><span class="token punctuation">(</span>eptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>exception<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Caught exception \&quot;&quot;</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;\&quot;\n&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    std<span class="token operator">::</span>exception_ptr eptr<span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">at</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// this generates an std::out_of_range</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        eptr <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">current_exception</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// capture</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">handle_eptr</span><span class="token punctuation">(</span>eptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token comment">// destructor for std::out_of_range called here, when the eptr is destructed</span>
+
+</code></pre></div><h2 id="best-practice-throw-by-value-catch-by-const-reference"><a href="#best-practice-throw-by-value-catch-by-const-reference" class="header-anchor">#</a> Best practice: throw by value, catch by const reference</h2> <p>In general, it is considered good practice to throw by value (rather than by pointer), but catch by (const) reference.</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token comment">// throw new std::runtime_error(&quot;Error!&quot;);   // Don't do this!</span>
+    <span class="token comment">// This creates an exception object</span>
+    <span class="token comment">// on the heap and would require you to catch the</span>
+    <span class="token comment">// pointer and manage the memory yourself. This can</span>
+    <span class="token comment">// cause memory leaks!</span>
+    
+    <span class="token keyword">throw</span> std<span class="token operator">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">&quot;Error!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>runtime_error<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>One reason why catching by reference is a good practice is that it eliminates the need to reconstruct the object when being passed to the catch block (or when propagating through to other catch blocks). Catching by reference also allows the exceptions to be handled polymorphically and avoids object slicing. However, if you are rethrowing an exception (like <code>throw e;</code>, see example below), you can still get object slicing because the <code>throw e;</code> statement makes a copy of the exception as whatever type is declared:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">BaseException</span> <span class="token punctuation">{</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token string">&quot;BaseException&quot;</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">DerivedException</span> <span class="token operator">:</span> BaseException <span class="token punctuation">{</span>
+    <span class="token comment">// &quot;virtual&quot; keyword is optional here</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token string">&quot;DerivedException&quot;</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span><span class="token operator">*</span><span class="token operator">*</span> argv<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token function">DerivedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> BaseException<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;First catch block: &quot;</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+            <span class="token comment">// Output ==&gt; First catch block: DerivedException</span>
+
+            <span class="token keyword">throw</span> e<span class="token punctuation">;</span> <span class="token comment">// This changes the exception to BaseException</span>
+                     <span class="token comment">// instead of the original DerivedException!</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> BaseException<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Second catch block: &quot;</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+        <span class="token comment">// Output ==&gt; Second catch block: BaseException</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>If you are sure that you are not going to do anything to change the exception (like add information or modify the message), catching by const reference allows the compiler to make optimizations and can improve performance. But this can still cause object splicing (as seen in the example above).</p> <p><strong>Warning:</strong> Beware of throwing unintended exceptions in <code>catch</code> blocks, especially related to allocating extra memory or resources. For example, constructing <code>logic_error</code>, <code>runtime_error</code> or their subclasses might throw <code>bad_alloc</code> due to memory running out when copying the exception string, I/O streams might throw during logging with respective exception masks set, etc.</p> <h2 id="std-uncaught-exceptions"><a href="#std-uncaught-exceptions" class="header-anchor">#</a> std::uncaught_exceptions</h2> <p>C++17 introduces <code>int std::uncaught_exceptions()</code> (to replace the limited <code>bool std::uncaught_exception()</code>) to know how many exceptions are currently uncaught.
+That allows for a class to determine if it is destroyed during a stack unwinding or not.</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;exception&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token comment">// Apply change on destruction:</span>
+<span class="token comment">// Rollback in case of exception (failure)</span>
+<span class="token comment">// Else Commit (success)</span>
+<span class="token keyword">class</span> <span class="token class-name">Transaction</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token function">Transaction</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> s<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">message</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token function">Transaction</span><span class="token punctuation">(</span><span class="token keyword">const</span> Transaction<span class="token operator">&amp;</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">delete</span><span class="token punctuation">;</span>
+    Transaction<span class="token operator">&amp;</span> <span class="token keyword">operator</span> <span class="token operator">=</span><span class="token punctuation">(</span><span class="token keyword">const</span> Transaction<span class="token operator">&amp;</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">delete</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> message <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;: Commit\n&quot;</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">RollBack</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> message <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;: Rollback\n&quot;</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token comment">// ...</span>
+
+    <span class="token operator">~</span><span class="token function">Transaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>uncaughtExceptionCount <span class="token operator">==</span> std<span class="token operator">::</span><span class="token function">uncaught_exceptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// May throw.</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span> <span class="token comment">// current stack unwinding</span>
+            <span class="token function">RollBack</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+<span class="token keyword">private</span><span class="token operator">:</span>
+    std<span class="token operator">::</span>string message<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> uncaughtExceptionCount <span class="token operator">=</span> std<span class="token operator">::</span><span class="token function">uncaught_exceptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Foo</span>
+<span class="token punctuation">{</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    <span class="token operator">~</span><span class="token function">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            Transaction <span class="token function">transaction</span><span class="token punctuation">(</span><span class="token string">&quot;In ~Foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Commit,</span>
+                                            <span class="token comment">// even if there is an uncaught exception</span>
+            <span class="token comment">//...</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>exception<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;exception/~Foo:&quot;</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        Transaction <span class="token function">transaction</span><span class="token punctuation">(</span><span class="token string">&quot;In main&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// RollBack</span>
+        Foo foo<span class="token punctuation">;</span> <span class="token comment">// ~Foo commit its transaction.</span>
+        <span class="token comment">//...</span>
+        <span class="token keyword">throw</span> std<span class="token operator">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">&quot;Error&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>exception<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;exception/main:&quot;</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Output:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>In <span class="token operator">~</span>Foo<span class="token operator">:</span> Commit
+In main<span class="token operator">:</span> Rollback
+exception<span class="token operator">/</span>main<span class="token operator">:</span>Error
+
+</code></pre></div><h2 id="custom-exception"><a href="#custom-exception" class="header-anchor">#</a> Custom exception</h2> <p>You shouldn't throw raw values as exceptions, instead use one of the standard exception classes or make your own.</p> <p>Having your own exception class inherited from <code>std::exception</code> is a good way to go about it. Here's a custom exception class which directly inherits from <code>std::exception</code>:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;exception&gt;</span></span>
+
+<span class="token keyword">class</span> <span class="token class-name">Except</span><span class="token operator">:</span> <span class="token keyword">virtual</span> <span class="token keyword">public</span> std<span class="token operator">::</span>exception <span class="token punctuation">{</span>
+    
+<span class="token keyword">protected</span><span class="token operator">:</span>
+
+    <span class="token keyword">int</span> error_number<span class="token punctuation">;</span>               <span class="token comment">///&lt; Error number</span>
+    <span class="token keyword">int</span> error_offset<span class="token punctuation">;</span>               <span class="token comment">///&lt; Error offset</span>
+    std<span class="token operator">::</span>string error_message<span class="token punctuation">;</span>      <span class="token comment">///&lt; Error message</span>
+    
+<span class="token keyword">public</span><span class="token operator">:</span>
+
+    <span class="token comment">/** Constructor (C++ STL string, int, int).
+     *  @param msg The error message
+     *  @param err_num Error number
+     *  @param err_off Error offset
+     */</span>
+    <span class="token keyword">explicit</span> 
+    <span class="token function">Except</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> msg<span class="token punctuation">,</span> <span class="token keyword">int</span> err_num<span class="token punctuation">,</span> <span class="token keyword">int</span> err_off<span class="token punctuation">)</span><span class="token operator">:</span>
+        <span class="token function">error_number</span><span class="token punctuation">(</span>err_num<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">error_offset</span><span class="token punctuation">(</span>err_off<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token function">error_message</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token comment">/** Destructor.
+     *  Virtual to allow for subclassing.
+     */</span>
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Except</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token comment">/** Returns a pointer to the (constant) error description.
+     *  @return A pointer to a const char*. The underlying memory
+     *  is in possession of the Except object. Callers must
+     *  not attempt to free the memory.
+     */</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">throw</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token keyword">return</span> error_message<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">/** Returns error number.
+     *  @return #error_number
+     */</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">int</span> <span class="token function">getErrorNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">throw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> error_number<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">/**Returns error offset.
+     * @return #error_offset
+     */</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">int</span> <span class="token function">getErrorOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">throw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> error_offset<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>An example throw catch:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">try</span> <span class="token punctuation">{</span>
+    <span class="token keyword">throw</span><span class="token punctuation">(</span><span class="token function">Except</span><span class="token punctuation">(</span><span class="token string">&quot;Couldn't do what you were expecting&quot;</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">34</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> Except<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>cout<span class="token operator">&lt;&lt;</span>e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+             <span class="token operator">&lt;&lt;</span><span class="token string">&quot;\nError number: &quot;</span><span class="token operator">&lt;&lt;</span>e<span class="token punctuation">.</span><span class="token function">getErrorNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+             <span class="token operator">&lt;&lt;</span><span class="token string">&quot;\nError offset: &quot;</span><span class="token operator">&lt;&lt;</span>e<span class="token punctuation">.</span><span class="token function">getErrorOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>As you are not only just throwing a dumb error message, also some other values representing what the error exactly was, your error handling becomes much more efficient and meaningful.</p> <p>There's an exception class that let's you handle error messages nicely :<code>std::runtime_error</code></p> <p>You can inherit from this class too:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdexcept&gt;</span></span>
+
+<span class="token keyword">class</span> <span class="token class-name">Except</span><span class="token operator">:</span> <span class="token keyword">virtual</span> <span class="token keyword">public</span> std<span class="token operator">::</span>runtime_error <span class="token punctuation">{</span>
+    
+<span class="token keyword">protected</span><span class="token operator">:</span>
+
+    <span class="token keyword">int</span> error_number<span class="token punctuation">;</span>               <span class="token comment">///&lt; Error number</span>
+    <span class="token keyword">int</span> error_offset<span class="token punctuation">;</span>               <span class="token comment">///&lt; Error offset</span>
+    
+<span class="token keyword">public</span><span class="token operator">:</span>
+
+    <span class="token comment">/** Constructor (C++ STL string, int, int).
+     *  @param msg The error message
+     *  @param err_num Error number
+     *  @param err_off Error offset
+     */</span>
+    <span class="token keyword">explicit</span> 
+    <span class="token function">Except</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> msg<span class="token punctuation">,</span> <span class="token keyword">int</span> err_num<span class="token punctuation">,</span> <span class="token keyword">int</span> err_off<span class="token punctuation">)</span><span class="token operator">:</span>
+        std<span class="token operator">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            error_number <span class="token operator">=</span> err_num<span class="token punctuation">;</span>
+            error_offset <span class="token operator">=</span> err_off<span class="token punctuation">;</span>
+            
+        <span class="token punctuation">}</span>
+
+    <span class="token comment">/** Destructor.
+     *  Virtual to allow for subclassing.
+     */</span>
+    <span class="token keyword">virtual</span> <span class="token operator">~</span><span class="token function">Except</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    
+    <span class="token comment">/** Returns error number.
+     *  @return #error_number
+     */</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">int</span> <span class="token function">getErrorNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">throw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> error_number<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">/**Returns error offset.
+     * @return #error_offset
+     */</span>
+    <span class="token keyword">virtual</span> <span class="token keyword">int</span> <span class="token function">getErrorOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span> <span class="token keyword">throw</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> error_offset<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Note that I haven't overridden the <code>what()</code> function from the base class (<code>std::runtime_error</code>) i.e we will be using the base class's version of <code>what()</code>. You can override it if you have further agenda.</p> <h2 id="function-try-block-for-regular-function"><a href="#function-try-block-for-regular-function" class="header-anchor">#</a> Function Try Block for regular function</h2> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">function_with_try_block</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// try block body</span>
+<span class="token punctuation">}</span> 
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span> 
+    <span class="token comment">// catch block body</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Which is equivalent to</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">function_with_try_block</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// try block body</span>
+    <span class="token punctuation">}</span> 
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span> 
+        <span class="token comment">// catch block body</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Note that for constructors and destructors, the behavior is different as the catch block  re-throws an exception anyway (the caught one if there is no other throw in the catch block body).</p> <p>The function <code>main</code> is allowed to have a function try block like any other function, but <code>main</code>'s function try block will not catch exceptions that occur during the construction of a non-local static variable or the destruction of any static variable. Instead, <code>std::terminate</code> is called.</p> <h2 id="nested-exception"><a href="#nested-exception" class="header-anchor">#</a> Nested exception</h2> <p>During exception handling there is a common use case when you catch a generic exception from a low-level function (such as a filesystem error or data transfer error) and throw a more specific high-level exception which indicates that some high-level operation could not be performed (such as being unable to publish a photo on Web). This allows exception handling to react to specific problems with high level operations and also allows, having only error an message, the programmer to find a place in the application where an exception occurred. Downside of this solution is that exception callstack is truncated and original exception is lost. This forces developers to manually include text of original exception into a newly created one.</p> <p>Nested exceptions aim to solve the problem by attaching low-level exception, which describes the cause, to a high level exception, which describes what it means in this particular case.</p> <p><code>std::nested_exception</code> allows to nest exceptions thanks to <code>std::throw_with_nested</code>:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdexcept&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;exception&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;fstream&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream&gt;</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">MyException</span>
+<span class="token punctuation">{</span>
+    <span class="token function">MyException</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> message<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">message</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    std<span class="token operator">::</span>string message<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">print_current_exception</span><span class="token punctuation">(</span><span class="token keyword">int</span> level<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>exception<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span>level<span class="token punctuation">,</span> <span class="token string">' '</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;exception: &quot;</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> MyException<span class="token operator">&amp;</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> std<span class="token operator">::</span><span class="token function">string</span><span class="token punctuation">(</span>level<span class="token punctuation">,</span> <span class="token string">' '</span><span class="token punctuation">)</span> <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;MyException: &quot;</span> <span class="token operator">&lt;&lt;</span> e<span class="token punctuation">.</span>message <span class="token operator">&lt;&lt;</span> <span class="token string">'\n'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>cerr <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Unkown exception\n&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">print_current_exception_with_nested</span><span class="token punctuation">(</span><span class="token keyword">int</span> level <span class="token operator">=</span>  <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">print_current_exception</span><span class="token punctuation">(</span>level<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>nested_exception<span class="token operator">&amp;</span> nested<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            nested<span class="token punctuation">.</span><span class="token function">rethrow_nested</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">print_current_exception_with_nested</span><span class="token punctuation">(</span>level <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// recursion</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Empty // End recursion</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// sample function that catches an exception and wraps it in a nested exception</span>
+<span class="token keyword">void</span> <span class="token function">open_file</span><span class="token punctuation">(</span><span class="token keyword">const</span> std<span class="token operator">::</span>string<span class="token operator">&amp;</span> s<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span>ifstream <span class="token function">file</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        file<span class="token punctuation">.</span><span class="token function">exceptions</span><span class="token punctuation">(</span>std<span class="token operator">::</span>ios_base<span class="token operator">::</span>failbit<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span><span class="token function">throw_with_nested</span><span class="token punctuation">(</span>MyException<span class="token punctuation">{</span><span class="token string">&quot;Couldn't open &quot;</span> <span class="token operator">+</span> s<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token comment">// sample function that catches an exception and wraps it in a nested exception</span>
+<span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token function">open_file</span><span class="token punctuation">(</span><span class="token string">&quot;nonexistent.file&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        std<span class="token operator">::</span><span class="token function">throw_with_nested</span><span class="token punctuation">(</span> std<span class="token operator">::</span><span class="token function">runtime_error</span><span class="token punctuation">(</span><span class="token string">&quot;run() failed&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token comment">// runs the sample function above and prints the caught exception</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">print_current_exception_with_nested</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Possible output:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>exception<span class="token operator">:</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> failed
+ MyException<span class="token operator">:</span> Couldn<span class="token number">'</span>t open nonexistent<span class="token punctuation">.</span>file
+  exception<span class="token operator">:</span> basic_ios<span class="token operator">::</span>clear
+
+</code></pre></div><p>If you work only with exceptions inherited from <code>std::exception</code>, code can even be simplified.</p> <h2 id="function-try-blocks-in-constructor"><a href="#function-try-blocks-in-constructor" class="header-anchor">#</a> Function Try Blocks In constructor</h2> <p>The only way to catch exception in initializer list:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">A</span> <span class="token operator">:</span> <span class="token keyword">public</span> B
+<span class="token punctuation">{</span>
+    <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">try</span> <span class="token operator">:</span> <span class="token function">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// constructor body </span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// exceptions from the initializer list and constructor are caught here</span>
+        <span class="token comment">// if no exception is thrown here</span>
+        <span class="token comment">// then the caught exception is re-thrown.</span>
+    <span class="token punctuation">}</span>
+ 
+<span class="token keyword">private</span><span class="token operator">:</span>
+    Foo foo<span class="token punctuation">;</span>
+    Bar bar<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="function-try-blocks-in-destructor"><a href="#function-try-blocks-in-destructor" class="header-anchor">#</a> Function Try Blocks In destructor</h2> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">struct</span> <span class="token class-name">A</span>
+<span class="token punctuation">{</span>
+    <span class="token operator">~</span><span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">noexcept</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// destructor body </span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// exceptions of destructor body are caught here</span>
+        <span class="token comment">// if no exception is thrown here</span>
+        <span class="token comment">// then the caught exception is re-thrown.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Note that, although this is possible, one needs to be very careful with throwing from destructor, as if a destructor called during stack unwinding throws an exception, <code>std::terminate</code> is called.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/cpp/exceptions.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cpp/implementation-defined-behavior.html" class="prev">
+        Implementation-defined behavior
+      </a></span> <span class="next"><a href="/cpp/lambdas.html">
+        Lambdas
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/647.4221f771.js" defer></script>
+  </body>
+</html>

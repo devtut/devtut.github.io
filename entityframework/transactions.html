@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Entity Framework - Transactions</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Database.BeginTransaction()">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Entity Framework - Transactions">
+    <meta property="og:description" content="Database.BeginTransaction()">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/entityframework/transactions.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Entity Framework - Transactions">
+    <meta name="twitter:description" content="Database.BeginTransaction()">
+    <meta name="twitter:url" content="/entityframework/transactions.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1064.6568c9ab.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Entity Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/entityframework/" class="sidebar-link">Disclaimer</a></li><li><a href="/entityframework/getting-started-with-entity-framework.html" class="sidebar-link">Getting started with Entity Framework</a></li><li><a href="/entityframework/code-first-conventions.html" class="sidebar-link">Code First Conventions</a></li><li><a href="/entityframework/code-first-dataannotations.html" class="sidebar-link">Code First DataAnnotations</a></li><li><a href="/entityframework/entity-framework-code-first.html" class="sidebar-link">Entity Framework Code First</a></li><li><a href="/entityframework/entity-framework-code-first-migrations.html" class="sidebar-link">Entity-framework Code First Migrations</a></li><li><a href="/entityframework/inheritance-with-entityframework-code-first.html" class="sidebar-link">Inheritance with EntityFramework (Code First)</a></li><li><a href="/entityframework/code-first-fluent-api.html" class="sidebar-link">Code First - Fluent API</a></li><li><a href="/entityframework/mapping-relationship-with-entity-framework-code-first-one-to-one-and-variations.html" class="sidebar-link">Mapping relationship with Entity Framework Code First: One-to-one and variations</a></li><li><a href="/entityframework/mapping-relationship-with-entity-framework-code-first-one-to-many-and-many-to-many.html" class="sidebar-link">Mapping relationship with Entity Framework Code First: One-to-many and Many-to-many</a></li><li><a href="/entityframework/database-first-model-generation.html" class="sidebar-link">Database first model generation</a></li><li><a href="/entityframework/complex-types.html" class="sidebar-link">Complex Types</a></li><li><a href="/entityframework/database-initialisers.html" class="sidebar-link">Database Initialisers</a></li><li><a href="/entityframework/tracking-vs-no-tracking.html" class="sidebar-link">Tracking vs. No-Tracking</a></li><li><a href="/entityframework/transactions.html" class="active sidebar-link">Transactions</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/entityframework/transactions.html#database-begintransaction" class="sidebar-link">Database.BeginTransaction()</a></li></ul></li><li><a href="/entityframework/managing-entity-state.html" class="sidebar-link">Managing entity state</a></li><li><a href="/entityframework/loading-related-entities.html" class="sidebar-link">Loading related entities</a></li><li><a href="/entityframework/model-restraints.html" class="sidebar-link">Model Restraints</a></li><li><a href="/entityframework/entity-framework-with-postgresql.html" class="sidebar-link">Entity-Framework  with Postgresql</a></li><li><a href="/entityframework/entity-framework-with-sqlite.html" class="sidebar-link">Entity Framework with SQLite</a></li><li><a href="/entityframework/t4-templates-in-entity-framework.html" class="sidebar-link">.t4 templates in entity-framework</a></li><li><a href="/entityframework/advanced-mapping-scenarios-entity-splitting-table-splitting.html" class="sidebar-link">Advanced mapping scenarios: entity splitting, table splitting</a></li><li><a href="/entityframework/best-practices-for-entity-framework-simple-professional.html" class="sidebar-link">Best Practices For Entity Framework (Simple &amp; Professional)</a></li><li><a href="/entityframework/optimization-techniques-in-ef.html" class="sidebar-link">Optimization Techniques in EF</a></li><li><a href="/entityframework/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="transactions"><a href="#transactions" class="header-anchor">#</a> Transactions</h1> <h2 id="database-begintransaction"><a href="#database-begintransaction" class="header-anchor">#</a> Database.BeginTransaction()</h2> <p>Multiple operations can be executed against a single transaction so that changes can be rolled back if any of the operations fail.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">PlanetContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> transaction <span class="token operator">=</span> context<span class="token punctuation">.</span>Database<span class="token punctuation">.</span><span class="token function">BeginTransaction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">try</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">//Lets assume this works</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> jupiter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Planet</span> <span class="token punctuation">{</span> Name <span class="token operator">=</span> <span class="token string">&quot;Jupiter&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            context<span class="token punctuation">.</span>Planets<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>jupiter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            context<span class="token punctuation">.</span><span class="token function">SaveChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">//And then this will throw an exception</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> neptune <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Planet</span> <span class="token punctuation">{</span> Name <span class="token operator">=</span> <span class="token string">&quot;Neptune&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+            context<span class="token punctuation">.</span>Planets<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>neptune<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            context<span class="token punctuation">.</span><span class="token function">SaveChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">//Without this line, no changes will get applied to the database</span>
+            transaction<span class="token punctuation">.</span><span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">//There is no need to call transaction.Rollback() here as the transaction object</span>
+            <span class="token comment">//will go out of scope and disposing will roll back automatically</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Note that it may be a developers' convention to call <code>transaction.Rollback()</code> explicitly, because it makes the code more self-explanatory. Also, there <strong>may</strong> be (less well-known) query providers for Entity Framework out there that don't implement <code>Dipsose</code> correctly, which would also require an explicit <code>transaction.Rollback()</code> call.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/entityframework/transactions.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/entityframework/tracking-vs-no-tracking.html" class="prev">
+        Tracking vs. No-Tracking
+      </a></span> <span class="next"><a href="/entityframework/managing-entity-state.html">
+        Managing entity state
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1064.6568c9ab.js" defer></script>
+  </body>
+</html>

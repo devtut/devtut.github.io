@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - Google Maps in a Windows Form</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="How to use a Google Map in a Windows Form">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - Google Maps in a Windows Form">
+    <meta property="og:description" content="How to use a Google Map in a Windows Form">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/google-maps-in-a-windows-form.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - Google Maps in a Windows Form">
+    <meta name="twitter:description" content="How to use a Google Map in a Windows Form">
+    <meta name="twitter:url" content="/vbnet/google-maps-in-a-windows-form.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3472.315b8f96.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="sidebar-link">Introduction to Syntax</a></li><li><a href="/vbnet/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="sidebar-link">Looping</a></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="sidebar-link">ByVal and ByRef keywords</a></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="sidebar-link">Extension methods</a></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="sidebar-link">Visual Basic 14.0 Features</a></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="active sidebar-link">Google Maps in a Windows Form</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/google-maps-in-a-windows-form.html#how-to-use-a-google-map-in-a-windows-form" class="sidebar-link">How to use a Google Map in a Windows Form</a></li></ul></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="sidebar-link">WinForms SpellCheckBox</a></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="sidebar-link">Task-based asynchronous pattern</a></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="google-maps-in-a-windows-form"><a href="#google-maps-in-a-windows-form" class="header-anchor">#</a> Google Maps in a Windows Form</h1> <h2 id="how-to-use-a-google-map-in-a-windows-form"><a href="#how-to-use-a-google-map-in-a-windows-form" class="header-anchor">#</a> How to use a Google Map in a Windows Form</h2> <p>The first part of this example explains how to implement it. In the second, I will explain how it works. This tries to be a general example. The template for the map (see step 3) and the example functions are fully customizable.</p> <p><strong>################################# IMPLEMENTATION #################################</strong></p> <p><strong>Step 1.</strong> Firstly, create a new project and select Windows Form Application. Let's leave its name as &quot;Form1&quot;.</p> <p><a href="http://i.stack.imgur.com/JMiqQ.png" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/JMiqQ.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>Step 2.</strong> Add a WebBrowser control (which will hold your map) to your Form1. Let's call it &quot;wbmap&quot;</p> <p><strong>Step 3.</strong> Create a .html file named &quot;googlemap_template.html&quot; with your favourite text editor and paste the following code:</p> <p><strong>googlemap_template.html</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>html<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>head<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>meta charset<span class="token operator">=</span><span class="token string">&quot;UTF-8&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>meta http<span class="token operator">-</span>equiv<span class="token operator">=</span><span class="token string">&quot;X-UA-Compatible&quot;</span> content<span class="token operator">=</span><span class="token string">&quot;IE=edge&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+     <span class="token operator">&lt;</span>style type<span class="token operator">=</span><span class="token string">&quot;text/css&quot;</span><span class="token operator">&gt;</span>
+      html<span class="token punctuation">,</span> body <span class="token punctuation">{</span>
+        height<span class="token punctuation">:</span> <span class="token number">100</span><span class="token operator">%</span>;
+        margin<span class="token punctuation">:</span> <span class="token number">0</span>;
+        padding<span class="token punctuation">:</span> <span class="token number">0</span>;
+      <span class="token punctuation">}</span>
+      <span class="token operator">#</span>gmap <span class="token punctuation">{</span>
+        height<span class="token punctuation">:</span> <span class="token number">100</span><span class="token operator">%</span>;
+      <span class="token punctuation">}</span>
+     <span class="token operator">&lt;</span><span class="token operator">/</span>style<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">&quot;text/javascript&quot;</span> src<span class="token operator">=</span><span class="token string">&quot;http://maps.google.com/maps/api/js?sensor=false&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">&quot;text/javascript&quot;</span><span class="token operator">&gt;</span>
+        <span class="token keyword">function</span> initialize<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token operator">/</span><span class="token operator">/</span>Use window<span class="token punctuation">.</span>X instead <span class="token keyword">of</span> var X <span class="token keyword">to</span> make a variable globally available 
+            window<span class="token punctuation">.</span>markers <span class="token operator">=</span> <span class="token keyword">new</span> Array<span class="token punctuation">(</span><span class="token punctuation">)</span>;
+            window<span class="token punctuation">.</span>marker_data <span class="token operator">=</span> [[MARKER_DATA]];
+            window<span class="token punctuation">.</span>gmap <span class="token operator">=</span> <span class="token keyword">new</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>Map<span class="token punctuation">(</span>document<span class="token punctuation">.</span>getElementById<span class="token punctuation">(</span><span class="token comment">'gmap'), {</span>
+            zoom<span class="token punctuation">:</span> <span class="token number">15</span><span class="token punctuation">,</span>
+            center<span class="token punctuation">:</span> <span class="token keyword">new</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>LatLng<span class="token punctuation">(</span>marker_data[<span class="token number">0</span>][<span class="token number">0</span>]<span class="token punctuation">,</span> marker_data[<span class="token number">0</span>][<span class="token number">1</span>]<span class="token punctuation">)</span><span class="token punctuation">,</span>
+            mapTypeId<span class="token punctuation">:</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>MapTypeId<span class="token punctuation">.</span>ROADMAP
+          <span class="token punctuation">}</span><span class="token punctuation">)</span>;
+          var infowindow <span class="token operator">=</span> <span class="token keyword">new</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>InfoWindow<span class="token punctuation">(</span><span class="token punctuation">)</span>;
+          var newmarker<span class="token punctuation">,</span> i;
+          <span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span>; i <span class="token operator">&lt;</span> marker_data<span class="token punctuation">.</span>length; i<span class="token operator">+</span><span class="token operator">+</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              <span class="token keyword">if</span> <span class="token punctuation">(</span>marker_data[<span class="token number">0</span>]<span class="token punctuation">.</span>length <span class="token operator">=</span><span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  newmarker <span class="token operator">=</span> <span class="token keyword">new</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>Marker<span class="token punctuation">(</span><span class="token punctuation">{</span>
+                      position<span class="token punctuation">:</span> <span class="token keyword">new</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>LatLng<span class="token punctuation">(</span>marker_data[i][<span class="token number">0</span>]<span class="token punctuation">,</span> marker_data[i][<span class="token number">1</span>]<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                      map<span class="token punctuation">:</span> gmap
+                  <span class="token punctuation">}</span><span class="token punctuation">)</span>;
+              <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>marker_data[<span class="token number">0</span>]<span class="token punctuation">.</span>length <span class="token operator">=</span><span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  newmarker <span class="token operator">=</span> <span class="token keyword">new</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>Marker<span class="token punctuation">(</span><span class="token punctuation">{</span>
+                      position<span class="token punctuation">:</span> <span class="token keyword">new</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>LatLng<span class="token punctuation">(</span>marker_data[i][<span class="token number">0</span>]<span class="token punctuation">,</span> marker_data[i][<span class="token number">1</span>]<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                      map<span class="token punctuation">:</span> gmap<span class="token punctuation">,</span>
+                      title<span class="token punctuation">:</span> <span class="token punctuation">(</span>marker_data[i][<span class="token number">2</span>]<span class="token punctuation">)</span>
+                  <span class="token punctuation">}</span><span class="token punctuation">)</span>;
+              <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                  newmarker <span class="token operator">=</span> <span class="token keyword">new</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>Marker<span class="token punctuation">(</span><span class="token punctuation">{</span>
+                      position<span class="token punctuation">:</span> <span class="token keyword">new</span> google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span>LatLng<span class="token punctuation">(</span>marker_data[i][<span class="token number">0</span>]<span class="token punctuation">,</span> marker_data[i][<span class="token number">1</span>]<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                      map<span class="token punctuation">:</span> gmap<span class="token punctuation">,</span>
+                      title<span class="token punctuation">:</span> <span class="token punctuation">(</span>marker_data[i][<span class="token number">2</span>]<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                      icon<span class="token punctuation">:</span> <span class="token punctuation">(</span>marker_data[i][<span class="token number">3</span>]<span class="token punctuation">)</span>
+                  <span class="token punctuation">}</span><span class="token punctuation">)</span>;
+              <span class="token punctuation">}</span>
+            google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span><span class="token keyword">event</span><span class="token punctuation">.</span>addListener<span class="token punctuation">(</span>newmarker<span class="token punctuation">,</span> <span class="token comment">'click', (function (newmarker, i) {</span>
+                <span class="token keyword">return</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>newmarker<span class="token punctuation">.</span>title<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        infowindow<span class="token punctuation">.</span>setContent<span class="token punctuation">(</span>newmarker<span class="token punctuation">.</span>title<span class="token punctuation">)</span>;
+                        infowindow<span class="token punctuation">.</span>open<span class="token punctuation">(</span>gmap<span class="token punctuation">,</span> newmarker<span class="token punctuation">)</span>;
+                    <span class="token punctuation">}</span>
+                    gmap<span class="token punctuation">.</span>setCenter<span class="token punctuation">(</span>newmarker<span class="token punctuation">.</span>getPosition<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>;
+                    <span class="token operator">/</span><span class="token operator">/</span> Calling functions written <span class="token keyword">in</span> the WF
+                    window<span class="token punctuation">.</span>external<span class="token punctuation">.</span>showVbHelloWorld<span class="token punctuation">(</span><span class="token punctuation">)</span>;
+                    window<span class="token punctuation">.</span>external<span class="token punctuation">.</span>getMarkerDataFromJavascript<span class="token punctuation">(</span>newmarker<span class="token punctuation">.</span>title<span class="token punctuation">,</span>i<span class="token punctuation">)</span>;
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>newmarker<span class="token punctuation">,</span> i<span class="token punctuation">)</span><span class="token punctuation">)</span>;
+            markers[i] <span class="token operator">=</span> newmarker;
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span><span class="token keyword">event</span><span class="token punctuation">.</span>addDomListener<span class="token punctuation">(</span>window<span class="token punctuation">,</span> <span class="token comment">'load', initialize);</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">&quot;text/javascript&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">/</span><span class="token operator">/</span> <span class="token keyword">Function</span> triggered from the WF <span class="token keyword">with</span> no arguments
+        <span class="token keyword">function</span> showJavascriptHelloWorld<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            alert<span class="token punctuation">(</span><span class="token string">&quot;Hello world in HTML from WF&quot;</span><span class="token punctuation">)</span>;
+        <span class="token punctuation">}</span>
+     <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">&quot;text/javascript&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">/</span><span class="token operator">/</span> <span class="token keyword">Function</span> triggered from the WF <span class="token keyword">with</span> a <span class="token keyword">String</span> argument
+        <span class="token keyword">function</span> focusMarkerFromIdx<span class="token punctuation">(</span>idx<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            google<span class="token punctuation">.</span>maps<span class="token punctuation">.</span><span class="token keyword">event</span><span class="token punctuation">.</span>trigger<span class="token punctuation">(</span>markers[idx]<span class="token punctuation">,</span> <span class="token comment">'click');</span>
+        <span class="token punctuation">}</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">&quot;gmap&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">&gt;</span>
+
+</code></pre></div><p>This will serve as our map template. I will explain how it works later.</p> <p><strong>Step 4.</strong> Add the googlemap_template.hmtl file to your project (right click on your project-&gt;add-&gt;existing item)</p> <p><strong>Step 5.</strong> Once it appears in your Solution Explorer, set its properties to:</p> <ul><li>Build Action -&gt; Embedded Resource
+</li><li>Custom Tool Namespace -&gt; write the
+name of the project</li></ul> <p><a href="http://i.stack.imgur.com/lFkbB.png" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/lFkbB.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>Step 6.</strong> Add a new class (right click on your project-&gt;add-&gt;class). In my example I'll call it GoogleMapHelper.</p> <p><a href="http://i.stack.imgur.com/hHvOM.png" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/hHvOM.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>Step 7.</strong> Paste the following code into your class:</p> <p><strong>GoogleMapHelper.vb</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+   Imports System.IO
+    Imports System.Reflection
+    Imports System.Text
+    
+    Public Class GoogleMapHelper
+
+    ' 1- googlemap_template.html must be copied in the main project folder
+    ' 2- add the file into the Visual Studio Solution Explorer (add existing file)
+    ' 3- set the properties of the file to: 
+    '                                   Build Action -&gt; Embedded Resource
+    '                                   Custom Tool Namespace -&gt; write the name of the project
+
+    Private Const ICON_FOLDER As String = &quot;marker_icons/&quot; 'images must be stored in a folder inside  Debug/Release folder
+    Private Const MAP_TEMPLATE As String = &quot;WindowsApplication1.googlemap_template.html&quot;
+    Private Const TEXT_TO_REPLACE_MARKER_DATA As String = &quot;[[MARKER_DATA]]&quot;
+    Private Const TMP_NAME As String = &quot;tmp_map.html&quot;
+    
+
+    Private mWebBrowser As WebBrowser
+
+    'MARKER POSITIONS 
+    Private mPositions As Double(,) 'lat, lon
+    ' marker data allows different formats to include lat,long and optionally title and icon:
+    ' op1: mMarkerData = New String(N-1, 1) {{lat1, lon1}, {lat2, lon2}, {latN, lonN}} 
+    ' op2: mMarkerData = New String(N-1, 2) {{lat1, lon1,'title1'}, {lat2, lon2,'title2'}, {latN, lonN, 'titleN'}} 
+    ' op3: mMarkerData = New String(N-1, 3) {{lat1, lon1,'title1','image1.png'}, {lat2, lon2,'title2','image2.png'}, {latN, lonN, 'titleN','imageN.png'}} 
+    Private mMarkerData As String(,) = Nothing
+    
+
+    Public Sub New(ByRef wb As WebBrowser, pos As Double(,))
+        mWebBrowser = wb
+        mPositions = pos
+        mMarkerData = getMarkerDataFromPositions(pos)
+    End Sub
+
+    Public Sub New(ByRef wb As WebBrowser, md As String(,))
+        mWebBrowser = wb
+        mMarkerData = md
+    End Sub
+
+    Public Sub loadMap()
+        mWebBrowser.Navigate(getMapTemplate())
+    End Sub
+
+    Private Function getMapTemplate() As String
+
+        If mMarkerData Is Nothing Or mMarkerData.GetLength(1) &gt; 4 Then
+            MessageBox.Show(&quot;Marker data has not the proper size. It must have 2, 3 o 4 columns&quot;)
+            Return Nothing
+        End If
+
+        Dim htmlTemplate As New StringBuilder()
+        Dim tmpFolder As String = Environment.GetEnvironmentVariable(&quot;TEMP&quot;)
+        Dim dataSize As Integer = mMarkerData.GetLength(1) 'number of columns
+        Dim mMarkerDataAsText As String = String.Empty
+        Dim myresourcePath As String = My.Resources.ResourceManager.BaseName
+        Dim myresourcefullPath As String = Path.GetFullPath(My.Resources.ResourceManager.BaseName)
+        Dim localPath = myresourcefullPath.Replace(myresourcePath, &quot;&quot;).Replace(&quot;\&quot;, &quot;/&quot;) &amp; ICON_FOLDER
+
+        htmlTemplate.AppendLine(getStringFromResources(MAP_TEMPLATE))
+        mMarkerDataAsText = &quot;[&quot;
+
+        For i As Integer = 0 To mMarkerData.GetLength(0) - 1
+            If i &lt;&gt; 0 Then
+                mMarkerDataAsText += &quot;,&quot;
+            End If
+            If dataSize = 2 Then 'lat,lon
+                mMarkerDataAsText += &quot;[&quot; &amp; mMarkerData(i, 0) &amp; &quot;,&quot; + mMarkerData(i, 1) &amp; &quot;]&quot;
+            ElseIf dataSize = 3 Then 'lat,lon and title
+                mMarkerDataAsText += &quot;[&quot; &amp; mMarkerData(i, 0) &amp; &quot;,&quot; + mMarkerData(i, 1) &amp; &quot;,'&quot; &amp; mMarkerData(i, 2) &amp; &quot;']&quot;
+            ElseIf dataSize = 4 Then 'lat,lon,title and image
+                mMarkerDataAsText += &quot;[&quot; &amp; mMarkerData(i, 0) &amp; &quot;,&quot; + mMarkerData(i, 1) &amp; &quot;,'&quot; &amp; mMarkerData(i, 2) &amp; &quot;','&quot; &amp; localPath &amp; mMarkerData(i, 3) &amp; &quot;']&quot; 'Ojo a las comillas simples en las columnas 3 y 4 
+            End If
+        Next
+
+        mMarkerDataAsText += &quot;]&quot;
+        htmlTemplate.Replace(TEXT_TO_REPLACE_MARKER_DATA, mMarkerDataAsText)
+
+        Dim tmpHtmlMapFile As String = (tmpFolder &amp; Convert.ToString(&quot;\&quot;)) + TMP_NAME
+        Dim existsMapFile As Boolean = False
+        Try
+            existsMapFile = createTxtFile(tmpHtmlMapFile, htmlTemplate)
+        Catch ex As Exception
+            MessageBox.Show(&quot;Error writing temporal file&quot;, &quot;Writing Error&quot;, MessageBoxButtons.OK, MessageBoxIcon.[Error])
+        End Try
+
+        If existsMapFile Then
+            Return tmpHtmlMapFile
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    Private Function getMarkerDataFromPositions(pos As Double(,)) As String(,)
+        Dim md As String(,) = New String(pos.GetLength(0) - 1, 1) {}
+        For i As Integer = 0 To pos.GetLength(0) - 1
+            md(i, 0) = pos(i, 0).ToString(&quot;g&quot;, New System.Globalization.CultureInfo(&quot;en-US&quot;))
+            md(i, 1) = pos(i, 1).ToString(&quot;g&quot;, New System.Globalization.CultureInfo(&quot;en-US&quot;))
+        Next
+        Return md
+    End Function
+
+    Private Function getStringFromResources(resourceName As String) As String
+        Dim assem As Assembly = Me.[GetType]().Assembly
+
+        Using stream As Stream = assem.GetManifestResourceStream(resourceName)
+            Try
+                Using reader As New StreamReader(stream)
+                    Return reader.ReadToEnd()
+                End Using
+            Catch e As Exception
+                Throw New Exception((Convert.ToString(&quot;Error de acceso al Recurso '&quot;) &amp; resourceName) + &quot;'&quot; &amp; vbCr &amp; vbLf + e.ToString())
+            End Try
+        End Using
+    End Function
+
+    Private Function createTxtFile(mFile As String, content As StringBuilder) As Boolean
+        Dim mPath As String = Path.GetDirectoryName(mFile)
+        If Not Directory.Exists(mPath) Then
+            Directory.CreateDirectory(mPath)
+        End If
+        If File.Exists(mFile) Then
+            File.Delete(mFile)
+        End If
+        Dim sw As StreamWriter = File.CreateText(mFile)
+        sw.Write(content.ToString())
+        sw.Close()
+        Return True
+    End Function
+    End Class
+
+</code></pre></div><p><strong>Note:</strong> The MAP_TEMPLATE constant must include the name of your project</p> <p><strong>Step 8.</strong>  Now we can use our GoogleMapHelper class to load the map into our webbrowser by simply creating and instance and calling its loadMap() method. How you build your markerData is up to you. In this example, for clarification, I write them by hand. There are 3 options to define the marker data (see GoogleMapHelper class comments). Note that if you use the third option (including title and icons) you must create a folder called &quot;marker_icons&quot; (or whatever you define in the GoogleMapHelper constant ICON_FOLDER) in your Debug/Release folder and place there your .png files.
+In my case:</p> <p><a href="http://i.stack.imgur.com/1pZj2.png" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/1pZj2.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>I created two buttons in my Form1 to illustrate how the map and the WF interact. Here is how it looks:</p> <p><a href="http://i.stack.imgur.com/fo8cN.png" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/fo8cN.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>And here is the code:</p> <p><strong>Form1.vb</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Imports</span> System<span class="token punctuation">.</span>IO
+<span class="token keyword">Imports</span> System<span class="token punctuation">.</span>Reflection
+<span class="token keyword">Imports</span> System<span class="token punctuation">.</span>Security<span class="token punctuation">.</span>Permissions
+<span class="token keyword">Imports</span> System<span class="token punctuation">.</span>Text
+<span class="token operator">&lt;</span>PermissionSet<span class="token punctuation">(</span>SecurityAction<span class="token punctuation">.</span>Demand<span class="token punctuation">,</span> Name<span class="token punctuation">:</span><span class="token operator">=</span><span class="token string">&quot;FullTrust&quot;</span><span class="token punctuation">)</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>System<span class="token punctuation">.</span>Runtime<span class="token punctuation">.</span>InteropServices<span class="token punctuation">.</span>ComVisible<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token operator">&gt;</span>
+<span class="token keyword">Public</span> <span class="token keyword">Class</span> Form1
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> Form1_Load<span class="token punctuation">(</span>sender <span class="token keyword">As</span> <span class="token keyword">Object</span><span class="token punctuation">,</span> e <span class="token keyword">As</span> EventArgs<span class="token punctuation">)</span> <span class="token keyword">Handles</span> <span class="token keyword">MyBase</span><span class="token punctuation">.</span>Load
+
+    <span class="token keyword">Me</span><span class="token punctuation">.</span>wbmap<span class="token punctuation">.</span>ObjectForScripting <span class="token operator">=</span> <span class="token keyword">Me</span>
+
+    <span class="token keyword">Dim</span> onlyPositions <span class="token keyword">As</span> <span class="token keyword">Double</span><span class="token punctuation">(</span><span class="token punctuation">,</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">Double</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">42.13557</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.40806</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">42.13684</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.40884</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">42.13716</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.40729</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token keyword">Dim</span> positonAndTitles <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">(</span><span class="token punctuation">,</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">String</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token string">&quot;42.13557&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;-0.40806&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;marker0&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">&quot;42.13684&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;-0.40884&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;marker1&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">&quot;42.13716&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;-0.40729&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;marker2&quot;</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token keyword">Dim</span> positonTitlesAndIcons <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">(</span><span class="token punctuation">,</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">String</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token string">&quot;42.13557&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;-0.40806&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;marker0&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;truck_red.png&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">&quot;42.13684&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;-0.40884&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;marker1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;truck_red.png&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token string">&quot;42.13716&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;-0.40729&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;marker2&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;truck_red.png&quot;</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+
+    <span class="token comment">'Dim gmh As GoogleMapHelper = New GoogleMapHelper(wbmap, onlyPositions)</span>
+    <span class="token comment">'Dim gmh As GoogleMapHelper = New GoogleMapHelper(wbmap, positonAndTitles)</span>
+    <span class="token keyword">Dim</span> gmh <span class="token keyword">As</span> GoogleMapHelper <span class="token operator">=</span> <span class="token keyword">New</span> GoogleMapHelper<span class="token punctuation">(</span>wbmap<span class="token punctuation">,</span> positonTitlesAndIcons<span class="token punctuation">)</span>
+    gmh<span class="token punctuation">.</span>loadMap<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token comment">'############################### CALLING JAVASCRIPT METHODS ##############################</span>
+<span class="token comment">'This methods call methods written in googlemap_template.html</span>
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> callMapJavascript<span class="token punctuation">(</span>sender <span class="token keyword">As</span> <span class="token keyword">Object</span><span class="token punctuation">,</span> e <span class="token keyword">As</span> EventArgs<span class="token punctuation">)</span> <span class="token keyword">Handles</span> Button1<span class="token punctuation">.</span>Click
+    wbmap<span class="token punctuation">.</span>Document<span class="token punctuation">.</span>InvokeScript<span class="token punctuation">(</span><span class="token string">&quot;showJavascriptHelloWorld&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> callMapJavascriptWithArguments<span class="token punctuation">(</span>sender <span class="token keyword">As</span> <span class="token keyword">Object</span><span class="token punctuation">,</span> e <span class="token keyword">As</span> EventArgs<span class="token punctuation">)</span> <span class="token keyword">Handles</span> Button2<span class="token punctuation">.</span>Click
+    wbmap<span class="token punctuation">.</span>Document<span class="token punctuation">.</span>InvokeScript<span class="token punctuation">(</span><span class="token string">&quot;focusMarkerFromIdx&quot;</span><span class="token punctuation">,</span> <span class="token keyword">New</span> <span class="token keyword">String</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token comment">'#########################################################################################</span>
+
+<span class="token comment">'############################### METHODS CALLED FROM JAVASCRIPT ##########################</span>
+<span class="token comment">'This methods are called by the javascript defined in googlemap_template.html when some events are triggered</span>
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> getMarkerDataFromJavascript<span class="token punctuation">(</span>title <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> idx <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    MsgBox<span class="token punctuation">(</span><span class="token string">&quot;Title: &quot;</span> <span class="token operator">&amp;</span> title <span class="token operator">&amp;</span> <span class="token string">&quot; idx: &quot;</span> <span class="token operator">&amp;</span> idx<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> showVbHelloWorld<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    MsgBox<span class="token punctuation">(</span><span class="token string">&quot;Hello world in WF from HTML&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+</code></pre></div><p><strong>IMPORTANT :</strong> don't forget to add these lines before your class Form1 definition:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token operator">&lt;</span>PermissionSet<span class="token punctuation">(</span>SecurityAction<span class="token punctuation">.</span>Demand<span class="token punctuation">,</span> Name<span class="token punctuation">:</span><span class="token operator">=</span><span class="token string">&quot;FullTrust&quot;</span><span class="token punctuation">)</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>System<span class="token punctuation">.</span>Runtime<span class="token punctuation">.</span>InteropServices<span class="token punctuation">.</span>ComVisible<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token operator">&gt;</span>
+
+</code></pre></div><p>What they do is to tell the .NET Framework that we want fulltrust and make the class visible to COM so Form1 is visible to JavaScript.</p> <p>Also don't forget this in your Form1 load function:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Me</span><span class="token punctuation">.</span>wbmap<span class="token punctuation">.</span>ObjectForScripting <span class="token operator">=</span> <span class="token keyword">Me</span>
+
+</code></pre></div><p>It exposes your Form1 class to the JavaScript on the googlemap_template.hmtl page.</p> <p>Now you can execute and it should be working</p> <p><strong>################################# HOW IT WORKS#################################</strong></p> <p>Basically, what our GoogleMapHelper class does is to read our googlemap_template.html, make a temporal copy, replace the code related to the markers ([[MARKER_DATA]]) and execute the page in the web browser control of our form. This html loops through all the markers and assigns a 'click' listener to each one. This click function is obviously fully customizable. In the example it opens an infowindow if the marker has a title, centers the map in such marker and calls two external functions that are defined in our Form1 class.</p> <p>On the other hand, we can define other javascript functions (with or without arguments) in this html to be called from our Windows Form (by using wbmap.Document.InvokeScript).</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/google-maps-in-a-windows-form.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/working-with-windows-forms.html" class="prev">
+        Working with Windows Forms
+      </a></span> <span class="next"><a href="/vbnet/gdi.html">
+        GDI+
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3472.315b8f96.js" defer></script>
+  </body>
+</html>

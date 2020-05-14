@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PostgreSQL - Accessing Data Programmatically</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Accessing PostgreSQL with the C-API, Accessing Postgresql from .NET using the Npgsql provider, Accessing PostgreSQL from python using psycopg2, Accessing PostgreSQL from PHP using Pomm2">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="PostgreSQL - Accessing Data Programmatically">
+    <meta property="og:description" content="Accessing PostgreSQL with the C-API, Accessing Postgresql from .NET using the Npgsql provider, Accessing PostgreSQL from python using psycopg2, Accessing PostgreSQL from PHP using Pomm2">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/postgresql/accessing-data-programmatically.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="PostgreSQL - Accessing Data Programmatically">
+    <meta name="twitter:description" content="Accessing PostgreSQL with the C-API, Accessing Postgresql from .NET using the Npgsql provider, Accessing PostgreSQL from python using psycopg2, Accessing PostgreSQL from PHP using Pomm2">
+    <meta name="twitter:url" content="/postgresql/accessing-data-programmatically.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2536.5df906c8.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>PostgreSQL</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/postgresql/" class="sidebar-link">Disclaimer</a></li><li><a href="/postgresql/getting-started-with-postgresql.html" class="sidebar-link">Getting started with postgresql</a></li><li><a href="/postgresql/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/postgresql/dates-timestamps-and-intervals.html" class="sidebar-link">Dates, Timestamps, and Intervals</a></li><li><a href="/postgresql/table-creation.html" class="sidebar-link">Table Creation</a></li><li><a href="/postgresql/select.html" class="sidebar-link">SELECT</a></li><li><a href="/postgresql/find-string-length-character-length.html" class="sidebar-link">Find String Length / Character Length</a></li><li><a href="/postgresql/coalesce.html" class="sidebar-link">COALESCE</a></li><li><a href="/postgresql/insert.html" class="sidebar-link">INSERT</a></li><li><a href="/postgresql/update.html" class="sidebar-link">UPDATE</a></li><li><a href="/postgresql/json-support.html" class="sidebar-link">JSON Support</a></li><li><a href="/postgresql/aggregate-functions.html" class="sidebar-link">Aggregate Functions</a></li><li><a href="/postgresql/common-table-expressions-with.html" class="sidebar-link">Common Table Expressions (WITH)</a></li><li><a href="/postgresql/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/postgresql/recursive-queries.html" class="sidebar-link">Recursive queries</a></li><li><a href="/postgresql/programming-with-pl-pgsql.html" class="sidebar-link">Programming with PL/pgSQL</a></li><li><a href="/postgresql/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/postgresql/export-postgresql-database-table-header-and-data-to-csv-file.html" class="sidebar-link">Export PostgreSQL database table header and data to CSV file</a></li><li><a href="/postgresql/triggers-and-trigger-functions.html" class="sidebar-link">Triggers and Trigger Functions</a></li><li><a href="/postgresql/event-triggers.html" class="sidebar-link">Event Triggers</a></li><li><a href="/postgresql/role-management.html" class="sidebar-link">Role Management</a></li><li><a href="/postgresql/postgres-cryptographic-functions.html" class="sidebar-link">Postgres cryptographic functions</a></li><li><a href="/postgresql/comments-in-postgresql.html" class="sidebar-link">Comments in postgresql</a></li><li><a href="/postgresql/backup-and-restore.html" class="sidebar-link">Backup and Restore</a></li><li><a href="/postgresql/backup-script-for-a-production-db.html" class="sidebar-link">Backup script for a production DB</a></li><li><a href="/postgresql/accessing-data-programmatically.html" class="active sidebar-link">Accessing Data Programmatically</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/postgresql/accessing-data-programmatically.html#accessing-postgresql-with-the-c-api" class="sidebar-link">Accessing PostgreSQL with the C-API</a></li><li class="sidebar-sub-header"><a href="/postgresql/accessing-data-programmatically.html#accessing-postgresql-from-net-using-the-npgsql-provider" class="sidebar-link">Accessing Postgresql from .NET using the Npgsql provider</a></li><li class="sidebar-sub-header"><a href="/postgresql/accessing-data-programmatically.html#accessing-postgresql-from-python-using-psycopg2" class="sidebar-link">Accessing PostgreSQL from python using psycopg2</a></li><li class="sidebar-sub-header"><a href="/postgresql/accessing-data-programmatically.html#accessing-postgresql-from-php-using-pomm2" class="sidebar-link">Accessing PostgreSQL from PHP using Pomm2</a></li></ul></li><li><a href="/postgresql/connect-to-postgresql-from-java.html" class="sidebar-link">Connect to PostgreSQL from Java</a></li><li><a href="/postgresql/postgresql-high-availability.html" class="sidebar-link">PostgreSQL High Availability</a></li><li><a href="/postgresql/extension-dblink-and-postgres-fdw.html" class="sidebar-link">EXTENSION dblink and postgres_fdw</a></li><li><a href="/postgresql/postgres-tip-and-tricks.html" class="sidebar-link">Postgres Tip and Tricks</a></li><li><a href="/postgresql/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="accessing-data-programmatically"><a href="#accessing-data-programmatically" class="header-anchor">#</a> Accessing Data Programmatically</h1> <h2 id="accessing-postgresql-with-the-c-api"><a href="#accessing-postgresql-with-the-c-api" class="header-anchor">#</a> Accessing PostgreSQL with the C-API</h2> <p>The C-API is the most powerful way to access PostgreSQL and it is surprisingly comfortable.</p> <h3 id="compilation-and-linking"><a href="#compilation-and-linking" class="header-anchor">#</a> Compilation and linking</h3> <p>During compilation, you have to add the PostgreSQL include directory, which can be found with <code>pg_config --includedir</code>, to the include path.<br>
+You must link with the PostgreSQL client shared library (<code>libpq.so</code> on UNIX, <code>libpq.dll</code> on Windows). This library is in the PostgreSQL library directory, which can be found with <code>pg_config --libdir</code>.</p> <p><strong>Note:</strong> For historical reason, the library is called <code>libpq.so</code>and <strong>not</strong> <code>libpg.so</code>, which is a popular trap for beginners.</p> <p>Given that the below code sample is in file <code>coltype.c</code>, compilation and linking would be done with</p> <div class="language-sql extra-class"><pre class="language-sql"><code>gcc <span class="token operator">-</span>Wall <span class="token operator">-</span>I <span class="token string">&quot;$(pg_config --includedir)&quot;</span> <span class="token operator">-</span>L <span class="token string">&quot;$(pg_config --libdir)&quot;</span> <span class="token operator">-</span>o coltype coltype<span class="token punctuation">.</span>c <span class="token operator">-</span>lpq
+
+</code></pre></div><p>with the GNU C compiler (consider adding <code>-Wl,-rpath,&quot;$(pg_config --libdir)&quot;</code> to add the library search path) or with</p> <div class="language-sql extra-class"><pre class="language-sql"><code>cl <span class="token operator">/</span>MT <span class="token operator">/</span>W4 <span class="token operator">/</span>I <span class="token operator">&lt;</span>include directory<span class="token operator">&gt;</span> coltype<span class="token punctuation">.</span>c <span class="token operator">&lt;</span>path <span class="token keyword">to</span> libpq<span class="token punctuation">.</span>lib<span class="token operator">&gt;</span>
+
+</code></pre></div><p>on Windows with Microsoft Visual C.</p> <h3 id="sample-program"><a href="#sample-program" class="header-anchor">#</a> Sample program</h3> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">/* necessary for all PostgreSQL client programs, should be first */</span>
+<span class="token comment">#include &lt;libpq-fe.h&gt;</span>
+
+<span class="token comment">#include &lt;stdio.h&gt;</span>
+<span class="token comment">#include &lt;string.h&gt;</span>
+
+<span class="token comment">#ifdef TRACE</span>
+<span class="token comment">#define TRACEFILE &quot;trace.out&quot;</span>
+<span class="token comment">#endif</span>
+
+<span class="token keyword">int</span> main<span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span> {
+<span class="token comment">#ifdef TRACE</span>
+    <span class="token keyword">FILE</span> <span class="token operator">*</span>trc<span class="token punctuation">;</span>
+<span class="token comment">#endif</span>
+    PGconn <span class="token operator">*</span>conn<span class="token punctuation">;</span>
+    PGresult <span class="token operator">*</span>res<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> <span class="token keyword">rowcount</span><span class="token punctuation">,</span> colcount<span class="token punctuation">,</span> i<span class="token punctuation">,</span> j<span class="token punctuation">,</span> firstcol<span class="token punctuation">;</span>
+    <span class="token comment">/* parameter type should be guessed by PostgreSQL */</span>
+    const Oid paramTypes<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> { <span class="token number">0</span> }<span class="token punctuation">;</span>
+    <span class="token comment">/* parameter value */</span>
+    const <span class="token keyword">char</span> <span class="token operator">*</span> const paramValues<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> { <span class="token string">&quot;pg_database&quot;</span> }<span class="token punctuation">;</span>
+
+    <span class="token comment">/*
+     * Using an empty connectstring will use default values for everything.
+     * If set, the environment variables PGHOST, PGDATABASE, PGPORT and
+     * PGUSER will be used.
+     */</span>
+    conn <span class="token operator">=</span> PQconnectdb<span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/*
+     * This can only happen if there is not enough memory
+     * to allocate the PGconn structure.
+     */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>conn <span class="token operator">=</span><span class="token operator">=</span> <span class="token boolean">NULL</span><span class="token punctuation">)</span>
+    {
+        fprintf<span class="token punctuation">(</span>stderr<span class="token punctuation">,</span> <span class="token string">&quot;Out of memory connecting to PostgreSQL.\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    }
+
+    <span class="token comment">/* check if the connection attempt worked */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>PQstatus<span class="token punctuation">(</span>conn<span class="token punctuation">)</span> <span class="token operator">!=</span> CONNECTION_OK<span class="token punctuation">)</span>
+    {
+        fprintf<span class="token punctuation">(</span>stderr<span class="token punctuation">,</span> <span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span> PQerrorMessage<span class="token punctuation">(</span>conn<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">/*
+         * Even if the connection failed, the PGconn structure has been
+         * allocated and must be freed.
+         */</span>
+        PQfinish<span class="token punctuation">(</span>conn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    }
+
+<span class="token comment">#ifdef TRACE</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">NULL</span> <span class="token operator">=</span><span class="token operator">=</span> <span class="token punctuation">(</span>trc <span class="token operator">=</span> fopen<span class="token punctuation">(</span>TRACEFILE<span class="token punctuation">,</span> <span class="token string">&quot;w&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    {
+        fprintf<span class="token punctuation">(</span>stderr<span class="token punctuation">,</span> <span class="token string">&quot;Error opening trace file \&quot;%s\&quot;!\n&quot;</span><span class="token punctuation">,</span> TRACEFILE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        PQfinish<span class="token punctuation">(</span>conn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    }
+
+    <span class="token comment">/* tracing for client-server communication */</span>
+    PQtrace<span class="token punctuation">(</span>conn<span class="token punctuation">,</span> trc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">#endif</span>
+
+    <span class="token comment">/* this program expects the database to return data in UTF-8 */</span>
+    PQsetClientEncoding<span class="token punctuation">(</span>conn<span class="token punctuation">,</span> <span class="token string">&quot;UTF8&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* perform a query with parameters */</span>
+    res <span class="token operator">=</span> PQexecParams<span class="token punctuation">(</span>
+        conn<span class="token punctuation">,</span>
+        <span class="token string">&quot;SELECT column_name, data_type &quot;</span>
+            <span class="token string">&quot;FROM information_schema.columns &quot;</span>
+            <span class="token string">&quot;WHERE table_name = $1&quot;</span><span class="token punctuation">,</span>
+        <span class="token number">1</span><span class="token punctuation">,</span>            <span class="token comment">/* one parameter */</span>
+        paramTypes<span class="token punctuation">,</span>        
+        paramValues<span class="token punctuation">,</span>
+        <span class="token boolean">NULL</span><span class="token punctuation">,</span>        <span class="token comment">/* parameter lengths are not required for strings */</span>
+        <span class="token boolean">NULL</span><span class="token punctuation">,</span>        <span class="token comment">/* all parameters are in text format */</span>
+        <span class="token number">0</span>            <span class="token comment">/* result shall be in text format */</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* out of memory or sever communication broken */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token boolean">NULL</span> <span class="token operator">=</span><span class="token operator">=</span> res<span class="token punctuation">)</span>
+    {
+        fprintf<span class="token punctuation">(</span>stderr<span class="token punctuation">,</span> <span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span> PQerrorMessage<span class="token punctuation">(</span>conn<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        PQfinish<span class="token punctuation">(</span>conn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">#ifdef TRACE</span>
+        fclose<span class="token punctuation">(</span>trc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">#endif</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    }
+
+    <span class="token comment">/* SQL statement should return results */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>PGRES_TUPLES_OK <span class="token operator">!=</span> PQresultStatus<span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    {
+        fprintf<span class="token punctuation">(</span>stderr<span class="token punctuation">,</span> <span class="token string">&quot;%s\n&quot;</span><span class="token punctuation">,</span> PQerrorMessage<span class="token punctuation">(</span>conn<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        PQfinish<span class="token punctuation">(</span>conn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">#ifdef TRACE</span>
+        fclose<span class="token punctuation">(</span>trc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">#endif</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    }
+
+    <span class="token comment">/* get count of result rows and columns */</span>
+    <span class="token keyword">rowcount</span> <span class="token operator">=</span> PQntuples<span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    colcount <span class="token operator">=</span> PQnfields<span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* print column headings */</span>
+    firstcol <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+    printf<span class="token punctuation">(</span><span class="token string">&quot;Description of the table \&quot;pg_database\&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>colcount<span class="token punctuation">;</span> <span class="token operator">+</span><span class="token operator">+</span>j<span class="token punctuation">)</span>
+    {
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>firstcol<span class="token punctuation">)</span>
+            firstcol <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+            printf<span class="token punctuation">(</span><span class="token string">&quot;: &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        printf<span class="token punctuation">(</span>PQfname<span class="token punctuation">(</span>res<span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    }
+
+    printf<span class="token punctuation">(</span><span class="token string">&quot;\n\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* loop through rosult rows */</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token keyword">rowcount</span><span class="token punctuation">;</span> <span class="token operator">+</span><span class="token operator">+</span>i<span class="token punctuation">)</span>
+    {
+        <span class="token comment">/* print all column data */</span>
+        firstcol <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> j<span class="token operator">&lt;</span>colcount<span class="token punctuation">;</span> <span class="token operator">+</span><span class="token operator">+</span>j<span class="token punctuation">)</span>
+        {
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>firstcol<span class="token punctuation">)</span>
+                firstcol <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">else</span>
+                printf<span class="token punctuation">(</span><span class="token string">&quot;: &quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            printf<span class="token punctuation">(</span>PQgetvalue<span class="token punctuation">(</span>res<span class="token punctuation">,</span> i<span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        }
+
+        printf<span class="token punctuation">(</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    }
+
+    <span class="token comment">/* this must be done after every statement to avoid memory leaks */</span>
+    PQclear<span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/* close the database connection and release memory */</span>
+    PQfinish<span class="token punctuation">(</span>conn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">#ifdef TRACE</span>
+    fclose<span class="token punctuation">(</span>trc<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">#endif</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+}
+
+</code></pre></div><h2 id="accessing-postgresql-from-net-using-the-npgsql-provider"><a href="#accessing-postgresql-from-net-using-the-npgsql-provider" class="header-anchor">#</a> Accessing Postgresql from .NET using the Npgsql provider</h2> <p>One of the more popular .NET providers for Postgresql is <a href="http://www.npgsql.org/" target="_blank" rel="noopener noreferrer">Npgsql<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, which is ADO.NET compatible and is used nearly identically as other .NET database providers.</p> <p>A typical query is performed by creating a command, binding parameters, and then executing the command. In C#:</p> <div class="language-sql extra-class"><pre class="language-sql"><code>var connString <span class="token operator">=</span> <span class="token string">&quot;Host=myserv;Username=myuser;Password=mypass;Database=mydb&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token punctuation">(</span>var conn <span class="token operator">=</span> new NpgsqlConnection<span class="token punctuation">(</span>connString<span class="token punctuation">)</span><span class="token punctuation">)</span>
+{
+    var querystring <span class="token operator">=</span> <span class="token string">&quot;INSERT INTO data (some_field) VALUES (@content)&quot;</span><span class="token punctuation">;</span>
+    
+    conn<span class="token punctuation">.</span><span class="token keyword">Open</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// Create a new command with CommandText and Connection constructor</span>
+    <span class="token keyword">using</span> <span class="token punctuation">(</span>var cmd <span class="token operator">=</span> new NpgsqlCommand<span class="token punctuation">(</span>querystring<span class="token punctuation">,</span> conn<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    {
+        <span class="token comment">// Add a parameter and set its type with the NpgsqlDbType enum</span>
+        var contentString <span class="token operator">=</span> <span class="token string">&quot;Hello World!&quot;</span><span class="token punctuation">;</span>
+        cmd<span class="token punctuation">.</span>Parameters<span class="token punctuation">.</span><span class="token keyword">Add</span><span class="token punctuation">(</span><span class="token string">&quot;@content&quot;</span><span class="token punctuation">,</span> NpgsqlDbType<span class="token punctuation">.</span><span class="token keyword">Text</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">Value</span> <span class="token operator">=</span> contentString<span class="token punctuation">;</span>
+
+        <span class="token comment">// Execute a query that returns no results</span>
+        cmd<span class="token punctuation">.</span>ExecuteNonQuery<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        <span class="token comment">/* It is possible to reuse a command object and open connection instead of creating new ones */</span>
+
+        <span class="token comment">// Create a new query and set its parameters</span>
+        <span class="token keyword">int</span> keyId <span class="token operator">=</span> <span class="token number">101</span><span class="token punctuation">;</span>
+        cmd<span class="token punctuation">.</span>CommandText <span class="token operator">=</span> <span class="token string">&quot;SELECT primary_key, some_field FROM data WHERE primary_key = @keyId&quot;</span><span class="token punctuation">;</span>
+        cmd<span class="token punctuation">.</span>Parameters<span class="token punctuation">.</span>Clear<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        cmd<span class="token punctuation">.</span>Parameters<span class="token punctuation">.</span><span class="token keyword">Add</span><span class="token punctuation">(</span><span class="token string">&quot;@keyId&quot;</span><span class="token punctuation">,</span> NpgsqlDbType<span class="token punctuation">.</span><span class="token keyword">Integer</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">Value</span> <span class="token operator">=</span> keyId<span class="token punctuation">;</span>
+
+        <span class="token comment">// Execute the command and read through the rows one by one</span>
+        <span class="token keyword">using</span> <span class="token punctuation">(</span>NpgsqlDataReader reader <span class="token operator">=</span> cmd<span class="token punctuation">.</span>ExecuteReader<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        {
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>reader<span class="token punctuation">.</span><span class="token keyword">Read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>   <span class="token comment">// Returns false for 0 rows, or after reading the last row of the results</span>
+            {
+                <span class="token comment">// read an integer value</span>
+                <span class="token keyword">int</span> primaryKey <span class="token operator">=</span> reader<span class="token punctuation">.</span>GetInt32<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment">// or </span>
+                primaryKey <span class="token operator">=</span> <span class="token keyword">Convert</span><span class="token punctuation">.</span>ToInt32<span class="token punctuation">(</span>reader<span class="token punctuation">[</span><span class="token string">&quot;primary_key&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// read a text value</span>
+                string someFieldText <span class="token operator">=</span> reader<span class="token punctuation">[</span><span class="token string">&quot;some_field&quot;</span><span class="token punctuation">]</span><span class="token punctuation">.</span>ToString<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            }
+        }
+    }
+}    <span class="token comment">// the C# 'using' directive calls conn.Close() and conn.Dispose() for us</span>
+
+</code></pre></div><h2 id="accessing-postgresql-from-python-using-psycopg2"><a href="#accessing-postgresql-from-python-using-psycopg2" class="header-anchor">#</a> Accessing PostgreSQL from python using psycopg2</h2> <p>You can find description of the driver <a href="http://initd.org/psycopg/docs/" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <p>The quick example is:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">import</span> psycopg2
+
+db_host <span class="token operator">=</span> <span class="token string">'postgres.server.com'</span>
+db_port <span class="token operator">=</span> <span class="token string">'5432'</span>
+db_un <span class="token operator">=</span> <span class="token string">'user'</span>
+db_pw <span class="token operator">=</span> <span class="token string">'password'</span>
+db_name <span class="token operator">=</span> <span class="token string">'testdb'</span>
+
+conn <span class="token operator">=</span> psycopg2<span class="token punctuation">.</span><span class="token keyword">connect</span><span class="token punctuation">(</span><span class="token string">&quot;dbname={} host={} user={} password={}&quot;</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>
+                         db_name<span class="token punctuation">,</span>  db_host<span class="token punctuation">,</span> db_un<span class="token punctuation">,</span> db_pw<span class="token punctuation">)</span><span class="token punctuation">,</span>
+                         cursor_factory<span class="token operator">=</span>RealDictCursor<span class="token punctuation">)</span>
+cur <span class="token operator">=</span> conn<span class="token punctuation">.</span><span class="token keyword">cursor</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">sql</span> <span class="token operator">=</span> <span class="token string">'select * from testtable where id &gt; %s and id &lt; %s'</span>
+args <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+cur<span class="token punctuation">.</span><span class="token keyword">execute</span><span class="token punctuation">(</span><span class="token keyword">sql</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>cur<span class="token punctuation">.</span>fetchall<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>Will result:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token punctuation">[</span>{<span class="token string">'id'</span>: <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'fruit'</span>: <span class="token string">'apple'</span>}<span class="token punctuation">,</span> {<span class="token string">'id'</span>: <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'fruit'</span>: <span class="token string">'orange'</span>}<span class="token punctuation">]</span>
+
+</code></pre></div><h2 id="accessing-postgresql-from-php-using-pomm2"><a href="#accessing-postgresql-from-php-using-pomm2" class="header-anchor">#</a> Accessing PostgreSQL from PHP using Pomm2</h2> <p>On the shoulders of the low level drivers, there is <a href="http://www.pomm-project.org/" target="_blank" rel="noopener noreferrer">pomm<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. It proposes a modular approach, data converters, listen/notify support, database inspector and much more.</p> <p>Assuming, Pomm has been installed using composer, here is a complete example:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">&lt;</span>?php
+<span class="token keyword">use</span> PommProject\Foundation\Pomm<span class="token punctuation">;</span>
+$loader <span class="token operator">=</span> <span class="token keyword">require</span> __DIR__ <span class="token punctuation">.</span> <span class="token string">'/vendor/autoload.php'</span><span class="token punctuation">;</span>
+$pomm <span class="token operator">=</span> new Pomm<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'my_db'</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">[</span><span class="token string">'dsn'</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">'pgsql://user:pass@host:5432/db_name'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// TABLE comment (</span>
+<span class="token comment">// comment_id uuid PK, created_at timestamptz NN,</span>
+<span class="token comment">// is_moderated bool NN default false,</span>
+<span class="token comment">// content text NN CHECK (content !~ '^\s+$'), author_email text NN)</span>
+$<span class="token keyword">sql</span> <span class="token operator">=</span> <span class="token operator">&lt;&lt;</span><span class="token operator">&lt;</span><span class="token keyword">SQL</span>
+<span class="token keyword">SELECT</span>
+  comment_id<span class="token punctuation">,</span>
+  created_at<span class="token punctuation">,</span>
+  is_moderated<span class="token punctuation">,</span>
+  content<span class="token punctuation">,</span>
+  author_email
+<span class="token keyword">FROM</span> <span class="token keyword">comment</span>
+  <span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> author <span class="token keyword">USING</span> <span class="token punctuation">(</span>author_email<span class="token punctuation">)</span>
+<span class="token keyword">WHERE</span>
+  age<span class="token punctuation">(</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> created_at<span class="token punctuation">)</span> <span class="token operator">&lt;</span> $<span class="token operator">*</span>::<span class="token keyword">interval</span>
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> created_at <span class="token keyword">ASC</span>
+<span class="token keyword">SQL</span><span class="token punctuation">;</span>
+
+<span class="token comment">// the argument will be converted as it is cast in the query above</span>
+$comments <span class="token operator">=</span> $pomm<span class="token punctuation">[</span><span class="token string">'my_db'</span><span class="token punctuation">]</span>
+    <span class="token operator">-</span><span class="token operator">&gt;</span>getQueryManager<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token operator">-</span><span class="token operator">&gt;</span>query<span class="token punctuation">(</span>$<span class="token keyword">sql</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>DateInterval::createFromDateString<span class="token punctuation">(</span><span class="token string">'1 day'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>$comments<span class="token operator">-</span><span class="token operator">&gt;</span>isEmpty<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> {
+    printf<span class="token punctuation">(</span><span class="token string">&quot;There are no new comments since yesterday.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+} <span class="token keyword">else</span> {
+    foreach <span class="token punctuation">(</span>$comments <span class="token keyword">as</span> $<span class="token keyword">comment</span><span class="token punctuation">)</span> {
+        printf<span class="token punctuation">(</span>
+                <span class="token string">&quot;%s has posted at %s. %s\n&quot;</span><span class="token punctuation">,</span>
+                $<span class="token keyword">comment</span><span class="token punctuation">[</span><span class="token string">'author_email'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                $<span class="token keyword">comment</span><span class="token punctuation">[</span><span class="token string">'created_at'</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token string">&quot;Y-m-d H:i:s&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                $<span class="token keyword">comment</span><span class="token punctuation">[</span><span class="token string">'is_moderated'</span><span class="token punctuation">]</span> ? <span class="token string">'[OK]'</span> : <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    }
+}
+
+</code></pre></div><p>Pomm’s query manager module escapes query arguments to prevent SQL injection. When the arguments are cast, it also converts them from a PHP representation to valid Postgres values. The result is an iterator, it uses a cursor internally. Every row is converted on the fly, booleans to booleans, timestamps to \DateTime etc.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/postgresql/accessing-data-programmatically.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/postgresql/backup-script-for-a-production-db.html" class="prev">
+        Backup script for a production DB
+      </a></span> <span class="next"><a href="/postgresql/connect-to-postgresql-from-java.html">
+        Connect to PostgreSQL from Java
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2536.5df906c8.js" defer></script>
+  </body>
+</html>

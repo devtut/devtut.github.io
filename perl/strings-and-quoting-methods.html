@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Perl - Strings and quoting methods</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="String Literal Quoting, Double-quoting, Heredocs, Removing trailing newlines">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Perl - Strings and quoting methods">
+    <meta property="og:description" content="String Literal Quoting, Double-quoting, Heredocs, Removing trailing newlines">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/perl/strings-and-quoting-methods.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Perl - Strings and quoting methods">
+    <meta name="twitter:description" content="String Literal Quoting, Double-quoting, Heredocs, Removing trailing newlines">
+    <meta name="twitter:url" content="/perl/strings-and-quoting-methods.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2408.247df191.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Perl</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/perl/" class="sidebar-link">Disclaimer</a></li><li><a href="/perl/getting-started-with-perl-language.html" class="sidebar-link">Getting started with Perl Language</a></li><li><a href="/perl/comments.html" class="sidebar-link">Comments</a></li><li><a href="/perl/variables.html" class="sidebar-link">Variables</a></li><li><a href="/perl/interpolation-in-perl.html" class="sidebar-link">Interpolation in Perl</a></li><li><a href="/perl/true-and-false.html" class="sidebar-link">True and false</a></li><li><a href="/perl/dates-and-time.html" class="sidebar-link">Dates and Time</a></li><li><a href="/perl/control-statements.html" class="sidebar-link">Control Statements</a></li><li><a href="/perl/subroutines.html" class="sidebar-link">Subroutines</a></li><li><a href="/perl/debug-output.html" class="sidebar-link">Debug Output</a></li><li><a href="/perl/lists.html" class="sidebar-link">Lists</a></li><li><a href="/perl/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/perl/file-i-o-reading-and-writing-files.html" class="sidebar-link">File I/O (reading and writing files)</a></li><li><a href="/perl/reading-a-file-s-content-into-a-variable.html" class="sidebar-link">Reading a file's content into a variable</a></li><li><a href="/perl/strings-and-quoting-methods.html" class="active sidebar-link">Strings and quoting methods</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/perl/strings-and-quoting-methods.html#string-literal-quoting" class="sidebar-link">String Literal Quoting</a></li><li class="sidebar-sub-header"><a href="/perl/strings-and-quoting-methods.html#double-quoting" class="sidebar-link">Double-quoting</a></li><li class="sidebar-sub-header"><a href="/perl/strings-and-quoting-methods.html#heredocs" class="sidebar-link">Heredocs</a></li><li class="sidebar-sub-header"><a href="/perl/strings-and-quoting-methods.html#removing-trailing-newlines" class="sidebar-link">Removing trailing newlines</a></li></ul></li><li><a href="/perl/split-a-string-on-unquoted-separators.html" class="sidebar-link">Split a string on unquoted separators</a></li><li><a href="/perl/object-oriented-perl.html" class="sidebar-link">Object-oriented Perl</a></li><li><a href="/perl/exception-handling.html" class="sidebar-link">Exception handling</a></li><li><a href="/perl/regular-expressions.html" class="sidebar-link">Regular Expressions</a></li><li><a href="/perl/xml-parsing.html" class="sidebar-link">XML Parsing</a></li><li><a href="/perl/unicode.html" class="sidebar-link">Unicode</a></li><li><a href="/perl/perl-one-liners.html" class="sidebar-link">Perl one-liners</a></li><li><a href="/perl/randomness.html" class="sidebar-link">Randomness</a></li><li><a href="/perl/special-variables.html" class="sidebar-link">Special variables</a></li><li><a href="/perl/dates-and-time.html" class="sidebar-link">Dates and Time</a></li><li><a href="/perl/packages-and-modules.html" class="sidebar-link">Packages and modules</a></li><li><a href="/perl/install-perl-modules-via-cpan.html" class="sidebar-link">Install Perl modules via CPAN</a></li><li><a href="/perl/easy-way-to-check-installed-modules-on-mac-and-ubuntu.html" class="sidebar-link">Easy way to check installed modules on Mac and Ubuntu</a></li><li><a href="/perl/pack-and-unpack.html" class="sidebar-link">Pack and unpack</a></li><li><a href="/perl/perl-commands-for-windows-excel-with-win32-ole-module.html" class="sidebar-link">Perl commands for Windows Excel with Win32::OLE module</a></li><li><a href="/perl/simple-interaction-with-database-via-dbi-module.html" class="sidebar-link">Simple interaction with database via DBI module</a></li><li><a href="/perl/perl-testing.html" class="sidebar-link">Perl Testing</a></li><li><a href="/perl/dancer.html" class="sidebar-link">Dancer</a></li><li><a href="/perl/attributed-text.html" class="sidebar-link">Attributed Text</a></li><li><a href="/perl/gui-applications-in-perl.html" class="sidebar-link">GUI Applications in Perl</a></li><li><a href="/perl/memory-usage-optimization.html" class="sidebar-link">Memory usage optimization</a></li><li><a href="/perl/perl-script-debugging.html" class="sidebar-link">Perl script debugging</a></li><li><a href="/perl/perlbrew.html" class="sidebar-link">Perlbrew</a></li><li><a href="/perl/installation-of-perl.html" class="sidebar-link">Installation of Perl</a></li><li><a href="/perl/compile-perl-cpan-module-sapnwrfc-from-source-code.html" class="sidebar-link">Compile Perl cpan module sapnwrfc from source code</a></li><li><a href="/perl/best-practices.html" class="sidebar-link">Best Practices</a></li><li><a href="/perl/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="strings-and-quoting-methods"><a href="#strings-and-quoting-methods" class="header-anchor">#</a> Strings and quoting methods</h1> <h2 id="string-literal-quoting"><a href="#string-literal-quoting" class="header-anchor">#</a> String Literal Quoting</h2> <p>String literals imply no escaping or interpolation ( with the exception of quoting string terminators )</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">print</span> <span class="token string">'This is a string literal\n'</span><span class="token punctuation">;</span> <span class="token comment"># emits a literal \ and n to terminal</span>
+
+<span class="token keyword">print</span> <span class="token string">'This literal contains a \'postraphe '</span><span class="token punctuation">;</span> <span class="token comment"># emits the ' but not its preceding \</span>
+
+</code></pre></div><p>You can use alternative quoting mechanisms to avoid clashes:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">print</span> <span class="token string">q/This is is a literal \' &lt;-- 2 characters /</span><span class="token punctuation">;</span>  <span class="token comment"># prints both \ and '</span>
+<span class="token keyword">print</span> <span class="token string">q^This is is a literal \' &lt;-- 2 characters ^</span><span class="token punctuation">;</span>  <span class="token comment"># also</span>
+
+</code></pre></div><p>Certain chosen quote characters are &quot;balanced&quot;</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">print</span> q<span class="token punctuation">{</span> This is a literal <span class="token operator">and</span> I contain <span class="token punctuation">{</span> parens<span class="token operator">!</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment"># prints inner { }</span>
+
+</code></pre></div><h2 id="double-quoting"><a href="#double-quoting" class="header-anchor">#</a> Double-quoting</h2> <p>Double-quoted strings use <strong>interpolation</strong> and <strong>escaping</strong> – unlike single-quoted strings. To double-quote a string, use either double quotes <code>&quot;</code> or the <code>qq</code> operator.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$greeting</span> <span class="token operator">=</span> <span class="token string">&quot;Hello!\n&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">print</span> <span class="token variable">$greeting</span><span class="token punctuation">;</span>
+<span class="token comment"># =&gt; Hello! (followed by a linefeed)</span>
+
+<span class="token keyword">my</span> <span class="token variable">$bush</span> <span class="token operator">=</span> <span class="token string">&quot;They misunderestimated me.&quot;</span>
+<span class="token keyword">print</span> <span class="token string">qq/As Bush once said: &quot;$bush&quot;\n/</span><span class="token punctuation">;</span>
+<span class="token comment"># =&gt; As Bush once said: &quot;They misunderestimated me.&quot; (with linefeed)</span>
+
+</code></pre></div><p>The <code>qq</code> is useful here, to avoid having to escape the quotation marks. Without it, we would have to write...</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">print</span> <span class="token string">&quot;As Bush once said: \&quot;$bush\&quot;\n&quot;</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>... which just isn't as nice.</p> <p>Perl doesn't limit you to using a slash <code>/</code> with <code>qq</code>; you can use any (visible) character.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">use</span> feature <span class="token string">'say'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">say</span> <span class="token string">qq/You can use slashes.../</span><span class="token punctuation">;</span>
+<span class="token keyword">say</span> <span class="token string">qq{...or braces...}</span><span class="token punctuation">;</span>
+<span class="token keyword">say</span> <span class="token string">qq^...or hats...^</span><span class="token punctuation">;</span>
+<span class="token keyword">say</span> <span class="token string">qq|...or pipes...|</span><span class="token punctuation">;</span>
+<span class="token comment"># say qq ...but not whitespace. ;</span>
+
+</code></pre></div><p>You can also interpolate arrays into strings.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">use</span> feature <span class="token string">'say'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">my</span> <span class="token variable">@letters</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">say</span> <span class="token string">&quot;I like these letters: @letters.&quot;</span><span class="token punctuation">;</span>
+<span class="token comment"># =&gt; I like these letters: a b c.</span>
+
+</code></pre></div><p>By default the values are space-separated – because the special variable <code>$&quot;</code> defaults to a single space. This can, of course, be changed.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">use</span> feature <span class="token string">'say'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">my</span> <span class="token variable">@letters</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span><span class="token keyword">local</span> $<span class="token string">&quot; = &quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;; say &quot;</span><span class="token variable">@letters</span>&quot;<span class="token punctuation">;</span> <span class="token punctuation">}</span>    <span class="token comment"># a, b, c</span>
+
+</code></pre></div><p>If you prefer, you have the option to <code>use English</code> and change <code>$LIST_SEPARATOR</code> instead:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">use</span> <span class="token vstring string">v5.18</span><span class="token punctuation">;</span> <span class="token comment"># English should be avoided on older Perls</span>
+<span class="token keyword">use</span> English<span class="token punctuation">;</span>
+
+<span class="token keyword">my</span> <span class="token variable">@letters</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">{</span> <span class="token keyword">local</span> <span class="token variable">$LIST_SEPARATOR</span> <span class="token operator">=</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span> <span class="token keyword">say</span> <span class="token string">&quot;My favourite letters:\n\n@letters&quot;</span> <span class="token punctuation">}</span>
+
+</code></pre></div><p>For anything more complex than this, you should use a loop instead.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">say</span> <span class="token string">&quot;My favourite letters:&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">say</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token keyword">my</span> <span class="token variable">$letter</span> <span class="token punctuation">(</span><span class="token variable">@letters</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">say</span> <span class="token string">&quot; - $letter&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Interpolation does <strong>not</strong> work with hashes.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">use</span> feature <span class="token string">'say'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">my</span> <span class="token variable">%hash</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'c'</span><span class="token punctuation">,</span> <span class="token string">'d'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">say</span> <span class="token string">&quot;This doesn't work: %hash&quot;</span>         <span class="token comment"># This doesn't work: %hash</span>
+
+</code></pre></div><p>Some code abuses interpolation of references – <strong>avoid it</strong>.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">use</span> feature <span class="token string">'say'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">say</span> <span class="token string">&quot;2 + 2 == @{[ 2 + 2 ]}&quot;</span><span class="token punctuation">;</span>           <span class="token comment"># 2 + 2 = 4 (avoid this)</span>
+<span class="token keyword">say</span> <span class="token string">&quot;2 + 2 == ${\( 2 + 2 )}&quot;</span><span class="token punctuation">;</span>          <span class="token comment"># 2 + 2 = 4 (avoid this)</span>
+
+</code></pre></div><p>The so-called &quot;cart operator&quot; causes perl to dereference <code>@{ ... }</code> the array reference <code>[ ... ]</code> that contains the expression that you want to interpolate, <code>2 + 2</code>. When you use this trick, Perl builds an anonymous array, then dereferences it and discards it.</p> <p>The <code>${\( ... )}</code> version is somewhat less wasteful, but it still requires allocating memory and it is even harder to read.</p> <p>Instead, consider writing:</p> <ul><li><code>say &quot;2 + 2 == &quot; . 2 + 2;</code></li> <li><code>my $result = 2 + 2; say &quot;2 + 2 == $result&quot;</code></li></ul> <h2 id="heredocs"><a href="#heredocs" class="header-anchor">#</a> Heredocs</h2> <p>Large Multi-Line strings are burdensome to write.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$variable</span> <span class="token operator">=</span> <span class="token operator">&lt;&lt;</span><span class="token string">'EOF'</span><span class="token punctuation">;</span>
+this block of text is interpreted literally<span class="token punctuation">,</span>
+no <span class="token operator">\</span><span class="token string">'quotes matter, they'</span>re just text
+only the trailing left<span class="token operator">-</span>aligned EOF matters<span class="token operator">.</span>
+EOF
+
+</code></pre></div><p>NB: Make sure you ignore stack-overflows syntax highlighter: It is very wrong.</p> <p>And Interpolated Heredocs work the same way.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$variable</span> <span class="token operator">=</span> <span class="token operator">&lt;&lt;</span><span class="token string">&quot;I Want it to End&quot;</span><span class="token punctuation">;</span>
+this block of text is interpreted<span class="token operator">.</span>
+quotes<span class="token operator">\</span>nare interpreted<span class="token punctuation">,</span> <span class="token operator">and</span> <span class="token variable">$interpolations</span>
+get interpolated<span class="token operator">...</span> 
+but still<span class="token punctuation">,</span> left<span class="token operator">-</span>aligned <span class="token string">&quot;I Want it to End&quot;</span> matters<span class="token operator">.</span>
+I Want it to End
+
+</code></pre></div><p>Pending in 5.26.0* is an &quot;Indented Heredoc&quot; Syntax which trims left-padding off for you</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$variable</span> <span class="token operator">=</span> <span class="token operator">&lt;&lt;</span><span class="token operator">~</span><span class="token string">&quot;MuchNicer&quot;</span><span class="token punctuation">;</span>
+    this block of text is interpreted<span class="token operator">.</span>
+    quotes<span class="token operator">\</span>nare interpreted<span class="token punctuation">,</span> <span class="token operator">and</span> <span class="token variable">$interpolations</span>
+    get interpolated<span class="token operator">...</span> 
+    but still<span class="token punctuation">,</span> left<span class="token operator">-</span>aligned <span class="token string">&quot;I Want it to End&quot;</span> matters<span class="token operator">.</span>
+MuchNicer
+
+</code></pre></div><h2 id="removing-trailing-newlines"><a href="#removing-trailing-newlines" class="header-anchor">#</a> Removing trailing newlines</h2> <p>The function <code>chomp</code> will remove <strong>one</strong> newline character, if present, from each scalar passed to it. <code>chomp</code> will mutate the original string and will return the number of characters removed</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$str</span> <span class="token operator">=</span> <span class="token string">&quot;Hello World\n\n&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">my</span> <span class="token variable">$removed</span> <span class="token operator">=</span> chomp<span class="token punctuation">(</span><span class="token variable">$str</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">print</span> <span class="token variable">$str</span><span class="token punctuation">;</span>     <span class="token comment"># &quot;Hello World\n&quot;</span>
+<span class="token keyword">print</span> <span class="token variable">$removed</span><span class="token punctuation">;</span> <span class="token comment"># 1    </span>
+
+<span class="token comment"># chomp again, removing another newline</span>
+<span class="token variable">$removed</span> <span class="token operator">=</span> chomp <span class="token variable">$str</span><span class="token punctuation">;</span>
+<span class="token keyword">print</span> <span class="token variable">$str</span><span class="token punctuation">;</span>     <span class="token comment"># &quot;Hello World&quot;</span>
+<span class="token keyword">print</span> <span class="token variable">$removed</span><span class="token punctuation">;</span> <span class="token comment"># 1    </span>
+
+<span class="token comment"># chomp again, but no newline to remove</span>
+<span class="token variable">$removed</span> <span class="token operator">=</span> chomp <span class="token variable">$str</span><span class="token punctuation">;</span>
+<span class="token keyword">print</span> <span class="token variable">$str</span><span class="token punctuation">;</span>     <span class="token comment"># &quot;Hello World&quot;</span>
+<span class="token keyword">print</span> <span class="token variable">$removed</span><span class="token punctuation">;</span> <span class="token comment"># 0    </span>
+
+</code></pre></div><p>You can also <code>chomp</code> more than one string at once:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">@strs</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">&quot;Hello\n&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;World!\n\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment"># one newline in first string, two in second</span>
+
+<span class="token keyword">my</span> <span class="token variable">$removed</span> <span class="token operator">=</span> chomp<span class="token punctuation">(</span><span class="token variable">@strs</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment"># @strs is now  (&quot;Hello&quot;, &quot;World!\n&quot;)</span>
+<span class="token keyword">print</span> <span class="token variable">$removed</span><span class="token punctuation">;</span>             <span class="token comment"># 2</span>
+
+<span class="token variable">$removed</span> <span class="token operator">=</span> chomp<span class="token punctuation">(</span><span class="token variable">@strs</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment"># @strs is now (&quot;Hello&quot;, &quot;World!&quot;)</span>
+<span class="token keyword">print</span> <span class="token variable">$removed</span><span class="token punctuation">;</span>          <span class="token comment"># 1  </span>
+
+<span class="token variable">$removed</span> <span class="token operator">=</span> chomp<span class="token punctuation">(</span><span class="token variable">@strs</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment"># @strs is still (&quot;Hello&quot;, &quot;World!&quot;)</span>
+<span class="token keyword">print</span> <span class="token variable">$removed</span><span class="token punctuation">;</span>          <span class="token comment"># 0</span>
+
+</code></pre></div><p>But usually, no one worries about how many newlines were removed, so <code>chomp</code> is usually seen in void context, and usually due to having read lines from a file:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token keyword">my</span> <span class="token variable">$line</span> <span class="token operator">=</span> readline <span class="token variable">$fh</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    chomp <span class="token variable">$line</span><span class="token punctuation">;</span>
+
+    <span class="token comment"># now do something with $line</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">my</span> <span class="token variable">@lines</span> <span class="token operator">=</span> readline <span class="token variable">$fh2</span><span class="token punctuation">;</span>
+
+chomp <span class="token punctuation">(</span><span class="token variable">@lines</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment"># remove newline from end of each line</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>The version syntax doesn't allow us to guard off versions that don't exist yet, so this is a reminder for somebody to go back and edit them in once it lands(  RE: Perl 5.26 ). The version guards rather need to have a &quot;future&quot; classification for tentative features that might be available to people brave enough to do a source checkout.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/perl/strings-and-quoting-methods.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/perl/reading-a-file-s-content-into-a-variable.html" class="prev">
+        Reading a file's content into a variable
+      </a></span> <span class="next"><a href="/perl/split-a-string-on-unquoted-separators.html">
+        Split a string on unquoted separators
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2408.247df191.js" defer></script>
+  </body>
+</html>

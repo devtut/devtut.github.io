@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C - Side Effects</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Pre/Post Increment/Decrement operators">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C - Side Effects">
+    <meta property="og:description" content="Pre/Post Increment/Decrement operators">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/c/side-effects.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C - Side Effects">
+    <meta name="twitter:description" content="Pre/Post Increment/Decrement operators">
+    <meta name="twitter:url" content="/c/side-effects.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/591.c9a6cfb8.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/c/" class="sidebar-link">Disclaimer</a></li><li><a href="/c/getting-started-with-c-language.html" class="sidebar-link">Getting started with C Language</a></li><li><a href="/c/comments.html" class="sidebar-link">Comments</a></li><li><a href="/c/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/c/operators.html" class="sidebar-link">Operators</a></li><li><a href="/c/boolean.html" class="sidebar-link">Boolean</a></li><li><a href="/c/strings.html" class="sidebar-link">Strings</a></li><li><a href="/c/literals-for-numbers-characters-and-strings.html" class="sidebar-link">Literals for numbers, characters and strings</a></li><li><a href="/c/compound-literals.html" class="sidebar-link">Compound Literals</a></li><li><a href="/c/bit-fields.html" class="sidebar-link">Bit-fields</a></li><li><a href="/c/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/c/linked-lists.html" class="sidebar-link">Linked lists</a></li><li><a href="/c/enumerations.html" class="sidebar-link">Enumerations</a></li><li><a href="/c/structs.html" class="sidebar-link">Structs</a></li><li><a href="/c/standard-math.html" class="sidebar-link">Standard Math</a></li><li><a href="/c/iteration-statements-loops-for-while-do-while.html" class="sidebar-link">Iteration Statements/Loops: for, while, do-while</a></li><li><a href="/c/selection-statements.html" class="sidebar-link">Selection Statements</a></li><li><a href="/c/initialization.html" class="sidebar-link">Initialization</a></li><li><a href="/c/declaration-vs-definition.html" class="sidebar-link">Declaration vs Definition</a></li><li><a href="/c/files-and-i-o-streams.html" class="sidebar-link">Files and I/O streams</a></li><li><a href="/c/formatted-input-output.html" class="sidebar-link">Formatted Input/Output</a></li><li><a href="/c/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/c/sequence-points.html" class="sidebar-link">Sequence points</a></li><li><a href="/c/function-pointers.html" class="sidebar-link">Function Pointers</a></li><li><a href="/c/function-parameters.html" class="sidebar-link">Function Parameters</a></li><li><a href="/c/pass-2d-arrays-to-functions.html" class="sidebar-link">Pass 2D-arrays to functions</a></li><li><a href="/c/error-handling.html" class="sidebar-link">Error handling</a></li><li><a href="/c/undefined-behavior.html" class="sidebar-link">Undefined behavior</a></li><li><a href="/c/random-number-generation.html" class="sidebar-link">Random Number Generation</a></li><li><a href="/c/preprocessor-and-macros.html" class="sidebar-link">Preprocessor and Macros</a></li><li><a href="/c/signal-handling.html" class="sidebar-link">Signal handling</a></li><li><a href="/c/variable-arguments.html" class="sidebar-link">Variable arguments</a></li><li><a href="/c/assertion.html" class="sidebar-link">Assertion</a></li><li><a href="/c/generic-selection.html" class="sidebar-link">Generic selection</a></li><li><a href="/c/x-macros.html" class="sidebar-link">X-macros</a></li><li><a href="/c/aliasing-and-effective-type.html" class="sidebar-link">Aliasing and effective type</a></li><li><a href="/c/compilation.html" class="sidebar-link">Compilation</a></li><li><a href="/c/identifier-scope.html" class="sidebar-link">Identifier Scope</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/implicit-and-explicit-conversions.html" class="sidebar-link">Implicit and Explicit Conversions</a></li><li><a href="/c/type-qualifiers.html" class="sidebar-link">Type Qualifiers</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/typedef.html" class="sidebar-link">Typedef</a></li><li><a href="/c/storage-classes.html" class="sidebar-link">Storage Classes</a></li><li><a href="/c/declarations.html" class="sidebar-link">Declarations</a></li><li><a href="/c/inline-assembly.html" class="sidebar-link">Inline assembly</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/structure-padding-and-packing.html" class="sidebar-link">Structure Padding and Packing</a></li><li><a href="/c/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/c/implementation-defined-behaviour.html" class="sidebar-link">Implementation-defined behaviour</a></li><li><a href="/c/atomics.html" class="sidebar-link">Atomics</a></li><li><a href="/c/jump-statements.html" class="sidebar-link">Jump Statements</a></li><li><a href="/c/create-and-include-header-files.html" class="sidebar-link">Create and include header files</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/ctype-h-character-classification-conversion.html" class="sidebar-link">— character classification &amp; conversion</a></li><li><a href="/c/side-effects.html" class="active sidebar-link">Side Effects</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/c/side-effects.html#pre-post-increment-decrement-operators" class="sidebar-link">Pre/Post Increment/Decrement operators</a></li></ul></li><li><a href="/c/multi-character-character-sequence.html" class="sidebar-link">Multi-Character Character Sequence</a></li><li><a href="/c/constraints.html" class="sidebar-link">Constraints</a></li><li><a href="/c/inlining.html" class="sidebar-link">Inlining</a></li><li><a href="/c/unions.html" class="sidebar-link">Unions</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/c/interprocess-communication-ipc.html" class="sidebar-link">Interprocess Communication (IPC)</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/common-c-programming-idioms-and-developer-practices.html" class="sidebar-link">Common C programming idioms and developer practices</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="side-effects"><a href="#side-effects" class="header-anchor">#</a> Side Effects</h1> <h2 id="pre-post-increment-decrement-operators"><a href="#pre-post-increment-decrement-operators" class="header-anchor">#</a> Pre/Post Increment/Decrement operators</h2> <p>In C, there are two unary operators - '++' and '--' that are very common source of confusion. The operator <code>++</code> is called the <strong>increment operator</strong> and the operator <code>--</code> is called the <strong>decrement operator</strong>. Both of them can be used used in either <strong>prefix</strong> form or <strong>postfix</strong> form. The syntax for prefix form for <code>++</code> operator is <code>++operand</code> and the syntax for postfix form is <code>operand++</code>. When used in the prefix form, the operand is incremented first by <code>1</code> and the resultant value of the operand is used in the evaluation of the expression. Consider the following example:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">int</span> n<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+n <span class="token operator">=</span> <span class="token operator">++</span>x<span class="token punctuation">;</span> <span class="token comment">/* x is incremented  by 1(x=6), and result is assigned to n(6) */</span>
+         <span class="token comment">/* this is a short form for two statements: */</span>
+         <span class="token comment">/* x = x + 1; */</span> 
+         <span class="token comment">/* n = x ; */</span>
+
+</code></pre></div><p>When used in the postfix form, the operand's current value is used in the expression and then the value of the operand is incremented by <code>1</code>. Consider the following example:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">int</span> n<span class="token punctuation">,</span> x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+n <span class="token operator">=</span> x<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">/* value of x(5) is assigned first to n(5), and then x is incremented by 1; x(6) */</span>
+         <span class="token comment">/* this is a short form for two statements: */</span>
+         <span class="token comment">/* n = x; */</span>
+         <span class="token comment">/* x = x + 1; */</span>
+
+</code></pre></div><p>The working of the decrement operator <code>--</code> can be understood similarly.</p> <p>The following code demonstrates what each one does</p> <div class="language- extra-class"><pre class="language-text"><code>
+   int main()
+    {
+        int a, b, x = 42;
+        a = ++x; /* a and x are 43 */
+        b = x++; /* b is 43, x is 44 */
+        a = x--; /* a is is 44, x is 43 */
+        b = --x; /* b and x are 42 */
+        
+        return 0;
+    }
+
+</code></pre></div><p>From the above it is clear that post operators return the current value of a variable and <strong>then</strong> modify it, but pre operators modify the variable and <strong>then</strong> return the modified value.</p> <p>In all versions of C, the order of evaluation of pre and post operators are not defined, hence the following code can return unexpected outputs:</p> <div class="language- extra-class"><pre class="language-text"><code>
+   int main()
+    {
+        int a, x = 42;
+        a = x++ + x; /* wrong */
+        a = x + x; /* right */
+        ++x;
+
+        int ar[10];
+        x = 0;
+        ar[x] = x++; /* wrong */
+        ar[x++] = x; /* wrong */
+        ar[x] = x; /* right */
+        ++x;
+        return 0;
+    }
+
+</code></pre></div><p>Note that it is also good practice to use pre over post operators when used alone in a statement. Look at the above code for this.</p> <p>Note also, that when a function is called, all side effects on arguments must take place before the function runs.</p> <div class="language- extra-class"><pre class="language-text"><code>
+   int foo(int x)
+    {
+        return x;
+    }
+
+    int main()
+    {
+        int a = 42;
+        int b = foo(a++);  /* This returns 43, even if it seems like it should return 42 */
+        return 0;
+    }
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/c/side-effects.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/c/ctype-h-character-classification-conversion.html" class="prev">
+        — character classification &amp; conversion
+      </a></span> <span class="next"><a href="/c/multi-character-character-sequence.html">
+        Multi-Character Character Sequence
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/591.c9a6cfb8.js" defer></script>
+  </body>
+</html>

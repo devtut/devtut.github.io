@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VBA - Interfaces</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Simple Interface - Flyable, Multiple Interfaces in One Class - Flyable and Swimable">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="VBA - Interfaces">
+    <meta property="og:description" content="Simple Interface - Flyable, Multiple Interfaces in One Class - Flyable and Swimable">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vba/interfaces.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="VBA - Interfaces">
+    <meta name="twitter:description" content="Simple Interface - Flyable, Multiple Interfaces in One Class - Flyable and Swimable">
+    <meta name="twitter:url" content="/vba/interfaces.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3425.5ea16fad.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vba/" class="sidebar-link">Disclaimer</a></li><li><a href="/vba/getting-started-with-vba.html" class="sidebar-link">Getting started with VBA</a></li><li><a href="/vba/comments.html" class="sidebar-link">Comments</a></li><li><a href="/vba/string-literals-escaping-non-printable-characters-and-line-continuations.html" class="sidebar-link">String Literals - Escaping, non-printable characters and line-continuations</a></li><li><a href="/vba/vba-option-keyword.html" class="sidebar-link">VBA Option Keyword</a></li><li><a href="/vba/declaring-variables.html" class="sidebar-link">Declaring Variables</a></li><li><a href="/vba/declaring-and-assigning-strings.html" class="sidebar-link">Declaring and assigning strings</a></li><li><a href="/vba/concatenating-strings.html" class="sidebar-link">Concatenating strings</a></li><li><a href="/vba/frequently-used-string-manipulation.html" class="sidebar-link">Frequently used string manipulation</a></li><li><a href="/vba/substrings.html" class="sidebar-link">Substrings</a></li><li><a href="/vba/searching-within-strings-for-the-presence-of-substrings.html" class="sidebar-link">Searching within strings for the presence of substrings</a></li><li><a href="/vba/assigning-strings-with-repeated-characters.html" class="sidebar-link">Assigning strings with repeated characters</a></li><li><a href="/vba/measuring-the-length-of-strings.html" class="sidebar-link">Measuring the length of strings</a></li><li><a href="/vba/converting-other-types-to-strings.html" class="sidebar-link">Converting other types to strings</a></li><li><a href="/vba/date-time-manipulation.html" class="sidebar-link">Date Time Manipulation</a></li><li><a href="/vba/data-types-and-limits.html" class="sidebar-link">Data Types and Limits</a></li><li><a href="/vba/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/vba/data-structures.html" class="sidebar-link">Data Structures</a></li><li><a href="/vba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/vba/copying-returning-and-passing-arrays.html" class="sidebar-link">Copying, returning and passing arrays</a></li><li><a href="/vba/collections.html" class="sidebar-link">Collections</a></li><li><a href="/vba/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vba/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/vba/flow-control-structures.html" class="sidebar-link">Flow control structures</a></li><li><a href="/vba/passing-arguments-byref-or-byval.html" class="sidebar-link">Passing Arguments ByRef or ByVal</a></li><li><a href="/vba/scripting-filesystemobject.html" class="sidebar-link">Scripting.FileSystemObject</a></li><li><a href="/vba/working-with-files-and-directories-without-using-filesystemobject.html" class="sidebar-link">Working With Files and Directories Without Using FileSystemObject</a></li><li><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html" class="sidebar-link">Reading 2GB+ files in binary in VBA and File Hashes</a></li><li><a href="/vba/creating-a-procedure.html" class="sidebar-link">Creating a procedure</a></li><li><a href="/vba/procedure-calls.html" class="sidebar-link">Procedure Calls</a></li><li><a href="/vba/conditional-compilation.html" class="sidebar-link">Conditional Compilation</a></li><li><a href="/vba/object-oriented-vba.html" class="sidebar-link">Object-Oriented VBA</a></li><li><a href="/vba/creating-a-custom-class.html" class="sidebar-link">Creating a Custom Class</a></li><li><a href="/vba/interfaces.html" class="active sidebar-link">Interfaces</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vba/interfaces.html#simple-interface-flyable" class="sidebar-link">Simple Interface - Flyable</a></li><li class="sidebar-sub-header"><a href="/vba/interfaces.html#multiple-interfaces-in-one-class-flyable-and-swimable" class="sidebar-link">Multiple Interfaces in One Class - Flyable and Swimable</a></li></ul></li><li><a href="/vba/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vba/events.html" class="sidebar-link">Events</a></li><li><a href="/vba/scripting-dictionary-object.html" class="sidebar-link">Scripting.Dictionary object</a></li><li><a href="/vba/working-with-ado.html" class="sidebar-link">Working with ADO</a></li><li><a href="/vba/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/vba/user-forms.html" class="sidebar-link">User Forms</a></li><li><a href="/vba/createobject-vs-getobject.html" class="sidebar-link">CreateObject vs. GetObject</a></li><li><a href="/vba/non-latin-characters.html" class="sidebar-link">Non-Latin Characters</a></li><li><a href="/vba/api-calls.html" class="sidebar-link">API Calls</a></li><li><a href="/vba/automation-or-using-other-applications-libraries.html" class="sidebar-link">Automation or Using other applications Libraries</a></li><li><a href="/vba/macro-security-and-signing-of-vba-projects-modules.html" class="sidebar-link">Macro security and signing of VBA-projects/-modules</a></li><li><a href="/vba/vba-run-time-errors.html" class="sidebar-link">VBA Run-Time Errors</a></li><li><a href="/vba/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="interfaces"><a href="#interfaces" class="header-anchor">#</a> Interfaces</h1> <p>An <strong>Interface</strong> is a way to define a set of behaviors that a class will perform. The definition of an interface is a list of method signatures (name, parameters, and return type). A class having all of the methods is said to &quot;implement&quot; that interface.</p> <p>In VBA, using interfaces lets the compiler check that a module implements all of its methods. A variable or parameter can be defined in terms of an interface instead of a specific class.</p> <h2 id="simple-interface-flyable"><a href="#simple-interface-flyable" class="header-anchor">#</a> Simple Interface - Flyable</h2> <p>The interface <code>Flyable</code> is a class module with the following code:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> Fly<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">' No code.</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> GetAltitude<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    <span class="token comment">' No code.</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>A class module, <code>Airplane</code>, uses the <code>Implements</code> keyword to tell the compiler to raise an error unless it has two methods: a <code>Flyable_Fly()</code> sub and a <code>Flyable_GetAltitude()</code> function that returns a <code>Long</code>.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Implements</span> Flyable
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> Flyable_Fly<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Flying With Jet Engines!&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> Flyable_GetAltitude<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    Flyable_GetAltitude <span class="token operator">=</span> <span class="token number">10000</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>A second class module, <code>Duck</code>, also implements <code>Flyable</code>:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Implements</span> Flyable
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> Flyable_Fly<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Flying With Wings!&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> Flyable_GetAltitude<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    Flyable_GetAltitude <span class="token operator">=</span> <span class="token number">30</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>We can write a routine that accepts any <code>Flyable</code> value, knowing that it will respond to a command of <code>Fly</code> or <code>GetAltitude</code>:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> FlyAndCheckAltitude<span class="token punctuation">(</span>F <span class="token keyword">As</span> Flyable<span class="token punctuation">)</span>
+    F<span class="token punctuation">.</span>Fly
+    Debug<span class="token punctuation">.</span>Print F<span class="token punctuation">.</span>GetAltitude
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Because the interface is defined, the IntelliSense popup window will show <code>Fly</code> and <code>GetAltitude</code> for <code>F</code>.</p> <p>When we run the following code:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> MyDuck <span class="token keyword">As</span> <span class="token keyword">New</span> Duck
+<span class="token keyword">Dim</span> MyAirplane <span class="token keyword">As</span> <span class="token keyword">New</span> Airplane
+
+FlyAndCheckAltitude MyDuck
+FlyAndCheckAltitude MyAirplane 
+
+</code></pre></div><p>The output is:</p> <div class="language-vb extra-class"><pre class="language-vb"><code>Flying <span class="token keyword">With</span> Wings<span class="token operator">!</span>
+<span class="token number">30</span>
+Flying <span class="token keyword">With</span> Jet Engines<span class="token operator">!</span>
+<span class="token number">10000</span>
+
+</code></pre></div><p>Note that even though the subroutine is named <code>Flyable_Fly</code> in both <code>Airplane</code> and <code>Duck</code>, it can be called as <code>Fly</code> when the variable or parameter is defined as <code>Flyable</code>.  If the variable is defined specifically as a <code>Duck</code>, it would have to be called as <code>Flyable_Fly</code>.</p> <h2 id="multiple-interfaces-in-one-class-flyable-and-swimable"><a href="#multiple-interfaces-in-one-class-flyable-and-swimable" class="header-anchor">#</a> Multiple Interfaces in One Class - Flyable and Swimable</h2> <p>Using the <code>Flyable</code> example as a starting point, we can add a second interface, <code>Swimmable</code>, with the following code:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> Swim<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">' No code</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The <code>Duck</code> object can <code>Implement</code> both flying and swimming:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Implements</span> Flyable
+<span class="token keyword">Implements</span> Swimmable
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> Flyable_Fly<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Flying With Wings!&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> Flyable_GetAltitude<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    Flyable_GetAltitude <span class="token operator">=</span> <span class="token number">30</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> Swimmable_Swim<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Floating on the water&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>A <code>Fish</code> class can implement <code>Swimmable</code>, too:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Implements</span> Swimmable
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> Swimmable_Swim<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Swimming under the water&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Now, we can see that the <code>Duck</code> object can be passed to a Sub as a <code>Flyable</code> on one hand, and a <code>Swimmable</code> on the other:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> InterfaceTest<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">Dim</span> MyDuck <span class="token keyword">As</span> <span class="token keyword">New</span> Duck
+<span class="token keyword">Dim</span> MyAirplane <span class="token keyword">As</span> <span class="token keyword">New</span> Airplane
+<span class="token keyword">Dim</span> MyFish <span class="token keyword">As</span> <span class="token keyword">New</span> Fish
+
+Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Fly Check...&quot;</span>
+
+FlyAndCheckAltitude MyDuck
+FlyAndCheckAltitude MyAirplane
+
+Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Swim Check...&quot;</span>
+
+TrySwimming MyDuck
+TrySwimming MyFish
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> FlyAndCheckAltitude<span class="token punctuation">(</span>F <span class="token keyword">As</span> Flyable<span class="token punctuation">)</span>
+    F<span class="token punctuation">.</span>Fly
+    Debug<span class="token punctuation">.</span>Print F<span class="token punctuation">.</span>GetAltitude
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> TrySwimming<span class="token punctuation">(</span>S <span class="token keyword">As</span> Swimmable<span class="token punctuation">)</span>
+    S<span class="token punctuation">.</span>Swim
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The output of this code is:</p> <blockquote></blockquote> <p>Fly Check...
+Flying With Wings!
+30
+Flying With Jet Engines!
+10000
+Swim Check...
+Floating on the water
+Swimming under the water</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vba/interfaces.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vba/creating-a-custom-class.html" class="prev">
+        Creating a Custom Class
+      </a></span> <span class="next"><a href="/vba/recursion.html">
+        Recursion
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3425.5ea16fad.js" defer></script>
+  </body>
+</html>

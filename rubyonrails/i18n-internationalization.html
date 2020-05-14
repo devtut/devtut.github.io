@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ruby on Rails - I18n - Internationalization</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="I18n with arguments, Translating ActiveRecord model attributes, Pluralization, Set locale through requests, Get locale from HTTP request, Use I18n with HTML Tags and Symbols, Use I18n in views">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Ruby on Rails - I18n - Internationalization">
+    <meta property="og:description" content="I18n with arguments, Translating ActiveRecord model attributes, Pluralization, Set locale through requests, Get locale from HTTP request, Use I18n with HTML Tags and Symbols, Use I18n in views">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/rubyonrails/i18n-internationalization.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Ruby on Rails - I18n - Internationalization">
+    <meta name="twitter:description" content="I18n with arguments, Translating ActiveRecord model attributes, Pluralization, Set locale through requests, Get locale from HTTP request, Use I18n with HTML Tags and Symbols, Use I18n in views">
+    <meta name="twitter:url" content="/rubyonrails/i18n-internationalization.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3157.54fdb419.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Ruby on Rails</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/rubyonrails/" class="sidebar-link">Disclaimer</a></li><li><a href="/rubyonrails/getting-started-with-ruby-on-rails.html" class="sidebar-link">Getting started with Ruby on Rails</a></li><li><a href="/rubyonrails/routing.html" class="sidebar-link">Routing</a></li><li><a href="/rubyonrails/activerecord.html" class="sidebar-link">ActiveRecord</a></li><li><a href="/rubyonrails/views.html" class="sidebar-link">Views</a></li><li><a href="/rubyonrails/activerecord-migrations.html" class="sidebar-link">ActiveRecord Migrations</a></li><li><a href="/rubyonrails/rails-best-practices.html" class="sidebar-link">Rails Best Practices</a></li><li><a href="/rubyonrails/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/rubyonrails/actioncable.html" class="sidebar-link">ActionCable</a></li><li><a href="/rubyonrails/activemodel.html" class="sidebar-link">ActiveModel</a></li><li><a href="/rubyonrails/user-authentication-in-rails.html" class="sidebar-link">User Authentication in Rails</a></li><li><a href="/rubyonrails/activerecord-associations.html" class="sidebar-link">ActiveRecord Associations</a></li><li><a href="/rubyonrails/activerecord-validations.html" class="sidebar-link">ActiveRecord Validations</a></li><li><a href="/rubyonrails/activerecord-query-interface.html" class="sidebar-link">ActiveRecord Query Interface</a></li><li><a href="/rubyonrails/actionmailer.html" class="sidebar-link">ActionMailer</a></li><li><a href="/rubyonrails/rails-generate-commands.html" class="sidebar-link">Rails generate commands</a></li><li><a href="/rubyonrails/configuration.html" class="sidebar-link">Configuration</a></li><li><a href="/rubyonrails/i18n-internationalization.html" class="active sidebar-link">I18n - Internationalization</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/rubyonrails/i18n-internationalization.html#i18n-with-arguments" class="sidebar-link">I18n with arguments</a></li><li class="sidebar-sub-header"><a href="/rubyonrails/i18n-internationalization.html#translating-activerecord-model-attributes" class="sidebar-link">Translating ActiveRecord model attributes</a></li><li class="sidebar-sub-header"><a href="/rubyonrails/i18n-internationalization.html#pluralization" class="sidebar-link">Pluralization</a></li><li class="sidebar-sub-header"><a href="/rubyonrails/i18n-internationalization.html#set-locale-through-requests" class="sidebar-link">Set locale through requests</a></li><li class="sidebar-sub-header"><a href="/rubyonrails/i18n-internationalization.html#get-locale-from-http-request" class="sidebar-link">Get locale from HTTP request</a></li><li class="sidebar-sub-header"><a href="/rubyonrails/i18n-internationalization.html#use-i18n-with-html-tags-and-symbols" class="sidebar-link">Use I18n with HTML Tags and Symbols</a></li><li class="sidebar-sub-header"><a href="/rubyonrails/i18n-internationalization.html#use-i18n-in-views" class="sidebar-link">Use I18n in views</a></li></ul></li><li><a href="/rubyonrails/using-googlemaps-with-rails.html" class="sidebar-link">Using GoogleMaps with Rails</a></li><li><a href="/rubyonrails/file-uploads.html" class="sidebar-link">File Uploads</a></li><li><a href="/rubyonrails/caching.html" class="sidebar-link">Caching</a></li><li><a href="/rubyonrails/actioncontroller.html" class="sidebar-link">ActionController</a></li><li><a href="/rubyonrails/configuration.html" class="sidebar-link">Configuration</a></li><li><a href="/rubyonrails/safe-constantize.html" class="sidebar-link">Safe Constantize</a></li><li><a href="/rubyonrails/rails-5.html" class="sidebar-link">Rails 5</a></li><li><a href="/rubyonrails/authorization-with-cancan.html" class="sidebar-link">Authorization with CanCan</a></li><li><a href="/rubyonrails/mongoid.html" class="sidebar-link">Mongoid</a></li><li><a href="/rubyonrails/gems.html" class="sidebar-link">Gems</a></li><li><a href="/rubyonrails/change-default-timezone.html" class="sidebar-link">Change default timezone</a></li><li><a href="/rubyonrails/asset-pipeline.html" class="sidebar-link">Asset Pipeline</a></li><li><a href="/rubyonrails/upgrading-rails.html" class="sidebar-link">Upgrading Rails</a></li><li><a href="/rubyonrails/activerecord-locking.html" class="sidebar-link">ActiveRecord Locking</a></li><li><a href="/rubyonrails/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/rubyonrails/configure-angular-with-rails.html" class="sidebar-link">Configure Angular with Rails</a></li><li><a href="/rubyonrails/rails-logger.html" class="sidebar-link">Rails logger</a></li><li><a href="/rubyonrails/prawn-pdf.html" class="sidebar-link">Prawn PDF</a></li><li><a href="/rubyonrails/rails-api.html" class="sidebar-link">Rails API</a></li><li><a href="/rubyonrails/deploying-a-rails-app-on-heroku.html" class="sidebar-link">Deploying a Rails app on Heroku</a></li><li><a href="/rubyonrails/activesupport.html" class="sidebar-link">ActiveSupport</a></li><li><a href="/rubyonrails/form-helpers.html" class="sidebar-link">Form Helpers</a></li><li><a href="/rubyonrails/activerecord-transactions.html" class="sidebar-link">ActiveRecord Transactions</a></li><li><a href="/rubyonrails/rspec-and-ruby-on-rails.html" class="sidebar-link">RSpec and Ruby on Rails</a></li><li><a href="/rubyonrails/decorator-pattern.html" class="sidebar-link">Decorator pattern</a></li><li><a href="/rubyonrails/elasticsearch.html" class="sidebar-link">Elasticsearch</a></li><li><a href="/rubyonrails/react-with-rails-using-react-rails-gem.html" class="sidebar-link">React with Rails using react-rails gem</a></li><li><a href="/rubyonrails/rails-cookbook-advanced-rails-recipes-learnings-and-coding-techniques.html" class="sidebar-link">Rails Cookbook - Advanced rails recipes/learnings and coding techniques</a></li><li><a href="/rubyonrails/multipurpose-activerecord-columns.html" class="sidebar-link">Multipurpose ActiveRecord columns</a></li><li><a href="/rubyonrails/class-organization.html" class="sidebar-link">Class Organization</a></li><li><a href="/rubyonrails/shallow-routing.html" class="sidebar-link">Shallow Routing</a></li><li><a href="/rubyonrails/model-states-aasm.html" class="sidebar-link">Model states: AASM</a></li><li><a href="/rubyonrails/rails-5-api-authetication.html" class="sidebar-link">Rails 5 API Authetication</a></li><li><a href="/rubyonrails/testing-rails-applications.html" class="sidebar-link">Testing Rails Applications</a></li><li><a href="/rubyonrails/active-jobs.html" class="sidebar-link">Active Jobs</a></li><li><a href="/rubyonrails/rails-frameworks-over-the-years.html" class="sidebar-link">Rails frameworks over the years</a></li><li><a href="/rubyonrails/nested-form-in-ruby-on-rails.html" class="sidebar-link">Nested form in Ruby on Rails</a></li><li><a href="/rubyonrails/factory-girl.html" class="sidebar-link">Factory Girl</a></li><li><a href="/rubyonrails/import-whole-csv-files-from-specific-folder.html" class="sidebar-link">Import whole CSV files from specific folder</a></li><li><a href="/rubyonrails/tools-for-ruby-on-rails-code-optimization-and-cleanup.html" class="sidebar-link">Tools for Ruby on Rails code optimization and cleanup</a></li><li><a href="/rubyonrails/activejob.html" class="sidebar-link">ActiveJob</a></li><li><a href="/rubyonrails/active-model-serializers.html" class="sidebar-link">Active Model Serializers</a></li><li><a href="/rubyonrails/rails-engine-modular-rails.html" class="sidebar-link">Rails Engine -  Modular Rails</a></li><li><a href="/rubyonrails/single-table-inheritance.html" class="sidebar-link">Single Table Inheritance</a></li><li><a href="/rubyonrails/activerecord-transactions.html" class="sidebar-link">ActiveRecord Transactions</a></li><li><a href="/rubyonrails/turbolinks.html" class="sidebar-link">Turbolinks</a></li><li><a href="/rubyonrails/friendly-id.html" class="sidebar-link">Friendly ID</a></li><li><a href="/rubyonrails/securely-storing-authentication-keys.html" class="sidebar-link">Securely storing authentication keys</a></li><li><a href="/rubyonrails/authenticate-api-using-devise.html" class="sidebar-link">Authenticate Api using Devise</a></li><li><a href="/rubyonrails/integrating-react-js-with-rails-using-hyperloop.html" class="sidebar-link">Integrating React.js with Rails Using Hyperloop</a></li><li><a href="/rubyonrails/change-a-default-rails-application-enviornment.html" class="sidebar-link">Change a default Rails application enviornment</a></li><li><a href="/rubyonrails/rails-engines.html" class="sidebar-link">Rails -Engines</a></li><li><a href="/rubyonrails/adding-an-amazon-rds-to-your-rails-application.html" class="sidebar-link">Adding an Amazon RDS to your rails application</a></li><li><a href="/rubyonrails/payment-feature-in-rails.html" class="sidebar-link">Payment feature in rails</a></li><li><a href="/rubyonrails/rails-on-docker.html" class="sidebar-link">Rails on docker</a></li><li><a href="/rubyonrails/reserved-words.html" class="sidebar-link">Reserved Words</a></li><li><a href="/rubyonrails/add-admin-panel.html" class="sidebar-link">Add Admin Panel</a></li><li><a href="/rubyonrails/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="i18n-internationalization"><a href="#i18n-internationalization" class="header-anchor">#</a> I18n - Internationalization</h1> <h2 id="i18n-with-arguments"><a href="#i18n-with-arguments" class="header-anchor">#</a> I18n with arguments</h2> <p>You can pass parameters to <strong>I18n</strong> <code>t</code> method:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># Example config/locales/en.yml</span>
+en<span class="token punctuation">:</span>
+  page<span class="token punctuation">:</span>
+    users<span class="token punctuation">:</span> <span class="token string">&quot;%{users_count} users currently online&quot;</span>
+
+<span class="token comment"># In models, controller, etc...</span>
+<span class="token constant">I18n</span><span class="token punctuation">.</span>t<span class="token punctuation">(</span><span class="token string">'page.users'</span><span class="token punctuation">,</span> users_count<span class="token punctuation">:</span> <span class="token number">12</span><span class="token punctuation">)</span>
+
+<span class="token comment"># In views</span>
+
+<span class="token comment"># ERB</span>
+<span class="token operator">&lt;</span><span class="token string">%= t('page.users', users_count: 12) %&gt;
+
+#SLIM
+=</span> t<span class="token punctuation">(</span><span class="token string">'page.users'</span><span class="token punctuation">,</span> users_count<span class="token punctuation">:</span> <span class="token number">12</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Shortcut in views - DRY!</span>
+<span class="token comment"># Use only the dot notation</span>
+<span class="token comment"># Important: Consider you have the following controller and view page#users</span>
+
+<span class="token comment"># ERB Example app/views/page/users.html.erb</span>
+<span class="token operator">&lt;</span><span class="token operator">%</span><span class="token operator">=</span> t<span class="token punctuation">(</span><span class="token string">'.users'</span><span class="token punctuation">,</span> users_count<span class="token punctuation">:</span> <span class="token number">12</span><span class="token punctuation">)</span> <span class="token operator">%</span><span class="token operator">&gt;</span>
+
+</code></pre></div><p>And get the following output:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token string">&quot;12 users currently online&quot;</span>
+
+</code></pre></div><h2 id="translating-activerecord-model-attributes"><a href="#translating-activerecord-model-attributes" class="header-anchor">#</a> Translating ActiveRecord model attributes</h2> <p><strong><code>globalize</code></strong> gem is a great solution to add translations to your <code>ActiveRecord</code> models. You can install it adding this to your <code>Gemfile</code>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>gem <span class="token string">'globalize'</span><span class="token punctuation">,</span> <span class="token string">'~&gt; 5.0.0'</span>
+
+</code></pre></div><p>If you're using <code>Rails 5</code> you will also need to add <code>activemodel-serializers-xml</code></p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>gem <span class="token string">'activemodel-serializers-xml'</span>
+
+</code></pre></div><p>Model translations allow you to translate your models' attribute values, for example:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Post</span> <span class="token operator">&lt;</span> <span class="token constant">ActiveRecord</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Base</span>
+  translates <span class="token symbol">:title</span><span class="token punctuation">,</span> <span class="token symbol">:text</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">I18n</span><span class="token punctuation">.</span>locale <span class="token operator">=</span> <span class="token symbol">:en</span>
+post<span class="token punctuation">.</span>title <span class="token comment"># =&gt; Globalize rocks!</span>
+
+<span class="token constant">I18n</span><span class="token punctuation">.</span>locale <span class="token operator">=</span> <span class="token symbol">:he</span>
+post<span class="token punctuation">.</span>title <span class="token comment"># =&gt; גלובאלייז2 שולט!</span>
+
+</code></pre></div><p>After you defined your model attributes that need to be translated you have to create a translation table, through a migration. <strong><code>globalize</code></strong> provides <code>create_translation_table!</code> and <code>drop_translation_table!</code>.</p> <p>For this migration you need to use <code>up</code> and <code>down</code>, and <strong>not</strong> <code>change</code>. Also, in order to run this migration successfully, you have to define the translated attributes in your model first, like shown above. A proper migration for the previous <code>Post</code> model is this:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">CreatePostsTranslationTable</span> <span class="token operator">&lt;</span> <span class="token constant">ActiveRecord</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Migration</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">up</span></span>
+    <span class="token constant">Post</span><span class="token punctuation">.</span>create_translation_table<span class="token operator">!</span> title<span class="token punctuation">:</span> <span class="token symbol">:string</span><span class="token punctuation">,</span> text<span class="token punctuation">:</span> <span class="token symbol">:text</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">down</span></span>
+    <span class="token constant">Post</span><span class="token punctuation">.</span>drop_translation_table<span class="token operator">!</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>You may also pass options for specific options, like:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">CreatePostsTranslationTable</span> <span class="token operator">&lt;</span> <span class="token constant">ActiveRecord</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Migration</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">up</span></span>
+    <span class="token constant">Post</span><span class="token punctuation">.</span>create_translation_table<span class="token operator">!</span> title<span class="token punctuation">:</span> <span class="token symbol">:string</span><span class="token punctuation">,</span>
+      text<span class="token punctuation">:</span> <span class="token punctuation">{</span> type<span class="token punctuation">:</span> <span class="token symbol">:text</span><span class="token punctuation">,</span> null<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> default<span class="token punctuation">:</span> <span class="token string">&quot;Default text&quot;</span> <span class="token punctuation">}</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">down</span></span>
+    <span class="token constant">Post</span><span class="token punctuation">.</span>drop_translation_table<span class="token operator">!</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>In case you already have any <strong>existing data</strong> in your needing translation columns, you can easily migrate it to the translations table, by adjusting your migration:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">CreatePostsTranslationTable</span> <span class="token operator">&lt;</span> <span class="token constant">ActiveRecord</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Migration</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">up</span></span>
+    <span class="token constant">Post</span><span class="token punctuation">.</span>create_translation_table<span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      title<span class="token punctuation">:</span> <span class="token symbol">:string</span><span class="token punctuation">,</span>
+      text<span class="token punctuation">:</span> <span class="token symbol">:text</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      migrate_data<span class="token punctuation">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">down</span></span>
+    <span class="token constant">Post</span><span class="token punctuation">.</span>drop_translation_table<span class="token operator">!</span> migrate_data<span class="token punctuation">:</span> <span class="token boolean">true</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p><strong><strong>Make sure you drop the translated columns from the parent table after all your data is safely migrated.</strong></strong> To automatically remove the translated columns from the parent table after the data migration, add the option <code>remove_source_columns</code> to the migration:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">CreatePostsTranslationTable</span> <span class="token operator">&lt;</span> <span class="token constant">ActiveRecord</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Migration</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">up</span></span>
+    <span class="token constant">Post</span><span class="token punctuation">.</span>create_translation_table<span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      title<span class="token punctuation">:</span> <span class="token symbol">:string</span><span class="token punctuation">,</span>
+      text<span class="token punctuation">:</span> <span class="token symbol">:text</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      migrate_data<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      remove_source_columns<span class="token punctuation">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">down</span></span>
+    <span class="token constant">Post</span><span class="token punctuation">.</span>drop_translation_table<span class="token operator">!</span> migrate_data<span class="token punctuation">:</span> <span class="token boolean">true</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>You may also add new fields to a previously created translations table:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Post</span> <span class="token operator">&lt;</span> <span class="token constant">ActiveRecord</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Base</span>
+  <span class="token comment"># Remember to add your attribute here too.</span>
+  translates <span class="token symbol">:title</span><span class="token punctuation">,</span> <span class="token symbol">:text</span><span class="token punctuation">,</span> <span class="token symbol">:author</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">AddAuthorToPost</span> <span class="token operator">&lt;</span> <span class="token constant">ActiveRecord</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Migration</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">up</span></span>
+    <span class="token constant">Post</span><span class="token punctuation">.</span>add_translation_fields<span class="token operator">!</span> author<span class="token punctuation">:</span> <span class="token symbol">:text</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">down</span></span>
+    remove_column <span class="token symbol">:post_translations</span><span class="token punctuation">,</span> <span class="token symbol">:author</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h2 id="pluralization"><a href="#pluralization" class="header-anchor">#</a> Pluralization</h2> <p>You can let <strong>I18n</strong> handle pluralization for you, just use <code>count</code> argument.</p> <p>You need to set up your locale file like this:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># config/locales/en.yml</span>
+en<span class="token punctuation">:</span>
+  online_users<span class="token punctuation">:</span>
+    one<span class="token punctuation">:</span> <span class="token string">&quot;1 user is online&quot;</span>
+    other<span class="token punctuation">:</span> <span class="token string">&quot;%{count} users are online&quot;</span>
+
+</code></pre></div><p>And then use the key you just created by passing the <code>count</code> argument to <code>I18n.t</code> helper:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token constant">I18n</span><span class="token punctuation">.</span>t<span class="token punctuation">(</span><span class="token string">&quot;online_users&quot;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment">#=&gt; &quot;1 user is online&quot;</span>
+
+<span class="token constant">I18n</span><span class="token punctuation">.</span>t<span class="token punctuation">(</span><span class="token string">&quot;online_users&quot;</span><span class="token punctuation">,</span> count<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token comment">#=&gt; &quot;4 users are online&quot;</span>
+
+</code></pre></div><h2 id="set-locale-through-requests"><a href="#set-locale-through-requests" class="header-anchor">#</a> Set locale through requests</h2> <p>In most cases, you may want to set <strong><code>I18n</code></strong> locale. One might want to set the locale for the current session, the current user, or based on a URL parameter This is easily achievable by implementing a <code>before_action</code> in one of your controllers, or in <code>ApplicationController</code> to have it in all of your controllers.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">ApplicationController</span> <span class="token operator">&lt;</span> <span class="token constant">ActionController</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Base</span>
+  before_action <span class="token symbol">:set_locale</span>
+
+  <span class="token keyword">protected</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">set_locale</span></span>
+    <span class="token comment"># Remove inappropriate/unnecessary ones</span>
+    <span class="token constant">I18n</span><span class="token punctuation">.</span>locale <span class="token operator">=</span> params<span class="token punctuation">[</span><span class="token symbol">:locale</span><span class="token punctuation">]</span> <span class="token operator">||</span>    <span class="token comment"># Request parameter</span>
+      session<span class="token punctuation">[</span><span class="token symbol">:locale</span><span class="token punctuation">]</span> <span class="token operator">||</span>               <span class="token comment"># Current session</span>
+      <span class="token punctuation">(</span>current_user<span class="token punctuation">.</span>preferred_locale <span class="token keyword">if</span> user_signed_in<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token operator">||</span>  <span class="token comment"># Model saved configuration</span>
+      extract_locale_from_accept_language_header <span class="token operator">||</span>          <span class="token comment"># Language header - browser config</span>
+      <span class="token constant">I18n</span><span class="token punctuation">.</span>default_locale               <span class="token comment"># Set in your config files, english by super-default</span>
+  <span class="token keyword">end</span>
+
+  <span class="token comment"># Extract language from request header</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">extract_locale_from_accept_language_header</span></span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>env<span class="token punctuation">[</span><span class="token string">'HTTP_ACCEPT_LANGUAGE'</span><span class="token punctuation">]</span>
+      lg <span class="token operator">=</span> request<span class="token punctuation">.</span>env<span class="token punctuation">[</span><span class="token string">'HTTP_ACCEPT_LANGUAGE'</span><span class="token punctuation">]</span><span class="token punctuation">.</span>scan<span class="token punctuation">(</span><span class="token regex">/^[a-z]{2}/</span><span class="token punctuation">)</span><span class="token punctuation">.</span>first<span class="token punctuation">.</span>to_sym
+      lg<span class="token punctuation">.</span><span class="token keyword">in</span><span class="token operator">?</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token symbol">:en</span><span class="token punctuation">,</span> <span class="token constant">YOUR_AVAILABLE_LANGUAGES</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">?</span> lg <span class="token punctuation">:</span> <span class="token keyword">nil</span>
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+
+</code></pre></div><h3 id="url-based"><a href="#url-based" class="header-anchor">#</a> URL-based</h3> <p>The <code>locale</code> param could come from an URL like this</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>yourapplication<span class="token punctuation">.</span>com<span class="token operator">/</span>products<span class="token operator">?</span>locale<span class="token operator">=</span>en
+
+</code></pre></div><p>Or</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>http<span class="token punctuation">:</span><span class="token operator">/</span><span class="token operator">/</span>yourapplication<span class="token punctuation">.</span>com<span class="token operator">/</span>en<span class="token operator">/</span>products
+
+</code></pre></div><p>To achieve the latter, you need to edit your <code>routes</code>, adding a <code>scope</code>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># config/routes.rb</span>
+scope <span class="token string">&quot;(:locale)&quot;</span><span class="token punctuation">,</span> locale<span class="token punctuation">:</span> <span class="token operator">/</span>en<span class="token operator">|</span>fr<span class="token operator">/</span> <span class="token keyword">do</span>
+  resources <span class="token symbol">:products</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>By doing this, visiting <code>http://yourapplication.com/en/products</code> will set your locale to <code>:en</code>. Instead, visiting <code>http://yourapplication.com/fr/products</code> will set it to <code>:fr</code>. Furthermore, you won't get a routing error when missing the <code>:locale</code> param, as visiting <code>http://yourapplication.com/products</code> will load the default <strong>I18n</strong> locale.</p> <h3 id="session-based-or-persistence-based"><a href="#session-based-or-persistence-based" class="header-anchor">#</a> Session-based or persistence-based</h3> <p>This assumes the user can click on a button/language flag to change the language. The action can route to a controller that sets the session to the current language (and eventually persist the changes to a database if the user is connected)</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">SetLanguageController</span> <span class="token operator">&lt;</span> <span class="token constant">ApplicationController</span>
+  skip_before_filter <span class="token symbol">:authenticate_user!</span>
+  after_action <span class="token symbol">:set_preferred_locale</span>
+
+  <span class="token comment"># Generic version to handle a large list of languages</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">change_locale</span></span>
+    <span class="token constant">I18n</span><span class="token punctuation">.</span>locale <span class="token operator">=</span> sanitize_language_param
+    set_session_and_redirect
+  <span class="token keyword">end</span>
+
+</code></pre></div><blockquote></blockquote> <p>You have to define sanitize_language_param with your list of available languages, and eventually handle errors in case the language doesn't exist.</p> <p>If you have very few languages, it may be worth defining them like this instead:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">fr</span></span>
+  <span class="token constant">I18n</span><span class="token punctuation">.</span>locale <span class="token operator">=</span> <span class="token symbol">:fr</span>
+  set_session_and_redirect
+<span class="token keyword">end</span>
+
+<span class="token keyword">def</span> <span class="token method-definition"><span class="token function">en</span></span>
+  <span class="token constant">I18n</span><span class="token punctuation">.</span>locale <span class="token operator">=</span> <span class="token symbol">:en</span>
+  set_session_and_redirect
+<span class="token keyword">end</span>
+
+<span class="token keyword">private</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">set_session_and_redirect</span></span>
+    session<span class="token punctuation">[</span><span class="token symbol">:locale</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token constant">I18n</span><span class="token punctuation">.</span>locale
+    redirect_to <span class="token symbol">:back</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">set_preferred_locale</span></span>
+    <span class="token keyword">if</span> user_signed_in<span class="token operator">?</span>
+      current_user<span class="token punctuation">.</span>preferred_locale <span class="token operator">=</span> <span class="token constant">I18n</span><span class="token punctuation">.</span>locale<span class="token punctuation">.</span>to_s
+      current_user<span class="token punctuation">.</span>save <span class="token keyword">if</span> current_user<span class="token punctuation">.</span>changed<span class="token operator">?</span>
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p><strong>Note: don't forget to add some routes to your <code>change_language</code> actions</strong></p> <h3 id="default-locale"><a href="#default-locale" class="header-anchor">#</a> Default Locale</h3> <p>Remember that you need to set your application default locale. You can do it by either setting it in <code>config/application.rb</code>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>config<span class="token punctuation">.</span>i18n<span class="token punctuation">.</span>default_locale <span class="token operator">=</span> <span class="token symbol">:de</span>
+
+</code></pre></div><p>or by creating an initializer in the <code>config/initializers</code> folder:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># config/initializers/locale.rb</span>
+<span class="token constant">I18n</span><span class="token punctuation">.</span>default_locale <span class="token operator">=</span> <span class="token symbol">:it</span>
+
+</code></pre></div><h2 id="get-locale-from-http-request"><a href="#get-locale-from-http-request" class="header-anchor">#</a> Get locale from HTTP request</h2> <p>Sometimes it can be useful to set your application locale based upon the request IP. You can easily achieve this using <strong><code>Geocoder</code></strong>. Among the many things <strong><code>Geocoder</code></strong> does, it can also tell the <code>location</code> of a <code>request</code>.</p> <p>First, add <strong><code>Geocoder</code></strong> to your <code>Gemfile</code></p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># Gemfile</span>
+gem <span class="token string">'geocoder'</span>
+
+</code></pre></div><p><strong><code>Geocoder</code></strong>  adds <code>location</code> and <code>safe_location</code> methods to the standard <code>Rack::Request</code> object so you can easily look up the location of any HTTP request by IP address. You can use this methods in a <code>before_action</code> in your <code>ApplicationController</code>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">ApplicationController</span> <span class="token operator">&lt;</span> <span class="token constant">ActionController</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">Base</span>
+  before_action <span class="token symbol">:set_locale_from_request</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">set_locale_from_request</span></span>
+    country_code <span class="token operator">=</span> request<span class="token punctuation">.</span>location<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token string">&quot;country_code&quot;</span><span class="token punctuation">]</span> <span class="token comment">#=&gt; &quot;US&quot;</span>
+    country_sym <span class="token operator">=</span> country_code<span class="token punctuation">.</span>underscore<span class="token punctuation">.</span>to_sym <span class="token comment">#=&gt; :us</span>
+
+    <span class="token comment"># If request locale is available use it, otherwise use I18n default locale</span>
+    <span class="token keyword">if</span> <span class="token constant">I18n</span><span class="token punctuation">.</span>available_locales<span class="token punctuation">.</span><span class="token keyword">include</span><span class="token operator">?</span> country_sym
+      <span class="token constant">I18n</span><span class="token punctuation">.</span>locale <span class="token operator">=</span> country_sym
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Beware that this will not work in <code>development</code> and <code>test</code> environments, as things like <code>0.0.0.0</code> and <code>localhost</code> are valid valid Internet IP addresses.</p> <h3 id="limitations-and-alternatives"><a href="#limitations-and-alternatives" class="header-anchor">#</a> Limitations and alternatives</h3> <p><strong><code>Geocoder</code></strong> is very powerful and flexible, but needs to be configured to work with a <strong>geocoding service</strong> (see <a href="https://github.com/alexreisner/geocoder#geocoding-service-lookup-configuration" target="_blank" rel="noopener noreferrer">more details<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>); many of which place limits on usage. It's also worth bearing in mind that calling an external service on every request could impact performance.</p> <p>To address these, it can also be worth considering:</p> <h3 id="_1-an-offline-solution"><a href="#_1-an-offline-solution" class="header-anchor">#</a> 1. An offline solution</h3> <p>Using a gem like <strong><code>GeoIP</code></strong> (see <a href="https://github.com/cjheath/geoip" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>) allows lookups to happen against a local datafile. There may be a trade-off in terms of accuracy, as these datafiles need to be kept up-to-date.</p> <h3 id="_2-use-cloudflare"><a href="#_2-use-cloudflare" class="header-anchor">#</a> 2. Use CloudFlare</h3> <p>Pages served through CloudFlare have the option of being geocoded transparently, with the country code being added to the header (<code>HTTP_CF_IPCOUNTRY</code>). More detail can be found <a href="https://support.cloudflare.com/hc/en-us/articles/200168236-What-does-Cloudflare-IP-Geolocation-do-" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <h2 id="use-i18n-with-html-tags-and-symbols"><a href="#use-i18n-with-html-tags-and-symbols" class="header-anchor">#</a> Use I18n with HTML Tags and Symbols</h2> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># config/locales/en.yml</span>
+en<span class="token punctuation">:</span>
+  stackoverflow<span class="token punctuation">:</span>
+    header<span class="token punctuation">:</span>
+      title_html<span class="token punctuation">:</span> <span class="token string">&quot;Use &lt;strong&gt;I18n&lt;/strong&gt; with Tags &amp;amp; Symbols&quot;</span>
+
+</code></pre></div><p>Note the addition of extra <code>_html</code> after the name <code>title</code>.</p> <p>And in Views,</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># ERB</span>
+<span class="token operator">&lt;</span>h2<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">%</span><span class="token operator">=</span> t<span class="token punctuation">(</span><span class="token symbol">:title_html</span><span class="token punctuation">,</span> scope<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token symbol">:stackoverflow</span><span class="token punctuation">,</span> <span class="token symbol">:header</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token string">%&gt;&lt;/h2&gt;</span>
+
+</code></pre></div><h2 id="use-i18n-in-views"><a href="#use-i18n-in-views" class="header-anchor">#</a> Use I18n in views</h2> <p>Assuming you have this YAML locale file:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># config/locales/en.yml</span>
+en<span class="token punctuation">:</span>
+  header<span class="token punctuation">:</span>
+    title<span class="token punctuation">:</span> <span class="token string">&quot;My header title&quot;</span>
+
+</code></pre></div><p>and you want to display your title string, you can do this</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># in ERB files</span>
+<span class="token operator">&lt;</span><span class="token string">%= t('header.title') %&gt;
+
+# in SLIM files
+=</span> t<span class="token punctuation">(</span><span class="token string">'header.title'</span><span class="token punctuation">)</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>I18n.t(&quot;key&quot;)</li> <li>I18n.translate(&quot;key&quot;)  # equivalent to <code>I18n.t(&quot;key&quot;)</code></li> <li>I18n.t(&quot;key&quot;, count: 4)</li> <li>I18n.t(&quot;key&quot;, param1: &quot;Something&quot;, param2: &quot;Else&quot;)</li> <li>I18n.t(&quot;doesnt_exist&quot;, default: &quot;key&quot;)  # specify a default if the key is missing</li> <li>I18n.locale #=&gt; :en</li> <li>I18n.locale = :en</li> <li>I18n.default_locale #=&gt; :en</li> <li>I18n.default_locale = :en</li> <li>t(&quot;.key&quot;)  # same as <code>I18n.t(&quot;key&quot;)</code>, but scoped to the action/template it's called from</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/rubyonrails/i18n-internationalization.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/rubyonrails/configuration.html" class="prev">
+        Configuration
+      </a></span> <span class="next"><a href="/rubyonrails/using-googlemaps-with-rails.html">
+        Using GoogleMaps with Rails
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3157.54fdb419.js" defer></script>
+  </body>
+</html>

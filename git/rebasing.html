@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Git - Rebasing</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Local Branch Rebasing, Rebase: ours and theirs, local and remote, Interactive Rebase, Rebase down to the initial commit, Rebasing before a code review, Testing all commits during rebase, Configuring autostash, Aborting an Interactive Rebase, Setup git-pull for automatically perform a rebase instead of a merge, Pushing after a rebase">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Git - Rebasing">
+    <meta property="og:description" content="Local Branch Rebasing, Rebase: ours and theirs, local and remote, Interactive Rebase, Rebase down to the initial commit, Rebasing before a code review, Testing all commits during rebase, Configuring autostash, Aborting an Interactive Rebase, Setup git-pull for automatically perform a rebase instead of a merge, Pushing after a rebase">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/git/rebasing.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Git - Rebasing">
+    <meta name="twitter:description" content="Local Branch Rebasing, Rebase: ours and theirs, local and remote, Interactive Rebase, Rebase down to the initial commit, Rebasing before a code review, Testing all commits during rebase, Configuring autostash, Aborting an Interactive Rebase, Setup git-pull for automatically perform a rebase instead of a merge, Pushing after a rebase">
+    <meta name="twitter:url" content="/git/rebasing.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1141.0fe85b40.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Git</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/git/" class="sidebar-link">Disclaimer</a></li><li><a href="/git/getting-started-with-git.html" class="sidebar-link">Getting started with Git</a></li><li><a href="/git/browsing-the-history.html" class="sidebar-link">Browsing the history</a></li><li><a href="/git/working-with-remotes.html" class="sidebar-link">Working with Remotes</a></li><li><a href="/git/staging.html" class="sidebar-link">Staging</a></li><li><a href="/git/ignoring-files-and-folders.html" class="sidebar-link">Ignoring Files and Folders</a></li><li><a href="/git/git-diff.html" class="sidebar-link">Git Diff</a></li><li><a href="/git/undoing.html" class="sidebar-link">Undoing</a></li><li><a href="/git/merging.html" class="sidebar-link">Merging</a></li><li><a href="/git/submodules.html" class="sidebar-link">Submodules</a></li><li><a href="/git/committing.html" class="sidebar-link">Committing</a></li><li><a href="/git/aliases.html" class="sidebar-link">Aliases</a></li><li><a href="/git/rebasing.html" class="active sidebar-link">Rebasing</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/git/rebasing.html#local-branch-rebasing" class="sidebar-link">Local Branch Rebasing</a></li><li class="sidebar-sub-header"><a href="/git/rebasing.html#rebase-ours-and-theirs-local-and-remote" class="sidebar-link">Rebase: ours and theirs, local and remote</a></li><li class="sidebar-sub-header"><a href="/git/rebasing.html#interactive-rebase" class="sidebar-link">Interactive Rebase</a></li><li class="sidebar-sub-header"><a href="/git/rebasing.html#rebase-down-to-the-initial-commit" class="sidebar-link">Rebase down to the initial commit</a></li><li class="sidebar-sub-header"><a href="/git/rebasing.html#rebasing-before-a-code-review" class="sidebar-link">Rebasing before a code review</a></li><li class="sidebar-sub-header"><a href="/git/rebasing.html#testing-all-commits-during-rebase" class="sidebar-link">Testing all commits during rebase</a></li><li class="sidebar-sub-header"><a href="/git/rebasing.html#configuring-autostash" class="sidebar-link">Configuring autostash</a></li><li class="sidebar-sub-header"><a href="/git/rebasing.html#aborting-an-interactive-rebase" class="sidebar-link">Aborting an Interactive Rebase</a></li><li class="sidebar-sub-header"><a href="/git/rebasing.html#setup-git-pull-for-automatically-perform-a-rebase-instead-of-a-merge" class="sidebar-link">Setup git-pull for automatically perform a rebase instead of a merge</a></li><li class="sidebar-sub-header"><a href="/git/rebasing.html#pushing-after-a-rebase" class="sidebar-link">Pushing after a rebase</a></li></ul></li><li><a href="/git/configuration.html" class="sidebar-link">Configuration</a></li><li><a href="/git/branching.html" class="sidebar-link">Branching</a></li><li><a href="/git/rev-list.html" class="sidebar-link">Rev-List</a></li><li><a href="/git/squashing.html" class="sidebar-link">Squashing</a></li><li><a href="/git/cherry-picking.html" class="sidebar-link">Cherry Picking</a></li><li><a href="/git/recovering.html" class="sidebar-link">Recovering</a></li><li><a href="/git/git-clean.html" class="sidebar-link">Git Clean</a></li><li><a href="/git/using-a-gitattributes-file.html" class="sidebar-link">Using a .gitattributes file</a></li><li><a href="/git/mailmap-file-associating-contributor-and-email-aliases.html" class="sidebar-link">.mailmap file: Associating contributor and email aliases</a></li><li><a href="/git/analyzing-types-of-workflows.html" class="sidebar-link">Analyzing types of workflows</a></li><li><a href="/git/pulling.html" class="sidebar-link">Pulling</a></li><li><a href="/git/hooks.html" class="sidebar-link">Hooks</a></li><li><a href="/git/cloning-repositories.html" class="sidebar-link">Cloning Repositories</a></li><li><a href="/git/stashing.html" class="sidebar-link">Stashing</a></li><li><a href="/git/subtrees.html" class="sidebar-link">Subtrees</a></li><li><a href="/git/renaming.html" class="sidebar-link">Renaming</a></li><li><a href="/git/pushing.html" class="sidebar-link">Pushing</a></li><li><a href="/git/internals.html" class="sidebar-link">Internals</a></li><li><a href="/git/git-tfs.html" class="sidebar-link">git-tfs</a></li><li><a href="/git/empty-directories-in-git.html" class="sidebar-link">Empty directories in Git</a></li><li><a href="/git/git-svn.html" class="sidebar-link">git-svn</a></li><li><a href="/git/archive.html" class="sidebar-link">Archive</a></li><li><a href="/git/rewriting-history-with-filter-branch.html" class="sidebar-link">Rewriting history with filter-branch</a></li><li><a href="/git/migrating-to-git.html" class="sidebar-link">Migrating to Git</a></li><li><a href="/git/show.html" class="sidebar-link">Show</a></li><li><a href="/git/resolving-merge-conflicts.html" class="sidebar-link">Resolving merge conflicts</a></li><li><a href="/git/bundles.html" class="sidebar-link">Bundles</a></li><li><a href="/git/display-commit-history-graphically-with-gitk.html" class="sidebar-link">Display commit history graphically with Gitk</a></li><li><a href="/git/bisecting-finding-faulty-commits.html" class="sidebar-link">Bisecting/Finding faulty commits</a></li><li><a href="/git/blaming.html" class="sidebar-link">Blaming</a></li><li><a href="/git/git-revisions-syntax.html" class="sidebar-link">Git revisions syntax</a></li><li><a href="/git/worktrees.html" class="sidebar-link">Worktrees</a></li><li><a href="/git/git-remote.html" class="sidebar-link">Git Remote</a></li><li><a href="/git/git-large-file-storage-lfs.html" class="sidebar-link">Git Large File Storage (LFS)</a></li><li><a href="/git/git-patch.html" class="sidebar-link">Git Patch</a></li><li><a href="/git/git-statistics.html" class="sidebar-link">Git statistics</a></li><li><a href="/git/git-send-email.html" class="sidebar-link">git send-email</a></li><li><a href="/git/git-gui-clients.html" class="sidebar-link">Git GUI Clients</a></li><li><a href="/git/reflog-restoring-commits-not-shown-in-git-log.html" class="sidebar-link">Reflog - Restoring commits not shown in git log</a></li><li><a href="/git/tortoisegit.html" class="sidebar-link">TortoiseGit</a></li><li><a href="/git/external-merge-and-difftools.html" class="sidebar-link">External merge and difftools</a></li><li><a href="/git/update-object-name-in-reference.html" class="sidebar-link">Update Object Name in Reference</a></li><li><a href="/git/git-branch-name-on-bash-ubuntu.html" class="sidebar-link">Git Branch Name on Bash Ubuntu</a></li><li><a href="/git/git-client-side-hooks.html" class="sidebar-link">Git Client-Side Hooks</a></li><li><a href="/git/git-rerere.html" class="sidebar-link">Git rerere</a></li><li><a href="/git/change-git-repository-name.html" class="sidebar-link">Change git repository name</a></li><li><a href="/git/git-tagging.html" class="sidebar-link">Git Tagging</a></li><li><a href="/git/tidying-up-your-local-and-remote-repository.html" class="sidebar-link">Tidying up your local and remote repository</a></li><li><a href="/git/diff-tree.html" class="sidebar-link">diff-tree</a></li><li><a href="/git/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="rebasing"><a href="#rebasing" class="header-anchor">#</a> Rebasing</h1> <h2 id="local-branch-rebasing"><a href="#local-branch-rebasing" class="header-anchor">#</a> Local Branch Rebasing</h2> <p><strong><a href="https://git-scm.com/docs/git-rebase" target="_blank" rel="noopener noreferrer">Rebasing<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></strong> reapplies a series of commits on top of another commit.</p> <p>To <code>rebase</code> a branch, checkout the branch and then <code>rebase</code> it on top of another branch.</p> <div class="language-git extra-class"><pre class="language-git"><code>git checkout topic
+git rebase master  # rebase current branch onto master branch
+
+</code></pre></div><p>This would cause:</p> <div class="language- extra-class"><pre class="language-text"><code>
+     A---B---C topic
+     /
+D---E---F---G master
+
+</code></pre></div><p>To turn into:</p> <div class="language- extra-class"><pre class="language-text"><code>
+             A'--B'--C' topic
+             /
+D---E---F---G master
+
+</code></pre></div><p>These operations can be combined into a single command that checks out the branch and immediately rebases it:</p> <div class="language-git extra-class"><pre class="language-git"><code>git rebase master topic   # rebase topic branch onto master branch
+
+</code></pre></div><p><strong>Important:</strong> After the rebase, the applied commits will have a different hash. You should not rebase commits you have already pushed to a remote host. A consequence may be an inability to <code>git push</code> your local rebased branch to a remote host, leaving your only option to <code>git push --force</code>.</p> <h2 id="rebase-ours-and-theirs-local-and-remote"><a href="#rebase-ours-and-theirs-local-and-remote" class="header-anchor">#</a> Rebase: ours and theirs, local and remote</h2> <p>A rebase switches the meaning of &quot;ours&quot; and &quot;theirs&quot;:</p> <div class="language-git extra-class"><pre class="language-git"><code>git checkout topic
+git rebase   master    # rebase topic branch on top of master branch
+
+</code></pre></div><p><strong>Whatever HEAD's pointing to is &quot;ours&quot;</strong></p> <p>The first thing a rebase does is resetting the <code>HEAD</code> to <code>master</code>; before cherry-picking commits from the old branch <code>topic</code> to a new one (every commit in the former <code>topic</code> branch will be rewritten and will be identified by a different hash).</p> <p>With respect to terminologies used by merge tools (not to be confused with <a href="https://git-scm.com/docs/gitglossary#gitglossary-aiddefrefspecarefspec" target="_blank" rel="noopener noreferrer">local ref or remote ref<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>)</p> <div class="language-git extra-class"><pre class="language-git"><code>=&gt; local is master (<span class="token string">&quot;ours&quot;</span>),
+=&gt; remote is topic (<span class="token string">&quot;theirs&quot;</span>)
+
+</code></pre></div><p>That means a merge/diff tool will present the upstream branch as <code>local</code> (<code>master</code>: the branch on top of which you are rebasing), and the working branch as <code>remote</code> (<code>topic</code>: the branch being rebased)</p> <div class="language-git extra-class"><pre class="language-git"><code><span class="token inserted">+-----------------------------------------+</span>
+| LOCAL:master |    BASE   | REMOTE:topic |
+<span class="token inserted">+-----------------------------------------+</span>
+|             MERGED                      |
+<span class="token inserted">+-----------------------------------------+</span>
+
+</code></pre></div><h3 id="inversion-illustrated"><a href="#inversion-illustrated" class="header-anchor">#</a> Inversion illustrated</h3> <h3 id="on-a-merge"><a href="#on-a-merge" class="header-anchor">#</a> On a merge:</h3> <div class="language-git extra-class"><pre class="language-git"><code>c--c--x--x--x(*) &lt;- current branch topic (<span class="token string">'*'</span>=HEAD)
+    \
+     \
+      \--y--y--y &lt;- other branch to merge
+
+</code></pre></div><p>We don't change the current branch <code>topic</code>, so what we have is still what we were working on (and we merge from another branch)</p> <div class="language-git extra-class"><pre class="language-git"><code>c--c--x--x--x---------o(*)  MERGE, still on branch topic
+    \       ^        /
+     \     ours     /
+      \            /
+       --y--y--y--/
+               ^
+              theirs
+
+</code></pre></div><h3 id="on-a-rebase"><a href="#on-a-rebase" class="header-anchor">#</a> On a rebase:</h3> <p>But <strong>on a rebase</strong> we switch sides because the first thing a rebase does is to checkout the upstream branch to replay the current commits on top of it!</p> <div class="language-git extra-class"><pre class="language-git"><code>c--c--x--x--x(*) &lt;- current branch topic (<span class="token string">'*'</span>=HEAD)
+    \
+     \
+      \--y--y--y &lt;- upstream branch
+
+</code></pre></div><p>A <strong><code>git rebase upstream</code></strong> will first set <code>HEAD</code> to the upstream branch, hence the switch of 'ours' and 'theirs' compared to the previous &quot;current&quot; working branch.</p> <div class="language-git extra-class"><pre class="language-git"><code>c--c--x--x--x &lt;- former <span class="token string">&quot;current&quot;</span> branch, new <span class="token string">&quot;theirs&quot;</span>
+    \
+     \
+      \--y--y--y(*) &lt;- set HEAD to this commit, to replay x's on it
+               ^       this will be the new <span class="token string">&quot;ours&quot;</span>
+               |
+            upstream
+
+</code></pre></div><p>The rebase will then replay 'their' commits on the new 'our' <code>topic</code> branch:</p> <div class="language-git extra-class"><pre class="language-git"><code>c--c..x..x..x &lt;- old <span class="token string">&quot;theirs&quot;</span> commits, now <span class="token string">&quot;ghosts&quot;</span>, available through <span class="token string">&quot;reflogs&quot;</span>
+    \
+     \
+      \--y--y--y--x<span class="token string">'--x'</span>--x<span class="token string">'(*) &lt;- topic  once all x'</span>s are replayed,
+               ^                      point branch topic to this commit
+               |
+        upstream branch
+
+</code></pre></div><h2 id="interactive-rebase"><a href="#interactive-rebase" class="header-anchor">#</a> Interactive Rebase</h2> <p>This example aims to describe how one can utilize <code>git rebase</code> in interactive mode. It is expected that one has a basic understanding of what <code>git rebase</code> is and what it does.</p> <p>Interactive rebase is initiated using following command:</p> <div class="language-git extra-class"><pre class="language-git"><code>git rebase -i
+
+</code></pre></div><p>The <code>-i</code> option refers to <strong>interactive mode</strong>. Using interactive rebase, the user can change commit messages, as well as reorder, split, and/or squash (combine to one) commits.</p> <p>Say you want to rearrange your last three commits. To do this you can run:</p> <div class="language-git extra-class"><pre class="language-git"><code>git rebase -i HEAD~3
+
+</code></pre></div><p>After executing the above instruction, a file will be opened in your text editor where you will be able to select how your commits will be rebased. For the purpose of this example, just change the order of your commits, save the file, and close the editor. This will initiate a rebase with the order you've applied. If you check <code>git log</code> you will see your commits in the new order you specified.</p> <h3 id="rewording-commit-messages"><a href="#rewording-commit-messages" class="header-anchor">#</a> Rewording commit messages</h3> <p>Now, you've decided that one of the commit messages is vague and you want it to be more descriptive. Let's examine the last three commits using the same command.</p> <div class="language-git extra-class"><pre class="language-git"><code>git rebase -i HEAD~3
+
+</code></pre></div><p>Instead of rearranging the order the commits will be rebased, this time we will change <code>pick</code>, the default, to <code>reword</code> on a commit where you would like to change the message.</p> <p>When you close the editor, the rebase will initiate and it will stop at the specific commit message that you wanted to reword. This will let you change the commit message to whichever you desire. After you've changed the message, simply close the editor to proceed.</p> <h3 id="changing-the-content-of-a-commit"><a href="#changing-the-content-of-a-commit" class="header-anchor">#</a> Changing the content of a commit</h3> <p>Besides changing the commit message you can also adapt the changes done by the commit. To do so just change <code>pick</code> to <code>edit</code> for one commit. Git will stop when it arrives at that commit and provide the original changes of the commit in the staging area. You can now adapt those changes by unstaging them or adding new changes.</p> <p>As soon as the staging area contains all changes you want in that commit, commit the changes. The old commit message will be shown and can be adapted to reflect the new commit.</p> <h3 id="splitting-a-single-commit-into-multiple"><a href="#splitting-a-single-commit-into-multiple" class="header-anchor">#</a> Splitting a single commit into multiple</h3> <p>Say you've made a commit but decided at a later point this commit could be split into two or more commits instead. Using the same command as before, replace <code>pick</code> with <code>edit</code> instead and hit enter.</p> <p>Now, git will stop at the commit you have marked for editing and place all of its content into the staging area. From that point you can run <code>git reset HEAD^</code> to place the commit into your working directory. Then, you can add and commit your files in a different sequence - ultimately splitting a single commit into <strong>n</strong> commits instead.</p> <h3 id="squashing-multiple-commits-into-one"><a href="#squashing-multiple-commits-into-one" class="header-anchor">#</a> Squashing multiple commits into one</h3> <p>Say you have done some work and have multiple commits which you think could be a single commit instead. For that you can carry out <code>git rebase -i HEAD~3</code>, replacing <code>3</code> with an appropriate amount of commits.</p> <p>This time replace <code>pick</code> with <code>squash</code> instead. During the rebase, the commit which you've instructed to be squashed will be squashed on top of the previous commit; turning them into a single commit instead.</p> <h2 id="rebase-down-to-the-initial-commit"><a href="#rebase-down-to-the-initial-commit" class="header-anchor">#</a> Rebase down to the initial commit</h2> <p>Since Git <a href="https://github.com/git/git/blob/1d1bdafd64266e5ee3bd46c6965228f32e4022ea/Documentation/RelNotes/1.7.12.txt#L59-L60" target="_blank" rel="noopener noreferrer">1.7.12<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> it is possible to rebase down to the root commit. The root commit is the first commit ever made in a repository, and normally cannot be edited. Use the following command:</p> <div class="language-git extra-class"><pre class="language-git"><code>git rebase -i --root
+
+</code></pre></div><h2 id="rebasing-before-a-code-review"><a href="#rebasing-before-a-code-review" class="header-anchor">#</a> Rebasing before a code review</h2> <h3 id="summary"><a href="#summary" class="header-anchor">#</a> Summary</h3> <p>This goal is to reorganize all of your scattered commits into more meaningful commits for easier code reviews. If there are too many layers of changes across too many files at once, it is harder to do a code review. If you can reorganize your chronologically created commits into topical commits, then the code review process is easier (and possibly less bugs slip through the code review process).</p> <p>This overly-simplified example is not the only strategy for using git to do better code reviews. It is the way I do it, and it's something to inspire others to consider how to make code reviews and git history easier/better.</p> <p>This also pedagogically demonstrates the power of rebase in general.</p> <p>This example assumes you know about interactive rebasing.</p> <h3 id="assuming"><a href="#assuming" class="header-anchor">#</a> Assuming:</h3> <ul><li>you're working on a feature branch off of master</li> <li>your feature has three main layers: front-end, back-end, DB</li> <li>you have made a lot of commits while working on a feature branch. Each commit touches multiple layers at once
+</li><li>you want (in the end) only three commits in your branch
+<ul></ul></li> <li>one containing all front end changes</li> <li>one containing all back end changes</li> <li>one containing all DB changes</li></ul> <h3 id="strategy"><a href="#strategy" class="header-anchor">#</a> Strategy:</h3> <ul><li>we are going to change our chronological commits into &quot;topical&quot; commits.</li> <li>first, split all commits into multiple, smaller commits -- each containing only one topic at a time (in our example, the topics are front end, back end, DB changes)</li> <li>Then reorder our topical commits together and 'squash' them into single topical commits</li></ul> <h3 id="example"><a href="#example" class="header-anchor">#</a> Example:</h3> <div class="language-git extra-class"><pre class="language-git"><code><span class="token command">$ git log<span class="token parameter"> --oneline</span> master..</span>
+975430b db adding works: db.sql logic.rb
+3702650 trying to allow adding todo items: page.html logic.rb
+43b075a first draft: page.html and db.sql
+<span class="token command">$ git rebase<span class="token parameter"> -i</span> master</span>
+
+</code></pre></div><p>This will be shown in text editor:</p> <div class="language-git extra-class"><pre class="language-git"><code>pick 43b075a first draft: page.html and db.sql
+pick 3702650 trying to allow adding todo items: page.html logic.rb
+pick 975430b db adding works: db.sql logic.rb
+
+</code></pre></div><p>Change it to this:</p> <div class="language-git extra-class"><pre class="language-git"><code>e 43b075a first draft: page.html and db.sql
+e 3702650 trying to allow adding todo items: page.html logic.rb
+e 975430b db adding works: db.sql logic.rb
+
+</code></pre></div><p>Then git will apply one commit at a time. After each commit, it will show a prompt, and then you can do the following:</p> <div class="language-git extra-class"><pre class="language-git"><code>Stopped at 43b075a92a952faf999e76c4e4d7fa0f44576579... first draft: page.html and db.sql
+You can amend the commit now, with
+
+        git commit --amend
+
+Once you are satisfied with your changes, run
+
+        git rebase --continue
+
+<span class="token command">$ git status</span>
+rebase in progress; onto 4975ae9
+You are currently editing a commit while rebasing branch <span class="token string">'feature'</span> on <span class="token string">'4975ae9'</span>.
+  (use <span class="token string">&quot;git commit --amend&quot;</span> to amend the current commit)
+  (use <span class="token string">&quot;git rebase --continue&quot;</span> once you are satisfied with your changes)
+
+nothing to commit, working directory clean
+<span class="token command">$ git reset HEAD^ #This </span><span class="token string">'uncommits'</span> all the changes in this commit.
+<span class="token command">$ git status<span class="token parameter"> -s</span></span>
+ M db.sql
+ M page.html
+<span class="token command">$ git add db.sql  #now we will create the smaller topical commits</span>
+<span class="token command">$ git commit<span class="token parameter"> -m</span> </span><span class="token string">&quot;first draft: db.sql&quot;</span>
+<span class="token command">$ git add page.html</span>
+<span class="token command">$ git commit<span class="token parameter"> -m</span> </span><span class="token string">&quot;first draft: page.html&quot;</span>
+<span class="token command">$ git rebase<span class="token parameter"> --continue</span></span>
+
+</code></pre></div><p>Then you will repeat those steps for every commit. In the end, you have this:</p> <div class="language-git extra-class"><pre class="language-git"><code><span class="token command">$ git log<span class="token parameter"> --oneline</span></span>
+0309336 db adding works: logic.rb
+06f81c9 db adding works: db.sql
+3264de2 adding todo items: page.html
+675a02b adding todo items: logic.rb
+272c674 first draft: page.html
+08c275d first draft: db.sql
+
+</code></pre></div><p>Now we run rebase one more time to reorder and squash:</p> <div class="language-git extra-class"><pre class="language-git"><code><span class="token command">$ git rebase<span class="token parameter"> -i</span> master</span>
+
+</code></pre></div><p>This will be shown in text editor:</p> <div class="language-git extra-class"><pre class="language-git"><code>pick 08c275d first draft: db.sql
+pick 272c674 first draft: page.html
+pick 675a02b adding todo items: logic.rb
+pick 3264de2 adding todo items: page.html
+pick 06f81c9 db adding works: db.sql
+pick 0309336 db adding works: logic.rb
+
+</code></pre></div><p>Change it to this:</p> <div class="language-git extra-class"><pre class="language-git"><code>pick 08c275d first draft: db.sql
+s 06f81c9 db adding works: db.sql
+pick 675a02b adding todo items: logic.rb
+s 0309336 db adding works: logic.rb
+pick 272c674 first draft: page.html
+s  3264de2 adding todo items: page.html
+
+</code></pre></div><p>NOTICE: make sure that you tell git rebase to apply/squash the smaller topical commits <strong>in the order they were chronologically commited</strong>. Otherwise you might have false, needless merge conflicts to deal with.</p> <p>When that interactive rebase is all said and done, you get this:</p> <div class="language-git extra-class"><pre class="language-git"><code><span class="token command">$ git log<span class="token parameter"> --oneline</span> master..</span>
+74bdd5f adding todos: GUI layer
+e8d8f7e adding todos: business logic layer
+121c578 adding todos: DB layer
+
+</code></pre></div><h3 id="recap"><a href="#recap" class="header-anchor">#</a> Recap</h3> <p>You have now rebased your chronological commits into topical commits. In real life, you may not need to do this every single time, but when you do want or need to do this, now you can. Plus, hopefully you learned more about git rebase.</p> <h2 id="testing-all-commits-during-rebase"><a href="#testing-all-commits-during-rebase" class="header-anchor">#</a> Testing all commits during rebase</h2> <p>Before making a pull request, it is useful to make sure that compile is successful and tests are passing for each commit in the branch. We can do that automatically using <code>-x</code> parameter.</p> <p>For example:</p> <p><code>git rebase -i -x make</code></p> <p>will perform the interactive rebase and stop after each commit to execute <code>make</code>. In case <code>make</code> fails, git will stop to give you an opportunity to fix the issues and amend the commit before proceeding with picking the next one.</p> <h2 id="configuring-autostash"><a href="#configuring-autostash" class="header-anchor">#</a> Configuring autostash</h2> <p>Autostash is a very useful configuration option when using rebase for local changes. Oftentimes, you may need to bring in commits from the upstream branch, but are not ready to commit just yet.</p> <p>However, Git does not allow a rebase to start if the working directory is not clean. Autostash to the rescue:</p> <div class="language-git extra-class"><pre class="language-git"><code>git config --global rebase.autostash    # one time configuration
+git rebase @{u}                         # example rebase on upstream branch
+
+</code></pre></div><p>The autostash will be applied whenever the rebase is finished. It does not matter whether the rebase finishes successfully, or if it is aborted. Either way, the autostash will be applied. If the rebase was successful, and the base commit therefore changed, then there may be a conflict between the autostash and the new commits. In this case, you will have to resolve the conflicts before committing. This is no different than if you would have manually stashed, and then applied, so there is no downside to doing it automatically.</p> <h2 id="aborting-an-interactive-rebase"><a href="#aborting-an-interactive-rebase" class="header-anchor">#</a> Aborting an Interactive Rebase</h2> <p>You have started an interactive rebase. In the editor where you pick your commits, you decide that something is going wrong (for example a commit is missing, or you chose the wrong rebase destination), and you want to abort the rebase.</p> <p>To do this, simply delete all commits and actions (i.e. all lines not starting with the <code>#</code> sign) and the rebase will be aborted!</p> <p>The help text in the editor actually provides this hint:</p> <div class="language-git extra-class"><pre class="language-git"><code><span class="token comment"># Rebase 36d15de..612f2f7 onto 36d15de (3 command(s))</span>
+<span class="token comment">#</span>
+<span class="token comment"># Commands:</span>
+<span class="token comment"># p, pick = use commit</span>
+<span class="token comment"># r, reword = use commit, but edit the commit message</span>
+<span class="token comment"># e, edit = use commit, but stop for amending</span>
+<span class="token comment"># s, squash = use commit, but meld into previous commit</span>
+<span class="token comment"># f, fixup = like &quot;squash&quot;, but discard this commit's log message</span>
+<span class="token comment"># x, exec = run command (the rest of the line) using shell</span>
+<span class="token comment">#</span>
+<span class="token comment"># These lines can be re-ordered; they are executed from top to bottom.</span>
+<span class="token comment">#</span>
+<span class="token comment"># If you remove a line here THAT COMMIT WILL BE LOST.</span>
+<span class="token comment">#</span>
+<span class="token comment"># However, if you remove everything, the rebase will be aborted.</span>
+<span class="token comment">#          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+<span class="token comment"># Note that empty commits are commented out</span>
+
+</code></pre></div><h2 id="setup-git-pull-for-automatically-perform-a-rebase-instead-of-a-merge"><a href="#setup-git-pull-for-automatically-perform-a-rebase-instead-of-a-merge" class="header-anchor">#</a> Setup git-pull for automatically perform a rebase instead of a merge</h2> <p>If your team is following a rebase-based workflow, it may be a advantageous to setup git so that each newly created branch will perform a rebase operation, instead of a merge operation, during a <code>git pull</code>.</p> <p>To setup every <strong>new</strong> branch to automatically rebase, add the following to your <code>.gitconfig</code> or <code>.git/config</code>:</p> <div class="language-git extra-class"><pre class="language-git"><code>[branch]
+autosetuprebase = always
+
+</code></pre></div><p><strong>Command line: <code>git config [--global] branch.autosetuprebase always</code></strong></p> <p>Alternatively, you can setup the <code>git pull</code> command to always behave as if the option <code>--rebase</code> was passed:</p> <div class="language-git extra-class"><pre class="language-git"><code>[pull]
+rebase = true
+
+</code></pre></div><p><strong>Command line: <code>git config [--global] pull.rebase true</code></strong></p> <h2 id="pushing-after-a-rebase"><a href="#pushing-after-a-rebase" class="header-anchor">#</a> Pushing after a rebase</h2> <p>Sometimes you need rewrite history with a rebase, but <code>git push</code> complains about doing so because you rewrote history.</p> <p>This can be solved with a <code>git push --force</code>, but consider <code>git push --force-with-lease</code>, indicating that you want the push to fail if the local remote-tracking branch differs from the branch on the remote, e.g., someone else pushed to the remote after the last fetch. This avoids inadvertently overwriting someone else's recent push.</p> <p><strong>Note</strong>: <code>git push --force</code> - and even <code>--force-with-lease</code> for that matter - can be a dangerous command because it rewrites the history of the branch. If another person had pulled the branch before the forced push, his/her <code>git pull</code> or <code>git fetch</code> will have errors because the local history and the remote history are diverged. This may cause the person to have unexpected errors. With enough looking at the reflogs the other user's work can be recovered, but it can lead to a lot of wasted time. If you must do a forced push to a branch with other contributors, try to coordinate with them so that they do not have to deal with errors.</p> <h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li><code>git rebase [-i | --interactive] [options] [--exec &lt;cmd&gt;] [--onto &lt;newbase&gt;] [&lt;upstream&gt;] [&lt;branch&gt;]</code></li> <li><code>git rebase [-i | --interactive] [options] [--exec &lt;cmd&gt;] [--onto &lt;newbase&gt;] --root [&lt;branch&gt;]</code></li> <li><code>git rebase --continue | --skip | --abort | --edit-todo</code></li></ul> <h4 id="parameters"><a href="#parameters" class="header-anchor">#</a> Parameters</h4> <table><thead><tr><th>Parameter</th> <th>Details</th></tr></thead> <tbody><tr><td>--continue</td> <td>Restart the rebasing process after having resolved a merge conflict.</td></tr> <tr><td>--abort</td> <td>Abort the rebase operation and reset HEAD to the original branch. If branch was provided when the rebase operation was started, then HEAD will be reset to branch. Otherwise HEAD will be reset to where it was when the rebase operation was started.</td></tr> <tr><td>--keep-empty</td> <td>Keep the commits that do not change anything from its parents in the result.</td></tr> <tr><td>--skip</td> <td>Restart the rebasing process by skipping the current patch.</td></tr> <tr><td>-m, --merge</td> <td>Use merging strategies to rebase. When the recursive (default) merge strategy is used, this allows rebase to be aware of renames on the upstream side. Note that a rebase merge works by replaying each commit from the working branch on top of the upstream branch. Because of this, when a merge conflict happens, the side reported as ours is the so-far rebased series, starting with upstream, and theirs is the working branch. In other words, the sides are swapped.</td></tr> <tr><td>--stat</td> <td>Show a diffstat of what changed upstream since the last rebase. The diffstat is also controlled by the configuration option rebase.stat.</td></tr> <tr><td>-x, --exec <code>command</code></td> <td>Perform interactive rebase, stopping between each commit and executing <code>command</code></td></tr></tbody></table> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Please keep in mind that rebase effectively rewrites the repository history.</p> <p>Rebasing commits that exists in the remote repository could rewrite repository nodes used by other developers as base node for their developments. Unless you really know what you are doing, it is a best practice to rebase before pushing your changes.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/git/rebasing.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/git/aliases.html" class="prev">
+        Aliases
+      </a></span> <span class="next"><a href="/git/configuration.html">
+        Configuration
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1141.0fe85b40.js" defer></script>
+  </body>
+</html>

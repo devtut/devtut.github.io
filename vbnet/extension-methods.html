@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - Extension methods</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Creating an extension method, Making the language more functional with extension methods, Padding Numerics, Getting Assembly Version From Strong Name">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - Extension methods">
+    <meta property="og:description" content="Creating an extension method, Making the language more functional with extension methods, Padding Numerics, Getting Assembly Version From Strong Name">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/extension-methods.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - Extension methods">
+    <meta name="twitter:description" content="Creating an extension method, Making the language more functional with extension methods, Padding Numerics, Getting Assembly Version From Strong Name">
+    <meta name="twitter:url" content="/vbnet/extension-methods.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3464.e00b6578.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="sidebar-link">Introduction to Syntax</a></li><li><a href="/vbnet/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="sidebar-link">Looping</a></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="sidebar-link">ByVal and ByRef keywords</a></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="active sidebar-link">Extension methods</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/extension-methods.html#creating-an-extension-method" class="sidebar-link">Creating an extension method</a></li><li class="sidebar-sub-header"><a href="/vbnet/extension-methods.html#making-the-language-more-functional-with-extension-methods" class="sidebar-link">Making the language more functional with extension methods</a></li><li class="sidebar-sub-header"><a href="/vbnet/extension-methods.html#padding-numerics" class="sidebar-link">Padding Numerics</a></li><li class="sidebar-sub-header"><a href="/vbnet/extension-methods.html#getting-assembly-version-from-strong-name" class="sidebar-link">Getting Assembly Version From Strong Name</a></li></ul></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="sidebar-link">Visual Basic 14.0 Features</a></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="sidebar-link">Google Maps in a Windows Form</a></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="sidebar-link">WinForms SpellCheckBox</a></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="sidebar-link">Task-based asynchronous pattern</a></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="extension-methods"><a href="#extension-methods" class="header-anchor">#</a> Extension methods</h1> <h2 id="creating-an-extension-method"><a href="#creating-an-extension-method" class="header-anchor">#</a> Creating an extension method</h2> <p>Extension methods are useful to extend the behaviour of libraries we don't own.</p> <p>They are used similar to instance methods thanks to the compiler's syntactic sugar:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> stringBuilder <span class="token operator">=</span> <span class="token keyword">new</span> StringBuilder<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">'Extension called directly on the object.</span>
+    stringBuilder<span class="token punctuation">.</span>AppendIf<span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;Condition was true&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">'Extension called as a regular method. This defeats the purpose</span>
+    <span class="token comment">'of an extension method but should be noted that it is possible.</span>
+    AppendIf<span class="token punctuation">(</span>stringBuilder<span class="token punctuation">,</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token string">&quot;Condition was true&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> AppendIf<span class="token punctuation">(</span>stringBuilder <span class="token keyword">As</span> StringBuilder<span class="token punctuation">,</span> condition <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">,</span> text <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span> <span class="token keyword">As</span> StringBuilder
+    <span class="token keyword">If</span><span class="token punctuation">(</span>condition<span class="token punctuation">)</span> <span class="token keyword">Then</span> stringBuilder<span class="token punctuation">.</span>Append<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+
+    <span class="token keyword">Return</span> stringBuilder
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>To have a usable extension method, the method needs the <code>Extension</code> attribute and needs to be declared in a <code>Module</code>.</p> <h2 id="making-the-language-more-functional-with-extension-methods"><a href="#making-the-language-more-functional-with-extension-methods" class="header-anchor">#</a> Making the language more functional with extension methods</h2> <p>A good use of extension method is to make the language more functional</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> strings <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">&quot;One&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Two&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Three&quot;</span> <span class="token punctuation">}</span>
+
+    strings<span class="token punctuation">.</span>Join<span class="token punctuation">(</span>Environment<span class="token punctuation">.</span>NewLine<span class="token punctuation">)</span><span class="token punctuation">.</span>Print<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> Join<span class="token punctuation">(</span>strings <span class="token keyword">As</span> IEnumerable<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">String</span><span class="token punctuation">)</span><span class="token punctuation">,</span> separator <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Return</span> <span class="token keyword">String</span><span class="token punctuation">.</span>Join<span class="token punctuation">(</span>separator<span class="token punctuation">,</span> strings<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+<span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> Print<span class="token punctuation">(</span>text <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="padding-numerics"><a href="#padding-numerics" class="header-anchor">#</a> Padding Numerics</h2> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Module</span> Usage
+  <span class="token keyword">Public</span> <span class="token keyword">Sub</span> LikeThis<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> iCount <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+    <span class="token keyword">Dim</span> sCount <span class="token keyword">As</span> <span class="token keyword">String</span>
+
+    iCount <span class="token operator">=</span> <span class="token number">245</span>
+    sCount <span class="token operator">=</span> iCount<span class="token punctuation">.</span>PadLeft<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">)</span>
+
+    Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span>sCount<span class="token punctuation">)</span>
+    Console<span class="token punctuation">.</span>ReadKey<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+
+
+<span class="token keyword">Public</span> <span class="token keyword">Module</span> Padding
+  <span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+  <span class="token keyword">Public</span> <span class="token keyword">Function</span> PadLeft<span class="token punctuation">(</span>Value <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> Length <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Return</span> Value<span class="token punctuation">.</span>PadLeft<span class="token punctuation">(</span>Length<span class="token punctuation">,</span> Space<span class="token punctuation">(</span>Length<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+
+
+  <span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+  <span class="token keyword">Public</span> <span class="token keyword">Function</span> PadRight<span class="token punctuation">(</span>Value <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> Length <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Return</span> Value<span class="token punctuation">.</span>PadRight<span class="token punctuation">(</span>Length<span class="token punctuation">,</span> Space<span class="token punctuation">(</span>Length<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+
+
+  <span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+  <span class="token keyword">Public</span> <span class="token keyword">Function</span> PadLeft<span class="token punctuation">(</span>Value <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> Length <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> Character <span class="token keyword">As</span> <span class="token keyword">Char</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Return</span> <span class="token keyword">CStr</span><span class="token punctuation">(</span>Value<span class="token punctuation">)</span><span class="token punctuation">.</span>PadLeft<span class="token punctuation">(</span>Length<span class="token punctuation">,</span> Character<span class="token punctuation">)</span>
+  <span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+
+
+  <span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+  <span class="token keyword">Public</span> <span class="token keyword">Function</span> PadRight<span class="token punctuation">(</span>Value <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> Length <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> Character <span class="token keyword">As</span> <span class="token keyword">Char</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Return</span> <span class="token keyword">CStr</span><span class="token punctuation">(</span>Value<span class="token punctuation">)</span><span class="token punctuation">.</span>PadRight<span class="token punctuation">(</span>Length<span class="token punctuation">,</span> Character<span class="token punctuation">)</span>
+  <span class="token keyword">End</span> <span class="token keyword">Function</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+</code></pre></div><h2 id="getting-assembly-version-from-strong-name"><a href="#getting-assembly-version-from-strong-name" class="header-anchor">#</a> Getting Assembly Version From Strong Name</h2> <p>Example of calling an extension method as an extension and as a regular method.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">public</span> <span class="token keyword">Class</span> <span class="token keyword">MyClass</span>  
+  <span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+        <span class="token comment">'Extension called directly on the object.</span>
+        <span class="token keyword">Dim</span> Version <span class="token operator">=</span> Assembly<span class="token punctuation">.</span>GetExecutingAssembly<span class="token punctuation">.</span>GetVersionFromAssembly<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment">'Called as a regular method.</span>
+        <span class="token keyword">Dim</span> Ver <span class="token operator">=</span> GetVersionFromAssembly<span class="token punctuation">(</span>SomeOtherAssembly<span class="token punctuation">)</span>
+
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+</code></pre></div><p>The Extension Method in a Module. Make the Module Public if extensions are compiled to a dll and will be referenced in another assembly.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Module</span> Extensions
+    <span class="token comment">''' &lt;summary&gt;</span>
+    <span class="token comment">''' Returns the version number from the specified assembly using the assembly's strong name.</span>
+    <span class="token comment">''' &lt;/summary&gt;</span>
+    <span class="token comment">''' &lt;param name=&quot;Assy&quot;&gt;[Assembly] Assembly to get the version info from.&lt;/param&gt;</span>
+    <span class="token comment">''' &lt;returns&gt;[String]&lt;/returns&gt;</span>
+    <span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+    <span class="token keyword">Friend</span> <span class="token keyword">Function</span> GetVersionFromAssembly<span class="token punctuation">(</span><span class="token keyword">ByVal</span> Assy <span class="token keyword">As</span> Assembly<span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+        <span class="token keyword">Return</span> Split<span class="token punctuation">(</span>Split<span class="token punctuation">(</span>Assy<span class="token punctuation">.</span>FullName<span class="token punctuation">,</span><span class="token string">&quot;,&quot;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token string">&quot;=&quot;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">End</span> <span class="token keyword">Function</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Extension methods are methods (<code>Sub</code> or <code>Function</code>) that add functionality to a Type (which may be a Reference Type or a Value Type).  These Types may or may not be owned by you.</p> <p>They may or may not be in the same assembly as the Type they are intended to modify.  You can allow an opt-in to your extension methods by isolating them in their own namespace.  Or if you prefer you can make them always available by including them in the same namespace as the Type they modify (assuming all the assembly references are in place and correct).  See the Entity Framework Core 1.0 project on GitHub for a good example of the opt-in style of extension methods.</p> <p>Extension methods in VB have a few requirements:</p> <ul><li>Extension methods may only be declared in modules.</li> <li>Extension methods must be decorated with the <code>Extension()</code> attribute.
+</li><li>The ExtensionAttribute namespace must be available within your module.<br> <code>Imports System.Runtime.CompilerServices</code></li> <li>The first parameter to the method must be of a type that this method will be attached to.</li> <li>The first parameter of the method will represent the instance that this method operates on.  (Equivalent to <code>Me</code> if this were a real instance method).</li> <li>An extension method can be called as a regular method by supplying all parameters if not called on the instantiated object.</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/extension-methods.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/oop-keywords.html" class="prev">
+        OOP Keywords
+      </a></span> <span class="next"><a href="/vbnet/reflection.html">
+        Reflection
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3464.e00b6578.js" defer></script>
+  </body>
+</html>

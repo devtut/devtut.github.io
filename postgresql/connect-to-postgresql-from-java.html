@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PostgreSQL - Connect to PostgreSQL from Java</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Connecting with java.sql.DriverManager, Connecting with java.sql.DriverManager and Properties, Connecting with javax.sql.DataSource using a connection pool">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="PostgreSQL - Connect to PostgreSQL from Java">
+    <meta property="og:description" content="Connecting with java.sql.DriverManager, Connecting with java.sql.DriverManager and Properties, Connecting with javax.sql.DataSource using a connection pool">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/postgresql/connect-to-postgresql-from-java.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="PostgreSQL - Connect to PostgreSQL from Java">
+    <meta name="twitter:description" content="Connecting with java.sql.DriverManager, Connecting with java.sql.DriverManager and Properties, Connecting with javax.sql.DataSource using a connection pool">
+    <meta name="twitter:url" content="/postgresql/connect-to-postgresql-from-java.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2543.7acce53f.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>PostgreSQL</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/postgresql/" class="sidebar-link">Disclaimer</a></li><li><a href="/postgresql/getting-started-with-postgresql.html" class="sidebar-link">Getting started with postgresql</a></li><li><a href="/postgresql/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/postgresql/dates-timestamps-and-intervals.html" class="sidebar-link">Dates, Timestamps, and Intervals</a></li><li><a href="/postgresql/table-creation.html" class="sidebar-link">Table Creation</a></li><li><a href="/postgresql/select.html" class="sidebar-link">SELECT</a></li><li><a href="/postgresql/find-string-length-character-length.html" class="sidebar-link">Find String Length / Character Length</a></li><li><a href="/postgresql/coalesce.html" class="sidebar-link">COALESCE</a></li><li><a href="/postgresql/insert.html" class="sidebar-link">INSERT</a></li><li><a href="/postgresql/update.html" class="sidebar-link">UPDATE</a></li><li><a href="/postgresql/json-support.html" class="sidebar-link">JSON Support</a></li><li><a href="/postgresql/aggregate-functions.html" class="sidebar-link">Aggregate Functions</a></li><li><a href="/postgresql/common-table-expressions-with.html" class="sidebar-link">Common Table Expressions (WITH)</a></li><li><a href="/postgresql/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/postgresql/recursive-queries.html" class="sidebar-link">Recursive queries</a></li><li><a href="/postgresql/programming-with-pl-pgsql.html" class="sidebar-link">Programming with PL/pgSQL</a></li><li><a href="/postgresql/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/postgresql/export-postgresql-database-table-header-and-data-to-csv-file.html" class="sidebar-link">Export PostgreSQL database table header and data to CSV file</a></li><li><a href="/postgresql/triggers-and-trigger-functions.html" class="sidebar-link">Triggers and Trigger Functions</a></li><li><a href="/postgresql/event-triggers.html" class="sidebar-link">Event Triggers</a></li><li><a href="/postgresql/role-management.html" class="sidebar-link">Role Management</a></li><li><a href="/postgresql/postgres-cryptographic-functions.html" class="sidebar-link">Postgres cryptographic functions</a></li><li><a href="/postgresql/comments-in-postgresql.html" class="sidebar-link">Comments in postgresql</a></li><li><a href="/postgresql/backup-and-restore.html" class="sidebar-link">Backup and Restore</a></li><li><a href="/postgresql/backup-script-for-a-production-db.html" class="sidebar-link">Backup script for a production DB</a></li><li><a href="/postgresql/accessing-data-programmatically.html" class="sidebar-link">Accessing Data Programmatically</a></li><li><a href="/postgresql/connect-to-postgresql-from-java.html" class="active sidebar-link">Connect to PostgreSQL from Java</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/postgresql/connect-to-postgresql-from-java.html#connecting-with-java-sql-drivermanager" class="sidebar-link">Connecting with java.sql.DriverManager</a></li><li class="sidebar-sub-header"><a href="/postgresql/connect-to-postgresql-from-java.html#connecting-with-java-sql-drivermanager-and-properties" class="sidebar-link">Connecting with java.sql.DriverManager and Properties</a></li><li class="sidebar-sub-header"><a href="/postgresql/connect-to-postgresql-from-java.html#connecting-with-javax-sql-datasource-using-a-connection-pool" class="sidebar-link">Connecting with javax.sql.DataSource using a connection pool</a></li></ul></li><li><a href="/postgresql/postgresql-high-availability.html" class="sidebar-link">PostgreSQL High Availability</a></li><li><a href="/postgresql/extension-dblink-and-postgres-fdw.html" class="sidebar-link">EXTENSION dblink and postgres_fdw</a></li><li><a href="/postgresql/postgres-tip-and-tricks.html" class="sidebar-link">Postgres Tip and Tricks</a></li><li><a href="/postgresql/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="connect-to-postgresql-from-java"><a href="#connect-to-postgresql-from-java" class="header-anchor">#</a> Connect to PostgreSQL from Java</h1> <p>The API to use a relational database from Java is JDBC.</p> <p>This API is implemented by a JDBC driver.</p> <p>To use it, put the JAR-file with the driver on the JAVA class path.</p> <p>This documentation shows samples how to use the JDBC driver to connect to a database.</p> <h2 id="connecting-with-java-sql-drivermanager"><a href="#connecting-with-java-sql-drivermanager" class="header-anchor">#</a> Connecting with java.sql.DriverManager</h2> <p>This is the simplest way to connect.</p> <p>First, the driver has to be <strong>registered</strong> with <code>java.sql.DriverManager</code> so that it knows which class to use.<br>
+This is done by loading the driver class, typically with <code>java.lang.Class.forname(**&lt;driver class name&gt;**)</code>.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">/**
+ * Connect to a PostgreSQL database.
+ * @param url the JDBC URL to connect to; must start with &quot;jdbc:postgresql:&quot;
+ * @param user the username for the connection
+ * @param password the password for the connection
+ * @return a connection object for the established connection
+ * @throws ClassNotFoundException if the driver class cannot be found on the Java class path
+ * @throws java.sql.SQLException if the connection to the database fails
+ */</span>
+private static java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>Connection <span class="token keyword">connect</span><span class="token punctuation">(</span>String url<span class="token punctuation">,</span> String <span class="token keyword">user</span><span class="token punctuation">,</span> String password<span class="token punctuation">)</span>
+    throws ClassNotFoundException<span class="token punctuation">,</span> java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>SQLException
+{
+    <span class="token comment">/*
+     * Register the PostgreSQL JDBC driver.
+     * This may throw a ClassNotFoundException.
+     */</span>
+    Class<span class="token punctuation">.</span>forName<span class="token punctuation">(</span><span class="token string">&quot;org.postgresql.Driver&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/*
+     * Tell the driver manager to connect to the database specified with the URL.
+     * This may throw an SQLException.
+     */</span>
+    <span class="token keyword">return</span> java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>DriverManager<span class="token punctuation">.</span>getConnection<span class="token punctuation">(</span>url<span class="token punctuation">,</span> <span class="token keyword">user</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+}
+
+</code></pre></div><p>Not that user and password can also be included in the JDBC URL, in which case you don't have to specify them in the <code>getConnection</code> method call.</p> <h2 id="connecting-with-java-sql-drivermanager-and-properties"><a href="#connecting-with-java-sql-drivermanager-and-properties" class="header-anchor">#</a> Connecting with java.sql.DriverManager and Properties</h2> <p>Instead of specifying connection parameters like user and password (see a complete list <a href="https://jdbc.postgresql.org/documentation/head/connect.html#connection-parameters" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>) in the URL or a separate parameters, you can pack them into a <code>java.util.Properties</code> object:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">/**
+ * Connect to a PostgreSQL database.
+ * @param url the JDBC URL to connect to. Must start with &quot;jdbc:postgresql:&quot;
+ * @param user the username for the connection
+ * @param password the password for the connection
+ * @return a connection object for the established connection
+ * @throws ClassNotFoundException if the driver class cannot be found on the Java class path
+ * @throws java.sql.SQLException if the connection to the database fails
+ */</span>
+private static java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>Connection <span class="token keyword">connect</span><span class="token punctuation">(</span>String url<span class="token punctuation">,</span> String <span class="token keyword">user</span><span class="token punctuation">,</span> String password<span class="token punctuation">)</span>
+    throws ClassNotFoundException<span class="token punctuation">,</span> java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>SQLException
+{
+    <span class="token comment">/*
+     * Register the PostgreSQL JDBC driver.
+     * This may throw a ClassNotFoundException.
+     */</span>
+    Class<span class="token punctuation">.</span>forName<span class="token punctuation">(</span><span class="token string">&quot;org.postgresql.Driver&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Properties props <span class="token operator">=</span> new java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Properties<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    props<span class="token punctuation">.</span>setProperty<span class="token punctuation">(</span><span class="token string">&quot;user&quot;</span><span class="token punctuation">,</span> <span class="token keyword">user</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    props<span class="token punctuation">.</span>setProperty<span class="token punctuation">(</span><span class="token string">&quot;password&quot;</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/* don't use server prepared statements */</span>
+    props<span class="token punctuation">.</span>setProperty<span class="token punctuation">(</span><span class="token string">&quot;prepareThreshold&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/*
+     * Tell the driver manager to connect to the database specified with the URL.
+     * This may throw an SQLException.
+     */</span>
+    <span class="token keyword">return</span> java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>DriverManager<span class="token punctuation">.</span>getConnection<span class="token punctuation">(</span>url<span class="token punctuation">,</span> props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+}
+
+</code></pre></div><h2 id="connecting-with-javax-sql-datasource-using-a-connection-pool"><a href="#connecting-with-javax-sql-datasource-using-a-connection-pool" class="header-anchor">#</a> Connecting with javax.sql.DataSource using a connection pool</h2> <p>It is common to use <code>javax.sql.DataSource</code> with JNDI in application server containers, where you register a data source under a name and look it up whenever you need a connection.</p> <p>This is code that demonstrates how data sources work:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">/**
+ * Create a data source with connection pool for PostgreSQL connections
+ * @param url the JDBC URL to connect to. Must start with &quot;jdbc:postgresql:&quot;
+ * @param user the username for the connection
+ * @param password the password for the connection
+ * @return a data source with the correct properties set
+ */</span>
+private static javax<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>DataSource createDataSource<span class="token punctuation">(</span>String url<span class="token punctuation">,</span> String <span class="token keyword">user</span><span class="token punctuation">,</span> String password<span class="token punctuation">)</span>
+{
+    <span class="token comment">/* use a data source with connection pooling */</span>
+    org<span class="token punctuation">.</span>postgresql<span class="token punctuation">.</span>ds<span class="token punctuation">.</span>PGPoolingDataSource ds <span class="token operator">=</span> new org<span class="token punctuation">.</span>postgresql<span class="token punctuation">.</span>ds<span class="token punctuation">.</span>PGPoolingDataSource<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ds<span class="token punctuation">.</span>setUrl<span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ds<span class="token punctuation">.</span><span class="token keyword">setUser</span><span class="token punctuation">(</span><span class="token keyword">user</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ds<span class="token punctuation">.</span>setPassword<span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/* the connection pool will have 10 to 20 connections */</span>
+    ds<span class="token punctuation">.</span>setInitialConnections<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ds<span class="token punctuation">.</span>setMaxConnections<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/* use SSL connections without checking server certificate */</span>
+    ds<span class="token punctuation">.</span>setSslMode<span class="token punctuation">(</span><span class="token string">&quot;require&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ds<span class="token punctuation">.</span>setSslfactory<span class="token punctuation">(</span><span class="token string">&quot;org.postgresql.ssl.NonValidatingFactory&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> ds<span class="token punctuation">;</span>
+}
+
+</code></pre></div><p>Once you have created a data source by calling this function, you would use it like this:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">/* get a connection from the connection pool */</span>
+java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>Connection conn <span class="token operator">=</span> ds<span class="token punctuation">.</span>getConnection<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* do some work */</span>
+
+<span class="token comment">/* hand the connection back to the pool - it will not be closed */</span>
+conn<span class="token punctuation">.</span><span class="token keyword">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p><strong>JDBC URL</strong></p> <p>The JDBC URL can take one of these forms:</p> <li>
+`jdbc:postgresql://**host**[:**port**]/[**database**][**parameters**]`
+<p>`**host**` defaults to `localhost`, `**port**` to 5432.<br>
+If `**host**` is an IPv6 address, it must be enclosed in square brackets.<br>
+The default database name is the same as the name of the connecting user.</p> <p>To implement failover, it is possible to have several `**host**[:**port**]` entries separated by a comma.<br>
+They are tried in turn until a connection succeeds.</p></li> <li>
+`jdbc:postgresql:**database**[**parameters**]`
+</li> <li>
+`jdbc:postgresql:/[**parameters**]`
+These forms are for connections to `localhost`.
+</li> <p><code>**parameters**</code> is a list of <code>**key**[=**value**]</code> pairs, headed by <code>?</code> and separated by <code>&amp;</code>. If the <code>**value**</code> is missing, it is assumed to be <code>true</code>.</p> <p>An example:</p> <div class="language-sql extra-class"><pre class="language-sql"><code>jdbc:postgresql:<span class="token comment">//localhost/test?user=fred&amp;password=secret&amp;ssl&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory</span>
+
+</code></pre></div><p><strong>References</strong></p> <ul><li>JDBC specification: <a href="http://download.oracle.com/otndocs/jcp/jdbc-4_2-mrel2-eval-spec/" target="_blank" rel="noopener noreferrer">http://download.oracle.com/otndocs/jcp/jdbc-4_2-mrel2-eval-spec/<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>PostgreSQL JDBC driver: <a href="https://jdbc.postgresql.org/" target="_blank" rel="noopener noreferrer">https://jdbc.postgresql.org/<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>PostgreSQL JDBC driver documentation: <a href="https://jdbc.postgresql.org/documentation/head/index.html" target="_blank" rel="noopener noreferrer">https://jdbc.postgresql.org/documentation/head/index.html<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/postgresql/connect-to-postgresql-from-java.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/postgresql/accessing-data-programmatically.html" class="prev">
+        Accessing Data Programmatically
+      </a></span> <span class="next"><a href="/postgresql/postgresql-high-availability.html">
+        PostgreSQL High Availability
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2543.7acce53f.js" defer></script>
+  </body>
+</html>

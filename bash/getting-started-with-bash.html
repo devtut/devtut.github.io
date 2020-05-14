@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Bash - Getting started with Bash</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Hello World, Hello World Using Variables, Hello World with User Input, Importance of Quoting in Strings, Viewing information for Bash built-ins, Hello World in Debug mode, Handling Named Arguments">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Bash - Getting started with Bash">
+    <meta property="og:description" content="Hello World, Hello World Using Variables, Hello World with User Input, Importance of Quoting in Strings, Viewing information for Bash built-ins, Hello World in Debug mode, Handling Named Arguments">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/bash/getting-started-with-bash.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Bash - Getting started with Bash">
+    <meta name="twitter:description" content="Hello World, Hello World Using Variables, Hello World with User Input, Importance of Quoting in Strings, Viewing information for Bash built-ins, Hello World in Debug mode, Handling Named Arguments">
+    <meta name="twitter:url" content="/bash/getting-started-with-bash.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/500.cc95aa1d.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Bash</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/bash/" class="sidebar-link">Disclaimer</a></li><li><a href="/bash/getting-started-with-bash.html" class="active sidebar-link">Getting started with Bash</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/bash/getting-started-with-bash.html#hello-world" class="sidebar-link">Hello World</a></li><li class="sidebar-sub-header"><a href="/bash/getting-started-with-bash.html#hello-world-using-variables" class="sidebar-link">Hello World Using Variables</a></li><li class="sidebar-sub-header"><a href="/bash/getting-started-with-bash.html#hello-world-with-user-input" class="sidebar-link">Hello World with User Input</a></li><li class="sidebar-sub-header"><a href="/bash/getting-started-with-bash.html#importance-of-quoting-in-strings" class="sidebar-link">Importance of Quoting in Strings</a></li><li class="sidebar-sub-header"><a href="/bash/getting-started-with-bash.html#viewing-information-for-bash-built-ins" class="sidebar-link">Viewing information for Bash built-ins</a></li></ul></li><li><a href="/bash/script-shebang.html" class="sidebar-link">Script shebang</a></li><li><a href="/bash/navigating-directories.html" class="sidebar-link">Navigating directories</a></li><li><a href="/bash/listing-files.html" class="sidebar-link">Listing Files</a></li><li><a href="/bash/using-cat.html" class="sidebar-link">Using cat</a></li><li><a href="/bash/grep.html" class="sidebar-link">Grep</a></li><li><a href="/bash/aliasing.html" class="sidebar-link">Aliasing</a></li><li><a href="/bash/jobs-and-processes.html" class="sidebar-link">Jobs and Processes</a></li><li><a href="/bash/redirection.html" class="sidebar-link">Redirection</a></li><li><a href="/bash/control-structures.html" class="sidebar-link">Control Structures</a></li><li><a href="/bash/true-false-and-commands.html" class="sidebar-link">true, false and : commands</a></li><li><a href="/bash/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/bash/associative-arrays.html" class="sidebar-link">Associative arrays</a></li><li><a href="/bash/functions.html" class="sidebar-link">Functions</a></li><li><a href="/bash/bash-parameter-expansion.html" class="sidebar-link">Bash Parameter Expansion</a></li><li><a href="/bash/copying-cp.html" class="sidebar-link">Copying (cp)</a></li><li><a href="/bash/find.html" class="sidebar-link">Find</a></li><li><a href="/bash/using-sort.html" class="sidebar-link">Using sort</a></li><li><a href="/bash/sourcing.html" class="sidebar-link">Sourcing</a></li><li><a href="/bash/here-documents-and-here-strings.html" class="sidebar-link">Here documents and here strings</a></li><li><a href="/bash/quoting.html" class="sidebar-link">Quoting</a></li><li><a href="/bash/conditional-expressions.html" class="sidebar-link">Conditional Expressions</a></li><li><a href="/bash/scripting-with-parameters.html" class="sidebar-link">Scripting with Parameters</a></li><li><a href="/bash/bash-history-substitutions.html" class="sidebar-link">Bash history substitutions</a></li><li><a href="/bash/math.html" class="sidebar-link">Math</a></li><li><a href="/bash/bash-arithmetic.html" class="sidebar-link">Bash Arithmetic</a></li><li><a href="/bash/scoping.html" class="sidebar-link">Scoping</a></li><li><a href="/bash/process-substitution.html" class="sidebar-link">Process substitution</a></li><li><a href="/bash/programmable-completion.html" class="sidebar-link">Programmable completion</a></li><li><a href="/bash/customizing-ps1.html" class="sidebar-link">Customizing PS1</a></li><li><a href="/bash/brace-expansion.html" class="sidebar-link">Brace Expansion</a></li><li><a href="/bash/getopts-smart-positional-parameter-parsing.html" class="sidebar-link">getopts : smart positional-parameter parsing</a></li><li><a href="/bash/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/bash/pattern-matching-and-regular-expressions.html" class="sidebar-link">Pattern matching and regular expressions</a></li><li><a href="/bash/change-shell.html" class="sidebar-link">Change shell</a></li><li><a href="/bash/internal-variables.html" class="sidebar-link">Internal variables</a></li><li><a href="/bash/job-control.html" class="sidebar-link">Job Control</a></li><li><a href="/bash/case-statement.html" class="sidebar-link">Case statement</a></li><li><a href="/bash/read-a-file-data-stream-variable-line-by-line-and-or-field-by-field.html" class="sidebar-link">Read a file (data stream, variable) line-by-line (and/or field-by-field)?</a></li><li><a href="/bash/file-execution-sequence.html" class="sidebar-link">File execution sequence</a></li><li><a href="/bash/splitting-files.html" class="sidebar-link">Splitting Files</a></li><li><a href="/bash/file-transfer-using-scp.html" class="sidebar-link">File Transfer using scp</a></li><li><a href="/bash/pipelines.html" class="sidebar-link">Pipelines</a></li><li><a href="/bash/managing-path-environment-variable.html" class="sidebar-link">Managing PATH environment variable</a></li><li><a href="/bash/word-splitting.html" class="sidebar-link">Word splitting</a></li><li><a href="/bash/avoiding-date-using-printf.html" class="sidebar-link">Avoiding date using printf</a></li><li><a href="/bash/using-trap-to-react-to-signals-and-system-events.html" class="sidebar-link">Using &quot;trap&quot; to react to signals and system events</a></li><li><a href="/bash/chain-of-commands-and-operations.html" class="sidebar-link">Chain of commands and operations</a></li><li><a href="/bash/type-of-shells.html" class="sidebar-link">Type of Shells</a></li><li><a href="/bash/color-script-output-cross-platform.html" class="sidebar-link">Color script output (cross-platform)</a></li><li><a href="/bash/co-processes.html" class="sidebar-link">co-processes</a></li><li><a href="/bash/typing-variables.html" class="sidebar-link">Typing variables</a></li><li><a href="/bash/jobs-at-specific-times.html" class="sidebar-link">Jobs at specific times</a></li><li><a href="/bash/handling-the-system-prompt.html" class="sidebar-link">Handling the system prompt</a></li><li><a href="/bash/the-cut-command.html" class="sidebar-link">The cut command</a></li><li><a href="/bash/bash-on-windows-10.html" class="sidebar-link">Bash on Windows 10</a></li><li><a href="/bash/cut-command.html" class="sidebar-link">Cut Command</a></li><li><a href="/bash/global-and-local-variables.html" class="sidebar-link">global and local variables</a></li><li><a href="/bash/cgi-scripts.html" class="sidebar-link">CGI Scripts</a></li><li><a href="/bash/select-keyword.html" class="sidebar-link">Select keyword</a></li><li><a href="/bash/when-to-use-eval.html" class="sidebar-link">When to use eval</a></li><li><a href="/bash/networking-with-bash.html" class="sidebar-link">Networking With Bash</a></li><li><a href="/bash/parallel.html" class="sidebar-link">Parallel</a></li><li><a href="/bash/decoding-url.html" class="sidebar-link">Decoding URL</a></li><li><a href="/bash/design-patterns.html" class="sidebar-link">Design Patterns</a></li><li><a href="/bash/namespace.html" class="sidebar-link">Namespace</a></li><li><a href="/bash/creating-directories.html" class="sidebar-link">Creating directories</a></li><li><a href="/bash/strace.html" class="sidebar-link">strace</a></li><li><a href="/bash/sleep-utility.html" class="sidebar-link">Sleep utility</a></li><li><a href="/bash/pitfalls.html" class="sidebar-link">Pitfalls</a></li><li><a href="/bash/keyboard-shortcuts.html" class="sidebar-link">Keyboard shortcuts</a></li><li><a href="/bash/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="getting-started-with-bash"><a href="#getting-started-with-bash" class="header-anchor">#</a> Getting started with Bash</h1> <h2 id="hello-world"><a href="#hello-world" class="header-anchor">#</a> Hello World</h2> <h3 id="interactive-shell"><a href="#interactive-shell" class="header-anchor">#</a> Interactive Shell</h3> <p>The Bash shell is commonly used <strong>interactively:</strong> It lets you enter and edit commands, then executes them when you press the <kbd>Return</kbd> key. Many Unix-based and Unix-like operating systems use Bash as their default shell (notably Linux and macOS). The terminal automatically enters an interactive Bash shell process on startup.</p> <p>Output <code>Hello World</code> by typing the following:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">echo</span> <span class="token string">&quot;Hello World&quot;</span>
+<span class="token comment">#&gt; Hello World  # Output Example</span>
+
+</code></pre></div><h3 id="notes"><a href="#notes" class="header-anchor">#</a> Notes</h3> <li>
+You can change the shell by just typing the name of the shell in terminal. For example: `sh`, `bash`, etc.
+</li> <li>
+[`echo`](https://www.gnu.org/software/bash/manual/bash.html#index-echo) is a Bash builtin command that writes the arguments it receives to the standard output.  It appends a newline to the output, by default.
+</li> <h3 id="non-interactive-shell"><a href="#non-interactive-shell" class="header-anchor">#</a> Non-Interactive Shell</h3> <p>The Bash shell can also be run <strong>non-interactively</strong> from a script, making the shell require no human interaction. Interactive behavior and scripted behavior should be identical – an important design consideration of Unix V7 Bourne shell and transitively Bash. Therefore anything that can be done at the command line can be put in a script file for reuse.</p> <p>Follow these steps to create a <code>Hello World</code> script:</p> <li>
+Create a new file called `hello-world.sh`
+<div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">touch</span> hello-world.sh
+
+</code></pre></div></li> <li>
+Make the script executable by running [`chmod`](http://ss64.com/bash/chmod.html)`+x hello-world.sh`
+</li> <li>
+Add this code:
+<div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;Hello World&quot;</span>
+
+</code></pre></div><p><strong>Line 1</strong>: The first line of the script must start with the character sequence <code>#!</code>, referred to as  <strong>shebang</strong><sup>1</sup>. The shebang instructs the operating system to run <code>/bin/bash</code>, the Bash shell, passing it the script's path as an argument.
+E.g. <code>/bin/bash hello-world.sh</code> <strong>Line 2</strong>: Uses the <a href="https://www.gnu.org/software/bash/manual/bash.html#index-echo" target="_blank" rel="noopener noreferrer"><code>echo</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> command to write <code>Hello World</code> to the standard output.
+</p></li><p></p> <li>
+Execute the `hello-world.sh` script from the command line using one of the following:
+<ul>
+1. `./hello-world.sh` – most commonly used, and recommended
+1. `/bin/bash hello-world.sh`
+1. `bash hello-world.sh` – assuming `/bin` is in your `$PATH`
+1. `sh hello-world.sh`
+</ul></li> <p>For real production use, you would omit the <code>.sh</code> extension (which is misleading anyway, since this is a Bash script, not a <code>sh</code> script) and perhaps move the file to a directory within your <a href="/documentation/bash/4797/internal-variables/16877/path"><code>PATH</code></a> so that it is available to you regardless of your current working directory, just like a system command such as <code>cat</code> or <code>ls</code>.</p> <p>Common mistakes include:</p> <li>
+Forgetting to apply execute permission on the file, i.e., `chmod +x hello-world.sh`, resulting in the output of `./hello-world.sh: Permission denied`.
+</li> <li>
+Editing the script on Windows, which produces incorrect line ending characters that Bash cannot handle.
+A common symptom is `: command not found`  where the carriage return has forced the cursor to the beginning of line, overwriting the text before the colon in the error message.
+The script can be fixed using the `dos2unix` program.
+An example use: `dos2unix hello-world.sh`
+**`dos2unix` edits the file inline.**
+</li> <li>
+Using `sh ./hello-world.sh`, not realizing that `bash` and `sh` are distinct shells with distinct features (though since Bash is backwards-compatible, the opposite mistake is harmless).
+Anyway, simply relying on the script's shebang line is vastly preferable to explicitly writing `bash` or `sh` (or `python` or `perl` or `awk` or `ruby` or...) before each script's file name.
+A common shebang line to use in order to make your script more portable is to use `#!/usr/bin/env bash` instead of hard-coding a path to Bash.  That way, `/usr/bin/env` has to exist, but beyond that point, `bash` just needs to be on your `PATH`.  On many systems, `/bin/bash` doesn't exist, and you should use `/usr/local/bin/bash` or some other absolute path; this change avoids having to figure out the details of that.
+</li> <p><sup>1</sup> <strong>Also referred to as sha-bang, hashbang, pound-bang, hash-pling.</strong></p> <h2 id="hello-world-using-variables"><a href="#hello-world-using-variables" class="header-anchor">#</a> Hello World Using Variables</h2> <p>Create a new file called <code>hello.sh</code> with the following content and give it executable permissions with <code>chmod +x hello.sh</code>.</p> <blockquote></blockquote> <p>Execute/Run via: <code>./hello.sh</code></p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env bash</span>
+
+<span class="token comment"># Note that spaces cannot be used around the `=` assignment operator</span>
+<span class="token assign-left variable">whom_variable</span><span class="token operator">=</span><span class="token string">&quot;World&quot;</span>
+
+<span class="token comment"># Use printf to safely output the data</span>
+<span class="token builtin class-name">printf</span> <span class="token string">&quot;Hello, %s<span class="token entity" title="\n">\n</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$whom_variable</span>&quot;</span>
+<span class="token comment">#&gt; Hello, World</span>
+
+</code></pre></div><p>This will print <code>Hello, World</code> to standard output when executed.</p> <p>To tell bash where the script is you need to be very specific, by pointing it to the containing directory, normally with <code>./</code> if it is your working directory, where <code>.</code> is an alias to the current directory. If you do not specify the directory, <code>bash</code> tries to locate the script in one of the directories contained in the <code>$PATH</code> environment variable.</p> <p>The following code accepts an argument <code>$1</code>, which is the first command line argument, and outputs it in a formatted string, following <code>Hello,</code>.</p> <blockquote></blockquote> <p>Execute/Run via: <code>./hello.sh World</code></p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env bash</span>
+<span class="token builtin class-name">printf</span> <span class="token string">&quot;Hello, %s<span class="token entity" title="\n">\n</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span>
+<span class="token comment">#&gt; Hello, World</span>
+
+</code></pre></div><p>It is important to note that <code>$1</code> has to be quoted in double quote, not single quote. <code>&quot;$1&quot;</code> expands to the first command line argument, as desired, while <code>'$1'</code> evaluates to literal string <code>$1</code>.</p> <blockquote></blockquote> <p>**Security Note:**<br>
+Read [**Security implications of forgetting to quote a variable in bash shells**](http://unix.stackexchange.com/q/171346/4667) to understand the importance of placing the variable text within double quotes.</p> <h2 id="hello-world-with-user-input"><a href="#hello-world-with-user-input" class="header-anchor">#</a> Hello World with User Input</h2> <p>The following will prompt a user for input, and then store that input as a string (text) in a variable. The variable is then used to give a message to the user.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env bash</span>
+<span class="token builtin class-name">echo</span>  <span class="token string">&quot;Who are you?&quot;</span>
+<span class="token builtin class-name">read</span> name
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;Hello, <span class="token variable">$name</span>.&quot;</span>
+
+</code></pre></div><p>The command <code>read</code> here reads one line of data from standard input into the variable <code>name</code>. This is then referenced using <code>$name</code> and printed to standard out using <code>echo</code>.</p> <p>Example output:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./hello_world.sh
+Who are you?
+Matt
+Hello, Matt.
+
+</code></pre></div><p>Here the user entered the name &quot;Matt&quot;, and this code was used to say <code>Hello, Matt.</code>.</p> <p>And if you want to append something to the variable value while printing it, use curly brackets around the variable name as shown in the following example:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env bash</span>
+<span class="token builtin class-name">echo</span>  <span class="token string">&quot;What are you doing?&quot;</span>
+<span class="token builtin class-name">read</span> action
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;You are <span class="token variable">${action}</span>ing.&quot;</span>
+
+</code></pre></div><p>Example output:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ ./hello_world.sh
+What are you doing?
+Sleep
+You are Sleeping.
+
+</code></pre></div><p>Here when user enters an action, &quot;ing&quot; is appended to that action while printing.</p> <h2 id="importance-of-quoting-in-strings"><a href="#importance-of-quoting-in-strings" class="header-anchor">#</a> Importance of Quoting in Strings</h2> <p>Quoting is important for string expansion in bash. With these, you can control how the bash parses and expands your strings.</p> <h3 id="there-are-two-types-of-quoting"><a href="#there-are-two-types-of-quoting" class="header-anchor">#</a> There are two types of quoting:</h3> <ul><li><strong>Weak</strong>: <strong>uses double quotes: &quot;</strong></li> <li><strong>Strong</strong>: <strong>uses single quotes: '</strong></li></ul> <p>If you want to bash to expand your argument, you can use <strong>Weak Quoting</strong>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env bash</span>
+<span class="token assign-left variable">world</span><span class="token operator">=</span><span class="token string">&quot;World&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;Hello <span class="token variable">$world</span>&quot;</span>
+<span class="token comment">#&gt; Hello World</span>
+
+</code></pre></div><p>If you don't want to bash to expand your argument, you can use <strong>Strong Quoting</strong>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env bash</span>
+<span class="token assign-left variable">world</span><span class="token operator">=</span><span class="token string">&quot;World&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">'Hello <span class="token variable">$world</span>'</span>
+<span class="token comment">#&gt; Hello $world</span>
+
+</code></pre></div><p>You can also use escape to prevent expansion:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/usr/bin/env bash</span>
+<span class="token assign-left variable">world</span><span class="token operator">=</span><span class="token string">&quot;World&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;Hello \<span class="token variable">$world</span>&quot;</span>
+<span class="token comment">#&gt; Hello $world</span>
+
+</code></pre></div><p>For more detailed information other than beginner details, you can continue to read it <a href="http://stackoverflow.com/documentation/bash/729/quoting#t=201703251731496717363" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <h2 id="viewing-information-for-bash-built-ins"><a href="#viewing-information-for-bash-built-ins" class="header-anchor">#</a> Viewing information for Bash built-ins</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">help</span> <span class="token operator">&lt;</span>command<span class="token operator">&gt;</span>
+
+</code></pre></div><p>This will display the Bash help (manual) page for the specified built-in.</p> <p>For example, <code>help unset</code> will show:</p> <blockquote></blockquote> <pre class="lang-none prettyprint-override"><code>unset: unset [-f] [-v] [-n] [name ...]
+   Unset values and attributes of shell variables and functions.
+
+   For each NAME, remove the corresponding variable or function.
+
+   Options:
+     -f    treat each NAME as a shell function
+     -v    treat each NAME as a shell variable
+     -n    treat each NAME as a name reference and unset the variable itself
+       rather than the variable it references
+
+   Without options, unset first tries to unset a variable, and if that fails,
+   tries to unset a function.
+
+   Some variables cannot be unset; also see `readonly'.
+
+   Exit Status:
+   Returns success unless an invalid option is given or a NAME is read-only.
+
+```
+
+
+
+
+To see a list of all built-ins with a short description, use
+
+```bash
+help -d
+
+```
+
+
+
+## Hello World in &quot;Debug&quot; mode
+
+
+```bash
+$ cat hello.sh 
+#!/bin/bash 
+echo &quot;Hello World&quot;
+$ bash -x hello.sh 
++ echo Hello World
+Hello World
+
+```
+
+The `-x` argument enables you to walk through each line in the script. One good example is here:
+
+```bash
+$ cat hello.sh
+#!/bin/bash 
+echo &quot;Hello World\n&quot; 
+adding_string_to_number=&quot;s&quot;
+v=$(expr 5 + $adding_string_to_number) 
+
+$ ./hello.sh 
+Hello World
+
+expr: non-integer argument
+
+```
+
+The above prompted error is not enough to trace the script; however, using the following way gives you a better sense where to look for the error in the script.
+
+```bash
+$ bash -x hello.sh 
++ echo Hello World\n
+Hello World
+
++ adding_string_to_number=s
++ expr 5 + s
+expr: non-integer argument
++ v=
+
+```
+
+
+
+## Handling Named Arguments
+
+
+```bash
+#!/bin/bash
+
+deploy=false
+uglify=false
+
+while (( $# &gt; 1 )); do case $1 in
+   --deploy) deploy=&quot;$2&quot;;;
+   --uglify) uglify=&quot;$2&quot;;;
+   *) break;
+ esac; shift 2
+done
+
+$deploy &amp;&amp; echo &quot;will deploy... deploy = $deploy&quot;
+$uglify &amp;&amp; echo &quot;will uglify... uglify = $uglify&quot;
+
+# how to run
+# chmod +x script.sh
+# ./script.sh --deploy true --uglify false
+
+```
+
+</code></pre></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/bash/getting-started-with-bash.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/bash/" class="prev router-link-active">
+        Disclaimer
+      </a></span> <span class="next"><a href="/bash/script-shebang.html">
+        Script shebang
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/500.cc95aa1d.js" defer></script>
+  </body>
+</html>

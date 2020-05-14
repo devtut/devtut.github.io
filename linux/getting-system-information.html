@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux - Getting System Information</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Statistics about CPU, Memory, Network and Disk (I/O operations), List Hardware, Find CPU model/speed information, Process monitoring and information gathering, Using tools like lscpu and lshw">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Linux - Getting System Information">
+    <meta property="og:description" content="Statistics about CPU, Memory, Network and Disk (I/O operations), List Hardware, Find CPU model/speed information, Process monitoring and information gathering, Using tools like lscpu and lshw">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/linux/getting-system-information.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Linux - Getting System Information">
+    <meta name="twitter:description" content="Statistics about CPU, Memory, Network and Disk (I/O operations), List Hardware, Find CPU model/speed information, Process monitoring and information gathering, Using tools like lscpu and lshw">
+    <meta name="twitter:url" content="/linux/getting-system-information.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1892.27836dd2.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/linux/" class="sidebar-link">Disclaimer</a></li><li><a href="/linux/getting-started-with-gnu-linux.html" class="sidebar-link">Getting started with GNU/Linux</a></li><li><a href="/linux/detecting-linux-distribution-name-and-version.html" class="sidebar-link">Detecting Linux distribution name and version</a></li><li><a href="/linux/getting-information-on-a-running-linux-kernel.html" class="sidebar-link">Getting information on a running Linux kernel</a></li><li><a href="/linux/shell.html" class="sidebar-link">Shell</a></li><li><a href="/linux/check-disk-space.html" class="sidebar-link">Check Disk Space</a></li><li><a href="/linux/getting-system-information.html" class="active sidebar-link">Getting System Information</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/linux/getting-system-information.html#statistics-about-cpu-memory-network-and-disk-i-o-operations" class="sidebar-link">Statistics about CPU, Memory, Network and Disk (I/O operations)</a></li><li class="sidebar-sub-header"><a href="/linux/getting-system-information.html#list-hardware" class="sidebar-link">List Hardware</a></li><li class="sidebar-sub-header"><a href="/linux/getting-system-information.html#find-cpu-model-speed-information" class="sidebar-link">Find CPU model/speed information</a></li><li class="sidebar-sub-header"><a href="/linux/getting-system-information.html#process-monitoring-and-information-gathering" class="sidebar-link">Process monitoring and information gathering</a></li><li class="sidebar-sub-header"><a href="/linux/getting-system-information.html#using-tools-like-lscpu-and-lshw" class="sidebar-link">Using tools like lscpu and lshw</a></li></ul></li><li><a href="/linux/ls-command.html" class="sidebar-link">ls command</a></li><li><a href="/linux/file-compression-with-tar-command.html" class="sidebar-link">File Compression with 'tar' command</a></li><li><a href="/linux/services.html" class="sidebar-link">Services</a></li><li><a href="/linux/managing-services.html" class="sidebar-link">Managing Services</a></li><li><a href="/linux/modifying-users.html" class="sidebar-link">Modifying Users</a></li><li><a href="/linux/lamp-stack.html" class="sidebar-link">LAMP Stack</a></li><li><a href="/linux/tee-command.html" class="sidebar-link">tee command</a></li><li><a href="/linux/secure-shell-ssh.html" class="sidebar-link">Secure Shell (SSH)</a></li><li><a href="/linux/scp.html" class="sidebar-link">SCP</a></li><li><a href="/linux/gnupg-gpg.html" class="sidebar-link">GnuPG (GPG)</a></li><li><a href="/linux/network-configuration.html" class="sidebar-link">Network Configuration</a></li><li><a href="/linux/midnight-commander.html" class="sidebar-link">Midnight Commander</a></li><li><a href="/linux/change-root-chroot.html" class="sidebar-link">Change root (chroot)</a></li><li><a href="/linux/package-managers.html" class="sidebar-link">Package Managers</a></li><li><a href="/linux/compiling-the-linux-kernel.html" class="sidebar-link">Compiling the Linux kernel</a></li><li><a href="/linux/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="getting-system-information"><a href="#getting-system-information" class="header-anchor">#</a> Getting System Information</h1> <p>Collection of commands to fetch system related information.</p> <h2 id="statistics-about-cpu-memory-network-and-disk-i-o-operations"><a href="#statistics-about-cpu-memory-network-and-disk-i-o-operations" class="header-anchor">#</a> Statistics about CPU, Memory, Network and Disk (I/O operations)</h2> <p>To get general statistics about main components of Linux family of <code>stat</code> commands are extremely useful</p> <h3 id="cpu"><a href="#cpu" class="header-anchor">#</a> CPU</h3> <p>To get processors related statistics you can use <code>mpstat</code> command but with some options it will provide better visibility:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ mpstat <span class="token number">2</span> <span class="token number">10</span>
+
+</code></pre></div><h3 id="memory"><a href="#memory" class="header-anchor">#</a> Memory</h3> <p>We all know command <code>free</code> to show amount of (remaining) RAM but to see all statistic including I/O operations:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">vmstat</span> <span class="token number">2</span> <span class="token number">10</span>
+
+</code></pre></div><h3 id="disk"><a href="#disk" class="header-anchor">#</a> Disk</h3> <p>To get general information about your disk operations in real time you can utilise <code>iostat</code>.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ iostat -kx <span class="token number">2</span>
+
+</code></pre></div><h3 id="network"><a href="#network" class="header-anchor">#</a> Network</h3> <p>To be able to see what is happening with your network services you can use <code>netstat</code></p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">netstat</span> -ntlp <span class="token comment"># open TCP sockets </span>
+$ <span class="token function">netstat</span> -nulp <span class="token comment"># open UDP sockets </span>
+$ <span class="token function">netstat</span> -nxlp <span class="token comment"># open Unix sockets </span>
+
+</code></pre></div><p>But you can find useful monitoring to see network traffic in real time:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">sudo</span> iftop
+
+</code></pre></div><h3 id="optional"><a href="#optional" class="header-anchor">#</a> Optional</h3> <p>To generate statistics in real time related to I/O operations across all components you can use <code>dstat</code>. That tool that is a versatile replacement for <code>vmstat</code>, <code>iostat</code> and <code>ifstat</code></p> <h2 id="list-hardware"><a href="#list-hardware" class="header-anchor">#</a> List Hardware</h2> <p><strong>Ubuntu:</strong></p> <p><strong>lshw</strong> is a small tool to extract detailed information on the hardware configuration of the machine. It can report exact memory configuration, firmware version, mainboard configuration,  CPU version and speed, cache configuration, bus speed, etc.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">sudo</span> lshw <span class="token operator">|</span> <span class="token function">less</span> <span class="token punctuation">(</span>or <span class="token function">more</span><span class="token punctuation">)</span>
+$ <span class="token function">sudo</span> lshw -html <span class="token operator">&gt;</span> myhardware.html
+$ <span class="token function">sudo</span> lshw -xml <span class="token operator">&gt;</span> myhardware.xml
+
+</code></pre></div><p>To show PCI info</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ lspci -tv
+
+</code></pre></div><p>To see USB info</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ lsusb -tv
+
+</code></pre></div><p>To display BIOS informations</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ dmidecode -q <span class="token operator">|</span> <span class="token function">less</span>
+
+</code></pre></div><p>To see specific information about disk (disk sda in example) you can use:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ hdparm -i /dev/sda
+
+</code></pre></div><p>Few additional utilities/commands will help gather some extra information:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ smartctl -A /dev/sda <span class="token operator">|</span> <span class="token function">grep</span> Power_On_Hours <span class="token comment"># How long has this disk (system) been powered on in total</span>
+$ hdparm -tT /dev/sda <span class="token comment"># Do a read speed test on disk sda</span>
+$ badblocks -s /dev/sda <span class="token comment"># Test for unreadable blocks on disk sda</span>
+
+</code></pre></div><h2 id="find-cpu-model-speed-information"><a href="#find-cpu-model-speed-information" class="header-anchor">#</a> Find CPU model/speed information</h2> <p><strong>Ubuntu:</strong></p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">cat</span> /proc/cpuinfo
+
+</code></pre></div><p>Sample Output:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>processor    <span class="token builtin class-name">:</span> <span class="token number">0</span>
+vendor_id    <span class="token builtin class-name">:</span> GenuineIntel
+cpu family    <span class="token builtin class-name">:</span> <span class="token number">6</span>
+model        <span class="token builtin class-name">:</span> <span class="token number">15</span>
+model name    <span class="token builtin class-name">:</span> Intel<span class="token punctuation">(</span>R<span class="token punctuation">)</span> Core<span class="token punctuation">(</span>TM<span class="token punctuation">)</span><span class="token number">2</span> Quad CPU    Q6600  @ <span class="token number">2</span>.40GHz
+stepping    <span class="token builtin class-name">:</span> <span class="token number">11</span>
+cpu MHz        <span class="token builtin class-name">:</span> <span class="token number">1596.000</span>
+cache size    <span class="token builtin class-name">:</span> <span class="token number">4096</span> KB
+physical <span class="token function">id</span>    <span class="token builtin class-name">:</span> <span class="token number">0</span>
+siblings    <span class="token builtin class-name">:</span> <span class="token number">4</span>
+core <span class="token function">id</span>        <span class="token builtin class-name">:</span> <span class="token number">0</span>
+cpu cores    <span class="token builtin class-name">:</span> <span class="token number">4</span>
+apicid        <span class="token builtin class-name">:</span> <span class="token number">0</span>
+initial apicid    <span class="token builtin class-name">:</span> <span class="token number">0</span>
+fpu        <span class="token builtin class-name">:</span> <span class="token function">yes</span>
+fpu_exception    <span class="token builtin class-name">:</span> <span class="token function">yes</span>
+cpuid level    <span class="token builtin class-name">:</span> <span class="token number">10</span>
+wp        <span class="token builtin class-name">:</span> <span class="token function">yes</span>
+flags        <span class="token builtin class-name">:</span> fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx lm constant_tsc arch_perfmon pebs bts rep_good pni dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm lahf_lm tpr_shadow vnmi flexpriority
+bogomips    <span class="token builtin class-name">:</span> <span class="token number">4800.18</span>
+clflush size    <span class="token builtin class-name">:</span> <span class="token number">64</span>
+cache_alignment    <span class="token builtin class-name">:</span> <span class="token number">64</span>
+address sizes    <span class="token builtin class-name">:</span> <span class="token number">36</span> bits physical, <span class="token number">48</span> bits virtual
+power management:
+<span class="token punctuation">..</span><span class="token punctuation">..</span>
+<span class="token punctuation">..</span>
+processor    <span class="token builtin class-name">:</span> <span class="token number">3</span>
+vendor_id    <span class="token builtin class-name">:</span> GenuineIntel
+cpu family    <span class="token builtin class-name">:</span> <span class="token number">6</span>
+model        <span class="token builtin class-name">:</span> <span class="token number">15</span>
+model name    <span class="token builtin class-name">:</span> Intel<span class="token punctuation">(</span>R<span class="token punctuation">)</span> Core<span class="token punctuation">(</span>TM<span class="token punctuation">)</span><span class="token number">2</span> Quad CPU    Q6600  @ <span class="token number">2</span>.40GHz
+stepping    <span class="token builtin class-name">:</span> <span class="token number">11</span>
+cpu MHz        <span class="token builtin class-name">:</span> <span class="token number">1596.000</span>
+cache size    <span class="token builtin class-name">:</span> <span class="token number">4096</span> KB
+physical <span class="token function">id</span>    <span class="token builtin class-name">:</span> <span class="token number">0</span>
+siblings    <span class="token builtin class-name">:</span> <span class="token number">4</span>
+core <span class="token function">id</span>        <span class="token builtin class-name">:</span> <span class="token number">3</span>
+cpu cores    <span class="token builtin class-name">:</span> <span class="token number">4</span>
+apicid        <span class="token builtin class-name">:</span> <span class="token number">3</span>
+initial apicid    <span class="token builtin class-name">:</span> <span class="token number">3</span>
+fpu        <span class="token builtin class-name">:</span> <span class="token function">yes</span>
+fpu_exception    <span class="token builtin class-name">:</span> <span class="token function">yes</span>
+cpuid level    <span class="token builtin class-name">:</span> <span class="token number">10</span>
+wp        <span class="token builtin class-name">:</span> <span class="token function">yes</span>
+flags        <span class="token builtin class-name">:</span> fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx lm constant_tsc arch_perfmon pebs bts rep_good pni dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm lahf_lm tpr_shadow vnmi flexpriority
+bogomips    <span class="token builtin class-name">:</span> <span class="token number">4800.30</span>
+clflush size    <span class="token builtin class-name">:</span> <span class="token number">64</span>
+cache_alignment    <span class="token builtin class-name">:</span> <span class="token number">64</span>
+address sizes    <span class="token builtin class-name">:</span> <span class="token number">36</span> bits physical, <span class="token number">48</span> bits virtual
+power management:
+
+</code></pre></div><p><strong>count processor (including cores):</strong></p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">grep</span> -c processor /proc/cpuinfo
+
+</code></pre></div><h2 id="process-monitoring-and-information-gathering"><a href="#process-monitoring-and-information-gathering" class="header-anchor">#</a> Process monitoring and information gathering</h2> <p>Overall you have two ways to monitor processes at linux host</p> <h3 id="static-monitoring"><a href="#static-monitoring" class="header-anchor">#</a> Static monitoring</h3> <p>Most widely used command is <code>ps</code> (i.e., process status) command is used to provide information about the currently running processes, including their process identification numbers (PIDs).</p> <p>Here few useful options to gather specific informations.</p> <p>List processes in a hierarchy</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ps</span> -e -o pid,args --forest
+
+</code></pre></div><p>List processes sorted by % cpu usage</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ps</span> -e -o pcpu,cpu,nice,state,cputime,args --sort pcpu <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'/^ 0.0 /d'</span>
+
+</code></pre></div><p>List processes sorted by mem (KB) usage.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ps</span> -e -orss<span class="token operator">=</span>,args<span class="token operator">=</span> <span class="token operator">|</span> <span class="token function">sort</span> -b -k1,1n <span class="token operator">|</span> <span class="token function">pr</span> -TW<span class="token environment constant">$COLUMNS</span>
+
+</code></pre></div><p>List all threads for a particular process (&quot;firefox-bin&quot; process in example )</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ps</span> -C firefox-bin -L -o pid,tid,pcpu,state
+
+</code></pre></div><p>After finding specific process you can gather information related to it using <code>lsof</code> to list paths that process id has open</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">lsof</span> -p <span class="token variable">$$</span> 
+
+</code></pre></div><p>Or based on path find out list processes that have specified path open</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">lsof</span> ~
+
+</code></pre></div><h3 id="interactive-monitoring"><a href="#interactive-monitoring" class="header-anchor">#</a> Interactive monitoring</h3> <p>Most commonly known tool for dynamic monitoring is:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">top</span>
+
+</code></pre></div><p>That mostly default command that have huge amount options to filter and represent information in real time (in comparison to <code>ps</code> command.</p> <p>Still there are more advance options that can be considered and installed as <code>top</code> replacement</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">htop</span> -d <span class="token number">5</span>
+
+</code></pre></div><p>or</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ atop 
+
+</code></pre></div><p>Which has ability to log all the activities into log file (default atop will log all the activity on every 600 seconds)
+To this list there are few specialised commands as <code>iotop</code> or <code>iftop</code></p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">sudo</span> iotop
+
+</code></pre></div><h2 id="using-tools-like-lscpu-and-lshw"><a href="#using-tools-like-lscpu-and-lshw" class="header-anchor">#</a> Using tools like lscpu and lshw</h2> <p>By using tools like lscpu as lscpu is an easy way to get CPU information.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ lscpu
+Architecture:          x86_64
+CPU op-mode<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:        <span class="token number">32</span>-bit, <span class="token number">64</span>-bit
+Byte Order:            Little Endian
+CPU<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:                <span class="token number">4</span>
+On-line CPU<span class="token punctuation">(</span>s<span class="token punctuation">)</span> list:   <span class="token number">0</span>-3
+Thread<span class="token punctuation">(</span>s<span class="token punctuation">)</span> per core:    <span class="token number">1</span>
+Core<span class="token punctuation">(</span>s<span class="token punctuation">)</span> per socket:    <span class="token number">4</span>
+Socket<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:             <span class="token number">1</span>
+NUMA node<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:          <span class="token number">1</span>
+Vendor ID:             GenuineIntel
+CPU family:            <span class="token number">6</span>
+Model:                 <span class="token number">23</span>
+Stepping:              <span class="token number">10</span>
+CPU MHz:               <span class="token number">1998.000</span>
+BogoMIPS:              <span class="token number">5303.14</span>
+Virtualization:        VT-x
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              2048K
+NUMA node0 CPU<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:     <span class="token number">0</span>-3
+
+</code></pre></div><p>By using tool lshw</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ lshw <span class="token operator">|</span> <span class="token function">grep</span> cpu
+
+df1-ws-5084               
+    description: Computer
+    width: <span class="token number">64</span> bits
+    capabilities: vsyscall32
+  *-core
+       description: Motherboard
+       physical id: <span class="token number">0</span>
+     *-memory
+          description: System memory
+          physical id: <span class="token number">0</span>
+          size: 5881MiB
+     *-cpu
+          product: Intel<span class="token punctuation">(</span>R<span class="token punctuation">)</span> Pentium<span class="token punctuation">(</span>R<span class="token punctuation">)</span> CPU G3220 @ <span class="token number">3</span>.00GHz
+          vendor: Intel Corp.
+          physical id: <span class="token number">1</span>
+          bus info: cpu@0
+          size: 3GHz
+          capacity: 3GHz
+          width: <span class="token number">64</span> bits
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/linux/getting-system-information.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/linux/check-disk-space.html" class="prev">
+        Check Disk Space
+      </a></span> <span class="next"><a href="/linux/ls-command.html">
+        ls command
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1892.27836dd2.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TypeScript - tsconfig.json</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Create TypeScript project with tsconfig.json, Configuration for fewer programming errors, compileOnSave, Comments, preserveConstEnums">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="TypeScript - tsconfig.json">
+    <meta property="og:description" content="Create TypeScript project with tsconfig.json, Configuration for fewer programming errors, compileOnSave, Comments, preserveConstEnums">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/typescript/tsconfig-json.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="TypeScript - tsconfig.json">
+    <meta name="twitter:description" content="Create TypeScript project with tsconfig.json, Configuration for fewer programming errors, compileOnSave, Comments, preserveConstEnums">
+    <meta name="twitter:url" content="/typescript/tsconfig-json.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3386.5c4c909d.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>TypeScript</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/typescript/" class="sidebar-link">Disclaimer</a></li><li><a href="/typescript/getting-started-with-typescript.html" class="sidebar-link">Getting started with TypeScript</a></li><li><a href="/typescript/why-and-when-to-use-typescript.html" class="sidebar-link">Why and when to use TypeScript</a></li><li><a href="/typescript/typescript-core-types.html" class="sidebar-link">TypeScript Core Types</a></li><li><a href="/typescript/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/typescript/enums.html" class="sidebar-link">Enums</a></li><li><a href="/typescript/functions.html" class="sidebar-link">Functions</a></li><li><a href="/typescript/classes.html" class="sidebar-link">Classes</a></li><li><a href="/typescript/class-decorator.html" class="sidebar-link">Class Decorator</a></li><li><a href="/typescript/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/typescript/generics.html" class="sidebar-link">Generics</a></li><li><a href="/typescript/strict-null-checks.html" class="sidebar-link">Strict null checks</a></li><li><a href="/typescript/user-defined-type-guards.html" class="sidebar-link">User-defined Type Guards</a></li><li><a href="/typescript/typescript-basic-examples.html" class="sidebar-link">Typescript basic examples</a></li><li><a href="/typescript/importing-external-libraries.html" class="sidebar-link">Importing external libraries</a></li><li><a href="/typescript/modules-exporting-and-importing.html" class="sidebar-link">Modules - exporting and importing</a></li><li><a href="/typescript/publish-typescript-definition-files.html" class="sidebar-link">Publish TypeScript definition files</a></li><li><a href="/typescript/using-typescript-with-webpack.html" class="sidebar-link">Using TypeScript with webpack</a></li><li><a href="/typescript/mixins.html" class="sidebar-link">Mixins</a></li><li><a href="/typescript/how-to-use-a-javascript-library-without-a-type-definition-file.html" class="sidebar-link">How to use a javascript library without a type definition file</a></li><li><a href="/typescript/typescript-installing-typescript-and-running-the-typescript-compiler-tsc.html" class="sidebar-link">Typescript-installing-typescript-and-running-the-typescript-compiler-tsc</a></li><li><a href="/typescript/configure-typescript-project-to-compile-all-files-in-typescript.html" class="sidebar-link">Configure typescript project to compile all files in typescript.</a></li><li><a href="/typescript/integrating-with-build-tools.html" class="sidebar-link">Integrating with Build Tools</a></li><li><a href="/typescript/using-typescript-with-requirejs.html" class="sidebar-link">Using Typescript with RequireJS</a></li><li><a href="/typescript/typescript-with-angularjs.html" class="sidebar-link">TypeScript with AngularJS</a></li><li><a href="/typescript/typescript-with-systemjs.html" class="sidebar-link">TypeScript with SystemJS</a></li><li><a href="/typescript/using-typescript-with-react-js-native.html" class="sidebar-link">Using Typescript with React (JS &amp; native)</a></li><li><a href="/typescript/tslint-assuring-code-quality-and-consistency.html" class="sidebar-link">TSLint - assuring code quality and consistency</a></li><li><a href="/typescript/tsconfig-json.html" class="active sidebar-link">tsconfig.json</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/typescript/tsconfig-json.html#create-typescript-project-with-tsconfig-json" class="sidebar-link">Create TypeScript project with tsconfig.json</a></li><li class="sidebar-sub-header"><a href="/typescript/tsconfig-json.html#configuration-for-fewer-programming-errors" class="sidebar-link">Configuration for fewer programming errors</a></li><li class="sidebar-sub-header"><a href="/typescript/tsconfig-json.html#compileonsave" class="sidebar-link">compileOnSave</a></li><li class="sidebar-sub-header"><a href="/typescript/tsconfig-json.html#comments" class="sidebar-link">Comments</a></li><li class="sidebar-sub-header"><a href="/typescript/tsconfig-json.html#preserveconstenums" class="sidebar-link">preserveConstEnums</a></li></ul></li><li><a href="/typescript/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/typescript/unit-testing.html" class="sidebar-link">Unit Testing</a></li><li><a href="/typescript/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="tsconfig-json"><a href="#tsconfig-json" class="header-anchor">#</a> tsconfig.json</h1> <h2 id="create-typescript-project-with-tsconfig-json"><a href="#create-typescript-project-with-tsconfig-json" class="header-anchor">#</a> Create TypeScript project with tsconfig.json</h2> <p>The presence of a <strong>tsconfig.json</strong> file indicates that the current directory is the root of a TypeScript enabled project.</p> <p>Initializing a TypeScript project, or better put tsconfig.json file, can be done through the following command:</p> <div class="language-ts extra-class"><pre class="language-ts"><code>tsc <span class="token operator">--</span>init
+
+</code></pre></div><p>As of TypeScript v2.3.0 and higher this will create the following tsconfig.json by default:</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token punctuation">{</span>
+  <span class="token string">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* Basic Options */</span>                       
+    <span class="token string">&quot;target&quot;</span><span class="token operator">:</span> <span class="token string">&quot;es5&quot;</span><span class="token punctuation">,</span>                          <span class="token comment">/* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */</span>
+    <span class="token string">&quot;module&quot;</span><span class="token operator">:</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">,</span>                     <span class="token comment">/* Specify module code generation: 'commonjs', 'amd', 'system', 'umd' or 'es2015'. */</span>
+    <span class="token comment">// &quot;lib&quot;: [],                             /* Specify library files to be included in the compilation:  */</span>
+    <span class="token comment">// &quot;allowJs&quot;: true,                       /* Allow javascript files to be compiled. */</span>
+    <span class="token comment">// &quot;checkJs&quot;: true,                       /* Report errors in .js files. */</span>
+    <span class="token comment">// &quot;jsx&quot;: &quot;preserve&quot;,                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */</span>
+    <span class="token comment">// &quot;declaration&quot;: true,                   /* Generates corresponding '.d.ts' file. */</span>
+    <span class="token comment">// &quot;sourceMap&quot;: true,                     /* Generates corresponding '.map' file. */</span>
+    <span class="token comment">// &quot;outFile&quot;: &quot;./&quot;,                       /* Concatenate and emit output to single file. */</span>
+    <span class="token comment">// &quot;outDir&quot;: &quot;./&quot;,                        /* Redirect output structure to the directory. */</span>
+    <span class="token comment">// &quot;rootDir&quot;: &quot;./&quot;,                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */</span>
+    <span class="token comment">// &quot;removeComments&quot;: true,                /* Do not emit comments to output. */</span>
+    <span class="token comment">// &quot;noEmit&quot;: true,                        /* Do not emit outputs. */</span>
+    <span class="token comment">// &quot;importHelpers&quot;: true,                 /* Import emit helpers from 'tslib'. */</span>
+    <span class="token comment">// &quot;downlevelIteration&quot;: true,            /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */</span>
+    <span class="token comment">// &quot;isolatedModules&quot;: true,               /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */</span>
+                                              
+    <span class="token comment">/* Strict Type-Checking Options */</span>        
+    <span class="token string">&quot;strict&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>                            <span class="token comment">/* Enable all strict type-checking options. */</span>
+    <span class="token comment">// &quot;noImplicitAny&quot;: true,                 /* Raise error on expressions and declarations with an implied 'any' type. */</span>
+    <span class="token comment">// &quot;strictNullChecks&quot;: true,              /* Enable strict null checks. */</span>
+    <span class="token comment">// &quot;noImplicitThis&quot;: true,                /* Raise error on 'this' expressions with an implied 'any' type. */</span>
+    <span class="token comment">// &quot;alwaysStrict&quot;: true,                  /* Parse in strict mode and emit &quot;use strict&quot; for each source file. */</span>
+                                              
+    <span class="token comment">/* Additional Checks */</span>                   
+    <span class="token comment">// &quot;noUnusedLocals&quot;: true,                /* Report errors on unused locals. */</span>
+    <span class="token comment">// &quot;noUnusedParameters&quot;: true,            /* Report errors on unused parameters. */</span>
+    <span class="token comment">// &quot;noImplicitReturns&quot;: true,             /* Report error when not all code paths in function return a value. */</span>
+    <span class="token comment">// &quot;noFallthroughCasesInSwitch&quot;: true,    /* Report errors for fallthrough cases in switch statement. */</span>
+                                              
+    <span class="token comment">/* Module Resolution Options */</span>           
+    <span class="token comment">// &quot;moduleResolution&quot;: &quot;node&quot;,            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */</span>
+    <span class="token comment">// &quot;baseUrl&quot;: &quot;./&quot;,                       /* Base directory to resolve non-absolute module names. */</span>
+    <span class="token comment">// &quot;paths&quot;: {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */</span>
+    <span class="token comment">// &quot;rootDirs&quot;: [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */</span>
+    <span class="token comment">// &quot;typeRoots&quot;: [],                       /* List of folders to include type definitions from. */</span>
+    <span class="token comment">// &quot;types&quot;: [],                           /* Type declaration files to be included in compilation. */</span>
+    <span class="token comment">// &quot;allowSyntheticDefaultImports&quot;: true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */</span>
+                                              
+    <span class="token comment">/* Source Map Options */</span>                  
+    <span class="token comment">// &quot;sourceRoot&quot;: &quot;./&quot;,                    /* Specify the location where debugger should locate TypeScript files instead of source locations. */</span>
+    <span class="token comment">// &quot;mapRoot&quot;: &quot;./&quot;,                       /* Specify the location where debugger should locate map files instead of generated locations. */</span>
+    <span class="token comment">// &quot;inlineSourceMap&quot;: true,               /* Emit a single file with source maps instead of having a separate file. */</span>
+    <span class="token comment">// &quot;inlineSources&quot;: true,                 /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */</span>
+                                              
+    <span class="token comment">/* Experimental Options */</span>                
+    <span class="token comment">// &quot;experimentalDecorators&quot;: true,        /* Enables experimental support for ES7 decorators. */</span>
+    <span class="token comment">// &quot;emitDecoratorMetadata&quot;: true,         /* Enables experimental support for emitting type metadata for decorators. */</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Most, if not all, options are generated automatically with only the bare necessities left uncommented.</p> <p>Older versions of TypeScript, like for example v2.0.x and lower, would generate a tsconfig.json like this:</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token punctuation">{</span>
+    <span class="token string">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;module&quot;</span><span class="token operator">:</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;target&quot;</span><span class="token operator">:</span> <span class="token string">&quot;es5&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;noImplicitAny&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;sourceMap&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="configuration-for-fewer-programming-errors"><a href="#configuration-for-fewer-programming-errors" class="header-anchor">#</a> Configuration for fewer programming errors</h2> <p>There are very good configurations to force typings and get more helpful errors which are not activated by default.</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token punctuation">{</span>
+  <span class="token string">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+
+    <span class="token string">&quot;alwaysStrict&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Parse in strict mode and emit &quot;use strict&quot; for each source file. </span>
+
+    <span class="token comment">// If you have wrong casing in referenced files e.g. the filename is Global.ts and you have a /// &lt;reference path=&quot;global.ts&quot; /&gt; to reference this file, then this can cause to unexpected errors. Visite: http://stackoverflow.com/questions/36628612/typescript-transpiler-casing-issue</span>
+    <span class="token string">&quot;forceConsistentCasingInFileNames&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Disallow inconsistently-cased references to the same file.</span>
+
+    <span class="token comment">// &quot;allowUnreachableCode&quot;: false, // Do not report errors on unreachable code. (Default: False)</span>
+    <span class="token comment">// &quot;allowUnusedLabels&quot;: false, // Do not report errors on unused labels. (Default: False)</span>
+
+    <span class="token string">&quot;noFallthroughCasesInSwitch&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Report errors for fall through cases in switch statement.</span>
+    <span class="token string">&quot;noImplicitReturns&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Report error when not all code paths in function return a value.</span>
+
+    <span class="token string">&quot;noUnusedParameters&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Report errors on unused parameters.</span>
+    <span class="token string">&quot;noUnusedLocals&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Report errors on unused locals.</span>
+
+    <span class="token string">&quot;noImplicitAny&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Raise error on expressions and declarations with an implied &quot;any&quot; type.</span>
+    <span class="token string">&quot;noImplicitThis&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// Raise error on this expressions with an implied &quot;any&quot; type.</span>
+
+    <span class="token string">&quot;strictNullChecks&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// The null and undefined values are not in the domain of every type and are only assignable to themselves and any.</span>
+
+    <span class="token comment">// To enforce this rules, add this configuration.</span>
+    <span class="token string">&quot;noEmitOnError&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>     <span class="token comment">// Do not emit outputs if any errors were reported.</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Not enough? If you are a hard coder and want more, then you may be interested to check your TypeScript files with tslint before compiling it with tsc. Check how to <a href="http://stackoverflow.com/documentation/typescript/7457/enforcing-code-style-guideline-with-tslint/25319/configuration-for-fewer-programming-errors#t=201611030920457805689" target="_blank" rel="noopener noreferrer">configure tslint for even stricter code<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <h2 id="compileonsave"><a href="#compileonsave" class="header-anchor">#</a> compileOnSave</h2> <p>Setting a top-level property <code>compileOnSave</code> signals to the IDE to generate all files for a given <strong>tsconfig.json</strong> upon saving.</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token punctuation">{</span>
+    <span class="token string">&quot;compileOnSave&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;exclude&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This feature is available since TypeScript 1.8.4 and onward, but needs to be directly supported by IDE's. Currently, examples of supported IDE's are:</p> <ul><li>Visual Studio 2015 <a href="https://github.com/Microsoft/TypeScript/issues/6782" target="_blank" rel="noopener noreferrer">with Update 3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://blog.jetbrains.com/webstorm/2016/03/how-to-compile-typescript-in-webstorm/" target="_blank" rel="noopener noreferrer">JetBrains WebStorm<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>Atom <a href="https://github.com/TypeStrong/atom-typescript/blob/master/docs/tsconfig.md#compileonsave" target="_blank" rel="noopener noreferrer">with atom-typescript<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul> <h2 id="comments"><a href="#comments" class="header-anchor">#</a> Comments</h2> <p>A tsconfig.json file can contain both line and block comments, using the same rules as ECMAScript.</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token comment">//Leading comment</span>
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token comment">//this is a line comment</span>
+        <span class="token string">&quot;module&quot;</span><span class="token operator">:</span> <span class="token string">&quot;commonjs&quot;</span><span class="token punctuation">,</span> <span class="token comment">//eol line comment</span>
+        <span class="token string">&quot;target&quot;</span> <span class="token comment">/*inline block*/</span> <span class="token operator">:</span> <span class="token string">&quot;es5&quot;</span><span class="token punctuation">,</span>
+        <span class="token comment">/* This is a
+        block
+        comment */</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">/* trailing comment */</span>
+
+</code></pre></div><h2 id="preserveconstenums"><a href="#preserveconstenums" class="header-anchor">#</a> preserveConstEnums</h2> <p>Typescript supports costant enumerables, declared through <code>const enum</code>.</p> <p>This is usually just syntax sugar as the costant enums are inlined in compiled JavaScript.</p> <p>For instance the following code</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">const</span> <span class="token keyword">enum</span> Tristate <span class="token punctuation">{</span>
+    True<span class="token punctuation">,</span>
+    False<span class="token punctuation">,</span>
+    Unknown
+<span class="token punctuation">}</span>
+
+<span class="token keyword">var</span> something <span class="token operator">=</span> Tristate<span class="token punctuation">.</span>True<span class="token punctuation">;</span>
+
+</code></pre></div><p>compiles to</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">var</span> something <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Although the perfomance benefit from inlining, you may prefer to keep enums even if costant (ie: you may wish readability on development code), to do this you have to set in <strong>tsconfig.json</strong> the <code>preserveConstEnums</code> clausole into the <code>compilerOptions</code> to <code>true</code>.</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token punctuation">{</span>
+    <span class="token string">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;preserveConstEnums&quot;</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;exclude&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>By this way the previous example would be compiled as any other enums, as shown in following snippet.</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">var</span> Tristate<span class="token punctuation">;</span>
+<span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">Tristate</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;True&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;True&quot;</span><span class="token punctuation">;</span>
+    Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;False&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;False&quot;</span><span class="token punctuation">;</span>
+    Tristate<span class="token punctuation">[</span>Tristate<span class="token punctuation">[</span><span class="token string">&quot;Unknown&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;Unknown&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Tristate <span class="token operator">||</span> <span class="token punctuation">(</span>Tristate <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> something <span class="token operator">=</span> Tristate<span class="token punctuation">.</span>True
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>Uses JSON file format</li> <li>Can also accept JavaScript style comments</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <h3 id="overview"><a href="#overview" class="header-anchor">#</a> Overview</h3> <p>The presence of a tsconfig.json file in a directory indicates that the directory is the root of a TypeScript project. The tsconfig.json file specifies the root files and the compiler options required to compile the project.</p> <h3 id="using-tsconfig-json"><a href="#using-tsconfig-json" class="header-anchor">#</a> Using tsconfig.json</h3> <ul><li>By invoking tsc with no input files, in which case the compiler searches for the tsconfig.json file starting in the current directory and continuing up the parent directory chain.
+</li><li>By invoking tsc with no input files and a --project (or just -p) command line option that specifies the path of a directory containing a tsconfig.json file.
+When input files are specified on the command line, tsconfig.json files are</li></ul> <h3 id="details"><a href="#details" class="header-anchor">#</a> Details</h3> <p>The <code>&quot;compilerOptions&quot;</code> property can be omitted, in which case the compiler’s defaults are used. See our full list of supported <a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html" target="_blank" rel="noopener noreferrer">Compiler Options<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <p>If no <code>&quot;files&quot;</code> property is present in a tsconfig.json, the compiler defaults to including all TypeScript (*.ts or *.tsx) files in the containing directory and subdirectories. When a &quot;files&quot; property is present, only the specified files are included.</p> <p>If the <code>&quot;exclude&quot;</code> property is specified, the compiler includes all TypeScript (*.ts or *.tsx) files in the containing directory and subdirectories except for those files or folders that are excluded.</p> <p>The <code>&quot;files&quot;</code> property cannot be used in conjunction with the &quot;exclude&quot; property. If both are specified then the &quot;files&quot; property takes precedence.</p> <p>Any files that are referenced by those specified in the <code>&quot;files&quot;</code> property are also included. Similarly, if a file B.ts is referenced by another file A.ts, then B.ts cannot be excluded unless the referencing file A.ts is also specified in the &quot;exclude&quot; list.</p> <p>A <code>tsconfig.json</code> file is permitted to be completely empty, which compiles all files in the containing directory and subdirectories with the default compiler options.</p> <p>Compiler options specified on the command line override those specified in the tsconfig.json file.</p> <h3 id="schema"><a href="#schema" class="header-anchor">#</a> Schema</h3> <p>Schema can be found at: <a href="http://json.schemastore.org/tsconfig" target="_blank" rel="noopener noreferrer">http://json.schemastore.org/tsconfig<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/typescript/tsconfig-json.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/typescript/tslint-assuring-code-quality-and-consistency.html" class="prev">
+        TSLint - assuring code quality and consistency
+      </a></span> <span class="next"><a href="/typescript/debugging.html">
+        Debugging
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3386.5c4c909d.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring - ApplicationContext Configuration</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Autowiring, Bootstrapping the ApplicationContext, Java Configuration, Xml Configuration">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Spring - ApplicationContext Configuration">
+    <meta property="og:description" content="Autowiring, Bootstrapping the ApplicationContext, Java Configuration, Xml Configuration">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/spring/applicationcontext-configuration.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Spring - ApplicationContext Configuration">
+    <meta name="twitter:description" content="Autowiring, Bootstrapping the ApplicationContext, Java Configuration, Xml Configuration">
+    <meta name="twitter:url" content="/spring/applicationcontext-configuration.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3194.35b7d85a.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Spring Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/spring/" class="sidebar-link">Disclaimer</a></li><li><a href="/spring/getting-started-with-spring.html" class="sidebar-link">Getting started with spring</a></li><li><a href="/spring/spring-core.html" class="sidebar-link">Spring Core</a></li><li><a href="/spring/spring-expression-language-spel.html" class="sidebar-link">Spring Expression Language (SpEL)</a></li><li><a href="/spring/obtaining-a-sqlrowset-from-simplejdbccall.html" class="sidebar-link">Obtaining a SqlRowSet from SimpleJdbcCall</a></li><li><a href="/spring/creating-and-using-beans.html" class="sidebar-link">Creating and using beans</a></li><li><a href="/spring/bean-scopes.html" class="sidebar-link">Bean scopes</a></li><li><a href="/spring/conditional-bean-registration-in-spring.html" class="sidebar-link">Conditional bean registration in Spring</a></li><li><a href="/spring/spring-jsr-303-bean-validation.html" class="sidebar-link">Spring JSR 303 Bean Validation</a></li><li><a href="/spring/applicationcontext-configuration.html" class="active sidebar-link">ApplicationContext Configuration</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/spring/applicationcontext-configuration.html#autowiring" class="sidebar-link">Autowiring</a></li><li class="sidebar-sub-header"><a href="/spring/applicationcontext-configuration.html#bootstrapping-the-applicationcontext" class="sidebar-link">Bootstrapping the ApplicationContext</a></li><li class="sidebar-sub-header"><a href="/spring/applicationcontext-configuration.html#java-configuration" class="sidebar-link">Java Configuration</a></li><li class="sidebar-sub-header"><a href="/spring/applicationcontext-configuration.html#xml-configuration" class="sidebar-link">Xml Configuration</a></li></ul></li><li><a href="/spring/resttemplate.html" class="sidebar-link">RestTemplate</a></li><li><a href="/spring/task-execution-and-scheduling.html" class="sidebar-link">Task Execution and Scheduling</a></li><li><a href="/spring/spring-lazy-initialization.html" class="sidebar-link">Spring Lazy Initialization</a></li><li><a href="/spring/property-source.html" class="sidebar-link">Property Source</a></li><li><a href="/spring/dependency-injection-di-and-inversion-of-control-ioc.html" class="sidebar-link">Dependency Injection (DI) and Inversion of Control (IoC)</a></li><li><a href="/spring/jdbctemplate.html" class="sidebar-link">JdbcTemplate</a></li><li><a href="/spring/soap-ws-consumption.html" class="sidebar-link">SOAP WS Consumption</a></li><li><a href="/spring/spring-profile.html" class="sidebar-link">Spring profile</a></li><li><a href="/spring/understanding-the-dispatcher-servlet-xml.html" class="sidebar-link">Understanding the dispatcher-servlet.xml</a></li><li><a href="/spring/getting-started-with-spring-mvc.html" class="sidebar-link">Getting started with spring-mvc</a></li><li><a href="/spring/spring-mvc-with-annotations.html" class="sidebar-link">Spring-MVC with annotations</a></li><li><a href="/spring/spring-mvc-validation.html" class="sidebar-link">Spring MVC Validation</a></li><li><a href="/spring/file-upload.html" class="sidebar-link">File Upload</a></li><li><a href="/spring/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/spring/global-exception-handling.html" class="sidebar-link">Global Exception Handling</a></li><li><a href="/spring/getting-started-with-spring-boot.html" class="sidebar-link">Getting started with spring-boot</a></li><li><a href="/spring/installing-the-spring-boot-cli.html" class="sidebar-link">Installing the Spring Boot CLI</a></li><li><a href="/spring/controllers.html" class="sidebar-link">Controllers</a></li><li><a href="/spring/package-scanning.html" class="sidebar-link">Package scanning</a></li><li><a href="/spring/rest-services.html" class="sidebar-link">REST Services</a></li><li><a href="/spring/create-and-use-of-multiple-application-properties-files.html" class="sidebar-link">Create and Use of multiple application.properties files</a></li><li><a href="/spring/threadpooltaskexecutor-configuration-and-usage.html" class="sidebar-link">ThreadPoolTaskExecutor: configuration and usage</a></li><li><a href="/spring/fully-responsive-spring-boot-web-application-with-jhipster.html" class="sidebar-link">Fully-Responsive Spring Boot Web Application with JHipster</a></li><li><a href="/spring/connecting-a-spring-boot-application-to-mysql.html" class="sidebar-link">Connecting a spring-boot application to MySQL</a></li><li><a href="/spring/caching-with-redis-using-spring-boot-for-mongodb.html" class="sidebar-link">Caching with Redis Using Spring Boot for MongoDB</a></li><li><a href="/spring/deploying-sample-application-using-spring-boot-on-amazon-elastic-beanstalk.html" class="sidebar-link">Deploying Sample application using Spring-boot on Amazon Elastic Beanstalk</a></li><li><a href="/spring/testing-in-spring-boot.html" class="sidebar-link">Testing in Spring Boot</a></li><li><a href="/spring/spring-boot-hibernate-web-ui-thymeleaf.html" class="sidebar-link">Spring boot + Hibernate + Web UI (Thymeleaf)</a></li><li><a href="/spring/spring-boot-hibernate-rest-integration.html" class="sidebar-link">Spring Boot- Hibernate-REST Integration</a></li><li><a href="/spring/spring-boot-microservice-with-jpa.html" class="sidebar-link">Spring-Boot Microservice with JPA</a></li><li><a href="/spring/spring-boot-jpa-rest.html" class="sidebar-link">Spring Boot + JPA + REST</a></li><li><a href="/spring/spring-boot-jdbc.html" class="sidebar-link">Spring-Boot + JDBC</a></li><li><a href="/spring/spring-boot-jpa-mongodb.html" class="sidebar-link">Spring boot + JPA + mongoDB</a></li><li><a href="/spring/spring-boot-spring-data-elasticsearch.html" class="sidebar-link">Spring Boot + Spring Data Elasticsearch</a></li><li><a href="/spring/spring-boot-spring-data-jpa.html" class="sidebar-link">Spring boot + Spring Data JPA</a></li><li><a href="/spring/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="applicationcontext-configuration"><a href="#applicationcontext-configuration" class="header-anchor">#</a> ApplicationContext Configuration</h1> <h2 id="autowiring"><a href="#autowiring" class="header-anchor">#</a> Autowiring</h2> <p>Autowiring is done using a <strong>sterotype</strong> annotation to specify what classes are going to be beans in the <code>ApplicationContext</code>, and using the <code>Autowired</code> and <code>Value</code> annotations to specify bean dependencies.  The unique part of autowiring is that there is no external <code>ApplicationContext</code> definition, as it is all done within the classes that are the beans themselves.</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Component</span> <span class="token comment">// The annotation that specifies to include this as a bean</span>
+           <span class="token comment">// in the ApplicationContext</span>
+<span class="token keyword">class</span> <span class="token class-name">Book</span> <span class="token punctuation">{</span>
+    
+    <span class="token annotation punctuation">@Autowired</span> <span class="token comment">// The annotation that wires the below defined Author</span>
+               <span class="token comment">// instance into this bean</span>
+    <span class="token class-name">Author</span> author<span class="token punctuation">;</span>
+
+    <span class="token class-name">String</span> title <span class="token operator">=</span> <span class="token string">&quot;It&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token class-name">Author</span> <span class="token function">getAuthor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> author<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token class-name">String</span> <span class="token function">getTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> title<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Component</span> <span class="token comment">// The annotation that specifies to include</span>
+           <span class="token comment">// this as a bean in the ApplicationContext</span>
+<span class="token keyword">class</span> <span class="token class-name">Author</span> <span class="token punctuation">{</span>
+    <span class="token class-name">String</span> firstName <span class="token operator">=</span> <span class="token string">&quot;Steven&quot;</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> lastName <span class="token operator">=</span> <span class="token string">&quot;King&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token class-name">String</span> <span class="token function">getFirstName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> firstName<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token class-name">String</span> <span class="token function">getLastName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> lastName<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="bootstrapping-the-applicationcontext"><a href="#bootstrapping-the-applicationcontext" class="header-anchor">#</a> Bootstrapping the ApplicationContext</h2> <h3 id="java-config"><a href="#java-config" class="header-anchor">#</a> Java Config</h3> <p>The configuration class needs only to be a class that is on the classpath of your application and visible to your applications main class.</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token class-name">AnnotationConfigApplicationContext</span> appContext <span class="token operator">=</span>
+            <span class="token keyword">new</span> <span class="token class-name">AnnotationConfigApplicationContext</span><span class="token punctuation">(</span><span class="token class-name">MyConfig</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// ready to retrieve beans from appContext, such as myObject.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">class</span> <span class="token class-name">MyConfig</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token class-name">MyObject</span> <span class="token function">myObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ...configure myObject...</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// ...define more beans...</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="xml-config"><a href="#xml-config" class="header-anchor">#</a> Xml Config</h3> <p>The configuration xml file needs only be on the classpath of your application.</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token class-name">ClassPathXmlApplicationContext</span> appContext <span class="token operator">=</span>
+            <span class="token keyword">new</span> <span class="token class-name">ClassPathXmlApplicationContext</span><span class="token punctuation">(</span><span class="token string">&quot;applicationContext.xml&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// ready to retrieve beans from appContext, such as myObject.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">&quot;1.0&quot;</span> encoding<span class="token operator">=</span><span class="token string">&quot;UTF-8&quot;</span><span class="token operator">?</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> applicationContext<span class="token punctuation">.</span>xml <span class="token operator">--</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>beans xmlns<span class="token operator">=</span><span class="token string">&quot;http://www.springframework.org/schema/beans&quot;</span>
+    xmlns<span class="token operator">:</span>xsi<span class="token operator">=</span><span class="token string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    xsi<span class="token operator">:</span>schemaLocation<span class="token operator">=</span>&quot;http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans
+                        http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans<span class="token operator">/</span>spring<span class="token operator">-</span>beans<span class="token punctuation">.</span>xsd&quot;<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;myObject&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;com.example.MyObject&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>configure myObject<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">&gt;</span>
+
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>define more beans<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token operator">--</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>beans<span class="token operator">&gt;</span>
+
+</code></pre></div><h3 id="autowiring-2"><a href="#autowiring-2" class="header-anchor">#</a> Autowiring</h3> <p>Autowiring needs to know which base packages to scan for annotated beans (<code>@Component</code>).  This is specified via the <code>#scan(String...)</code> method.</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">class</span> <span class="token class-name">MyApp</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token class-name">AnnotationConfigApplicationContext</span> appContext <span class="token operator">=</span>
+            <span class="token keyword">new</span> <span class="token class-name">AnnotationConfigApplicationContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        appContext<span class="token punctuation">.</span><span class="token function">scan</span><span class="token punctuation">(</span><span class="token string">&quot;com.example&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        appContext<span class="token punctuation">.</span><span class="token function">refresh</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// ready to retrieve beans from appContext, such as myObject.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// assume this class is in the com.example package.</span>
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">class</span> <span class="token class-name">MyObject</span> <span class="token punctuation">{</span>
+    <span class="token comment">// ...myObject definition...</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="java-configuration"><a href="#java-configuration" class="header-anchor">#</a> Java Configuration</h2> <p>Java configuration is typically done by applying the <code>@Configuration</code> annotation to a class to suggest that a class contains bean definitions.  The bean definitions are specified by applying the <code>@Bean</code> annotation to a method that returns an object.</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span> <span class="token comment">// This annotation tells the ApplicationContext that this class</span>
+               <span class="token comment">// contains bean definitions.</span>
+<span class="token keyword">class</span> <span class="token class-name">AppConfig</span> <span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * An Author created with the default constructor
+     * setting no properties
+     */</span>
+    <span class="token annotation punctuation">@Bean</span> <span class="token comment">// This annotation marks a method that defines a bean </span>
+    <span class="token class-name">Author</span> <span class="token function">author1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Author</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * An Author created with the constructor that initializes the 
+     * name fields
+     */</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token class-name">Author</span> <span class="token function">author2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Author</span><span class="token punctuation">(</span><span class="token string">&quot;Steven&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;King&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * An Author created with the default constructor, but  
+     * then uses the property setters to specify name fields
+     */</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token class-name">Author</span> <span class="token function">author3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Author</span> author <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Author</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        author<span class="token punctuation">.</span><span class="token function">setFirstName</span><span class="token punctuation">(</span><span class="token string">&quot;George&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        author<span class="token punctuation">.</span><span class="token function">setLastName</span><span class="token punctuation">(</span><span class="token string">&quot;Martin&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> author<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * A Book created referring to author2 (created above) via
+     * a constructor argument.  The dependency is fulfilled by
+     * invoking the method as plain Java.
+     */</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token class-name">Book</span> <span class="token function">book1</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Book</span><span class="token punctuation">(</span><span class="token function">author2</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;It&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * A Book created referring to author3 (created above) via
+     * a property setter.  The dependency is fulfilled by
+     * invoking the method as plain Java.
+     */</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token class-name">Book</span> <span class="token function">book2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Book</span> book <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Book</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        book<span class="token punctuation">.</span><span class="token function">setAuthor</span><span class="token punctuation">(</span><span class="token function">author3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        book<span class="token punctuation">.</span><span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token string">&quot;A Game of Thrones&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> book<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">// The classes that are being initialized and wired above...</span>
+<span class="token keyword">class</span> <span class="token class-name">Book</span> <span class="token punctuation">{</span> <span class="token comment">// assume package org.springframework.example</span>
+    <span class="token class-name">Author</span> author<span class="token punctuation">;</span>
+    <span class="token class-name">String</span> title<span class="token punctuation">;</span>
+    
+    <span class="token class-name">Book</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// default constructor</span>
+    <span class="token class-name">Book</span><span class="token punctuation">(</span><span class="token class-name">Author</span> author<span class="token punctuation">,</span> <span class="token class-name">String</span> title<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>author <span class="token operator">=</span> author<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>title<span class="token operator">=</span> title<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token class-name">Author</span> <span class="token function">getAuthor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> author<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token class-name">String</span> <span class="token function">getTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> title<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">setAuthor</span><span class="token punctuation">(</span><span class="token class-name">Author</span> author<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>author <span class="token operator">=</span> author<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token class-name">String</span> title<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>title<span class="token operator">=</span> title<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Author</span> <span class="token punctuation">{</span> <span class="token comment">// assume package org.springframework.example</span>
+    <span class="token class-name">String</span> firstName<span class="token punctuation">;</span>
+    <span class="token class-name">String</span> lastName<span class="token punctuation">;</span>
+
+    <span class="token class-name">Author</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// default constructor</span>
+    <span class="token class-name">Author</span><span class="token punctuation">(</span><span class="token class-name">String</span> firstName<span class="token punctuation">,</span> <span class="token class-name">String</span> lastName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> firstName<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> lastName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token class-name">String</span> <span class="token function">getFirstName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> firstName<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token class-name">String</span> <span class="token function">getLastName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> lastName<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">setFirstName</span><span class="token punctuation">(</span><span class="token class-name">String</span> firstName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> firstName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">setLastName</span><span class="token punctuation">(</span><span class="token class-name">String</span> lastName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> lastName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="xml-configuration"><a href="#xml-configuration" class="header-anchor">#</a> Xml Configuration</h2> <p>Xml configuration is typically done by defining beans within an xml file, using Spring's specific <code>beans</code> schema.  Under the root <code>beans</code> element, typical bean definition would be done using the <code>bean</code> subelement.</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">&quot;1.0&quot;</span> encoding<span class="token operator">=</span><span class="token string">&quot;UTF-8&quot;</span><span class="token operator">?</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>beans xmlns<span class="token operator">=</span><span class="token string">&quot;http://www.springframework.org/schema/beans&quot;</span>
+    xmlns<span class="token operator">:</span>xsi<span class="token operator">=</span><span class="token string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+    xsi<span class="token operator">:</span>schemaLocation<span class="token operator">=</span>&quot;http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans
+                        http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>org<span class="token operator">/</span>schema<span class="token operator">/</span>beans<span class="token operator">/</span>spring<span class="token operator">-</span>beans<span class="token punctuation">.</span>xsd&quot;<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token class-name">An</span> <span class="token class-name">Author</span> created <span class="token keyword">with</span> the <span class="token keyword">default</span> constructor
+         setting no properties <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;author1&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;org.springframework.example.Author&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token class-name">An</span> <span class="token class-name">Author</span> created <span class="token keyword">with</span> the constructor that initializes the 
+         name fields <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;author2&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;org.springframework.example.Author&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>constructor<span class="token operator">-</span>arg index<span class="token operator">=</span><span class="token string">&quot;0&quot;</span> value<span class="token operator">=</span><span class="token string">&quot;Steven&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>constructor<span class="token operator">-</span>arg index<span class="token operator">=</span><span class="token string">&quot;1&quot;</span> value<span class="token operator">=</span><span class="token string">&quot;King&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">&gt;</span>
+
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token class-name">An</span> <span class="token class-name">Author</span> created <span class="token keyword">with</span> the <span class="token keyword">default</span> constructor<span class="token punctuation">,</span> but  
+         then <span class="token keyword">uses</span> the property setters <span class="token keyword">to</span> specify name fields <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;author3&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;org.springframework.example.Author&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">&quot;firstName&quot;</span> value<span class="token operator">=</span><span class="token string">&quot;George&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">&quot;lastName&quot;</span> value<span class="token operator">=</span><span class="token string">&quot;Martin&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">&gt;</span>
+
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token class-name">A</span> <span class="token class-name">Book</span> created referring <span class="token keyword">to</span> author2 <span class="token punctuation">(</span>created above<span class="token punctuation">)</span> via
+         a constructor argument <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;book1&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;org.springframework.example.Book&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>constructor<span class="token operator">-</span>arg index<span class="token operator">=</span><span class="token string">&quot;0&quot;</span> ref<span class="token operator">=</span><span class="token string">&quot;author2&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>constructor<span class="token operator">-</span>arg index<span class="token operator">=</span><span class="token string">&quot;1&quot;</span> value<span class="token operator">=</span><span class="token string">&quot;It&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">&gt;</span>
+
+    <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> <span class="token class-name">A</span> <span class="token class-name">Book</span> created referring <span class="token keyword">to</span> author3 <span class="token punctuation">(</span>created above<span class="token punctuation">)</span> via
+         a property setter <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;book1&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;org.springframework.example.Book&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">&quot;author&quot;</span> ref<span class="token operator">=</span><span class="token string">&quot;author3&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">&quot;title&quot;</span> value<span class="token operator">=</span><span class="token string">&quot;A Game of Thrones&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>beans<span class="token operator">&gt;</span>
+
+</code></pre></div><div class="language-java extra-class"><pre class="language-java"><code><span class="token comment">// The classes that are being initialized and wired above...</span>
+<span class="token keyword">class</span> <span class="token class-name">Book</span> <span class="token punctuation">{</span> <span class="token comment">// assume package org.springframework.example</span>
+    <span class="token class-name">Author</span> author<span class="token punctuation">;</span>
+    <span class="token class-name">String</span> title<span class="token punctuation">;</span>
+    
+    <span class="token class-name">Book</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// default constructor</span>
+    <span class="token class-name">Book</span><span class="token punctuation">(</span><span class="token class-name">Author</span> author<span class="token punctuation">,</span> <span class="token class-name">String</span> title<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>author <span class="token operator">=</span> author<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>title<span class="token operator">=</span> title<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token class-name">Author</span> <span class="token function">getAuthor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> author<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token class-name">String</span> <span class="token function">getTitle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> title<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">setAuthor</span><span class="token punctuation">(</span><span class="token class-name">Author</span> author<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>author <span class="token operator">=</span> author<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">setTitle</span><span class="token punctuation">(</span><span class="token class-name">String</span> title<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>title<span class="token operator">=</span> title<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Author</span> <span class="token punctuation">{</span> <span class="token comment">// assume package org.springframework.example</span>
+    <span class="token class-name">String</span> firstName<span class="token punctuation">;</span>
+    <span class="token class-name">String</span> lastName<span class="token punctuation">;</span>
+
+    <span class="token class-name">Author</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token comment">// default constructor</span>
+    <span class="token class-name">Author</span><span class="token punctuation">(</span><span class="token class-name">String</span> firstName<span class="token punctuation">,</span> <span class="token class-name">String</span> lastName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> firstName<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> lastName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token class-name">String</span> <span class="token function">getFirstName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> firstName<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token class-name">String</span> <span class="token function">getLastName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> lastName<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">setFirstName</span><span class="token punctuation">(</span><span class="token class-name">String</span> firstName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> firstName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">void</span> <span class="token function">setLastName</span><span class="token punctuation">(</span><span class="token class-name">String</span> lastName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> lastName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Spring has made it so that configuring an <code>ApplicationContext</code> is extremely flexible.  There are numerous ways to apply each type of configuration, and they can all be mixed and matched together nicely.</p> <p><strong>Java configuration</strong> is a form of <strong>explicit</strong> configuration.  A <code>@Configuration</code> annotated class is used to specify the beans that will be a part of the <code>ApplicationContext</code>, as well as define and wire the dependencies of each bean.</p> <p><strong>Xml configuration</strong> is a form of <strong>explicit</strong> configuration.  A specific xml schema is used to define the beans that will be a part of the <code>ApplicationContext</code>.  This same schema is used to define and wire the dependencies of each bean.</p> <p><strong>Autowiring</strong> is a form of <strong>automatic</strong> configuration.  Certain annotations are used in class definitions to establish what beans will be a part of the <code>ApplicationContext</code>, and other annotations are used to wire the dependencies of these beans.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/spring/applicationcontext-configuration.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/spring/spring-jsr-303-bean-validation.html" class="prev">
+        Spring JSR 303 Bean Validation
+      </a></span> <span class="next"><a href="/spring/resttemplate.html">
+        RestTemplate
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3194.35b7d85a.js" defer></script>
+  </body>
+</html>

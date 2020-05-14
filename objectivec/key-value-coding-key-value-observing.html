@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Objective C - Key Value Coding / Key Value Observing</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Most Common Real Life Key Value Coding Example, Key Value Observing, Querying KVC Data, Collection Operators">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Objective C - Key Value Coding / Key Value Observing">
+    <meta property="og:description" content="Most Common Real Life Key Value Coding Example, Key Value Observing, Querying KVC Data, Collection Operators">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/objectivec/key-value-coding-key-value-observing.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Objective C - Key Value Coding / Key Value Observing">
+    <meta name="twitter:description" content="Most Common Real Life Key Value Coding Example, Key Value Observing, Querying KVC Data, Collection Operators">
+    <meta name="twitter:url" content="/objectivec/key-value-coding-key-value-observing.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2288.15bad417.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Objective-C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/objectivec/" class="sidebar-link">Disclaimer</a></li><li><a href="/objectivec/getting-started-with-objective-c-language.html" class="sidebar-link">Getting started with Objective-C Language</a></li><li><a href="/objectivec/basic-data-types.html" class="sidebar-link">Basic Data Types</a></li><li><a href="/objectivec/enums.html" class="sidebar-link">Enums</a></li><li><a href="/objectivec/structs.html" class="sidebar-link">Structs</a></li><li><a href="/objectivec/classes-and-objects.html" class="sidebar-link">Classes  and Objects</a></li><li><a href="/objectivec/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/objectivec/methods.html" class="sidebar-link">Methods</a></li><li><a href="/objectivec/properties.html" class="sidebar-link">Properties</a></li><li><a href="/objectivec/random-integer.html" class="sidebar-link">Random Integer</a></li><li><a href="/objectivec/bool-bool-boolean-nscfboolean.html" class="sidebar-link">BOOL / bool / Boolean / NSCFBoolean</a></li><li><a href="/objectivec/continue-and-break.html" class="sidebar-link">Continue and Break!</a></li><li><a href="/objectivec/key-value-coding-key-value-observing.html" class="active sidebar-link">Key Value Coding / Key Value Observing</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/objectivec/key-value-coding-key-value-observing.html#most-common-real-life-key-value-coding-example" class="sidebar-link">Most Common Real Life Key Value Coding Example</a></li><li class="sidebar-sub-header"><a href="/objectivec/key-value-coding-key-value-observing.html#key-value-observing" class="sidebar-link">Key Value Observing</a></li><li class="sidebar-sub-header"><a href="/objectivec/key-value-coding-key-value-observing.html#querying-kvc-data" class="sidebar-link">Querying KVC Data</a></li><li class="sidebar-sub-header"><a href="/objectivec/key-value-coding-key-value-observing.html#collection-operators" class="sidebar-link">Collection Operators</a></li></ul></li><li><a href="/objectivec/nsstring.html" class="sidebar-link">NSString</a></li><li><a href="/objectivec/nsarray.html" class="sidebar-link">NSArray</a></li><li><a href="/objectivec/nsmutablearray.html" class="sidebar-link">NSMutableArray</a></li><li><a href="/objectivec/nsdictionary.html" class="sidebar-link">NSDictionary</a></li><li><a href="/objectivec/nsmutabledictionary.html" class="sidebar-link">NSMutableDictionary</a></li><li><a href="/objectivec/nsdate.html" class="sidebar-link">NSDate</a></li><li><a href="/objectivec/nsurl.html" class="sidebar-link">NSURL</a></li><li><a href="/objectivec/nsurl-send-a-post-request.html" class="sidebar-link">NSUrl send a post request</a></li><li><a href="/objectivec/nsdata.html" class="sidebar-link">NSData</a></li><li><a href="/objectivec/nspredicate.html" class="sidebar-link">NSPredicate</a></li><li><a href="/objectivec/nsregularexpression.html" class="sidebar-link">NSRegularExpression</a></li><li><a href="/objectivec/nsjsonserialization.html" class="sidebar-link">NSJSONSerialization</a></li><li><a href="/objectivec/nscalendar.html" class="sidebar-link">NSCalendar</a></li><li><a href="/objectivec/nsattributedstring.html" class="sidebar-link">NSAttributedString</a></li><li><a href="/objectivec/nstimer.html" class="sidebar-link">NSTimer</a></li><li><a href="/objectivec/nsobject.html" class="sidebar-link">NSObject</a></li><li><a href="/objectivec/nssortdescriptor.html" class="sidebar-link">NSSortDescriptor</a></li><li><a href="/objectivec/nstextattachment.html" class="sidebar-link">NSTextAttachment</a></li><li><a href="/objectivec/nscache.html" class="sidebar-link">NSCache</a></li><li><a href="/objectivec/nsuserdefaults.html" class="sidebar-link">NSUserDefaults</a></li><li><a href="/objectivec/subscripting.html" class="sidebar-link">Subscripting</a></li><li><a href="/objectivec/low-level-runtime-environment.html" class="sidebar-link">Low-level Runtime Environment</a></li><li><a href="/objectivec/fast-enumeration.html" class="sidebar-link">Fast Enumeration</a></li><li><a href="/objectivec/categories.html" class="sidebar-link">Categories</a></li><li><a href="/objectivec/protocols.html" class="sidebar-link">Protocols</a></li><li><a href="/objectivec/protocols-and-delegates.html" class="sidebar-link">Protocols and Delegates</a></li><li><a href="/objectivec/blocks.html" class="sidebar-link">Blocks</a></li><li><a href="/objectivec/xml-parsing.html" class="sidebar-link">XML parsing</a></li><li><a href="/objectivec/declare-class-method-and-instance-method.html" class="sidebar-link">Declare class method and instance method</a></li><li><a href="/objectivec/predefined-macros.html" class="sidebar-link">Predefined Macros</a></li><li><a href="/objectivec/grand-central-dispatch.html" class="sidebar-link">Grand Central Dispatch</a></li><li><a href="/objectivec/format-specifiers.html" class="sidebar-link">Format-Specifiers</a></li><li><a href="/objectivec/logging.html" class="sidebar-link">Logging</a></li><li><a href="/objectivec/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/objectivec/modern-objective-c.html" class="sidebar-link">Modern Objective-C</a></li><li><a href="/objectivec/singletons.html" class="sidebar-link">Singletons</a></li><li><a href="/objectivec/multi-threading.html" class="sidebar-link">Multi-Threading</a></li><li><a href="/objectivec/unit-testing-using-xcode.html" class="sidebar-link">Unit testing using Xcode</a></li><li><a href="/objectivec/memory-management.html" class="sidebar-link">Memory Management</a></li><li><a href="/objectivec/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="key-value-coding-key-value-observing"><a href="#key-value-coding-key-value-observing" class="header-anchor">#</a> Key Value Coding / Key Value Observing</h1> <h2 id="most-common-real-life-key-value-coding-example"><a href="#most-common-real-life-key-value-coding-example" class="header-anchor">#</a> Most Common Real Life Key Value Coding Example</h2> <p>Key Value Coding is integrated into <strong>NSObject</strong> using <strong>NSKeyValueCoding</strong> protocol.</p> <p><strong>What this means?</strong></p> <p>It means that any id object is capable of calling valueForKey method and its various variants like valueForKeyPath etc. '</p> <p>It also means that any id object can invoke setValue method and its various variants too.</p> <p><strong>Example:</strong></p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code>id obj <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>MyClass alloc<span class="token punctuation">]</span> init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+id value <span class="token operator">=</span> <span class="token punctuation">[</span>obj valueForKey<span class="token punctuation">:</span><span class="token string">@&quot;myNumber&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> myNumberAsInt <span class="token operator">=</span> <span class="token punctuation">[</span>value intValue<span class="token punctuation">]</span><span class="token punctuation">;</span>
+myNumberAsInt <span class="token operator">=</span> <span class="token number">53</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>obj setValue<span class="token punctuation">:</span><span class="token operator">@</span><span class="token punctuation">(</span>myNumberAsInt<span class="token punctuation">)</span> forKey<span class="token punctuation">:</span><span class="token string">@&quot;myNumber&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>Exceptions:</strong></p> <p>Above example assumes that MyClass has an NSNumber Property called myNumber.
+If myNumber does not appear in MyClass interface definition, an NSUndefinedKeyException can be raised at possibly both lines 2 and 5 - popularly known as:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code>this class is not key value coding<span class="token operator">-</span>compliant <span class="token keyword">for</span> the key myNumber<span class="token punctuation">.</span>
+
+</code></pre></div><p><strong>Why this is SO powerful:</strong></p> <p>You can write code that can access properties of a class dynamically, without needing interface for that class. This means that a table view can display values from any properties of an NSObject derived object, provided its property names are supplied dynamically at runtime.</p> <p>In the example above, the code can as well work without MyClass being available and id type obj being available to calling code.</p> <h2 id="key-value-observing"><a href="#key-value-observing" class="header-anchor">#</a> Key Value Observing</h2> <p>Setting up key value observing.</p> <p>In this case, we want to observe the <code>contentOffset</code> on an object that our observer owns</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token comment">//</span>
+<span class="token comment">// Class to observe</span>
+<span class="token comment">//</span>
+<span class="token keyword">@interface</span> XYZScrollView<span class="token punctuation">:</span> NSObject
+<span class="token keyword">@property</span> <span class="token punctuation">(</span>nonatomic<span class="token punctuation">,</span> assign<span class="token punctuation">)</span> CGPoint contentOffset<span class="token punctuation">;</span>
+<span class="token keyword">@end</span>
+
+<span class="token keyword">@implementation</span> XYZScrollView
+<span class="token keyword">@end</span>
+
+
+<span class="token comment">//</span>
+<span class="token comment">// Class that will observe changes</span>
+<span class="token comment">//</span>
+<span class="token keyword">@interface</span> XYZObserver<span class="token punctuation">:</span> NSObject
+<span class="token keyword">@property</span> <span class="token punctuation">(</span>nonatomic<span class="token punctuation">,</span> strong<span class="token punctuation">)</span> XYZScrollView <span class="token operator">*</span>scrollView<span class="token punctuation">;</span>
+<span class="token keyword">@end</span>
+
+<span class="token keyword">@implementation</span> XYZObserver
+
+<span class="token comment">// simple way to create a KVO context</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token operator">*</span>XYZObserverContext <span class="token operator">=</span> <span class="token operator">&amp;</span>XYZObserverContext<span class="token punctuation">;</span>
+
+
+<span class="token comment">// Helper method to add self as an observer to </span>
+<span class="token comment">// the scrollView's contentOffset property</span>
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>addObserver <span class="token punctuation">{</span>
+
+    <span class="token comment">// NSKeyValueObservingOptions</span>
+    <span class="token comment">//</span>
+    <span class="token comment">// - NSKeyValueObservingOptionNew</span>
+    <span class="token comment">// - NSKeyValueObservingOptionOld</span>
+    <span class="token comment">// - NSKeyValueObservingOptionInitial</span>
+    <span class="token comment">// - NSKeyValueObservingOptionPrior</span>
+    <span class="token comment">//</span>
+    <span class="token comment">// can be combined:</span>
+    <span class="token comment">// (NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)</span>
+    
+    NSString <span class="token operator">*</span>keyPath <span class="token operator">=</span> <span class="token function">NSStringFromSelector</span><span class="token punctuation">(</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>contentOffset<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    NSKeyValueObservingOptions options <span class="token operator">=</span> NSKeyValueObservingOptionNew<span class="token punctuation">;</span>    
+
+    <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>scrollView addObserver<span class="token punctuation">:</span> <span class="token keyword">self</span> 
+                      forKeyPath<span class="token punctuation">:</span> keyPath 
+                         options<span class="token punctuation">:</span> options
+                         context<span class="token punctuation">:</span> XYZObserverContext<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>observeValueForKeyPath<span class="token punctuation">:</span><span class="token punctuation">(</span>NSString <span class="token operator">*</span><span class="token punctuation">)</span>keyPath ofObject<span class="token punctuation">:</span><span class="token punctuation">(</span>id<span class="token punctuation">)</span>object change<span class="token punctuation">:</span><span class="token punctuation">(</span>NSDictionary<span class="token operator">&lt;</span>NSString <span class="token operator">*</span><span class="token punctuation">,</span>id<span class="token operator">&gt;</span> <span class="token operator">*</span><span class="token punctuation">)</span>change context<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span>context <span class="token punctuation">{</span>
+    
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>context <span class="token operator">==</span> XYZObserverContext<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// check the context</span>
+
+        <span class="token comment">// check the keyPath to see if it's any of the desired keyPath's.</span>
+        <span class="token comment">// You can observe multiple keyPath's</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>keyPath isEqualToString<span class="token punctuation">:</span> <span class="token function">NSStringFromSelector</span><span class="token punctuation">(</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>contentOffset<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+            <span class="token comment">// change dictionary keys:</span>
+            <span class="token comment">// - NSKeyValueChangeKindKey</span>
+            <span class="token comment">// - NSKeyValueChangeNewKey</span>
+            <span class="token comment">// - NSKeyValueChangeOldKey</span>
+            <span class="token comment">// - NSKeyValueChangeIndexesKey</span>
+            <span class="token comment">// - NSKeyValueChangeNotificationIsPriorKey</span>
+            
+            <span class="token comment">// the change dictionary here for a CGPoint observation will</span>
+            <span class="token comment">// return an NSPoint, so we can take the CGPointValue of it.</span>
+            CGPoint point <span class="token operator">=</span> <span class="token punctuation">[</span>change<span class="token punctuation">[</span>NSKeyValueChangeNewKey<span class="token punctuation">]</span> CGPointValue<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            
+            <span class="token comment">// handle point</span>
+        <span class="token punctuation">}</span>
+        
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+
+        <span class="token comment">// if the context doesn't match our current object's context</span>
+        <span class="token comment">// we want to pass the observation parameters to super</span>
+        <span class="token punctuation">[</span><span class="token keyword">super</span> observeValueForKeyPath<span class="token punctuation">:</span> keyPath
+                             ofObject<span class="token punctuation">:</span> object
+                               change<span class="token punctuation">:</span> change
+                              context<span class="token punctuation">:</span> context<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// The program can crash if an object is not removed as observer </span>
+<span class="token comment">// before it is dealloc'd</span>
+<span class="token comment">//</span>
+<span class="token comment">// Helper method to remove self as an observer of the scrollView's</span>
+<span class="token comment">// contentOffset property</span>
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>removeObserver <span class="token punctuation">{</span>
+    NSString <span class="token operator">*</span>keyPath <span class="token operator">=</span> <span class="token function">NSStringFromSelector</span><span class="token punctuation">(</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>contentOffset<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>scrollView removeObserver<span class="token punctuation">:</span> <span class="token keyword">self</span> forKeyPath<span class="token punctuation">:</span> keyPath<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">@end</span>
+
+</code></pre></div><h2 id="querying-kvc-data"><a href="#querying-kvc-data" class="header-anchor">#</a> Querying KVC Data</h2> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span>dataObject objectForKey<span class="token punctuation">:</span><span class="token string">@&quot;yourVariable&quot;</span><span class="token punctuation">]</span> isEqualToString<span class="token punctuation">:</span><span class="token string">&quot;Hello World&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> YES<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> NO<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You can query values stored using KVC quickly and easily, without needing to retrieve or cast these as local variables.</p> <h2 id="collection-operators"><a href="#collection-operators" class="header-anchor">#</a> Collection Operators</h2> <p><strong>Collection Operators</strong> can be used in a KVC key path to perform an operation on a “collection-type” property (i.e. <code>NSArray</code>, <code>NSSet</code> and similar). For example, a common operation to perform is to count the objects in a collection. To achieve this, you use the <code>@count</code> <strong>collection operator</strong>:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">self</span><span class="token punctuation">.</span>array <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">[</span><span class="token operator">@</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token operator">@</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token operator">@</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token operator">@</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token operator">@</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+NSNumber <span class="token operator">*</span>count <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>array valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;@count&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+NSNumber <span class="token operator">*</span>countAlt <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;array.@count&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// count == countAlt == 5</span>
+
+</code></pre></div><p>While this is completely redundant here (we could have just accessed the <code>count</code> property), it <strong>can</strong> be useful on occasion, though it is rarely necessary. There are, however, some collection operators that are much more useful, namely <code>@max</code>, <code>@min</code>, <code>@sum</code>, <code>@avg</code> and the <code>@unionOf</code> family. It is important to note that these operators <strong>also</strong> require a separate key path <strong>following</strong> the operator to function correctly. Here's a list of them and the type of data they work with:</p> <table><thead><tr><th>Operator</th> <th>Data Type</th></tr></thead> <tbody><tr><td><code>@count</code></td> <td>(none)</td></tr> <tr><td><code>@max</code></td> <td><code>NSNumber</code>, <code>NSDate</code>, <code>int</code> (and related), etc.</td></tr> <tr><td><code>@min</code></td> <td><code>NSNumber</code>, <code>NSDate</code>, <code>int</code> (and related), etc.</td></tr> <tr><td><code>@sum</code></td> <td><code>NSNumber</code>, <code>int</code> (and related), <code>double</code> (and related), etc.</td></tr> <tr><td><code>@avg</code></td> <td><code>NSNumber</code>, <code>int</code> (and related), <code>double</code> (and related), etc.</td></tr> <tr><td><code>@unionOfObjects</code></td> <td><code>NSArray</code>, <code>NSSet</code>, etc.</td></tr> <tr><td><code>@distinctUnionOfObjects</code></td> <td><code>NSArray</code>, <code>NSSet</code>, etc.</td></tr> <tr><td><code>@unionOfArrays</code></td> <td><code>NSArray&lt;NSArray*&gt;</code></td></tr> <tr><td><code>@distinctUnionOfArrays</code></td> <td><code>NSArray&lt;NSArray*&gt;</code></td></tr> <tr><td><code>@distinctUnionOfSets</code></td> <td><code>NSSet&lt;NSSet*&gt;</code></td></tr></tbody></table> <p><code>@max</code> and <code>@min</code> will return the highest or lowest value, respectively, of a property of objects in the collection. For example, look at the following code:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token comment">// “Point” class used in our collection</span>
+<span class="token keyword">@interface</span> Point <span class="token punctuation">:</span> NSObject
+
+<span class="token keyword">@property</span> NSInteger x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+
+<span class="token operator">+</span> <span class="token punctuation">(</span>instancetype<span class="token punctuation">)</span>pointWithX<span class="token punctuation">:</span><span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>x y<span class="token punctuation">:</span><span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>y<span class="token punctuation">;</span>
+
+<span class="token keyword">@end</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">self</span><span class="token punctuation">.</span>points <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">[</span><span class="token punctuation">[</span>Point pointWithX<span class="token punctuation">:</span><span class="token number">0</span> y<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token punctuation">[</span>Point pointWithX<span class="token punctuation">:</span><span class="token number">1</span> y<span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token punctuation">[</span>Point pointWithX<span class="token punctuation">:</span><span class="token number">5</span> y<span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token punctuation">[</span>Point pointWithX<span class="token punctuation">:</span><span class="token number">3</span> y<span class="token punctuation">:</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                <span class="token punctuation">[</span>Point pointWithX<span class="token punctuation">:</span><span class="token number">8</span> y<span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+NSNumber <span class="token operator">*</span>maxX <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;points.@max.x&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+NSNumber <span class="token operator">*</span>minX <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;points.@min.x&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+NSNumber <span class="token operator">*</span>maxY <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;points.@max.y&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+NSNumber <span class="token operator">*</span>minY <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;points.@min.y&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+NSArray<span class="token operator">&lt;</span>NSNumber<span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span>boundsOfAllPoints <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">[</span>maxX<span class="token punctuation">,</span> minX<span class="token punctuation">,</span> maxY<span class="token punctuation">,</span> minY<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+</code></pre></div><p>In just a 4 lines of code and pure Foundation, with the power of Key-Value Coding collection operators we were able to extract a rectangle that encapsulates all of the points in our array.</p> <p>It is important to note that these comparisons are made by invoking the <code>compare:</code> method on the objects, so if you ever want to make your own class compatible with these operators, you must implement this method.</p> <p><code>@sum</code> will, as you can probably guess, add up all the values of a property.</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">@interface</span> Expense <span class="token punctuation">:</span> NSObject
+
+<span class="token keyword">@property</span> NSNumber <span class="token operator">*</span>price<span class="token punctuation">;</span>
+
+<span class="token operator">+</span> <span class="token punctuation">(</span>instancetype<span class="token punctuation">)</span>expenseWithPrice<span class="token punctuation">:</span><span class="token punctuation">(</span>NSNumber <span class="token operator">*</span><span class="token punctuation">)</span>price<span class="token punctuation">;</span>
+
+<span class="token keyword">@end</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">self</span><span class="token punctuation">.</span>expenses <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">[</span><span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">1.50</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                  <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">9.99</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                  <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">2.78</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                  <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">9.99</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                  <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">24.95</span><span class="token punctuation">]</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+NSNumber <span class="token operator">*</span>totalExpenses <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;expenses.@sum.price&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Here, we used <code>@sum</code> to find the total price of all the expenses in the array. If we instead wanted to find the average price we're paying for each expense, we can use <code>@avg</code>:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code>NSNumber <span class="token operator">*</span>averagePrice <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;expenses.@avg.price&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Finally, there's the <code>@unionOf</code> family. There are five different operators in this family, but they all work mostly the same, with only small differences between each. First, there's <code>@unionOfObjects</code> which will return an array of the properties of objects in an array:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token comment">// See &quot;expenses&quot; array above</span>
+
+NSArray<span class="token operator">&lt;</span>NSNumber<span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span>allPrices <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> valueForKeyPath<span class="token punctuation">:</span>
+    <span class="token string">@&quot;expenses.@unionOfObjects.price&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Equal to @[ @1.50, @9.99, @2.78, @9.99, @24.95 ]</span>
+
+</code></pre></div><p><code>@distinctUnionOfObjects</code> functions the same as <code>@unionOfObjects</code>, but it removes duplicates:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code>NSArray<span class="token operator">&lt;</span>NSNumber<span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span>differentPrices <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">self</span> valueForKeyPath<span class="token punctuation">:</span>
+    <span class="token string">@&quot;expenses.@distinctUnionOfObjects.price&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Equal to @[ @1.50, @9.99, @2.78, @24.95 ]</span>
+
+</code></pre></div><p>And finally, the last 3 operators in the <code>@unionOf</code> family will go one step deeper and return an array of values found for a property contained inside dually-nested arrays:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code>NSArray<span class="token operator">&lt;</span>NSArray<span class="token operator">&lt;</span>Expense<span class="token operator">*</span><span class="token punctuation">,</span>Expense<span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span>arrayOfArrays <span class="token operator">=</span>
+    <span class="token operator">@</span><span class="token punctuation">[</span>
+        <span class="token operator">@</span><span class="token punctuation">[</span> <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">19.99</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+           <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">14.95</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+           <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">4.50</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+           <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">19.99</span><span class="token punctuation">]</span>
+         <span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+        <span class="token operator">@</span><span class="token punctuation">[</span> <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">3.75</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+           <span class="token punctuation">[</span>Expense expenseWithPrice<span class="token punctuation">:</span><span class="token operator">@</span><span class="token number">14.95</span><span class="token punctuation">]</span>
+         <span class="token punctuation">]</span>
+     <span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// @unionOfArrays</span>
+NSArray<span class="token operator">&lt;</span>NSNumber<span class="token operator">*</span><span class="token operator">&gt;</span> allPrices <span class="token operator">=</span> <span class="token punctuation">[</span>arrayOfArrays valueForKeyPath<span class="token punctuation">:</span>
+    <span class="token string">@&quot;@unionOfArrays.price&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// Equal to @[ @19.99, @14.95, @4.50, @19.99, @3.75, @14.95 ];</span>
+
+<span class="token comment">// @distinctUnionOfArrays</span>
+NSArray<span class="token operator">&lt;</span>NSNumber<span class="token operator">*</span><span class="token operator">&gt;</span> allPrices <span class="token operator">=</span> <span class="token punctuation">[</span>arrayOfArrays valueForKeyPath<span class="token punctuation">:</span>
+    <span class="token string">@&quot;@distinctUnionOfArrays.price&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// Equal to @[ @19.99, @14.95, @4.50, @3.75 ];</span>
+
+</code></pre></div><p>The one missing from this example is <code>@distinctUnionOfSets</code>, however this functions exactly the same as <code>@distinctUnionOfArrays</code>, but works with and returns <code>NSSet</code>s instead (there is no non-<code>distinct</code> version because in a set, every object must be distinct anyway).</p> <p>And that's it! Collection operators can be really powerful if used correctly, and can help to avoid having to loop through stuff unnecessarily.</p> <p>One last note: you can also use the standard collection operators on arrays of <code>NSNumber</code>s (without additional property access). To do this, you access the <code>self</code> pseudo-property that just returns the object:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code>NSArray<span class="token operator">&lt;</span>NSNumber<span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span>numbers <span class="token operator">=</span> <span class="token operator">@</span><span class="token punctuation">[</span><span class="token operator">@</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token operator">@</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token operator">@</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token operator">@</span><span class="token number">27</span><span class="token punctuation">,</span> <span class="token operator">@</span><span class="token number">1337</span><span class="token punctuation">,</span> <span class="token operator">@</span><span class="token number">2048</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+NSNumber <span class="token operator">*</span>largest <span class="token operator">=</span> <span class="token punctuation">[</span>numbers valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;@max.self&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+NSNumber <span class="token operator">*</span>smallest <span class="token operator">=</span> <span class="token punctuation">[</span>numbers valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;@min.self&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+NSNumber <span class="token operator">*</span>total <span class="token operator">=</span> <span class="token punctuation">[</span>numbers valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;@sum.self&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+NSNumber <span class="token operator">*</span>average <span class="token operator">=</span> <span class="token punctuation">[</span>numbers valueForKeyPath<span class="token punctuation">:</span><span class="token string">@&quot;@avg.self&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/objectivec/key-value-coding-key-value-observing.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/objectivec/continue-and-break.html" class="prev">
+        Continue and Break!
+      </a></span> <span class="next"><a href="/objectivec/nsstring.html">
+        NSString
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2288.15bad417.js" defer></script>
+  </body>
+</html>

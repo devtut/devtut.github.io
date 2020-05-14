@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Angular 2 - Angular 2 Data Driven Forms</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Data driven form">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Angular 2 - Angular 2 Data Driven Forms">
+    <meta property="og:description" content="Data driven form">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/angular2/angular-2-data-driven-forms.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Angular 2 - Angular 2 Data Driven Forms">
+    <meta name="twitter:description" content="Data driven form">
+    <meta name="twitter:url" content="/angular2/angular-2-data-driven-forms.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/348.847e7ada.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Angular 2</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/angular2/" class="sidebar-link">Disclaimer</a></li><li><a href="/angular2/getting-started-with-angular-2.html" class="sidebar-link">Getting started with Angular 2</a></li><li><a href="/angular2/components.html" class="sidebar-link">Components</a></li><li><a href="/angular2/component-interactions.html" class="sidebar-link">Component interactions</a></li><li><a href="/angular2/directives.html" class="sidebar-link">Directives</a></li><li><a href="/angular2/page-title.html" class="sidebar-link">Page title</a></li><li><a href="/angular2/templates.html" class="sidebar-link">Templates</a></li><li><a href="/angular2/commonly-built-in-directives-and-services.html" class="sidebar-link">Commonly built-in directives and services</a></li><li><a href="/angular2/directives-components-input-output.html" class="sidebar-link">Directives &amp; components : @Input @Output</a></li><li><a href="/angular2/attribute-directives-to-affect-the-value-of-properties-on-the-host-node-by-using-the-hostbinding-decorator.html" class="sidebar-link">Attribute directives to affect the value of properties on the host node by using the @HostBinding decorator.</a></li><li><a href="/angular2/how-to-use-ngif.html" class="sidebar-link">How to Use ngif</a></li><li><a href="/angular2/how-to-use-ngfor.html" class="sidebar-link">How to use ngfor</a></li><li><a href="/angular2/angular-forloop.html" class="sidebar-link">Angular - ForLoop</a></li><li><a href="/angular2/modules.html" class="sidebar-link">Modules</a></li><li><a href="/angular2/pipes.html" class="sidebar-link">Pipes</a></li><li><a href="/angular2/orderby-pipe.html" class="sidebar-link">OrderBy Pipe</a></li><li><a href="/angular2/angular2-custom-validations.html" class="sidebar-link">Angular2 Custom Validations</a></li><li><a href="/angular2/routing.html" class="sidebar-link">Routing</a></li><li><a href="/angular2/routing-3-0-0.html" class="sidebar-link">Routing (3.0.0+)</a></li><li><a href="/angular2/dynamically-add-components-using-viewcontainerref-createcomponent.html" class="sidebar-link">Dynamically add components using ViewContainerRef.createComponent</a></li><li><a href="/angular2/installing-3rd-party-plugins-with-angular-cli-1-0-0-beta-10.html" class="sidebar-link">Installing 3rd party plugins with angular-cli@1.0.0-beta.10</a></li><li><a href="/angular2/lifecycle-hooks.html" class="sidebar-link">Lifecycle Hooks</a></li><li><a href="/angular2/angular-rxjs-subjects-and-observables-with-api-requests.html" class="sidebar-link">Angular RXJS Subjects and Observables with API requests</a></li><li><a href="/angular2/services-and-dependency-injection.html" class="sidebar-link">Services and Dependency Injection</a></li><li><a href="/angular2/service-worker.html" class="sidebar-link">Service Worker</a></li><li><a href="/angular2/eventemitter-service.html" class="sidebar-link">EventEmitter Service</a></li><li><a href="/angular2/optimizing-rendering-using-changedetectionstrategy.html" class="sidebar-link">Optimizing rendering using ChangeDetectionStrategy</a></li><li><a href="/angular2/angular-2-forms-update.html" class="sidebar-link">Angular 2 Forms Update</a></li><li><a href="/angular2/detecting-resize-events.html" class="sidebar-link">Detecting resize events</a></li><li><a href="/angular2/testing-ngmodel.html" class="sidebar-link">Testing ngModel</a></li><li><a href="/angular2/feature-modules.html" class="sidebar-link">Feature Modules</a></li><li><a href="/angular2/bootstrap-empty-module-in-angular-2.html" class="sidebar-link">Bootstrap Empty module in angular 2</a></li><li><a href="/angular2/lazy-loading-a-module.html" class="sidebar-link">Lazy loading a module</a></li><li><a href="/angular2/advanced-component-examples.html" class="sidebar-link">Advanced Component Examples</a></li><li><a href="/angular2/bypassing-sanitizing-for-trusted-values.html" class="sidebar-link">Bypassing Sanitizing for trusted values</a></li><li><a href="/angular2/angular-2-data-driven-forms.html" class="active sidebar-link">Angular 2 Data Driven Forms</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/angular2/angular-2-data-driven-forms.html#data-driven-form" class="sidebar-link">Data driven form</a></li></ul></li><li><a href="/angular2/angular2-in-memory-web-api.html" class="sidebar-link">Angular2 In Memory Web API</a></li><li><a href="/angular2/ahead-of-time-aot-compilation-with-angular-2.html" class="sidebar-link">Ahead-of-time (AOT) compilation with Angular 2</a></li><li><a href="/angular2/crud-in-angular2-with-restful-api.html" class="sidebar-link">CRUD in Angular2 with Restful API</a></li><li><a href="/angular2/use-native-webcomponents-in-angular-2.html" class="sidebar-link">Use native webcomponents in Angular 2</a></li><li><a href="/angular2/update-typings.html" class="sidebar-link">Update typings</a></li><li><a href="/angular2/mocking-ngrx-store.html" class="sidebar-link">Mocking @ngrx/Store</a></li><li><a href="/angular2/ngrx.html" class="sidebar-link">ngrx</a></li><li><a href="/angular2/http-interceptor.html" class="sidebar-link">Http Interceptor</a></li><li><a href="/angular2/animation.html" class="sidebar-link">Animation</a></li><li><a href="/angular2/zone-js.html" class="sidebar-link">Zone.js</a></li><li><a href="/angular2/angular2-animations.html" class="sidebar-link">Angular2 Animations</a></li><li><a href="/angular2/create-an-angular-2-npm-package.html" class="sidebar-link">Create an Angular 2+ NPM package</a></li><li><a href="/angular2/angular2-canactivate.html" class="sidebar-link">Angular2 CanActivate</a></li><li><a href="/angular2/angular-2-protractor.html" class="sidebar-link">Angular  2 - Protractor</a></li><li><a href="/angular2/example-for-routes-such-as-route-subroute-for-static-urls.html" class="sidebar-link">Example for routes such as /route/subroute for static urls</a></li><li><a href="/angular2/angular2-input-output.html" class="sidebar-link">Angular2 Input() output()</a></li><li><a href="/angular2/angular-cli.html" class="sidebar-link">Angular-cli</a></li><li><a href="/angular2/angular-2-change-detection-and-manual-triggering.html" class="sidebar-link">Angular 2 Change detection and manual triggering</a></li><li><a href="/angular2/angular2-databinding.html" class="sidebar-link">Angular2 Databinding</a></li><li><a href="/angular2/brute-force-upgrading.html" class="sidebar-link">Brute Force Upgrading</a></li><li><a href="/angular2/angular2-provide-external-data-to-app-before-bootstrap.html" class="sidebar-link">Angular2 provide external data to App before bootstrap</a></li><li><a href="/angular2/custom-ngx-bootstrap-datepicker-input.html" class="sidebar-link">custom ngx-bootstrap datepicker + input</a></li><li><a href="/angular2/using-third-party-libraries-like-jquery-in-angular-2.html" class="sidebar-link">Using third party libraries like jQuery in Angular 2</a></li><li><a href="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html" class="sidebar-link">Configuring ASP.net Core application to work with Angular 2 and TypeScript</a></li><li><a href="/angular2/angular2-using-webpack.html" class="sidebar-link">Angular2 using webpack</a></li><li><a href="/angular2/angular-material-design.html" class="sidebar-link">Angular material design</a></li><li><a href="/angular2/dropzone-in-angular2.html" class="sidebar-link">Dropzone in Angular2</a></li><li><a href="/angular2/angular-redux.html" class="sidebar-link">angular redux</a></li><li><a href="/angular2/creating-an-angular-npm-library.html" class="sidebar-link">Creating an Angular npm library</a></li><li><a href="/angular2/barrel.html" class="sidebar-link">Barrel</a></li><li><a href="/angular2/testing-an-angular-2-app.html" class="sidebar-link">Testing an Angular 2 App</a></li><li><a href="/angular2/angular-cli-test-coverage.html" class="sidebar-link">angular-cli test coverage</a></li><li><a href="/angular2/debugging-angular2-typescript-application-using-visual-studio-code.html" class="sidebar-link">Debugging Angular2 typescript application using Visual Studio Code</a></li><li><a href="/angular2/unit-testing.html" class="sidebar-link">unit testing</a></li><li><a href="/angular2/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="angular-2-data-driven-forms"><a href="#angular-2-data-driven-forms" class="header-anchor">#</a> Angular 2 Data Driven Forms</h1> <h2 id="data-driven-form"><a href="#data-driven-form" class="header-anchor">#</a> Data driven form</h2> <p>Component</p> <div class="language- extra-class"><pre class="language-text"><code>
+   import {Component, OnInit} from '@angular/core';
+import {
+    FormGroup,
+    FormControl,
+    FORM_DIRECTIVES,
+    REACTIVE_FORM_DIRECTIVES,
+    Validators,
+    FormBuilder,
+    FormArray
+} from &quot;@angular/forms&quot;;
+import {Control} from &quot;@angular/common&quot;;
+
+@Component({
+  moduleId: module.id,
+  selector: 'app-data-driven-form',
+  templateUrl: 'data-driven-form.component.html',
+  styleUrls: ['data-driven-form.component.css'],
+  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
+})
+export class DataDrivenFormComponent  implements OnInit {
+  myForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {}
+
+  ngOnInit() {
+    this.myForm = this.formBuilder.group({
+      'loginCredentials': this.formBuilder.group({
+        'login': ['', Validators.required],
+        'email': ['',  [Validators.required, customValidator]],
+        'password': ['',  Validators.required]
+      }),
+      'hobbies': this.formBuilder.array([
+        this.formBuilder.group({
+          'hobby': ['', Validators.required]
+        })
+      ])
+    });
+  }
+
+  removeHobby(index: number){
+    (&lt;FormArray&gt;this.myForm.find('hobbies')).removeAt(index);
+  }
+
+  onAddHobby() {
+    (&lt;FormArray&gt;this.myForm.find('hobbies')).push(new FormGroup({
+      'hobby': new FormControl('', Validators.required)
+    }))
+  }
+
+  onSubmit() {
+    console.log(this.myForm.value);
+  }
+}
+
+function customValidator(control: Control): {[s: string]: boolean} {
+  if(!control.value.match(&quot;[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?&quot;)) {
+    return {error: true}
+  }
+}
+
+</code></pre></div><p>HTML Markup</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>h3<span class="token operator">&gt;</span>Register page<span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>form <span class="token punctuation">[</span>formGroup<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;myForm&quot;</span> <span class="token punctuation">(</span>ngSubmit<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">&quot;onSubmit()&quot;</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>div formGroupName<span class="token operator">=</span><span class="token string">&quot;loginCredentials&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;form-group&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>label <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">&quot;login&quot;</span><span class="token operator">&gt;</span>Login<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>input  id<span class="token operator">=</span><span class="token string">&quot;login&quot;</span> type<span class="token operator">=</span><span class="token string">&quot;text&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;form-control&quot;</span> formControlName<span class="token operator">=</span><span class="token string">&quot;login&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>label <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">&quot;email&quot;</span><span class="token operator">&gt;</span>Email<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>input  id<span class="token operator">=</span><span class="token string">&quot;email&quot;</span> type<span class="token operator">=</span><span class="token string">&quot;text&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;form-control&quot;</span>  formControlName<span class="token operator">=</span><span class="token string">&quot;email&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>label <span class="token keyword">for</span><span class="token operator">=</span><span class="token string">&quot;password&quot;</span><span class="token operator">&gt;</span>Password<span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>input  id<span class="token operator">=</span><span class="token string">&quot;password&quot;</span> type<span class="token operator">=</span><span class="token string">&quot;text&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;form-control&quot;</span>  formControlName<span class="token operator">=</span><span class="token string">&quot;password&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;row&quot;</span> <span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div  formGroupName<span class="token operator">=</span><span class="token string">&quot;hobbies&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;form-group&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>label<span class="token operator">&gt;</span>Hobbies array<span class="token operator">:</span><span class="token operator">&lt;</span><span class="token operator">/</span>label<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>div  <span class="token operator">*</span>ngFor<span class="token operator">=</span><span class="token string">&quot;let hobby of myForm.find('hobbies').controls; let i = index&quot;</span><span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span>div formGroupName<span class="token operator">=</span><span class="token string">&quot;{{i}}&quot;</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>input id<span class="token operator">=</span><span class="token string">&quot;hobby_{{i}}&quot;</span> type<span class="token operator">=</span><span class="token string">&quot;text&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;form-control&quot;</span>  formControlName<span class="token operator">=</span><span class="token string">&quot;hobby&quot;</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>button <span class="token operator">*</span>ngIf<span class="token operator">=</span><span class="token string">&quot;myForm.find('hobbies').length &gt; 1&quot;</span> <span class="token punctuation">(</span>click<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">&quot;removeHobby(i)&quot;</span><span class="token operator">&gt;</span>x<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token function">button</span> <span class="token punctuation">(</span>click<span class="token punctuation">)</span><span class="token operator">=</span><span class="token string">&quot;onAddHobby()&quot;</span><span class="token operator">&gt;</span>Add hobby<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>button type<span class="token operator">=</span><span class="token string">&quot;submit&quot;</span> <span class="token punctuation">[</span>disabled<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;!myForm.valid&quot;</span><span class="token operator">&gt;</span>Submit<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">&gt;</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p><code>this.myForm = this.formBuilder.group</code></p> <p>creates a form object with user's configuration and assigns it to this.myForm variable.</p> <p><code>'loginCredentials': this.formBuilder.group</code></p> <p>method creates a group of controls which consist of a <strong>formControlName</strong> eg. <code>login</code> and value <code>['', Validators.required],</code> where the first parameter is the initial value of the form input and the secons is a validator or an array of validators as in <code>'email': ['', [Validators.required, customValidator]],</code>.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token string">'hobbies'</span><span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>formBuilder<span class="token punctuation">.</span>array
+
+</code></pre></div><p>Creates an array of groups where the index of the group is <strong>formGroupName</strong>  in the array and is accessed like :</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>div <span class="token operator">*</span>ngFor<span class="token operator">=</span><span class="token string">&quot;let hobby of myForm.find('hobbies').controls; let i = index&quot;</span><span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span>div formGroupName<span class="token operator">=</span><span class="token string">&quot;{{i}}&quot;</span><span class="token operator">&gt;</span><span class="token operator">...</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token function">onAddHobby</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">(</span><span class="token operator">&lt;</span>FormArray<span class="token operator">&gt;</span><span class="token keyword">this</span><span class="token punctuation">.</span>myForm<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'hobbies'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">FormGroup</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      <span class="token string">'hobby'</span><span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">FormControl</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> Validators<span class="token punctuation">.</span>required<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+</code></pre></div><p>this sample method adds new formGroup to the array.
+Currently accessing requires specifing the type of control we want to access, in this example this type is : <code>&lt;FormArray&gt;</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">removeHobby</span><span class="token punctuation">(</span><span class="token parameter">index<span class="token operator">:</span> number</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token punctuation">(</span><span class="token operator">&lt;</span>FormArray<span class="token operator">&gt;</span><span class="token keyword">this</span><span class="token punctuation">.</span>myForm<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'hobbies'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">removeAt</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+</code></pre></div><p>same rules as above apply to removing a specific form control from the array</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/angular2/angular-2-data-driven-forms.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/angular2/bypassing-sanitizing-for-trusted-values.html" class="prev">
+        Bypassing Sanitizing for trusted values
+      </a></span> <span class="next"><a href="/angular2/angular2-in-memory-web-api.html">
+        Angular2 In Memory Web API
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/348.847e7ada.js" defer></script>
+  </body>
+</html>

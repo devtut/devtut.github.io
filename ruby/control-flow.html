@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ruby - Control Flow</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="if, elsif, else and end, Case statement, Truthy and Falsy values, Inline if/unless, while, until, Or-Equals/Conditional assignment operator (||=), Flip-Flop operator, unless, throw, catch, Ternary operator, Loop control with break, next, and redo, return vs. next: non-local return in a block, Control flow with logic statements, begin, end">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Ruby - Control Flow">
+    <meta property="og:description" content="if, elsif, else and end, Case statement, Truthy and Falsy values, Inline if/unless, while, until, Or-Equals/Conditional assignment operator (||=), Flip-Flop operator, unless, throw, catch, Ternary operator, Loop control with break, next, and redo, return vs. next: non-local return in a block, Control flow with logic statements, begin, end">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/ruby/control-flow.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Ruby - Control Flow">
+    <meta name="twitter:description" content="if, elsif, else and end, Case statement, Truthy and Falsy values, Inline if/unless, while, until, Or-Equals/Conditional assignment operator (||=), Flip-Flop operator, unless, throw, catch, Ternary operator, Loop control with break, next, and redo, return vs. next: non-local return in a block, Control flow with logic statements, begin, end">
+    <meta name="twitter:url" content="/ruby/control-flow.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3060.f2ade2fa.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Ruby</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ruby/" class="sidebar-link">Disclaimer</a></li><li><a href="/ruby/installation.html" class="sidebar-link">Installation</a></li><li><a href="/ruby/getting-started-with-ruby-language.html" class="sidebar-link">Getting started with Ruby Language</a></li><li><a href="/ruby/casting-type-conversion.html" class="sidebar-link">Casting (type conversion)</a></li><li><a href="/ruby/operators.html" class="sidebar-link">Operators</a></li><li><a href="/ruby/variable-scope-and-visibility.html" class="sidebar-link">Variable Scope and Visibility</a></li><li><a href="/ruby/environment-variables.html" class="sidebar-link">Environment Variables</a></li><li><a href="/ruby/constants.html" class="sidebar-link">Constants</a></li><li><a href="/ruby/special-constants-in-ruby.html" class="sidebar-link">Special Constants in Ruby</a></li><li><a href="/ruby/comments.html" class="sidebar-link">Comments</a></li><li><a href="/ruby/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/ruby/multidimensional-arrays.html" class="sidebar-link">Multidimensional Arrays</a></li><li><a href="/ruby/strings.html" class="sidebar-link">Strings</a></li><li><a href="/ruby/datetime.html" class="sidebar-link">DateTime</a></li><li><a href="/ruby/time.html" class="sidebar-link">Time</a></li><li><a href="/ruby/numbers.html" class="sidebar-link">Numbers</a></li><li><a href="/ruby/symbols.html" class="sidebar-link">Symbols</a></li><li><a href="/ruby/comparable.html" class="sidebar-link">Comparable</a></li><li><a href="/ruby/control-flow.html" class="active sidebar-link">Control Flow</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#if-elsif-else-and-end" class="sidebar-link">if, elsif, else and end</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#case-statement" class="sidebar-link">Case statement</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#truthy-and-falsy-values" class="sidebar-link">Truthy and Falsy values</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#inline-if-unless" class="sidebar-link">Inline if/unless</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#while-until" class="sidebar-link">while, until</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#or-equals-conditional-assignment-operator" class="sidebar-link">Or-Equals/Conditional assignment operator (||=)</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#flip-flop-operator" class="sidebar-link">Flip-Flop operator</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#unless" class="sidebar-link">unless</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#throw-catch" class="sidebar-link">throw, catch</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#ternary-operator" class="sidebar-link">Ternary operator</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#loop-control-with-break-next-and-redo" class="sidebar-link">Loop control with break, next, and redo</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#return-vs-next-non-local-return-in-a-block" class="sidebar-link">return vs. next: non-local return in a block</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#control-flow-with-logic-statements" class="sidebar-link">Control flow with logic statements</a></li><li class="sidebar-sub-header"><a href="/ruby/control-flow.html#begin-end" class="sidebar-link">begin, end</a></li></ul></li><li><a href="/ruby/methods.html" class="sidebar-link">Methods</a></li><li><a href="/ruby/hashes.html" class="sidebar-link">Hashes</a></li><li><a href="/ruby/blocks-and-procs-and-lambdas.html" class="sidebar-link">Blocks and Procs and Lambdas</a></li><li><a href="/ruby/iteration.html" class="sidebar-link">Iteration</a></li><li><a href="/ruby/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/ruby/enumerators.html" class="sidebar-link">Enumerators</a></li><li><a href="/ruby/enumerable-in-ruby.html" class="sidebar-link">Enumerable in Ruby</a></li><li><a href="/ruby/classes.html" class="sidebar-link">Classes</a></li><li><a href="/ruby/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/ruby/method-missing.html" class="sidebar-link">method_missing</a></li><li><a href="/ruby/regular-expressions-and-regex-based-operations.html" class="sidebar-link">Regular Expressions and Regex Based Operations</a></li><li><a href="/ruby/file-and-i-o-operations.html" class="sidebar-link">File and I/O Operations</a></li><li><a href="/ruby/ruby-access-modifiers.html" class="sidebar-link">Ruby Access Modifiers</a></li><li><a href="/ruby/design-patterns-and-idioms-in-ruby.html" class="sidebar-link">Design Patterns and Idioms in Ruby</a></li><li><a href="/ruby/loading-source-files.html" class="sidebar-link">Loading Source Files</a></li><li><a href="/ruby/thread.html" class="sidebar-link">Thread</a></li><li><a href="/ruby/range.html" class="sidebar-link">Range</a></li><li><a href="/ruby/modules.html" class="sidebar-link">Modules</a></li><li><a href="/ruby/introspection-in-ruby.html" class="sidebar-link">Introspection in Ruby</a></li><li><a href="/ruby/monkey-patching-in-ruby.html" class="sidebar-link">Monkey Patching in Ruby</a></li><li><a href="/ruby/recursion-in-ruby.html" class="sidebar-link">Recursion in Ruby</a></li><li><a href="/ruby/splat-operator.html" class="sidebar-link">Splat operator (*)</a></li><li><a href="/ruby/json-with-ruby.html" class="sidebar-link">JSON with Ruby</a></li><li><a href="/ruby/pure-rspec-json-api-testing.html" class="sidebar-link">Pure RSpec JSON API testing</a></li><li><a href="/ruby/gem-creation-management.html" class="sidebar-link">Gem Creation/Management</a></li><li><a href="/ruby/rbenv.html" class="sidebar-link">rbenv</a></li><li><a href="/ruby/gem-usage.html" class="sidebar-link">Gem Usage</a></li><li><a href="/ruby/singleton-class.html" class="sidebar-link">Singleton Class</a></li><li><a href="/ruby/queue.html" class="sidebar-link">Queue</a></li><li><a href="/ruby/destructuring.html" class="sidebar-link">Destructuring</a></li><li><a href="/ruby/struct.html" class="sidebar-link">Struct</a></li><li><a href="/ruby/metaprogramming.html" class="sidebar-link">Metaprogramming</a></li><li><a href="/ruby/dynamic-evaluation.html" class="sidebar-link">Dynamic Evaluation</a></li><li><a href="/ruby/instance-eval.html" class="sidebar-link">instance_eval</a></li><li><a href="/ruby/message-passing.html" class="sidebar-link">Message Passing</a></li><li><a href="/ruby/keyword-arguments.html" class="sidebar-link">Keyword Arguments</a></li><li><a href="/ruby/truthiness.html" class="sidebar-link">Truthiness</a></li><li><a href="/ruby/implicit-receivers-and-understanding-self.html" class="sidebar-link">Implicit Receivers and Understanding Self</a></li><li><a href="/ruby/introspection.html" class="sidebar-link">Introspection</a></li><li><a href="/ruby/refinements.html" class="sidebar-link">Refinements</a></li><li><a href="/ruby/catching-exceptions-with-begin-rescue.html" class="sidebar-link">Catching Exceptions with Begin / Rescue</a></li><li><a href="/ruby/command-line-apps.html" class="sidebar-link">Command Line Apps</a></li><li><a href="/ruby/irb.html" class="sidebar-link">IRB</a></li><li><a href="/ruby/erb.html" class="sidebar-link">ERB</a></li><li><a href="/ruby/generate-a-random-number.html" class="sidebar-link">Generate a random number</a></li><li><a href="/ruby/getting-started-with-hanami.html" class="sidebar-link">Getting started with Hanami</a></li><li><a href="/ruby/optionparser.html" class="sidebar-link">OptionParser</a></li><li><a href="/ruby/operating-system-or-shell-commands.html" class="sidebar-link">Operating System or Shell commands</a></li><li><a href="/ruby/c-extensions.html" class="sidebar-link">C Extensions</a></li><li><a href="/ruby/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/ruby/ruby-version-manager.html" class="sidebar-link">Ruby Version Manager</a></li><li><a href="/ruby/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="control-flow"><a href="#control-flow" class="header-anchor">#</a> Control Flow</h1> <h2 id="if-elsif-else-and-end"><a href="#if-elsif-else-and-end" class="header-anchor">#</a> if, elsif, else and end</h2> <p>Ruby offers the expected <code>if</code> and <code>else</code> expressions for branching logic, terminated by the <code>end</code> keyword:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># Simulate flipping a coin</span>
+result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token symbol">:heads</span><span class="token punctuation">,</span> <span class="token symbol">:tails</span><span class="token punctuation">]</span><span class="token punctuation">.</span>sample
+
+<span class="token keyword">if</span> result <span class="token operator">==</span> <span class="token symbol">:heads</span>
+  puts <span class="token string">'The coin-toss came up &quot;heads&quot;'</span>
+<span class="token keyword">else</span>
+  puts <span class="token string">'The coin-toss came up &quot;tails&quot;'</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>In Ruby, <code>if</code> statements are expressions that evaluate to a value, and the result can be assigned to a variable:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>status <span class="token operator">=</span> <span class="token keyword">if</span> age <span class="token operator">&lt;</span> <span class="token number">18</span>
+           <span class="token symbol">:minor</span>
+         <span class="token keyword">else</span>
+           <span class="token symbol">:adult</span>
+         <span class="token keyword">end</span>
+
+</code></pre></div><p>Ruby also offers C-style ternary operators (<a href="http://stackoverflow.com/documentation/ruby/640/control-flow/10907/ternary-operator#t=201607270911323570258" target="_blank" rel="noopener noreferrer">see here for details<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>) that can be expressed as:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>some_statement <span class="token operator">?</span> if_true <span class="token punctuation">:</span> if_false  
+
+</code></pre></div><p>This means the above example using if-else can also be written as</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>status <span class="token operator">=</span> age <span class="token operator">&lt;</span> <span class="token number">18</span> <span class="token operator">?</span> <span class="token symbol">:minor</span> <span class="token punctuation">:</span> <span class="token symbol">:adult</span>
+
+</code></pre></div><p>Additionally, Ruby offers the <code>elsif</code> keyword which accepts an expression to enables additional branching logic:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>label <span class="token operator">=</span> <span class="token keyword">if</span> shirt_size <span class="token operator">==</span> <span class="token symbol">:s</span>
+          <span class="token string">'small'</span>
+        <span class="token keyword">elsif</span> shirt_size <span class="token operator">==</span> <span class="token symbol">:m</span>
+          <span class="token string">'medium'</span>
+        <span class="token keyword">elsif</span> shirt_size <span class="token operator">==</span> <span class="token symbol">:l</span>
+          <span class="token string">'large'</span>
+        <span class="token keyword">else</span>
+          <span class="token string">'unknown size'</span>
+        <span class="token keyword">end</span>
+
+</code></pre></div><p>If none of the conditions in an <code>if</code>/<code>elsif</code> chain are true, and there is no <code>else</code> clause, then the expression evaluates to nil.  This can be useful inside string interpolation, since <code>nil.to_s</code> is the empty string:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token string">&quot;user<span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token string">'s'</span> <span class="token keyword">if</span> <span class="token variable">@users</span><span class="token punctuation">.</span>size <span class="token operator">!=</span> <span class="token number">1</span><span class="token delimiter tag">}</span></span>&quot;</span>
+
+</code></pre></div><h2 id="case-statement"><a href="#case-statement" class="header-anchor">#</a> Case statement</h2> <p>Ruby uses the <code>case</code> keyword for switch statements.</p> <p>As per the <a href="http://ruby-doc.org/docs/keywords/1.9/Object.html#method-i-case" target="_blank" rel="noopener noreferrer">Ruby Docs<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <blockquote></blockquote> <p>Case statements consist of an optional condition, which is in the
+position of an argument to `case`, and zero or more `when` clauses.
+The first `when` clause to match the condition (or to evaluate to
+Boolean truth, if the condition is null) “wins”, and its code stanza
+is executed. The value of the case statement is the value of the
+successful `when` clause, or `nil` if there is no such clause.</p> <p>A case statement can end with an `else` clause. Each `when` a
+statement can have multiple candidate values, separated by commas.</p> <p>Example:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">case</span> x
+<span class="token keyword">when</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span>
+  puts <span class="token string">&quot;1, 2, or 3&quot;</span>
+<span class="token keyword">when</span> <span class="token number">10</span>
+  puts <span class="token string">&quot;10&quot;</span>
+<span class="token keyword">else</span>
+  puts <span class="token string">&quot;Some other number&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Shorter version:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">case</span> x
+<span class="token keyword">when</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span> <span class="token keyword">then</span> puts <span class="token string">&quot;1, 2, or 3&quot;</span>
+<span class="token keyword">when</span> <span class="token number">10</span> <span class="token keyword">then</span> puts <span class="token string">&quot;10&quot;</span>
+<span class="token keyword">else</span> puts <span class="token string">&quot;Some other number&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>The value of the <code>case</code> clause is matched with each <code>when</code> clause using the <code>===</code> method (not <code>==</code>). Therefore it can be used with a variety of different types of objects.</p> <p>A <code>case</code> statement can be used with <a href="http://ruby-doc.org/core/Range.html" target="_blank" rel="noopener noreferrer">Ranges<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">case</span> <span class="token number">17</span>
+<span class="token keyword">when</span> <span class="token number">13.</span><span class="token number">.19</span>
+  puts <span class="token string">&quot;teenager&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>A <code>case</code> statement can be used with a <a href="http://ruby-doc.org/core/Regexp.html" target="_blank" rel="noopener noreferrer">Regexp<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">case</span> <span class="token string">&quot;google&quot;</span>
+<span class="token keyword">when</span> <span class="token regex">/oo/</span>
+  puts <span class="token string">&quot;word contains oo&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>A <code>case</code> statement can be used with a <a href="http://ruby-doc.org/core/Proc.html" target="_blank" rel="noopener noreferrer">Proc<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> or lambda:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">case</span> <span class="token number">44</span>
+<span class="token keyword">when</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token punctuation">{</span> n<span class="token punctuation">.</span>even<span class="token operator">?</span> <span class="token keyword">or</span> n <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+  puts <span class="token string">&quot;even or less than zero&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>A <code>case</code> statement can be used with <a href="http://ruby-doc.org/core/Class.html" target="_blank" rel="noopener noreferrer">Classes<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">case</span> x
+<span class="token keyword">when</span> <span class="token builtin">Integer</span>
+  puts <span class="token string">&quot;It's an integer&quot;</span>
+<span class="token keyword">when</span> <span class="token builtin">String</span>
+  puts <span class="token string">&quot;It's a string&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>By implementing the <code>===</code> method you can create your own match classes:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Empty</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span></span><span class="token operator">===</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span>
+    <span class="token operator">!</span>object <span class="token keyword">or</span> <span class="token string">&quot;&quot;</span> <span class="token operator">==</span> object
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">case</span> <span class="token string">&quot;&quot;</span>
+<span class="token keyword">when</span> <span class="token constant">Empty</span>
+  puts <span class="token string">&quot;name was empty&quot;</span>
+<span class="token keyword">else</span>
+  puts <span class="token string">&quot;name is not empty&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>A <code>case</code> statement can be used without a value to match against:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">case</span>
+<span class="token keyword">when</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string">'A'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'Y'</span>
+  puts <span class="token string">'A'</span>
+<span class="token keyword">when</span> <span class="token constant">ENV</span><span class="token punctuation">[</span><span class="token string">'B'</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'Y'</span>
+  puts <span class="token string">'B'</span>
+<span class="token keyword">else</span>
+  puts <span class="token string">'Neither A nor B'</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>A <code>case</code> statement has a value, so you can use it as a method argument or in an assignment:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>description <span class="token operator">=</span> <span class="token keyword">case</span> <span class="token number">16</span>
+              <span class="token keyword">when</span> <span class="token number">13.</span><span class="token number">.19</span> <span class="token keyword">then</span> <span class="token string">&quot;teenager&quot;</span>
+              <span class="token keyword">else</span> <span class="token string">&quot;&quot;</span>
+              <span class="token keyword">end</span>
+
+</code></pre></div><h2 id="truthy-and-falsy-values"><a href="#truthy-and-falsy-values" class="header-anchor">#</a> Truthy and Falsy values</h2> <p>In Ruby, there are exactly two values which are considered &quot;falsy&quot;, and will return false when tested as a condition for an <code>if</code> expression. They are:</p> <ul><li><code>nil</code></li> <li>boolean <code>false</code></li></ul> <p><strong>All</strong> other values are considered &quot;truthy&quot;, including:</p> <ul><li><code>0</code> - numeric zero (Integer or otherwise)</li> <li><code>&quot;&quot;</code> - Empty strings</li> <li><code>&quot;\n&quot;</code> - Strings containing only whitespace</li> <li><code>[]</code> - Empty arrays</li> <li><code>{}</code> - Empty hashes</li></ul> <p>Take, for example, the following code:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">check_truthy</span></span><span class="token punctuation">(</span>var_name<span class="token punctuation">,</span> var<span class="token punctuation">)</span>
+  is_truthy <span class="token operator">=</span> var <span class="token operator">?</span> <span class="token string">&quot;truthy&quot;</span> <span class="token punctuation">:</span> <span class="token string">&quot;falsy&quot;</span>
+  puts <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>var_name<span class="token delimiter tag">}</span></span> is <span class="token interpolation"><span class="token delimiter tag">#{</span>is_truthy<span class="token delimiter tag">}</span></span>&quot;</span>
+<span class="token keyword">end</span>
+
+check_truthy<span class="token punctuation">(</span><span class="token string">&quot;false&quot;</span><span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+check_truthy<span class="token punctuation">(</span><span class="token string">&quot;nil&quot;</span><span class="token punctuation">,</span> <span class="token keyword">nil</span><span class="token punctuation">)</span>
+check_truthy<span class="token punctuation">(</span><span class="token string">&quot;0&quot;</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+check_truthy<span class="token punctuation">(</span><span class="token string">&quot;empty string&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">)</span>
+check_truthy<span class="token punctuation">(</span><span class="token string">&quot;\\n&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span>
+check_truthy<span class="token punctuation">(</span><span class="token string">&quot;empty array&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+check_truthy<span class="token punctuation">(</span><span class="token string">&quot;empty hash&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>Will output:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token boolean">false</span> is falsy
+<span class="token keyword">nil</span> is falsy
+<span class="token number">0</span> is truthy
+empty string is truthy
+\n is truthy
+empty array is truthy
+empty hash is truthy
+
+</code></pre></div><h2 id="inline-if-unless"><a href="#inline-if-unless" class="header-anchor">#</a> Inline if/unless</h2> <p>A common pattern is to use an inline, or trailing, <code>if</code> or <code>unless</code>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>puts <span class="token string">&quot;x is less than 5&quot;</span> <span class="token keyword">if</span> x <span class="token operator">&lt;</span> <span class="token number">5</span>
+
+</code></pre></div><p>This is known as a conditional <strong>modifier</strong>, and is a handy way of adding simple guard code and early returns:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">save_to_file</span></span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> filename<span class="token punctuation">)</span>
+  <span class="token keyword">raise</span> <span class="token string">&quot;no filename given&quot;</span> <span class="token keyword">if</span> filename<span class="token punctuation">.</span>empty<span class="token operator">?</span>
+  <span class="token keyword">return</span> <span class="token boolean">false</span> <span class="token keyword">unless</span> data<span class="token punctuation">.</span>valid<span class="token operator">?</span>
+
+  <span class="token builtin">File</span><span class="token punctuation">.</span>write<span class="token punctuation">(</span>filename<span class="token punctuation">,</span> data<span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>It is not possible to add an <code>else</code> clause to these modifiers. Also it is generally not recommended to use conditional modifiers inside the main logic -- For complex code one should use normal <code>if</code>, <code>elsif</code>, <code>else</code> instead.</p> <h2 id="while-until"><a href="#while-until" class="header-anchor">#</a> while, until</h2> <p>A <code>while</code> loop executes the block while the given condition is met:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>i <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">while</span> i <span class="token operator">&lt;</span> <span class="token number">5</span>
+  puts <span class="token string">&quot;Iteration #<span class="token interpolation"><span class="token delimiter tag">#{</span>i<span class="token delimiter tag">}</span></span>&quot;</span>
+  i <span class="token operator">+</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>An <code>until</code> loop executes the block while the conditional is false:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>i <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">until</span> i <span class="token operator">==</span> <span class="token number">5</span>
+  puts <span class="token string">&quot;Iteration #<span class="token interpolation"><span class="token delimiter tag">#{</span>i<span class="token delimiter tag">}</span></span>&quot;</span>
+  i <span class="token operator">+</span><span class="token operator">=</span><span class="token number">1</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h2 id="or-equals-conditional-assignment-operator"><a href="#or-equals-conditional-assignment-operator" class="header-anchor">#</a> Or-Equals/Conditional assignment operator (||=)</h2> <p>Ruby has an or-equals operator that allows a value to be assigned to a variable if and only if that variable evaluates to either <code>nil</code> or <code>false</code>.</p> <div class="language- extra-class"><pre class="language-text"><code>
+||= # this is the operator that achieves this. 
+
+</code></pre></div><p>this operator with the double pipes representing or and the equals sign representing assigning of a value. You may think it represents something like this:</p> <div class="language- extra-class"><pre class="language-text"><code>
+x = x || y
+
+</code></pre></div><p>this above example is not correct. The or-equals operator actually represents this:</p> <div class="language- extra-class"><pre class="language-text"><code>
+x || x = y
+
+</code></pre></div><p>If <code>x</code> evaluates to <code>nil</code> or <code>false</code> then <code>x</code> is assigned the value of <code>y</code>, and left unchanged otherwise.</p> <p>Here is a practical use-case of the or-equals operator. Imagine you have a portion of your code that is expected to send an email to a user. What do you do if for what ever reason there is no email for this user. You might write something like this:</p> <div class="language- extra-class"><pre class="language-text"><code>
+if user_email.nil?
+    user_email = &quot;error@yourapp.com&quot;
+ end
+
+</code></pre></div><p>Using the or-equals operator we can cut this entire chunk of code, providing clean, clear control and functionality.</p> <div class="language- extra-class"><pre class="language-text"><code>
+user_email ||= &quot;error@yourapp.com&quot;
+
+</code></pre></div><p>In cases where <code>false</code> is a valid value, care must be taken to not override it accidentally:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>has_been_run <span class="token operator">=</span> <span class="token boolean">false</span>
+has_been_run <span class="token operator">||</span><span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token comment">#=&gt; true</span>
+
+has_been_run <span class="token operator">=</span> <span class="token boolean">false</span>
+has_been_run <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token keyword">if</span> has_been_run<span class="token punctuation">.</span><span class="token keyword">nil</span><span class="token operator">?</span>
+<span class="token comment">#=&gt; false</span>
+
+</code></pre></div><h2 id="flip-flop-operator"><a href="#flip-flop-operator" class="header-anchor">#</a> Flip-Flop operator</h2> <p>The flip flop operator <code>..</code> is used between two conditions in a conditional statement:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token punctuation">(</span><span class="token number">1.</span><span class="token number">.5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>select <span class="token keyword">do</span> <span class="token operator">|</span>e<span class="token operator">|</span>
+  e <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+<span class="token comment"># =&gt; [2, 3, 4]</span>
+
+</code></pre></div><p>The condition evaluates to <code>false</code> <strong>until</strong> the first part becomes <code>true</code>. Then it evaluates to <code>true</code> <strong>until</strong> the second part becomes <code>true</code>. After that it switches to <code>false</code> again.</p> <p>This example illustrates what is being selected:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">.</span>select <span class="token keyword">do</span> <span class="token operator">|</span>e<span class="token operator">|</span>
+  e <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+<span class="token comment"># =&gt; [2, 2, 3, 4]</span>
+
+</code></pre></div><p>The flip-flop operator only works inside ifs (including <code>unless</code>) and ternary operator. Otherwise it is being considered as the range operator.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token punctuation">(</span><span class="token number">1.</span><span class="token number">.5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>select <span class="token keyword">do</span> <span class="token operator">|</span>e<span class="token operator">|</span>
+  <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+<span class="token comment"># =&gt; ArgumentError: bad value for range</span>
+
+</code></pre></div><p>It can switch from <code>false</code> to <code>true</code> and backwards multiple times:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1.</span><span class="token number">.5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>to_a <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>select <span class="token keyword">do</span> <span class="token operator">|</span>e<span class="token operator">|</span>
+  e <span class="token keyword">if</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">(</span>e <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+<span class="token comment"># =&gt; [2, 3, 4, 2, 3, 4] </span>
+
+</code></pre></div><h2 id="unless"><a href="#unless" class="header-anchor">#</a> unless</h2> <p>A common statement is <code>if !(some condition)</code>. Ruby offers the alternative of the <code>unless</code> statement.</p> <p>The structure is exactly the same as an <code>if</code> statement, except the condition is negative. Also, the <code>unless</code> statement does not support <code>elsif</code>, but it does support <code>else</code>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># Prints not inclusive</span>
+<span class="token keyword">unless</span> <span class="token string">'hellow'</span><span class="token punctuation">.</span><span class="token keyword">include</span><span class="token operator">?</span><span class="token punctuation">(</span><span class="token string">'all'</span><span class="token punctuation">)</span>
+  puts <span class="token string">'not inclusive'</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h2 id="throw-catch"><a href="#throw-catch" class="header-anchor">#</a> throw, catch</h2> <p>Unlike many other programming languages, the <code>throw</code> and <code>catch</code> keywords are not related to exception handling in Ruby.</p> <p>In Ruby, <code>throw</code> and <code>catch</code> act a bit like labels in other languages. They are used to change the control flow, but are not related to a concept of &quot;error&quot; like Exceptions are.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>catch<span class="token punctuation">(</span><span class="token symbol">:out</span><span class="token punctuation">)</span> <span class="token keyword">do</span>
+  catch<span class="token punctuation">(</span><span class="token symbol">:nested</span><span class="token punctuation">)</span> <span class="token keyword">do</span>
+    puts <span class="token string">&quot;nested&quot;</span>
+  <span class="token keyword">end</span>
+
+  puts <span class="token string">&quot;before&quot;</span>
+  <span class="token keyword">throw</span> <span class="token symbol">:out</span>
+  puts <span class="token string">&quot;will not be executed&quot;</span>
+<span class="token keyword">end</span>
+puts <span class="token string">&quot;after&quot;</span>
+<span class="token comment"># prints &quot;nested&quot;, &quot;before&quot;, &quot;after&quot;</span>
+
+</code></pre></div><h2 id="ternary-operator"><a href="#ternary-operator" class="header-anchor">#</a> Ternary operator</h2> <p>Ruby has a ternary operator (<code>?:</code>), which returns one of two value based on if a condition evaluates as truthy:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>conditional <span class="token operator">?</span> value_if_truthy <span class="token punctuation">:</span> value_if_falsy
+
+value <span class="token operator">=</span> <span class="token boolean">true</span>
+value <span class="token operator">?</span> <span class="token string">&quot;true&quot;</span> <span class="token punctuation">:</span> <span class="token string">&quot;false&quot;</span>
+<span class="token comment">#=&gt; &quot;true&quot;</span>
+
+value <span class="token operator">=</span> <span class="token boolean">false</span>
+value <span class="token operator">?</span> <span class="token string">&quot;true&quot;</span> <span class="token punctuation">:</span> <span class="token string">&quot;false&quot;</span>
+<span class="token comment">#=&gt; &quot;false&quot;</span>
+
+</code></pre></div><p>it is the same as writing <code>if a then b else c end</code>, though the ternary is preferred</p> <p>Examples:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>puts <span class="token punctuation">(</span><span class="token keyword">if</span> <span class="token number">1</span> <span class="token keyword">then</span> <span class="token number">2</span> <span class="token keyword">else</span> <span class="token number">3</span> <span class="token keyword">end</span><span class="token punctuation">)</span> <span class="token comment"># =&gt; 2</span>
+
+puts <span class="token number">1</span> <span class="token operator">?</span> <span class="token number">2</span> <span class="token punctuation">:</span> <span class="token number">3</span>                <span class="token comment"># =&gt; 2</span>
+
+x <span class="token operator">=</span> <span class="token keyword">if</span> <span class="token number">1</span> <span class="token keyword">then</span> <span class="token number">2</span> <span class="token keyword">else</span> <span class="token number">3</span> <span class="token keyword">end</span>
+puts x                        <span class="token comment"># =&gt; 2</span>
+
+</code></pre></div><h2 id="loop-control-with-break-next-and-redo"><a href="#loop-control-with-break-next-and-redo" class="header-anchor">#</a> Loop control with break, next, and redo</h2> <p>The flow of execution of a Ruby block may be controlled with the <code>break</code>, <code>next</code>, and <code>redo</code> statements.</p> <h3 id="break"><a href="#break" class="header-anchor">#</a> <code>break</code></h3> <p>The <code>break</code> statement will exit the block immediately.  Any remaining instructions in the block will be skipped, and the iteration will end:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>actions <span class="token operator">=</span> <span class="token string">%w(run jump swim exit macarena)</span>
+index <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token keyword">while</span> index <span class="token operator">&lt;</span> actions<span class="token punctuation">.</span>length
+  action <span class="token operator">=</span> actions<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+
+  <span class="token keyword">break</span> <span class="token keyword">if</span> action <span class="token operator">==</span> <span class="token string">&quot;exit&quot;</span>
+
+  index <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+  puts <span class="token string">&quot;Currently doing this action: <span class="token interpolation"><span class="token delimiter tag">#{</span>action<span class="token delimiter tag">}</span></span>&quot;</span>
+<span class="token keyword">end</span>
+
+<span class="token comment"># Currently doing this action: run</span>
+<span class="token comment"># Currently doing this action: jump</span>
+<span class="token comment"># Currently doing this action: swim</span>
+
+</code></pre></div><h3 id="next"><a href="#next" class="header-anchor">#</a> <code>next</code></h3> <p>The <code>next</code> statement will return to the top of the block immediately, and proceed with the next iteration.  Any remaining instructions in the block will be skipped:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>actions <span class="token operator">=</span> <span class="token string">%w(run jump swim rest macarena)</span>
+index <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token keyword">while</span> index <span class="token operator">&lt;</span> actions<span class="token punctuation">.</span>length
+  action <span class="token operator">=</span> actions<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+  index <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+
+  <span class="token keyword">next</span> <span class="token keyword">if</span> action <span class="token operator">==</span> <span class="token string">&quot;rest&quot;</span>
+
+  puts <span class="token string">&quot;Currently doing this action: <span class="token interpolation"><span class="token delimiter tag">#{</span>action<span class="token delimiter tag">}</span></span>&quot;</span>
+<span class="token keyword">end</span>
+
+<span class="token comment"># Currently doing this action: run</span>
+<span class="token comment"># Currently doing this action: jump</span>
+<span class="token comment"># Currently doing this action: swim</span>
+<span class="token comment"># Currently doing this action: macarena</span>
+
+</code></pre></div><h3 id="redo"><a href="#redo" class="header-anchor">#</a> <code>redo</code></h3> <p>The <code>redo</code> statement will return to the top of the block immediately, and retry the same iteration.  Any remaining instructions in the block will be skipped:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>actions <span class="token operator">=</span> <span class="token string">%w(run jump swim sleep macarena)</span>
+index <span class="token operator">=</span> <span class="token number">0</span>
+repeat_count <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token keyword">while</span> index <span class="token operator">&lt;</span> actions<span class="token punctuation">.</span>length
+  action <span class="token operator">=</span> actions<span class="token punctuation">[</span>index<span class="token punctuation">]</span>
+  puts <span class="token string">&quot;Currently doing this action: <span class="token interpolation"><span class="token delimiter tag">#{</span>action<span class="token delimiter tag">}</span></span>&quot;</span>
+
+  <span class="token keyword">if</span> action <span class="token operator">==</span> <span class="token string">&quot;sleep&quot;</span>
+    repeat_count <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">redo</span> <span class="token keyword">if</span> repeat_count <span class="token operator">&lt;</span> <span class="token number">3</span>
+  <span class="token keyword">end</span>
+
+  index <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">end</span>
+
+<span class="token comment"># Currently doing this action: run</span>
+<span class="token comment"># Currently doing this action: jump</span>
+<span class="token comment"># Currently doing this action: swim</span>
+<span class="token comment"># Currently doing this action: sleep</span>
+<span class="token comment"># Currently doing this action: sleep</span>
+<span class="token comment"># Currently doing this action: sleep</span>
+<span class="token comment"># Currently doing this action: macarena</span>
+
+</code></pre></div><h3 id="enumerable-iteration"><a href="#enumerable-iteration" class="header-anchor">#</a> <code>Enumerable</code> iteration</h3> <p>In addition to loops, these statements work with Enumerable iteration methods, such as <code>each</code> and <code>map</code>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token keyword">each</span> <span class="token keyword">do</span> <span class="token operator">|</span>item<span class="token operator">|</span>
+  <span class="token keyword">next</span> <span class="token keyword">if</span> item<span class="token punctuation">.</span>even<span class="token operator">?</span>
+  puts <span class="token string">&quot;Item: <span class="token interpolation"><span class="token delimiter tag">#{</span>item<span class="token delimiter tag">}</span></span>&quot;</span>
+<span class="token keyword">end</span>
+
+<span class="token comment"># Item: 1</span>
+<span class="token comment"># Item: 3</span>
+
+</code></pre></div><h3 id="block-result-values"><a href="#block-result-values" class="header-anchor">#</a> Block result values</h3> <p>In both the <code>break</code> and <code>next</code> statements, a value may be provided, and will be used as a block result value:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>even_value <span class="token operator">=</span> <span class="token keyword">for</span> value <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+  <span class="token keyword">break</span> value <span class="token keyword">if</span> value<span class="token punctuation">.</span>even<span class="token operator">?</span>
+<span class="token keyword">end</span>
+
+puts <span class="token string">&quot;The first even value is: <span class="token interpolation"><span class="token delimiter tag">#{</span>even_value<span class="token delimiter tag">}</span></span>&quot;</span>
+
+<span class="token comment"># The first even value is: 2</span>
+
+</code></pre></div><h2 id="return-vs-next-non-local-return-in-a-block"><a href="#return-vs-next-non-local-return-in-a-block" class="header-anchor">#</a> return vs. next: non-local return in a block</h2> <p>Consider this <strong>broken</strong> snippet:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">foo</span></span>
+  bar <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">.</span>map <span class="token keyword">do</span> <span class="token operator">|</span>x<span class="token operator">|</span>
+    <span class="token keyword">return</span> <span class="token number">0</span> <span class="token keyword">if</span> x<span class="token punctuation">.</span>even<span class="token operator">?</span>
+    x
+  <span class="token keyword">end</span>
+  puts <span class="token string">'baz'</span>
+  bar
+<span class="token keyword">end</span>
+foo <span class="token comment"># =&gt; 0</span>
+
+</code></pre></div><p>One might expect <code>return</code> to yield a value for <code>map</code>'s array of block results. So the return value of <code>foo</code> would be <code>[1, 0, 3, 0]</code>. Instead, <strong><code>return</code> returns a value from the method <code>foo</code></strong>. Notice that <code>baz</code> isn't printed, which means execution never reached that line.</p> <p><code>next</code> with a value does the trick. It acts as a block-level <code>return</code>.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">foo</span></span>
+  bar <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">.</span>map <span class="token keyword">do</span> <span class="token operator">|</span>x<span class="token operator">|</span>
+    <span class="token keyword">next</span> <span class="token number">0</span> <span class="token keyword">if</span> x<span class="token punctuation">.</span>even<span class="token operator">?</span>
+    x
+  <span class="token keyword">end</span>
+  puts <span class="token string">'baz'</span>
+  bar
+<span class="token keyword">end</span>
+foo <span class="token comment"># baz</span>
+    <span class="token comment"># =&gt; [1, 0, 3, 0]</span>
+
+</code></pre></div><p>In the absence of a <code>return</code>, the value returned by the block is the value of its last expression.</p> <h2 id="control-flow-with-logic-statements"><a href="#control-flow-with-logic-statements" class="header-anchor">#</a> Control flow with logic statements</h2> <p>While it might seem counterintuitive, you can use logical operators to determine whether or not a statement is run. For instance:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token builtin">File</span><span class="token punctuation">.</span>exist<span class="token operator">?</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span> <span class="token keyword">or</span> <span class="token constant">STDERR</span><span class="token punctuation">.</span>puts <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>filename<span class="token delimiter tag">}</span></span> does not exist!&quot;</span>
+
+</code></pre></div><p>This will check to see if the file exists and only print the error message if it doesn't. The <code>or</code> statement is lazy, which means it'll stop executing once it's sure which whether it's value is true or false. As soon as the first term is found to be true, there's no need to check the value of the other term. But if the first term is false, it must check the second term.</p> <p>A common use is to set a default value:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>glass <span class="token operator">=</span> glass <span class="token keyword">or</span> <span class="token string">'full'</span> <span class="token comment"># Optimist! </span>
+
+</code></pre></div><p>That sets the value of <code>glass</code> to 'full' if it's not already set. More concisely, you can use the symbolic version of <code>or</code>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>glass <span class="token operator">||</span><span class="token operator">=</span> <span class="token string">'empty'</span> <span class="token comment"># Pessimist. </span>
+
+</code></pre></div><p>It's also possible to run the second statement only if the first one is false:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token builtin">File</span><span class="token punctuation">.</span>exist<span class="token operator">?</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span> <span class="token keyword">and</span> puts <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>filename<span class="token delimiter tag">}</span></span> found!&quot;</span>
+
+</code></pre></div><p>Again, <code>and</code> is lazy so it will only execute the second statement if necessary to arrive at a value.</p> <p>The <code>or</code> operator has lower precedence than <code>and</code>. Similarly, <code>||</code> has lower precedence than <code>&amp;&amp;</code>. The symbol forms have higher precedence than the word forms. This is handy to know when you want to mix this technique with assignment:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>a <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">and</span> b <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token comment">#=&gt; a==1</span>
+<span class="token comment">#=&gt; b==2</span>
+
+</code></pre></div><div class="language-ruby extra-class"><pre class="language-ruby"><code>a <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&amp;&amp;</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> puts a<span class="token punctuation">,</span> b
+<span class="token comment">#=&gt; a==2</span>
+<span class="token comment">#=&gt; b==2</span>
+
+</code></pre></div><p>Note that the Ruby Style Guide <a href="https://github.com/bbatsov/ruby-style-guide#no-and-or-or" target="_blank" rel="noopener noreferrer">recommends<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <blockquote></blockquote> <p>The <code>and</code> and <code>or</code> keywords are banned. The minimal added readability is just not worth the high probability of introducing subtle bugs. For boolean expressions, always use <code>&amp;&amp;</code> and <code>||</code> instead. For flow control, use <code>if</code> and <code>unless</code>; <code>&amp;&amp;</code> and <code>||</code> are also acceptable but less clear.</p> <h2 id="begin-end"><a href="#begin-end" class="header-anchor">#</a> begin, end</h2> <p>The <code>begin</code> block is a control structure that groups together multiple statements.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">begin</span>
+  a <span class="token operator">=</span> <span class="token number">7</span>
+  b <span class="token operator">=</span> <span class="token number">6</span>
+  a <span class="token operator">*</span> b
+<span class="token keyword">end</span>
+
+</code></pre></div><p>A <code>begin</code> block will return the value of the last statement in the block.  The following example will return <code>3</code>.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">begin</span>
+  <span class="token number">1</span>
+  <span class="token number">2</span>
+  <span class="token number">3</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>The <code>begin</code> block is useful for conditional assignment using the <code>||=</code> operator where multiple statements may be required to return a result.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>circumference <span class="token operator">||</span><span class="token operator">=</span>
+  <span class="token keyword">begin</span>
+    radius <span class="token operator">=</span> <span class="token number">7</span>
+    tau <span class="token operator">=</span> <span class="token constant">Math</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token constant">PI</span> <span class="token operator">*</span> <span class="token number">2</span>
+    tau <span class="token operator">*</span> radius
+  <span class="token keyword">end</span>
+
+</code></pre></div><p>It can also be combined with other block structures such as <code>rescue</code>, <code>ensure</code>, <code>while</code>, <code>if</code>, <code>unless</code>, etc to provide greater control of program flow.</p> <p><code>Begin</code> blocks are not code blocks, like <code>{ ... }</code> or <code>do ... end</code>; they cannot be passed to functions.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/ruby/control-flow.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/ruby/comparable.html" class="prev">
+        Comparable
+      </a></span> <span class="next"><a href="/ruby/methods.html">
+        Methods
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3060.f2ade2fa.js" defer></script>
+  </body>
+</html>

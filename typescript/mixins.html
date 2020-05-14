@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TypeScript - Mixins</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Example of Mixins">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="TypeScript - Mixins">
+    <meta property="og:description" content="Example of Mixins">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/typescript/mixins.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="TypeScript - Mixins">
+    <meta name="twitter:description" content="Example of Mixins">
+    <meta name="twitter:url" content="/typescript/mixins.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3382.823e76a7.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>TypeScript</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/typescript/" class="sidebar-link">Disclaimer</a></li><li><a href="/typescript/getting-started-with-typescript.html" class="sidebar-link">Getting started with TypeScript</a></li><li><a href="/typescript/why-and-when-to-use-typescript.html" class="sidebar-link">Why and when to use TypeScript</a></li><li><a href="/typescript/typescript-core-types.html" class="sidebar-link">TypeScript Core Types</a></li><li><a href="/typescript/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/typescript/enums.html" class="sidebar-link">Enums</a></li><li><a href="/typescript/functions.html" class="sidebar-link">Functions</a></li><li><a href="/typescript/classes.html" class="sidebar-link">Classes</a></li><li><a href="/typescript/class-decorator.html" class="sidebar-link">Class Decorator</a></li><li><a href="/typescript/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/typescript/generics.html" class="sidebar-link">Generics</a></li><li><a href="/typescript/strict-null-checks.html" class="sidebar-link">Strict null checks</a></li><li><a href="/typescript/user-defined-type-guards.html" class="sidebar-link">User-defined Type Guards</a></li><li><a href="/typescript/typescript-basic-examples.html" class="sidebar-link">Typescript basic examples</a></li><li><a href="/typescript/importing-external-libraries.html" class="sidebar-link">Importing external libraries</a></li><li><a href="/typescript/modules-exporting-and-importing.html" class="sidebar-link">Modules - exporting and importing</a></li><li><a href="/typescript/publish-typescript-definition-files.html" class="sidebar-link">Publish TypeScript definition files</a></li><li><a href="/typescript/using-typescript-with-webpack.html" class="sidebar-link">Using TypeScript with webpack</a></li><li><a href="/typescript/mixins.html" class="active sidebar-link">Mixins</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/typescript/mixins.html#example-of-mixins" class="sidebar-link">Example of Mixins</a></li></ul></li><li><a href="/typescript/how-to-use-a-javascript-library-without-a-type-definition-file.html" class="sidebar-link">How to use a javascript library without a type definition file</a></li><li><a href="/typescript/typescript-installing-typescript-and-running-the-typescript-compiler-tsc.html" class="sidebar-link">Typescript-installing-typescript-and-running-the-typescript-compiler-tsc</a></li><li><a href="/typescript/configure-typescript-project-to-compile-all-files-in-typescript.html" class="sidebar-link">Configure typescript project to compile all files in typescript.</a></li><li><a href="/typescript/integrating-with-build-tools.html" class="sidebar-link">Integrating with Build Tools</a></li><li><a href="/typescript/using-typescript-with-requirejs.html" class="sidebar-link">Using Typescript with RequireJS</a></li><li><a href="/typescript/typescript-with-angularjs.html" class="sidebar-link">TypeScript with AngularJS</a></li><li><a href="/typescript/typescript-with-systemjs.html" class="sidebar-link">TypeScript with SystemJS</a></li><li><a href="/typescript/using-typescript-with-react-js-native.html" class="sidebar-link">Using Typescript with React (JS &amp; native)</a></li><li><a href="/typescript/tslint-assuring-code-quality-and-consistency.html" class="sidebar-link">TSLint - assuring code quality and consistency</a></li><li><a href="/typescript/tsconfig-json.html" class="sidebar-link">tsconfig.json</a></li><li><a href="/typescript/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/typescript/unit-testing.html" class="sidebar-link">Unit Testing</a></li><li><a href="/typescript/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="mixins"><a href="#mixins" class="header-anchor">#</a> Mixins</h1> <h2 id="example-of-mixins"><a href="#example-of-mixins" class="header-anchor">#</a> Example of Mixins</h2> <p>To create mixins, simply declare lightweight classes that can be used as &quot;behaviours&quot;.</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">class</span> <span class="token class-name">Flies</span> <span class="token punctuation">{</span>
+    <span class="token function">fly</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'Is it a bird? Is it a plane?'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Climbs</span> <span class="token punctuation">{</span>
+    <span class="token function">climb</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'My spider-sense is tingling.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Bulletproof</span> <span class="token punctuation">{</span>
+    <span class="token function">deflect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'My wings are a shield of steel.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You can then apply these behaviours to a composition class:</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">class</span> <span class="token class-name">BeetleGuy</span> <span class="token keyword">implements</span> <span class="token class-name">Climbs</span><span class="token punctuation">,</span> Bulletproof <span class="token punctuation">{</span>
+        <span class="token function-variable function">climb</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+        <span class="token function-variable function">deflect</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">applyMixins</span> <span class="token punctuation">(</span>BeetleGuy<span class="token punctuation">,</span> <span class="token punctuation">[</span>Climbs<span class="token punctuation">,</span> Bulletproof<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The <code>applyMixins</code> function is needed to do the work of composition.</p> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">function</span> <span class="token function">applyMixins</span><span class="token punctuation">(</span><span class="token parameter">derivedCtor<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">,</span> baseCtors<span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    baseCtors<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">baseCtor</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        Object<span class="token punctuation">.</span><span class="token function">getOwnPropertyNames</span><span class="token punctuation">(</span>baseCtor<span class="token punctuation">.</span>prototype<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">name</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+             <span class="token keyword">if</span> <span class="token punctuation">(</span>name <span class="token operator">!==</span> <span class="token string">'constructor'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                derivedCtor<span class="token punctuation">.</span>prototype<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> baseCtor<span class="token punctuation">.</span>prototype<span class="token punctuation">[</span>name<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>class BeetleGuy implements Climbs, Bulletproof { }</li> <li>applyMixins (BeetleGuy, [Climbs, Bulletproof]);</li></ul> <h4 id="parameters"><a href="#parameters" class="header-anchor">#</a> Parameters</h4> <table><thead><tr><th>Parameter</th> <th>Description</th></tr></thead> <tbody><tr><td>derivedCtor</td> <td>The class that you want to use as the composition class</td></tr> <tr><td>baseCtors</td> <td>An array of classes to be added to the composition class</td></tr></tbody></table> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>There are three rules to bear in mind with mixins:</p> <ul><li>You use the <code>implements</code> keyword, not the <code>extends</code> keyword when you write your composition class</li> <li>You need to have a matching signature to keep the compiler quiet (but it doesn’t need any real implementation – it will get that from the mixin).</li> <li>You need to call <code>applyMixins</code> with the correct arguments.</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/typescript/mixins.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/typescript/using-typescript-with-webpack.html" class="prev">
+        Using TypeScript with webpack
+      </a></span> <span class="next"><a href="/typescript/how-to-use-a-javascript-library-without-a-type-definition-file.html">
+        How to use a javascript library without a type definition file
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3382.823e76a7.js" defer></script>
+  </body>
+</html>

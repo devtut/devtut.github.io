@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kotlin - RecyclerView in Kotlin</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Main class and Adapter">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Kotlin - RecyclerView in Kotlin">
+    <meta property="og:description" content="Main class and Adapter">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/kotlin/recyclerview-in-kotlin.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Kotlin - RecyclerView in Kotlin">
+    <meta name="twitter:description" content="Main class and Adapter">
+    <meta name="twitter:url" content="/kotlin/recyclerview-in-kotlin.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1855.f64d49ff.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Kotlin</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/kotlin/" class="sidebar-link">Disclaimer</a></li><li><a href="/kotlin/getting-started-with-kotlin.html" class="sidebar-link">Getting started with Kotlin</a></li><li><a href="/kotlin/basics-of-kotlin.html" class="sidebar-link">Basics of Kotlin</a></li><li><a href="/kotlin/strings.html" class="sidebar-link">Strings</a></li><li><a href="/kotlin/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/kotlin/collections.html" class="sidebar-link">Collections</a></li><li><a href="/kotlin/enum.html" class="sidebar-link">Enum</a></li><li><a href="/kotlin/functions.html" class="sidebar-link">Functions</a></li><li><a href="/kotlin/vararg-parameters-in-functions.html" class="sidebar-link">Vararg Parameters in Functions</a></li><li><a href="/kotlin/conditional-statements.html" class="sidebar-link">Conditional Statements</a></li><li><a href="/kotlin/loops-in-kotlin.html" class="sidebar-link">Loops in Kotlin</a></li><li><a href="/kotlin/ranges.html" class="sidebar-link">Ranges</a></li><li><a href="/kotlin/regex.html" class="sidebar-link">Regex</a></li><li><a href="/kotlin/basic-lambdas.html" class="sidebar-link">Basic Lambdas</a></li><li><a href="/kotlin/null-safety.html" class="sidebar-link">Null Safety</a></li><li><a href="/kotlin/class-delegation.html" class="sidebar-link">Class Delegation</a></li><li><a href="/kotlin/class-inheritance.html" class="sidebar-link">Class Inheritance</a></li><li><a href="/kotlin/visibility-modifiers.html" class="sidebar-link">Visibility Modifiers</a></li><li><a href="/kotlin/generics.html" class="sidebar-link">Generics</a></li><li><a href="/kotlin/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/kotlin/singleton-objects.html" class="sidebar-link">Singleton objects</a></li><li><a href="/kotlin/coroutines.html" class="sidebar-link">coroutines</a></li><li><a href="/kotlin/annotations.html" class="sidebar-link">Annotations</a></li><li><a href="/kotlin/type-aliases.html" class="sidebar-link">Type aliases</a></li><li><a href="/kotlin/type-safe-builders.html" class="sidebar-link">Type-Safe Builders</a></li><li><a href="/kotlin/delegated-properties.html" class="sidebar-link">Delegated properties</a></li><li><a href="/kotlin/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/kotlin/extension-methods.html" class="sidebar-link">Extension Methods</a></li><li><a href="/kotlin/dsl-building.html" class="sidebar-link">DSL Building</a></li><li><a href="/kotlin/idioms.html" class="sidebar-link">Idioms</a></li><li><a href="/kotlin/recyclerview-in-kotlin.html" class="active sidebar-link">RecyclerView in Kotlin</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/kotlin/recyclerview-in-kotlin.html#main-class-and-adapter" class="sidebar-link">Main class and Adapter</a></li></ul></li><li><a href="/kotlin/logging-in-kotlin.html" class="sidebar-link">logging in kotlin</a></li><li><a href="/kotlin/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/kotlin/junit.html" class="sidebar-link">JUnit</a></li><li><a href="/kotlin/kotlin-android-extensions.html" class="sidebar-link">Kotlin Android Extensions</a></li><li><a href="/kotlin/kotlin-for-java-developers.html" class="sidebar-link">Kotlin for Java Developers</a></li><li><a href="/kotlin/java-8-stream-equivalents.html" class="sidebar-link">Java 8 Stream Equivalents</a></li><li><a href="/kotlin/kotlin-caveats.html" class="sidebar-link">Kotlin Caveats</a></li><li><a href="/kotlin/configuring-kotlin-build.html" class="sidebar-link">Configuring Kotlin build</a></li><li><a href="/kotlin/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="recyclerview-in-kotlin"><a href="#recyclerview-in-kotlin" class="header-anchor">#</a> RecyclerView in Kotlin</h1> <p>I just want to share my little bit knowledge and code of RecyclerView using Kotlin.</p> <h2 id="main-class-and-adapter"><a href="#main-class-and-adapter" class="header-anchor">#</a> Main class and Adapter</h2> <p>I am assuming that you have aware about the some syntax of <strong>Kotlin</strong> and how to use, just add <strong>RecyclerView</strong> in <strong>activity_main.xml</strong> file and set with adapter class.</p> <div class="language-kotlin extra-class"><pre class="language-kotlin"><code><span class="token keyword">class</span> MainActivity <span class="token operator">:</span> <span class="token function">AppCompatActivity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    
+        <span class="token keyword">lateinit</span> <span class="token keyword">var</span> mRecyclerView <span class="token operator">:</span> RecyclerView
+        <span class="token keyword">val</span> mAdapter <span class="token operator">:</span> RecyclerAdapter <span class="token operator">=</span> <span class="token function">RecyclerAdapter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token operator">:</span> Bundle<span class="token operator">?</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">onCreate</span><span class="token punctuation">(</span>savedInstanceState<span class="token punctuation">)</span>
+            <span class="token function">setContentView</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>activity_main<span class="token punctuation">)</span>
+            <span class="token keyword">val</span> toolbar <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>toolbar<span class="token punctuation">)</span> <span class="token keyword">as</span> Toolbar
+            <span class="token function">setSupportActionBar</span><span class="token punctuation">(</span>toolbar<span class="token punctuation">)</span>
+    
+            mRecyclerView <span class="token operator">=</span> <span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>recycler_view<span class="token punctuation">)</span> <span class="token keyword">as</span> RecyclerView
+    
+            mRecyclerView<span class="token punctuation">.</span><span class="token function">setHasFixedSize</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span>
+            mRecyclerView<span class="token punctuation">.</span>layoutManager <span class="token operator">=</span> <span class="token function">LinearLayoutManager</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+            mAdapter<span class="token punctuation">.</span><span class="token function">RecyclerAdapter</span><span class="token punctuation">(</span><span class="token function">getList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">)</span>
+            mRecyclerView<span class="token punctuation">.</span>adapter <span class="token operator">=</span> mAdapter
+        <span class="token punctuation">}</span>
+    
+        <span class="token keyword">private</span> <span class="token keyword">fun</span> <span class="token function">getList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">var</span> list <span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span>  <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// equivalent of 1 &lt;= i &amp;&amp; i &lt;= 10</span>
+                <span class="token function">println</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+                list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation variable">$i</span>&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> list
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+</code></pre></div><p>this one is your recycler view <strong>adapter</strong> class and create <strong>main_item.xml</strong> file what you want</p> <div class="language-kotlin extra-class"><pre class="language-kotlin"><code><span class="token keyword">class</span> RecyclerAdapter <span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span>Adapter<span class="token operator">&lt;</span>RecyclerAdapter<span class="token punctuation">.</span>ViewHolder<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">var</span> mItems<span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span>  <span class="token operator">=</span> <span class="token function">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">lateinit</span> <span class="token keyword">var</span> mClick <span class="token operator">:</span> OnClick
+
+    <span class="token keyword">fun</span> <span class="token function">RecyclerAdapter</span><span class="token punctuation">(</span>item <span class="token operator">:</span> ArrayList<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">,</span> mClick <span class="token operator">:</span> OnClick<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>mItems <span class="token operator">=</span> item
+        <span class="token keyword">this</span><span class="token punctuation">.</span>mClick <span class="token operator">=</span> mClick<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onBindViewHolder</span><span class="token punctuation">(</span>holder<span class="token operator">:</span> ViewHolder<span class="token punctuation">,</span> position<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> item <span class="token operator">=</span> mItems<span class="token punctuation">[</span>position<span class="token punctuation">]</span>
+        holder<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> mClick<span class="token punctuation">,</span> position<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">onCreateViewHolder</span><span class="token punctuation">(</span>parent<span class="token operator">:</span> ViewGroup<span class="token punctuation">,</span> viewType<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> ViewHolder <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> layoutInflater <span class="token operator">=</span> LayoutInflater<span class="token punctuation">.</span><span class="token function">from</span><span class="token punctuation">(</span>parent<span class="token punctuation">.</span>context<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token function">ViewHolder</span><span class="token punctuation">(</span>layoutInflater<span class="token punctuation">.</span><span class="token function">inflate</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>layout<span class="token punctuation">.</span>main_item<span class="token punctuation">,</span> parent<span class="token punctuation">,</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">getItemCount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> mItems<span class="token punctuation">.</span>size
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">class</span> <span class="token function">ViewHolder</span><span class="token punctuation">(</span>view<span class="token operator">:</span> View<span class="token punctuation">)</span> <span class="token operator">:</span> RecyclerView<span class="token punctuation">.</span><span class="token function">ViewHolder</span><span class="token punctuation">(</span>view<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> card <span class="token operator">=</span> view<span class="token punctuation">.</span><span class="token function">findViewById</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>card<span class="token punctuation">)</span> <span class="token keyword">as</span> TextView
+        <span class="token keyword">fun</span> <span class="token function">bind</span><span class="token punctuation">(</span>str<span class="token operator">:</span> String<span class="token punctuation">,</span> mClick<span class="token operator">:</span> OnClick<span class="token punctuation">,</span> position<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            card<span class="token punctuation">.</span>text <span class="token operator">=</span> str
+            card<span class="token punctuation">.</span><span class="token function">setOnClickListener</span> <span class="token punctuation">{</span> view <span class="token operator">-&gt;</span>
+                mClick<span class="token punctuation">.</span><span class="token function">onClickListner</span><span class="token punctuation">(</span>position<span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/kotlin/recyclerview-in-kotlin.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/kotlin/idioms.html" class="prev">
+        Idioms
+      </a></span> <span class="next"><a href="/kotlin/logging-in-kotlin.html">
+        logging in kotlin
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1855.f64d49ff.js" defer></script>
+  </body>
+</html>

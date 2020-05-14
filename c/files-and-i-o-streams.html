@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C - Files and I/O streams</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Open and write to file, Run process, fprintf, Get lines from a file using getline(), Open and write to a binary file, fscanf(), Read lines from a file">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C - Files and I/O streams">
+    <meta property="og:description" content="Open and write to file, Run process, fprintf, Get lines from a file using getline(), Open and write to a binary file, fscanf(), Read lines from a file">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/c/files-and-i-o-streams.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C - Files and I/O streams">
+    <meta name="twitter:description" content="Open and write to file, Run process, fprintf, Get lines from a file using getline(), Open and write to a binary file, fscanf(), Read lines from a file">
+    <meta name="twitter:url" content="/c/files-and-i-o-streams.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/564.54137ff5.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/c/" class="sidebar-link">Disclaimer</a></li><li><a href="/c/getting-started-with-c-language.html" class="sidebar-link">Getting started with C Language</a></li><li><a href="/c/comments.html" class="sidebar-link">Comments</a></li><li><a href="/c/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/c/operators.html" class="sidebar-link">Operators</a></li><li><a href="/c/boolean.html" class="sidebar-link">Boolean</a></li><li><a href="/c/strings.html" class="sidebar-link">Strings</a></li><li><a href="/c/literals-for-numbers-characters-and-strings.html" class="sidebar-link">Literals for numbers, characters and strings</a></li><li><a href="/c/compound-literals.html" class="sidebar-link">Compound Literals</a></li><li><a href="/c/bit-fields.html" class="sidebar-link">Bit-fields</a></li><li><a href="/c/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/c/linked-lists.html" class="sidebar-link">Linked lists</a></li><li><a href="/c/enumerations.html" class="sidebar-link">Enumerations</a></li><li><a href="/c/structs.html" class="sidebar-link">Structs</a></li><li><a href="/c/standard-math.html" class="sidebar-link">Standard Math</a></li><li><a href="/c/iteration-statements-loops-for-while-do-while.html" class="sidebar-link">Iteration Statements/Loops: for, while, do-while</a></li><li><a href="/c/selection-statements.html" class="sidebar-link">Selection Statements</a></li><li><a href="/c/initialization.html" class="sidebar-link">Initialization</a></li><li><a href="/c/declaration-vs-definition.html" class="sidebar-link">Declaration vs Definition</a></li><li><a href="/c/files-and-i-o-streams.html" class="active sidebar-link">Files and I/O streams</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/c/files-and-i-o-streams.html#open-and-write-to-file" class="sidebar-link">Open and write to file</a></li><li class="sidebar-sub-header"><a href="/c/files-and-i-o-streams.html#run-process" class="sidebar-link">Run process</a></li><li class="sidebar-sub-header"><a href="/c/files-and-i-o-streams.html#fprintf" class="sidebar-link">fprintf</a></li><li class="sidebar-sub-header"><a href="/c/files-and-i-o-streams.html#get-lines-from-a-file-using-getline" class="sidebar-link">Get lines from a file using getline()</a></li><li class="sidebar-sub-header"><a href="/c/files-and-i-o-streams.html#open-and-write-to-a-binary-file" class="sidebar-link">Open and write to a binary file</a></li><li class="sidebar-sub-header"><a href="/c/files-and-i-o-streams.html#fscanf" class="sidebar-link">fscanf()</a></li><li class="sidebar-sub-header"><a href="/c/files-and-i-o-streams.html#read-lines-from-a-file" class="sidebar-link">Read lines from a file</a></li></ul></li><li><a href="/c/formatted-input-output.html" class="sidebar-link">Formatted Input/Output</a></li><li><a href="/c/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/c/sequence-points.html" class="sidebar-link">Sequence points</a></li><li><a href="/c/function-pointers.html" class="sidebar-link">Function Pointers</a></li><li><a href="/c/function-parameters.html" class="sidebar-link">Function Parameters</a></li><li><a href="/c/pass-2d-arrays-to-functions.html" class="sidebar-link">Pass 2D-arrays to functions</a></li><li><a href="/c/error-handling.html" class="sidebar-link">Error handling</a></li><li><a href="/c/undefined-behavior.html" class="sidebar-link">Undefined behavior</a></li><li><a href="/c/random-number-generation.html" class="sidebar-link">Random Number Generation</a></li><li><a href="/c/preprocessor-and-macros.html" class="sidebar-link">Preprocessor and Macros</a></li><li><a href="/c/signal-handling.html" class="sidebar-link">Signal handling</a></li><li><a href="/c/variable-arguments.html" class="sidebar-link">Variable arguments</a></li><li><a href="/c/assertion.html" class="sidebar-link">Assertion</a></li><li><a href="/c/generic-selection.html" class="sidebar-link">Generic selection</a></li><li><a href="/c/x-macros.html" class="sidebar-link">X-macros</a></li><li><a href="/c/aliasing-and-effective-type.html" class="sidebar-link">Aliasing and effective type</a></li><li><a href="/c/compilation.html" class="sidebar-link">Compilation</a></li><li><a href="/c/identifier-scope.html" class="sidebar-link">Identifier Scope</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/implicit-and-explicit-conversions.html" class="sidebar-link">Implicit and Explicit Conversions</a></li><li><a href="/c/type-qualifiers.html" class="sidebar-link">Type Qualifiers</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/typedef.html" class="sidebar-link">Typedef</a></li><li><a href="/c/storage-classes.html" class="sidebar-link">Storage Classes</a></li><li><a href="/c/declarations.html" class="sidebar-link">Declarations</a></li><li><a href="/c/inline-assembly.html" class="sidebar-link">Inline assembly</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/structure-padding-and-packing.html" class="sidebar-link">Structure Padding and Packing</a></li><li><a href="/c/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/c/implementation-defined-behaviour.html" class="sidebar-link">Implementation-defined behaviour</a></li><li><a href="/c/atomics.html" class="sidebar-link">Atomics</a></li><li><a href="/c/jump-statements.html" class="sidebar-link">Jump Statements</a></li><li><a href="/c/create-and-include-header-files.html" class="sidebar-link">Create and include header files</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/ctype-h-character-classification-conversion.html" class="sidebar-link">— character classification &amp; conversion</a></li><li><a href="/c/side-effects.html" class="sidebar-link">Side Effects</a></li><li><a href="/c/multi-character-character-sequence.html" class="sidebar-link">Multi-Character Character Sequence</a></li><li><a href="/c/constraints.html" class="sidebar-link">Constraints</a></li><li><a href="/c/inlining.html" class="sidebar-link">Inlining</a></li><li><a href="/c/unions.html" class="sidebar-link">Unions</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/c/interprocess-communication-ipc.html" class="sidebar-link">Interprocess Communication (IPC)</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/common-c-programming-idioms-and-developer-practices.html" class="sidebar-link">Common C programming idioms and developer practices</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="files-and-i-o-streams"><a href="#files-and-i-o-streams" class="header-anchor">#</a> Files and I/O streams</h1> <h2 id="open-and-write-to-file"><a href="#open-and-write-to-file" class="header-anchor">#</a> Open and write to file</h2> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span>   </span><span class="token comment">/* for perror(), fopen(), fputs() and fclose() */</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span>  </span><span class="token comment">/* for the EXIT_* macros */</span>
+ 
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> e <span class="token operator">=</span> EXIT_SUCCESS<span class="token punctuation">;</span>
+
+    <span class="token comment">/* Get path from argument to main else default to output.txt */</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>path <span class="token operator">=</span> <span class="token punctuation">(</span>argc <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">?</span> argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">:</span> <span class="token string">&quot;output.txt&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* Open file for writing and obtain file pointer */</span>
+    FILE <span class="token operator">*</span>file <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token string">&quot;w&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">/* Print error message and exit if fopen() failed */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>file<span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* Writes text to file. Unlike puts(), fputs() does not add a new-line. */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">fputs</span><span class="token punctuation">(</span><span class="token string">&quot;Output in file.\n&quot;</span><span class="token punctuation">,</span> file<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">EOF</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e <span class="token operator">=</span> EXIT_FAILURE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* Close file */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">fclose</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> e<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This program opens the file with name given in the argument to main, defaulting to <code>output.txt</code> if no argument is given.  If a file with the same name already exists, its contents are discarded and the file is treated as a new empty file. If the files does not already exist the <code>fopen()</code> call creates it.</p> <p>If the <code>fopen()</code> call fails for some reason, it returns a <code>NULL</code> value and sets the global <code>errno</code> variable value. This means that the program can test the returned value after the <code>fopen()</code> call and use <code>perror()</code>  if <code>fopen()</code> fails.</p> <p>If the <code>fopen()</code> call succeeds, it returns a valid <code>FILE</code> pointer. This pointer can then be used to reference this file until <code>fclose()</code> is called on it.</p> <p>The <code>fputs()</code> function writes the given text to the opened file, replacing any previous contents of the file. Similarly to <code>fopen()</code>, the <code>fputs()</code> function also sets the <code>errno</code> value if it fails, though in this case the function returns <code>EOF</code> to indicate the fail (it otherwise returns a non-negative value).</p> <p>The <code>fclose()</code> function flushes any buffers, closes the file and frees the memory pointed to by <code>FILE *</code>. The return value indicates completion just as <code>fputs()</code> does (though it returns '0' if successful), again also setting the <code>errno</code> value in the case of a fail.</p> <h2 id="run-process"><a href="#run-process" class="header-anchor">#</a> Run process</h2> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">print_all</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>stream<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> c<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>c <span class="token operator">=</span> <span class="token function">getc</span><span class="token punctuation">(</span>stream<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token constant">EOF</span><span class="token punctuation">)</span>
+        <span class="token function">putchar</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    FILE <span class="token operator">*</span>stream<span class="token punctuation">;</span>
+
+    <span class="token comment">/* call netstat command. netstat is available for Windows and Linux */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>stream <span class="token operator">=</span> <span class="token function">popen</span><span class="token punctuation">(</span><span class="token string">&quot;netstat&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;r&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  
+    <span class="token function">print_all</span><span class="token punctuation">(</span>stream<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">pclose</span><span class="token punctuation">(</span>stream<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This program runs a process (<a href="http://man7.org/linux/man-pages/man8/netstat.8.html" target="_blank" rel="noopener noreferrer"><code>netstat</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>) via <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/popen.html" target="_blank" rel="noopener noreferrer"><code>popen()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> and reads all the standard output from the process and echoes that to standard output.</p> <p><strong>Note:</strong> <code>popen()</code> does not exist in the <a href="https://en.wikipedia.org/wiki/C_standard_library" target="_blank" rel="noopener noreferrer">standard C library<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, but it is rather a part of <a href="https://en.wikipedia.org/wiki/C_POSIX_library" target="_blank" rel="noopener noreferrer">POSIX C<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>)</p> <h2 id="fprintf"><a href="#fprintf" class="header-anchor">#</a> fprintf</h2> <p>You can use <code>fprintf</code> on a file just like you might on a console with <code>printf</code>. For example to keep track of game wins, losses and ties you might write</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* saves wins, losses and, ties */</span>
+<span class="token keyword">void</span> <span class="token function">savewlt</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fout<span class="token punctuation">,</span> <span class="token keyword">int</span> wins<span class="token punctuation">,</span> <span class="token keyword">int</span> losses<span class="token punctuation">,</span> <span class="token keyword">int</span> ties<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span>fout<span class="token punctuation">,</span> <span class="token string">&quot;Wins: %d\nTies: %d\nLosses: %d\n&quot;</span><span class="token punctuation">,</span> wins<span class="token punctuation">,</span> ties<span class="token punctuation">,</span> losses<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>A side note: Some systems (infamously, Windows) do not use what most programmers would call &quot;normal&quot; line endings. While UNIX-like systems use \n to terminate lines, Windows uses a pair of characters: \r (carriage return) and \n (line feed). This sequence is commonly called CRLF. However, whenever using C, you do not need to worry about these highly platform-dependent details. A C compiler is required to convert every instance of \n to the correct platform line ending. So a Windows compiler would convert \n to \r\n, but a UNIX compiler would keep it as-is.</p> <h2 id="get-lines-from-a-file-using-getline"><a href="#get-lines-from-a-file-using-getline" class="header-anchor">#</a> Get lines from a file using getline()</h2> <p>The POSIX C library defines the <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/getline.html" target="_blank" rel="noopener noreferrer"><code>getline()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> function. This function allocates a buffer to hold the line contents and returns the new line, the number of characters in the line, and the size of the buffer.</p> <p>Example program that gets each line from <code>example.txt</code>:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span>  </span>
+
+
+<span class="token macro property">#<span class="token directive keyword">define</span> FILENAME &quot;example.txt&quot;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">/* Open the file for reading */</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>line_buf <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+  size_t line_buf_size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> line_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  ssize_t line_size<span class="token punctuation">;</span>
+  FILE <span class="token operator">*</span>fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>FILENAME<span class="token punctuation">,</span> <span class="token string">&quot;r&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>fp<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;Error opening file '%s'\n&quot;</span><span class="token punctuation">,</span> FILENAME<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* Get the first line of the file. */</span>
+  line_size <span class="token operator">=</span> <span class="token function">getline</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>line_buf<span class="token punctuation">,</span> <span class="token operator">&amp;</span>line_buf_size<span class="token punctuation">,</span> fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">/* Loop through until we are done with the file. */</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>line_size <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token comment">/* Increment our line count */</span>
+    line_count<span class="token operator">++</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* Show the line details */</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;line[%06d]: chars=%06zd, buf size=%06zu, contents: %s&quot;</span><span class="token punctuation">,</span> line_count<span class="token punctuation">,</span>
+        line_size<span class="token punctuation">,</span> line_buf_size<span class="token punctuation">,</span> line_buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* Get the next line */</span>
+    line_size <span class="token operator">=</span> <span class="token function">getline</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>line_buf<span class="token punctuation">,</span> <span class="token operator">&amp;</span>line_buf_size<span class="token punctuation">,</span> fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* Free the allocated line buffer */</span>
+  <span class="token function">free</span><span class="token punctuation">(</span>line_buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  line_buf <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+  <span class="token comment">/* Close the file now that we are done with it */</span>
+  <span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> EXIT_SUCCESS<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="input-file-example-txt"><a href="#input-file-example-txt" class="header-anchor">#</a> Input file <code>example.txt</code></h3> <div class="language-c extra-class"><pre class="language-c"><code>This is a file
+  which has
+multiple lines
+    with various indentation<span class="token punctuation">,</span>
+blank lines
+
+
+
+a really <span class="token keyword">long</span> line to show that <span class="token function">getline</span><span class="token punctuation">(</span><span class="token punctuation">)</span> will reallocate the line buffer <span class="token keyword">if</span> the length of a line is too <span class="token keyword">long</span> to fit in the buffer it has been given<span class="token punctuation">,</span>
+  and punctuation at the end of the lines<span class="token punctuation">.</span>
+
+</code></pre></div><h3 id="output"><a href="#output" class="header-anchor">#</a> Output</h3> <div class="language-c extra-class"><pre class="language-c"><code>line<span class="token punctuation">[</span><span class="token number">000001</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000015</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000016</span><span class="token punctuation">,</span> contents<span class="token operator">:</span> This is a file
+line<span class="token punctuation">[</span><span class="token number">000002</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000012</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000016</span><span class="token punctuation">,</span> contents<span class="token operator">:</span>   which has
+line<span class="token punctuation">[</span><span class="token number">000003</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000015</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000016</span><span class="token punctuation">,</span> contents<span class="token operator">:</span> multiple lines
+line<span class="token punctuation">[</span><span class="token number">000004</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000030</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000032</span><span class="token punctuation">,</span> contents<span class="token operator">:</span>     with various indentation<span class="token punctuation">,</span>
+line<span class="token punctuation">[</span><span class="token number">000005</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000012</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000032</span><span class="token punctuation">,</span> contents<span class="token operator">:</span> blank lines
+line<span class="token punctuation">[</span><span class="token number">000006</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000001</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000032</span><span class="token punctuation">,</span> contents<span class="token operator">:</span> 
+line<span class="token punctuation">[</span><span class="token number">000007</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000001</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000032</span><span class="token punctuation">,</span> contents<span class="token operator">:</span> 
+line<span class="token punctuation">[</span><span class="token number">000008</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000001</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000032</span><span class="token punctuation">,</span> contents<span class="token operator">:</span> 
+line<span class="token punctuation">[</span><span class="token number">000009</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000150</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000160</span><span class="token punctuation">,</span> contents<span class="token operator">:</span> a really <span class="token keyword">long</span> line to show that <span class="token function">getline</span><span class="token punctuation">(</span><span class="token punctuation">)</span> will reallocate the line buffer <span class="token keyword">if</span> the length of a line is too <span class="token keyword">long</span> to fit in the buffer it has been given<span class="token punctuation">,</span>
+line<span class="token punctuation">[</span><span class="token number">000010</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000042</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000160</span><span class="token punctuation">,</span> contents<span class="token operator">:</span>  and punctuation at the end of the lines<span class="token punctuation">.</span>
+line<span class="token punctuation">[</span><span class="token number">000011</span><span class="token punctuation">]</span><span class="token operator">:</span> chars<span class="token operator">=</span><span class="token number">000001</span><span class="token punctuation">,</span> buf size<span class="token operator">=</span><span class="token number">000160</span><span class="token punctuation">,</span> contents<span class="token operator">:</span> 
+
+</code></pre></div><p>In the example, <code>getline()</code> is initially called with no buffer allocated.  During this first call, <code>getline()</code> allocates a buffer, reads the first line and places the line's contents in the new buffer.  On subsequent calls, <code>getline()</code> updates the same buffer and only reallocates the buffer when it is no longer large enough to fit the whole line.  The temporary buffer is then freed when we are done with the file.</p> <p>Another option is <code>getdelim()</code>.  This is the same as <code>getline()</code> except you specify the line ending character.  This is only necessary if the last character of the line for your file type is not '\n'.  <code>getline()</code> works even with Windows text files because with the multibyte line ending (<code>&quot;\r\n&quot;)</code>'\n'` is still the last character on the line.</p> <h3 id="example-implementation-of-getline"><a href="#example-implementation-of-getline" class="header-anchor">#</a> Example implementation of <code>getline()</code></h3> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;errno.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdint.h&gt;</span></span>
+
+
+<span class="token macro property">#<span class="token directive keyword">if</span> !(defined _POSIX_C_SOURCE)</span>
+<span class="token keyword">typedef</span> <span class="token keyword">long</span> <span class="token keyword">int</span> ssize_t<span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token comment">/* Only include our version of getline() if the POSIX version isn't available. */</span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> !(defined _POSIX_C_SOURCE) || _POSIX_C_SOURCE &lt; 200809L</span>
+
+<span class="token macro property">#<span class="token directive keyword">if</span> !(defined SSIZE_MAX)</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> SSIZE_MAX (SIZE_MAX &gt;&gt; 1)</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+ssize_t <span class="token function">getline</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>pline_buf<span class="token punctuation">,</span> size_t <span class="token operator">*</span>pn<span class="token punctuation">,</span> FILE <span class="token operator">*</span>fin<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token keyword">const</span> size_t INITALLOC <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> size_t ALLOCSTEP <span class="token operator">=</span> <span class="token number">16</span><span class="token punctuation">;</span>
+  size_t num_read <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+  <span class="token comment">/* First check that none of our input pointers are NULL. */</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> pline_buf<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> pn<span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> fin<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    errno <span class="token operator">=</span> EINVAL<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* If output buffer is NULL, then allocate a buffer. */</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> <span class="token operator">*</span>pline_buf<span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+    <span class="token operator">*</span>pline_buf <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span>INITALLOC<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> <span class="token operator">*</span>pline_buf<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">/* Can't allocate memory. */</span>
+      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">/* Note how big the buffer is at this time. */</span>
+      <span class="token operator">*</span>pn <span class="token operator">=</span> INITALLOC<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* Step through the file, pulling characters until either a newline or EOF. */</span>
+
+  <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> c<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token constant">EOF</span> <span class="token operator">!=</span> <span class="token punctuation">(</span>c <span class="token operator">=</span> <span class="token function">getc</span><span class="token punctuation">(</span>fin<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      <span class="token comment">/* Note we read a character. */</span>
+      num_read<span class="token operator">++</span><span class="token punctuation">;</span>
+
+      <span class="token comment">/* Reallocate the buffer if we need more room */</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>num_read <span class="token operator">&gt;=</span> <span class="token operator">*</span>pn<span class="token punctuation">)</span>
+      <span class="token punctuation">{</span>
+        size_t n_realloc <span class="token operator">=</span> <span class="token operator">*</span>pn <span class="token operator">+</span> ALLOCSTEP<span class="token punctuation">;</span>
+        <span class="token keyword">char</span> <span class="token operator">*</span> tmp <span class="token operator">=</span> <span class="token function">realloc</span><span class="token punctuation">(</span><span class="token operator">*</span>pline_buf<span class="token punctuation">,</span> n_realloc <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* +1 for the trailing NUL. */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">!=</span> tmp<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+          <span class="token comment">/* Use the new buffer and note the new buffer size. */</span>
+          <span class="token operator">*</span>pline_buf <span class="token operator">=</span> tmp<span class="token punctuation">;</span>
+          <span class="token operator">*</span>pn <span class="token operator">=</span> n_realloc<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+          <span class="token comment">/* Exit with error and let the caller free the buffer. */</span>
+          <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">/* Test for overflow. */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>SSIZE_MAX <span class="token operator">&lt;</span> <span class="token operator">*</span>pn<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+          errno <span class="token operator">=</span> ERANGE<span class="token punctuation">;</span>
+          <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token comment">/* Add the character to the buffer. */</span>
+      <span class="token punctuation">(</span><span class="token operator">*</span>pline_buf<span class="token punctuation">)</span><span class="token punctuation">[</span>num_read <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span> c<span class="token punctuation">;</span>
+
+      <span class="token comment">/* Break from the loop if we hit the ending character. */</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token string">'\n'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">{</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* Note if we hit EOF. */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">EOF</span> <span class="token operator">==</span> c<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+      errno <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* Terminate the string by suffixing NUL. */</span>
+  <span class="token punctuation">(</span><span class="token operator">*</span>pline_buf<span class="token punctuation">)</span><span class="token punctuation">[</span>num_read<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>ssize_t<span class="token punctuation">)</span> num_read<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+</code></pre></div><h2 id="open-and-write-to-a-binary-file"><a href="#open-and-write-to-a-binary-file" class="header-anchor">#</a> Open and write to a binary file</h2> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+   result <span class="token operator">=</span> EXIT_SUCCESS<span class="token punctuation">;</span>
+
+   <span class="token keyword">char</span> file_name<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;outbut.bin&quot;</span><span class="token punctuation">;</span>
+   <span class="token keyword">char</span> str<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;This is a binary file example&quot;</span><span class="token punctuation">;</span>
+   FILE <span class="token operator">*</span> fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>file_name<span class="token punctuation">,</span> <span class="token string">&quot;wb&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>fp <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>  <span class="token comment">/* If an error occurs during the file creation */</span>
+   <span class="token punctuation">{</span>
+     result <span class="token operator">=</span> EXIT_FAILURE<span class="token punctuation">;</span>
+     <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;fopen() failed for '%s'\n&quot;</span><span class="token punctuation">,</span> file_name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   <span class="token keyword">else</span>
+   <span class="token punctuation">{</span>
+     size_t element_size <span class="token operator">=</span> <span class="token keyword">sizeof</span> <span class="token operator">*</span>str<span class="token punctuation">;</span>
+     size_t elements_to_write <span class="token operator">=</span> <span class="token keyword">sizeof</span> str<span class="token punctuation">;</span>
+
+     <span class="token comment">/* Writes str (_including_ the NUL-terminator) to the binary file. */</span>
+     size_t elements_written <span class="token operator">=</span> <span class="token function">fwrite</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> element_size<span class="token punctuation">,</span> elements_to_write<span class="token punctuation">,</span> fp<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>elements_written <span class="token operator">!=</span> elements_to_write<span class="token punctuation">)</span>
+     <span class="token punctuation">{</span>
+       result <span class="token operator">=</span> EXIT_FAILURE<span class="token punctuation">;</span>
+       <span class="token comment">/* This works for &gt;=c99 only, else the z length modifier is unknown. */</span>
+       <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;fwrite() failed: wrote only %zu out of %zu elements.\n&quot;</span><span class="token punctuation">,</span> 
+         elements_written<span class="token punctuation">,</span> elements_to_write<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">/* Use this for &lt;c99: *
+       fprintf(stderr, &quot;fwrite() failed: wrote only %lu out of %lu elements.\n&quot;, 
+         (unsigned long) elements_written, (unsigned long) elements_to_write);
+        */</span>
+     <span class="token punctuation">}</span>
+
+     <span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+
+   <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This program creates and writes text in the binary form through the <code>fwrite</code> function to the file <code>output.bin</code>.</p> <p>If a file with the same name already exists, its contents are discarded and the file is treated as a new empty file.</p> <p>A binary stream is an ordered sequence of characters that can transparently record internal data. In this mode, bytes are written between the program and the file without any interpretation.</p> <p>To write integers portably, it must be known whether the file format expects them in big or little-endian format, and the size (usually 16, 32 or 64 bits). Bit shifting and masking may then be used to write out the bytes in the correct order. Integers in C are not guaranteed to have two's complement representation (though almost all implementations do). Fortunately a conversion to unsigned <strong>is</strong> guaranteed to use twos complement. The code for writing a signed integer to a binary file is therefore a little surprising.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* write a 16-bit little endian integer */</span>
+<span class="token keyword">int</span> <span class="token function">fput16le</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> FILE <span class="token operator">*</span>fp<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> rep <span class="token operator">=</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> e1<span class="token punctuation">,</span> e2<span class="token punctuation">;</span>
+
+    e1 <span class="token operator">=</span> <span class="token function">fputc</span><span class="token punctuation">(</span>rep <span class="token operator">&amp;</span> <span class="token number">0xFF</span><span class="token punctuation">,</span> fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e2 <span class="token operator">=</span> <span class="token function">fputc</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rep <span class="token operator">&gt;&gt;</span> <span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">0xFF</span><span class="token punctuation">,</span> fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>e1 <span class="token operator">==</span> <span class="token constant">EOF</span> <span class="token operator">||</span> e2 <span class="token operator">==</span> <span class="token constant">EOF</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> <span class="token constant">EOF</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>  
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The other functions follow the same pattern with minor modifications for size and byte order.</p> <h2 id="fscanf"><a href="#fscanf" class="header-anchor">#</a> fscanf()</h2> <p>Let's say we have a text file and we want to read all words in that file, in order to do some requirements.</p> <p><strong>file.txt</strong>:</p> <div class="language-c extra-class"><pre class="language-c"><code>This is just
+a test file
+to be used by <span class="token function">fscanf</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>This is the main function:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">printAllWords</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  FILE <span class="token operator">*</span>fp<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">&quot;file.txt&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;r&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">&quot;Error opening file&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">exit</span><span class="token punctuation">(</span>EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">printAllWords</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">return</span> EXIT_SUCCESS<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">printAllWords</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span> fp<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> tmp<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">fscanf</span><span class="token punctuation">(</span>fp<span class="token punctuation">,</span> <span class="token string">&quot;%19s&quot;</span><span class="token punctuation">,</span> tmp<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token constant">EOF</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;Word %d: %s\n&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> tmp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        i<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The output will be:</p> <div class="language-c extra-class"><pre class="language-c"><code>Word <span class="token number">1</span><span class="token operator">:</span> This 
+Word <span class="token number">2</span><span class="token operator">:</span> is 
+Word <span class="token number">3</span><span class="token operator">:</span> just
+Word <span class="token number">4</span><span class="token operator">:</span> a 
+Word <span class="token number">5</span><span class="token operator">:</span> test
+Word <span class="token number">6</span><span class="token operator">:</span> file
+Word <span class="token number">7</span><span class="token operator">:</span> to
+Word <span class="token number">8</span><span class="token operator">:</span> be 
+Word <span class="token number">9</span><span class="token operator">:</span> used
+Word <span class="token number">10</span><span class="token operator">:</span> by
+Word <span class="token number">11</span><span class="token operator">:</span> <span class="token function">fscanf</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><h2 id="read-lines-from-a-file"><a href="#read-lines-from-a-file" class="header-anchor">#</a> Read lines from a file</h2> <p>The <code>stdio.h</code> header defines the <code>fgets()</code> function. This function reads a line from a stream and stores it in a specified string. The function stops reading text from the stream when either <code>n - 1</code> characters are read, the newline character (<code>'\n'</code>) is read or the end of file (EOF) is reached.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;string.h&gt;</span></span>
+
+<span class="token macro property">#<span class="token directive keyword">define</span> MAX_LINE_LENGTH 80</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token operator">*</span>argv<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>path<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> line<span class="token punctuation">[</span>MAX_LINE_LENGTH<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">unsigned</span> <span class="token keyword">int</span> line_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>argc <span class="token operator">&lt;</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+    path <span class="token operator">=</span> argv<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">/* Open file */</span>
+    FILE <span class="token operator">*</span>file <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>path<span class="token punctuation">,</span> <span class="token string">&quot;r&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>file<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">/* Get each line until there are none left */</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token function">fgets</span><span class="token punctuation">(</span>line<span class="token punctuation">,</span> MAX_LINE_LENGTH<span class="token punctuation">,</span> file<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">/* Print each line */</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;line[%06d]: %s&quot;</span><span class="token punctuation">,</span> <span class="token operator">++</span>line_count<span class="token punctuation">,</span> line<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">/* Add a trailing newline to lines that don't already have one */</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>line<span class="token punctuation">[</span><span class="token function">strlen</span><span class="token punctuation">(</span>line<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'\n'</span><span class="token punctuation">)</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">/* Close file */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">fclose</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Calling the program with an argument that is a path to a file containing the following text:</p> <div class="language-c extra-class"><pre class="language-c"><code>This is a file
+  which has
+multiple lines
+    with various indentation<span class="token punctuation">,</span>
+blank lines
+
+
+
+a really <span class="token keyword">long</span> line to show that the line will be counted as two lines <span class="token keyword">if</span> the length of a line is too <span class="token keyword">long</span> to fit in the buffer it has been given<span class="token punctuation">,</span>
+  and punctuation at the end of the lines<span class="token punctuation">.</span>
+
+</code></pre></div><p>Will result in the following output:</p> <div class="language-c extra-class"><pre class="language-c"><code>line<span class="token punctuation">[</span><span class="token number">000001</span><span class="token punctuation">]</span><span class="token operator">:</span> This is a file
+line<span class="token punctuation">[</span><span class="token number">000002</span><span class="token punctuation">]</span><span class="token operator">:</span>   which has
+line<span class="token punctuation">[</span><span class="token number">000003</span><span class="token punctuation">]</span><span class="token operator">:</span> multiple lines
+line<span class="token punctuation">[</span><span class="token number">000004</span><span class="token punctuation">]</span><span class="token operator">:</span>     with various indentation<span class="token punctuation">,</span>
+line<span class="token punctuation">[</span><span class="token number">000005</span><span class="token punctuation">]</span><span class="token operator">:</span> blank lines
+line<span class="token punctuation">[</span><span class="token number">000006</span><span class="token punctuation">]</span><span class="token operator">:</span> 
+line<span class="token punctuation">[</span><span class="token number">000007</span><span class="token punctuation">]</span><span class="token operator">:</span> 
+line<span class="token punctuation">[</span><span class="token number">000008</span><span class="token punctuation">]</span><span class="token operator">:</span> 
+line<span class="token punctuation">[</span><span class="token number">000009</span><span class="token punctuation">]</span><span class="token operator">:</span> a really <span class="token keyword">long</span> line to show that the line will be counted as two lines <span class="token keyword">if</span> the le
+line<span class="token punctuation">[</span><span class="token number">000010</span><span class="token punctuation">]</span><span class="token operator">:</span> ngth of a line is too <span class="token keyword">long</span> to fit in the buffer it has been given<span class="token punctuation">,</span>
+line<span class="token punctuation">[</span><span class="token number">000011</span><span class="token punctuation">]</span><span class="token operator">:</span>  and punctuation at the end of the lines<span class="token punctuation">.</span>
+line<span class="token punctuation">[</span><span class="token number">000012</span><span class="token punctuation">]</span><span class="token operator">:</span> 
+
+</code></pre></div><p>This very simple example allows a fixed maximum line length, such that longer lines will effectively be counted as two lines. The <code>fgets()</code> function requires that the calling code provide the memory to be used as the destination for the line that is read.</p> <p>POSIX makes the <a href="http://stackoverflow.com/documentation/c/507/files-and-i-o-streams/8274/get-lines-from-a-file-using-getline#t=201703141659155440184" target="_blank" rel="noopener noreferrer"><code>getline()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> function available which instead internally allocates memory to enlarge the buffer as necessary for a line of any length (as long as there is sufficient memory).</p> <h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>#include &lt;stdio.h&gt; /* Include this to use any of the following sections */</li> <li>FILE *fopen(const char *path, const char <em>mode); /</em> Open a stream on the file at <strong>path</strong> with the specified <strong>mode</strong> */</li> <li>FILE *freopen(const char *path, const char *mode, FILE <em>stream); /</em> Re-open an existing stream on the file at <strong>path</strong> with the specified <strong>mode</strong> */</li> <li>int fclose(FILE <em>stream); /</em> Close an opened stream */</li> <li>size_t fread(void *ptr, size_t size, size_t nmemb, FILE <em>stream); /</em> Read at most <strong>nmemb</strong> elements of <strong>size</strong> bytes each from the <strong>stream</strong> and write them in <strong>ptr</strong>. Returns the number of read elements. */</li> <li>size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE <em>stream); /</em> Write <strong>nmemb</strong> elements of <strong>size</strong> bytes each from <strong>ptr</strong> to the <strong>stream</strong>. Returns the number of written elements. */</li> <li>int fseek(FILE <em>stream, long offset, int whence); /</em> Set the cursor of the stream to <strong>offset</strong>, relative to the offset told by <strong>whence</strong>, and returns 0 if it succeeded. */</li> <li>long ftell(FILE <em>stream); /</em> Return the offset of the current cursor position from the beginning of the stream. */</li> <li>void rewind(FILE <em>stream); /</em> Set the cursor position to the beginning of the file. */</li> <li>int fprintf(FILE *fout, const char <em>fmt, ...); /</em> Writes printf format string on fout */</li> <li>FILE <em>stdin; /</em> Standard input stream */</li> <li>FILE <em>stdout; /</em> Standard output stream */</li> <li>FILE <em>stderr; /</em> Standard error stream */</li></ul> <h4 id="parameters"><a href="#parameters" class="header-anchor">#</a> Parameters</h4> <table><thead><tr><th>Parameter</th> <th>Details</th></tr></thead> <tbody><tr><td>const char *mode</td> <td>A string describing the opening mode of the file-backed stream. See remarks for possible values.</td></tr> <tr><td>int whence</td> <td>Can be <code>SEEK_SET</code> to set from the beginning of the file, <code>SEEK_END</code> to set from its end, or <code>SEEK_CUR</code> to set relative to the current cursor value. Note: <code>SEEK_END</code> is non-portable.</td></tr></tbody></table> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <h3 id="mode-strings"><a href="#mode-strings" class="header-anchor">#</a> Mode strings:</h3> <p>Mode strings in <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/fopen.html" target="_blank" rel="noopener noreferrer"><code>fopen()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> and <a href="http://pubs.opengroup.org/onlinepubs/9699919799/functions/freopen.html" target="_blank" rel="noopener noreferrer"><code>freopen()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> can be one of those values:</p> <ul><li><code>&quot;r&quot;</code>: Open the file in read-only mode, with the cursor set to the beginning of the file.</li> <li><code>&quot;r+&quot;</code>: Open the file in read-write mode, with the cursor set to the beginning of the file.</li> <li><code>&quot;w&quot;</code>: Open or create the file in write-only mode, with its content truncated to 0 bytes. The cursor is set to the beginning of the file.</li> <li><code>&quot;w+&quot;</code>: Open or create the file in read-write mode, with its content truncated to 0 bytes. The cursor is set to the beginning of the file.</li> <li><code>&quot;a&quot;</code>: Open or create the file in write-only mode, with the cursor set to the end of the file.</li> <li><code>&quot;a+&quot;</code>: Open or create the file in read-write mode, with the read-cursor set to the beginning of the file. The output, however, will <strong>always</strong> be appended to the end of the file.</li></ul> <p>Each of these file modes may have a <code>b</code> added after the initial letter (e.g. <code>&quot;rb&quot;</code> or <code>&quot;a+b&quot;</code> or <code>&quot;ab+&quot;</code>).  The <code>b</code> means that the file should be treated as a binary file instead of a text file on those systems where there is a difference.  It doesn't make a difference on Unix-like systems; it is important on Windows systems.  (Additionally, Windows <a href="https://msdn.microsoft.com/en-us/library/yeby3zcb(v=vs.140).aspx" target="_blank" rel="noopener noreferrer"><code>fopen</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> allows an explicit <code>t</code> instead of <code>b</code> to indicate 'text file' — and numerous other platform-specific options.)</p> <ul><li><code>&quot;wx&quot;</code>: Create a text file in write-only mode. <strong>The file may not exist</strong>.</li> <li><code>&quot;wbx&quot;</code>: Create a binary file in write-only mode. <strong>The file may not exist</strong>.</li></ul> <p>The <code>x</code>, if present, must be the last character in the mode string.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/c/files-and-i-o-streams.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/c/declaration-vs-definition.html" class="prev">
+        Declaration vs Definition
+      </a></span> <span class="next"><a href="/c/formatted-input-output.html">
+        Formatted Input/Output
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/564.54137ff5.js" defer></script>
+  </body>
+</html>

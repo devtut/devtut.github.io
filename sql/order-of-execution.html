@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SQL - Order of Execution</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Logical Order of  Query Processing in SQL">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="SQL - Order of Execution">
+    <meta property="og:description" content="Logical Order of  Query Processing in SQL">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/sql/order-of-execution.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="SQL - Order of Execution">
+    <meta name="twitter:description" content="Logical Order of  Query Processing in SQL">
+    <meta name="twitter:url" content="/sql/order-of-execution.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3281.fc02ebfa.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>SQL</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/sql/" class="sidebar-link">Disclaimer</a></li><li><a href="/sql/getting-started-with-sql.html" class="sidebar-link">Getting started with SQL</a></li><li><a href="/sql/identifier.html" class="sidebar-link">Identifier</a></li><li><a href="/sql/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/sql/null.html" class="sidebar-link">NULL</a></li><li><a href="/sql/example-databases-and-tables.html" class="sidebar-link">Example Databases and Tables</a></li><li><a href="/sql/select.html" class="sidebar-link">SELECT</a></li><li><a href="/sql/group-by.html" class="sidebar-link">GROUP BY</a></li><li><a href="/sql/order-by.html" class="sidebar-link">ORDER BY</a></li><li><a href="/sql/and-or-operators.html" class="sidebar-link">AND &amp; OR Operators</a></li><li><a href="/sql/case.html" class="sidebar-link">CASE</a></li><li><a href="/sql/like-operator.html" class="sidebar-link">LIKE operator</a></li><li><a href="/sql/in-clause.html" class="sidebar-link">IN clause</a></li><li><a href="/sql/filter-results-using-where-and-having.html" class="sidebar-link">Filter results using WHERE and HAVING</a></li><li><a href="/sql/skip-take-pagination.html" class="sidebar-link">SKIP TAKE (Pagination)</a></li><li><a href="/sql/except.html" class="sidebar-link">EXCEPT</a></li><li><a href="/sql/explain-and-describe.html" class="sidebar-link">EXPLAIN and DESCRIBE</a></li><li><a href="/sql/exists-clause.html" class="sidebar-link">EXISTS CLAUSE</a></li><li><a href="/sql/join.html" class="sidebar-link">JOIN</a></li><li><a href="/sql/update.html" class="sidebar-link">UPDATE</a></li><li><a href="/sql/create-database.html" class="sidebar-link">CREATE Database</a></li><li><a href="/sql/create-table.html" class="sidebar-link">CREATE TABLE</a></li><li><a href="/sql/create-function.html" class="sidebar-link">CREATE FUNCTION</a></li><li><a href="/sql/try-catch.html" class="sidebar-link">TRY/CATCH</a></li><li><a href="/sql/union-union-all.html" class="sidebar-link">UNION / UNION ALL</a></li><li><a href="/sql/alter-table.html" class="sidebar-link">ALTER TABLE</a></li><li><a href="/sql/insert.html" class="sidebar-link">INSERT</a></li><li><a href="/sql/merge.html" class="sidebar-link">MERGE</a></li><li><a href="/sql/cross-apply-outer-apply.html" class="sidebar-link">cross apply, outer apply</a></li><li><a href="/sql/delete.html" class="sidebar-link">DELETE</a></li><li><a href="/sql/truncate.html" class="sidebar-link">TRUNCATE</a></li><li><a href="/sql/drop-table.html" class="sidebar-link">DROP Table</a></li><li><a href="/sql/drop-or-delete-database.html" class="sidebar-link">DROP or DELETE Database</a></li><li><a href="/sql/cascading-delete.html" class="sidebar-link">Cascading Delete</a></li><li><a href="/sql/grant-and-revoke.html" class="sidebar-link">GRANT and REVOKE</a></li><li><a href="/sql/xml.html" class="sidebar-link">XML</a></li><li><a href="/sql/primary-keys.html" class="sidebar-link">Primary Keys</a></li><li><a href="/sql/indexes.html" class="sidebar-link">Indexes</a></li><li><a href="/sql/row-number.html" class="sidebar-link">Row number</a></li><li><a href="/sql/sql-group-by-vs-distinct.html" class="sidebar-link">SQL Group By vs Distinct</a></li><li><a href="/sql/finding-duplicates-on-a-column-subset-with-detail.html" class="sidebar-link">Finding Duplicates on a Column Subset with Detail</a></li><li><a href="/sql/string-functions.html" class="sidebar-link">String Functions</a></li><li><a href="/sql/functions-aggregate.html" class="sidebar-link">Functions (Aggregate)</a></li><li><a href="/sql/functions-scalar-single-row.html" class="sidebar-link">Functions (Scalar/Single Row)</a></li><li><a href="/sql/functions-analytic.html" class="sidebar-link">Functions (Analytic)</a></li><li><a href="/sql/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/sql/common-table-expressions.html" class="sidebar-link">Common Table Expressions</a></li><li><a href="/sql/views.html" class="sidebar-link">Views</a></li><li><a href="/sql/materialized-views.html" class="sidebar-link">Materialized Views</a></li><li><a href="/sql/comments.html" class="sidebar-link">Comments</a></li><li><a href="/sql/foreign-keys.html" class="sidebar-link">Foreign Keys</a></li><li><a href="/sql/sequence.html" class="sidebar-link">Sequence</a></li><li><a href="/sql/subqueries.html" class="sidebar-link">Subqueries</a></li><li><a href="/sql/execution-blocks.html" class="sidebar-link">Execution blocks</a></li><li><a href="/sql/stored-procedures.html" class="sidebar-link">Stored Procedures</a></li><li><a href="/sql/triggers.html" class="sidebar-link">Triggers</a></li><li><a href="/sql/transactions.html" class="sidebar-link">Transactions</a></li><li><a href="/sql/table-design.html" class="sidebar-link">Table Design</a></li><li><a href="/sql/synonyms.html" class="sidebar-link">Synonyms</a></li><li><a href="/sql/information-schema.html" class="sidebar-link">Information Schema</a></li><li><a href="/sql/order-of-execution.html" class="active sidebar-link">Order of Execution</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/sql/order-of-execution.html#logical-order-of-query-processing-in-sql" class="sidebar-link">Logical Order of  Query Processing in SQL</a></li></ul></li><li><a href="/sql/clean-code-in-sql.html" class="sidebar-link">Clean Code in SQL</a></li><li><a href="/sql/relational-algebra.html" class="sidebar-link">Relational Algebra</a></li><li><a href="/sql/sql-injection.html" class="sidebar-link">SQL Injection</a></li><li><a href="/sql/sql-cursor.html" class="sidebar-link">SQL CURSOR</a></li><li><a href="/sql/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="order-of-execution"><a href="#order-of-execution" class="header-anchor">#</a> Order of Execution</h1> <h2 id="logical-order-of-query-processing-in-sql"><a href="#logical-order-of-query-processing-in-sql" class="header-anchor">#</a> Logical Order of  Query Processing in SQL</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">/*(8)*/</span>  <span class="token keyword">SELECT</span> <span class="token comment">/*9*/</span> <span class="token keyword">DISTINCT</span> <span class="token comment">/*11*/</span> <span class="token keyword">TOP</span>  
+<span class="token comment">/*(1)*/</span>  <span class="token keyword">FROM</span> 
+<span class="token comment">/*(3)*/</span>        <span class="token keyword">JOIN</span> 
+<span class="token comment">/*(2)*/</span>       <span class="token keyword">ON</span> 
+<span class="token comment">/*(4)*/</span>  <span class="token keyword">WHERE</span> 
+<span class="token comment">/*(5)*/</span>  <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> 
+<span class="token comment">/*(6)*/</span>  <span class="token keyword">WITH</span> {CUBE <span class="token operator">|</span> ROLLUP}
+<span class="token comment">/*(7)*/</span>  <span class="token keyword">HAVING</span> 
+<span class="token comment">/*(10)*/</span> <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> 
+<span class="token comment">/*(11)*/</span> <span class="token keyword">LIMIT</span> 
+</code></pre></div><p>The order in which a query is processed and description of each section.</p> <p>VT stands for 'Virtual Table' and shows how various data is produced as the query is processed</p> <li><p>FROM: A Cartesian product (cross join) is performed between the first two tables in the FROM clause, and as a result, virtual table VT1
+is generated.</p></li> <li>
+ON: The ON filter is applied to VT1. Only rows for which the is TRUE are inserted to VT2.
+</li> <li><p>OUTER (join): If an OUTER JOIN is specified (as opposed to a CROSS JOIN or an INNER JOIN), rows from the preserved table or tables for
+which a match was not found are added to the rows from VT2 as outer rows, generating VT3. If more than two tables appear in the FROM clause,
+steps 1 through 3 are applied repeatedly between the result of the last join and the next table in the FROM clause until all tables are processed.</p></li> <li>
+WHERE: The WHERE filter is applied to VT3. Only rows for which the is TRUE are inserted to VT4.
+</li> <li>
+GROUP BY: The rows from VT4 are arranged in groups based on the column list specified in the GROUP BY clause. VT5 is generated.
+</li> <li>
+CUBE | ROLLUP: Supergroups (groups of groups) are added to the rows from VT5, generating VT6.
+</li> <li>
+HAVING: The HAVING filter is applied to VT6. Only groups for which the is TRUE are inserted to VT7.
+</li> <li>
+SELECT: The SELECT list is processed, generating VT8.
+</li> <li>
+DISTINCT: Duplicate rows are removed from VT8. VT9 is generated.
+</li> <li>
+ORDER BY: The rows from VT9 are sorted according to the column list specified in the ORDER BY clause. A cursor is generated (VC10).
+</li> <li>
+TOP: The specified number or percentage of rows is selected from the beginning of VC10. Table VT11 is generated and returned to the caller. LIMIT has the same functionality as TOP in some SQL dialects such as Postgres and Netezza.
+</li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/sql/order-of-execution.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/sql/information-schema.html" class="prev">
+        Information Schema
+      </a></span> <span class="next"><a href="/sql/clean-code-in-sql.html">
+        Clean Code in SQL
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3281.fc02ebfa.js" defer></script>
+  </body>
+</html>

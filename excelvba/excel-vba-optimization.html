@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Excel VBA - Excel-VBA Optimization</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Disabling Worksheet Updating, Optimizing Error Search by Extended Debugging, Checking time of execution, Using With blocks, Row Deletion - Performance, Disabling All Excel Functionality Before executing large macros">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Excel VBA - Excel-VBA Optimization">
+    <meta property="og:description" content="Disabling Worksheet Updating, Optimizing Error Search by Extended Debugging, Checking time of execution, Using With blocks, Row Deletion - Performance, Disabling All Excel Functionality Before executing large macros">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/excelvba/excel-vba-optimization.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Excel VBA - Excel-VBA Optimization">
+    <meta name="twitter:description" content="Disabling Worksheet Updating, Optimizing Error Search by Extended Debugging, Checking time of execution, Using With blocks, Row Deletion - Performance, Disabling All Excel Functionality Before executing large macros">
+    <meta name="twitter:url" content="/excelvba/excel-vba-optimization.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1078.f5d22332.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Excel VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/excelvba/" class="sidebar-link">Disclaimer</a></li><li><a href="/excelvba/getting-started-with-excel-vba.html" class="sidebar-link">Getting started with excel-vba</a></li><li><a href="/excelvba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/excelvba/conditional-statements.html" class="sidebar-link">Conditional statements</a></li><li><a href="/excelvba/ranges-and-cells.html" class="sidebar-link">Ranges and Cells</a></li><li><a href="/excelvba/named-ranges.html" class="sidebar-link">Named Ranges</a></li><li><a href="/excelvba/merged-cells-ranges.html" class="sidebar-link">Merged Cells / Ranges</a></li><li><a href="/excelvba/locating-duplicate-values-in-a-range.html" class="sidebar-link">Locating duplicate values in a range</a></li><li><a href="/excelvba/user-defined-functions-udfs.html" class="sidebar-link">User Defined Functions (UDFs)</a></li><li><a href="/excelvba/conditional-formatting-using-vba.html" class="sidebar-link">Conditional formatting using VBA</a></li><li><a href="/excelvba/workbooks.html" class="sidebar-link">Workbooks</a></li><li><a href="/excelvba/working-with-excel-tables-in-vba.html" class="sidebar-link">Working with Excel Tables in VBA</a></li><li><a href="/excelvba/loop-through-all-sheets-in-active-workbook.html" class="sidebar-link">Loop through all Sheets in Active Workbook</a></li><li><a href="/excelvba/use-worksheet-object-and-not-sheet-object.html" class="sidebar-link">Use Worksheet object and not Sheet object</a></li><li><a href="/excelvba/methods-for-finding-the-last-used-row-or-column-in-a-worksheet.html" class="sidebar-link">Methods for Finding the Last Used Row or Column in a Worksheet</a></li><li><a href="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html" class="sidebar-link">Creating a drop-down menu in the Active Worksheet with a Combo Box</a></li><li><a href="/excelvba/file-system-object.html" class="sidebar-link">File System Object</a></li><li><a href="/excelvba/pivot-tables.html" class="sidebar-link">Pivot Tables</a></li><li><a href="/excelvba/binding.html" class="sidebar-link">Binding</a></li><li><a href="/excelvba/autofilter-uses-and-best-practices.html" class="sidebar-link">autofilter ; Uses and best practices</a></li><li><a href="/excelvba/application-object.html" class="sidebar-link">Application object</a></li><li><a href="/excelvba/charts-and-charting.html" class="sidebar-link">Charts and Charting</a></li><li><a href="/excelvba/customdocumentproperties-in-practice.html" class="sidebar-link">CustomDocumentProperties in practice</a></li><li><a href="/excelvba/powerpoint-integration-through-vba.html" class="sidebar-link">PowerPoint Integration Through VBA</a></li><li><a href="/excelvba/how-to-record-a-macro.html" class="sidebar-link">How to record a Macro</a></li><li><a href="/excelvba/sql-in-excel-vba-best-practices.html" class="sidebar-link">SQL in Excel VBA - Best Practices</a></li><li><a href="/excelvba/excel-vba-optimization.html" class="active sidebar-link">Excel-VBA Optimization</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/excelvba/excel-vba-optimization.html#disabling-worksheet-updating" class="sidebar-link">Disabling Worksheet Updating</a></li><li class="sidebar-sub-header"><a href="/excelvba/excel-vba-optimization.html#optimizing-error-search-by-extended-debugging" class="sidebar-link">Optimizing Error Search by Extended Debugging</a></li><li class="sidebar-sub-header"><a href="/excelvba/excel-vba-optimization.html#checking-time-of-execution" class="sidebar-link">Checking time of execution</a></li><li class="sidebar-sub-header"><a href="/excelvba/excel-vba-optimization.html#using-with-blocks" class="sidebar-link">Using With blocks</a></li><li class="sidebar-sub-header"><a href="/excelvba/excel-vba-optimization.html#row-deletion-performance" class="sidebar-link">Row Deletion - Performance</a></li><li class="sidebar-sub-header"><a href="/excelvba/excel-vba-optimization.html#disabling-all-excel-functionality-before-executing-large-macros" class="sidebar-link">Disabling All Excel Functionality Before executing large macros</a></li></ul></li><li><a href="/excelvba/vba-security.html" class="sidebar-link">VBA Security</a></li><li><a href="/excelvba/debugging-and-troubleshooting.html" class="sidebar-link">Debugging and Troubleshooting</a></li><li><a href="/excelvba/vba-best-practices.html" class="sidebar-link">VBA Best Practices</a></li><li><a href="/excelvba/excel-vba-tips-and-tricks.html" class="sidebar-link">Excel VBA Tips and Tricks</a></li><li><a href="/excelvba/common-mistakes.html" class="sidebar-link">Common Mistakes</a></li><li><a href="/excelvba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="excel-vba-optimization"><a href="#excel-vba-optimization" class="header-anchor">#</a> Excel-VBA Optimization</h1> <p>Excel-VBA Optimization refers also to coding better error handling by documentation and additional details. This is shown here.</p> <h2 id="disabling-worksheet-updating"><a href="#disabling-worksheet-updating" class="header-anchor">#</a> Disabling Worksheet Updating</h2> <p>Disabling calculation of the worksheet can decrease running time of the macro significantly. Moreover, disabling events, screen updating and page breaks would be beneficial. Following <code>Sub</code> can be used in any macro for this purpose.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> OptimizeVBA<span class="token punctuation">(</span>isOn <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+    Application<span class="token punctuation">.</span>Calculation <span class="token operator">=</span> IIf<span class="token punctuation">(</span>isOn<span class="token punctuation">,</span> xlCalculationManual<span class="token punctuation">,</span> xlCalculationAutomatic<span class="token punctuation">)</span>
+    Application<span class="token punctuation">.</span>EnableEvents <span class="token operator">=</span> <span class="token keyword">Not</span><span class="token punctuation">(</span>isOn<span class="token punctuation">)</span>
+    Application<span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token keyword">Not</span><span class="token punctuation">(</span>isOn<span class="token punctuation">)</span>
+    ActiveSheet<span class="token punctuation">.</span>DisplayPageBreaks <span class="token operator">=</span> <span class="token keyword">Not</span><span class="token punctuation">(</span>isOn<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>For optimization follow the below pseudo-code:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> MyCode<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+    OptimizeVBA <span class="token boolean">True</span>
+
+    <span class="token comment">'Your code goes here</span>
+
+    OptimizeVBA <span class="token boolean">False</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="optimizing-error-search-by-extended-debugging"><a href="#optimizing-error-search-by-extended-debugging" class="header-anchor">#</a> Optimizing Error Search by Extended Debugging</h2> <p><strong>Using Line Numbers ... and documenting them in case of error</strong>
+(&quot;The importance of seeing Erl&quot;)</p> <p>Detecting which line raises an error is a substantial part of any debugging and narrows the search for the cause. To document identified error lines with a short description completes a successful error tracking, at best together with the names of module and procedure. The example below saves these data to a log file.</p> <p><strong>Back ground</strong></p> <p>The error object returns error number (Err.Number) and error description (Err.Description), but doesn't explicitly respond to the question where to locate the error. The <strong>Erl</strong> function, however, does, but on condition that you add *<strong>line numbers <em>)</em></strong> to the code (BTW one of several other concessions to former Basic times).</p> <p>If there are no error lines at all, then the Erl function returns 0, if numbering is incomplete you'll get the procedure's last preceding line number.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> MyProc1<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">Dim</span> i <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+<span class="token keyword">Dim</span> j <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+<span class="token keyword">On</span> <span class="token keyword">Error</span> <span class="token keyword">GoTo</span> LogErr
+<span class="token number">10</span>     j <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">/</span> <span class="token number">0</span>    <span class="token comment">' raises an error</span>
+okay<span class="token punctuation">:</span>
+Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;i=&quot;</span> <span class="token operator">&amp;</span> i
+<span class="token keyword">Exit</span> <span class="token keyword">Sub</span>
+
+LogErr<span class="token punctuation">:</span>
+MsgBox LogErrors<span class="token punctuation">(</span><span class="token string">&quot;MyModule&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;MyProc1&quot;</span><span class="token punctuation">,</span> Err<span class="token punctuation">)</span><span class="token punctuation">,</span> vbExclamation<span class="token punctuation">,</span> <span class="token string">&quot;Error &quot;</span> <span class="token operator">&amp;</span> Err<span class="token punctuation">.</span>Number
+<span class="token keyword">Stop</span>
+<span class="token keyword">Resume</span> <span class="token keyword">Next</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> LogErrors<span class="token punctuation">(</span> <span class="token operator">_</span>
+           <span class="token keyword">ByVal</span> sModule <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+           <span class="token keyword">ByVal</span> sProc <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+           Err <span class="token keyword">As</span> ErrObject<span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+<span class="token comment">' Purpose: write error number, description and Erl to log file and return error text</span>
+  <span class="token keyword">Dim</span> sLogFile <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">:</span> sLogFile <span class="token operator">=</span> ThisWorkbook<span class="token punctuation">.</span>Path <span class="token operator">&amp;</span> Application<span class="token punctuation">.</span>PathSeparator <span class="token operator">&amp;</span> <span class="token string">&quot;LogErrors.txt&quot;</span>
+  <span class="token keyword">Dim</span> sLogTxt  <span class="token keyword">As</span> <span class="token keyword">String</span>
+  <span class="token keyword">Dim</span> lFile    <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+<span class="token comment">' Create error text</span>
+  sLogTxt <span class="token operator">=</span> sModule <span class="token operator">&amp;</span> <span class="token string">&quot;|&quot;</span> <span class="token operator">&amp;</span> sProc <span class="token operator">&amp;</span> <span class="token string">&quot;|Erl &quot;</span> <span class="token operator">&amp;</span> Erl <span class="token operator">&amp;</span> <span class="token string">&quot;|Err &quot;</span> <span class="token operator">&amp;</span> Err<span class="token punctuation">.</span>Number <span class="token operator">&amp;</span> <span class="token string">&quot;|&quot;</span> <span class="token operator">&amp;</span> Err<span class="token punctuation">.</span>Description
+
+  <span class="token keyword">On</span> <span class="token keyword">Error</span> <span class="token keyword">Resume</span> <span class="token keyword">Next</span>
+  lFile <span class="token operator">=</span> FreeFile
+
+  Open sLogFile <span class="token keyword">For</span> Append <span class="token keyword">As</span> lFile
+  Print <span class="token operator">#</span>lFile<span class="token punctuation">,</span> Format<span class="token operator">$</span><span class="token punctuation">(</span>Now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;yy.mm.dd hh:mm:ss &quot;</span><span class="token punctuation">)</span>; sLogTxt
+      Print <span class="token operator">#</span>lFile<span class="token punctuation">,</span>
+  Close lFile
+<span class="token comment">' Return error text</span>
+  LogErrors <span class="token operator">=</span> sLogTxt
+ <span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>'<strong>Additional Code to show log file</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> ShowLogFile<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">Dim</span> sLogFile <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">:</span> sLogFile <span class="token operator">=</span> ThisWorkbook<span class="token punctuation">.</span>Path <span class="token operator">&amp;</span> Application<span class="token punctuation">.</span>PathSeparator <span class="token operator">&amp;</span> <span class="token string">&quot;LogErrors.txt&quot;</span>
+
+<span class="token keyword">On</span> <span class="token keyword">Error</span> <span class="token keyword">GoTo</span> LogErr
+Shell <span class="token string">&quot;notepad.exe &quot;</span> <span class="token operator">&amp;</span> sLogFile<span class="token punctuation">,</span> vbNormalFocus
+
+okay<span class="token punctuation">:</span>
+<span class="token keyword">On</span> <span class="token keyword">Error</span> <span class="token keyword">Resume</span> <span class="token keyword">Next</span>
+<span class="token keyword">Exit</span> <span class="token keyword">Sub</span>
+
+LogErr<span class="token punctuation">:</span>
+MsgBox LogErrors<span class="token punctuation">(</span><span class="token string">&quot;MyModule&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ShowLogFile&quot;</span><span class="token punctuation">,</span> Err<span class="token punctuation">)</span><span class="token punctuation">,</span> vbExclamation<span class="token punctuation">,</span> <span class="token string">&quot;Error No &quot;</span> <span class="token operator">&amp;</span> Err<span class="token punctuation">.</span>Number
+<span class="token keyword">Resume</span> okay
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="checking-time-of-execution"><a href="#checking-time-of-execution" class="header-anchor">#</a> Checking time of execution</h2> <p>Different procedures can give out the same result, but they would use different processing time. In order to check out which one is faster, a code like this can be used:</p> <div class="language-vb extra-class"><pre class="language-vb"><code>time1 <span class="token operator">=</span> Timer
+
+<span class="token keyword">For</span> <span class="token keyword">Each</span> iCell <span class="token keyword">In</span> MyRange
+   iCell <span class="token operator">=</span> <span class="token string">&quot;text&quot;</span>
+<span class="token keyword">Next</span> iCell
+
+time2 <span class="token operator">=</span> Timer
+
+<span class="token keyword">For</span> i <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">To</span> <span class="token number">30</span>
+   MyRange<span class="token punctuation">.</span>Cells<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;text&quot;</span>
+<span class="token keyword">Next</span> i
+
+time3 <span class="token operator">=</span> Timer
+
+debug<span class="token punctuation">.</span>print <span class="token string">&quot;Proc1 time: &quot;</span> <span class="token operator">&amp;</span> <span class="token keyword">cStr</span><span class="token punctuation">(</span>time2<span class="token operator">-</span>time1<span class="token punctuation">)</span>
+debug<span class="token punctuation">.</span>print <span class="token string">&quot;Proc2 time: &quot;</span> <span class="token operator">&amp;</span> <span class="token keyword">cStr</span><span class="token punctuation">(</span>time3<span class="token operator">-</span>time2<span class="token punctuation">)</span>
+
+</code></pre></div><p><a href="https://msdn.microsoft.com/en-us/library/office/ff700515(v=office.14).aspx#Anchor_5" target="_blank" rel="noopener noreferrer">MicroTimer<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Declare</span> PtrSafe <span class="token keyword">Function</span> getFrequency <span class="token keyword">Lib</span> <span class="token string">&quot;Kernel32&quot;</span> <span class="token keyword">Alias</span> <span class="token string">&quot;QueryPerformanceFrequency&quot;</span> <span class="token punctuation">(</span>cyFrequency <span class="token keyword">As</span> Currency<span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+<span class="token keyword">Private</span> <span class="token keyword">Declare</span> PtrSafe <span class="token keyword">Function</span> getTickCount <span class="token keyword">Lib</span> <span class="token string">&quot;Kernel32&quot;</span> <span class="token keyword">Alias</span> <span class="token string">&quot;QueryPerformanceCounter&quot;</span> <span class="token punctuation">(</span>cyTickCount <span class="token keyword">As</span> Currency<span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+<span class="token keyword">Function</span> MicroTimer<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Double</span>
+    <span class="token keyword">Dim</span> cyTicks1 <span class="token keyword">As</span> Currency
+    <span class="token keyword">Static</span> cyFrequency <span class="token keyword">As</span> Currency
+
+    MicroTimer <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">If</span> cyFrequency <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">Then</span> getFrequency cyFrequency        <span class="token comment">'Get frequency</span>
+    getTickCount cyTicks1                                   <span class="token comment">'Get ticks</span>
+    <span class="token keyword">If</span> cyFrequency <span class="token keyword">Then</span> MicroTimer <span class="token operator">=</span> cyTicks1 <span class="token operator">/</span> cyFrequency <span class="token comment">'Returns Seconds</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><h2 id="using-with-blocks"><a href="#using-with-blocks" class="header-anchor">#</a> Using With blocks</h2> <p>Using with blocks can accelerate the process of running a macro. Instead writing a range, chart name, worksheet, etc. you can use with-blocks like below;</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">With</span> ActiveChart
+    <span class="token punctuation">.</span>Parent<span class="token punctuation">.</span>Width <span class="token operator">=</span> <span class="token number">400</span>
+    <span class="token punctuation">.</span>Parent<span class="token punctuation">.</span>Height <span class="token operator">=</span> <span class="token number">145</span>
+    <span class="token punctuation">.</span>Parent<span class="token punctuation">.</span>Top <span class="token operator">=</span> <span class="token number">77.5</span> <span class="token operator">+</span> <span class="token number">165</span> <span class="token operator">*</span> <span class="token keyword">step</span> <span class="token operator">-</span> replacer <span class="token operator">*</span> <span class="token number">15</span>
+    <span class="token punctuation">.</span>Parent<span class="token punctuation">.</span>Left <span class="token operator">=</span> <span class="token number">5</span>
+<span class="token keyword">End</span> <span class="token keyword">With</span> 
+
+</code></pre></div><p>Which is faster than this:</p> <div class="language-vb extra-class"><pre class="language-vb"><code>ActiveChart<span class="token punctuation">.</span>Parent<span class="token punctuation">.</span>Width <span class="token operator">=</span> <span class="token number">400</span>
+ActiveChart<span class="token punctuation">.</span>Parent<span class="token punctuation">.</span>Height <span class="token operator">=</span> <span class="token number">145</span>
+ActiveChart<span class="token punctuation">.</span>Parent<span class="token punctuation">.</span>Top <span class="token operator">=</span> <span class="token number">77.5</span> <span class="token operator">+</span> <span class="token number">165</span> <span class="token operator">*</span> <span class="token keyword">step</span> <span class="token operator">-</span> replacer <span class="token operator">*</span> <span class="token number">15</span>
+ActiveChart<span class="token punctuation">.</span>Parent<span class="token punctuation">.</span>Left <span class="token operator">=</span> <span class="token number">5</span>
+
+</code></pre></div><p>Notes:</p> <li>
+Once a With block is entered, object can't be changed. As a result, you can't use a single With statement to affect a number of different objects
+</li> <li>
+**Don't jump into or out of With blocks**. If statements in a With block are executed, but either the With or End With statement is not executed, **a temporary variable containing a reference to the object remains in memory until you exit the procedure**
+</li> <li>
+Don't Loop inside With statements, especially if the cached object is used as an iterator
+</li> <li>
+You can nest With statements by placing one With block within another. However, because members of outer With blocks are masked within the inner With blocks, you must provide a fully qualified object reference in an inner With block to any member of an object in an outer With block.
+</li> <p>Nesting Example:</p> <p>This example uses the With statement to execute a series of statements on a single object.<br>
+The object and its properties are generic names used for illustration purposes only.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">With</span> MyObject 
+    <span class="token punctuation">.</span>Height <span class="token operator">=</span> <span class="token number">100</span>               <span class="token comment">'Same as MyObject.Height = 100. </span>
+    <span class="token punctuation">.</span>Caption <span class="token operator">=</span> <span class="token string">&quot;Hello World&quot;</span>    <span class="token comment">'Same as MyObject.Caption = &quot;Hello World&quot;. </span>
+    <span class="token keyword">With</span> <span class="token punctuation">.</span>Font 
+        <span class="token punctuation">.</span>Color <span class="token operator">=</span> Red            <span class="token comment">'Same as MyObject.Font.Color = Red. </span>
+        <span class="token punctuation">.</span>Bold <span class="token operator">=</span> <span class="token boolean">True</span>            <span class="token comment">'Same as MyObject.Font.Bold = True. </span>
+        MyObject<span class="token punctuation">.</span>Height <span class="token operator">=</span> <span class="token number">200</span>   <span class="token comment">'Inner-most With refers to MyObject.Font (must be qualified</span>
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+<span class="token keyword">End</span> <span class="token keyword">With</span>
+
+</code></pre></div><p>More Info on <a href="https://msdn.microsoft.com/en-us/vba/language-reference-vba/articles/with-statement" target="_blank" rel="noopener noreferrer">MSDN<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="row-deletion-performance"><a href="#row-deletion-performance" class="header-anchor">#</a> Row Deletion - Performance</h2> <li>
+Deleting rows is slow, specially when looping through cells and deleting rows, one by one
+</li> <li>
+A different approach is using an AutoFilter to hide the rows to be deleted
+</li> <li>
+Copy the visible range and Paste it into a new WorkSheet
+</li> <li>
+Remove the initial sheet entirely
+</li> <li>
+With this method, the more rows to delete, the faster it will be
+</li> <p>Example:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+
+<span class="token comment">'Deleted rows: 775,153, Total Rows: 1,000,009, Duration: 1.87 sec</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> DeleteRows<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> oldWs <span class="token keyword">As</span> Worksheet<span class="token punctuation">,</span> newWs <span class="token keyword">As</span> Worksheet<span class="token punctuation">,</span> wsName <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> ur <span class="token keyword">As</span> Range
+
+    <span class="token keyword">Set</span> oldWs <span class="token operator">=</span> ThisWorkbook<span class="token punctuation">.</span>ActiveSheet
+    wsName <span class="token operator">=</span> oldWs<span class="token punctuation">.</span>Name
+    <span class="token keyword">Set</span> ur <span class="token operator">=</span> oldWs<span class="token punctuation">.</span>Range<span class="token punctuation">(</span><span class="token string">&quot;F2&quot;</span><span class="token punctuation">,</span> oldWs<span class="token punctuation">.</span>Cells<span class="token punctuation">(</span>oldWs<span class="token punctuation">.</span>Rows<span class="token punctuation">.</span>Count<span class="token punctuation">,</span> <span class="token string">&quot;F&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">End</span><span class="token punctuation">(</span>xlUp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    Application<span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token boolean">False</span>
+    <span class="token keyword">Set</span> newWs <span class="token operator">=</span> Sheets<span class="token punctuation">.</span>Add<span class="token punctuation">(</span>After<span class="token punctuation">:</span><span class="token operator">=</span>oldWs<span class="token punctuation">)</span>    <span class="token comment">'Create a new WorkSheet</span>
+
+    <span class="token keyword">With</span> ur    <span class="token comment">'Copy visible range after Autofilter (modify Criteria1 and 2 accordingly)</span>
+        <span class="token punctuation">.</span>AutoFilter Field<span class="token punctuation">:</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> Criteria1<span class="token punctuation">:</span><span class="token operator">=</span><span class="token string">&quot;&lt;&gt;0&quot;</span><span class="token punctuation">,</span> <span class="token keyword">Operator</span><span class="token punctuation">:</span><span class="token operator">=</span>xlAnd<span class="token punctuation">,</span> Criteria2<span class="token punctuation">:</span><span class="token operator">=</span><span class="token string">&quot;&lt;&gt;&quot;</span>
+        oldWs<span class="token punctuation">.</span>UsedRange<span class="token punctuation">.</span>Copy
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+    <span class="token comment">'Paste all visible data into the new WorkSheet (values and formats)</span>
+    <span class="token keyword">With</span> newWs<span class="token punctuation">.</span>Range<span class="token punctuation">(</span>oldWs<span class="token punctuation">.</span>UsedRange<span class="token punctuation">.</span>Cells<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Address<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span>PasteSpecial xlPasteColumnWidths
+        <span class="token punctuation">.</span>PasteSpecial xlPasteAll
+        newWs<span class="token punctuation">.</span>Cells<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">Select</span><span class="token punctuation">:</span> newWs<span class="token punctuation">.</span>Cells<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Copy
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+
+    <span class="token keyword">With</span> Application
+        <span class="token punctuation">.</span>CutCopyMode <span class="token operator">=</span> <span class="token boolean">False</span>
+        <span class="token punctuation">.</span>DisplayAlerts <span class="token operator">=</span> <span class="token boolean">False</span>
+            oldWs<span class="token punctuation">.</span>Delete
+        <span class="token punctuation">.</span>DisplayAlerts <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+    newWs<span class="token punctuation">.</span>Name <span class="token operator">=</span> wsName
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="disabling-all-excel-functionality-before-executing-large-macros"><a href="#disabling-all-excel-functionality-before-executing-large-macros" class="header-anchor">#</a> Disabling All Excel Functionality Before executing large macros</h2> <p>The procedures bellow will temporarily disable all Excel features at WorkBook and WorkSheet level</p> <li>
+FastWB() is a toggle that accepts On or Off flags
+</li> <li>
+FastWS() accepts an Optional WorkSheet object, or none
+</li> <li>
+If the ws parameter is missing it will turn all features on and off for all WorkSheets in the collection
+<ul>
+- A custom type can be used to capture all settings before turning them off
+- At the end of the process, the initial settings can be restored
+<div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> FastWB<span class="token punctuation">(</span><span class="token keyword">Optional</span> <span class="token keyword">ByVal</span> opt <span class="token keyword">As</span> <span class="token keyword">Boolean</span> <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">With</span> Application
+        <span class="token punctuation">.</span>Calculation <span class="token operator">=</span> IIf<span class="token punctuation">(</span>opt<span class="token punctuation">,</span> xlCalculationManual<span class="token punctuation">,</span> xlCalculationAutomatic<span class="token punctuation">)</span>
+        <span class="token keyword">If</span> <span class="token punctuation">.</span>DisplayAlerts <span class="token operator">&lt;</span><span class="token operator">&gt;</span> <span class="token keyword">Not</span> opt <span class="token keyword">Then</span> <span class="token punctuation">.</span>DisplayAlerts <span class="token operator">=</span> <span class="token keyword">Not</span> opt
+        <span class="token keyword">If</span> <span class="token punctuation">.</span>DisplayStatusBar <span class="token operator">&lt;</span><span class="token operator">&gt;</span> <span class="token keyword">Not</span> opt <span class="token keyword">Then</span> <span class="token punctuation">.</span>DisplayStatusBar <span class="token operator">=</span> <span class="token keyword">Not</span> opt
+        <span class="token keyword">If</span> <span class="token punctuation">.</span>EnableAnimations <span class="token operator">&lt;</span><span class="token operator">&gt;</span> <span class="token keyword">Not</span> opt <span class="token keyword">Then</span> <span class="token punctuation">.</span>EnableAnimations <span class="token operator">=</span> <span class="token keyword">Not</span> opt
+        <span class="token keyword">If</span> <span class="token punctuation">.</span>EnableEvents <span class="token operator">&lt;</span><span class="token operator">&gt;</span> <span class="token keyword">Not</span> opt <span class="token keyword">Then</span> <span class="token punctuation">.</span>EnableEvents <span class="token operator">=</span> <span class="token keyword">Not</span> opt
+        <span class="token keyword">If</span> <span class="token punctuation">.</span>ScreenUpdating <span class="token operator">&lt;</span><span class="token operator">&gt;</span> <span class="token keyword">Not</span> opt <span class="token keyword">Then</span> <span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token keyword">Not</span> opt
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+    FastWS <span class="token punctuation">,</span> opt
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> FastWS<span class="token punctuation">(</span><span class="token keyword">Optional</span> <span class="token keyword">ByVal</span> ws <span class="token keyword">As</span> Worksheet<span class="token punctuation">,</span> <span class="token keyword">Optional</span> <span class="token keyword">ByVal</span> opt <span class="token keyword">As</span> <span class="token keyword">Boolean</span> <span class="token operator">=</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> ws <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span>
+        <span class="token keyword">For</span> <span class="token keyword">Each</span> ws <span class="token keyword">In</span> Application<span class="token punctuation">.</span>ThisWorkbook<span class="token punctuation">.</span>Sheets
+            OptimiseWS ws<span class="token punctuation">,</span> opt
+        <span class="token keyword">Next</span>
+    <span class="token keyword">Else</span>
+        OptimiseWS ws<span class="token punctuation">,</span> opt
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> OptimiseWS<span class="token punctuation">(</span><span class="token keyword">ByVal</span> ws <span class="token keyword">As</span> Worksheet<span class="token punctuation">,</span> <span class="token keyword">ByVal</span> opt <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+    <span class="token keyword">With</span> ws
+        <span class="token punctuation">.</span>DisplayPageBreaks <span class="token operator">=</span> <span class="token boolean">False</span>
+        <span class="token punctuation">.</span>EnableCalculation <span class="token operator">=</span> <span class="token keyword">Not</span> opt
+        <span class="token punctuation">.</span>EnableFormatConditionsCalculation <span class="token operator">=</span> <span class="token keyword">Not</span> opt
+        <span class="token punctuation">.</span>EnablePivotTable <span class="token operator">=</span> <span class="token keyword">Not</span> opt
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Restore all Excel settings to default</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> XlResetSettings<span class="token punctuation">(</span><span class="token punctuation">)</span>    <span class="token comment">'default Excel settings</span>
+    <span class="token keyword">With</span> Application
+        <span class="token punctuation">.</span>Calculation <span class="token operator">=</span> xlCalculationAutomatic
+        <span class="token punctuation">.</span>DisplayAlerts <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token punctuation">.</span>DisplayStatusBar <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token punctuation">.</span>EnableAnimations <span class="token operator">=</span> <span class="token boolean">False</span>
+        <span class="token punctuation">.</span>EnableEvents <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token keyword">Dim</span> sh <span class="token keyword">As</span> Worksheet
+        <span class="token keyword">For</span> <span class="token keyword">Each</span> sh <span class="token keyword">In</span> Application<span class="token punctuation">.</span>ThisWorkbook<span class="token punctuation">.</span>Sheets
+            <span class="token keyword">With</span> sh
+                <span class="token punctuation">.</span>DisplayPageBreaks <span class="token operator">=</span> <span class="token boolean">False</span>
+                <span class="token punctuation">.</span>EnableCalculation <span class="token operator">=</span> <span class="token boolean">True</span>
+                <span class="token punctuation">.</span>EnableFormatConditionsCalculation <span class="token operator">=</span> <span class="token boolean">True</span>
+                <span class="token punctuation">.</span>EnablePivotTable <span class="token operator">=</span> <span class="token boolean">True</span>
+            <span class="token keyword">End</span> <span class="token keyword">With</span>
+        <span class="token keyword">Next</span>
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>*) Line numbers represent are integers, that is a signed 16 bit data type in the range of -32,768 to 32,767, otherwise you produce an overflow. Usually line numbers are inserted in steps of 10 over a part of the code or all procedures of a module as a whole.</p></ul></li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/excelvba/excel-vba-optimization.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/excelvba/sql-in-excel-vba-best-practices.html" class="prev">
+        SQL in Excel VBA - Best Practices
+      </a></span> <span class="next"><a href="/excelvba/vba-security.html">
+        VBA Security
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1078.f5d22332.js" defer></script>
+  </body>
+</html>

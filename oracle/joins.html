@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Oracle Database - JOINS</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="CROSS JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN, ANTIJOIN, INNER JOIN, JOIN, SEMIJOIN, NATURAL JOIN">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Oracle Database - JOINS">
+    <meta property="og:description" content="CROSS JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN, ANTIJOIN, INNER JOIN, JOIN, SEMIJOIN, NATURAL JOIN">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/oracle/joins.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Oracle Database - JOINS">
+    <meta name="twitter:description" content="CROSS JOIN, LEFT OUTER JOIN, RIGHT OUTER JOIN, FULL OUTER JOIN, ANTIJOIN, INNER JOIN, JOIN, SEMIJOIN, NATURAL JOIN">
+    <meta name="twitter:url" content="/oracle/joins.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2353.f346ea3e.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Oracle Database</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/oracle/" class="sidebar-link">Disclaimer</a></li><li><a href="/oracle/getting-started-with-oracle-database.html" class="sidebar-link">Getting started with Oracle Database</a></li><li><a href="/oracle/anonymous-pl-sql-block.html" class="sidebar-link">Anonymous PL/SQL Block</a></li><li><a href="/oracle/data-dictionary.html" class="sidebar-link">Data Dictionary</a></li><li><a href="/oracle/dates.html" class="sidebar-link">Dates</a></li><li><a href="/oracle/working-with-dates.html" class="sidebar-link">Working with Dates</a></li><li><a href="/oracle/dual-table.html" class="sidebar-link">DUAL table</a></li><li><a href="/oracle/joins.html" class="active sidebar-link">JOINS</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/oracle/joins.html#cross-join" class="sidebar-link">CROSS JOIN</a></li><li class="sidebar-sub-header"><a href="/oracle/joins.html#left-outer-join" class="sidebar-link">LEFT OUTER JOIN</a></li><li class="sidebar-sub-header"><a href="/oracle/joins.html#right-outer-join" class="sidebar-link">RIGHT OUTER JOIN</a></li><li class="sidebar-sub-header"><a href="/oracle/joins.html#full-outer-join" class="sidebar-link">FULL OUTER JOIN</a></li><li class="sidebar-sub-header"><a href="/oracle/joins.html#antijoin" class="sidebar-link">ANTIJOIN</a></li><li class="sidebar-sub-header"><a href="/oracle/joins.html#inner-join" class="sidebar-link">INNER JOIN</a></li><li class="sidebar-sub-header"><a href="/oracle/joins.html#join" class="sidebar-link">JOIN</a></li><li class="sidebar-sub-header"><a href="/oracle/joins.html#semijoin" class="sidebar-link">SEMIJOIN</a></li><li class="sidebar-sub-header"><a href="/oracle/joins.html#natural-join" class="sidebar-link">NATURAL JOIN</a></li></ul></li><li><a href="/oracle/handling-null-values.html" class="sidebar-link">Handling NULL values</a></li><li><a href="/oracle/string-manipulation.html" class="sidebar-link">String Manipulation</a></li><li><a href="/oracle/limiting-the-rows-returned-by-a-query-pagination.html" class="sidebar-link">Limiting the rows returned by a query (Pagination)</a></li><li><a href="/oracle/recursive-sub-query-factoring-using-the-with-clause-a-k-a-common-table-expressions.html" class="sidebar-link">Recursive Sub-Query Factoring using the WITH Clause (A.K.A. Common Table Expressions)</a></li><li><a href="/oracle/different-ways-to-update-records.html" class="sidebar-link">Different ways to update records</a></li><li><a href="/oracle/update-with-joins.html" class="sidebar-link">Update with Joins</a></li><li><a href="/oracle/statistical-functions.html" class="sidebar-link">Statistical functions</a></li><li><a href="/oracle/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/oracle/creating-a-context.html" class="sidebar-link">Creating a Context</a></li><li><a href="/oracle/splitting-delimited-strings.html" class="sidebar-link">Splitting Delimited Strings</a></li><li><a href="/oracle/sequences.html" class="sidebar-link">Sequences</a></li><li><a href="/oracle/indexes.html" class="sidebar-link">Indexes</a></li><li><a href="/oracle/hints.html" class="sidebar-link">Hints</a></li><li><a href="/oracle/error-logging.html" class="sidebar-link">Error logging</a></li><li><a href="/oracle/database-links.html" class="sidebar-link">Database Links</a></li><li><a href="/oracle/table-partitioning.html" class="sidebar-link">Table partitioning</a></li><li><a href="/oracle/oracle-advanced-queuing-aq.html" class="sidebar-link">Oracle Advanced Queuing (AQ)</a></li><li><a href="/oracle/constraints.html" class="sidebar-link">constraints</a></li><li><a href="/oracle/autonomous-transactions.html" class="sidebar-link">Autonomous Transactions</a></li><li><a href="/oracle/oracle-maf.html" class="sidebar-link">Oracle MAF</a></li><li><a href="/oracle/level-query.html" class="sidebar-link">level query</a></li><li><a href="/oracle/hierarchical-retrieval-with-oracle-database-12c.html" class="sidebar-link">Hierarchical Retrieval With Oracle Database 12C</a></li><li><a href="/oracle/data-pump.html" class="sidebar-link">Data Pump</a></li><li><a href="/oracle/real-application-security.html" class="sidebar-link">Real Application Security</a></li><li><a href="/oracle/dynamic-sql.html" class="sidebar-link">Dynamic SQL</a></li><li><a href="/oracle/delimiting-keywords-or-special-characters.html" class="sidebar-link">Delimiting keywords or special characters</a></li><li><a href="/oracle/getting-started-with-plsql.html" class="sidebar-link">Getting started with plsql</a></li><li><a href="/oracle/plsql-procedure.html" class="sidebar-link">PLSQL procedure</a></li><li><a href="/oracle/if-then-else-statement.html" class="sidebar-link">IF-THEN-ELSE Statement</a></li><li><a href="/oracle/functions.html" class="sidebar-link">Functions</a></li><li><a href="/oracle/collections-and-records.html" class="sidebar-link">Collections and Records</a></li><li><a href="/oracle/object-types.html" class="sidebar-link">Object Types</a></li><li><a href="/oracle/loop.html" class="sidebar-link">Loop</a></li><li><a href="/oracle/cursors.html" class="sidebar-link">Cursors</a></li><li><a href="/oracle/packages.html" class="sidebar-link">Packages</a></li><li><a href="/oracle/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/oracle/bulk-collect.html" class="sidebar-link">Bulk collect</a></li><li><a href="/oracle/assignments-model-and-language.html" class="sidebar-link">Assignments model and language</a></li><li><a href="/oracle/triggers.html" class="sidebar-link">Triggers</a></li><li><a href="/oracle/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/oracle/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="joins"><a href="#joins" class="header-anchor">#</a> JOINS</h1> <h2 id="cross-join"><a href="#cross-join" class="header-anchor">#</a> CROSS JOIN</h2> <p>A <code>CROSS JOIN</code> performs a join between two tables that does not use an explicit join clause and results in the Cartesian product of two tables. A Cartesian product means each row of one table is combined with each row of the second table in the join. For example, if <code>TABLEA</code> has 20 rows and <code>TABLEB</code> has 20 rows, the result would be <code>20*20 = 400</code> output rows.</p> <p>Example:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token operator">*</span> 
+<span class="token keyword">FROM</span> TABLEA <span class="token keyword">CROSS</span> <span class="token keyword">JOIN</span> TABLEB<span class="token punctuation">;</span>
+
+</code></pre></div><p>This can also be written as:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> TABLEA<span class="token punctuation">,</span> TABLEB<span class="token punctuation">;</span>
+
+</code></pre></div><p>Here's an example of cross join in SQL between two tables:</p> <p><strong>Sample Table:</strong> TABLEA</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-------+---------+</span>
+<span class="token operator">|</span> <span class="token keyword">VALUE</span> <span class="token operator">|</span>   NAME  <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-------+---------+</span>
+<span class="token operator">|</span>   <span class="token number">1</span>   <span class="token operator">|</span>   ONE   <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">2</span>   <span class="token operator">|</span>   TWO   <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-------+---------+</span>
+
+</code></pre></div><p><strong>Sample Table:</strong> TABLEB</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-------+--------+</span>
+<span class="token operator">|</span> <span class="token keyword">VALUE</span> <span class="token operator">|</span>  NAME  <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-------+--------+</span>
+<span class="token operator">|</span>   <span class="token number">3</span>   <span class="token operator">|</span>  THREE <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">4</span>   <span class="token operator">|</span>  FOUR  <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-------+--------+</span>
+
+</code></pre></div><p>Now, If you execute the query:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> TABLEA <span class="token keyword">CROSS</span> <span class="token keyword">JOIN</span> TABLEB<span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>Output:</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-------+--------+-------+--------+</span>
+<span class="token operator">|</span> <span class="token keyword">VALUE</span> <span class="token operator">|</span>  NAME  <span class="token operator">|</span> <span class="token keyword">VALUE</span> <span class="token operator">|</span>  NAME  <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-------+--------+-------+--------+</span>
+<span class="token operator">|</span>   <span class="token number">1</span>   <span class="token operator">|</span>   ONE  <span class="token operator">|</span>   <span class="token number">3</span>   <span class="token operator">|</span>  THREE <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">1</span>   <span class="token operator">|</span>   ONE  <span class="token operator">|</span>   <span class="token number">4</span>   <span class="token operator">|</span>  FOUR  <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">2</span>   <span class="token operator">|</span>   TWO  <span class="token operator">|</span>   <span class="token number">3</span>   <span class="token operator">|</span>  THREE <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">2</span>   <span class="token operator">|</span>   TWO  <span class="token operator">|</span>   <span class="token number">4</span>   <span class="token operator">|</span>  FOUR  <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-------+--------+-------+--------+</span>
+
+</code></pre></div><p>This is how cross joining happens between two tables:
+<a href="http://i.stack.imgur.com/fMjRr.jpg" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/fMjRr.jpg" alt="Output"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>More about Cross Join: <a href="http://docs.oracle.com/javadb/10.10.1.2/ref/rrefsqljcrossjoin.html" target="_blank" rel="noopener noreferrer">Oracle documentation<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="left-outer-join"><a href="#left-outer-join" class="header-anchor">#</a> LEFT OUTER JOIN</h2> <p>A <code>LEFT OUTER JOIN</code> performs a join between two tables that requires an explicit join clause but does not exclude unmatched rows from the first table.</p> <p>Example:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span>                                      
+      ENAME<span class="token punctuation">,</span>                                
+      DNAME<span class="token punctuation">,</span>                                
+      EMP<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">,</span>                           
+      DEPT<span class="token punctuation">.</span>DEPTNO                           
+<span class="token keyword">FROM</span>                                        
+      SCOTT<span class="token punctuation">.</span>EMP <span class="token keyword">LEFT</span> <span class="token keyword">OUTER</span> <span class="token keyword">JOIN</span> SCOTT<span class="token punctuation">.</span>DEPT  
+      <span class="token keyword">ON</span> EMP<span class="token punctuation">.</span>DEPTNO <span class="token operator">=</span> DEPT<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">;</span>          
+
+</code></pre></div><p>Even though ANSI syntax is the <a href="https://docs.oracle.com/cd/B28359_01/server.111/b28286/queries006.htm" target="_blank" rel="noopener noreferrer">recommended<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> way, it is likely to encounter legacy syntax very often. Using <code>(+)</code> within a condition determines which side of the equation to be considered as <strong>outer</strong>.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span>                                      
+      ENAME<span class="token punctuation">,</span>                                
+      DNAME<span class="token punctuation">,</span>                                
+      EMP<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">,</span>                           
+      DEPT<span class="token punctuation">.</span>DEPTNO                           
+<span class="token keyword">FROM</span>                                        
+      SCOTT<span class="token punctuation">.</span>EMP<span class="token punctuation">,</span> 
+      SCOTT<span class="token punctuation">.</span>DEPT  
+<span class="token keyword">WHERE</span>
+      EMP<span class="token punctuation">.</span>DEPTNO <span class="token operator">=</span> DEPT<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">(</span><span class="token operator">+</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Here's an example of Left Outer Join between two tables:</p> <p><strong>Sample Table:</strong> EMPLOYEE</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>    NAME   <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>     A     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     B     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     C     <span class="token operator">|</span>    <span class="token number">3</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     D     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     E     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     F     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     G     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     H     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+
+</code></pre></div><p><strong>Sample Table:</strong> DEPT</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+<span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>   DEPTNAME   <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+<span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">5</span>    <span class="token operator">|</span>   MARKETING  <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">6</span>    <span class="token operator">|</span>      HR      <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+
+</code></pre></div><p>Now, If you execute the query:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span>
+      <span class="token operator">*</span>
+<span class="token keyword">FROM</span>
+      EMPLOYEE <span class="token keyword">LEFT</span> <span class="token keyword">OUTER</span> <span class="token keyword">JOIN</span> DEPT
+      <span class="token keyword">ON</span> EMPLOYEE<span class="token punctuation">.</span>DEPTNO <span class="token operator">=</span> DEPT<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>Output:</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-----------+---------+---------+--------------+</span>
+<span class="token operator">|</span>    NAME   <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>   DEPTNAME   <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+---------+--------------+</span>
+<span class="token operator">|</span>     F     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>     E     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>     B     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>     D     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>     A     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>     C     <span class="token operator">|</span>    <span class="token number">3</span>    <span class="token operator">|</span>         <span class="token operator">|</span>              <span class="token operator">|</span>
+<span class="token operator">|</span>     H     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>         <span class="token operator">|</span>              <span class="token operator">|</span>
+<span class="token operator">|</span>     G     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>         <span class="token operator">|</span>              <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+---------+--------------+</span>
+
+</code></pre></div><h2 id="right-outer-join"><a href="#right-outer-join" class="header-anchor">#</a> RIGHT OUTER JOIN</h2> <p>A <code>RIGHT OUTER JOIN</code> performs a join between two tables that requires an explicit join clause but does not exclude unmatched rows from the second table.</p> <p>Example:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span>                                      
+      ENAME<span class="token punctuation">,</span>                                
+      DNAME<span class="token punctuation">,</span>                                
+      EMP<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">,</span>                           
+      DEPT<span class="token punctuation">.</span>DEPTNO                           
+<span class="token keyword">FROM</span>                                        
+      SCOTT<span class="token punctuation">.</span>EMP <span class="token keyword">RIGHT</span> <span class="token keyword">OUTER</span> <span class="token keyword">JOIN</span> SCOTT<span class="token punctuation">.</span>DEPT  
+      <span class="token keyword">ON</span> EMP<span class="token punctuation">.</span>DEPTNO <span class="token operator">=</span> DEPT<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">;</span>          
+
+</code></pre></div><p>As the unmatched rows of <code>SCOTT.DEPT</code> are included, but unmatched rows of <code>SCOTT.EMP</code> are not, the above is equivalent to the following statement using <code>LEFT OUTER JOIN</code>.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span>                                      
+      ENAME<span class="token punctuation">,</span>                                
+      DNAME<span class="token punctuation">,</span>                                
+      EMP<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">,</span>                           
+      DEPT<span class="token punctuation">.</span>DEPTNO                           
+<span class="token keyword">FROM</span>                                        
+      SCOTT<span class="token punctuation">.</span>DEPT <span class="token keyword">RIGHT</span> <span class="token keyword">OUTER</span> <span class="token keyword">JOIN</span> SCOTT<span class="token punctuation">.</span>EMP  
+      <span class="token keyword">ON</span> DEPT<span class="token punctuation">.</span>DEPTNO <span class="token operator">=</span> EMP<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">;</span>
+
+</code></pre></div><p>Here's an example of Right Outer Join between two tables:</p> <p><strong>Sample Table:</strong> EMPLOYEE</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>    NAME   <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>     A     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     B     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     C     <span class="token operator">|</span>    <span class="token number">3</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     D     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     E     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     F     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     G     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     H     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+
+</code></pre></div><p><strong>Sample Table:</strong> DEPT</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+<span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>   DEPTNAME   <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+<span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">5</span>    <span class="token operator">|</span>   MARKETING  <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">6</span>    <span class="token operator">|</span>      HR      <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+
+</code></pre></div><p>Now, If you execute the query:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span>
+      <span class="token operator">*</span>
+<span class="token keyword">FROM</span>
+      EMPLOYEE <span class="token keyword">RIGHT</span> <span class="token keyword">OUTER</span> <span class="token keyword">JOIN</span> DEPT
+      <span class="token keyword">ON</span> EMPLOYEE<span class="token punctuation">.</span>DEPTNO <span class="token operator">=</span> DEPT<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>Output:</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-----------+---------+---------+--------------+</span>
+<span class="token operator">|</span>    NAME   <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>   DEPTNAME   <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+---------+--------------+</span>
+<span class="token operator">|</span>     A     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>     B     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>     D     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>     E     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>     F     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>           <span class="token operator">|</span>         <span class="token operator">|</span>    <span class="token number">5</span>    <span class="token operator">|</span>   MARKETING  <span class="token operator">|</span>
+<span class="token operator">|</span>           <span class="token operator">|</span>         <span class="token operator">|</span>    <span class="token number">6</span>    <span class="token operator">|</span>      HR      <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+---------+--------------+</span>
+
+</code></pre></div><p>Oracle (+) syntax equivalent for the query is:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> EMPLOYEE<span class="token punctuation">,</span> DEPT
+<span class="token keyword">WHERE</span> EMPLOYEE<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">(</span><span class="token operator">+</span><span class="token punctuation">)</span> <span class="token operator">=</span> DEPT<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="full-outer-join"><a href="#full-outer-join" class="header-anchor">#</a> FULL OUTER JOIN</h2> <p>A <code>FULL OUTER JOIN</code> performs a join between two tables that requires an explicit join clause but does not exclude unmatched rows in either table. In other words, it returns all the rows in each table.</p> <p>Example:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span>                                     
+      <span class="token operator">*</span>                                    
+<span class="token keyword">FROM</span>                                       
+      EMPLOYEE <span class="token keyword">FULL</span> <span class="token keyword">OUTER</span> <span class="token keyword">JOIN</span> DEPT 
+      <span class="token keyword">ON</span> EMPLOYEE<span class="token punctuation">.</span>DEPTNO <span class="token operator">=</span> DEPT<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">;</span>         
+
+</code></pre></div><p>Here's an example of Full Outer Join between two tables:</p> <p><strong>Sample Table:</strong> EMPLOYEE</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>    NAME   <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>     A     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     B     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     C     <span class="token operator">|</span>    <span class="token number">3</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     D     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     E     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     F     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     G     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     H     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+
+</code></pre></div><p><strong>Sample Table:</strong> DEPT</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+<span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>   DEPTNAME   <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+<span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">5</span>    <span class="token operator">|</span>   MARKETING  <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">6</span>    <span class="token operator">|</span>      HR      <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+
+</code></pre></div><p>Now, If you execute the query:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span>
+      <span class="token operator">*</span>
+<span class="token keyword">FROM</span>
+      EMPLOYEE <span class="token keyword">FULL</span> <span class="token keyword">OUTER</span> <span class="token keyword">JOIN</span> DEPT
+      <span class="token keyword">ON</span> EMPLOYEE<span class="token punctuation">.</span>DEPTNO <span class="token operator">=</span> DEPT<span class="token punctuation">.</span>DEPTNO<span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>Output</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-----------+---------+---------+--------------+</span>
+<span class="token operator">|</span>    NAME   <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>   DEPTNAME   <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+---------+--------------+</span>
+<span class="token operator">|</span>     A     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>     B     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>     C     <span class="token operator">|</span>    <span class="token number">3</span>    <span class="token operator">|</span>         <span class="token operator">|</span>              <span class="token operator">|</span>
+<span class="token operator">|</span>     D     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>     E     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>     F     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>     G     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>         <span class="token operator">|</span>              <span class="token operator">|</span>
+<span class="token operator">|</span>     H     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>         <span class="token operator">|</span>              <span class="token operator">|</span>
+<span class="token operator">|</span>           <span class="token operator">|</span>         <span class="token operator">|</span>    <span class="token number">6</span>    <span class="token operator">|</span>      HR      <span class="token operator">|</span>
+<span class="token operator">|</span>           <span class="token operator">|</span>         <span class="token operator">|</span>    <span class="token number">5</span>    <span class="token operator">|</span>   MARKETING  <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+---------+--------------+</span>
+
+</code></pre></div><p>Here the columns that do not match has been kept NULL.</p> <h2 id="antijoin"><a href="#antijoin" class="header-anchor">#</a> ANTIJOIN</h2> <p>An antijoin returns rows from the left side of the predicate for which there are no corresponding rows on the right side of the predicate. It returns rows that fail to match (NOT IN) the subquery on the right side.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> employees 
+   <span class="token keyword">WHERE</span> department_id <span class="token operator">NOT</span> <span class="token operator">IN</span> 
+   <span class="token punctuation">(</span><span class="token keyword">SELECT</span> department_id <span class="token keyword">FROM</span> departments 
+       <span class="token keyword">WHERE</span> location_id <span class="token operator">=</span> <span class="token number">1700</span><span class="token punctuation">)</span>
+   <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> last_name<span class="token punctuation">;</span>
+
+</code></pre></div><p>Here's an example of Anti Join between two tables:</p> <p><strong>Sample Table:</strong> EMPLOYEE</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>    NAME   <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>     A     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     B     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     C     <span class="token operator">|</span>    <span class="token number">3</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     D     <span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     E     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     F     <span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     G     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     H     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+
+</code></pre></div><p><strong>Sample Table:</strong> DEPT</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+<span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>   DEPTNAME   <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+<span class="token operator">|</span>    <span class="token number">1</span>    <span class="token operator">|</span>  ACCOUNTING  <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">2</span>    <span class="token operator">|</span>    FINANCE   <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">5</span>    <span class="token operator">|</span>   MARKETING  <span class="token operator">|</span>
+<span class="token operator">|</span>    <span class="token number">6</span>    <span class="token operator">|</span>      HR      <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">---------+--------------+</span>
+
+</code></pre></div><p>Now, If you execute the query:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span>
+      <span class="token operator">*</span>
+<span class="token keyword">FROM</span>
+      EMPLOYEE <span class="token keyword">WHERE</span> DEPTNO <span class="token operator">NOT</span> <span class="token operator">IN</span>
+      <span class="token punctuation">(</span><span class="token keyword">SELECT</span> DEPTNO <span class="token keyword">FROM</span> DEPT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>Output:</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>    NAME   <span class="token operator">|</span>  DEPTNO <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+<span class="token operator">|</span>     C     <span class="token operator">|</span>    <span class="token number">3</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     H     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">|</span>     G     <span class="token operator">|</span>    <span class="token number">4</span>    <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----------+---------+</span>
+
+</code></pre></div><p>The output shows that only the rows of EMPLOYEE table, of which DEPTNO were not present in DEPT table.</p> <h2 id="inner-join"><a href="#inner-join" class="header-anchor">#</a> INNER JOIN</h2> <p>An INNER JOIN is a JOIN operation that allows you to specify an explicit join clause.</p> <p>Syntax</p> <p>TableExpression [ INNER ] JOIN TableExpression
+{
+ON booleanExpression |
+USING clause
+}</p> <p>You can specify the join clause by specifying ON with a boolean expression.</p> <p>The scope of expressions in the ON clause includes the current tables and any tables in outer query blocks to the current SELECT. In the following example, the ON clause refers to the current tables:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">-- Join the EMP_ACT and EMPLOYEE tables</span>
+<span class="token comment">-- select all the columns from the EMP_ACT table and </span>
+<span class="token comment">-- add the employee's surname (LASTNAME) from the EMPLOYEE table</span>
+<span class="token comment">-- to each row of the result</span>
+<span class="token keyword">SELECT</span> SAMP<span class="token punctuation">.</span>EMP_ACT<span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">,</span> LASTNAME
+ <span class="token keyword">FROM</span> SAMP<span class="token punctuation">.</span>EMP_ACT <span class="token keyword">JOIN</span> SAMP<span class="token punctuation">.</span>EMPLOYEE
+ <span class="token keyword">ON</span> EMP_ACT<span class="token punctuation">.</span>EMPNO <span class="token operator">=</span> EMPLOYEE<span class="token punctuation">.</span>EMPNO
+<span class="token comment">-- Join the EMPLOYEE and DEPARTMENT tables, </span>
+<span class="token comment">-- select the employee number (EMPNO),  </span>
+<span class="token comment">-- employee surname (LASTNAME), </span>
+<span class="token comment">-- department number (WORKDEPT in the EMPLOYEE table and DEPTNO in the</span>
+<span class="token comment">-- DEPARTMENT table) </span>
+<span class="token comment">-- and department name (DEPTNAME) </span>
+<span class="token comment">-- of all employees who were born (BIRTHDATE) earlier than 1930.</span>
+<span class="token keyword">SELECT</span> EMPNO<span class="token punctuation">,</span> LASTNAME<span class="token punctuation">,</span> WORKDEPT<span class="token punctuation">,</span> DEPTNAME 
+ <span class="token keyword">FROM</span> SAMP<span class="token punctuation">.</span>EMPLOYEE <span class="token keyword">JOIN</span> SAMP<span class="token punctuation">.</span>DEPARTMENT 
+ <span class="token keyword">ON</span> WORKDEPT <span class="token operator">=</span> DEPTNO 
+ <span class="token operator">AND</span> <span class="token keyword">YEAR</span><span class="token punctuation">(</span>BIRTHDATE<span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1930</span>
+
+<span class="token comment">-- Another example of &quot;generating&quot; new data values, </span>
+<span class="token comment">-- using a query which selects from a VALUES clause (which is an </span>
+<span class="token comment">-- alternate form of a fullselect). </span>
+<span class="token comment">-- This query shows how a table can be derived called &quot;X&quot;</span>
+<span class="token comment">-- having 2 columns &quot;R1&quot; and &quot;R2&quot; and 1 row of data</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span>
+<span class="token keyword">FROM</span> <span class="token punctuation">(</span><span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">AS</span> VALUESTABLE1<span class="token punctuation">(</span>C1<span class="token punctuation">,</span> C2<span class="token punctuation">)</span>
+<span class="token keyword">JOIN</span> <span class="token punctuation">(</span><span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> VALUESTABLE2<span class="token punctuation">(</span>c1<span class="token punctuation">,</span> c2<span class="token punctuation">)</span>
+<span class="token keyword">ON</span> VALUESTABLE1<span class="token punctuation">.</span>c1 <span class="token operator">=</span> VALUESTABLE2<span class="token punctuation">.</span>c1
+<span class="token comment">-- This results in:</span>
+<span class="token comment">-- C1         |C2         |C1         |2</span>
+<span class="token comment">-- -----------------------------------------------</span>
+<span class="token comment">-- 3          |4          |3          |2</span>
+<span class="token comment">-- 1          |5          |1          |2 </span>
+
+
+<span class="token comment">-- List every department with the employee number and </span>
+<span class="token comment">-- last name of the manager</span>
+
+<span class="token keyword">SELECT</span> DEPTNO<span class="token punctuation">,</span> DEPTNAME<span class="token punctuation">,</span> EMPNO<span class="token punctuation">,</span> LASTNAME
+<span class="token keyword">FROM</span> DEPARTMENT <span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> EMPLOYEE
+<span class="token keyword">ON</span> MGRNO <span class="token operator">=</span> EMPNO
+
+<span class="token comment">-- List every employee number and last name </span>
+<span class="token comment">-- with the employee number and last name of their manager</span>
+<span class="token keyword">SELECT</span> E<span class="token punctuation">.</span>EMPNO<span class="token punctuation">,</span> E<span class="token punctuation">.</span>LASTNAME<span class="token punctuation">,</span> M<span class="token punctuation">.</span>EMPNO<span class="token punctuation">,</span> M<span class="token punctuation">.</span>LASTNAME    
+<span class="token keyword">FROM</span> EMPLOYEE E <span class="token keyword">INNER</span> <span class="token keyword">JOIN</span>    
+DEPARTMENT <span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> EMPLOYEE M 
+    <span class="token keyword">ON</span> MGRNO <span class="token operator">=</span> M<span class="token punctuation">.</span>EMPNO
+    <span class="token keyword">ON</span> E<span class="token punctuation">.</span>WORKDEPT <span class="token operator">=</span> DEPTNO
+
+</code></pre></div><h2 id="join"><a href="#join" class="header-anchor">#</a> JOIN</h2> <p>The <code>JOIN</code> operation performs a join between two tables, excluding any unmatched rows from the first table. From Oracle 9i forward, the <code>JOIN</code> is equivalent in function to the <code>INNER JOIN</code>. This operation requires an explicit join clause, as opposed to the <code>CROSS JOIN</code> and <code>NATURAL JOIN</code> operators.</p> <p>Example:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">select</span> t1<span class="token punctuation">.</span><span class="token operator">*</span><span class="token punctuation">,</span>
+       t2<span class="token punctuation">.</span>DeptId
+  <span class="token keyword">from</span> table_1 t1
+  <span class="token keyword">join</span> table_2 t2 <span class="token keyword">on</span> t2<span class="token punctuation">.</span>DeptNo <span class="token operator">=</span> t1<span class="token punctuation">.</span>DeptNo
+
+</code></pre></div><p>Oracle documentation:</p> <ul><li><a href="http://docs.oracle.com/javadb/10.6.2.1/ref/rrefsqlj29840.html#rrefsqlj29840" target="_blank" rel="noopener noreferrer">10g<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://docs.oracle.com/cd/B28359_01/server.111/b28286/queries006.htm" target="_blank" rel="noopener noreferrer">11g<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://docs.oracle.com/database/121/SQLRF/queries006.htm#SQLRF30046" target="_blank" rel="noopener noreferrer">12g<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul> <h2 id="semijoin"><a href="#semijoin" class="header-anchor">#</a> SEMIJOIN</h2> <p>A semijoin query can be used, for example, to find all departments with at least one employee whose salary exceeds 2500.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> departments 
+   <span class="token keyword">WHERE</span> <span class="token keyword">EXISTS</span> 
+   <span class="token punctuation">(</span><span class="token keyword">SELECT</span> <span class="token number">1</span> <span class="token keyword">FROM</span> employees 
+       <span class="token keyword">WHERE</span> departments<span class="token punctuation">.</span>department_id <span class="token operator">=</span> employees<span class="token punctuation">.</span>department_id 
+       <span class="token operator">AND</span> employees<span class="token punctuation">.</span>salary <span class="token operator">&gt;</span> <span class="token number">2500</span><span class="token punctuation">)</span>
+   <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> department_name<span class="token punctuation">;</span> 
+
+</code></pre></div><p>This is more efficient than the full join alternatives, as inner joining on employees then giving a where clause detailing that the salary has to be greater than 2500 could return the same department numerous times. Say if the Fire department has <code>n</code> employees all with salary 3000, <code>select * from departments, employees</code> with the necessary join on ids and our where clause would return the Fire department <code>n</code> times.</p> <h2 id="natural-join"><a href="#natural-join" class="header-anchor">#</a> NATURAL JOIN</h2> <p>NATURAL JOIN requires no explitic join condition; it builds one based on all the fields with the same name in the joined tables.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">create</span> <span class="token keyword">table</span> tab1<span class="token punctuation">(</span>id number<span class="token punctuation">,</span>  descr varchar2<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">create</span> <span class="token keyword">table</span> tab2<span class="token punctuation">(</span>id number<span class="token punctuation">,</span>  descr varchar2<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> tab1 <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'one'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> tab1 <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'two'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> tab1 <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'three'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> tab2 <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'ONE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">insert</span> <span class="token keyword">into</span> tab2 <span class="token keyword">values</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'three'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The join will be done on the fields ID and DESCR, common to both the tables:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SQL</span><span class="token operator">&gt;</span> <span class="token keyword">select</span> <span class="token operator">*</span>
+  <span class="token number">2</span>  <span class="token keyword">from</span> tab1
+  <span class="token number">3</span>        <span class="token keyword">natural</span> <span class="token keyword">join</span>
+  <span class="token number">4</span>       tab2<span class="token punctuation">;</span>
+
+        ID DESCR
+<span class="token comment">---------- ----------</span>
+         <span class="token number">3</span> three
+
+</code></pre></div><p>Columns with different names will not be used in the JOIN condition:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SQL</span><span class="token operator">&gt;</span> <span class="token keyword">select</span> <span class="token operator">*</span>
+  <span class="token number">2</span>  <span class="token keyword">from</span> <span class="token punctuation">(</span><span class="token keyword">select</span> id <span class="token keyword">as</span> id<span class="token punctuation">,</span> descr <span class="token keyword">as</span> descr1 <span class="token keyword">from</span> tab1<span class="token punctuation">)</span>
+  <span class="token number">3</span>       <span class="token keyword">natural</span> <span class="token keyword">join</span>
+  <span class="token number">4</span>       <span class="token punctuation">(</span><span class="token keyword">select</span> id <span class="token keyword">as</span> id<span class="token punctuation">,</span> descr <span class="token keyword">as</span> descr2 <span class="token keyword">from</span> tab2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        ID DESCR1     DESCR2
+<span class="token comment">---------- ---------- ----------</span>
+         <span class="token number">1</span> one        ONE
+         <span class="token number">3</span> three      three
+
+</code></pre></div><p>If the joined tables have no common columns, a JOIN with no conditions will be done:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SQL</span><span class="token operator">&gt;</span> <span class="token keyword">select</span> <span class="token operator">*</span>
+  <span class="token number">2</span>  <span class="token keyword">from</span> <span class="token punctuation">(</span><span class="token keyword">select</span> id <span class="token keyword">as</span> id1<span class="token punctuation">,</span> descr <span class="token keyword">as</span> descr1 <span class="token keyword">from</span> tab1<span class="token punctuation">)</span>
+  <span class="token number">3</span>       <span class="token keyword">natural</span> <span class="token keyword">join</span>
+  <span class="token number">4</span>       <span class="token punctuation">(</span><span class="token keyword">select</span> id <span class="token keyword">as</span> id2<span class="token punctuation">,</span> descr <span class="token keyword">as</span> descr2 <span class="token keyword">from</span> tab2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+       ID1 DESCR1            ID2 DESCR2
+<span class="token comment">---------- ---------- ---------- ----------</span>
+         <span class="token number">1</span> one                 <span class="token number">1</span> ONE
+         <span class="token number">2</span> two                 <span class="token number">1</span> ONE
+         <span class="token number">3</span> three               <span class="token number">1</span> ONE
+         <span class="token number">1</span> one                 <span class="token number">3</span> three
+         <span class="token number">2</span> two                 <span class="token number">3</span> three
+         <span class="token number">3</span> three               <span class="token number">3</span> three
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/oracle/joins.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/oracle/dual-table.html" class="prev">
+        DUAL table
+      </a></span> <span class="next"><a href="/oracle/handling-null-values.html">
+        Handling NULL values
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2353.f346ea3e.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - ByVal and ByRef keywords</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="ByRef keyword, ByVal keyword">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - ByVal and ByRef keywords">
+    <meta property="og:description" content="ByRef keyword, ByVal keyword">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/byval-and-byref-keywords.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - ByVal and ByRef keywords">
+    <meta name="twitter:description" content="ByRef keyword, ByVal keyword">
+    <meta name="twitter:url" content="/vbnet/byval-and-byref-keywords.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3450.fc2ae72f.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="sidebar-link">Introduction to Syntax</a></li><li><a href="/vbnet/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="sidebar-link">Looping</a></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="active sidebar-link">ByVal and ByRef keywords</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/byval-and-byref-keywords.html#byref-keyword" class="sidebar-link">ByRef keyword</a></li><li class="sidebar-sub-header"><a href="/vbnet/byval-and-byref-keywords.html#byval-keyword" class="sidebar-link">ByVal keyword</a></li></ul></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="sidebar-link">Extension methods</a></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="sidebar-link">Visual Basic 14.0 Features</a></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="sidebar-link">Google Maps in a Windows Form</a></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="sidebar-link">WinForms SpellCheckBox</a></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="sidebar-link">Task-based asynchronous pattern</a></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="byval-and-byref-keywords"><a href="#byval-and-byref-keywords" class="header-anchor">#</a> ByVal and ByRef keywords</h1> <h2 id="byref-keyword"><a href="#byref-keyword" class="header-anchor">#</a> ByRef keyword</h2> <p>ByRef keyword before method parameter says that parameter will be sent in a way allowing the method to change (assign a new value) the variable underlying the parameter.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Class</span> SomeClass
+    <span class="token keyword">Public</span> <span class="token keyword">Property</span> Member <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+<span class="token keyword">Module</span> Program
+    <span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">Dim</span> someInstance <span class="token keyword">As</span> <span class="token keyword">New</span> SomeClass <span class="token keyword">With</span> <span class="token punctuation">{</span><span class="token punctuation">.</span>Member <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">}</span>
+    
+        Foo <span class="token punctuation">(</span>someInstance<span class="token punctuation">)</span>
+        <span class="token comment">' here someInstance is not Nothing</span>
+        <span class="token comment">' but someInstance.Member is -42</span>
+
+        Bar<span class="token punctuation">(</span>someInstance<span class="token punctuation">)</span>
+        <span class="token comment">' here someInstance is Nothing</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+    <span class="token keyword">Sub</span> Foo<span class="token punctuation">(</span><span class="token keyword">ByVal</span> arg <span class="token keyword">As</span> SomeClass<span class="token punctuation">)</span>
+        arg<span class="token punctuation">.</span>Member <span class="token operator">=</span> <span class="token operator">-</span>arg<span class="token punctuation">.</span>Member <span class="token comment">' change argument content</span>
+        arg <span class="token operator">=</span> <span class="token boolean">Nothing</span> <span class="token comment">' change (re-assign) argument</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+    <span class="token keyword">Sub</span> Bar<span class="token punctuation">(</span><span class="token keyword">ByRef</span> param <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span>
+        arg<span class="token punctuation">.</span>Member <span class="token operator">=</span> <span class="token operator">-</span>arg<span class="token punctuation">.</span>Member <span class="token comment">' change argument content</span>
+        arg <span class="token operator">=</span> <span class="token boolean">Nothing</span> <span class="token comment">' change (re-assign) argument</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+</code></pre></div><h2 id="byval-keyword"><a href="#byval-keyword" class="header-anchor">#</a> ByVal keyword</h2> <p>ByVal keyword before method parameter (or no keyword as ByVal is assumed by default) says that parameter will be sent in a way <strong>not</strong> allowing the method to change (assign a new value) the variable underlying the parameter.<br>
+It doesn't prevent the content (or state) of the argument to be changed if it's a class.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Class</span> SomeClass
+    <span class="token keyword">Public</span> <span class="token keyword">Property</span> Member <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+<span class="token keyword">Module</span> Program
+    <span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">Dim</span> someInstance <span class="token keyword">As</span> <span class="token keyword">New</span> SomeClass <span class="token keyword">With</span> <span class="token punctuation">{</span><span class="token punctuation">.</span>Member <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">}</span>
+
+        Foo <span class="token punctuation">(</span>someInstance<span class="token punctuation">)</span>
+        <span class="token comment">' here someInstance is not Nothing (still the same object)</span>
+        <span class="token comment">' but someInstance.Member is -42 (internal state can still be changed)</span>
+
+        <span class="token keyword">Dim</span> number <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">42</span>
+        Foo<span class="token punctuation">(</span>number<span class="token punctuation">)</span>
+        <span class="token comment">' here number is still 42</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+    <span class="token keyword">Sub</span> Foo<span class="token punctuation">(</span><span class="token keyword">ByVal</span> arg <span class="token keyword">As</span> SomeClass<span class="token punctuation">)</span>
+        arg<span class="token punctuation">.</span>Member <span class="token operator">=</span> <span class="token operator">-</span>arg<span class="token punctuation">.</span>Member <span class="token comment">' change argument content</span>
+        arg <span class="token operator">=</span> <span class="token boolean">Nothing</span> <span class="token comment">' change (re-assign) argument</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>    
+
+    <span class="token keyword">Sub</span> Foo<span class="token punctuation">(</span>arg <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span> <span class="token comment">' No ByVal or ByRef keyword, ByVal is assumed</span>
+        arg <span class="token operator">=</span> <span class="token operator">-</span>arg
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/byval-and-byref-keywords.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/type-conversion.html" class="prev">
+        Type conversion
+      </a></span> <span class="next"><a href="/vbnet/console.html">
+        Console
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3450.fc2ae72f.js" defer></script>
+  </body>
+</html>

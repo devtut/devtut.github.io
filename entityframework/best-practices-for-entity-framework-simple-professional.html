@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Entity Framework - Best Practices For Entity Framework (Simple &amp; Professional)</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="1- Entity Framework @ Data layer (Basics), 2- Entity Framework @ Business layer, 3- Using Business layer @ Presentation layer (MVC), 4- Entity Framework @ Unit Test Layer">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Entity Framework - Best Practices For Entity Framework (Simple & Professional)">
+    <meta property="og:description" content="1- Entity Framework @ Data layer (Basics), 2- Entity Framework @ Business layer, 3- Using Business layer @ Presentation layer (MVC), 4- Entity Framework @ Unit Test Layer">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/entityframework/best-practices-for-entity-framework-simple-professional.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Entity Framework - Best Practices For Entity Framework (Simple & Professional)">
+    <meta name="twitter:description" content="1- Entity Framework @ Data layer (Basics), 2- Entity Framework @ Business layer, 3- Using Business layer @ Presentation layer (MVC), 4- Entity Framework @ Unit Test Layer">
+    <meta name="twitter:url" content="/entityframework/best-practices-for-entity-framework-simple-professional.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1042.2eefc4ba.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Entity Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/entityframework/" class="sidebar-link">Disclaimer</a></li><li><a href="/entityframework/getting-started-with-entity-framework.html" class="sidebar-link">Getting started with Entity Framework</a></li><li><a href="/entityframework/code-first-conventions.html" class="sidebar-link">Code First Conventions</a></li><li><a href="/entityframework/code-first-dataannotations.html" class="sidebar-link">Code First DataAnnotations</a></li><li><a href="/entityframework/entity-framework-code-first.html" class="sidebar-link">Entity Framework Code First</a></li><li><a href="/entityframework/entity-framework-code-first-migrations.html" class="sidebar-link">Entity-framework Code First Migrations</a></li><li><a href="/entityframework/inheritance-with-entityframework-code-first.html" class="sidebar-link">Inheritance with EntityFramework (Code First)</a></li><li><a href="/entityframework/code-first-fluent-api.html" class="sidebar-link">Code First - Fluent API</a></li><li><a href="/entityframework/mapping-relationship-with-entity-framework-code-first-one-to-one-and-variations.html" class="sidebar-link">Mapping relationship with Entity Framework Code First: One-to-one and variations</a></li><li><a href="/entityframework/mapping-relationship-with-entity-framework-code-first-one-to-many-and-many-to-many.html" class="sidebar-link">Mapping relationship with Entity Framework Code First: One-to-many and Many-to-many</a></li><li><a href="/entityframework/database-first-model-generation.html" class="sidebar-link">Database first model generation</a></li><li><a href="/entityframework/complex-types.html" class="sidebar-link">Complex Types</a></li><li><a href="/entityframework/database-initialisers.html" class="sidebar-link">Database Initialisers</a></li><li><a href="/entityframework/tracking-vs-no-tracking.html" class="sidebar-link">Tracking vs. No-Tracking</a></li><li><a href="/entityframework/transactions.html" class="sidebar-link">Transactions</a></li><li><a href="/entityframework/managing-entity-state.html" class="sidebar-link">Managing entity state</a></li><li><a href="/entityframework/loading-related-entities.html" class="sidebar-link">Loading related entities</a></li><li><a href="/entityframework/model-restraints.html" class="sidebar-link">Model Restraints</a></li><li><a href="/entityframework/entity-framework-with-postgresql.html" class="sidebar-link">Entity-Framework  with Postgresql</a></li><li><a href="/entityframework/entity-framework-with-sqlite.html" class="sidebar-link">Entity Framework with SQLite</a></li><li><a href="/entityframework/t4-templates-in-entity-framework.html" class="sidebar-link">.t4 templates in entity-framework</a></li><li><a href="/entityframework/advanced-mapping-scenarios-entity-splitting-table-splitting.html" class="sidebar-link">Advanced mapping scenarios: entity splitting, table splitting</a></li><li><a href="/entityframework/best-practices-for-entity-framework-simple-professional.html" class="active sidebar-link">Best Practices For Entity Framework (Simple &amp; Professional)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/entityframework/best-practices-for-entity-framework-simple-professional.html#_1-entity-framework-data-layer-basics" class="sidebar-link">1- Entity Framework @ Data layer (Basics)</a></li><li class="sidebar-sub-header"><a href="/entityframework/best-practices-for-entity-framework-simple-professional.html#_2-entity-framework-business-layer" class="sidebar-link">2- Entity Framework @ Business layer</a></li><li class="sidebar-sub-header"><a href="/entityframework/best-practices-for-entity-framework-simple-professional.html#_3-using-business-layer-presentation-layer-mvc" class="sidebar-link">3- Using Business layer @ Presentation layer (MVC)</a></li><li class="sidebar-sub-header"><a href="/entityframework/best-practices-for-entity-framework-simple-professional.html#_4-entity-framework-unit-test-layer" class="sidebar-link">4- Entity Framework @ Unit Test Layer</a></li></ul></li><li><a href="/entityframework/optimization-techniques-in-ef.html" class="sidebar-link">Optimization Techniques in EF</a></li><li><a href="/entityframework/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="best-practices-for-entity-framework-simple-professional"><a href="#best-practices-for-entity-framework-simple-professional" class="header-anchor">#</a> Best Practices For Entity Framework (Simple &amp; Professional)</h1> <p>This article is to introduce a simple and professional practice to use Entity Framework.</p> <p>Simple: because it only needs one class (with one interface)</p> <p>Professional: because it applies <a href="https://www.codeproject.com/Articles/703634/SOLID-architecture-principles-using-simple-Csharp" target="_blank" rel="noopener noreferrer">SOLID architecture principles<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>I don't wish to talk more.... let's enjoy it!</p> <h2 id="_1-entity-framework-data-layer-basics"><a href="#_1-entity-framework-data-layer-basics" class="header-anchor">#</a> 1- Entity Framework @ Data layer (Basics)</h2> <p>In this article we will use a simple database called “Company” with two tables:</p> <p>[dbo].[Categories]([CategoryID], [CategoryName])</p> <p>[dbo].[Products]([ProductID], [CategoryID], [ProductName])</p> <p><strong>1-1 Generate Entity Framework code</strong></p> <p>In this layer we generate the Entity Framework code (in project library) (see <a href="https://msdn.microsoft.com/en-us/library/jj206878(v=vs.113).aspx" target="_blank" rel="noopener noreferrer">this article<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> in how can you do that) then you will have the following classes</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> <span class="token class-name">CompanyContext</span> <span class="token punctuation">:</span> DbContext
+<span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> <span class="token class-name">Product</span>
+<span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> <span class="token class-name">Category</span>
+
+</code></pre></div><p><strong>1-2 Create basic Interface</strong></p> <p>We will create one interface for our basics functions</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IDbRepository</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">IDisposable</span></span>
+<span class="token punctuation">{</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Tables and Views functions</span>
+
+    <span class="token return-type class-name">IQueryable<span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span> <span class="token generic-method"><span class="token function">GetAll</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">bool</span></span> noTracking <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TResult</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">Add</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">Delete</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">Attach</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">AttachIfNot</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span><span class="token punctuation">;</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Tables and Views functions</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Transactions Functions</span>
+
+    <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span> <span class="token function">CommitAsync</span><span class="token punctuation">(</span><span class="token class-name">CancellationToken</span> cancellationToken <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">(</span><span class="token type-expression class-name">CancellationToken</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Transactions Functions</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Database Procedures and Functions</span>
+
+    <span class="token return-type class-name">TResult</span> <span class="token generic-method"><span class="token function">Execute</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> functionName<span class="token punctuation">,</span> <span class="token keyword">params</span> <span class="token class-name"><span class="token keyword">object</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> parameters<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Database Procedures and Functions</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>1-3 Implementing basic Interface</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token comment">/// &lt;summary&gt;</span>
+<span class="token comment">/// Implementing basic tables, views, procedures, functions, and transaction functions</span>
+<span class="token comment">/// Select (GetAll), Insert (Add), Delete, and Attach</span>
+<span class="token comment">/// No Edit (Modify) function (can modify attached entity without function call)</span>
+<span class="token comment">/// Executes database procedures or functions (Execute)</span>
+<span class="token comment">/// Transaction functions (Commit)</span>
+<span class="token comment">/// More functions can be added if needed</span>
+<span class="token comment">/// &lt;/summary&gt;</span>
+<span class="token comment">/// &lt;typeparam name=&quot;TEntity&quot;&gt;Entity Framework table or view&lt;/typeparam&gt;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DbRepository</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">IDbRepository</span></span>
+<span class="token punctuation">{</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Protected Members</span>
+
+    <span class="token keyword">protected</span> <span class="token class-name">DbContext</span> _dbContext<span class="token punctuation">;</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Protected Members</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Constractors</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Repository constructor </span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token comment">/// &lt;param name=&quot;dbContext&quot;&gt;Entity framework databse context&lt;/param&gt;</span>
+    <span class="token keyword">public</span> <span class="token function">DbRepository</span><span class="token punctuation">(</span><span class="token class-name">DbContext</span> dbContext<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _dbContext <span class="token operator">=</span> dbContext<span class="token punctuation">;</span>
+
+        <span class="token function">ConfigureContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Constractors</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> IRepository Implementation</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Tables and Views functions</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Query all</span>
+    <span class="token comment">/// Set noTracking to true for selecting only (read-only queries)</span>
+    <span class="token comment">/// Set noTracking to false for insert, update, or delete after select</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">IQueryable<span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span> <span class="token generic-method"><span class="token function">GetAll</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">bool</span></span> noTracking <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TResult</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> entityDbSet <span class="token operator">=</span> <span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>noTracking<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> entityDbSet<span class="token punctuation">.</span><span class="token function">AsNoTracking</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> entityDbSet<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">Add</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Delete loaded (attached) or unloaded (Detached) entitiy</span>
+    <span class="token comment">/// No need to load object to delete it</span>
+    <span class="token comment">/// Create new object of TEntity and set the id then call Delete function</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token comment">/// &lt;param name=&quot;entity&quot;&gt;TEntity&lt;/param&gt;</span>
+    <span class="token comment">/// &lt;returns&gt;&lt;/returns&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">Delete</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>_dbContext<span class="token punctuation">.</span><span class="token function">Entry</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">.</span>State <span class="token operator">==</span> EntityState<span class="token punctuation">.</span>Detached<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            _dbContext<span class="token punctuation">.</span><span class="token function">Entry</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">.</span>State <span class="token operator">=</span> EntityState<span class="token punctuation">.</span>Deleted<span class="token punctuation">;</span>
+            <span class="token keyword">return</span> entity<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+            <span class="token keyword">return</span> <span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">Attach</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Attach</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">AttachIfNot</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>_dbContext<span class="token punctuation">.</span><span class="token function">Entry</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">.</span>State <span class="token operator">==</span> EntityState<span class="token punctuation">.</span>Detached<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token function">Attach</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> entity<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Tables and Views functions</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Transactions Functions</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Saves all changes made in this context to the underlying database.</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token comment">/// &lt;returns&gt;The number of objects written to the underlying database.&lt;/returns&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> _dbContext<span class="token punctuation">.</span><span class="token function">SaveChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Asynchronously saves all changes made in this context to the underlying database.</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token comment">/// &lt;param name=&quot;cancellationToken&quot;&gt;A System.Threading.CancellationToken to observe while waiting for the task to complete.&lt;/param&gt;</span>
+    <span class="token comment">/// &lt;returns&gt;A task that represents the asynchronous save operation.  The task result contains the number of objects written to the underlying database.&lt;/returns&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span> <span class="token function">CommitAsync</span><span class="token punctuation">(</span><span class="token class-name">CancellationToken</span> cancellationToken <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">(</span><span class="token type-expression class-name">CancellationToken</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> _dbContext<span class="token punctuation">.</span><span class="token function">SaveChangesAsync</span><span class="token punctuation">(</span>cancellationToken<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Transactions Functions</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Database Procedures and Functions</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Executes any function in the context</span>
+    <span class="token comment">/// use to call database procesdures and functions</span>
+    <span class="token comment">/// &lt;/summary&gt;&gt;</span>
+    <span class="token comment">/// &lt;typeparam name=&quot;TResult&quot;&gt;return function type&lt;/typeparam&gt;</span>
+    <span class="token comment">/// &lt;param name=&quot;functionName&quot;&gt;context function name&lt;/param&gt;</span>
+    <span class="token comment">/// &lt;param name=&quot;parameters&quot;&gt;context function parameters in same order&lt;/param&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">TResult</span> <span class="token generic-method"><span class="token function">Execute</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> functionName<span class="token punctuation">,</span> <span class="token keyword">params</span> <span class="token class-name"><span class="token keyword">object</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> parameters<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name">MethodInfo</span> method <span class="token operator">=</span> _dbContext<span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">GetMethod</span><span class="token punctuation">(</span>functionName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>TResult<span class="token punctuation">)</span>method<span class="token punctuation">.</span><span class="token function">Invoke</span><span class="token punctuation">(</span>_dbContext<span class="token punctuation">,</span> parameters<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Database Procedures and Functions</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> IRepository Implementation</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> IDisposable Implementation</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _dbContext<span class="token punctuation">.</span><span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> IDisposable Implementation</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Protected Functions</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Set Context Configuration</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">protected</span> <span class="token keyword">virtual</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">ConfigureContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// set your recommended Context Configuration</span>
+        _dbContext<span class="token punctuation">.</span>Configuration<span class="token punctuation">.</span>LazyLoadingEnabled <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Protected Functions</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Private Functions</span>
+
+    <span class="token keyword">private</span> <span class="token return-type class-name">DbSet<span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span> <span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> _dbContext<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Set</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Private Functions</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="_2-entity-framework-business-layer"><a href="#_2-entity-framework-business-layer" class="header-anchor">#</a> 2- Entity Framework @ Business layer</h2> <p>In this layer we will write the application business.</p> <p>It is recommended for each presentation screen, you create the business interface and implementation class that contain all required functions for the screen.</p> <p>Below we will write the business for product screen as example</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token comment">/// &lt;summary&gt;</span>
+<span class="token comment">/// Contains Product Business functions</span>
+<span class="token comment">/// &lt;/summary&gt;</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IProductBusiness</span>
+<span class="token punctuation">{</span>
+    <span class="token return-type class-name">Product</span> <span class="token function">SelectById</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> productId<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">bool</span></span> noTracking <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span>IEnumerable<span class="token punctuation">&lt;</span><span class="token keyword">dynamic</span><span class="token punctuation">&gt;</span><span class="token punctuation">&gt;</span></span> <span class="token function">SelectByCategoryAsync</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> CategoryId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span>Product<span class="token punctuation">&gt;</span></span> <span class="token function">InsertAsync</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> productName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> categoryId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">Product</span> <span class="token function">InsertForNewCategory</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> productName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">string</span></span> categoryName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">Product</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> productId<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">string</span></span> productName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> categoryId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">Product</span> <span class="token function">Update2</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> productId<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">string</span></span> productName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> categoryId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">DeleteWithoutLoad</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> productId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">DeleteLoadedProduct</span><span class="token punctuation">(</span><span class="token class-name">Product</span> product<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token return-type class-name">IEnumerable<span class="token punctuation">&lt;</span>GetProductsCategory_Result<span class="token punctuation">&gt;</span></span> <span class="token function">GetProductsCategory</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> categoryId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+
+<span class="token comment">/// &lt;summary&gt;</span>
+<span class="token comment">/// Implementing Product Business functions</span>
+<span class="token comment">/// &lt;/summary&gt;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProductBusiness</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">IProductBusiness</span></span>
+<span class="token punctuation">{</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Private Members</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">IDbRepository</span> _dbRepository<span class="token punctuation">;</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Private Members</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Constructors</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Product Business Constructor</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token comment">/// &lt;param name=&quot;dbRepository&quot;&gt;&lt;/param&gt;</span>
+    <span class="token keyword">public</span> <span class="token function">ProductBusiness</span><span class="token punctuation">(</span><span class="token class-name">IDbRepository</span> dbRepository<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _dbRepository <span class="token operator">=</span> dbRepository<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Constructors</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> IProductBusiness Function</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Selects Product By Id</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">Product</span> <span class="token function">SelectById</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> productId<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">bool</span></span> noTracking <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> products <span class="token operator">=</span> _dbRepository<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">GetAll</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Product<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span>noTracking<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> products<span class="token punctuation">.</span><span class="token function">FirstOrDefault</span><span class="token punctuation">(</span>pro <span class="token operator">=&gt;</span> pro<span class="token punctuation">.</span>ProductID <span class="token operator">==</span> productId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Selects Products By Category Id Async</span>
+    <span class="token comment">/// To have async method, add reference to EntityFramework 6 dll or higher</span>
+    <span class="token comment">/// also you need to have the namespace &quot;System.Data.Entity&quot;</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token comment">/// &lt;param name=&quot;CategoryId&quot;&gt;CategoryId&lt;/param&gt;</span>
+    <span class="token comment">/// &lt;returns&gt;Return what ever the object that you want to return&lt;/returns&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span>IEnumerable<span class="token punctuation">&lt;</span><span class="token keyword">dynamic</span><span class="token punctuation">&gt;</span><span class="token punctuation">&gt;</span></span> <span class="token function">SelectByCategoryAsync</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> CategoryId<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> products <span class="token operator">=</span> _dbRepository<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">GetAll</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Product<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> categories <span class="token operator">=</span> _dbRepository<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">GetAll</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Category<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name"><span class="token keyword">var</span></span> result <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">from</span> pro <span class="token keyword">in</span> products
+                      <span class="token keyword">join</span> cat <span class="token keyword">in</span> categories
+                      <span class="token keyword">on</span> pro<span class="token punctuation">.</span>CategoryID equals cat<span class="token punctuation">.</span>CategoryID
+                      <span class="token keyword">where</span> <span class="token class-name">pro</span><span class="token punctuation">.</span>CategoryID <span class="token operator">==</span> CategoryId
+                      <span class="token keyword">select</span> <span class="token keyword">new</span>
+                      <span class="token punctuation">{</span>
+                          ProductId <span class="token operator">=</span> pro<span class="token punctuation">.</span>ProductID<span class="token punctuation">,</span>
+                          ProductName <span class="token operator">=</span> pro<span class="token punctuation">.</span>ProductName<span class="token punctuation">,</span>
+                          CategoryName <span class="token operator">=</span> cat<span class="token punctuation">.</span>CategoryName
+                      <span class="token punctuation">}</span>
+                              <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token keyword">await</span> result<span class="token punctuation">.</span><span class="token function">ToListAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Insert Async new product for given category</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span>Product<span class="token punctuation">&gt;</span></span> <span class="token function">InsertAsync</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> productName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> categoryId<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> newProduct <span class="token operator">=</span> _dbRepository<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Product</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> ProductName <span class="token operator">=</span> productName<span class="token punctuation">,</span> CategoryID <span class="token operator">=</span> categoryId <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">await</span> _dbRepository<span class="token punctuation">.</span><span class="token function">CommitAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> newProduct<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Insert new product and new category</span>
+    <span class="token comment">/// Do many database actions in one transaction</span>
+    <span class="token comment">/// each _dbRepository.Commit(); will commit one transaction</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">Product</span> <span class="token function">InsertForNewCategory</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> productName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">string</span></span> categoryName<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> newCategory <span class="token operator">=</span> _dbRepository<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Category</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> CategoryName <span class="token operator">=</span> categoryName <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> newProduct <span class="token operator">=</span> _dbRepository<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Product</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> ProductName <span class="token operator">=</span> productName<span class="token punctuation">,</span> Category <span class="token operator">=</span> newCategory <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        _dbRepository<span class="token punctuation">.</span><span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> newProduct<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Update given product with tracking</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">Product</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> productId<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">string</span></span> productName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> categoryId<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> product <span class="token operator">=</span> <span class="token function">SelectById</span><span class="token punctuation">(</span>productId<span class="token punctuation">,</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product<span class="token punctuation">.</span>CategoryID <span class="token operator">=</span> categoryId<span class="token punctuation">;</span>
+        product<span class="token punctuation">.</span>ProductName <span class="token operator">=</span> productName<span class="token punctuation">;</span>
+
+        _dbRepository<span class="token punctuation">.</span><span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> product<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Update given product with no tracking and attach function</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">Product</span> <span class="token function">Update2</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> productId<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">string</span></span> productName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> categoryId<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> product <span class="token operator">=</span> <span class="token function">SelectById</span><span class="token punctuation">(</span>productId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        _dbRepository<span class="token punctuation">.</span><span class="token function">Attach</span><span class="token punctuation">(</span>product<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        product<span class="token punctuation">.</span>CategoryID <span class="token operator">=</span> categoryId<span class="token punctuation">;</span>
+        product<span class="token punctuation">.</span>ProductName <span class="token operator">=</span> productName<span class="token punctuation">;</span>
+
+        _dbRepository<span class="token punctuation">.</span><span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> product<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Deletes product without loading it</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">DeleteWithoutLoad</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> productId<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _dbRepository<span class="token punctuation">.</span><span class="token function">Delete</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Product</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> ProductID <span class="token operator">=</span> productId <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> _dbRepository<span class="token punctuation">.</span><span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Deletes product after loading it</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">DeleteLoadedProduct</span><span class="token punctuation">(</span><span class="token class-name">Product</span> product<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _dbRepository<span class="token punctuation">.</span><span class="token function">Delete</span><span class="token punctuation">(</span>product<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> _dbRepository<span class="token punctuation">.</span><span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Assuming we have the following procedure in database</span>
+    <span class="token comment">/// PROCEDURE [dbo].[GetProductsCategory] @CategoryID INT, @OrderBy VARCHAR(50)</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">IEnumerable<span class="token punctuation">&lt;</span>GetProductsCategory_Result<span class="token punctuation">&gt;</span></span> <span class="token function">GetProductsCategory</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> categoryId<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> _dbRepository<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Execute</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>IEnumerable<span class="token punctuation">&lt;</span>GetProductsCategory_Result<span class="token punctuation">&gt;</span><span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token string">&quot;GetProductsCategory&quot;</span><span class="token punctuation">,</span> categoryId<span class="token punctuation">,</span> <span class="token string">&quot;ProductName DESC&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> IProductBusiness Function</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="_3-using-business-layer-presentation-layer-mvc"><a href="#_3-using-business-layer-presentation-layer-mvc" class="header-anchor">#</a> 3- Using Business layer @ Presentation layer (MVC)</h2> <p>In this example we will use the Business layer in Presentation layer. And we will use MVC as example of Presentation layer (but you can use any other Presentation layer).</p> <p>We need first to register the IoC (we will use Unity, but you can use any IoC), then write our Presentation layer</p> <p><strong>3-1 Register Unity types within MVC</strong></p> <p>3-1-1 Add “Unity bootstrapper for ASP.NET MVC” NuGet backage</p> <p>3-1-2 Add UnityWebActivator.Start(); in Global.asax.cs file (Application_Start() function)</p> <p>3-1-3 Modify UnityConfig.RegisterTypes function as following</p> <div class="language- extra-class"><pre class="language-text"><code>
+   public static void RegisterTypes(IUnityContainer container)
+    {
+        // Data Access Layer
+        container.RegisterType&lt;DbContext, CompanyContext&gt;(new PerThreadLifetimeManager());
+        container.RegisterType(typeof(IDbRepository), typeof(DbRepository), new PerThreadLifetimeManager());
+
+        // Business Layer
+        container.RegisterType&lt;IProductBusiness, ProductBusiness&gt;(new PerThreadLifetimeManager());
+
+    }
+
+</code></pre></div><p><strong>3-2 Using Business layer @ Presentation layer (MVC)</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProductController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Private Members</span>
+
+    <span class="token class-name">IProductBusiness</span> _productBusiness<span class="token punctuation">;</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Private Members</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Constractors</span>
+
+    <span class="token keyword">public</span> <span class="token function">ProductController</span><span class="token punctuation">(</span><span class="token class-name">IProductBusiness</span> productBusiness<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _productBusiness <span class="token operator">=</span> productBusiness<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Constractors</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Action Functions</span>
+
+    <span class="token punctuation">[</span>HttpPost<span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">InsertForNewCategory</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> productName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">string</span></span> categoryName<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">try</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// you can use any of IProductBusiness functions</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> newProduct <span class="token operator">=</span> _productBusiness<span class="token punctuation">.</span><span class="token function">InsertForNewCategory</span><span class="token punctuation">(</span>productName<span class="token punctuation">,</span> categoryName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">return</span> <span class="token function">Json</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token punctuation">{</span> success <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> data <span class="token operator">=</span> newProduct <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span> 
+        <span class="token punctuation">{</span>   <span class="token comment">/* log ex*/</span>
+            <span class="token keyword">return</span> <span class="token function">Json</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token punctuation">{</span> success <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span> errorMessage <span class="token operator">=</span> ex<span class="token punctuation">.</span>Message<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">HttpDelete</span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">SmartDeleteWithoutLoad</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> productId<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">try</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// deletes product without load</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> deletedProduct <span class="token operator">=</span> _productBusiness<span class="token punctuation">.</span><span class="token function">DeleteWithoutLoad</span><span class="token punctuation">(</span>productId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">return</span> <span class="token function">Json</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token punctuation">{</span> success <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> data <span class="token operator">=</span> deletedProduct <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>   <span class="token comment">/* log ex*/</span>
+            <span class="token keyword">return</span> <span class="token function">Json</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token punctuation">{</span> success <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span> errorMessage <span class="token operator">=</span> ex<span class="token punctuation">.</span>Message <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">async</span> <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span>ActionResult<span class="token punctuation">&gt;</span></span> <span class="token function">SelectByCategoryAsync</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> CategoryId<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">try</span>
+        <span class="token punctuation">{</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> results <span class="token operator">=</span> <span class="token keyword">await</span> _productBusiness<span class="token punctuation">.</span><span class="token function">SelectByCategoryAsync</span><span class="token punctuation">(</span>CategoryId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">return</span> <span class="token function">Json</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token punctuation">{</span> success <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">,</span> data <span class="token operator">=</span> results <span class="token punctuation">}</span><span class="token punctuation">,</span>JsonRequestBehavior<span class="token punctuation">.</span>AllowGet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>   <span class="token comment">/* log ex*/</span>
+            <span class="token keyword">return</span> <span class="token function">Json</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token punctuation">{</span> success <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">,</span> errorMessage <span class="token operator">=</span> ex<span class="token punctuation">.</span>Message <span class="token punctuation">}</span><span class="token punctuation">,</span>JsonRequestBehavior<span class="token punctuation">.</span>AllowGet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Action Functions</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="_4-entity-framework-unit-test-layer"><a href="#_4-entity-framework-unit-test-layer" class="header-anchor">#</a> 4- Entity Framework @ Unit Test Layer</h2> <p>In Unit Test layer we usually test the Business Layer functionalities. And in order to do this, we will remove the Data Layer (Entity Framework) dependencies.</p> <p>And the question now is: How can I remove the Entity Framework dependencies in order to unit test the Business Layer functions?</p> <p>And the answer is simple: we will a fake implementation for IDbRepository Interface then we can do our unit test</p> <p><strong>4-1 Implementing basic Interface (fake implementation)</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">class</span> <span class="token class-name">FakeDbRepository</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">IDbRepository</span></span>
+<span class="token punctuation">{</span>
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Protected Members</span>
+
+    <span class="token keyword">protected</span> <span class="token class-name">Hashtable</span> _dbContext<span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> <span class="token class-name"><span class="token keyword">int</span></span> _numberOfRowsAffected<span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> <span class="token class-name">Hashtable</span> _contextFunctionsResults<span class="token punctuation">;</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Protected Members</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Constractors</span>
+
+    <span class="token keyword">public</span> <span class="token function">FakeDbRepository</span><span class="token punctuation">(</span><span class="token class-name">Hashtable</span> contextFunctionsResults <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        _dbContext <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Hashtable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        _numberOfRowsAffected <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        _contextFunctionsResults <span class="token operator">=</span> contextFunctionsResults<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Constractors</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> IRepository Implementation</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Tables and Views functions</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">IQueryable<span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span> <span class="token generic-method"><span class="token function">GetAll</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">bool</span></span> noTracking <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TResult</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">AsQueryable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">Add</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">++</span>_numberOfRowsAffected<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> entity<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">Delete</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token operator">++</span>_numberOfRowsAffected<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> entity<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">Attach</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">Add</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">TEntity</span> <span class="token generic-method"><span class="token function">AttachIfNot</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name">TEntity</span> entity<span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token function">Attach</span><span class="token punctuation">(</span>entity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> entity<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Tables and Views functions</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Transactions Functions</span>
+
+    
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> <span class="token function">Commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> numberOfRowsAffected <span class="token operator">=</span> _numberOfRowsAffected<span class="token punctuation">;</span>
+        _numberOfRowsAffected <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> numberOfRowsAffected<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">Task<span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span> <span class="token function">CommitAsync</span><span class="token punctuation">(</span><span class="token class-name">CancellationToken</span> cancellationToken <span class="token operator">=</span> <span class="token keyword">default</span><span class="token punctuation">(</span><span class="token type-expression class-name">CancellationToken</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> numberOfRowsAffected <span class="token operator">=</span> _numberOfRowsAffected<span class="token punctuation">;</span>
+        _numberOfRowsAffected <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Task<span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> numberOfRowsAffected<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Transactions Functions</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Database Procedures and Functions</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">TResult</span> <span class="token generic-method"><span class="token function">Execute</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TResult<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> functionName<span class="token punctuation">,</span> <span class="token keyword">params</span> <span class="token class-name"><span class="token keyword">object</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> parameters<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>_contextFunctionsResults <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> _contextFunctionsResults<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span>functionName<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token punctuation">(</span>TResult<span class="token punctuation">)</span>_contextFunctionsResults<span class="token punctuation">[</span>functionName<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">NotImplementedException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Database Procedures and Functions</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> IRepository Implementation</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> IDisposable Implementation</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> IDisposable Implementation</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Private Functions</span>
+
+    <span class="token keyword">private</span> <span class="token return-type class-name">List<span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span> <span class="token generic-method"><span class="token function">GetDbSet</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">TEntity</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token keyword">class</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>_dbContext<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token type-expression class-name">TEntity</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            _dbContext<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token type-expression class-name">TEntity</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>TEntity<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>List<span class="token operator">&lt;</span>TEntity<span class="token operator">&gt;</span><span class="token punctuation">)</span>_dbContext<span class="token punctuation">[</span><span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token type-expression class-name">TEntity</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span> Private Functions</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>4-2 Run your unit testing</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">TestClass</span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ProductUnitTest</span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">TestMethod</span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">TestInsertForNewCategory</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Initialize repositories</span>
+        <span class="token class-name">FakeDbRepository</span> _dbRepository <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">FakeDbRepository</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Initialize Business object</span>
+        <span class="token class-name">IProductBusiness</span> productBusiness <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ProductBusiness</span><span class="token punctuation">(</span>_dbRepository<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Process test method</span>
+        productBusiness<span class="token punctuation">.</span><span class="token function">InsertForNewCategory</span><span class="token punctuation">(</span><span class="token string">&quot;Test Product&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Test Category&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name"><span class="token keyword">int</span></span> _productCount <span class="token operator">=</span> _dbRepository<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">GetAll</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Product<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name"><span class="token keyword">int</span></span> _categoryCount <span class="token operator">=</span> _dbRepository<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">GetAll</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Category<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Assert<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">AreEqual</span><span class="token generic class-name"><span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> _productCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Assert<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">AreEqual</span><span class="token generic class-name"><span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> _categoryCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">TestMethod</span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">TestProceduresFunctionsCall</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Initialize Procedures / Functions result</span>
+        <span class="token class-name">Hashtable</span> _contextFunctionsResults <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Hashtable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        _contextFunctionsResults<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">&quot;GetProductsCategory&quot;</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>GetProductsCategory_Result<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span> 
+            <span class="token keyword">new</span> <span class="token constructor-invocation class-name">GetProductsCategory_Result</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> ProductName <span class="token operator">=</span> <span class="token string">&quot;Product 1&quot;</span><span class="token punctuation">,</span> ProductID <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> CategoryName <span class="token operator">=</span> <span class="token string">&quot;Category 1&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token constructor-invocation class-name">GetProductsCategory_Result</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> ProductName <span class="token operator">=</span> <span class="token string">&quot;Product 2&quot;</span><span class="token punctuation">,</span> ProductID <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> CategoryName <span class="token operator">=</span> <span class="token string">&quot;Category 1&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token keyword">new</span> <span class="token constructor-invocation class-name">GetProductsCategory_Result</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> ProductName <span class="token operator">=</span> <span class="token string">&quot;Product 3&quot;</span><span class="token punctuation">,</span> ProductID <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">,</span> CategoryName <span class="token operator">=</span> <span class="token string">&quot;Category 1&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Initialize repositories</span>
+        <span class="token class-name">FakeDbRepository</span> _dbRepository <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">FakeDbRepository</span><span class="token punctuation">(</span>_contextFunctionsResults<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Initialize Business object</span>
+        <span class="token class-name">IProductBusiness</span> productBusiness <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ProductBusiness</span><span class="token punctuation">(</span>_dbRepository<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Process test method</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> results <span class="token operator">=</span> productBusiness<span class="token punctuation">.</span><span class="token function">GetProductsCategory</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Assert<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">AreEqual</span><span class="token generic class-name"><span class="token punctuation">&lt;</span><span class="token keyword">int</span><span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> results<span class="token punctuation">.</span><span class="token function">Count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/entityframework/best-practices-for-entity-framework-simple-professional.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/entityframework/advanced-mapping-scenarios-entity-splitting-table-splitting.html" class="prev">
+        Advanced mapping scenarios: entity splitting, table splitting
+      </a></span> <span class="next"><a href="/entityframework/optimization-techniques-in-ef.html">
+        Optimization Techniques in EF
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1042.2eefc4ba.js" defer></script>
+  </body>
+</html>

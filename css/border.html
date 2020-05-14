@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CSS - Border</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="border-radius, border-style, Multiple Borders, border (shorthands), border-image, border-collapse, Creating a multi-colored border using border-image, border-[left|right|top|bottom]">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="CSS - Border">
+    <meta property="og:description" content="border-radius, border-style, Multiple Borders, border (shorthands), border-image, border-collapse, Creating a multi-colored border using border-image, border-[left|right|top|bottom]">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/css/border.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="CSS - Border">
+    <meta name="twitter:description" content="border-radius, border-style, Multiple Borders, border (shorthands), border-image, border-collapse, Creating a multi-colored border using border-image, border-[left|right|top|bottom]">
+    <meta name="twitter:url" content="/css/border.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/928.ef79c8ae.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>CSS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/css/" class="sidebar-link">Disclaimer</a></li><li><a href="/css/getting-started-with-css.html" class="sidebar-link">Getting started with CSS</a></li><li><a href="/css/structure-and-formatting-of-a-css-rule.html" class="sidebar-link">Structure and Formatting of a CSS Rule</a></li><li><a href="/css/comments.html" class="sidebar-link">Comments</a></li><li><a href="/css/selectors.html" class="sidebar-link">Selectors</a></li><li><a href="/css/backgrounds.html" class="sidebar-link">Backgrounds</a></li><li><a href="/css/centering.html" class="sidebar-link">Centering</a></li><li><a href="/css/the-box-model.html" class="sidebar-link">The Box Model</a></li><li><a href="/css/margins.html" class="sidebar-link">Margins</a></li><li><a href="/css/padding.html" class="sidebar-link">Padding</a></li><li><a href="/css/border.html" class="active sidebar-link">Border</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/css/border.html#border-radius" class="sidebar-link">border-radius</a></li><li class="sidebar-sub-header"><a href="/css/border.html#border-style" class="sidebar-link">border-style</a></li><li class="sidebar-sub-header"><a href="/css/border.html#multiple-borders" class="sidebar-link">Multiple Borders</a></li><li class="sidebar-sub-header"><a href="/css/border.html#border-shorthands" class="sidebar-link">border (shorthands)</a></li><li class="sidebar-sub-header"><a href="/css/border.html#border-image" class="sidebar-link">border-image</a></li><li class="sidebar-sub-header"><a href="/css/border.html#border-collapse" class="sidebar-link">border-collapse</a></li><li class="sidebar-sub-header"><a href="/css/border.html#creating-a-multi-colored-border-using-border-image" class="sidebar-link">Creating a multi-colored border using border-image</a></li><li class="sidebar-sub-header"><a href="/css/border.html#border-left-right-top-bottom" class="sidebar-link">border-[left|right|top|bottom]</a></li></ul></li><li><a href="/css/outlines.html" class="sidebar-link">Outlines</a></li><li><a href="/css/overflow.html" class="sidebar-link">Overflow</a></li><li><a href="/css/media-queries.html" class="sidebar-link">Media Queries</a></li><li><a href="/css/floats.html" class="sidebar-link">Floats</a></li><li><a href="/css/typography.html" class="sidebar-link">Typography</a></li><li><a href="/css/flexible-box-layout-flexbox.html" class="sidebar-link">Flexible Box Layout (Flexbox)</a></li><li><a href="/css/cascading-and-specificity.html" class="sidebar-link">Cascading and Specificity</a></li><li><a href="/css/colors.html" class="sidebar-link">Colors</a></li><li><a href="/css/opacity.html" class="sidebar-link">Opacity</a></li><li><a href="/css/length-units.html" class="sidebar-link">Length Units</a></li><li><a href="/css/pseudo-elements.html" class="sidebar-link">Pseudo-Elements</a></li><li><a href="/css/positioning.html" class="sidebar-link">Positioning</a></li><li><a href="/css/layout-control.html" class="sidebar-link">Layout Control</a></li><li><a href="/css/grid.html" class="sidebar-link">Grid</a></li><li><a href="/css/tables.html" class="sidebar-link">Tables</a></li><li><a href="/css/transitions.html" class="sidebar-link">Transitions</a></li><li><a href="/css/animations.html" class="sidebar-link">Animations</a></li><li><a href="/css/2d-transforms.html" class="sidebar-link">2D Transforms</a></li><li><a href="/css/3d-transforms.html" class="sidebar-link">3D Transforms</a></li><li><a href="/css/filter-property.html" class="sidebar-link">Filter Property</a></li><li><a href="/css/cursor-styling.html" class="sidebar-link">Cursor Styling</a></li><li><a href="/css/box-shadow.html" class="sidebar-link">box-shadow</a></li><li><a href="/css/shapes-for-floats.html" class="sidebar-link">Shapes for Floats</a></li><li><a href="/css/list-styles.html" class="sidebar-link">List Styles</a></li><li><a href="/css/counters.html" class="sidebar-link">Counters</a></li><li><a href="/css/functions.html" class="sidebar-link">Functions</a></li><li><a href="/css/custom-properties-variables.html" class="sidebar-link">Custom Properties (Variables)</a></li><li><a href="/css/single-element-shapes.html" class="sidebar-link">Single Element Shapes</a></li><li><a href="/css/columns.html" class="sidebar-link">Columns</a></li><li><a href="/css/multiple-columns.html" class="sidebar-link">Multiple columns</a></li><li><a href="/css/inline-block-layout.html" class="sidebar-link">Inline-Block Layout</a></li><li><a href="/css/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/css/css-image-sprites.html" class="sidebar-link">CSS Image Sprites</a></li><li><a href="/css/clipping-and-masking.html" class="sidebar-link">Clipping and Masking</a></li><li><a href="/css/fragmentation.html" class="sidebar-link">Fragmentation</a></li><li><a href="/css/css-object-model-cssom.html" class="sidebar-link">CSS Object Model (CSSOM)</a></li><li><a href="/css/feature-queries.html" class="sidebar-link">Feature Queries</a></li><li><a href="/css/stacking-context.html" class="sidebar-link">Stacking Context</a></li><li><a href="/css/block-formatting-contexts.html" class="sidebar-link">Block Formatting Contexts</a></li><li><a href="/css/vertical-centering.html" class="sidebar-link">Vertical Centering</a></li><li><a href="/css/object-fit-and-placement.html" class="sidebar-link">Object Fit and Placement</a></li><li><a href="/css/css-design-patterns.html" class="sidebar-link">CSS design patterns</a></li><li><a href="/css/browser-support-prefixes.html" class="sidebar-link">Browser Support &amp; Prefixes</a></li><li><a href="/css/normalizing-browser-styles.html" class="sidebar-link">Normalizing Browser Styles</a></li><li><a href="/css/internet-explorer-hacks.html" class="sidebar-link">Internet Explorer Hacks</a></li><li><a href="/css/performance.html" class="sidebar-link">Performance</a></li><li><a href="/css/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="border"><a href="#border" class="header-anchor">#</a> Border</h1> <h2 id="border-radius"><a href="#border-radius" class="header-anchor">#</a> border-radius</h2> <p>The border-radius property allows you to change the shape of the basic box model.</p> <p>Every corner of an element can have up to two values, for the vertical and horizontal radius of that corner (for a maximum of 8 values).</p> <p><a href="https://i.stack.imgur.com/FnIqF.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/FnIqF.png" alt="border-radius"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>The first set of values defines the horizontal radius. The optional second set of values, preceded by a ‘/’ , defines the vertical radius. If only one set of values is supplied, it is used for both the vertical and horizontal radius.</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token property">border-radius</span><span class="token punctuation">:</span> 10px 5% / 20px 25em 30px 35em<span class="token punctuation">;</span>
+
+</code></pre></div><p>The <code>10px</code> is the horizontal radius of the top-left-and-bottom-right. And the <code>5%</code> is the horizontal radius of the top-right-and-bottom-left. The other four values after '/' are the vertical radii for top-left, top-right, bottom-right and bottom-left.</p> <p>As with many CSS properties, shorthands can be used for any or all
+possible values. You can therefore specify anything from one to eight values. The following shorthand allows you to set the horizontal and vertical radius of every corner to the same value:</p> <p>HTML:</p> <div class="language-css extra-class"><pre class="language-css"><code>&lt;div class=<span class="token string">'box'</span>&gt;&lt;/div&gt;
+
+</code></pre></div><p>CSS:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.box</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 250px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 250px<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> black<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Border-radius is most commonly used to convert box elements into circles. By setting the border-radius to half of the length of a square element, a circular element is created:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.circle</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Because border-radius accepts percentages, it is common to use 50% to avoid manually calculating the border-radius value:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.circle</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 150px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 150px<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>If the width and height properties are not equal, the resulting shape will be an oval rather than a circle.</p> <p>Browser specific border-radius example:</p> <div class="language- extra-class"><pre class="language-text"><code>
+ -webkit-border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+
+</code></pre></div><h2 id="border-style"><a href="#border-style" class="header-anchor">#</a> border-style</h2> <p>The <code>border-style</code> property sets the style of an element's border.
+This property can have from one to four values (for every side of the element one value.)</p> <p>Examples:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token property">border-style</span><span class="token punctuation">:</span> dotted<span class="token punctuation">;</span>
+
+</code></pre></div><div class="language-css extra-class"><pre class="language-css"><code><span class="token property">border-style</span><span class="token punctuation">:</span> dotted solid double dashed<span class="token punctuation">;</span>
+
+</code></pre></div><p><a href="https://i.stack.imgur.com/gieW6.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/gieW6.png" alt="border-styles"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><code>border-style</code> can also have the values <code>none</code> and <code>hidden</code>. They have the same effect, except <code>hidden</code> works for border conflict resolution for <code>&lt;table&gt;</code> elements. In a <code>&lt;table&gt;</code> with multiple borders, <code>none</code> has the lowest priority (meaning in a conflict, the border would show), and <code>hidden</code> has the highest priority (meaning in a conflict, the border would not show).</p> <h2 id="multiple-borders"><a href="#multiple-borders" class="header-anchor">#</a> Multiple Borders</h2> <p>Using outline:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.div1</span><span class="token punctuation">{</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 3px solid black<span class="token punctuation">;</span> 
+  <span class="token property">outline</span><span class="token punctuation">:</span> 6px solid blue<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Using box-shadow:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.div2</span><span class="token punctuation">{</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 5px solid green<span class="token punctuation">;</span> 
+  <span class="token property">box-shadow</span><span class="token punctuation">:</span> 0px 0px 0px 4px #000<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Using a pseudo element:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.div3</span> <span class="token punctuation">{</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 5px solid #000<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.div3:before</span> <span class="token punctuation">{</span>
+  <span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">;</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 5px solid blue<span class="token punctuation">;</span>
+  <span class="token property">z-index</span><span class="token punctuation">:</span> -1<span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+  <span class="token property">left</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+  <span class="token property">right</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+  <span class="token property">bottom</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><a href="https://i.stack.imgur.com/lta3P.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/lta3P.png" alt="multiple borders"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="http://jsfiddle.net/MadalinaTn/bvqpcohm/2/" target="_blank" rel="noopener noreferrer">http://jsfiddle.net/MadalinaTn/bvqpcohm/2/<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="border-shorthands"><a href="#border-shorthands" class="header-anchor">#</a> border (shorthands)</h2> <p>In most cases you want to define several border properties (<code>border-width</code>, <code>border-style</code> and <code>border-color</code>) for all sides of an element.</p> <p>Instead of writing:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token property">border-width</span><span class="token punctuation">:</span> 1px<span class="token punctuation">;</span>
+<span class="token property">border-style</span><span class="token punctuation">:</span> solid<span class="token punctuation">;</span>
+<span class="token property">border-color</span><span class="token punctuation">:</span> #000<span class="token punctuation">;</span>
+
+</code></pre></div><p>You can simply write:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token property">border</span><span class="token punctuation">:</span> 1px solid #000<span class="token punctuation">;</span>
+
+</code></pre></div><p>These shorthands are also available for every side of an element:
+<code>border-top</code>, <code>border-left</code>, <code>border-right</code> and <code>border-bottom</code>. So you can do:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token property">border-top</span><span class="token punctuation">:</span> 2px double #aaaaaa<span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="border-image"><a href="#border-image" class="header-anchor">#</a> border-image</h2> <p>With the <code>border-image</code> property you have the possibility to set an image to be used instead of normal border styles.</p> <p>A <code>border-image</code> essentially consist of a</p> <ul><li><code>border-image-source</code>: The path to the image to be used</li> <li><code>border-image-slice</code>: Specifies the offset that is used to divide the image into <strong>nine regions</strong> (four <strong>corners</strong>, four <strong>edges</strong> and a <strong>middle</strong>)</li> <li><code>border-image-repeat</code>: Specifies how the images for the sides and the middle of the border image are scaled</li></ul> <p>Consider the following example wheras border.png is a image of 90x90 pixels:</p> <p><code>border-image: url(&quot;border.png&quot;) 30 stretch;</code></p> <p>The image will be split into nine regions with 30x30 pixels. The edges will be used as the corners of the border while the side will be used in between. If the element is higher / wider than 30px this part of the image will be <strong>stretched</strong>. The middle part of the image defaults to be transparent.</p> <h2 id="border-collapse"><a href="#border-collapse" class="header-anchor">#</a> border-collapse</h2> <p>The <code>border-collapse</code> property applies only to <code>table</code>s (and elements displayed as <code>display: table</code> or <code>inline-table</code>) and sets whether the table borders are collapsed into a single border or detached as in standard HTML.</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">table</span> <span class="token punctuation">{</span>
+  <span class="token property">border-collapse</span><span class="token punctuation">:</span> separate<span class="token punctuation">;</span> <span class="token comment">/* default */</span>
+  <span class="token property">border-spacing</span><span class="token punctuation">:</span> 2px<span class="token punctuation">;</span> <span class="token comment">/* Only works if border-collapse is separate */</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Also see <a href="http://stackoverflow.com/documentation/css/1074/tables/3456/border-collapse" target="_blank" rel="noopener noreferrer">Tables - border-collapse<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> documentation entry</p> <h2 id="creating-a-multi-colored-border-using-border-image"><a href="#creating-a-multi-colored-border-using-border-image" class="header-anchor">#</a> Creating a multi-colored border using border-image</h2> <h3 id="css"><a href="#css" class="header-anchor">#</a> CSS</h3> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.bordered</span> <span class="token punctuation">{</span>
+  <span class="token property">border-image</span><span class="token punctuation">:</span> <span class="token function">linear-gradient</span><span class="token punctuation">(</span>to right<span class="token punctuation">,</span> red 20%<span class="token punctuation">,</span> green 20%<span class="token punctuation">,</span> green 40%<span class="token punctuation">,</span> blue 40%<span class="token punctuation">,</span> blue 60%<span class="token punctuation">,</span> maroon 60%<span class="token punctuation">,</span> maroon 80%<span class="token punctuation">,</span> chocolate 80%<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* gradient with required colors */</span>
+  <span class="token property">border-image-slice</span><span class="token punctuation">:</span> 1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="html"><a href="#html" class="header-anchor">#</a> HTML</h3> <div class="language-css extra-class"><pre class="language-css"><code>&lt;div class=<span class="token string">'bordered'</span>&gt;Border on all sides&lt;/div&gt;
+
+</code></pre></div><p>The above example would produce a border that comprises of 5 different colors. The colors are defined through a <code>linear-gradient</code> (you can find more information about gradients in the <a href="http://stackoverflow.com/documentation/css/296/backgrounds/2478/css-gradients#t=201607291511493190436" target="_blank" rel="noopener noreferrer">docs<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>). You can find more information about <code>border-image-slice</code> property in the <a href="http://stackoverflow.com/documentation/css/2160/border/9699/border-image" target="_blank" rel="noopener noreferrer"><code>border-image</code> example<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> in same page.</p> <p><a href="https://i.stack.imgur.com/YWzek.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/YWzek.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>(<strong>Note: Additional properties were added to the element for presentational purpose.</strong>)</p> <p>You'd have noticed that the left border has only a single color (the start color of the gradient) while the right border also has only a single color (the  gradient's end color). This is because of the way that border image property works. It is as though the gradient is applied to the entire box and then the colors are masked from the padding and content areas, thus making it look as though only the border has the gradient.</p> <p>Which border(s) have a single color is dependant on the gradient definition. If the gradient is a <code>to right</code> gradient, the left border would be the start color of the gradient and right border would be the end color. If it was a <code>to bottom</code> gradient the top border would be the gradient's start color and bottom border would be end color. Below is the output of a <code>to bottom</code> 5 colored gradient.</p> <p><a href="https://i.stack.imgur.com/6ihGO.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/6ihGO.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>If the border is required only on specific sides of the element then the <code>border-width</code> property can be used just like with any other normal border. For example, adding the below code would produce a border only on the top of the element.</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token property">border-width</span><span class="token punctuation">:</span> 5px 0px 0px 0px<span class="token punctuation">;</span>
+
+</code></pre></div><p><a href="https://i.stack.imgur.com/wU0fE.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/wU0fE.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>Note that, any element that has <code>border-image</code> property <strong>won't respect the</strong> <code>border-radius</code> (that is the border won't curve). This is based on the below statement in the spec:</p> <blockquote></blockquote> <p>A box's backgrounds, but not its border-image, are clipped to the appropriate curve (as determined by ‘background-clip’).</p> <h2 id="border-left-right-top-bottom"><a href="#border-left-right-top-bottom" class="header-anchor">#</a> border-[left|right|top|bottom]</h2> <p>The <code>border-[left|right|top|bottom]</code> property is used to add a border to a specific side of an element.</p> <p>For example if you wanted to add a border to the left side of an element, you could do:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">#element</span> <span class="token punctuation">{</span>
+    <span class="token property">border-left</span><span class="token punctuation">:</span> 1px solid black<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <li>
+**border**
+</li> <li>
+border: border-width border-style border-color | initial | inherit;
+</li> <li>
+border-top: border-width border-style border-color | initial | inherit;
+</li> <li>
+border-bottom: border-width border-style border-color | initial | inherit;
+</li> <li>
+border-left: border-width border-style border-color | initial | inherit;
+</li> <li>
+border-right: border-width border-style border-color | initial | inherit;
+</li> <li>
+**border-style**
+</li> <li>
+border-style: 1-4 none | hidden | dotted | dashed | solid | double | groove | ridge | inset | outset | initial | inherit;
+</li> <li>
+**border-radius**
+</li> <li>
+border-radius: 1-4 length | % / 1-4 length | % | initial | inherit;
+</li> <li>
+border-top-left-radius: length | %  [length | %] | initial | inherit;
+</li> <li>
+border-top-right-radius: length | %  [length | %] | initial | inherit;
+</li> <li>
+border-bottom-left-radius: length | %  [length | %] | initial | inherit;
+</li> <li>
+border-bottom-right-radius: length | %  [length | %] | initial | inherit;
+</li> <li>
+**border-image**
+</li> <li>
+border-image: border-image-source border-image-slice [ border-image-width [ border-image-outset ] ] border-image-repeat
+</li> <li>
+border-image-source: none | image;
+</li> <li>
+border-image-slice: 1-4 number | percentage [fill]
+</li> <li>
+border-image-repeat: 1-2 stretch | repeat | round | space
+</li> <li>
+**border-collapse**
+</li> <li>
+border-collapse: separate | collapse | initial | inherit
+</li> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Related <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/border" target="_blank" rel="noopener noreferrer">properties<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <li>
+border
+</li> <li>
+border-bottom
+</li> <li>
+border-bottom-color
+</li> <li>
+border-bottom-left-radius
+</li> <li>
+border-bottom-right-radius
+</li> <li>
+border-bottom-style
+</li> <li>
+border-bottom-width
+</li> <li>
+border-color
+</li> <li>
+border-image
+</li> <li>
+border-image-outset
+</li> <li>
+border-image-repeat
+</li> <li>
+border-image-slice
+</li> <li>
+border-image-source
+</li> <li>
+border-image-width
+</li> <li>
+border-left
+</li> <li>
+border-left-color
+</li> <li>
+border-left-style
+</li> <li>
+border-left-width
+</li> <li>
+border-radius
+</li> <li>
+border-right
+</li> <li>
+border-right-color
+</li> <li>
+border-right-style
+</li> <li>
+border-right-width
+</li> <li>
+border-style
+</li> <li>
+border-top
+</li> <li>
+border-top-color
+</li> <li>
+border-top-left-radius
+</li> <li>
+border-top-right-radius
+</li> <li>
+border-top-style
+</li> <li>
+border-top-width
+</li> <li>
+border-width
+</li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/css/border.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/css/padding.html" class="prev">
+        Padding
+      </a></span> <span class="next"><a href="/css/outlines.html">
+        Outlines
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/928.ef79c8ae.js" defer></script>
+  </body>
+</html>

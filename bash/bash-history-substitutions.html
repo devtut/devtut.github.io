@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Bash - Bash history substitutions</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Quick Reference, Repeat previous command with sudo, Search in the command history by pattern, Switch to newly created directory with !#:N, Using !$, Repeat the previous command with a substitution">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Bash - Bash history substitutions">
+    <meta property="og:description" content="Quick Reference, Repeat previous command with sudo, Search in the command history by pattern, Switch to newly created directory with !#:N, Using !$, Repeat the previous command with a substitution">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/bash/bash-history-substitutions.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Bash - Bash history substitutions">
+    <meta name="twitter:description" content="Quick Reference, Repeat previous command with sudo, Search in the command history by pattern, Switch to newly created directory with !#:N, Using !$, Repeat the previous command with a substitution">
+    <meta name="twitter:url" content="/bash/bash-history-substitutions.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/475.f9a9eb35.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Bash</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/bash/" class="sidebar-link">Disclaimer</a></li><li><a href="/bash/getting-started-with-bash.html" class="sidebar-link">Getting started with Bash</a></li><li><a href="/bash/script-shebang.html" class="sidebar-link">Script shebang</a></li><li><a href="/bash/navigating-directories.html" class="sidebar-link">Navigating directories</a></li><li><a href="/bash/listing-files.html" class="sidebar-link">Listing Files</a></li><li><a href="/bash/using-cat.html" class="sidebar-link">Using cat</a></li><li><a href="/bash/grep.html" class="sidebar-link">Grep</a></li><li><a href="/bash/aliasing.html" class="sidebar-link">Aliasing</a></li><li><a href="/bash/jobs-and-processes.html" class="sidebar-link">Jobs and Processes</a></li><li><a href="/bash/redirection.html" class="sidebar-link">Redirection</a></li><li><a href="/bash/control-structures.html" class="sidebar-link">Control Structures</a></li><li><a href="/bash/true-false-and-commands.html" class="sidebar-link">true, false and : commands</a></li><li><a href="/bash/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/bash/associative-arrays.html" class="sidebar-link">Associative arrays</a></li><li><a href="/bash/functions.html" class="sidebar-link">Functions</a></li><li><a href="/bash/bash-parameter-expansion.html" class="sidebar-link">Bash Parameter Expansion</a></li><li><a href="/bash/copying-cp.html" class="sidebar-link">Copying (cp)</a></li><li><a href="/bash/find.html" class="sidebar-link">Find</a></li><li><a href="/bash/using-sort.html" class="sidebar-link">Using sort</a></li><li><a href="/bash/sourcing.html" class="sidebar-link">Sourcing</a></li><li><a href="/bash/here-documents-and-here-strings.html" class="sidebar-link">Here documents and here strings</a></li><li><a href="/bash/quoting.html" class="sidebar-link">Quoting</a></li><li><a href="/bash/conditional-expressions.html" class="sidebar-link">Conditional Expressions</a></li><li><a href="/bash/scripting-with-parameters.html" class="sidebar-link">Scripting with Parameters</a></li><li><a href="/bash/bash-history-substitutions.html" class="active sidebar-link">Bash history substitutions</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/bash/bash-history-substitutions.html#quick-reference" class="sidebar-link">Quick Reference</a></li><li class="sidebar-sub-header"><a href="/bash/bash-history-substitutions.html#repeat-previous-command-with-sudo" class="sidebar-link">Repeat previous command with sudo</a></li><li class="sidebar-sub-header"><a href="/bash/bash-history-substitutions.html#search-in-the-command-history-by-pattern" class="sidebar-link">Search in the command history by pattern</a></li><li class="sidebar-sub-header"><a href="/bash/bash-history-substitutions.html#switch-to-newly-created-directory-with-n" class="sidebar-link">Switch to newly created directory with !#:N</a></li><li class="sidebar-sub-header"><a href="/bash/bash-history-substitutions.html#using" class="sidebar-link">Using !$</a></li><li class="sidebar-sub-header"><a href="/bash/bash-history-substitutions.html#repeat-the-previous-command-with-a-substitution" class="sidebar-link">Repeat the previous command with a substitution</a></li></ul></li><li><a href="/bash/math.html" class="sidebar-link">Math</a></li><li><a href="/bash/bash-arithmetic.html" class="sidebar-link">Bash Arithmetic</a></li><li><a href="/bash/scoping.html" class="sidebar-link">Scoping</a></li><li><a href="/bash/process-substitution.html" class="sidebar-link">Process substitution</a></li><li><a href="/bash/programmable-completion.html" class="sidebar-link">Programmable completion</a></li><li><a href="/bash/customizing-ps1.html" class="sidebar-link">Customizing PS1</a></li><li><a href="/bash/brace-expansion.html" class="sidebar-link">Brace Expansion</a></li><li><a href="/bash/getopts-smart-positional-parameter-parsing.html" class="sidebar-link">getopts : smart positional-parameter parsing</a></li><li><a href="/bash/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/bash/pattern-matching-and-regular-expressions.html" class="sidebar-link">Pattern matching and regular expressions</a></li><li><a href="/bash/change-shell.html" class="sidebar-link">Change shell</a></li><li><a href="/bash/internal-variables.html" class="sidebar-link">Internal variables</a></li><li><a href="/bash/job-control.html" class="sidebar-link">Job Control</a></li><li><a href="/bash/case-statement.html" class="sidebar-link">Case statement</a></li><li><a href="/bash/read-a-file-data-stream-variable-line-by-line-and-or-field-by-field.html" class="sidebar-link">Read a file (data stream, variable) line-by-line (and/or field-by-field)?</a></li><li><a href="/bash/file-execution-sequence.html" class="sidebar-link">File execution sequence</a></li><li><a href="/bash/splitting-files.html" class="sidebar-link">Splitting Files</a></li><li><a href="/bash/file-transfer-using-scp.html" class="sidebar-link">File Transfer using scp</a></li><li><a href="/bash/pipelines.html" class="sidebar-link">Pipelines</a></li><li><a href="/bash/managing-path-environment-variable.html" class="sidebar-link">Managing PATH environment variable</a></li><li><a href="/bash/word-splitting.html" class="sidebar-link">Word splitting</a></li><li><a href="/bash/avoiding-date-using-printf.html" class="sidebar-link">Avoiding date using printf</a></li><li><a href="/bash/using-trap-to-react-to-signals-and-system-events.html" class="sidebar-link">Using &quot;trap&quot; to react to signals and system events</a></li><li><a href="/bash/chain-of-commands-and-operations.html" class="sidebar-link">Chain of commands and operations</a></li><li><a href="/bash/type-of-shells.html" class="sidebar-link">Type of Shells</a></li><li><a href="/bash/color-script-output-cross-platform.html" class="sidebar-link">Color script output (cross-platform)</a></li><li><a href="/bash/co-processes.html" class="sidebar-link">co-processes</a></li><li><a href="/bash/typing-variables.html" class="sidebar-link">Typing variables</a></li><li><a href="/bash/jobs-at-specific-times.html" class="sidebar-link">Jobs at specific times</a></li><li><a href="/bash/handling-the-system-prompt.html" class="sidebar-link">Handling the system prompt</a></li><li><a href="/bash/the-cut-command.html" class="sidebar-link">The cut command</a></li><li><a href="/bash/bash-on-windows-10.html" class="sidebar-link">Bash on Windows 10</a></li><li><a href="/bash/cut-command.html" class="sidebar-link">Cut Command</a></li><li><a href="/bash/global-and-local-variables.html" class="sidebar-link">global and local variables</a></li><li><a href="/bash/cgi-scripts.html" class="sidebar-link">CGI Scripts</a></li><li><a href="/bash/select-keyword.html" class="sidebar-link">Select keyword</a></li><li><a href="/bash/when-to-use-eval.html" class="sidebar-link">When to use eval</a></li><li><a href="/bash/networking-with-bash.html" class="sidebar-link">Networking With Bash</a></li><li><a href="/bash/parallel.html" class="sidebar-link">Parallel</a></li><li><a href="/bash/decoding-url.html" class="sidebar-link">Decoding URL</a></li><li><a href="/bash/design-patterns.html" class="sidebar-link">Design Patterns</a></li><li><a href="/bash/namespace.html" class="sidebar-link">Namespace</a></li><li><a href="/bash/creating-directories.html" class="sidebar-link">Creating directories</a></li><li><a href="/bash/strace.html" class="sidebar-link">strace</a></li><li><a href="/bash/sleep-utility.html" class="sidebar-link">Sleep utility</a></li><li><a href="/bash/pitfalls.html" class="sidebar-link">Pitfalls</a></li><li><a href="/bash/keyboard-shortcuts.html" class="sidebar-link">Keyboard shortcuts</a></li><li><a href="/bash/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="bash-history-substitutions"><a href="#bash-history-substitutions" class="header-anchor">#</a> Bash history substitutions</h1> <h2 id="quick-reference"><a href="#quick-reference" class="header-anchor">#</a> Quick Reference</h2> <h3 id="interaction-with-the-history"><a href="#interaction-with-the-history" class="header-anchor">#</a> Interaction with the history</h3> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># List all previous commands</span>
+<span class="token function">history</span>
+
+<span class="token comment"># Clear the history, useful if you entered a password by accident</span>
+<span class="token function">history</span> -c
+
+</code></pre></div><h3 id="event-designators"><a href="#event-designators" class="header-anchor">#</a> Event designators</h3> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Expands to line n of bash history</span>
+<span class="token operator">!</span>n
+
+<span class="token comment"># Expands to last command</span>
+<span class="token operator">!</span><span class="token operator">!</span>
+
+<span class="token comment"># Expands to last command starting with &quot;text&quot;</span>
+<span class="token operator">!</span>text
+
+<span class="token comment"># Expands to last command containing &quot;text&quot;</span>
+<span class="token operator">!</span>?text
+
+<span class="token comment"># Expands to command n lines ago</span>
+<span class="token operator">!</span>-n
+
+<span class="token comment"># Expands to last command with first occurrence of &quot;foo&quot; replaced by &quot;bar&quot;</span>
+^foo^bar^
+
+<span class="token comment"># Expands to the current command</span>
+<span class="token operator">!</span><span class="token comment">#</span>
+
+</code></pre></div><h3 id="word-designators"><a href="#word-designators" class="header-anchor">#</a> Word designators</h3> <p>These are separated by <code>:</code> from the event designator they refer to. The colon can be omitted if the word designator doesn't start with a number: <code>!^</code> is the same as <code>!:^</code>.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Expands to the first argument of the most recent command</span>
+<span class="token operator">!</span>^
+
+<span class="token comment"># Expands to the last argument of the most recent command (short for !!:$)</span>
+<span class="token operator">!</span>$
+
+<span class="token comment"># Expands to the third argument of the most recent command</span>
+<span class="token operator">!</span>:3
+
+<span class="token comment"># Expands to arguments x through y (inclusive) of the last command</span>
+<span class="token comment"># x and y can be numbers or the anchor characters ^ $</span>
+<span class="token operator">!</span>:x-y
+
+<span class="token comment"># Expands to all words of the last command except the 0th</span>
+<span class="token comment"># Equivalent to :^-$</span>
+<span class="token operator">!</span>*
+
+</code></pre></div><h3 id="modifiers"><a href="#modifiers" class="header-anchor">#</a> Modifiers</h3> <p>These modify the preceding event or word designator.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Replacement in the expansion using sed syntax</span>
+<span class="token comment"># Allows flags before the s and alternate separators</span>
+:s/foo/bar/ <span class="token comment">#substitutes bar for first occurrence of foo</span>
+:gs<span class="token operator">|</span>foo<span class="token operator">|</span>bar<span class="token operator">|</span> <span class="token comment">#substitutes bar for all foo</span>
+
+<span class="token comment"># Remove leading path from last argument (&quot;tail&quot;)</span>
+:t
+
+<span class="token comment"># Remove trailing path from last argument (&quot;head&quot;)</span>
+:h
+
+<span class="token comment"># Remove file extension from last argument</span>
+:r
+
+</code></pre></div><p>If the Bash variable <code>HISTCONTROL</code> contains either <code>ignorespace</code> or <code>ignoreboth</code> (or, alternatively, <code>HISTIGNORE</code> contains the pattern <code>[ ]*</code>), you can prevent your commands from being stored in Bash history by prepending them with a space:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># This command won't be saved in the history</span>
+ foo
+
+<span class="token comment"># This command will be saved</span>
+bar
+
+</code></pre></div><h2 id="repeat-previous-command-with-sudo"><a href="#repeat-previous-command-with-sudo" class="header-anchor">#</a> Repeat previous command with sudo</h2> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">apt-get</span> <span class="token function">install</span> r-base
+E: Could not <span class="token function">open</span> lock <span class="token function">file</span> /var/lib/dpkg/lock - <span class="token function">open</span> <span class="token punctuation">(</span><span class="token number">13</span>: Permission denied<span class="token punctuation">)</span>
+E: Unable to lock the administration directory <span class="token punctuation">(</span>/var/lib/dpkg/<span class="token punctuation">)</span>, are you root?
+$ <span class="token function">sudo</span> <span class="token operator">!</span><span class="token operator">!</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> r-base
+<span class="token punctuation">[</span>sudo<span class="token punctuation">]</span> password <span class="token keyword">for</span> <span class="token operator">&lt;</span>user<span class="token operator">&gt;</span>: 
+
+</code></pre></div><h2 id="search-in-the-command-history-by-pattern"><a href="#search-in-the-command-history-by-pattern" class="header-anchor">#</a> Search in the command history by pattern</h2> <p>Press <kbd>control</kbd><kbd>r</kbd> and type a pattern.</p> <p>For example, if you recently executed <code>man 5 crontab</code>, you can find it quickly by <strong>starting to type</strong> &quot;crontab&quot;. The prompt will change like this:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token punctuation">(</span>reverse-i-search<span class="token punctuation">)</span>`cr': <span class="token function">man</span> <span class="token number">5</span> <span class="token function">crontab</span>
+
+</code></pre></div><p>The ``cr'` there is the string I typed so far.
+This is an incremental search, so as you continue typing, the search result gets updated to match the most recent command that contained the pattern.</p> <p>Press the left or right arrow keys to edit the matched command before running it,
+or the <kbd>enter</kbd> key to run the command.</p> <p>By default the search finds the most recently executed command matching the pattern. To go further back in the history press <kbd>control</kbd><kbd>r</kbd> again. You may press it repeatedly until you find the desired command.</p> <h2 id="switch-to-newly-created-directory-with-n"><a href="#switch-to-newly-created-directory-with-n" class="header-anchor">#</a> Switch to newly created directory with !#:N</h2> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">mkdir</span> backup_download_directory <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> <span class="token operator">!</span><span class="token comment">#:1</span>
+<span class="token function">mkdir</span> backup_download_directory <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">cd</span> backup_download_directory
+
+</code></pre></div><p>This will substitute the Nth argument of the current command. In the example <code>!#:1</code> is replaced with the first argument, i.e. backup_download_directory.</p> <h2 id="using"><a href="#using" class="header-anchor">#</a> Using !$</h2> <p>You can use the <code>!$</code> to reduce repetition when using the command line:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">echo</span> <span class="token function">ping</span>
+<span class="token function">ping</span>
+$ <span class="token builtin class-name">echo</span> <span class="token operator">!</span>$
+<span class="token function">ping</span>
+
+</code></pre></div><p>You can also build upon the repetition</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">echo</span> <span class="token operator">!</span>$ pong
+<span class="token function">ping</span> pong
+$ <span class="token builtin class-name">echo</span> <span class="token operator">!</span>$, a great game
+pong, a great game
+
+</code></pre></div><p>Notice that in the last example we did not get <code>ping pong, a great game</code> because the last argument passed  to the previous command was <code>pong</code>, we can avoid issue like this by adding quotes. Continuing with the example, our last argument was <code>game</code>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;it is !$ time&quot;</span>
+it is game <span class="token function">time</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;hooray, !<span class="token variable">$!</span>&quot;</span>
+hooray, it is game time<span class="token operator">!</span>
+
+</code></pre></div><h2 id="repeat-the-previous-command-with-a-substitution"><a href="#repeat-the-previous-command-with-a-substitution" class="header-anchor">#</a> Repeat the previous command with a substitution</h2> <div class="language-bash extra-class"><pre class="language-bash"><code>$ mplayer Lecture_video_part1.mkv
+$ ^1^2^
+mplayer Lecture_video_part2.mkv
+
+</code></pre></div><p>This command will replace <code>1</code> with <code>2</code> in the previously executed command. It will only replace the first occurrence of the string and is equivalent to <code>!!:s/1/2/</code>.</p> <p>If you want to replace <strong>all</strong> occurrences, you have to use <code>!!:gs/1/2/</code> or <code>!!:as/1/2/</code>.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/bash/bash-history-substitutions.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/bash/scripting-with-parameters.html" class="prev">
+        Scripting with Parameters
+      </a></span> <span class="next"><a href="/bash/math.html">
+        Math
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/475.f9a9eb35.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Oracle Database - Oracle Advanced Queuing (AQ)</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Simple Producer/Consumer">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Oracle Database - Oracle Advanced Queuing (AQ)">
+    <meta property="og:description" content="Simple Producer/Consumer">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/oracle/oracle-advanced-queuing-aq.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Oracle Database - Oracle Advanced Queuing (AQ)">
+    <meta name="twitter:description" content="Simple Producer/Consumer">
+    <meta name="twitter:url" content="/oracle/oracle-advanced-queuing-aq.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2358.d5e5e695.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Oracle Database</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/oracle/" class="sidebar-link">Disclaimer</a></li><li><a href="/oracle/getting-started-with-oracle-database.html" class="sidebar-link">Getting started with Oracle Database</a></li><li><a href="/oracle/anonymous-pl-sql-block.html" class="sidebar-link">Anonymous PL/SQL Block</a></li><li><a href="/oracle/data-dictionary.html" class="sidebar-link">Data Dictionary</a></li><li><a href="/oracle/dates.html" class="sidebar-link">Dates</a></li><li><a href="/oracle/working-with-dates.html" class="sidebar-link">Working with Dates</a></li><li><a href="/oracle/dual-table.html" class="sidebar-link">DUAL table</a></li><li><a href="/oracle/joins.html" class="sidebar-link">JOINS</a></li><li><a href="/oracle/handling-null-values.html" class="sidebar-link">Handling NULL values</a></li><li><a href="/oracle/string-manipulation.html" class="sidebar-link">String Manipulation</a></li><li><a href="/oracle/limiting-the-rows-returned-by-a-query-pagination.html" class="sidebar-link">Limiting the rows returned by a query (Pagination)</a></li><li><a href="/oracle/recursive-sub-query-factoring-using-the-with-clause-a-k-a-common-table-expressions.html" class="sidebar-link">Recursive Sub-Query Factoring using the WITH Clause (A.K.A. Common Table Expressions)</a></li><li><a href="/oracle/different-ways-to-update-records.html" class="sidebar-link">Different ways to update records</a></li><li><a href="/oracle/update-with-joins.html" class="sidebar-link">Update with Joins</a></li><li><a href="/oracle/statistical-functions.html" class="sidebar-link">Statistical functions</a></li><li><a href="/oracle/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/oracle/creating-a-context.html" class="sidebar-link">Creating a Context</a></li><li><a href="/oracle/splitting-delimited-strings.html" class="sidebar-link">Splitting Delimited Strings</a></li><li><a href="/oracle/sequences.html" class="sidebar-link">Sequences</a></li><li><a href="/oracle/indexes.html" class="sidebar-link">Indexes</a></li><li><a href="/oracle/hints.html" class="sidebar-link">Hints</a></li><li><a href="/oracle/error-logging.html" class="sidebar-link">Error logging</a></li><li><a href="/oracle/database-links.html" class="sidebar-link">Database Links</a></li><li><a href="/oracle/table-partitioning.html" class="sidebar-link">Table partitioning</a></li><li><a href="/oracle/oracle-advanced-queuing-aq.html" class="active sidebar-link">Oracle Advanced Queuing (AQ)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/oracle/oracle-advanced-queuing-aq.html#simple-producer-consumer" class="sidebar-link">Simple Producer/Consumer</a></li></ul></li><li><a href="/oracle/constraints.html" class="sidebar-link">constraints</a></li><li><a href="/oracle/autonomous-transactions.html" class="sidebar-link">Autonomous Transactions</a></li><li><a href="/oracle/oracle-maf.html" class="sidebar-link">Oracle MAF</a></li><li><a href="/oracle/level-query.html" class="sidebar-link">level query</a></li><li><a href="/oracle/hierarchical-retrieval-with-oracle-database-12c.html" class="sidebar-link">Hierarchical Retrieval With Oracle Database 12C</a></li><li><a href="/oracle/data-pump.html" class="sidebar-link">Data Pump</a></li><li><a href="/oracle/real-application-security.html" class="sidebar-link">Real Application Security</a></li><li><a href="/oracle/dynamic-sql.html" class="sidebar-link">Dynamic SQL</a></li><li><a href="/oracle/delimiting-keywords-or-special-characters.html" class="sidebar-link">Delimiting keywords or special characters</a></li><li><a href="/oracle/getting-started-with-plsql.html" class="sidebar-link">Getting started with plsql</a></li><li><a href="/oracle/plsql-procedure.html" class="sidebar-link">PLSQL procedure</a></li><li><a href="/oracle/if-then-else-statement.html" class="sidebar-link">IF-THEN-ELSE Statement</a></li><li><a href="/oracle/functions.html" class="sidebar-link">Functions</a></li><li><a href="/oracle/collections-and-records.html" class="sidebar-link">Collections and Records</a></li><li><a href="/oracle/object-types.html" class="sidebar-link">Object Types</a></li><li><a href="/oracle/loop.html" class="sidebar-link">Loop</a></li><li><a href="/oracle/cursors.html" class="sidebar-link">Cursors</a></li><li><a href="/oracle/packages.html" class="sidebar-link">Packages</a></li><li><a href="/oracle/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/oracle/bulk-collect.html" class="sidebar-link">Bulk collect</a></li><li><a href="/oracle/assignments-model-and-language.html" class="sidebar-link">Assignments model and language</a></li><li><a href="/oracle/triggers.html" class="sidebar-link">Triggers</a></li><li><a href="/oracle/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/oracle/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="oracle-advanced-queuing-aq"><a href="#oracle-advanced-queuing-aq" class="header-anchor">#</a> Oracle Advanced Queuing (AQ)</h1> <h2 id="simple-producer-consumer"><a href="#simple-producer-consumer" class="header-anchor">#</a> Simple Producer/Consumer</h2> <h3 id="overview"><a href="#overview" class="header-anchor">#</a> Overview</h3> <p>Create a queue that we can send a message to.  Oracle will notify our stored procedure that a message has been enqueued and should be worked.  We'll also add some subprograms we can use in an emergency to stop messages from being deqeued, allow dequeuing again, and run a simple batch job to work through all of the messages.</p> <p>These examples were tested on Oracle Database 12c Enterprise Edition Release 12.1.0.2.0 - 64bit Production.</p> <h3 id="create-queue"><a href="#create-queue" class="header-anchor">#</a> Create Queue</h3> <p>We will create a message type, a queue table that can hold the messages, and a queue.  Messages in the queue will be dequeued first by priority then be their enqueue time.  If anything goes wrong working the message and the dequeue is rolled-back AQ will make the message available for dequeue 3600 seconds later.  It will do this 48 times before moving it an exception queue.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">create</span> <span class="token keyword">type</span> message_t <span class="token keyword">as</span> object 
+   <span class="token punctuation">(</span>
+   sender  varchar2 <span class="token punctuation">(</span> <span class="token number">50</span> <span class="token punctuation">)</span><span class="token punctuation">,</span>
+   message varchar2 <span class="token punctuation">(</span> <span class="token number">512</span> <span class="token punctuation">)</span>
+   <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+<span class="token comment">-- Type MESSAGE_T compiled</span>
+<span class="token keyword">begin</span> dbms_aqadm<span class="token punctuation">.</span>create_queue_table<span class="token punctuation">(</span>
+     queue_table        <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">'MESSAGE_Q_TBL'</span><span class="token punctuation">,</span>
+     queue_payload_type <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">'MESSAGE_T'</span><span class="token punctuation">,</span>
+     sort_list          <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">'PRIORITY,ENQ_TIME'</span><span class="token punctuation">,</span>
+     multiple_consumers <span class="token operator">=</span><span class="token operator">&gt;</span>  <span class="token boolean">false</span><span class="token punctuation">,</span>
+     compatible         <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">'10.0.0'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+<span class="token comment">-- PL/SQL procedure successfully completed.</span>
+<span class="token keyword">begin</span> dbms_aqadm<span class="token punctuation">.</span>create_queue<span class="token punctuation">(</span>
+     queue_name          <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">'MESSAGE_Q'</span><span class="token punctuation">,</span>
+     queue_table         <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">'MESSAGE_Q_TBL'</span><span class="token punctuation">,</span>
+     queue_type          <span class="token operator">=</span><span class="token operator">&gt;</span>  <span class="token number">0</span><span class="token punctuation">,</span>
+     max_retries         <span class="token operator">=</span><span class="token operator">&gt;</span>  <span class="token number">48</span><span class="token punctuation">,</span>
+     retry_delay         <span class="token operator">=</span><span class="token operator">&gt;</span>  <span class="token number">3600</span><span class="token punctuation">,</span>
+     dependency_tracking <span class="token operator">=</span><span class="token operator">&gt;</span>  <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+<span class="token comment">-- PL/SQL procedure successfully completed.</span>
+
+</code></pre></div><p>Now that we have a place to put the messages lets create a package to manage and work messages in the queue.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">create</span> <span class="token operator">or</span> <span class="token keyword">replace</span> package message_worker_pkg
+<span class="token operator">is</span>
+   queue_name_c constant varchar2<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span> :<span class="token operator">=</span> <span class="token string">'MESSAGE_Q'</span><span class="token punctuation">;</span>
+   
+   <span class="token comment">-- allows the workers to process messages in the queue</span>
+   <span class="token keyword">procedure</span> enable_dequeue<span class="token punctuation">;</span>
+
+   <span class="token comment">-- prevents messages from being worked but will still allow them to be created and enqueued</span>
+   <span class="token keyword">procedure</span> disable_dequeue<span class="token punctuation">;</span>
+
+   <span class="token comment">-- called only by Oracle Advanced Queueing.  Do not call anywhere else.</span>
+   <span class="token keyword">procedure</span> on_message_enqueued <span class="token punctuation">(</span>context        <span class="token operator">in</span> raw<span class="token punctuation">,</span>
+                                  reginfo        <span class="token operator">in</span> sys<span class="token punctuation">.</span>aq$_reg_info<span class="token punctuation">,</span>
+                                  descr          <span class="token operator">in</span> sys<span class="token punctuation">.</span>aq$_descriptor<span class="token punctuation">,</span>
+                                  payload        <span class="token operator">in</span> raw<span class="token punctuation">,</span>
+                                  payloadl       <span class="token operator">in</span> number<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">-- allows messages to be worked if we missed the notification (or a retry</span>
+   <span class="token comment">-- is pending)</span>
+   <span class="token keyword">procedure</span> work_old_messages<span class="token punctuation">;</span>
+   
+<span class="token keyword">end</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+
+<span class="token keyword">create</span> <span class="token operator">or</span> <span class="token keyword">replace</span> package body message_worker_pkg
+<span class="token operator">is</span>
+   <span class="token comment">-- raised by Oracle when we try to dequeue but no more messages are ready to</span>
+   <span class="token comment">-- be dequeued at this moment</span>
+   no_more_messages_ex          exception<span class="token punctuation">;</span>
+   pragma exception_init <span class="token punctuation">(</span>no_more_messages_ex<span class="token punctuation">,</span>
+                          <span class="token operator">-</span><span class="token number">25228</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">-- allows the workers to process messages in the queue</span>
+   <span class="token keyword">procedure</span> enable_dequeue
+   <span class="token keyword">as</span>
+   <span class="token keyword">begin</span>
+      dbms_aqadm<span class="token punctuation">.</span>start_queue <span class="token punctuation">(</span>queue_name <span class="token operator">=</span><span class="token operator">&gt;</span> queue_name_c<span class="token punctuation">,</span> dequeue <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">end</span> enable_dequeue<span class="token punctuation">;</span>
+
+   <span class="token comment">-- prevents messages from being worked but will still allow them to be created and enqueued</span>
+   <span class="token keyword">procedure</span> disable_dequeue
+   <span class="token keyword">as</span>
+   <span class="token keyword">begin</span>
+      dbms_aqadm<span class="token punctuation">.</span>stop_queue <span class="token punctuation">(</span>queue_name <span class="token operator">=</span><span class="token operator">&gt;</span> queue_name_c<span class="token punctuation">,</span> dequeue <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token boolean">true</span><span class="token punctuation">,</span> enqueue <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">end</span> disable_dequeue<span class="token punctuation">;</span>
+
+   <span class="token keyword">procedure</span> work_message <span class="token punctuation">(</span>message_in <span class="token operator">in</span> <span class="token keyword">out</span> nocopy message_t<span class="token punctuation">)</span>
+   <span class="token keyword">as</span>
+   <span class="token keyword">begin</span>
+      dbms_output<span class="token punctuation">.</span>put_line <span class="token punctuation">(</span> message_in<span class="token punctuation">.</span>sender <span class="token operator">||</span> <span class="token string">' says '</span> <span class="token operator">||</span> message_in<span class="token punctuation">.</span>message <span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">end</span> work_message<span class="token punctuation">;</span>
+
+   <span class="token comment">-- called only by Oracle Advanced Queueing.  Do not call anywhere else.</span>
+
+   <span class="token keyword">procedure</span> on_message_enqueued <span class="token punctuation">(</span>context        <span class="token operator">in</span> raw<span class="token punctuation">,</span>
+                                  reginfo        <span class="token operator">in</span> sys<span class="token punctuation">.</span>aq$_reg_info<span class="token punctuation">,</span>
+                                  descr          <span class="token operator">in</span> sys<span class="token punctuation">.</span>aq$_descriptor<span class="token punctuation">,</span>
+                                  payload        <span class="token operator">in</span> raw<span class="token punctuation">,</span>
+                                  payloadl       <span class="token operator">in</span> number<span class="token punctuation">)</span>
+   <span class="token keyword">as</span>
+      pragma autonomous_transaction<span class="token punctuation">;</span>
+      dequeue_options_l      dbms_aq<span class="token punctuation">.</span>dequeue_options_t<span class="token punctuation">;</span>
+      message_id_l           raw <span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      message_l              message_t<span class="token punctuation">;</span>
+      message_properties_l   dbms_aq<span class="token punctuation">.</span>message_properties_t<span class="token punctuation">;</span>
+   <span class="token keyword">begin</span>
+      dequeue_options_l<span class="token punctuation">.</span>msgid         :<span class="token operator">=</span> descr<span class="token punctuation">.</span>msg_id<span class="token punctuation">;</span>
+      dequeue_options_l<span class="token punctuation">.</span>consumer_name :<span class="token operator">=</span> descr<span class="token punctuation">.</span>consumer_name<span class="token punctuation">;</span>
+      dequeue_options_l<span class="token punctuation">.</span>wait          :<span class="token operator">=</span> dbms_aq<span class="token punctuation">.</span>no_wait<span class="token punctuation">;</span>
+      dbms_aq<span class="token punctuation">.</span>dequeue <span class="token punctuation">(</span>queue_name           <span class="token operator">=</span><span class="token operator">&gt;</span> descr<span class="token punctuation">.</span>queue_name<span class="token punctuation">,</span>
+                       dequeue_options      <span class="token operator">=</span><span class="token operator">&gt;</span> dequeue_options_l<span class="token punctuation">,</span>
+                       message_properties   <span class="token operator">=</span><span class="token operator">&gt;</span> message_properties_l<span class="token punctuation">,</span>
+                       payload              <span class="token operator">=</span><span class="token operator">&gt;</span> message_l<span class="token punctuation">,</span>
+                       msgid                <span class="token operator">=</span><span class="token operator">&gt;</span> message_id_l<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      work_message <span class="token punctuation">(</span>message_l<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">commit</span><span class="token punctuation">;</span>
+   exception
+      <span class="token keyword">when</span> no_more_messages_ex
+      <span class="token keyword">then</span>
+         <span class="token comment">-- it's possible work_old_messages already dequeued the message</span>
+         <span class="token keyword">commit</span><span class="token punctuation">;</span>
+      <span class="token keyword">when</span> others
+      <span class="token keyword">then</span>
+         <span class="token comment">-- we don't need to have a raise here.  I just wanted to point out that</span>
+         <span class="token comment">-- since this will be called by AQ throwing the exception back to it</span>
+         <span class="token comment">-- will have it put the message back on the queue and retry later</span>
+         raise<span class="token punctuation">;</span>
+   <span class="token keyword">end</span> on_message_enqueued<span class="token punctuation">;</span>
+
+   <span class="token comment">-- allows messages to be worked if we missed the notification (or a retry</span>
+   <span class="token comment">-- is pending)</span>
+   <span class="token keyword">procedure</span> work_old_messages
+   <span class="token keyword">as</span>
+      pragma autonomous_transaction<span class="token punctuation">;</span>
+      dequeue_options_l      dbms_aq<span class="token punctuation">.</span>dequeue_options_t<span class="token punctuation">;</span>
+      message_id_l           raw <span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      message_l              message_t<span class="token punctuation">;</span>
+      message_properties_l   dbms_aq<span class="token punctuation">.</span>message_properties_t<span class="token punctuation">;</span>
+   <span class="token keyword">begin</span>
+      dequeue_options_l<span class="token punctuation">.</span>wait       :<span class="token operator">=</span> dbms_aq<span class="token punctuation">.</span>no_wait<span class="token punctuation">;</span>
+      dequeue_options_l<span class="token punctuation">.</span>navigation :<span class="token operator">=</span> dbms_aq<span class="token punctuation">.</span>first_message<span class="token punctuation">;</span>
+
+      <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token keyword">loop</span> <span class="token comment">-- way out is no_more_messages_ex</span>
+         dbms_aq<span class="token punctuation">.</span>dequeue <span class="token punctuation">(</span>queue_name           <span class="token operator">=</span><span class="token operator">&gt;</span> queue_name_c<span class="token punctuation">,</span>
+                          dequeue_options      <span class="token operator">=</span><span class="token operator">&gt;</span> dequeue_options_l<span class="token punctuation">,</span>
+                          message_properties   <span class="token operator">=</span><span class="token operator">&gt;</span> message_properties_l<span class="token punctuation">,</span>
+                          payload              <span class="token operator">=</span><span class="token operator">&gt;</span> message_l<span class="token punctuation">,</span>
+                          msgid                <span class="token operator">=</span><span class="token operator">&gt;</span> message_id_l<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         work_message <span class="token punctuation">(</span>message_l<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token keyword">commit</span><span class="token punctuation">;</span>
+      <span class="token keyword">end</span> <span class="token keyword">loop</span><span class="token punctuation">;</span>
+   exception
+      <span class="token keyword">when</span> no_more_messages_ex
+      <span class="token keyword">then</span>
+         <span class="token boolean">null</span><span class="token punctuation">;</span>
+   <span class="token keyword">end</span> work_old_messages<span class="token punctuation">;</span>
+<span class="token keyword">end</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Next tell AQ that when a message is enqueued to MESSAGE_Q (and committed) notify our procedure it has work to do.  AQ will start up a job in its own session to handle this.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">begin</span>
+  dbms_aq<span class="token punctuation">.</span>register <span class="token punctuation">(</span>
+     sys<span class="token punctuation">.</span>aq$_reg_info_list <span class="token punctuation">(</span>
+        sys<span class="token punctuation">.</span>aq$_reg_info <span class="token punctuation">(</span><span class="token keyword">user</span> <span class="token operator">||</span> <span class="token string">'.'</span> <span class="token operator">||</span> message_worker_pkg<span class="token punctuation">.</span>queue_name_c<span class="token punctuation">,</span>
+                          dbms_aq<span class="token punctuation">.</span>namespace_aq<span class="token punctuation">,</span>
+                          <span class="token string">'plsql://'</span> <span class="token operator">||</span> <span class="token keyword">user</span> <span class="token operator">||</span> <span class="token string">'.message_worker_pkg.on_message_enqueued'</span><span class="token punctuation">,</span>
+                          hextoraw <span class="token punctuation">(</span><span class="token string">'FF'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+     <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">commit</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span class="token punctuation">;</span> 
+
+</code></pre></div><h3 id="start-queue-and-send-a-message"><a href="#start-queue-and-send-a-message" class="header-anchor">#</a> Start Queue and Send a Message</h3> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">declare</span>
+   enqueue_options_l      dbms_aq<span class="token punctuation">.</span>enqueue_options_t<span class="token punctuation">;</span>
+   message_properties_l   dbms_aq<span class="token punctuation">.</span>message_properties_t<span class="token punctuation">;</span>
+   message_id_l           raw <span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   message_l              message_t<span class="token punctuation">;</span>
+<span class="token keyword">begin</span>
+   <span class="token comment">-- only need to do this next line ONCE</span>
+   dbms_aqadm<span class="token punctuation">.</span>start_queue <span class="token punctuation">(</span>queue_name <span class="token operator">=</span><span class="token operator">&gt;</span> message_worker_pkg<span class="token punctuation">.</span>queue_name_c<span class="token punctuation">,</span> enqueue <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token boolean">true</span> <span class="token punctuation">,</span> dequeue <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   
+   message_l :<span class="token operator">=</span> new message_t <span class="token punctuation">(</span> <span class="token string">'Jon'</span><span class="token punctuation">,</span> <span class="token string">'Hello, world!'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+   dbms_aq<span class="token punctuation">.</span>enqueue <span class="token punctuation">(</span>queue_name           <span class="token operator">=</span><span class="token operator">&gt;</span> message_worker_pkg<span class="token punctuation">.</span>queue_name_c<span class="token punctuation">,</span>
+                    enqueue_options      <span class="token operator">=</span><span class="token operator">&gt;</span> enqueue_options_l<span class="token punctuation">,</span>
+                    message_properties   <span class="token operator">=</span><span class="token operator">&gt;</span> message_properties_l<span class="token punctuation">,</span>
+                    payload              <span class="token operator">=</span><span class="token operator">&gt;</span> message_l<span class="token punctuation">,</span>
+                    msgid                <span class="token operator">=</span><span class="token operator">&gt;</span> message_id_l<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">commit</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span><span class="token punctuation">;</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <li>
+Never use DDL or DML against tables created by `dbms_aqadm.create_queue_table`.  Only use dbms_aqadm and dbms_aq to work with these tables.  Oracle may make several supporting tables, indexes, etc that you will not be aware of.  Manually running DDL or DML against the table may lead you to a scenario where Oracle Support will need you to drop and recreate the table and queues to resolve the situation.
+</li> <li>
+It's strongly recommended you do not use `dbms_aq.forever` for a wait option.  This has caused issues in the past as Oracle may start scheduling an excessive number of worker jobs to work the queues that are unnecessary (see Oracle Doc ID 2001165.1).
+</li> <li>
+It's recommended you do not set the AQ_TM_PROCESSES parameter in version 10.1 and later.  Especially avoid setting this to zero since this will disable the QMON background job that is necessary to maintain the queues.  You can reset this value to the Oracle default using the following command and restarting the database. `alter system reset aq_tm_processes scope=spfile sid='*';`
+</li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/oracle/oracle-advanced-queuing-aq.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/oracle/table-partitioning.html" class="prev">
+        Table partitioning
+      </a></span> <span class="next"><a href="/oracle/constraints.html">
+        constraints
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2358.d5e5e695.js" defer></script>
+  </body>
+</html>

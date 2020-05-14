@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CSS - Custom Properties (Variables)</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Variable Color, Variable Dimensions, Variable Cascading, Valid/Invalids, With media queries">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="CSS - Custom Properties (Variables)">
+    <meta property="og:description" content="Variable Color, Variable Dimensions, Variable Cascading, Valid/Invalids, With media queries">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/css/custom-properties-variables.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="CSS - Custom Properties (Variables)">
+    <meta name="twitter:description" content="Variable Color, Variable Dimensions, Variable Cascading, Valid/Invalids, With media queries">
+    <meta name="twitter:url" content="/css/custom-properties-variables.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/943.4d0bd90d.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>CSS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/css/" class="sidebar-link">Disclaimer</a></li><li><a href="/css/getting-started-with-css.html" class="sidebar-link">Getting started with CSS</a></li><li><a href="/css/structure-and-formatting-of-a-css-rule.html" class="sidebar-link">Structure and Formatting of a CSS Rule</a></li><li><a href="/css/comments.html" class="sidebar-link">Comments</a></li><li><a href="/css/selectors.html" class="sidebar-link">Selectors</a></li><li><a href="/css/backgrounds.html" class="sidebar-link">Backgrounds</a></li><li><a href="/css/centering.html" class="sidebar-link">Centering</a></li><li><a href="/css/the-box-model.html" class="sidebar-link">The Box Model</a></li><li><a href="/css/margins.html" class="sidebar-link">Margins</a></li><li><a href="/css/padding.html" class="sidebar-link">Padding</a></li><li><a href="/css/border.html" class="sidebar-link">Border</a></li><li><a href="/css/outlines.html" class="sidebar-link">Outlines</a></li><li><a href="/css/overflow.html" class="sidebar-link">Overflow</a></li><li><a href="/css/media-queries.html" class="sidebar-link">Media Queries</a></li><li><a href="/css/floats.html" class="sidebar-link">Floats</a></li><li><a href="/css/typography.html" class="sidebar-link">Typography</a></li><li><a href="/css/flexible-box-layout-flexbox.html" class="sidebar-link">Flexible Box Layout (Flexbox)</a></li><li><a href="/css/cascading-and-specificity.html" class="sidebar-link">Cascading and Specificity</a></li><li><a href="/css/colors.html" class="sidebar-link">Colors</a></li><li><a href="/css/opacity.html" class="sidebar-link">Opacity</a></li><li><a href="/css/length-units.html" class="sidebar-link">Length Units</a></li><li><a href="/css/pseudo-elements.html" class="sidebar-link">Pseudo-Elements</a></li><li><a href="/css/positioning.html" class="sidebar-link">Positioning</a></li><li><a href="/css/layout-control.html" class="sidebar-link">Layout Control</a></li><li><a href="/css/grid.html" class="sidebar-link">Grid</a></li><li><a href="/css/tables.html" class="sidebar-link">Tables</a></li><li><a href="/css/transitions.html" class="sidebar-link">Transitions</a></li><li><a href="/css/animations.html" class="sidebar-link">Animations</a></li><li><a href="/css/2d-transforms.html" class="sidebar-link">2D Transforms</a></li><li><a href="/css/3d-transforms.html" class="sidebar-link">3D Transforms</a></li><li><a href="/css/filter-property.html" class="sidebar-link">Filter Property</a></li><li><a href="/css/cursor-styling.html" class="sidebar-link">Cursor Styling</a></li><li><a href="/css/box-shadow.html" class="sidebar-link">box-shadow</a></li><li><a href="/css/shapes-for-floats.html" class="sidebar-link">Shapes for Floats</a></li><li><a href="/css/list-styles.html" class="sidebar-link">List Styles</a></li><li><a href="/css/counters.html" class="sidebar-link">Counters</a></li><li><a href="/css/functions.html" class="sidebar-link">Functions</a></li><li><a href="/css/custom-properties-variables.html" class="active sidebar-link">Custom Properties (Variables)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/css/custom-properties-variables.html#variable-color" class="sidebar-link">Variable Color</a></li><li class="sidebar-sub-header"><a href="/css/custom-properties-variables.html#variable-dimensions" class="sidebar-link">Variable Dimensions</a></li><li class="sidebar-sub-header"><a href="/css/custom-properties-variables.html#variable-cascading" class="sidebar-link">Variable Cascading</a></li><li class="sidebar-sub-header"><a href="/css/custom-properties-variables.html#valid-invalids" class="sidebar-link">Valid/Invalids</a></li><li class="sidebar-sub-header"><a href="/css/custom-properties-variables.html#with-media-queries" class="sidebar-link">With media queries</a></li></ul></li><li><a href="/css/single-element-shapes.html" class="sidebar-link">Single Element Shapes</a></li><li><a href="/css/columns.html" class="sidebar-link">Columns</a></li><li><a href="/css/multiple-columns.html" class="sidebar-link">Multiple columns</a></li><li><a href="/css/inline-block-layout.html" class="sidebar-link">Inline-Block Layout</a></li><li><a href="/css/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/css/css-image-sprites.html" class="sidebar-link">CSS Image Sprites</a></li><li><a href="/css/clipping-and-masking.html" class="sidebar-link">Clipping and Masking</a></li><li><a href="/css/fragmentation.html" class="sidebar-link">Fragmentation</a></li><li><a href="/css/css-object-model-cssom.html" class="sidebar-link">CSS Object Model (CSSOM)</a></li><li><a href="/css/feature-queries.html" class="sidebar-link">Feature Queries</a></li><li><a href="/css/stacking-context.html" class="sidebar-link">Stacking Context</a></li><li><a href="/css/block-formatting-contexts.html" class="sidebar-link">Block Formatting Contexts</a></li><li><a href="/css/vertical-centering.html" class="sidebar-link">Vertical Centering</a></li><li><a href="/css/object-fit-and-placement.html" class="sidebar-link">Object Fit and Placement</a></li><li><a href="/css/css-design-patterns.html" class="sidebar-link">CSS design patterns</a></li><li><a href="/css/browser-support-prefixes.html" class="sidebar-link">Browser Support &amp; Prefixes</a></li><li><a href="/css/normalizing-browser-styles.html" class="sidebar-link">Normalizing Browser Styles</a></li><li><a href="/css/internet-explorer-hacks.html" class="sidebar-link">Internet Explorer Hacks</a></li><li><a href="/css/performance.html" class="sidebar-link">Performance</a></li><li><a href="/css/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="custom-properties-variables"><a href="#custom-properties-variables" class="header-anchor">#</a> Custom Properties (Variables)</h1> <p>CSS Variables allow authors to create reusable values which can be used throughout a CSS document.</p> <p>For example, it's common in CSS to reuse a single color throughout a document. Prior to CSS Variables this would mean reusing the same color value many times throughout a document. With CSS Variables the color value can be assigned to a variable and referenced in multiple places. This makes changing values easier and is more semantic than using traditional CSS values.</p> <h2 id="variable-color"><a href="#variable-color" class="header-anchor">#</a> Variable Color</h2> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">:root</span> <span class="token punctuation">{</span>
+  <span class="token property">--red</span><span class="token punctuation">:</span> #b00<span class="token punctuation">;</span>
+  <span class="token property">--blue</span><span class="token punctuation">:</span> #4679bd<span class="token punctuation">;</span>
+  <span class="token property">--grey</span><span class="token punctuation">:</span> #ddd<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.Bx1</span> <span class="token punctuation">{</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--red<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--grey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid <span class="token function">var</span><span class="token punctuation">(</span>--red<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="variable-dimensions"><a href="#variable-dimensions" class="header-anchor">#</a> Variable Dimensions</h2> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">:root</span> <span class="token punctuation">{</span>
+  <span class="token property">--W200</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+  <span class="token property">--W10</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.Bx2</span> <span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--W200<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--W200<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--W10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="variable-cascading"><a href="#variable-cascading" class="header-anchor">#</a> Variable Cascading</h2> <p>CSS variables cascade in much the same way as other properties, and can be restated safely.</p> <p>You can define variables multiple times and only the definition with the highest specificity will apply to the element selected.</p> <p>Assuming this HTML:</p> <div class="language-css extra-class"><pre class="language-css"><code>&lt;a class=<span class="token string">&quot;button&quot;</span>&gt;Button Green&lt;/a&gt;
+&lt;a class=<span class="token string">&quot;button button_red&quot;</span>&gt;Button Red&lt;/a&gt;
+&lt;a class=<span class="token string">&quot;button&quot;</span>&gt;Button Hovered On&lt;/a&gt;
+
+</code></pre></div><p>We can write this CSS:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.button</span> <span class="token punctuation">{</span>
+  <span class="token property">--color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> .5rem<span class="token punctuation">;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid <span class="token function">var</span><span class="token punctuation">(</span>--color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--color<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.button:hover</span> <span class="token punctuation">{</span>
+  <span class="token property">--color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.button_red</span> <span class="token punctuation">{</span>
+  <span class="token property">--color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>And get this result:</p> <p><a href="https://i.stack.imgur.com/49U74.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/49U74.png" alt="Three button variations"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="valid-invalids"><a href="#valid-invalids" class="header-anchor">#</a> Valid/Invalids</h2> <p><strong>Naming</strong>
+When naming CSS variables, it contains only letters and dashes just like other CSS properties (eg: line-height, -moz-box-sizing) but it should start with double dashes (--)</p> <div class="language-css extra-class"><pre class="language-css"><code>//These are Invalids variable names
+<span class="token property">--123color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+--#<span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token property">--bg_color</span><span class="token punctuation">:</span> yellow
+--$<span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+
+//Valid variable names
+<span class="token property">--color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token property">--bg-color</span><span class="token punctuation">:</span> yellow
+<span class="token property">--width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>CSS Variables are case sensitive.</strong></p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token comment">/* The variable names below are all different variables */</span>
+<span class="token property">--pcolor</span><span class="token punctuation">:</span> <span class="token punctuation">;</span>
+<span class="token property">--Pcolor</span><span class="token punctuation">:</span> <span class="token punctuation">;</span>
+<span class="token property">--pColor</span><span class="token punctuation">:</span> <span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>Empty Vs Space</strong></p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token comment">/* Invalid */</span>
+    <span class="token property">--color</span><span class="token punctuation">:</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* Valid */</span>
+  <span class="token property">--color</span><span class="token punctuation">:</span> <span class="token punctuation">;</span> <span class="token comment">/* space is assigned */</span>
+
+</code></pre></div><p><strong>Concatenations</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+   /* Invalid - CSS doesn't support concatenation*/
+    .logo{
+        --logo-url: 'logo';
+        background: url('assets/img/' var(--logo-url) '.png');
+    }
+
+    /* Invalid - CSS bug */
+    .logo{
+        --logo-url: 'assets/img/logo.png';
+        background: url(var(--logo-url));
+    }
+
+    /* Valid */
+    .logo{
+        --logo-url: url('assets/img/logo.png');
+        background: var(--logo-url);
+    }
+
+</code></pre></div><p><strong>Careful when using Units</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+   /* Invalid */
+    --width: 10;
+    width: var(--width)px;
+
+    /* Valid */
+    --width: 10px;
+    width: var(--width);
+
+    /* Valid */
+    --width: 10;
+    width: calc(1px * var(--width)); /* multiply by 1 unit to convert */
+    width: calc(1em * var(--width));
+
+</code></pre></div><h2 id="with-media-queries"><a href="#with-media-queries" class="header-anchor">#</a> With media queries</h2> <p>You can re-set variables within media queries and have those new values cascade wherever they are used, something that isn't possible with pre-processor variables.</p> <p>Here, a media query changes the variables used to set up a very simple grid:</p> <p><strong>HTML</strong></p> <div class="language-css extra-class"><pre class="language-css"><code>&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+
+</code></pre></div><p><strong>CSS</strong></p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">:root</span><span class="token punctuation">{</span>
+    <span class="token property">--width</span><span class="token punctuation">:</span> 25%<span class="token punctuation">;</span>
+    <span class="token property">--content</span><span class="token punctuation">:</span> <span class="token string">'This is desktop'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token atrule"><span class="token rule">@media</span> only screen and <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> 767px<span class="token punctuation">)</span></span><span class="token punctuation">{</span>
+    <span class="token selector">:root</span><span class="token punctuation">{</span>
+        <span class="token property">--width</span><span class="token punctuation">:</span>50%<span class="token punctuation">;</span>
+        <span class="token property">--content</span><span class="token punctuation">:</span> <span class="token string">'This is mobile'</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token atrule"><span class="token rule">@media</span> only screen and <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> 480px<span class="token punctuation">)</span></span><span class="token punctuation">{</span>
+    <span class="token selector">:root</span><span class="token punctuation">{</span>
+        <span class="token property">--width</span><span class="token punctuation">:</span>100%<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">div</span><span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token function">var</span><span class="token punctuation">(</span>--width<span class="token punctuation">)</span> - 20px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">div:before</span><span class="token punctuation">{</span>
+    <span class="token property">content</span><span class="token punctuation">:</span> <span class="token function">var</span><span class="token punctuation">(</span>--content<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Other Styles */</span>
+<span class="token selector">body</span> <span class="token punctuation">{</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">div</span><span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    <span class="token property">font-weight</span><span class="token punctuation">:</span>bold<span class="token punctuation">;</span>
+    <span class="token property">float</span><span class="token punctuation">:</span>left<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 4px solid black<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You can try resizing the window in this <a href="https://codepen.io/mkumaran/pen/BZaXvz" target="_blank" rel="noopener noreferrer">CodePen Demo<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>Here's an animated screenshot of the resizing in action:</p> <p><a href="https://i.stack.imgur.com/GXWRP.gif" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/GXWRP.gif" alt="Resizing the screen"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>:root {} /* pseudo-class that allows for more global definition of variables */</li> <li>--variable-name: <strong>value</strong>; /* define variable */</li> <li>var(--variable-name, <strong>default-value</strong>) /* use defined variable with default value fallback */</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p><strong>CSS Variables are currently considered an experimental technology.</strong></p> <p><strong><a name="remarks-browser-support-/-compatibility-0" class="remarks-subsection-anchor"></a> <h3>BROWSER SUPPORT / COMPATIBILITY</h3></strong></p> <p><strong>Firefox:</strong> Version <strong>31</strong>+ <strong>(Enabled by default)</strong></p> <p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/var()" target="_blank" rel="noopener noreferrer">More info from Mozilla<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>Chrome:</strong> Version <strong>49</strong>+ <strong>(Enabled by default)</strong>.</p> <p><strong>&quot;This feature can be enabled in Chrome Version 48 for testing by enabling the <code>experimental Web Platform</code> feature. Enter <code>chrome://flags/</code> in your Chrome address bar to access this setting.&quot;</strong></p> <p><strong>IE:</strong> Not Supported.</p> <p><strong>Edge:</strong> <a href="https://developer.microsoft.com/en-us/microsoft-edge/platform/status/csscustompropertiesakacssvariables/" target="_blank" rel="noopener noreferrer">Under Development<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>Safari:</strong> Version <strong>9.1+</strong></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/css/custom-properties-variables.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/css/functions.html" class="prev">
+        Functions
+      </a></span> <span class="next"><a href="/css/single-element-shapes.html">
+        Single Element Shapes
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/943.4d0bd90d.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CSS - Normalizing Browser Styles</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="normalize.css, Approaches and Examples">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="CSS - Normalizing Browser Styles">
+    <meta property="og:description" content="normalize.css, Approaches and Examples">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/css/normalizing-browser-styles.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="CSS - Normalizing Browser Styles">
+    <meta name="twitter:description" content="normalize.css, Approaches and Examples">
+    <meta name="twitter:url" content="/css/normalizing-browser-styles.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/961.08199efc.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>CSS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/css/" class="sidebar-link">Disclaimer</a></li><li><a href="/css/getting-started-with-css.html" class="sidebar-link">Getting started with CSS</a></li><li><a href="/css/structure-and-formatting-of-a-css-rule.html" class="sidebar-link">Structure and Formatting of a CSS Rule</a></li><li><a href="/css/comments.html" class="sidebar-link">Comments</a></li><li><a href="/css/selectors.html" class="sidebar-link">Selectors</a></li><li><a href="/css/backgrounds.html" class="sidebar-link">Backgrounds</a></li><li><a href="/css/centering.html" class="sidebar-link">Centering</a></li><li><a href="/css/the-box-model.html" class="sidebar-link">The Box Model</a></li><li><a href="/css/margins.html" class="sidebar-link">Margins</a></li><li><a href="/css/padding.html" class="sidebar-link">Padding</a></li><li><a href="/css/border.html" class="sidebar-link">Border</a></li><li><a href="/css/outlines.html" class="sidebar-link">Outlines</a></li><li><a href="/css/overflow.html" class="sidebar-link">Overflow</a></li><li><a href="/css/media-queries.html" class="sidebar-link">Media Queries</a></li><li><a href="/css/floats.html" class="sidebar-link">Floats</a></li><li><a href="/css/typography.html" class="sidebar-link">Typography</a></li><li><a href="/css/flexible-box-layout-flexbox.html" class="sidebar-link">Flexible Box Layout (Flexbox)</a></li><li><a href="/css/cascading-and-specificity.html" class="sidebar-link">Cascading and Specificity</a></li><li><a href="/css/colors.html" class="sidebar-link">Colors</a></li><li><a href="/css/opacity.html" class="sidebar-link">Opacity</a></li><li><a href="/css/length-units.html" class="sidebar-link">Length Units</a></li><li><a href="/css/pseudo-elements.html" class="sidebar-link">Pseudo-Elements</a></li><li><a href="/css/positioning.html" class="sidebar-link">Positioning</a></li><li><a href="/css/layout-control.html" class="sidebar-link">Layout Control</a></li><li><a href="/css/grid.html" class="sidebar-link">Grid</a></li><li><a href="/css/tables.html" class="sidebar-link">Tables</a></li><li><a href="/css/transitions.html" class="sidebar-link">Transitions</a></li><li><a href="/css/animations.html" class="sidebar-link">Animations</a></li><li><a href="/css/2d-transforms.html" class="sidebar-link">2D Transforms</a></li><li><a href="/css/3d-transforms.html" class="sidebar-link">3D Transforms</a></li><li><a href="/css/filter-property.html" class="sidebar-link">Filter Property</a></li><li><a href="/css/cursor-styling.html" class="sidebar-link">Cursor Styling</a></li><li><a href="/css/box-shadow.html" class="sidebar-link">box-shadow</a></li><li><a href="/css/shapes-for-floats.html" class="sidebar-link">Shapes for Floats</a></li><li><a href="/css/list-styles.html" class="sidebar-link">List Styles</a></li><li><a href="/css/counters.html" class="sidebar-link">Counters</a></li><li><a href="/css/functions.html" class="sidebar-link">Functions</a></li><li><a href="/css/custom-properties-variables.html" class="sidebar-link">Custom Properties (Variables)</a></li><li><a href="/css/single-element-shapes.html" class="sidebar-link">Single Element Shapes</a></li><li><a href="/css/columns.html" class="sidebar-link">Columns</a></li><li><a href="/css/multiple-columns.html" class="sidebar-link">Multiple columns</a></li><li><a href="/css/inline-block-layout.html" class="sidebar-link">Inline-Block Layout</a></li><li><a href="/css/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/css/css-image-sprites.html" class="sidebar-link">CSS Image Sprites</a></li><li><a href="/css/clipping-and-masking.html" class="sidebar-link">Clipping and Masking</a></li><li><a href="/css/fragmentation.html" class="sidebar-link">Fragmentation</a></li><li><a href="/css/css-object-model-cssom.html" class="sidebar-link">CSS Object Model (CSSOM)</a></li><li><a href="/css/feature-queries.html" class="sidebar-link">Feature Queries</a></li><li><a href="/css/stacking-context.html" class="sidebar-link">Stacking Context</a></li><li><a href="/css/block-formatting-contexts.html" class="sidebar-link">Block Formatting Contexts</a></li><li><a href="/css/vertical-centering.html" class="sidebar-link">Vertical Centering</a></li><li><a href="/css/object-fit-and-placement.html" class="sidebar-link">Object Fit and Placement</a></li><li><a href="/css/css-design-patterns.html" class="sidebar-link">CSS design patterns</a></li><li><a href="/css/browser-support-prefixes.html" class="sidebar-link">Browser Support &amp; Prefixes</a></li><li><a href="/css/normalizing-browser-styles.html" class="active sidebar-link">Normalizing Browser Styles</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/css/normalizing-browser-styles.html#normalize-css" class="sidebar-link">normalize.css</a></li><li class="sidebar-sub-header"><a href="/css/normalizing-browser-styles.html#approaches-and-examples" class="sidebar-link">Approaches and Examples</a></li></ul></li><li><a href="/css/internet-explorer-hacks.html" class="sidebar-link">Internet Explorer Hacks</a></li><li><a href="/css/performance.html" class="sidebar-link">Performance</a></li><li><a href="/css/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="normalizing-browser-styles"><a href="#normalizing-browser-styles" class="header-anchor">#</a> Normalizing Browser Styles</h1> <h2 id="normalize-css"><a href="#normalize-css" class="header-anchor">#</a> normalize.css</h2> <p>Browsers have a default set of CSS styles they use for rendering elements. Some of these styles can even be customised using the browser's settings to change default font face and size definitions, for example. The styles contain the definition of which elements are supposed to be block-level or inline, among other things.</p> <p>Because these default styles are given some leeway by the language specifications and because browsers may not follow the specs properly they can differ from browser to browser.</p> <p>This is where <a href="http://necolas.github.io/normalize.css/" target="_blank" rel="noopener noreferrer">normalize.css<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> comes into play. It overrides the most common inconsistencies and fixes known bugs.</p> <h3 id="what-does-it-do"><a href="#what-does-it-do" class="header-anchor">#</a> What does it do</h3> <blockquote></blockquote> <ul>
+- Preserves useful defaults, unlike many CSS resets.
+- Normalizes styles for a wide range of elements.
+- Corrects bugs and common browser inconsistencies.
+- Improves usability with subtle modifications.
+- Explains what code does using detailed comments.
+</ul> <p>So, by including normalize.css in your project your design will look more alike and consistent across different browsers.</p> <h3 id="difference-to-reset-css"><a href="#difference-to-reset-css" class="header-anchor">#</a> Difference to reset.css</h3> <p>You may have heard of <code>reset.css</code>. What's the difference between the two?</p> <p>While normalize.css provides consistency by setting different properties to unified defaults, reset.css achieves consistency by <strong>removing</strong> all basic styling that a browser may apply. While this might sound like a good idea at first, this actually means you have to write <strong>all</strong> rules yourself, which goes against having a solid standard.</p> <h2 id="approaches-and-examples"><a href="#approaches-and-examples" class="header-anchor">#</a> Approaches and Examples</h2> <p>CSS resets take separate approaches to browser defaults. Eric Meyer’s Reset CSS has been around for a while. His approach nullifies many of the browser elements that have been known to cause problems right off the back. The following is from his version (v2.0 | 20110126) CSS Reset.</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video</span> <span class="token punctuation">{</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token property">font</span><span class="token punctuation">:</span> inherit<span class="token punctuation">;</span>
+    <span class="token property">vertical-align</span><span class="token punctuation">:</span> baseline<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><a href="http://meyerweb.com/eric/tools/css/reset/" target="_blank" rel="noopener noreferrer">Eric Meyer's Reset CSS<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>Normalize CSS on the other and deals with many of these separately. The following is a sample from the version (v4.2.0) of the code.</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token comment">/**
+ * 1. Change the default font family in all browsers (opinionated).
+ * 2. Correct the line height in all browsers.
+ * 3. Prevent adjustments of font size after orientation changes in IE and iOS.
+ */</span>
+
+<span class="token comment">/* Document
+   ========================================================================== */</span>
+
+<span class="token selector">html</span> <span class="token punctuation">{</span>
+  <span class="token property">font-family</span><span class="token punctuation">:</span> sans-serif<span class="token punctuation">;</span> <span class="token comment">/* 1 */</span>
+  <span class="token property">line-height</span><span class="token punctuation">:</span> 1.15<span class="token punctuation">;</span> <span class="token comment">/* 2 */</span>
+  <span class="token property">-ms-text-size-adjust</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span> <span class="token comment">/* 3 */</span>
+  <span class="token property">-webkit-text-size-adjust</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span> <span class="token comment">/* 3 */</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Sections
+   ========================================================================== */</span>
+
+<span class="token comment">/**
+ * Remove the margin in all browsers (opinionated).
+ */</span>
+
+<span class="token selector">body</span> <span class="token punctuation">{</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+ * Add the correct display in IE 9-.
+ */</span>
+
+<span class="token selector">article,
+aside,
+footer,
+header,
+nav,
+section</span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */</span>
+
+<span class="token selector">h1</span> <span class="token punctuation">{</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 2em<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> 0.67em 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><a href="http://normalize.css" target="_blank" rel="noopener noreferrer">Normalize CSS<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Meyer's Reset, while effective, makes the same changes to nearly every commonly used element. This has the result of polluting web browser inspector windows with the same applied styles over and over again, and creates more work for the browser (more rules to apply to more elements). The Normalize technique, on the other hand, is much more focused and less of a broad-brush technique. This simplifies the work on the part of the browser, and results in less clutter in the browser inspection tools.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/css/normalizing-browser-styles.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/css/browser-support-prefixes.html" class="prev">
+        Browser Support &amp; Prefixes
+      </a></span> <span class="next"><a href="/css/internet-explorer-hacks.html">
+        Internet Explorer Hacks
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/961.08199efc.js" defer></script>
+  </body>
+</html>

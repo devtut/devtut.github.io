@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SQL - Common Table Expressions</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="generating values, recursively enumerating a subtree, Temporary query, recursively going up in a tree, Recursively generate dates, extended to include team rostering as example, Oracle CONNECT BY functionality with recursive CTEs, Refactoring a query to use Common Table Expressions, Example of a complex SQL with Common Table Expression">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="SQL - Common Table Expressions">
+    <meta property="og:description" content="generating values, recursively enumerating a subtree, Temporary query, recursively going up in a tree, Recursively generate dates, extended to include team rostering as example, Oracle CONNECT BY functionality with recursive CTEs, Refactoring a query to use Common Table Expressions, Example of a complex SQL with Common Table Expression">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/sql/common-table-expressions.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="SQL - Common Table Expressions">
+    <meta name="twitter:description" content="generating values, recursively enumerating a subtree, Temporary query, recursively going up in a tree, Recursively generate dates, extended to include team rostering as example, Oracle CONNECT BY functionality with recursive CTEs, Refactoring a query to use Common Table Expressions, Example of a complex SQL with Common Table Expression">
+    <meta name="twitter:url" content="/sql/common-table-expressions.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3246.29ebc253.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>SQL</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/sql/" class="sidebar-link">Disclaimer</a></li><li><a href="/sql/getting-started-with-sql.html" class="sidebar-link">Getting started with SQL</a></li><li><a href="/sql/identifier.html" class="sidebar-link">Identifier</a></li><li><a href="/sql/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/sql/null.html" class="sidebar-link">NULL</a></li><li><a href="/sql/example-databases-and-tables.html" class="sidebar-link">Example Databases and Tables</a></li><li><a href="/sql/select.html" class="sidebar-link">SELECT</a></li><li><a href="/sql/group-by.html" class="sidebar-link">GROUP BY</a></li><li><a href="/sql/order-by.html" class="sidebar-link">ORDER BY</a></li><li><a href="/sql/and-or-operators.html" class="sidebar-link">AND &amp; OR Operators</a></li><li><a href="/sql/case.html" class="sidebar-link">CASE</a></li><li><a href="/sql/like-operator.html" class="sidebar-link">LIKE operator</a></li><li><a href="/sql/in-clause.html" class="sidebar-link">IN clause</a></li><li><a href="/sql/filter-results-using-where-and-having.html" class="sidebar-link">Filter results using WHERE and HAVING</a></li><li><a href="/sql/skip-take-pagination.html" class="sidebar-link">SKIP TAKE (Pagination)</a></li><li><a href="/sql/except.html" class="sidebar-link">EXCEPT</a></li><li><a href="/sql/explain-and-describe.html" class="sidebar-link">EXPLAIN and DESCRIBE</a></li><li><a href="/sql/exists-clause.html" class="sidebar-link">EXISTS CLAUSE</a></li><li><a href="/sql/join.html" class="sidebar-link">JOIN</a></li><li><a href="/sql/update.html" class="sidebar-link">UPDATE</a></li><li><a href="/sql/create-database.html" class="sidebar-link">CREATE Database</a></li><li><a href="/sql/create-table.html" class="sidebar-link">CREATE TABLE</a></li><li><a href="/sql/create-function.html" class="sidebar-link">CREATE FUNCTION</a></li><li><a href="/sql/try-catch.html" class="sidebar-link">TRY/CATCH</a></li><li><a href="/sql/union-union-all.html" class="sidebar-link">UNION / UNION ALL</a></li><li><a href="/sql/alter-table.html" class="sidebar-link">ALTER TABLE</a></li><li><a href="/sql/insert.html" class="sidebar-link">INSERT</a></li><li><a href="/sql/merge.html" class="sidebar-link">MERGE</a></li><li><a href="/sql/cross-apply-outer-apply.html" class="sidebar-link">cross apply, outer apply</a></li><li><a href="/sql/delete.html" class="sidebar-link">DELETE</a></li><li><a href="/sql/truncate.html" class="sidebar-link">TRUNCATE</a></li><li><a href="/sql/drop-table.html" class="sidebar-link">DROP Table</a></li><li><a href="/sql/drop-or-delete-database.html" class="sidebar-link">DROP or DELETE Database</a></li><li><a href="/sql/cascading-delete.html" class="sidebar-link">Cascading Delete</a></li><li><a href="/sql/grant-and-revoke.html" class="sidebar-link">GRANT and REVOKE</a></li><li><a href="/sql/xml.html" class="sidebar-link">XML</a></li><li><a href="/sql/primary-keys.html" class="sidebar-link">Primary Keys</a></li><li><a href="/sql/indexes.html" class="sidebar-link">Indexes</a></li><li><a href="/sql/row-number.html" class="sidebar-link">Row number</a></li><li><a href="/sql/sql-group-by-vs-distinct.html" class="sidebar-link">SQL Group By vs Distinct</a></li><li><a href="/sql/finding-duplicates-on-a-column-subset-with-detail.html" class="sidebar-link">Finding Duplicates on a Column Subset with Detail</a></li><li><a href="/sql/string-functions.html" class="sidebar-link">String Functions</a></li><li><a href="/sql/functions-aggregate.html" class="sidebar-link">Functions (Aggregate)</a></li><li><a href="/sql/functions-scalar-single-row.html" class="sidebar-link">Functions (Scalar/Single Row)</a></li><li><a href="/sql/functions-analytic.html" class="sidebar-link">Functions (Analytic)</a></li><li><a href="/sql/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/sql/common-table-expressions.html" class="active sidebar-link">Common Table Expressions</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/sql/common-table-expressions.html#generating-values" class="sidebar-link">generating values</a></li><li class="sidebar-sub-header"><a href="/sql/common-table-expressions.html#recursively-enumerating-a-subtree" class="sidebar-link">recursively enumerating a subtree</a></li><li class="sidebar-sub-header"><a href="/sql/common-table-expressions.html#temporary-query" class="sidebar-link">Temporary query</a></li><li class="sidebar-sub-header"><a href="/sql/common-table-expressions.html#recursively-going-up-in-a-tree" class="sidebar-link">recursively going up in a tree</a></li><li class="sidebar-sub-header"><a href="/sql/common-table-expressions.html#recursively-generate-dates-extended-to-include-team-rostering-as-example" class="sidebar-link">Recursively generate dates, extended to include team rostering as example</a></li><li class="sidebar-sub-header"><a href="/sql/common-table-expressions.html#oracle-connect-by-functionality-with-recursive-ctes" class="sidebar-link">Oracle CONNECT BY functionality with recursive CTEs</a></li><li class="sidebar-sub-header"><a href="/sql/common-table-expressions.html#refactoring-a-query-to-use-common-table-expressions" class="sidebar-link">Refactoring a query to use Common Table Expressions</a></li><li class="sidebar-sub-header"><a href="/sql/common-table-expressions.html#example-of-a-complex-sql-with-common-table-expression" class="sidebar-link">Example of a complex SQL with Common Table Expression</a></li></ul></li><li><a href="/sql/views.html" class="sidebar-link">Views</a></li><li><a href="/sql/materialized-views.html" class="sidebar-link">Materialized Views</a></li><li><a href="/sql/comments.html" class="sidebar-link">Comments</a></li><li><a href="/sql/foreign-keys.html" class="sidebar-link">Foreign Keys</a></li><li><a href="/sql/sequence.html" class="sidebar-link">Sequence</a></li><li><a href="/sql/subqueries.html" class="sidebar-link">Subqueries</a></li><li><a href="/sql/execution-blocks.html" class="sidebar-link">Execution blocks</a></li><li><a href="/sql/stored-procedures.html" class="sidebar-link">Stored Procedures</a></li><li><a href="/sql/triggers.html" class="sidebar-link">Triggers</a></li><li><a href="/sql/transactions.html" class="sidebar-link">Transactions</a></li><li><a href="/sql/table-design.html" class="sidebar-link">Table Design</a></li><li><a href="/sql/synonyms.html" class="sidebar-link">Synonyms</a></li><li><a href="/sql/information-schema.html" class="sidebar-link">Information Schema</a></li><li><a href="/sql/order-of-execution.html" class="sidebar-link">Order of Execution</a></li><li><a href="/sql/clean-code-in-sql.html" class="sidebar-link">Clean Code in SQL</a></li><li><a href="/sql/relational-algebra.html" class="sidebar-link">Relational Algebra</a></li><li><a href="/sql/sql-injection.html" class="sidebar-link">SQL Injection</a></li><li><a href="/sql/sql-cursor.html" class="sidebar-link">SQL CURSOR</a></li><li><a href="/sql/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="common-table-expressions"><a href="#common-table-expressions" class="header-anchor">#</a> Common Table Expressions</h1> <h2 id="generating-values"><a href="#generating-values" class="header-anchor">#</a> generating values</h2> <p>Most databases do not have a native way of generating a series of numbers for ad-hoc use; however, common table expressions can be used with recursion to emulate that type of function.</p> <p>The following example generates a common table expression called <code>Numbers</code> with a column <code>i</code> which has a row for numbers 1-5:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">--Give a table name `Numbers&quot; and a column `i` to hold the numbers</span>
+<span class="token keyword">WITH</span> Numbers<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+    <span class="token comment">--Starting number/index</span>
+    <span class="token keyword">SELECT</span> <span class="token number">1</span>
+    <span class="token comment">--Top-level UNION ALL operator required for recursion</span>
+    <span class="token keyword">UNION</span> <span class="token keyword">ALL</span>
+    <span class="token comment">--Iteration expression:</span>
+    <span class="token keyword">SELECT</span> i <span class="token operator">+</span> <span class="token number">1</span>
+    <span class="token comment">--Table expression we first declared used as source for recursion</span>
+    <span class="token keyword">FROM</span> Numbers
+    <span class="token comment">--Clause to define the end of the recursion</span>
+    <span class="token keyword">WHERE</span> i <span class="token operator">&lt;</span> <span class="token number">5</span>
+<span class="token punctuation">)</span>
+<span class="token comment">--Use the generated table expression like a regular table</span>
+<span class="token keyword">SELECT</span> i <span class="token keyword">FROM</span> Numbers<span class="token punctuation">;</span>
+
+</code></pre></div><table><thead><tr><th>i</th></tr></thead> <tbody><tr><td>1</td></tr> <tr><td>2</td></tr> <tr><td>3</td></tr> <tr><td>4</td></tr> <tr><td>5</td></tr></tbody></table> <p>This method can be used with any number interval, as well as other types of data.</p> <h2 id="recursively-enumerating-a-subtree"><a href="#recursively-enumerating-a-subtree" class="header-anchor">#</a> recursively enumerating a subtree</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">WITH</span> RECURSIVE ManagedByJames<span class="token punctuation">(</span><span class="token keyword">Level</span><span class="token punctuation">,</span> ID<span class="token punctuation">,</span> FName<span class="token punctuation">,</span> LName<span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+    <span class="token comment">-- start with this row</span>
+    <span class="token keyword">SELECT</span> <span class="token number">1</span><span class="token punctuation">,</span> ID<span class="token punctuation">,</span> FName<span class="token punctuation">,</span> LName
+    <span class="token keyword">FROM</span> Employees
+    <span class="token keyword">WHERE</span> ID <span class="token operator">=</span> <span class="token number">1</span>
+
+    <span class="token keyword">UNION</span> <span class="token keyword">ALL</span>
+
+    <span class="token comment">-- get employees that have any of the previously selected rows as manager</span>
+    <span class="token keyword">SELECT</span> ManagedByJames<span class="token punctuation">.</span><span class="token keyword">Level</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span>
+           Employees<span class="token punctuation">.</span>ID<span class="token punctuation">,</span>
+           Employees<span class="token punctuation">.</span>FName<span class="token punctuation">,</span>
+           Employees<span class="token punctuation">.</span>LName
+    <span class="token keyword">FROM</span> Employees
+    <span class="token keyword">JOIN</span> ManagedByJames
+        <span class="token keyword">ON</span> Employees<span class="token punctuation">.</span>ManagerID <span class="token operator">=</span> ManagedByJames<span class="token punctuation">.</span>ID
+
+    <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> <span class="token number">1</span> <span class="token keyword">DESC</span>   <span class="token comment">-- depth-first search</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> ManagedByJames<span class="token punctuation">;</span>
+
+</code></pre></div><table><thead><tr><th>Level</th> <th>ID</th> <th>FName</th> <th>LName</th></tr></thead> <tbody><tr><td><strong>1</strong></td> <td>1</td> <td>James</td> <td>Smith</td></tr> <tr><td><strong>2</strong></td> <td>2</td> <td>John</td> <td>Johnson</td></tr> <tr><td><strong>3</strong></td> <td>4</td> <td>Johnathon</td> <td>Smith</td></tr> <tr><td><strong>2</strong></td> <td>3</td> <td>Michael</td> <td>Williams</td></tr></tbody></table> <h2 id="temporary-query"><a href="#temporary-query" class="header-anchor">#</a> Temporary query</h2> <p>These behave in the same manner as nested subqueries but with a different syntax.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">WITH</span> ReadyCars <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span> <span class="token operator">*</span>
+  <span class="token keyword">FROM</span> Cars
+  <span class="token keyword">WHERE</span> <span class="token keyword">Status</span> <span class="token operator">=</span> <span class="token string">'READY'</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">SELECT</span> ID<span class="token punctuation">,</span> Model<span class="token punctuation">,</span> TotalCost
+<span class="token keyword">FROM</span> ReadyCars
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> TotalCost<span class="token punctuation">;</span>
+
+</code></pre></div><table><thead><tr><th>ID</th> <th>Model</th> <th>TotalCost</th></tr></thead> <tbody><tr><td>1</td> <td>Ford F-150</td> <td>200</td></tr> <tr><td>2</td> <td>Ford F-150</td> <td>230</td></tr></tbody></table> <p><strong>Equivalent subquery syntax</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> ID<span class="token punctuation">,</span> Model<span class="token punctuation">,</span> TotalCost
+<span class="token keyword">FROM</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span> <span class="token operator">*</span>
+  <span class="token keyword">FROM</span> Cars
+  <span class="token keyword">WHERE</span> <span class="token keyword">Status</span> <span class="token operator">=</span> <span class="token string">'READY'</span>
+<span class="token punctuation">)</span> <span class="token keyword">AS</span> ReadyCars
+<span class="token keyword">ORDER</span> <span class="token keyword">BY</span> TotalCost
+
+</code></pre></div><h2 id="recursively-going-up-in-a-tree"><a href="#recursively-going-up-in-a-tree" class="header-anchor">#</a> recursively going up in a tree</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">WITH</span> RECURSIVE ManagersOfJonathon <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+    <span class="token comment">-- start with this row</span>
+    <span class="token keyword">SELECT</span> <span class="token operator">*</span>
+    <span class="token keyword">FROM</span> Employees
+    <span class="token keyword">WHERE</span> ID <span class="token operator">=</span> <span class="token number">4</span>
+
+    <span class="token keyword">UNION</span> <span class="token keyword">ALL</span>
+
+    <span class="token comment">-- get manager(s) of all previously selected rows</span>
+    <span class="token keyword">SELECT</span> Employees<span class="token punctuation">.</span><span class="token operator">*</span>
+    <span class="token keyword">FROM</span> Employees
+    <span class="token keyword">JOIN</span> ManagersOfJonathon
+        <span class="token keyword">ON</span> Employees<span class="token punctuation">.</span>ID <span class="token operator">=</span> ManagersOfJonathon<span class="token punctuation">.</span>ManagerID
+<span class="token punctuation">)</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> ManagersOfJonathon<span class="token punctuation">;</span>
+
+</code></pre></div><table><thead><tr><th>Id</th> <th>FName</th> <th>LName</th> <th>PhoneNumber</th> <th>ManagerId</th> <th>DepartmentId</th></tr></thead> <tbody><tr><td>4</td> <td>Johnathon</td> <td>Smith</td> <td>1212121212</td> <td><strong>2</strong></td> <td>1</td></tr> <tr><td><strong>2</strong></td> <td>John</td> <td>Johnson</td> <td>2468101214</td> <td><strong>1</strong></td> <td>1</td></tr> <tr><td><strong>1</strong></td> <td>James</td> <td>Smith</td> <td>1234567890</td> <td>NULL</td> <td>1</td></tr></tbody></table> <h2 id="recursively-generate-dates-extended-to-include-team-rostering-as-example"><a href="#recursively-generate-dates-extended-to-include-team-rostering-as-example" class="header-anchor">#</a> Recursively generate dates, extended to include team rostering as example</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">DECLARE</span> <span class="token variable">@DateFrom</span> <span class="token keyword">DATETIME</span> <span class="token operator">=</span> <span class="token string">'2016-06-01 06:00'</span>
+<span class="token keyword">DECLARE</span> <span class="token variable">@DateTo</span> <span class="token keyword">DATETIME</span> <span class="token operator">=</span> <span class="token string">'2016-07-01 06:00'</span>
+<span class="token keyword">DECLARE</span> <span class="token variable">@IntervalDays</span> <span class="token keyword">INT</span> <span class="token operator">=</span> <span class="token number">7</span>
+
+<span class="token comment">-- Transition Sequence = Rest &amp; Relax into Day Shift into Night Shift</span>
+<span class="token comment">-- RR (Rest &amp; Relax) = 1</span>
+<span class="token comment">-- DS (Day Shift) = 2</span>
+<span class="token comment">-- NS (Night Shift) = 3</span>
+
+<span class="token punctuation">;</span><span class="token keyword">WITH</span> roster <span class="token keyword">AS</span>
+<span class="token punctuation">(</span>
+   <span class="token keyword">SELECT</span> <span class="token variable">@DateFrom</span> <span class="token keyword">AS</span> RosterStart<span class="token punctuation">,</span> <span class="token number">1</span> <span class="token keyword">AS</span> TeamA<span class="token punctuation">,</span> <span class="token number">2</span> <span class="token keyword">AS</span> TeamB<span class="token punctuation">,</span> <span class="token number">3</span> <span class="token keyword">AS</span> TeamC
+   <span class="token keyword">UNION</span> <span class="token keyword">ALL</span>
+   <span class="token keyword">SELECT</span> DATEADD<span class="token punctuation">(</span>d<span class="token punctuation">,</span> <span class="token variable">@IntervalDays</span><span class="token punctuation">,</span> RosterStart<span class="token punctuation">)</span><span class="token punctuation">,</span>
+          <span class="token keyword">CASE</span> TeamA <span class="token keyword">WHEN</span> <span class="token number">1</span> <span class="token keyword">THEN</span> <span class="token number">2</span> <span class="token keyword">WHEN</span> <span class="token number">2</span> <span class="token keyword">THEN</span> <span class="token number">3</span> <span class="token keyword">WHEN</span> <span class="token number">3</span> <span class="token keyword">THEN</span> <span class="token number">1</span> <span class="token keyword">END</span> <span class="token keyword">AS</span> TeamA<span class="token punctuation">,</span>
+          <span class="token keyword">CASE</span> TeamB <span class="token keyword">WHEN</span> <span class="token number">1</span> <span class="token keyword">THEN</span> <span class="token number">2</span> <span class="token keyword">WHEN</span> <span class="token number">2</span> <span class="token keyword">THEN</span> <span class="token number">3</span> <span class="token keyword">WHEN</span> <span class="token number">3</span> <span class="token keyword">THEN</span> <span class="token number">1</span> <span class="token keyword">END</span> <span class="token keyword">AS</span> TeamB<span class="token punctuation">,</span>
+          <span class="token keyword">CASE</span> TeamC <span class="token keyword">WHEN</span> <span class="token number">1</span> <span class="token keyword">THEN</span> <span class="token number">2</span> <span class="token keyword">WHEN</span> <span class="token number">2</span> <span class="token keyword">THEN</span> <span class="token number">3</span> <span class="token keyword">WHEN</span> <span class="token number">3</span> <span class="token keyword">THEN</span> <span class="token number">1</span> <span class="token keyword">END</span> <span class="token keyword">AS</span> TeamC
+   <span class="token keyword">FROM</span> roster <span class="token keyword">WHERE</span> RosterStart <span class="token operator">&lt;</span> DATEADD<span class="token punctuation">(</span>d<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token variable">@IntervalDays</span><span class="token punctuation">,</span> <span class="token variable">@DateTo</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">SELECT</span> RosterStart<span class="token punctuation">,</span>
+       ISNULL<span class="token punctuation">(</span>LEAD<span class="token punctuation">(</span>RosterStart<span class="token punctuation">)</span> <span class="token keyword">OVER</span> <span class="token punctuation">(</span><span class="token keyword">ORDER</span> <span class="token keyword">BY</span> RosterStart<span class="token punctuation">)</span><span class="token punctuation">,</span> RosterStart <span class="token operator">+</span> <span class="token variable">@IntervalDays</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> RosterEnd<span class="token punctuation">,</span>
+       <span class="token keyword">CASE</span> TeamA <span class="token keyword">WHEN</span> <span class="token number">1</span> <span class="token keyword">THEN</span> <span class="token string">'RR'</span> <span class="token keyword">WHEN</span> <span class="token number">2</span> <span class="token keyword">THEN</span> <span class="token string">'DS'</span> <span class="token keyword">WHEN</span> <span class="token number">3</span> <span class="token keyword">THEN</span> <span class="token string">'NS'</span> <span class="token keyword">END</span> <span class="token keyword">AS</span> TeamA<span class="token punctuation">,</span>
+       <span class="token keyword">CASE</span> TeamB <span class="token keyword">WHEN</span> <span class="token number">1</span> <span class="token keyword">THEN</span> <span class="token string">'RR'</span> <span class="token keyword">WHEN</span> <span class="token number">2</span> <span class="token keyword">THEN</span> <span class="token string">'DS'</span> <span class="token keyword">WHEN</span> <span class="token number">3</span> <span class="token keyword">THEN</span> <span class="token string">'NS'</span> <span class="token keyword">END</span> <span class="token keyword">AS</span> TeamB<span class="token punctuation">,</span>
+       <span class="token keyword">CASE</span> TeamC <span class="token keyword">WHEN</span> <span class="token number">1</span> <span class="token keyword">THEN</span> <span class="token string">'RR'</span> <span class="token keyword">WHEN</span> <span class="token number">2</span> <span class="token keyword">THEN</span> <span class="token string">'DS'</span> <span class="token keyword">WHEN</span> <span class="token number">3</span> <span class="token keyword">THEN</span> <span class="token string">'NS'</span> <span class="token keyword">END</span> <span class="token keyword">AS</span> TeamC
+<span class="token keyword">FROM</span> roster
+
+</code></pre></div><p><strong>Result</strong></p> <p>I.e. For Week 1 TeamA is on R&amp;R, TeamB is on Day Shift and TeamC is on Night Shift.</p> <p><a href="http://i.stack.imgur.com/rm2xk.jpg" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/rm2xk.jpg" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="oracle-connect-by-functionality-with-recursive-ctes"><a href="#oracle-connect-by-functionality-with-recursive-ctes" class="header-anchor">#</a> Oracle CONNECT BY functionality with recursive CTEs</h2> <p>Oracle's CONNECT BY functionality provides many useful and nontrivial features that are not built-in when using SQL standard recursive CTEs. This example replicates these features (with a few additions for sake of completeness), using SQL Server syntax. It is most useful for Oracle developers finding many features missing in their hierarchical queries on other databases, but it also serves to showcase what can be done with a hierarchical query in general.</p> <div class="language- extra-class"><pre class="language-text"><code>
+ WITH tbl AS (
+       SELECT id, name, parent_id
+         FROM mytable)
+     , tbl_hierarchy AS (
+       /* Anchor */
+       SELECT 1 AS &quot;LEVEL&quot;
+            --, 1 AS CONNECT_BY_ISROOT
+            --, 0 AS CONNECT_BY_ISBRANCH
+            , CASE WHEN t.id IN (SELECT parent_id FROM tbl) THEN 0 ELSE 1 END AS CONNECT_BY_ISLEAF
+            , 0 AS CONNECT_BY_ISCYCLE
+            , '/' + CAST(t.id   AS VARCHAR(MAX)) + '/' AS SYS_CONNECT_BY_PATH_id
+            , '/' + CAST(t.name AS VARCHAR(MAX)) + '/' AS SYS_CONNECT_BY_PATH_name
+            , t.id AS root_id
+            , t.*
+         FROM tbl t
+        WHERE t.parent_id IS NULL                            -- START WITH parent_id IS NULL
+       UNION ALL
+       /* Recursive */
+       SELECT th.&quot;LEVEL&quot; + 1 AS &quot;LEVEL&quot;
+            --, 0 AS CONNECT_BY_ISROOT
+            --, CASE WHEN t.id IN (SELECT parent_id FROM tbl) THEN 1 ELSE 0 END AS CONNECT_BY_ISBRANCH
+            , CASE WHEN t.id IN (SELECT parent_id FROM tbl) THEN 0 ELSE 1 END AS CONNECT_BY_ISLEAF
+            , CASE WHEN th.SYS_CONNECT_BY_PATH_id LIKE '%/' + CAST(t.id AS VARCHAR(MAX)) + '/%' THEN 1 ELSE 0 END AS CONNECT_BY_ISCYCLE
+            , th.SYS_CONNECT_BY_PATH_id   + CAST(t.id   AS VARCHAR(MAX)) + '/' AS SYS_CONNECT_BY_PATH_id
+            , th.SYS_CONNECT_BY_PATH_name + CAST(t.name AS VARCHAR(MAX)) + '/' AS SYS_CONNECT_BY_PATH_name
+            , th.root_id
+            , t.*
+         FROM tbl t
+              JOIN tbl_hierarchy th ON (th.id = t.parent_id) -- CONNECT BY PRIOR id = parent_id
+        WHERE th.CONNECT_BY_ISCYCLE = 0)                     -- NOCYCLE
+SELECT th.*
+     --, REPLICATE(' ', (th.&quot;LEVEL&quot; - 1) * 3) + th.name AS tbl_hierarchy
+  FROM tbl_hierarchy th
+       JOIN tbl CONNECT_BY_ROOT ON (CONNECT_BY_ROOT.id = th.root_id)
+ ORDER BY th.SYS_CONNECT_BY_PATH_name;                       -- ORDER SIBLINGS BY name
+
+</code></pre></div><p>CONNECT BY features demonstrated above, with explanations:</p> <li>Clauses
+<ul>
+- CONNECT BY: Specifies the relationship that defines the hierarchy.
+- START WITH: Specifies the root nodes.
+- ORDER SIBLINGS BY: Orders results properly.
+<ul><li><p>NOCYCLE: Stops processing a branch when a loop is detected. Valid hierarchies are Directed Acyclic Graphs, and circular references violate this construct.</p></li> <li><p>PRIOR: Obtains data from the node's parent.</p></li> <li><p>CONNECT_BY_ROOT: Obtains data from the node's root.</p></li> <li><p>LEVEL: Indicates the node's distance from its root.</p></li> <li><p>CONNECT_BY_ISLEAF: Indicates a node without children.</p></li> <li><p>CONNECT_BY_ISCYCLE: Indicates a node with a circular reference.</p></li> <li><p>SYS_CONNECT_BY_PATH: Returns a flattened/concatenated representation of the path to the node from its root.</p></li></ul> <h2 id="refactoring-a-query-to-use-common-table-expressions"><a href="#refactoring-a-query-to-use-common-table-expressions" class="header-anchor">#</a> Refactoring a query to use Common Table Expressions</h2> <p>Suppose we want to get all product categories with total sales greater than 20.</p> <p>Here is a query without Common Table Expressions:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> category<span class="token punctuation">.</span>description<span class="token punctuation">,</span> <span class="token function">sum</span><span class="token punctuation">(</span>product<span class="token punctuation">.</span>price<span class="token punctuation">)</span> <span class="token keyword">as</span> total_sales
+<span class="token keyword">FROM</span> sale
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> product <span class="token keyword">on</span> sale<span class="token punctuation">.</span>product_id <span class="token operator">=</span> product<span class="token punctuation">.</span>id
+<span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> category <span class="token keyword">on</span> product<span class="token punctuation">.</span>category_id <span class="token operator">=</span> category<span class="token punctuation">.</span>id
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> category<span class="token punctuation">.</span>id<span class="token punctuation">,</span> category<span class="token punctuation">.</span>description
+<span class="token keyword">HAVING</span> <span class="token function">sum</span><span class="token punctuation">(</span>product<span class="token punctuation">.</span>price<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">20</span>
+
+</code></pre></div><p>And an equivalent query using Common Table Expressions:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">WITH</span> all_sales <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span> product<span class="token punctuation">.</span>price<span class="token punctuation">,</span> category<span class="token punctuation">.</span>id <span class="token keyword">as</span> category_id<span class="token punctuation">,</span> category<span class="token punctuation">.</span>description <span class="token keyword">as</span> category_description
+  <span class="token keyword">FROM</span> sale
+  <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> product <span class="token keyword">on</span> sale<span class="token punctuation">.</span>product_id <span class="token operator">=</span> product<span class="token punctuation">.</span>id
+  <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> category <span class="token keyword">on</span> product<span class="token punctuation">.</span>category_id <span class="token operator">=</span> category<span class="token punctuation">.</span>id
+<span class="token punctuation">)</span>
+<span class="token punctuation">,</span> sales_by_category <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span> category_description<span class="token punctuation">,</span> <span class="token function">sum</span><span class="token punctuation">(</span>price<span class="token punctuation">)</span> <span class="token keyword">as</span> total_sales
+  <span class="token keyword">FROM</span> all_sales
+  <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> category_id<span class="token punctuation">,</span> category_description
+<span class="token punctuation">)</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">from</span> sales_by_category <span class="token keyword">WHERE</span> total_sales <span class="token operator">&gt;</span> <span class="token number">20</span>
+
+</code></pre></div><h2 id="example-of-a-complex-sql-with-common-table-expression"><a href="#example-of-a-complex-sql-with-common-table-expression" class="header-anchor">#</a> Example of a complex SQL with Common Table Expression</h2> <p>Suppose we want to query the &quot;cheapest products&quot; from the &quot;top categories&quot;.</p> <p>Here is an example of query using Common Table Expressions</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">-- all_sales: just a simple SELECT with all the needed JOINS</span>
+<span class="token keyword">WITH</span> all_sales <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span>
+  product<span class="token punctuation">.</span>price <span class="token keyword">as</span> product_price<span class="token punctuation">,</span>
+  category<span class="token punctuation">.</span>id <span class="token keyword">as</span> category_id<span class="token punctuation">,</span>
+  category<span class="token punctuation">.</span>description <span class="token keyword">as</span> category_description
+  <span class="token keyword">FROM</span> sale
+  <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> product <span class="token keyword">on</span> sale<span class="token punctuation">.</span>product_id <span class="token operator">=</span> product<span class="token punctuation">.</span>id
+  <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> category <span class="token keyword">on</span> product<span class="token punctuation">.</span>category_id <span class="token operator">=</span> category<span class="token punctuation">.</span>id
+<span class="token punctuation">)</span>
+<span class="token comment">-- Group by category</span>
+<span class="token punctuation">,</span> sales_by_category <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span> category_id<span class="token punctuation">,</span> category_description<span class="token punctuation">,</span>
+  <span class="token function">sum</span><span class="token punctuation">(</span>product_price<span class="token punctuation">)</span> <span class="token keyword">as</span> total_sales
+  <span class="token keyword">FROM</span> all_sales
+  <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> category_id<span class="token punctuation">,</span> category_description
+<span class="token punctuation">)</span>
+<span class="token comment">-- Filtering total_sales &gt; 20</span>
+<span class="token punctuation">,</span> top_categories <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">from</span> sales_by_category <span class="token keyword">WHERE</span> total_sales <span class="token operator">&gt;</span> <span class="token number">20</span>
+<span class="token punctuation">)</span>
+<span class="token comment">-- all_products: just a simple SELECT with all the needed JOINS</span>
+<span class="token punctuation">,</span> all_products <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span>
+  product<span class="token punctuation">.</span>id <span class="token keyword">as</span> product_id<span class="token punctuation">,</span>
+  product<span class="token punctuation">.</span>description <span class="token keyword">as</span> product_description<span class="token punctuation">,</span>
+  product<span class="token punctuation">.</span>price <span class="token keyword">as</span> product_price<span class="token punctuation">,</span>
+  category<span class="token punctuation">.</span>id <span class="token keyword">as</span> category_id<span class="token punctuation">,</span>
+  category<span class="token punctuation">.</span>description <span class="token keyword">as</span> category_description
+  <span class="token keyword">FROM</span> product
+  <span class="token keyword">LEFT</span> <span class="token keyword">JOIN</span> category <span class="token keyword">on</span> product<span class="token punctuation">.</span>category_id <span class="token operator">=</span> category<span class="token punctuation">.</span>id
+<span class="token punctuation">)</span>
+<span class="token comment">-- Order by product price</span>
+<span class="token punctuation">,</span> cheapest_products <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">from</span> all_products
+  <span class="token keyword">ORDER</span> <span class="token keyword">by</span> product_price <span class="token keyword">ASC</span>
+<span class="token punctuation">)</span>
+<span class="token comment">-- Simple inner join </span>
+<span class="token punctuation">,</span> cheapest_products_from_top_categories <span class="token keyword">AS</span> <span class="token punctuation">(</span>
+  <span class="token keyword">SELECT</span> product_description<span class="token punctuation">,</span> product_price
+  <span class="token keyword">FROM</span> cheapest_products
+  <span class="token keyword">INNER</span> <span class="token keyword">JOIN</span> top_categories <span class="token keyword">ON</span> cheapest_products<span class="token punctuation">.</span>category_id <span class="token operator">=</span> top_categories<span class="token punctuation">.</span>category_id
+<span class="token punctuation">)</span>
+<span class="token comment">--The main SELECT</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">from</span> cheapest_products_from_top_categories
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <li><p>WITH QueryName [(ColumnName, ...)] AS (<br>
+  SELECT ...<br>
+)<br>
+SELECT ... FROM QueryName ...;</p></li> <li><p>WITH RECURSIVE QueryName [(ColumnName, ...)] AS (<br>
+  SELECT ...<br>
+  UNION [ALL]<br>
+  SELECT ... FROM QueryName ...<br>
+)<br>
+SELECT ... FROM QueryName ...;</p></li> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Official documentation: <a href="http://www.sqlite.org/lang_with.html" target="_blank" rel="noopener noreferrer">WITH clause<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>A Common Table Expression is a temporary result set, and it can be result of complex sub query. It is defined by using WITH clause. CTE improves readability and it is created in memory rather than TempDB database where Temp Table and Table variable is created.</p> <p><strong>Key concepts of Common Table Expressions:</strong></p> <ul><li>Can be used to break up complex queries, especially complex joins and sub-queries.</li> <li>Is a way of encapsulating a query definition.</li> <li>Persist only until the next query is run.</li> <li>Correct use can lead to improvements in both code quality/maintainability and speed.</li> <li>Can be used to reference the resulting table multiple times in the same statement (eliminate duplication in SQL).</li> <li>Can be a substitute for a view when the general use of a view is not required; that is, you do not have to store the definition in metadata.</li> <li>Will be run when called, not when defined. If the CTE is used multiple times in a query it will be run multiple times (possibly with different results).</li></ul></ul></li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/sql/common-table-expressions.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/sql/window-functions.html" class="prev">
+        Window Functions
+      </a></span> <span class="next"><a href="/sql/views.html">
+        Views
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3246.29ebc253.js" defer></script>
+  </body>
+</html>

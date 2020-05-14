@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Excel VBA - CustomDocumentProperties in practice</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Organizing new invoice numbers">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Excel VBA - CustomDocumentProperties in practice">
+    <meta property="og:description" content="Organizing new invoice numbers">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/excelvba/customdocumentproperties-in-practice.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Excel VBA - CustomDocumentProperties in practice">
+    <meta name="twitter:description" content="Organizing new invoice numbers">
+    <meta name="twitter:url" content="/excelvba/customdocumentproperties-in-practice.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1076.a315e400.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Excel VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/excelvba/" class="sidebar-link">Disclaimer</a></li><li><a href="/excelvba/getting-started-with-excel-vba.html" class="sidebar-link">Getting started with excel-vba</a></li><li><a href="/excelvba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/excelvba/conditional-statements.html" class="sidebar-link">Conditional statements</a></li><li><a href="/excelvba/ranges-and-cells.html" class="sidebar-link">Ranges and Cells</a></li><li><a href="/excelvba/named-ranges.html" class="sidebar-link">Named Ranges</a></li><li><a href="/excelvba/merged-cells-ranges.html" class="sidebar-link">Merged Cells / Ranges</a></li><li><a href="/excelvba/locating-duplicate-values-in-a-range.html" class="sidebar-link">Locating duplicate values in a range</a></li><li><a href="/excelvba/user-defined-functions-udfs.html" class="sidebar-link">User Defined Functions (UDFs)</a></li><li><a href="/excelvba/conditional-formatting-using-vba.html" class="sidebar-link">Conditional formatting using VBA</a></li><li><a href="/excelvba/workbooks.html" class="sidebar-link">Workbooks</a></li><li><a href="/excelvba/working-with-excel-tables-in-vba.html" class="sidebar-link">Working with Excel Tables in VBA</a></li><li><a href="/excelvba/loop-through-all-sheets-in-active-workbook.html" class="sidebar-link">Loop through all Sheets in Active Workbook</a></li><li><a href="/excelvba/use-worksheet-object-and-not-sheet-object.html" class="sidebar-link">Use Worksheet object and not Sheet object</a></li><li><a href="/excelvba/methods-for-finding-the-last-used-row-or-column-in-a-worksheet.html" class="sidebar-link">Methods for Finding the Last Used Row or Column in a Worksheet</a></li><li><a href="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html" class="sidebar-link">Creating a drop-down menu in the Active Worksheet with a Combo Box</a></li><li><a href="/excelvba/file-system-object.html" class="sidebar-link">File System Object</a></li><li><a href="/excelvba/pivot-tables.html" class="sidebar-link">Pivot Tables</a></li><li><a href="/excelvba/binding.html" class="sidebar-link">Binding</a></li><li><a href="/excelvba/autofilter-uses-and-best-practices.html" class="sidebar-link">autofilter ; Uses and best practices</a></li><li><a href="/excelvba/application-object.html" class="sidebar-link">Application object</a></li><li><a href="/excelvba/charts-and-charting.html" class="sidebar-link">Charts and Charting</a></li><li><a href="/excelvba/customdocumentproperties-in-practice.html" class="active sidebar-link">CustomDocumentProperties in practice</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/excelvba/customdocumentproperties-in-practice.html#organizing-new-invoice-numbers" class="sidebar-link">Organizing new invoice numbers</a></li></ul></li><li><a href="/excelvba/powerpoint-integration-through-vba.html" class="sidebar-link">PowerPoint Integration Through VBA</a></li><li><a href="/excelvba/how-to-record-a-macro.html" class="sidebar-link">How to record a Macro</a></li><li><a href="/excelvba/sql-in-excel-vba-best-practices.html" class="sidebar-link">SQL in Excel VBA - Best Practices</a></li><li><a href="/excelvba/excel-vba-optimization.html" class="sidebar-link">Excel-VBA Optimization</a></li><li><a href="/excelvba/vba-security.html" class="sidebar-link">VBA Security</a></li><li><a href="/excelvba/debugging-and-troubleshooting.html" class="sidebar-link">Debugging and Troubleshooting</a></li><li><a href="/excelvba/vba-best-practices.html" class="sidebar-link">VBA Best Practices</a></li><li><a href="/excelvba/excel-vba-tips-and-tricks.html" class="sidebar-link">Excel VBA Tips and Tricks</a></li><li><a href="/excelvba/common-mistakes.html" class="sidebar-link">Common Mistakes</a></li><li><a href="/excelvba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="customdocumentproperties-in-practice"><a href="#customdocumentproperties-in-practice" class="header-anchor">#</a> CustomDocumentProperties in practice</h1> <p>Using CustomDocumentProperties (CDPs) is a good method to store user defined values in a relatively safe way within the same work book, but avoiding to show related cell values simply in an unprotected work sheet *).</p> <p>Note: CDPs represent a separate collection comparable to BuiltInDocumentProperties, but allow to create user defined property names of your own instead of a fixed collection.</p> <p>*) Alternatively, you could enter values also in a hidden or &quot;very hidden&quot; workbook.</p> <h2 id="organizing-new-invoice-numbers"><a href="#organizing-new-invoice-numbers" class="header-anchor">#</a> Organizing new invoice numbers</h2> <p>Incrementing an invoice number and saving its value is a frequent task.
+Using CustomDocumentProperties (CDPs) is a good method to store such numbers in a relatively safe way within the same work book, but avoiding to show related cell values simply in an unprotected work sheet.</p> <p><strong>Additional hint:</strong></p> <p>Alternatively, you could enter values also in a hidden worksheet or even a so called &quot;very hidden&quot; worksheet (see <a href="https://stackoverflow.com/documentation/excel-vba/2240/excel-vba-tips-and-tricks/7333/using-xlveryhidden-sheets#t=201707311517265257827" target="_blank" rel="noopener noreferrer">Using xlVeryHidden Sheets<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>). Of course, it's possible to save data also to external files (e.g. ini file, csv or any other type) or the registry.</p> <p><strong>Example content</strong>:</p> <p>The example below shows</p> <ul><li>a function NextInvoiceNo that sets and returns the next invoice number,</li> <li>a procedure DeleteInvoiceNo, that deletes the invoice CDP completely, as well as</li> <li>a procedure showAllCDPs listing the complete CDPs collection with all names. Not using VBA, you can also list them via the workbook's information: Info | Properties [DropDown:] | Advanced Properties | Custom</li></ul> <p>You can get and set the next invoice number (last no plus one) simply by calling the above mentioned function, returning a string value in order to facilitate adding prefixes. &quot;InvoiceNo&quot; is implicitly used as CDP name in all procedures.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> sNumber <span class="token keyword">As</span> <span class="token keyword">String</span>
+sNumber <span class="token operator">=</span> NextInvoiceNo <span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><p><strong>Example code:</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+
+<span class="token keyword">Sub</span> Test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">Dim</span> sNumber <span class="token keyword">As</span> <span class="token keyword">String</span>
+  sNumber <span class="token operator">=</span> NextInvoiceNo<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  MsgBox <span class="token string">&quot;New Invoice No: &quot;</span> <span class="token operator">&amp;</span> sNumber<span class="token punctuation">,</span> vbInformation<span class="token punctuation">,</span> <span class="token string">&quot;New Invoice Number&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Function</span> NextInvoiceNo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+<span class="token comment">' Purpose: a) Set Custom Document Property (CDP) &quot;InvoiceNo&quot; if not yet existing</span>
+<span class="token comment">'          b) Increment CDP value and return new value as string</span>
+<span class="token comment">' Declarations</span>
+  <span class="token keyword">Dim</span> prop <span class="token keyword">As</span> <span class="token keyword">Object</span>
+  <span class="token keyword">Dim</span> ret  <span class="token keyword">As</span> <span class="token keyword">String</span>
+  <span class="token keyword">Dim</span> wb   <span class="token keyword">As</span> Workbook
+<span class="token comment">' Set workbook and CDPs</span>
+  <span class="token keyword">Set</span> wb <span class="token operator">=</span> ThisWorkbook
+  <span class="token keyword">Set</span> prop <span class="token operator">=</span> wb<span class="token punctuation">.</span>CustomDocumentProperties
+
+  <span class="token comment">' -------------------------------------------------------</span>
+  <span class="token comment">' Generate new CDP &quot;InvoiceNo&quot; if not yet existing</span>
+  <span class="token comment">' -------------------------------------------------------</span>
+    <span class="token keyword">If</span> <span class="token keyword">Not</span> CDPExists<span class="token punctuation">(</span><span class="token string">&quot;InvoiceNo&quot;</span><span class="token punctuation">)</span> <span class="token keyword">Then</span>
+    <span class="token comment">'  set temporary starting value &quot;0&quot;</span>
+       prop<span class="token punctuation">.</span>Add <span class="token string">&quot;InvoiceNo&quot;</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">,</span> msoPropertyTypeString<span class="token punctuation">,</span> <span class="token string">&quot;0&quot;</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+
+  <span class="token comment">' --------------------------------------------------------</span>
+  <span class="token comment">' Increment invoice no and return function value as string</span>
+  <span class="token comment">' --------------------------------------------------------</span>
+       ret <span class="token operator">=</span> Format<span class="token punctuation">(</span>Val<span class="token punctuation">(</span>prop<span class="token punctuation">(</span><span class="token string">&quot;InvoiceNo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">)</span>
+  <span class="token comment">' a) Set CDP &quot;InvoiceNo&quot; = ret</span>
+       prop<span class="token punctuation">(</span><span class="token string">&quot;InvoiceNo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>value <span class="token operator">=</span> ret
+  <span class="token comment">' b) Return function value </span>
+       NextInvoiceNo <span class="token operator">=</span> ret
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Function</span> CDPExists<span class="token punctuation">(</span>sCDPName <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+<span class="token comment">' Purpose: return True if custom document property (CDP) exists</span>
+<span class="token comment">' Method: loop thru CustomDocumentProperties collection and check if name parameter exists</span>
+<span class="token comment">' Site: cf. http://stackoverflow.com/questions/23917977/alternatives-to-public-variables-in-vba/23918236#23918236</span>
+<span class="token comment">' vgl.: https://answers.microsoft.com/en-us/msoffice/forum/msoffice_word-mso_other/using-customdocumentproperties-with-vba/91ef15eb-b089-4c9b-a8a7-1685d073fb9f</span>
+<span class="token comment">' Declarations</span>
+  <span class="token keyword">Dim</span> cdp <span class="token keyword">As</span> <span class="token keyword">Variant</span>      <span class="token comment">' element of CustomDocumentProperties Collection</span>
+  <span class="token keyword">Dim</span> boo <span class="token keyword">As</span> <span class="token keyword">Boolean</span>      <span class="token comment">' boolean value showing element exists</span>
+  <span class="token keyword">For</span> <span class="token keyword">Each</span> cdp <span class="token keyword">In</span> ThisWorkbook<span class="token punctuation">.</span>CustomDocumentProperties
+    <span class="token keyword">If</span> LCase<span class="token punctuation">(</span>cdp<span class="token punctuation">.</span>Name<span class="token punctuation">)</span> <span class="token operator">=</span> LCase<span class="token punctuation">(</span>sCDPName<span class="token punctuation">)</span> <span class="token keyword">Then</span>
+       boo <span class="token operator">=</span> <span class="token boolean">True</span>      <span class="token comment">' heureka</span>
+       <span class="token keyword">Exit</span> <span class="token keyword">For</span>        <span class="token comment">' exit loop</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+  <span class="token keyword">Next</span>
+  CDPExists <span class="token operator">=</span> boo          <span class="token comment">' return value to function</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+
+<span class="token keyword">Sub</span> DeleteInvoiceNo<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">' Declarations</span>
+  <span class="token keyword">Dim</span> wb     <span class="token keyword">As</span> Workbook
+  <span class="token keyword">Dim</span> prop   <span class="token keyword">As</span> <span class="token keyword">Object</span>
+<span class="token comment">' Set workbook and CDPs</span>
+  <span class="token keyword">Set</span> wb <span class="token operator">=</span> ThisWorkbook
+  <span class="token keyword">Set</span> prop <span class="token operator">=</span> wb<span class="token punctuation">.</span>CustomDocumentProperties
+
+<span class="token comment">' ----------------------</span>
+<span class="token comment">' Delete CDP &quot;InvoiceNo&quot;</span>
+<span class="token comment">' ----------------------</span>
+ <span class="token keyword">If</span> CDPExists<span class="token punctuation">(</span><span class="token string">&quot;InvoiceNo&quot;</span><span class="token punctuation">)</span> <span class="token keyword">Then</span>
+    prop<span class="token punctuation">(</span><span class="token string">&quot;InvoiceNo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Delete
+ <span class="token keyword">End</span> <span class="token keyword">If</span>
+
+</code></pre></div><p>End Sub</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> showAllCDPs<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">' Purpose: Show all CustomDocumentProperties (CDP) and values (if set)</span>
+<span class="token comment">' Declarations</span>
+  <span class="token keyword">Dim</span> wb      <span class="token keyword">As</span> Workbook
+  <span class="token keyword">Dim</span> cdp     <span class="token keyword">As</span> <span class="token keyword">Object</span>
+
+  <span class="token keyword">Dim</span> i       <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+  <span class="token keyword">Dim</span> maxi   <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+  <span class="token keyword">Dim</span> s       <span class="token keyword">As</span> <span class="token keyword">String</span>
+<span class="token comment">' Set workbook and CDPs</span>
+  <span class="token keyword">Set</span> wb <span class="token operator">=</span> ThisWorkbook
+  <span class="token keyword">Set</span> cdp <span class="token operator">=</span> wb<span class="token punctuation">.</span>CustomDocumentProperties
+<span class="token comment">' Loop thru CDP getting name and value</span>
+  maxi <span class="token operator">=</span> cdp<span class="token punctuation">.</span>Count
+  <span class="token keyword">For</span> i <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">To</span> maxi
+    <span class="token keyword">On</span> <span class="token keyword">Error</span> <span class="token keyword">Resume</span> <span class="token keyword">Next</span>    <span class="token comment">' necessary in case of unset value</span>
+    s <span class="token operator">=</span> s <span class="token operator">&amp;</span> Chr<span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token number">96</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token string">&quot;) &quot;</span> <span class="token operator">&amp;</span> <span class="token operator">_</span>
+            cdp<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span>Name <span class="token operator">&amp;</span> <span class="token string">&quot;=&quot;</span> <span class="token operator">&amp;</span> cdp<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span>value <span class="token operator">&amp;</span> vbCr
+  <span class="token keyword">Next</span> i
+<span class="token comment">' Show result string</span>
+  Debug<span class="token punctuation">.</span>Print s
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/excelvba/customdocumentproperties-in-practice.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/excelvba/charts-and-charting.html" class="prev">
+        Charts and Charting
+      </a></span> <span class="next"><a href="/excelvba/powerpoint-integration-through-vba.html">
+        PowerPoint Integration Through VBA
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1076.a315e400.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C# | Exception Handling</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Creating Custom Exceptions, Finally block, Best Practices, Exception Anti-patterns, Basic Exception Handling, Handling specific exception types, Aggregate exceptions / multiple exceptions from one method, Throwing an exception, Unhandled and Thread Exception, Using the exception object, Implementing IErrorHandler for WCF Services, Nesting of Exceptions & try catch blocks.">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C# | Exception Handling">
+    <meta property="og:description" content="Creating Custom Exceptions, Finally block, Best Practices, Exception Anti-patterns, Basic Exception Handling, Handling specific exception types, Aggregate exceptions / multiple exceptions from one method, Throwing an exception, Unhandled and Thread Exception, Using the exception object, Implementing IErrorHandler for WCF Services, Nesting of Exceptions & try catch blocks.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/csharp/exception-handling.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C# | Exception Handling">
+    <meta name="twitter:description" content="Creating Custom Exceptions, Finally block, Best Practices, Exception Anti-patterns, Basic Exception Handling, Handling specific exception types, Aggregate exceptions / multiple exceptions from one method, Throwing an exception, Unhandled and Thread Exception, Using the exception object, Implementing IErrorHandler for WCF Services, Nesting of Exceptions & try catch blocks.">
+    <meta name="twitter:url" content="/csharp/exception-handling.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/809.9fc63e2e.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C#</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/csharp/" class="sidebar-link">Disclaimer</a></li><li><a href="/csharp/getting-started-with-c-language.html" class="sidebar-link">Getting started with C# Language</a></li><li><a href="/csharp/literals.html" class="sidebar-link">Literals</a></li><li><a href="/csharp/operators.html" class="sidebar-link">Operators</a></li><li><a href="/csharp/conditional-statements.html" class="sidebar-link">Conditional Statements</a></li><li><a href="/csharp/equality-operator.html" class="sidebar-link">Equality Operator</a></li><li><a href="/csharp/equals-and-gethashcode.html" class="sidebar-link">Equals and GetHashCode</a></li><li><a href="/csharp/null-coalescing-operator.html" class="sidebar-link">Null-Coalescing Operator</a></li><li><a href="/csharp/null-conditional-operators.html" class="sidebar-link">Null-conditional Operators</a></li><li><a href="/csharp/nameof-operator.html" class="sidebar-link">nameof Operator</a></li><li><a href="/csharp/verbatim-strings.html" class="sidebar-link">Verbatim Strings</a></li><li><a href="/csharp/common-string-operations.html" class="sidebar-link">Common String Operations</a></li><li><a href="/csharp/string-format.html" class="sidebar-link">String.Format</a></li><li><a href="/csharp/string-concatenate.html" class="sidebar-link">String Concatenate</a></li><li><a href="/csharp/string-manipulation.html" class="sidebar-link">String Manipulation</a></li><li><a href="/csharp/string-interpolation.html" class="sidebar-link">String Interpolation</a></li><li><a href="/csharp/string-escape-sequences.html" class="sidebar-link">String Escape Sequences</a></li><li><a href="/csharp/stringbuilder.html" class="sidebar-link">StringBuilder</a></li><li><a href="/csharp/regex-parsing.html" class="sidebar-link">Regex Parsing</a></li><li><a href="/csharp/datetime-methods.html" class="sidebar-link">DateTime Methods</a></li><li><a href="/csharp/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/csharp/o-n-algorithm-for-circular-rotation-of-an-array.html" class="sidebar-link">O(n) Algorithm for circular rotation of an array</a></li><li><a href="/csharp/enum.html" class="sidebar-link">Enum</a></li><li><a href="/csharp/tuples.html" class="sidebar-link">Tuples</a></li><li><a href="/csharp/guid.html" class="sidebar-link">Guid</a></li><li><a href="/csharp/biginteger.html" class="sidebar-link">BigInteger</a></li><li><a href="/csharp/collection-initializers.html" class="sidebar-link">Collection Initializers</a></li><li><a href="/csharp/an-overview-of-c-collections.html" class="sidebar-link">An overview of c# collections</a></li><li><a href="/csharp/looping.html" class="sidebar-link">Looping</a></li><li><a href="/csharp/iterators.html" class="sidebar-link">Iterators</a></li><li><a href="/csharp/ienumerable.html" class="sidebar-link">IEnumerable</a></li><li><a href="/csharp/value-type-vs-reference-type.html" class="sidebar-link">Value type vs Reference type</a></li><li><a href="/csharp/built-in-types.html" class="sidebar-link">Built-in Types</a></li><li><a href="/csharp/aliases-of-built-in-types.html" class="sidebar-link">Aliases of built-in types</a></li><li><a href="/csharp/anonymous-types.html" class="sidebar-link">Anonymous types</a></li><li><a href="/csharp/dynamic-type.html" class="sidebar-link">Dynamic type</a></li><li><a href="/csharp/type-conversion.html" class="sidebar-link">Type Conversion</a></li><li><a href="/csharp/casting.html" class="sidebar-link">Casting</a></li><li><a href="/csharp/nullable-types.html" class="sidebar-link">Nullable types</a></li><li><a href="/csharp/constructors-and-finalizers.html" class="sidebar-link">Constructors and Finalizers</a></li><li><a href="/csharp/access-modifiers.html" class="sidebar-link">Access Modifiers</a></li><li><a href="/csharp/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/csharp/static-classes.html" class="sidebar-link">Static Classes</a></li><li><a href="/csharp/singleton-implementation.html" class="sidebar-link">Singleton Implementation</a></li><li><a href="/csharp/dependency-injection.html" class="sidebar-link">Dependency Injection</a></li><li><a href="/csharp/partial-class-and-methods.html" class="sidebar-link">Partial class and methods</a></li><li><a href="/csharp/object-initializers.html" class="sidebar-link">Object initializers</a></li><li><a href="/csharp/methods.html" class="sidebar-link">Methods</a></li><li><a href="/csharp/extension-methods.html" class="sidebar-link">Extension Methods</a></li><li><a href="/csharp/named-arguments.html" class="sidebar-link">Named Arguments</a></li><li><a href="/csharp/named-and-optional-arguments.html" class="sidebar-link">Named and Optional Arguments</a></li><li><a href="/csharp/data-annotation.html" class="sidebar-link">Data Annotation</a></li><li><a href="/csharp/keywords.html" class="sidebar-link">Keywords</a></li><li><a href="/csharp/object-oriented-programming-in-c.html" class="sidebar-link">Object Oriented Programming In C#</a></li><li><a href="/csharp/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/csharp/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/csharp/xml-documentation-comments.html" class="sidebar-link">XML Documentation Comments</a></li><li><a href="/csharp/comments-and-regions.html" class="sidebar-link">Comments and regions</a></li><li><a href="/csharp/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/csharp/generics.html" class="sidebar-link">Generics</a></li><li><a href="/csharp/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/csharp/using-directive.html" class="sidebar-link">Using Directive</a></li><li><a href="/csharp/idisposable-interface.html" class="sidebar-link">IDisposable interface</a></li><li><a href="/csharp/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/csharp/iqueryable-interface.html" class="sidebar-link">IQueryable interface</a></li><li><a href="/csharp/linq-to-objects.html" class="sidebar-link">Linq to Objects</a></li><li><a href="/csharp/linq-queries.html" class="sidebar-link">LINQ Queries</a></li><li><a href="/csharp/linq-to-xml.html" class="sidebar-link">LINQ to XML</a></li><li><a href="/csharp/parallel-linq-plinq.html" class="sidebar-link">Parallel LINQ (PLINQ)</a></li><li><a href="/csharp/xmldocument-and-the-system-xml-namespace.html" class="sidebar-link">XmlDocument and the System.Xml namespace</a></li><li><a href="/csharp/xdocument-and-the-system-xml-linq-namespace.html" class="sidebar-link">XDocument and the System.Xml.Linq namespace</a></li><li><a href="/csharp/c-7-0-features.html" class="sidebar-link">C# 7.0 Features</a></li><li><a href="/csharp/c-6-0-features.html" class="sidebar-link">C# 6.0 Features</a></li><li><a href="/csharp/c-5-0-features.html" class="sidebar-link">C# 5.0 Features</a></li><li><a href="/csharp/c-4-0-features.html" class="sidebar-link">C# 4.0 Features</a></li><li><a href="/csharp/c-3-0-features.html" class="sidebar-link">C# 3.0 Features</a></li><li><a href="/csharp/exception-handling.html" class="active sidebar-link">Exception Handling</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#creating-custom-exceptions" class="sidebar-link">Creating Custom Exceptions</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#finally-block" class="sidebar-link">Finally block</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#best-practices" class="sidebar-link">Best Practices</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#exception-anti-patterns" class="sidebar-link">Exception Anti-patterns</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#basic-exception-handling" class="sidebar-link">Basic Exception Handling</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#handling-specific-exception-types" class="sidebar-link">Handling specific exception types</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#aggregate-exceptions-multiple-exceptions-from-one-method" class="sidebar-link">Aggregate exceptions / multiple exceptions from one method</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#throwing-an-exception" class="sidebar-link">Throwing an exception</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#unhandled-and-thread-exception" class="sidebar-link">Unhandled and Thread Exception</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#using-the-exception-object" class="sidebar-link">Using the exception object</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#implementing-ierrorhandler-for-wcf-services" class="sidebar-link">Implementing IErrorHandler for WCF Services</a></li><li class="sidebar-sub-header"><a href="/csharp/exception-handling.html#nesting-of-exceptions-try-catch-blocks" class="sidebar-link">Nesting of Exceptions &amp; try catch blocks.</a></li></ul></li><li><a href="/csharp/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/csharp/handling-formatexception-when-converting-string-to-other-types.html" class="sidebar-link">Handling FormatException when converting string to other types</a></li><li><a href="/csharp/read-understand-stacktraces.html" class="sidebar-link">Read &amp; Understand Stacktraces</a></li><li><a href="/csharp/diagnostics.html" class="sidebar-link">Diagnostics</a></li><li><a href="/csharp/overflow.html" class="sidebar-link">Overflow</a></li><li><a href="/csharp/getting-started-json-with-c.html" class="sidebar-link">Getting Started: Json with C#</a></li><li><a href="/csharp/using-json-net.html" class="sidebar-link">Using json.net</a></li><li><a href="/csharp/lambda-expressions.html" class="sidebar-link">Lambda Expressions</a></li><li><a href="/csharp/generic-lambda-query-builder.html" class="sidebar-link">Generic Lambda Query Builder</a></li><li><a href="/csharp/properties.html" class="sidebar-link">Properties</a></li><li><a href="/csharp/initializing-properties.html" class="sidebar-link">Initializing Properties</a></li><li><a href="/csharp/inotifypropertychanged-interface.html" class="sidebar-link">INotifyPropertyChanged interface</a></li><li><a href="/csharp/events.html" class="sidebar-link">Events</a></li><li><a href="/csharp/expression-trees.html" class="sidebar-link">Expression Trees</a></li><li><a href="/csharp/overload-resolution.html" class="sidebar-link">Overload Resolution</a></li><li><a href="/csharp/bindinglist-t.html" class="sidebar-link">BindingList</a></li><li><a href="/csharp/preprocessor-directives.html" class="sidebar-link">Preprocessor directives</a></li><li><a href="/csharp/structs.html" class="sidebar-link">Structs</a></li><li><a href="/csharp/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/csharp/delegates.html" class="sidebar-link">Delegates</a></li><li><a href="/csharp/file-and-stream-i-o.html" class="sidebar-link">File and Stream I/O</a></li><li><a href="/csharp/networking.html" class="sidebar-link">Networking</a></li><li><a href="/csharp/performing-http-requests.html" class="sidebar-link">Performing HTTP requests</a></li><li><a href="/csharp/reading-and-writing-zip-files.html" class="sidebar-link">Reading and writing .zip files</a></li><li><a href="/csharp/filesystemwatcher.html" class="sidebar-link">FileSystemWatcher</a></li><li><a href="/csharp/access-network-shared-folder-with-username-and-password.html" class="sidebar-link">Access network shared folder with username and password</a></li><li><a href="/csharp/asynchronous-socket.html" class="sidebar-link">Asynchronous Socket</a></li><li><a href="/csharp/action-filters.html" class="sidebar-link">Action Filters</a></li><li><a href="/csharp/polymorphism.html" class="sidebar-link">Polymorphism</a></li><li><a href="/csharp/immutability.html" class="sidebar-link">Immutability</a></li><li><a href="/csharp/indexer.html" class="sidebar-link">Indexer</a></li><li><a href="/csharp/checked-and-unchecked.html" class="sidebar-link">Checked and Unchecked</a></li><li><a href="/csharp/stream.html" class="sidebar-link">Stream</a></li><li><a href="/csharp/timers.html" class="sidebar-link">Timers</a></li><li><a href="/csharp/stopwatches.html" class="sidebar-link">Stopwatches</a></li><li><a href="/csharp/threading.html" class="sidebar-link">Threading</a></li><li><a href="/csharp/async-await-backgroundworker-task-and-thread-examples.html" class="sidebar-link">Async/await, Backgroundworker, Task and Thread Examples</a></li><li><a href="/csharp/async-await.html" class="sidebar-link">Async-Await</a></li><li><a href="/csharp/synchronization-context-in-async-await.html" class="sidebar-link">Synchronization Context in Async-Await</a></li><li><a href="/csharp/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/csharp/task-parallel-library.html" class="sidebar-link">Task Parallel Library</a></li><li><a href="/csharp/making-a-variable-thread-safe.html" class="sidebar-link">Making a variable thread safe</a></li><li><a href="/csharp/lock-statement.html" class="sidebar-link">Lock Statement</a></li><li><a href="/csharp/yield-keyword.html" class="sidebar-link">Yield Keyword</a></li><li><a href="/csharp/task-parallel-library-tpl-dataflow-constructs.html" class="sidebar-link">Task Parallel Library (TPL) Dataflow Constructs</a></li><li><a href="/csharp/functional-programming.html" class="sidebar-link">Functional Programming</a></li><li><a href="/csharp/func-delegates.html" class="sidebar-link">Func delegates</a></li><li><a href="/csharp/function-with-multiple-return-values.html" class="sidebar-link">Function with multiple return values</a></li><li><a href="/csharp/binary-serialization.html" class="sidebar-link">Binary Serialization</a></li><li><a href="/csharp/icloneable.html" class="sidebar-link">ICloneable</a></li><li><a href="/csharp/icomparable.html" class="sidebar-link">IComparable</a></li><li><a href="/csharp/accessing-databases.html" class="sidebar-link">Accessing Databases</a></li><li><a href="/csharp/using-sqlite-in-c.html" class="sidebar-link">Using SQLite in C#</a></li><li><a href="/csharp/caching.html" class="sidebar-link">Caching</a></li><li><a href="/csharp/code-contracts.html" class="sidebar-link">Code Contracts</a></li><li><a href="/csharp/code-contracts-and-assertions.html" class="sidebar-link">Code Contracts and Assertions</a></li><li><a href="/csharp/structural-design-patterns.html" class="sidebar-link">Structural Design Patterns</a></li><li><a href="/csharp/creational-design-patterns.html" class="sidebar-link">Creational Design Patterns</a></li><li><a href="/csharp/implementing-decorator-design-pattern.html" class="sidebar-link">Implementing Decorator Design Pattern</a></li><li><a href="/csharp/implementing-flyweight-design-pattern.html" class="sidebar-link">Implementing Flyweight Design Pattern</a></li><li><a href="/csharp/system-management-automation.html" class="sidebar-link">System.Management.Automation</a></li><li><a href="/csharp/system-directoryservices-protocols-ldapconnection.html" class="sidebar-link">System.DirectoryServices.Protocols.LdapConnection</a></li><li><a href="/csharp/c-authentication-handler.html" class="sidebar-link">C# Authentication handler</a></li><li><a href="/csharp/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/csharp/pointers-unsafe-code.html" class="sidebar-link">Pointers &amp; Unsafe Code</a></li><li><a href="/csharp/how-to-use-c-structs-to-create-a-union-type-similar-to-c-unions.html" class="sidebar-link">How to use C# Structs to create a Union type  (Similar to C Unions)</a></li><li><a href="/csharp/reactive-extensions-rx.html" class="sidebar-link">Reactive Extensions (Rx)</a></li><li><a href="/csharp/assemblyinfo-cs-examples.html" class="sidebar-link">AssemblyInfo.cs Examples</a></li><li><a href="/csharp/creating-a-console-application-using-a-plain-text-editor-and-the-c-compiler-csc-exe.html" class="sidebar-link">Creating a Console Application using a Plain-Text Editor and the C# Compiler (csc.exe)</a></li><li><a href="/csharp/clscompliantattribute.html" class="sidebar-link">CLSCompliantAttribute</a></li><li><a href="/csharp/observablecollection-t.html" class="sidebar-link">ObservableCollection</a></li><li><a href="/csharp/hash-functions.html" class="sidebar-link">Hash Functions</a></li><li><a href="/csharp/generating-random-numbers-in-c.html" class="sidebar-link">Generating Random Numbers in C#</a></li><li><a href="/csharp/cryptography-system-security-cryptography.html" class="sidebar-link">Cryptography (System.Security.Cryptography)</a></li><li><a href="/csharp/asp-net-identity.html" class="sidebar-link">ASP.NET Identity</a></li><li><a href="/csharp/unsafe-code-in-net.html" class="sidebar-link">Unsafe Code in .NET</a></li><li><a href="/csharp/c-script.html" class="sidebar-link">C# Script</a></li><li><a href="/csharp/runtime-compile.html" class="sidebar-link">Runtime Compile</a></li><li><a href="/csharp/interoperability.html" class="sidebar-link">Interoperability</a></li><li><a href="/csharp/net-compiler-platform-roslyn.html" class="sidebar-link">.NET Compiler Platform (Roslyn)</a></li><li><a href="/csharp/ilgenerator.html" class="sidebar-link">ILGenerator</a></li><li><a href="/csharp/t4-code-generation.html" class="sidebar-link">T4 Code Generation</a></li><li><a href="/csharp/creating-own-messagebox-in-windows-form-application.html" class="sidebar-link">Creating Own MessageBox in Windows Form Application</a></li><li><a href="/csharp/including-font-resources.html" class="sidebar-link">Including Font Resources</a></li><li><a href="/csharp/import-google-contacts.html" class="sidebar-link">Import Google Contacts</a></li><li><a href="/csharp/garbage-collector-in-net.html" class="sidebar-link">Garbage Collector in .Net</a></li><li><a href="/csharp/microsoft-exchange-webservices.html" class="sidebar-link">Microsoft.Exchange.WebServices</a></li><li><a href="/csharp/windows-communication-foundation.html" class="sidebar-link">Windows Communication Foundation</a></li><li><a href="/csharp/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="exception-handling"><a href="#exception-handling" class="header-anchor">#</a> Exception Handling</h1> <h2 id="creating-custom-exceptions"><a href="#creating-custom-exceptions" class="header-anchor">#</a> Creating Custom Exceptions</h2> <p>You are allowed to implement custom exceptions that can be thrown just like any other exception. This makes sense when you want to make your exceptions distinguishable from other errors during runtime.</p> <p>In this example we will create a custom exception for clear handling of problems the application may have while parsing a complex input.</p> <h3 id="creating-custom-exception-class"><a href="#creating-custom-exception-class" class="header-anchor">#</a> Creating Custom Exception Class</h3> <p>To create a custom exception create a sub-class of <code>Exception</code>:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ParserException</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Exception</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token function">ParserException</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> 
+      <span class="token keyword">base</span><span class="token punctuation">(</span><span class="token string">&quot;The parsing went wrong and we have no additional information.&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Custom exception become very useful when you want to provide additional information to the catcher:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ParserException</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Exception</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token function">ParserException</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> fileName<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> lineNumber<span class="token punctuation">)</span> <span class="token punctuation">:</span> 
+      <span class="token keyword">base</span><span class="token punctuation">(</span><span class="token interpolation-string"><span class="token string">$&quot;Parser error in </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">fileName</span><span class="token punctuation">}</span></span><span class="token string">:</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">lineNumber</span><span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span> 
+    <span class="token punctuation">{</span>
+      FileName <span class="token operator">=</span> fileName<span class="token punctuation">;</span>
+      LineNumber <span class="token operator">=</span> lineNumber<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> FileName <span class="token punctuation">{</span><span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">private</span> <span class="token keyword">set</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> LineNumber <span class="token punctuation">{</span><span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">private</span> <span class="token keyword">set</span><span class="token punctuation">;</span><span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Now, when you <code>catch(ParserException x)</code> you will have additional semantics to  fine-tune exception handling.</p> <p>Custom classes can implement the following features to support additional scenarios.</p> <h3 id="re-throwing"><a href="#re-throwing" class="header-anchor">#</a> re-throwing</h3> <p>During the parsing process, the original exception is still of interest. In this example it is a <code>FormatException</code> because the code attempts to parse a piece of string, which is expected to be a number. In this case the custom exception should support the inclusion of the '<strong>InnerException</strong>':</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token comment">//new constructor:</span>
+<span class="token function">ParserException</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> msg<span class="token punctuation">,</span> <span class="token class-name">Exception</span> inner<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span>msg<span class="token punctuation">,</span> inner<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="serialization"><a href="#serialization" class="header-anchor">#</a> serialization</h3> <p>In some cases your exceptions may have to cross AppDomain boundaries. This is the case if your parser is running in its own AppDomain to support hot reloading of new parser configurations. In Visual Studio, you can use <code>Exception</code> template to generate code like this.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Serializable</span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ParserException</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Exception</span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// Constructor without arguments allows throwing your exception without</span>
+    <span class="token comment">// providing any information, including error message. Should be included</span>
+    <span class="token comment">// if your exception is meaningful without any additional details. Should</span>
+    <span class="token comment">// set message by calling base constructor (default message is not helpful).</span>
+    <span class="token keyword">public</span> <span class="token function">ParserException</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span><span class="token string">&quot;Parser failure.&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token comment">// Constructor with message argument allows overriding default error message.</span>
+    <span class="token comment">// Should be included if users can provide more helpful messages than</span>
+    <span class="token comment">// generic automatically generated messages.</span>
+    <span class="token keyword">public</span> <span class="token function">ParserException</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> message<span class="token punctuation">)</span> 
+        <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span>message<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token comment">// Constructor for serialization support. If your exception contains custom</span>
+    <span class="token comment">// properties, read their values here.</span>
+    <span class="token keyword">protected</span> <span class="token function">ParserException</span><span class="token punctuation">(</span><span class="token class-name">SerializationInfo</span> info<span class="token punctuation">,</span> <span class="token class-name">StreamingContext</span> context<span class="token punctuation">)</span> 
+        <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span>info<span class="token punctuation">,</span> context<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="using-the-parserexception"><a href="#using-the-parserexception" class="header-anchor">#</a> Using the ParserException</h3> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    Process<span class="token punctuation">.</span><span class="token function">StartRun</span><span class="token punctuation">(</span>fileName<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ParserException</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token interpolation-string"><span class="token string">$&quot;</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">ex<span class="token punctuation">.</span>Message</span><span class="token punctuation">}</span></span><span class="token string"> in $</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">ex<span class="token punctuation">.</span>FileName</span><span class="token punctuation">}</span></span><span class="token string">:$</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">ex<span class="token punctuation">.</span>LineNumber</span><span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">PostProcessException</span> x<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token range operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You may also use custom exceptions for catching and wrapping exceptions. This way many different errors can be converted into a single error type that is more useful to the application:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">int</span></span> foo <span class="token operator">=</span> <span class="token keyword">int</span><span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span>token<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">FormatException</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//Assuming you added this constructor</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ParserException</span><span class="token punctuation">(</span>
+      <span class="token interpolation-string"><span class="token string">$&quot;Failed to read </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">token</span><span class="token punctuation">}</span></span><span class="token string"> as number.&quot;</span></span><span class="token punctuation">,</span> 
+      FileName<span class="token punctuation">,</span> 
+      LineNumber<span class="token punctuation">,</span> 
+      ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>When handling exceptions by raising your own custom exceptions, you should generally include a reference the original exception in the <code>InnerException</code> property, as shown above.</p> <h3 id="security-concerns"><a href="#security-concerns" class="header-anchor">#</a> Security Concerns</h3> <p>If exposing the reason for the exception might compromise security by allowing users to see the inner workings of your application it can be a bad idea to wrap the inner exception. This might apply if you are creating a class library that will be used by others.</p> <p>Here is how you could raise a custom exception without wrapping the inner exception:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">SomeStandardException</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">MyCustomException</span><span class="token punctuation">(</span>someMessage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="conclusion"><a href="#conclusion" class="header-anchor">#</a> Conclusion</h3> <p>When raising a custom exception (either with wrapping or with an unwrapped new exception), you should raise an exception that is meaningful to the caller. For instance, a user of a class library may not know much about how that library does its internal work. The exceptions that are thrown by the dependencies of the class library are not meaningful. Rather, the user wants an exception that is relevant to how the class library is using those dependencies in an erroneous way.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+  <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">StorageServiceException</span><span class="token punctuation">(</span><span class="token string">@&quot;The Storage Service encountered a problem saving
+your data. Please consult the inner exception for technical details. 
+If you are not able to resolve the problem, please call 555-555-1234 for technical       
+assistance.&quot;</span><span class="token punctuation">,</span> ex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="finally-block"><a href="#finally-block" class="header-anchor">#</a> Finally block</h2> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* code that could throw an exception */</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* handle the exception */</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">finally</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* Code that will be executed, regardless if an exception was thrown / caught or not */</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The <code>try / catch / finally</code> block can be very handy when reading from files.<br>
+For example:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token class-name">FileStream</span> f <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+<span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    f <span class="token operator">=</span> File<span class="token punctuation">.</span><span class="token function">OpenRead</span><span class="token punctuation">(</span><span class="token string">&quot;file.txt&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/* process the file here */</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">finally</span>
+<span class="token punctuation">{</span>
+    f<span class="token punctuation">?.</span><span class="token function">Close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// f may be null, so use the null conditional operator.</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>A try block must be followed by either a <code>catch</code> or a <code>finally</code> block. However, since there is no catch block, the execution will cause termination. Before termination, the statements inside the finally block will be executed.</p> <p>In the file-reading we could have used a <code>using</code> block as <code>FileStream</code> (what <code>OpenRead</code> returns) implements <code>IDisposable</code>.</p> <p>Even if there is a <code>return</code> statement in <code>try</code> block, the <code>finally</code> block will usually execute; there are a few cases where it will not:</p> <ul><li>When a <a href="https://msdn.microsoft.com/en-us/library/system.stackoverflowexception(v=vs.110).aspx" target="_blank" rel="noopener noreferrer">StackOverflow occurs<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</li> <li><a href="https://msdn.microsoft.com/en-us/library/system.environment.failfast.aspx" target="_blank" rel="noopener noreferrer"><code>Environment.FailFast</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>The application process is killed, usually by an external source.</li></ul> <h2 id="best-practices"><a href="#best-practices" class="header-anchor">#</a> Best Practices</h2> <h3 id="cheatsheet"><a href="#cheatsheet" class="header-anchor">#</a> Cheatsheet</h3> <table><thead><tr><th>DO</th> <th>DON'T</th></tr></thead> <tbody><tr><td>Control flow with control statements</td> <td>Control flow with exceptions</td></tr> <tr><td>Keep track of ignored (absorbed) exception by logging</td> <td>Ignore exception</td></tr> <tr><td>Repeat exception by using <code>throw</code></td> <td>Re-throw exception - <code>throw new ArgumentNullException()</code> or <code>throw ex</code></td></tr> <tr><td>Throw predefined system exceptions</td> <td>Throw custom exceptions similar to predefined system exceptions</td></tr> <tr><td>Throw custom/predefined exception if it is crucial to application logic</td> <td>Throw custom/predefined exceptions to state a warning in flow</td></tr> <tr><td>Catch exceptions that you want to handle</td> <td>Catch every exception</td></tr></tbody></table> <h3 id="do-not-manage-business-logic-with-exceptions"><a href="#do-not-manage-business-logic-with-exceptions" class="header-anchor">#</a> DO NOT manage business logic with exceptions.</h3> <p>Flow control should NOT be done by exceptions. Use conditional statements instead. If a control can be done with <code>if-else</code> statement clearly, don't use exceptions because it reduces readability and performance.</p> <p>Consider the following snippet by Mr. Bad Practices:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token comment">// This is a snippet example for DO NOT</span>
+<span class="token class-name"><span class="token keyword">object</span></span> myObject<span class="token punctuation">;</span>
+<span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">DoingSomethingWithMyObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>myObject<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>When execution reaches <code>Console.WriteLine(myObject.ToString());</code> application will throw an NullReferenceException. Mr. Bad Practices realized that <code>myObject</code> is null and edited his snippet to catch &amp; handle <code>NullReferenceException</code>:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token comment">// This is a snippet example for DO NOT</span>
+<span class="token class-name"><span class="token keyword">object</span></span> myObject<span class="token punctuation">;</span>
+<span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">DoingSomethingWithMyObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>myObject<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">NullReferenceException</span> ex<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Hmmm, if I create a new instance of object and assign it to myObject:</span>
+        myObject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name"><span class="token keyword">object</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Nice, now I can continue to work with myObject</span>
+        <span class="token function">DoSomethingElseWithMyObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Since previous snippet only covers logic of exception, what should I do if <code>myObject</code> is not null at this point? Where should I cover this part of logic? Right after <code>Console.WriteLine(myObject.ToString());</code>? How about after the <code>try...catch</code> block?</p> <p>How about Mr. Best Practices? How would he handle this?</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token comment">// This is a snippet example for DO</span>
+<span class="token class-name"><span class="token keyword">object</span></span> myObject<span class="token punctuation">;</span>
+<span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">DoingSomethingWithMyObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>myObject <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        myObject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name"><span class="token keyword">object</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">// When execution reaches this point, we are sure that myObject is not null</span>
+    <span class="token function">DoSomethingElseWithMyObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Mr. Best Practices achieved same logic with fewer code and a clear &amp; understandable logic.</p> <h3 id="do-not-re-throw-exceptions"><a href="#do-not-re-throw-exceptions" class="header-anchor">#</a> DO NOT re-throw Exceptions</h3> <p>Re-throwing exceptions is expensive. It negatively impact performance. For code that routinely fails, you can use design patterns to minimize performance issues. <a href="https://msdn.microsoft.com/en-us/library/ms229009(v=vs.100).aspx" target="_blank" rel="noopener noreferrer">This topic<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> describes two design patterns that are useful when exceptions might significantly impact performance.</p> <h3 id="do-not-absorb-exceptions-with-no-logging"><a href="#do-not-absorb-exceptions-with-no-logging" class="header-anchor">#</a> DO NOT absorb exceptions with no logging</h3> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//Some code that might throw an exception</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//empty catch block, bad practice</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Never swallow exceptions. Ignoring exceptions will save that moment but will create a chaos for maintainability later. When logging exceptions, you should always log the exception instance so that the complete stack trace is logged and not the exception message only.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//Some code that might throw an exception</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">NullException</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    LogManager<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span>ex<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="do-not-catch-exceptions-that-you-cannot-handle"><a href="#do-not-catch-exceptions-that-you-cannot-handle" class="header-anchor">#</a> Do not catch exceptions that you cannot handle</h3> <p>Many resources, such as <a href="http://c2.com/cgi/wiki?DontCatchExceptions" target="_blank" rel="noopener noreferrer">this one<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, strongly urge you to consider why you are catching an exception in the place that you are catching it. You should only catch an exception if you can handle it at that location. If you can do something there to help mitigate the problem, such as trying an alternative algorithm, connecting to a backup database, trying another filename, waiting 30 seconds and trying again, or notifying an administrator, you can catch the error and do that. If there is nothing that you can plausibly and reasonably do, just &quot;let it go&quot; and let the exception be handled at a higher level. If the exception is sufficiently catastrophic and there is no reasonable option other than for the entire program to crash because of the severity of the problem, then let it crash.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//Try to save the data to the main database.</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">SqlException</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//Try to save the data to the alternative database.</span>
+<span class="token punctuation">}</span>
+<span class="token comment">//If anything other than a SqlException is thrown, there is nothing we can do here. Let the exception bubble up to a level where it can be handled.</span>
+
+</code></pre></div><h2 id="exception-anti-patterns"><a href="#exception-anti-patterns" class="header-anchor">#</a> Exception Anti-patterns</h2> <h3 id="swallowing-exceptions"><a href="#swallowing-exceptions" class="header-anchor">#</a> Swallowing Exceptions</h3> <p>One should always re-throw exception in the following way:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token range operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token range operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword">throw</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Re-throwing an exception like below will obfuscate the original exception and will lose the original stack trace. One should never do this! The stack trace prior to the catch and rethrow will be lost.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token range operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token range operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword">throw</span> ex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="baseball-exception-handling"><a href="#baseball-exception-handling" class="header-anchor">#</a> Baseball Exception Handling</h3> <p>One should not use exceptions as a <a href="http://c2.com/cgi/wiki?DontUseExceptionsForFlowControl" target="_blank" rel="noopener noreferrer">substitute for normal flow control constructs<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> like if-then statements and while loops. This anti-pattern is sometimes called <a href="http://www.stackprinter.com/questions/new-programming-jargon-you-coined.html" target="_blank" rel="noopener noreferrer">Baseball Exception Handling<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <p>Here is an example of the anti-pattern:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>AccountManager<span class="token punctuation">.</span><span class="token function">HasMoreAccounts</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        account <span class="token operator">=</span> AccountManager<span class="token punctuation">.</span><span class="token function">GetNextAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>account<span class="token punctuation">.</span>Name <span class="token operator">==</span> userName<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">//We found it</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">AccountFoundException</span><span class="token punctuation">(</span>account<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">AccountFoundException</span> found<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token string">&quot;Here are your account details: &quot;</span> <span class="token operator">+</span> found<span class="token punctuation">.</span>Account<span class="token punctuation">.</span>Details<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Here is a better way to do it:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token class-name">Account</span> found <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span>AccountManager<span class="token punctuation">.</span><span class="token function">HasMoreAccounts</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>found<span class="token operator">==</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    account <span class="token operator">=</span> AccountManager<span class="token punctuation">.</span><span class="token function">GetNextAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>account<span class="token punctuation">.</span>Name <span class="token operator">==</span> userName<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//We found it</span>
+        found <span class="token operator">=</span> account<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token string">&quot;Here are your account details: &quot;</span> <span class="token operator">+</span> found<span class="token punctuation">.</span>Details<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="catch-exception"><a href="#catch-exception" class="header-anchor">#</a> catch (Exception)</h3> <p>There are almost no (some say none!) reasons to catch the generic exception type in your code. You should catch only the exception types you expect to happen, because you hide bugs in your code otherwise.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span> 
+<span class="token punctuation">{</span>
+     <span class="token class-name"><span class="token keyword">var</span></span> f <span class="token operator">=</span> File<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span>myfile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment">// do something</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> x<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     <span class="token comment">// Assume file not found</span>
+     Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token string">&quot;Could not open file&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment">// but maybe the error was a NullReferenceException because of a bug in the file handling code?</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Better do:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span> 
+<span class="token punctuation">{</span>
+     <span class="token class-name"><span class="token keyword">var</span></span> f <span class="token operator">=</span> File<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span>myfile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment">// do something which should normally not throw exceptions</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token string">&quot;File not found&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// Unfortunatelly, this one does not derive from the above, so declare separatelly</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">UnauthorizedAccessException</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+     Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span><span class="token string">&quot;Insufficient rights&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>If any other exception happens, we purposedly let the application crash, so it directly steps in the debugger and we can fix the problem. We mustn't ship a program where any other exceptions than these happen anyway, so it's not a problem to have a crash.</p> <p>The following is a bad example, too, because it uses exceptions to work around a programming error. That's not what they're designed for.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">DoSomething</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+     <span class="token keyword">if</span> <span class="token punctuation">(</span>s <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+         <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentNullException</span><span class="token punctuation">(</span><span class="token keyword">nameof</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token comment">// Implementation goes here</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">try</span> 
+<span class="token punctuation">{</span>    
+     <span class="token function">DoSomething</span><span class="token punctuation">(</span>myString<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">ArgumentNullException</span> x<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// if this happens, we have a programming error and we should check</span>
+    <span class="token comment">// why myString was null in the first place.</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="basic-exception-handling"><a href="#basic-exception-handling" class="header-anchor">#</a> Basic Exception Handling</h2> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* code that could throw an exception */</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* handle the exception */</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Note that handling all exceptions with the same code is often not the best approach.<br>
+This is commonly used when any inner exception handling routines fail, as a last resort.</p> <h2 id="handling-specific-exception-types"><a href="#handling-specific-exception-types" class="header-anchor">#</a> Handling specific exception types</h2> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* code to open a file */</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>FileNotFoundException</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* code to handle the file being not found */</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>UnauthorizedAccessException</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* code to handle not being allowed access to the file */</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>IOException</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* code to handle IOException or it's descendant other than the previous two */</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">System<span class="token punctuation">.</span>Exception</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* code to handle other errors */</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Be careful that exceptions are evaluated in order and inheritance is applied. So you need to start with the most specific ones and end with their ancestor.
+At any given point, only one catch block will get executed.</p> <h2 id="aggregate-exceptions-multiple-exceptions-from-one-method"><a href="#aggregate-exceptions-multiple-exceptions-from-one-method" class="header-anchor">#</a> Aggregate exceptions / multiple exceptions from one method</h2> <p>Who says you cannot throw multiple exceptions in one method. If you are not used to playing around with AggregateExceptions you may be tempted to create your own data-structure to represent many things going wrong. There are of course were another data-structure that is not an exception would be more ideal such as the results of a validation. Even if you do play with AggregateExceptions you may be on the receiving side and always handling them not realizing they can be of use to you.</p> <p>It is quite plausible to have a method execute and even though it will be a failure as a whole you will want to highlight multiple things that went wrong in the exceptions that are thrown. As an example this behavior can be seen with how Parallel methods work were a task broken into multiple threads and any number of them could throw exceptions and this needs to be reported. Here is a silly example of how you could benefit from this:</p> <div class="language-cs extra-class"><pre class="language-cs"><code>
+   <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Run</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">try</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">SillyMethod</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">AggregateException</span> ex<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>ex<span class="token punctuation">.</span>Message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> innerException <span class="token keyword">in</span> ex<span class="token punctuation">.</span>InnerExceptions<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>innerException<span class="token punctuation">.</span>Message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">SillyMethod</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> input1<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">int</span></span> input2<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> exceptions <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>Exception<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>input1 <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            exceptions<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentException</span><span class="token punctuation">(</span><span class="token string">&quot;I do not like ones&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>input2 <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            exceptions<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentException</span><span class="token punctuation">(</span><span class="token string">&quot;I do not like twos&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>exceptions<span class="token punctuation">.</span><span class="token function">Any</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">AggregateException</span><span class="token punctuation">(</span><span class="token string">&quot;Funny stuff happended during execution&quot;</span><span class="token punctuation">,</span> exceptions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="throwing-an-exception"><a href="#throwing-an-exception" class="header-anchor">#</a> Throwing an exception</h2> <p>Your code can, and often should, throw an exception when something unusual has happened.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">WalkInto</span><span class="token punctuation">(</span><span class="token class-name">Destination</span> destination<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>destination<span class="token punctuation">.</span>Name <span class="token operator">==</span> <span class="token string">&quot;Mordor&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">InvalidOperationException</span><span class="token punctuation">(</span><span class="token string">&quot;One does not simply walk into Mordor.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// ... Implement your normal walking code here.</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="unhandled-and-thread-exception"><a href="#unhandled-and-thread-exception" class="header-anchor">#</a> Unhandled and Thread Exception</h2> <p><strong>AppDomain.UnhandledException</strong>
+This event provides notification of uncaught exceptions.It allows the application to log information about the exception before the system default handler reports the exception to the user and terminates the application.If sufficient information about the state of the application is available, other actions may be undertaken — such as saving program data for later recovery.Caution is advised, because program data can become corrupted when exceptions are not handled.</p> <div class="language-cs extra-class"><pre class="language-cs"><code>
+   <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// The main entry point for the application.</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token punctuation">[</span>STAThread<span class="token punctuation">]</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> args<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        AppDomain<span class="token punctuation">.</span>CurrentDomain<span class="token punctuation">.</span>UnhandledException <span class="token operator">+=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">UnhandledExceptionEventHandler</span><span class="token punctuation">(</span>UnhandledException<span class="token punctuation">)</span><span class="token punctuation">;</span>            
+    <span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Application.ThreadException</strong>
+This event allows your Windows Forms application to handle otherwise unhandled exceptions that occur in Windows Forms threads. Attach your event handlers to the ThreadException event to deal with these exceptions, which will leave your application in an unknown state. Where possible, exceptions should be handled by a structured exception handling block.</p> <div class="language-cs extra-class"><pre class="language-cs"><code>
+   <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// The main entry point for the application.</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token punctuation">[</span>STAThread<span class="token punctuation">]</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> args<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        AppDomain<span class="token punctuation">.</span>CurrentDomain<span class="token punctuation">.</span>UnhandledException <span class="token operator">+=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">UnhandledExceptionEventHandler</span><span class="token punctuation">(</span>UnhandledException<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Application<span class="token punctuation">.</span>ThreadException <span class="token operator">+=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ThreadExceptionEventHandler</span><span class="token punctuation">(</span>ThreadException<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+</code></pre></div><p>And finally exception handling</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">UnhandledException</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">UnhandledExceptionEventArgs</span> e<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name">Exception</span> ex <span class="token operator">=</span> <span class="token punctuation">(</span>Exception<span class="token punctuation">)</span>e<span class="token punctuation">.</span>ExceptionObject<span class="token punctuation">;</span>
+        <span class="token comment">// your code</span>
+    <span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">ThreadException</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">ThreadExceptionEventArgs</span> e<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name">Exception</span> ex <span class="token operator">=</span> e<span class="token punctuation">.</span>Exception<span class="token punctuation">;</span>
+        <span class="token comment">// your code</span>
+    <span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="using-the-exception-object"><a href="#using-the-exception-object" class="header-anchor">#</a> Using the exception object</h2> <p>You are allowed to create and throw exceptions in your own code.
+Instantiating an exception is done the same way that any other C# object.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token class-name">Exception</span> ex <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Exception</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// constructor with an overload that takes a message string</span>
+<span class="token class-name">Exception</span> ex <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Exception</span><span class="token punctuation">(</span><span class="token string">&quot;Error message&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+</code></pre></div><p>You can then use the <code>throw</code> keyword to raise the exception:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Exception</span><span class="token punctuation">(</span><span class="token string">&quot;Error&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>ex<span class="token punctuation">.</span>Message<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Logs 'Error' to the output window</span>
+<span class="token punctuation">}</span> 
+
+</code></pre></div><p><strong>Note:</strong> If you're throwing a new exception inside a catch block, ensure that the original exception is passed as &quot;inner exception&quot;, e.g.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">DoSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">int</span></span> b<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token class-name"><span class="token keyword">int</span></span> c<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> 
+        b <span class="token operator">=</span> a <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        c <span class="token operator">=</span> a <span class="token operator">/</span> b<span class="token punctuation">;</span>
+        a <span class="token operator">=</span> a <span class="token operator">/</span> c<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>        
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">DivideByZeroException</span> dEx<span class="token punctuation">)</span> <span class="token keyword">when</span> <span class="token punctuation">(</span>b<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// we're throwing the same kind of exception</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">DivideByZeroException</span><span class="token punctuation">(</span><span class="token string">&quot;Cannot divide by b because it is zero&quot;</span><span class="token punctuation">,</span> dEx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">DivideByZeroException</span> dEx<span class="token punctuation">)</span> <span class="token keyword">when</span> <span class="token punctuation">(</span>c<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// we're throwing the same kind of exception</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">DivideByZeroException</span><span class="token punctuation">(</span><span class="token string">&quot;Cannot divide by c because it is zero&quot;</span><span class="token punctuation">,</span> dEx<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>    
+    <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">DoSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Logs full error information (incl. inner exception)</span>
+        Console<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>ex<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>In this case it is assumed that the exception cannot be handled but some useful information is added to the message (and the original exception can still be accessed via <code>ex.InnerException</code> by an outer exception block).</p> <p>It will show something like:</p> <blockquote></blockquote> <p>System.DivideByZeroException: Cannot divide by b because it is zero ---&gt; System.DivideByZeroException: Attempted to divide by zero. <br>
+at UserQuery.g__DoSomething0_0() in C:[...]\LINQPadQuery.cs:line 36 <br>
+--- End of inner exception stack trace --- <br>
+at UserQuery.g__DoSomething0_0() in C:[...]\LINQPadQuery.cs:line 42 <br>
+at UserQuery.Main() in C:[...]\LINQPadQuery.cs:line 55 <br></p> <p>If you're trying this example in LinqPad, you'll notice that the line numbers aren't very meaningful (they don't always help you). But passing a helpful error text as suggested above oftentimes significantly reduces the time to track down the location of the error, which is in this example clearly the line</p> <blockquote></blockquote> <p>c = a / b;</p> <p>in function <code>DoSomething()</code>.</p> <p><strong><a href="https://dotnetfiddle.net/Widget/JLUXXY" target="_blank" rel="noopener noreferrer">Try it in .NET Fiddle<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></strong></p> <h2 id="implementing-ierrorhandler-for-wcf-services"><a href="#implementing-ierrorhandler-for-wcf-services" class="header-anchor">#</a> Implementing IErrorHandler for WCF Services</h2> <p>Implementing IErrorHandler for WCF services is a great way to centralize error handling and logging. The implementation shown here should catch any unhandled exception that is thrown as a result of a call to one of your WCF services. Also shown in this example is how to return a custom object, and how to return JSON rather than the default XML.</p> <p>Implement IErrorHandler:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>ServiceModel<span class="token punctuation">.</span>Channels</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>ServiceModel<span class="token punctuation">.</span>Dispatcher</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Runtime<span class="token punctuation">.</span>Serialization<span class="token punctuation">.</span>Json</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>ServiceModel</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>ServiceModel<span class="token punctuation">.</span>Web</span><span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> <span class="token namespace">BehaviorsAndInspectors</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ErrorHandler</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">IErrorHandler</span></span>
+    <span class="token punctuation">{</span>
+
+        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">bool</span></span> <span class="token function">HandleError</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// Log exceptions here</span>
+
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span> <span class="token comment">// end</span>
+
+        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">ProvideFault</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">,</span> <span class="token class-name">MessageVersion</span> version<span class="token punctuation">,</span> <span class="token keyword">ref</span> <span class="token class-name">Message</span> fault<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// Get the outgoing response portion of the current context</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> response <span class="token operator">=</span> WebOperationContext<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>OutgoingResponse<span class="token punctuation">;</span>
+
+            <span class="token comment">// Set the default http status code </span>
+            response<span class="token punctuation">.</span>StatusCode <span class="token operator">=</span> HttpStatusCode<span class="token punctuation">.</span>InternalServerError<span class="token punctuation">;</span>
+
+            <span class="token comment">// Add ContentType header that specifies we are using JSON</span>
+            response<span class="token punctuation">.</span>ContentType <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">MediaTypeHeaderValue</span><span class="token punctuation">(</span><span class="token string">&quot;application/json&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Create the fault message that is returned (note the ref parameter) with BaseDataResponseContract                </span>
+            fault <span class="token operator">=</span> Message<span class="token punctuation">.</span><span class="token function">CreateMessage</span><span class="token punctuation">(</span>
+                version<span class="token punctuation">,</span>
+                <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">,</span>
+                <span class="token keyword">new</span> <span class="token constructor-invocation class-name">CustomReturnType</span> <span class="token punctuation">{</span> ErrorMessage <span class="token operator">=</span> <span class="token string">&quot;An unhandled exception occurred!&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token keyword">new</span> <span class="token constructor-invocation class-name">DataContractJsonSerializer</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token type-expression class-name">BaseDataResponseContract</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>Type<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span> <span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token type-expression class-name">BaseDataResponseContract</span><span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>ex<span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token type-expression class-name">VariousExceptionTypes</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                 <span class="token comment">// You might want to catch different types of exceptions here and process them differently</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token comment">// Tell WCF to use JSON encoding rather than default XML</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> webBodyFormatMessageProperty <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">WebBodyFormatMessageProperty</span><span class="token punctuation">(</span>WebContentFormat<span class="token punctuation">.</span>Json<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            fault<span class="token punctuation">.</span>Properties<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>WebBodyFormatMessageProperty<span class="token punctuation">.</span>Name<span class="token punctuation">,</span> webBodyFormatMessageProperty<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span> <span class="token comment">// end</span>
+
+    <span class="token punctuation">}</span> <span class="token comment">// end class</span>
+
+<span class="token punctuation">}</span> <span class="token comment">// end namespace</span>
+
+</code></pre></div><p>In this example we attach the handler to the service behavior. You could also attach this to IEndpointBehavior, IContractBehavior, or IOperationBehavior in a similar way.</p> <p>Attach to Service Behaviors:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>ObjectModel</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>ServiceModel</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>ServiceModel<span class="token punctuation">.</span>Channels</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>ServiceModel<span class="token punctuation">.</span>Configuration</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>ServiceModel<span class="token punctuation">.</span>Description</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>ServiceModel<span class="token punctuation">.</span>Dispatcher</span><span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> <span class="token namespace">BehaviorsAndInspectors</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ErrorHandlerExtension</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">BehaviorExtensionElement</span><span class="token punctuation">,</span> <span class="token class-name">IServiceBehavior</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token return-type class-name">Type</span> BehaviorType
+        <span class="token punctuation">{</span>
+            <span class="token keyword">get</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token function">GetType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">object</span></span> <span class="token function">CreateBehavior</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">private</span> <span class="token return-type class-name">IErrorHandler</span> <span class="token function">GetInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ErrorHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token return-type class-name"><span class="token keyword">void</span></span> IServiceBehavior<span class="token punctuation">.</span><span class="token function">AddBindingParameters</span><span class="token punctuation">(</span><span class="token class-name">ServiceDescription</span> serviceDescription<span class="token punctuation">,</span> <span class="token class-name">ServiceHostBase</span> serviceHostBase<span class="token punctuation">,</span> <span class="token class-name">Collection<span class="token punctuation">&lt;</span>ServiceEndpoint<span class="token punctuation">&gt;</span></span> endpoints<span class="token punctuation">,</span> <span class="token class-name">BindingParameterCollection</span> bindingParameters<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token comment">// end</span>
+
+        <span class="token return-type class-name"><span class="token keyword">void</span></span> IServiceBehavior<span class="token punctuation">.</span><span class="token function">ApplyDispatchBehavior</span><span class="token punctuation">(</span><span class="token class-name">ServiceDescription</span> serviceDescription<span class="token punctuation">,</span> <span class="token class-name">ServiceHostBase</span> serviceHostBase<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> errorHandlerInstance <span class="token operator">=</span> <span class="token function">GetInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name">ChannelDispatcher</span> dispatcher <span class="token keyword">in</span> serviceHostBase<span class="token punctuation">.</span>ChannelDispatchers<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                dispatcher<span class="token punctuation">.</span>ErrorHandlers<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>errorHandlerInstance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token return-type class-name"><span class="token keyword">void</span></span> IServiceBehavior<span class="token punctuation">.</span><span class="token function">Validate</span><span class="token punctuation">(</span><span class="token class-name">ServiceDescription</span> serviceDescription<span class="token punctuation">,</span> <span class="token class-name">ServiceHostBase</span> serviceHostBase<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span> <span class="token comment">// end</span>
+      
+    <span class="token punctuation">}</span> <span class="token comment">// end class</span>
+
+<span class="token punctuation">}</span> <span class="token comment">// end namespace</span>
+
+</code></pre></div><p>Configs in Web.config:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token range operator">..</span><span class="token punctuation">.</span>
+<span class="token operator">&lt;</span>system<span class="token punctuation">.</span>serviceModel<span class="token operator">&gt;</span>
+
+    <span class="token operator">&lt;</span>services<span class="token operator">&gt;</span>      
+      <span class="token operator">&lt;</span><span class="token class-name">service</span> name<span class="token operator">=</span><span class="token string">&quot;WebServices.MyService&quot;</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token class-name">endpoint</span> binding<span class="token operator">=</span><span class="token string">&quot;webHttpBinding&quot;</span> contract<span class="token operator">=</span><span class="token string">&quot;WebServices.IMyService&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>service<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>services<span class="token operator">&gt;</span>
+
+    <span class="token operator">&lt;</span>extensions<span class="token operator">&gt;</span>      
+      <span class="token operator">&lt;</span>behaviorExtensions<span class="token operator">&gt;</span>        
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> This extension <span class="token keyword">if</span> <span class="token keyword">for</span> the WCF Error Handling<span class="token operator">--</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token keyword">add</span> name<span class="token operator">=</span><span class="token string">&quot;ErrorHandlerBehavior&quot;</span> type<span class="token operator">=</span><span class="token string">&quot;WebServices.BehaviorsAndInspectors.ErrorHandlerExtensionBehavior, WebServices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>      
+      <span class="token operator">&lt;</span><span class="token operator">/</span>behaviorExtensions<span class="token operator">&gt;</span>    
+    <span class="token operator">&lt;</span><span class="token operator">/</span>extensions<span class="token operator">&gt;</span>
+
+    <span class="token operator">&lt;</span>behaviors<span class="token operator">&gt;</span>          
+      <span class="token operator">&lt;</span>serviceBehaviors<span class="token operator">&gt;</span>        
+        <span class="token operator">&lt;</span>behavior<span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span><span class="token class-name">serviceMetadata</span> httpGetEnabled<span class="token operator">=</span><span class="token string">&quot;true&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span><span class="token class-name">serviceDebug</span> includeExceptionDetailInFaults<span class="token operator">=</span><span class="token string">&quot;true&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span>ErrorHandlerBehavior <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>behavior<span class="token operator">&gt;</span>     
+      <span class="token operator">&lt;</span><span class="token operator">/</span>serviceBehaviors<span class="token operator">&gt;</span>    
+    <span class="token operator">&lt;</span><span class="token operator">/</span>behaviors<span class="token operator">&gt;</span>
+
+    <span class="token range operator">..</span><span class="token range operator">..</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>system<span class="token punctuation">.</span>serviceModel<span class="token operator">&gt;</span>
+<span class="token range operator">..</span><span class="token punctuation">.</span>
+
+</code></pre></div><p>Here are a few links that may be helpful on this topic:</p> <p><a href="https://msdn.microsoft.com/en-us/library/system.servicemodel.dispatcher.ierrorhandler(v=vs.100).aspx" target="_blank" rel="noopener noreferrer">https://msdn.microsoft.com/en-us/library/system.servicemodel.dispatcher.ierrorhandler(v=vs.100).aspx<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="http://www.brainthud.com/cards/5218/25441/which-four-behavior-interfaces-exist-for-interacting-with-a-service-or-client-description-what-methods-do-they-implement-and" target="_blank" rel="noopener noreferrer">http://www.brainthud.com/cards/5218/25441/which-four-behavior-interfaces-exist-for-interacting-with-a-service-or-client-description-what-methods-do-they-implement-and<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>Other Examples:</p> <p><a href="http://stackoverflow.com/questions/38231970/ierrorhandler-returning-wrong-message-body-when-http-status-code-is-401-unauthor" target="_blank" rel="noopener noreferrer">IErrorHandler returning wrong message body when HTTP status code is 401 Unauthorized<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="http://stackoverflow.com/questions/3036692/ierrorhandler-doesnt-seem-to-be-handling-my-errors-in-wcf-any-ideas" target="_blank" rel="noopener noreferrer">IErrorHandler doesn't seem to be handling my errors in WCF .. any ideas?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="http://stackoverflow.com/questions/1149037/how-to-make-custom-wcf-error-handler-return-json-response-with-non-ok-http-code" target="_blank" rel="noopener noreferrer">How to make custom WCF error handler return JSON response with non-OK http code?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><a href="http://stackoverflow.com/questions/10679214/how-do-you-set-the-content-type-header-for-an-httpclient-request?rq=1" target="_blank" rel="noopener noreferrer">How do you set the Content-Type header for an HttpClient request?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="nesting-of-exceptions-try-catch-blocks"><a href="#nesting-of-exceptions-try-catch-blocks" class="header-anchor">#</a> Nesting of Exceptions &amp; try catch blocks.</h2> <p>One is able to nest one exception / <code>try</code> <code>catch</code> block inside the other.</p> <p>This way one can manage small blocks of code which are capable of working without disrupting your whole mechanism.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">try</span> 
+<span class="token punctuation">{</span>
+<span class="token comment">//some code here</span>
+    <span class="token keyword">try</span> 
+    <span class="token punctuation">{</span>
+        <span class="token comment">//some thing which throws an exception. For Eg : divide by 0</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">DivideByZeroException</span> dzEx<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//handle here only this exception</span>
+        <span class="token comment">//throw from here will be passed on to the parent catch block</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">finally</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//any thing to do after it is done.</span>
+    <span class="token punctuation">}</span>
+ <span class="token comment">//resume from here &amp; proceed as normal; </span>
+<span class="token punctuation">}</span>
+<span class="token keyword">catch</span><span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//handle here</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Note:</strong> Avoid <a href="https://stackoverflow.com/documentation/c%23/40/exception-handling/6940/exception-anti-patterns#t=201707281310293021372" target="_blank" rel="noopener noreferrer">Swallowing Exceptions<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>  when throwing to the parent catch block</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/csharp/exception-handling.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/csharp/c-3-0-features.html" class="prev">
+        C# 3.0 Features
+      </a></span> <span class="next"><a href="/csharp/nullreferenceexception.html">
+        NullReferenceException
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/809.9fc63e2e.js" defer></script>
+  </body>
+</html>

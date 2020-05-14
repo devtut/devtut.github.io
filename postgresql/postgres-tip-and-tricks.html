@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PostgreSQL - Postgres Tip and Tricks</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="DATEADD alternative in Postgres, Comma seperated values of a column, Delete duplicate records from postgres table, Update query with join between two tables alternative since Postresql does not support join in update query., Difference between two date timestamps month wise and year wise, Query to Copy/Move/Transafer table data from one database to other database table with same schema">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="PostgreSQL - Postgres Tip and Tricks">
+    <meta property="og:description" content="DATEADD alternative in Postgres, Comma seperated values of a column, Delete duplicate records from postgres table, Update query with join between two tables alternative since Postresql does not support join in update query., Difference between two date timestamps month wise and year wise, Query to Copy/Move/Transafer table data from one database to other database table with same schema">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/postgresql/postgres-tip-and-tricks.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="PostgreSQL - Postgres Tip and Tricks">
+    <meta name="twitter:description" content="DATEADD alternative in Postgres, Comma seperated values of a column, Delete duplicate records from postgres table, Update query with join between two tables alternative since Postresql does not support join in update query., Difference between two date timestamps month wise and year wise, Query to Copy/Move/Transafer table data from one database to other database table with same schema">
+    <meta name="twitter:url" content="/postgresql/postgres-tip-and-tricks.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2556.638577b0.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>PostgreSQL</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/postgresql/" class="sidebar-link">Disclaimer</a></li><li><a href="/postgresql/getting-started-with-postgresql.html" class="sidebar-link">Getting started with postgresql</a></li><li><a href="/postgresql/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/postgresql/dates-timestamps-and-intervals.html" class="sidebar-link">Dates, Timestamps, and Intervals</a></li><li><a href="/postgresql/table-creation.html" class="sidebar-link">Table Creation</a></li><li><a href="/postgresql/select.html" class="sidebar-link">SELECT</a></li><li><a href="/postgresql/find-string-length-character-length.html" class="sidebar-link">Find String Length / Character Length</a></li><li><a href="/postgresql/coalesce.html" class="sidebar-link">COALESCE</a></li><li><a href="/postgresql/insert.html" class="sidebar-link">INSERT</a></li><li><a href="/postgresql/update.html" class="sidebar-link">UPDATE</a></li><li><a href="/postgresql/json-support.html" class="sidebar-link">JSON Support</a></li><li><a href="/postgresql/aggregate-functions.html" class="sidebar-link">Aggregate Functions</a></li><li><a href="/postgresql/common-table-expressions-with.html" class="sidebar-link">Common Table Expressions (WITH)</a></li><li><a href="/postgresql/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/postgresql/recursive-queries.html" class="sidebar-link">Recursive queries</a></li><li><a href="/postgresql/programming-with-pl-pgsql.html" class="sidebar-link">Programming with PL/pgSQL</a></li><li><a href="/postgresql/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/postgresql/export-postgresql-database-table-header-and-data-to-csv-file.html" class="sidebar-link">Export PostgreSQL database table header and data to CSV file</a></li><li><a href="/postgresql/triggers-and-trigger-functions.html" class="sidebar-link">Triggers and Trigger Functions</a></li><li><a href="/postgresql/event-triggers.html" class="sidebar-link">Event Triggers</a></li><li><a href="/postgresql/role-management.html" class="sidebar-link">Role Management</a></li><li><a href="/postgresql/postgres-cryptographic-functions.html" class="sidebar-link">Postgres cryptographic functions</a></li><li><a href="/postgresql/comments-in-postgresql.html" class="sidebar-link">Comments in postgresql</a></li><li><a href="/postgresql/backup-and-restore.html" class="sidebar-link">Backup and Restore</a></li><li><a href="/postgresql/backup-script-for-a-production-db.html" class="sidebar-link">Backup script for a production DB</a></li><li><a href="/postgresql/accessing-data-programmatically.html" class="sidebar-link">Accessing Data Programmatically</a></li><li><a href="/postgresql/connect-to-postgresql-from-java.html" class="sidebar-link">Connect to PostgreSQL from Java</a></li><li><a href="/postgresql/postgresql-high-availability.html" class="sidebar-link">PostgreSQL High Availability</a></li><li><a href="/postgresql/extension-dblink-and-postgres-fdw.html" class="sidebar-link">EXTENSION dblink and postgres_fdw</a></li><li><a href="/postgresql/postgres-tip-and-tricks.html" class="active sidebar-link">Postgres Tip and Tricks</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/postgresql/postgres-tip-and-tricks.html#dateadd-alternative-in-postgres" class="sidebar-link">DATEADD alternative in Postgres</a></li><li class="sidebar-sub-header"><a href="/postgresql/postgres-tip-and-tricks.html#comma-seperated-values-of-a-column" class="sidebar-link">Comma seperated values of a column</a></li><li class="sidebar-sub-header"><a href="/postgresql/postgres-tip-and-tricks.html#delete-duplicate-records-from-postgres-table" class="sidebar-link">Delete duplicate records from postgres table</a></li><li class="sidebar-sub-header"><a href="/postgresql/postgres-tip-and-tricks.html#update-query-with-join-between-two-tables-alternative-since-postresql-does-not-support-join-in-update-query" class="sidebar-link">Update query with join between two tables alternative since Postresql does not support join in update query.</a></li><li class="sidebar-sub-header"><a href="/postgresql/postgres-tip-and-tricks.html#difference-between-two-date-timestamps-month-wise-and-year-wise" class="sidebar-link">Difference between two date timestamps month wise and year wise</a></li><li class="sidebar-sub-header"><a href="/postgresql/postgres-tip-and-tricks.html#query-to-copy-move-transafer-table-data-from-one-database-to-other-database-table-with-same-schema" class="sidebar-link">Query to Copy/Move/Transafer table data from one database to other database table with same schema</a></li></ul></li><li><a href="/postgresql/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="postgres-tip-and-tricks"><a href="#postgres-tip-and-tricks" class="header-anchor">#</a> Postgres Tip and Tricks</h1> <h2 id="dateadd-alternative-in-postgres"><a href="#dateadd-alternative-in-postgres" class="header-anchor">#</a> DATEADD alternative in Postgres</h2> <ul><li><code>SELECT CURRENT_DATE + '1 day'::INTERVAL</code></li> <li><code>SELECT '1999-12-11'::TIMESTAMP + '19 days'::INTERVAL</code></li> <li><code>SELECT '1 month'::INTERVAL + '1 month 3 days'::INTERVAL</code></li></ul> <h2 id="comma-seperated-values-of-a-column"><a href="#comma-seperated-values-of-a-column" class="header-anchor">#</a> Comma seperated values of a column</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> 
+    string_agg<span class="token punctuation">(</span><span class="token operator">&lt;</span>TABLE_NAME<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token operator">&lt;</span>COLUMN_NAME<span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token string">','</span><span class="token punctuation">)</span> 
+<span class="token keyword">FROM</span> 
+    <span class="token operator">&lt;</span>SCHEMA_NAME<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token operator">&lt;</span>TABLE_NAME<span class="token operator">&gt;</span> T
+
+</code></pre></div><h2 id="delete-duplicate-records-from-postgres-table"><a href="#delete-duplicate-records-from-postgres-table" class="header-anchor">#</a> Delete duplicate records from postgres table</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">DELETE</span> 
+    <span class="token keyword">FROM</span> <span class="token operator">&lt;</span>SCHEMA_NAME<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token operator">&lt;</span>Table_NAME<span class="token operator">&gt;</span> 
+<span class="token keyword">WHERE</span> 
+    ctid <span class="token operator">NOT</span> <span class="token operator">IN</span>
+        <span class="token punctuation">(</span>
+        <span class="token keyword">SELECT</span> 
+            <span class="token function">MAX</span><span class="token punctuation">(</span>ctid<span class="token punctuation">)</span> 
+        <span class="token keyword">FROM</span> 
+            <span class="token operator">&lt;</span>SCHEMA_NAME<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token operator">&lt;</span>TABLE_NAME<span class="token operator">&gt;</span> 
+        <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> 
+            <span class="token operator">&lt;</span>SCHEMA_NAME<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token operator">&lt;</span>TABLE_NAME<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token operator">*</span>
+        <span class="token punctuation">)</span>
+<span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="update-query-with-join-between-two-tables-alternative-since-postresql-does-not-support-join-in-update-query"><a href="#update-query-with-join-between-two-tables-alternative-since-postresql-does-not-support-join-in-update-query" class="header-anchor">#</a> Update query with join between two tables alternative since Postresql does not support join in update query.</h2> <div class="language- extra-class"><pre class="language-text"><code>
+   update &lt;SCHEMA_NAME&gt;.&lt;TABLE_NAME_1&gt; AS A
+    SET &lt;COLUMN_1&gt; = True       
+    FROM &lt;SCHEMA_NAME&gt;.&lt;TABLE_NAME_2&gt; AS B 
+    WHERE 
+        A.&lt;COLUMN_2&gt; = B.&lt;COLUMN_2&gt; AND
+        A.&lt;COLUMN_3&gt; = B.&lt;COLUMN_3&gt;
+
+</code></pre></div><h2 id="difference-between-two-date-timestamps-month-wise-and-year-wise"><a href="#difference-between-two-date-timestamps-month-wise-and-year-wise" class="header-anchor">#</a> Difference between two date timestamps month wise and year wise</h2> <p>Monthwise difference between two dates(timestamp)</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">select</span> 
+    <span class="token punctuation">(</span>
+        <span class="token punctuation">(</span>DATE_PART<span class="token punctuation">(</span><span class="token string">'year'</span><span class="token punctuation">,</span> AgeonDate<span class="token punctuation">)</span> <span class="token operator">-</span> DATE_PART<span class="token punctuation">(</span><span class="token string">'year'</span><span class="token punctuation">,</span> tmpdate<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">12</span> 
+        <span class="token operator">+</span>
+        <span class="token punctuation">(</span>DATE_PART<span class="token punctuation">(</span><span class="token string">'month'</span><span class="token punctuation">,</span> AgeonDate<span class="token punctuation">)</span> <span class="token operator">-</span> DATE_PART<span class="token punctuation">(</span><span class="token string">'month'</span><span class="token punctuation">,</span> tmpdate<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">)</span> 
+<span class="token keyword">from</span> dbo<span class="token punctuation">.</span><span class="token string">&quot;Table1&quot;</span>
+
+</code></pre></div><p>Yearwise difference between two dates(timestamp)</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">select</span> <span class="token punctuation">(</span>DATE_PART<span class="token punctuation">(</span><span class="token string">'year'</span><span class="token punctuation">,</span> AgeonDate<span class="token punctuation">)</span> <span class="token operator">-</span> DATE_PART<span class="token punctuation">(</span><span class="token string">'year'</span><span class="token punctuation">,</span> tmpdate<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">from</span> dbo<span class="token punctuation">.</span><span class="token string">&quot;Table1&quot;</span>
+
+</code></pre></div><h2 id="query-to-copy-move-transafer-table-data-from-one-database-to-other-database-table-with-same-schema"><a href="#query-to-copy-move-transafer-table-data-from-one-database-to-other-database-table-with-same-schema" class="header-anchor">#</a> Query to Copy/Move/Transafer table data from one database to other database table with same schema</h2> <p>First Execute</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> EXTENSION DBLINK<span class="token punctuation">;</span>
+
+</code></pre></div><p>Then</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> 
+    <span class="token operator">&lt;</span>SCHEMA_NAME<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token operator">&lt;</span>TABLE_NAME_1<span class="token operator">&gt;</span> 
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> 
+<span class="token keyword">FROM</span> 
+    DBLINK<span class="token punctuation">(</span>
+    <span class="token string">'HOST=&lt;IP-ADDRESS&gt; USER=&lt;USERNAME&gt; PASSWORD=&lt;PASSWORD&gt; DBNAME=&lt;DATABASE&gt;'</span><span class="token punctuation">,</span>
+    <span class="token string">'SELECT * FROM &lt;SCHEMA_NAME&gt;.&lt;TABLE_NAME_2&gt;'</span><span class="token punctuation">)</span>
+    <span class="token keyword">AS</span> <span class="token operator">&lt;</span>TABLE_NAME<span class="token operator">&gt;</span>
+    <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>COLUMN_1<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>DATATYPE_1<span class="token operator">&gt;</span><span class="token punctuation">,</span> 
+    <span class="token operator">&lt;</span>COLUMN_1<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>DATATYPE_2<span class="token operator">&gt;</span><span class="token punctuation">,</span> 
+    <span class="token operator">&lt;</span>COLUMN_1<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>DATATYPE_3<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/postgresql/postgres-tip-and-tricks.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/postgresql/extension-dblink-and-postgres-fdw.html" class="prev">
+        EXTENSION dblink and postgres_fdw
+      </a></span> <span class="next"><a href="/postgresql/contributors.html">
+        The Contributors
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2556.638577b0.js" defer></script>
+  </body>
+</html>

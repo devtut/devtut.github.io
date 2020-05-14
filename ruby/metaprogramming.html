@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ruby - Metaprogramming</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Implementing with using instance evaluation, send() method, Defining methods dynamically, Defining methods on instances">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Ruby - Metaprogramming">
+    <meta property="og:description" content="Implementing with using instance evaluation, send() method, Defining methods dynamically, Defining methods on instances">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/ruby/metaprogramming.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Ruby - Metaprogramming">
+    <meta name="twitter:description" content="Implementing with using instance evaluation, send() method, Defining methods dynamically, Defining methods on instances">
+    <meta name="twitter:url" content="/ruby/metaprogramming.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3090.e5ddbf7a.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Ruby</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ruby/" class="sidebar-link">Disclaimer</a></li><li><a href="/ruby/installation.html" class="sidebar-link">Installation</a></li><li><a href="/ruby/getting-started-with-ruby-language.html" class="sidebar-link">Getting started with Ruby Language</a></li><li><a href="/ruby/casting-type-conversion.html" class="sidebar-link">Casting (type conversion)</a></li><li><a href="/ruby/operators.html" class="sidebar-link">Operators</a></li><li><a href="/ruby/variable-scope-and-visibility.html" class="sidebar-link">Variable Scope and Visibility</a></li><li><a href="/ruby/environment-variables.html" class="sidebar-link">Environment Variables</a></li><li><a href="/ruby/constants.html" class="sidebar-link">Constants</a></li><li><a href="/ruby/special-constants-in-ruby.html" class="sidebar-link">Special Constants in Ruby</a></li><li><a href="/ruby/comments.html" class="sidebar-link">Comments</a></li><li><a href="/ruby/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/ruby/multidimensional-arrays.html" class="sidebar-link">Multidimensional Arrays</a></li><li><a href="/ruby/strings.html" class="sidebar-link">Strings</a></li><li><a href="/ruby/datetime.html" class="sidebar-link">DateTime</a></li><li><a href="/ruby/time.html" class="sidebar-link">Time</a></li><li><a href="/ruby/numbers.html" class="sidebar-link">Numbers</a></li><li><a href="/ruby/symbols.html" class="sidebar-link">Symbols</a></li><li><a href="/ruby/comparable.html" class="sidebar-link">Comparable</a></li><li><a href="/ruby/control-flow.html" class="sidebar-link">Control Flow</a></li><li><a href="/ruby/methods.html" class="sidebar-link">Methods</a></li><li><a href="/ruby/hashes.html" class="sidebar-link">Hashes</a></li><li><a href="/ruby/blocks-and-procs-and-lambdas.html" class="sidebar-link">Blocks and Procs and Lambdas</a></li><li><a href="/ruby/iteration.html" class="sidebar-link">Iteration</a></li><li><a href="/ruby/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/ruby/enumerators.html" class="sidebar-link">Enumerators</a></li><li><a href="/ruby/enumerable-in-ruby.html" class="sidebar-link">Enumerable in Ruby</a></li><li><a href="/ruby/classes.html" class="sidebar-link">Classes</a></li><li><a href="/ruby/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/ruby/method-missing.html" class="sidebar-link">method_missing</a></li><li><a href="/ruby/regular-expressions-and-regex-based-operations.html" class="sidebar-link">Regular Expressions and Regex Based Operations</a></li><li><a href="/ruby/file-and-i-o-operations.html" class="sidebar-link">File and I/O Operations</a></li><li><a href="/ruby/ruby-access-modifiers.html" class="sidebar-link">Ruby Access Modifiers</a></li><li><a href="/ruby/design-patterns-and-idioms-in-ruby.html" class="sidebar-link">Design Patterns and Idioms in Ruby</a></li><li><a href="/ruby/loading-source-files.html" class="sidebar-link">Loading Source Files</a></li><li><a href="/ruby/thread.html" class="sidebar-link">Thread</a></li><li><a href="/ruby/range.html" class="sidebar-link">Range</a></li><li><a href="/ruby/modules.html" class="sidebar-link">Modules</a></li><li><a href="/ruby/introspection-in-ruby.html" class="sidebar-link">Introspection in Ruby</a></li><li><a href="/ruby/monkey-patching-in-ruby.html" class="sidebar-link">Monkey Patching in Ruby</a></li><li><a href="/ruby/recursion-in-ruby.html" class="sidebar-link">Recursion in Ruby</a></li><li><a href="/ruby/splat-operator.html" class="sidebar-link">Splat operator (*)</a></li><li><a href="/ruby/json-with-ruby.html" class="sidebar-link">JSON with Ruby</a></li><li><a href="/ruby/pure-rspec-json-api-testing.html" class="sidebar-link">Pure RSpec JSON API testing</a></li><li><a href="/ruby/gem-creation-management.html" class="sidebar-link">Gem Creation/Management</a></li><li><a href="/ruby/rbenv.html" class="sidebar-link">rbenv</a></li><li><a href="/ruby/gem-usage.html" class="sidebar-link">Gem Usage</a></li><li><a href="/ruby/singleton-class.html" class="sidebar-link">Singleton Class</a></li><li><a href="/ruby/queue.html" class="sidebar-link">Queue</a></li><li><a href="/ruby/destructuring.html" class="sidebar-link">Destructuring</a></li><li><a href="/ruby/struct.html" class="sidebar-link">Struct</a></li><li><a href="/ruby/metaprogramming.html" class="active sidebar-link">Metaprogramming</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/ruby/metaprogramming.html#implementing-with-using-instance-evaluation" class="sidebar-link">Implementing &quot;with&quot; using instance evaluation</a></li><li class="sidebar-sub-header"><a href="/ruby/metaprogramming.html#send-method" class="sidebar-link">send() method</a></li><li class="sidebar-sub-header"><a href="/ruby/metaprogramming.html#defining-methods-dynamically" class="sidebar-link">Defining methods dynamically</a></li><li class="sidebar-sub-header"><a href="/ruby/metaprogramming.html#defining-methods-on-instances" class="sidebar-link">Defining methods on instances</a></li></ul></li><li><a href="/ruby/dynamic-evaluation.html" class="sidebar-link">Dynamic Evaluation</a></li><li><a href="/ruby/instance-eval.html" class="sidebar-link">instance_eval</a></li><li><a href="/ruby/message-passing.html" class="sidebar-link">Message Passing</a></li><li><a href="/ruby/keyword-arguments.html" class="sidebar-link">Keyword Arguments</a></li><li><a href="/ruby/truthiness.html" class="sidebar-link">Truthiness</a></li><li><a href="/ruby/implicit-receivers-and-understanding-self.html" class="sidebar-link">Implicit Receivers and Understanding Self</a></li><li><a href="/ruby/introspection.html" class="sidebar-link">Introspection</a></li><li><a href="/ruby/refinements.html" class="sidebar-link">Refinements</a></li><li><a href="/ruby/catching-exceptions-with-begin-rescue.html" class="sidebar-link">Catching Exceptions with Begin / Rescue</a></li><li><a href="/ruby/command-line-apps.html" class="sidebar-link">Command Line Apps</a></li><li><a href="/ruby/irb.html" class="sidebar-link">IRB</a></li><li><a href="/ruby/erb.html" class="sidebar-link">ERB</a></li><li><a href="/ruby/generate-a-random-number.html" class="sidebar-link">Generate a random number</a></li><li><a href="/ruby/getting-started-with-hanami.html" class="sidebar-link">Getting started with Hanami</a></li><li><a href="/ruby/optionparser.html" class="sidebar-link">OptionParser</a></li><li><a href="/ruby/operating-system-or-shell-commands.html" class="sidebar-link">Operating System or Shell commands</a></li><li><a href="/ruby/c-extensions.html" class="sidebar-link">C Extensions</a></li><li><a href="/ruby/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/ruby/ruby-version-manager.html" class="sidebar-link">Ruby Version Manager</a></li><li><a href="/ruby/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="metaprogramming"><a href="#metaprogramming" class="header-anchor">#</a> Metaprogramming</h1> <p><strong>Metaprogramming</strong> can be described in two ways:</p> <p>“Computer programs that write or manipulate other programs (or themselves) as their data, or that do part of the work at compile time that would otherwise be done at runtime”.</p> <p>More simply put: <strong>Metaprogramming is writing code that writes code during runtime to make your life easier</strong>.</p> <h2 id="implementing-with-using-instance-evaluation"><a href="#implementing-with-using-instance-evaluation" class="header-anchor">#</a> Implementing &quot;with&quot; using instance evaluation</h2> <p>Many languages feature a <code>with</code> statement that allows programmers to omit the receiver of method calls.</p> <p><code>with</code> can be easily emulated in Ruby using <a href="http://ruby-doc.org/core/BasicObject.html#method-i-instance_eval" target="_blank" rel="noopener noreferrer"><code>instance_eval</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">with</span></span><span class="token punctuation">(</span>object<span class="token punctuation">,</span> <span class="token operator">&amp;</span>block<span class="token punctuation">)</span>
+  object<span class="token punctuation">.</span>instance_eval <span class="token operator">&amp;</span>block
+<span class="token keyword">end</span>
+
+</code></pre></div><p>The <code>with</code> method can be used to seamlessly execute methods on objects:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>hash <span class="token operator">=</span> <span class="token builtin">Hash</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+
+with hash <span class="token keyword">do</span>
+  store <span class="token symbol">:key</span><span class="token punctuation">,</span> <span class="token symbol">:value</span>
+  has_key<span class="token operator">?</span> <span class="token symbol">:key</span>       <span class="token comment"># =&gt; true</span>
+  values              <span class="token comment"># =&gt; [:value]</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h2 id="send-method"><a href="#send-method" class="header-anchor">#</a> send() method</h2> <p><code>send()</code> is used to pass message to <code>object</code>. <code>send()</code> is an instance method of the <code>Object</code> class.
+The first argument in <code>send()</code> is the message that you're sending to the object - that is, the name of a method. It could be <code>string</code> or <code>symbol</code> but <strong>symbols</strong> are preferred. Then arguments those need to pass in method, those will be the remaining arguments in <code>send()</code>.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Hello</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">hello</span></span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span>
+    puts <span class="token string">'Hello '</span> <span class="token operator">+</span> args<span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">)</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+h <span class="token operator">=</span> <span class="token constant">Hello</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+h<span class="token punctuation">.</span>send <span class="token symbol">:hello</span><span class="token punctuation">,</span> <span class="token string">'gentle'</span><span class="token punctuation">,</span> <span class="token string">'readers'</span>   <span class="token comment">#=&gt; &quot;Hello gentle readers&quot;</span>
+<span class="token comment"># h.send(:hello, 'gentle', 'readers') #=&gt; Here :hello is method and rest are the arguments to method.</span>
+
+</code></pre></div><h3 id="here-is-the-more-descriptive-example"><a href="#here-is-the-more-descriptive-example" class="header-anchor">#</a> Here is the more descriptive example</h3> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Account</span>
+  attr_accessor <span class="token symbol">:name</span><span class="token punctuation">,</span> <span class="token symbol">:email</span><span class="token punctuation">,</span> <span class="token symbol">:notes</span><span class="token punctuation">,</span> <span class="token symbol">:address</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">assign_values</span></span><span class="token punctuation">(</span>values<span class="token punctuation">)</span>
+    values<span class="token punctuation">.</span>each_key <span class="token keyword">do</span> <span class="token operator">|</span>k<span class="token punctuation">,</span> v<span class="token operator">|</span>
+      <span class="token comment"># How send method would look a like</span>
+      <span class="token comment"># self.name = value[k]</span>
+      <span class="token keyword">self</span><span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>k<span class="token delimiter tag">}</span></span>=&quot;</span><span class="token punctuation">,</span> values<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+user_info <span class="token operator">=</span> <span class="token punctuation">{</span>
+  name<span class="token punctuation">:</span> <span class="token string">'Matt'</span><span class="token punctuation">,</span>
+  email<span class="token punctuation">:</span> <span class="token string">'test@gms.com'</span><span class="token punctuation">,</span>
+  address<span class="token punctuation">:</span> <span class="token string">'132 random st.'</span><span class="token punctuation">,</span>
+  notes<span class="token punctuation">:</span> <span class="token string">&quot;annoying customer&quot;</span>
+<span class="token punctuation">}</span>
+
+account <span class="token operator">=</span> <span class="token constant">Account</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+<span class="token constant">If</span> attributes gets increase <span class="token keyword">then</span> we would messup the code
+<span class="token comment">#--------- Bad way --------------</span>
+account<span class="token punctuation">.</span>name <span class="token operator">=</span> user_info<span class="token punctuation">[</span><span class="token symbol">:name</span><span class="token punctuation">]</span>
+account<span class="token punctuation">.</span>address <span class="token operator">=</span> user_info<span class="token punctuation">[</span><span class="token symbol">:address</span><span class="token punctuation">]</span>
+account<span class="token punctuation">.</span>email <span class="token operator">=</span> user_info<span class="token punctuation">[</span><span class="token symbol">:email</span><span class="token punctuation">]</span>
+account<span class="token punctuation">.</span>notes <span class="token operator">=</span> user_info<span class="token punctuation">[</span><span class="token symbol">:notes</span><span class="token punctuation">]</span>
+
+<span class="token comment"># --------- Meta Programing way --------------</span>
+account<span class="token punctuation">.</span>assign_values<span class="token punctuation">(</span>user_info<span class="token punctuation">)</span> <span class="token comment"># With single line we can assign n number of attributes</span>
+
+puts account<span class="token punctuation">.</span>inspect
+
+</code></pre></div><p>Note: <code>send()</code> itself is not recommended anymore. Use <code>__send__()</code> which has the power to call private methods, or (recommended) <code>public_send()</code></p> <h2 id="defining-methods-dynamically"><a href="#defining-methods-dynamically" class="header-anchor">#</a> Defining methods dynamically</h2> <p>With Ruby you can modify the structure of the program in execution time. One way to do it, is by defining methods dynamically using the method <code>method_missing</code>.</p> <p>Let's say that we want to be able to test if a number is greater than other number with the syntax <code>777.is_greater_than_123?</code>.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># open Numeric class</span>
+<span class="token keyword">class</span> <span class="token class-name">Numeric</span>
+  <span class="token comment"># override `method_missing`</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">method_missing</span></span><span class="token punctuation">(</span>method_name<span class="token punctuation">,</span><span class="token operator">*</span>args<span class="token punctuation">)</span>
+    <span class="token comment"># test if the method_name matches the syntax we want</span>
+    <span class="token keyword">if</span> method_name<span class="token punctuation">.</span>to_s<span class="token punctuation">.</span>match <span class="token regex">/^is_greater_than_(\d+)\?$/</span>
+      <span class="token comment"># capture the number in the method_name</span>
+      the_other_number <span class="token operator">=</span> $<span class="token number">1.</span>to_i
+      <span class="token comment"># return whether the number is greater than the other number or not</span>
+      <span class="token keyword">self</span> <span class="token operator">&gt;</span> the_other_number
+    <span class="token keyword">else</span>
+      <span class="token comment"># if the method_name doesn't match what we want, let the previous definition of `method_missing` handle it</span>
+      <span class="token keyword">super</span>
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>One important thing to remember when using <code>method_missing</code> that one should also override <code>respond_to?</code> method:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Numeric</span>
+   <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">respond_to</span></span><span class="token operator">?</span><span class="token punctuation">(</span>method_name<span class="token punctuation">,</span> include_all <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span> 
+     method_name<span class="token punctuation">.</span>to_s<span class="token punctuation">.</span>match<span class="token punctuation">(</span><span class="token regex">/^is_greater_than_(\d+)\?$/</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token keyword">super</span>
+   <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Forgetting to do so leads to a inconsistent situation, when you can successfully call <code>600.is_greater_than_123</code>, but <code>600.respond_to(:is_greater_than_123)</code> returns false.</p> <h2 id="defining-methods-on-instances"><a href="#defining-methods-on-instances" class="header-anchor">#</a> Defining methods on instances</h2> <p>In ruby you can add methods to existing instances of any class. This allows you to add behavior to and instance of a class without changing the behavior of the rest of the instances of that class.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">method1</span></span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span>
+    puts foo
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token comment">#defines method2 on object exp</span>
+exp <span class="token operator">=</span> <span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+exp<span class="token punctuation">.</span><span class="token keyword">define_method</span><span class="token punctuation">(</span><span class="token symbol">:method2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>puts <span class="token string">&quot;Method2&quot;</span><span class="token punctuation">}</span>
+
+<span class="token comment">#with method parameters</span>
+exp<span class="token punctuation">.</span><span class="token keyword">define_method</span><span class="token punctuation">(</span><span class="token symbol">:method3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">|</span>name<span class="token operator">|</span> puts name<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/ruby/metaprogramming.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/ruby/struct.html" class="prev">
+        Struct
+      </a></span> <span class="next"><a href="/ruby/dynamic-evaluation.html">
+        Dynamic Evaluation
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3090.e5ddbf7a.js" defer></script>
+  </body>
+</html>

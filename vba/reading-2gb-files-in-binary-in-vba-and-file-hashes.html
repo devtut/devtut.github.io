@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VBA - Reading 2GB+ files in binary in VBA and File Hashes</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="This have to be in a Class module, examples later referred as Random, Code for Calculating File Hash in a Standard module, Calculating all Files Hash from a root Folder">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="VBA - Reading 2GB+ files in binary in VBA and File Hashes">
+    <meta property="og:description" content="This have to be in a Class module, examples later referred as Random, Code for Calculating File Hash in a Standard module, Calculating all Files Hash from a root Folder">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="VBA - Reading 2GB+ files in binary in VBA and File Hashes">
+    <meta name="twitter:description" content="This have to be in a Class module, examples later referred as Random, Code for Calculating File Hash in a Standard module, Calculating all Files Hash from a root Folder">
+    <meta name="twitter:url" content="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3434.2b2aee2c.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vba/" class="sidebar-link">Disclaimer</a></li><li><a href="/vba/getting-started-with-vba.html" class="sidebar-link">Getting started with VBA</a></li><li><a href="/vba/comments.html" class="sidebar-link">Comments</a></li><li><a href="/vba/string-literals-escaping-non-printable-characters-and-line-continuations.html" class="sidebar-link">String Literals - Escaping, non-printable characters and line-continuations</a></li><li><a href="/vba/vba-option-keyword.html" class="sidebar-link">VBA Option Keyword</a></li><li><a href="/vba/declaring-variables.html" class="sidebar-link">Declaring Variables</a></li><li><a href="/vba/declaring-and-assigning-strings.html" class="sidebar-link">Declaring and assigning strings</a></li><li><a href="/vba/concatenating-strings.html" class="sidebar-link">Concatenating strings</a></li><li><a href="/vba/frequently-used-string-manipulation.html" class="sidebar-link">Frequently used string manipulation</a></li><li><a href="/vba/substrings.html" class="sidebar-link">Substrings</a></li><li><a href="/vba/searching-within-strings-for-the-presence-of-substrings.html" class="sidebar-link">Searching within strings for the presence of substrings</a></li><li><a href="/vba/assigning-strings-with-repeated-characters.html" class="sidebar-link">Assigning strings with repeated characters</a></li><li><a href="/vba/measuring-the-length-of-strings.html" class="sidebar-link">Measuring the length of strings</a></li><li><a href="/vba/converting-other-types-to-strings.html" class="sidebar-link">Converting other types to strings</a></li><li><a href="/vba/date-time-manipulation.html" class="sidebar-link">Date Time Manipulation</a></li><li><a href="/vba/data-types-and-limits.html" class="sidebar-link">Data Types and Limits</a></li><li><a href="/vba/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/vba/data-structures.html" class="sidebar-link">Data Structures</a></li><li><a href="/vba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/vba/copying-returning-and-passing-arrays.html" class="sidebar-link">Copying, returning and passing arrays</a></li><li><a href="/vba/collections.html" class="sidebar-link">Collections</a></li><li><a href="/vba/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vba/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/vba/flow-control-structures.html" class="sidebar-link">Flow control structures</a></li><li><a href="/vba/passing-arguments-byref-or-byval.html" class="sidebar-link">Passing Arguments ByRef or ByVal</a></li><li><a href="/vba/scripting-filesystemobject.html" class="sidebar-link">Scripting.FileSystemObject</a></li><li><a href="/vba/working-with-files-and-directories-without-using-filesystemobject.html" class="sidebar-link">Working With Files and Directories Without Using FileSystemObject</a></li><li><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html" class="active sidebar-link">Reading 2GB+ files in binary in VBA and File Hashes</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html#this-have-to-be-in-a-class-module-examples-later-referred-as-random" class="sidebar-link">This have to be in a Class module, examples later referred as &quot;Random&quot;</a></li><li class="sidebar-sub-header"><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html#code-for-calculating-file-hash-in-a-standard-module" class="sidebar-link">Code for Calculating File Hash in a Standard module</a></li><li class="sidebar-sub-header"><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html#calculating-all-files-hash-from-a-root-folder" class="sidebar-link">Calculating all Files Hash from a root Folder</a></li></ul></li><li><a href="/vba/creating-a-procedure.html" class="sidebar-link">Creating a procedure</a></li><li><a href="/vba/procedure-calls.html" class="sidebar-link">Procedure Calls</a></li><li><a href="/vba/conditional-compilation.html" class="sidebar-link">Conditional Compilation</a></li><li><a href="/vba/object-oriented-vba.html" class="sidebar-link">Object-Oriented VBA</a></li><li><a href="/vba/creating-a-custom-class.html" class="sidebar-link">Creating a Custom Class</a></li><li><a href="/vba/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/vba/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vba/events.html" class="sidebar-link">Events</a></li><li><a href="/vba/scripting-dictionary-object.html" class="sidebar-link">Scripting.Dictionary object</a></li><li><a href="/vba/working-with-ado.html" class="sidebar-link">Working with ADO</a></li><li><a href="/vba/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/vba/user-forms.html" class="sidebar-link">User Forms</a></li><li><a href="/vba/createobject-vs-getobject.html" class="sidebar-link">CreateObject vs. GetObject</a></li><li><a href="/vba/non-latin-characters.html" class="sidebar-link">Non-Latin Characters</a></li><li><a href="/vba/api-calls.html" class="sidebar-link">API Calls</a></li><li><a href="/vba/automation-or-using-other-applications-libraries.html" class="sidebar-link">Automation or Using other applications Libraries</a></li><li><a href="/vba/macro-security-and-signing-of-vba-projects-modules.html" class="sidebar-link">Macro security and signing of VBA-projects/-modules</a></li><li><a href="/vba/vba-run-time-errors.html" class="sidebar-link">VBA Run-Time Errors</a></li><li><a href="/vba/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="reading-2gb-files-in-binary-in-vba-and-file-hashes"><a href="#reading-2gb-files-in-binary-in-vba-and-file-hashes" class="header-anchor">#</a> Reading 2GB+ files in binary in VBA and File Hashes</h1> <p>There is a built in easy way to read files in binary within VBA, however it has a restriction of 2GB (2,147,483,647 bytes - max of Long data type). As technology evolves, this 2GB limit is easily breached. e.g. an ISO image of Operating System install DVD disc. Microsoft does provide a way to overcome this via low level Windows API and here is a backup of it.</p> <p>Also demonstrate (Read part) for calculating File Hashes without external program like <code>fciv.exe</code> from Microsoft.</p> <h2 id="this-have-to-be-in-a-class-module-examples-later-referred-as-random"><a href="#this-have-to-be-in-a-class-module-examples-later-referred-as-random" class="header-anchor">#</a> This have to be in a Class module, examples later referred as &quot;Random&quot;</h2> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token comment">' How To Seek Past VBA's 2GB File Limit</span>
+<span class="token comment">' Source: https://support.microsoft.com/en-us/kb/189981 (Archived)</span>
+<span class="token comment">' This must be in a Class Module</span>
+
+<span class="token keyword">Option</span> Explicit
+
+<span class="token keyword">Public</span> <span class="token keyword">Enum</span> W32F_Errors
+    W32F_UNKNOWN_ERROR <span class="token operator">=</span> <span class="token number">45600</span>
+    W32F_FILE_ALREADY_OPEN
+    W32F_PROBLEM_OPENING_FILE
+    W32F_FILE_ALREADY_CLOSED
+    W32F_Problem_seeking
+<span class="token keyword">End</span> <span class="token keyword">Enum</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> W32F_SOURCE <span class="token operator">=</span> <span class="token string">&quot;Win32File Object&quot;</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> GENERIC_WRITE <span class="token operator">=</span> <span class="token number">&amp;H40000000</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> GENERIC_READ <span class="token operator">=</span> <span class="token number">&amp;H80000000</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> FILE_ATTRIBUTE_NORMAL <span class="token operator">=</span> <span class="token number">&amp;H80</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> CREATE_ALWAYS <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> OPEN_ALWAYS <span class="token operator">=</span> <span class="token number">4</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> INVALID_HANDLE_VALUE <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> FILE_BEGIN <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> FILE_CURRENT <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> FILE_END <span class="token operator">=</span> <span class="token number">2</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> FORMAT_MESSAGE_FROM_SYSTEM <span class="token operator">=</span> <span class="token number">&amp;H1000</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Declare</span> <span class="token keyword">Function</span> FormatMessage <span class="token keyword">Lib</span> <span class="token string">&quot;kernel32&quot;</span> <span class="token keyword">Alias</span> <span class="token string">&quot;FormatMessageA&quot;</span> <span class="token punctuation">(</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> dwFlags <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    lpSource <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> dwMessageId <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> dwLanguageId <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> lpBuffer <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> nSize <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    Arguments <span class="token keyword">As</span> Any<span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Declare</span> <span class="token keyword">Function</span> ReadFile <span class="token keyword">Lib</span> <span class="token string">&quot;kernel32&quot;</span> <span class="token punctuation">(</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> hFile <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    lpBuffer <span class="token keyword">As</span> Any<span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> nNumberOfBytesToRead <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    lpNumberOfBytesRead <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> lpOverlapped <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Declare</span> <span class="token keyword">Function</span> CloseHandle <span class="token keyword">Lib</span> <span class="token string">&quot;kernel32&quot;</span> <span class="token punctuation">(</span><span class="token keyword">ByVal</span> hObject <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Declare</span> <span class="token keyword">Function</span> WriteFile <span class="token keyword">Lib</span> <span class="token string">&quot;kernel32&quot;</span> <span class="token punctuation">(</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> hFile <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    lpBuffer <span class="token keyword">As</span> Any<span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> nNumberOfBytesToWrite <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    lpNumberOfBytesWritten <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> lpOverlapped <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Declare</span> <span class="token keyword">Function</span> CreateFile <span class="token keyword">Lib</span> <span class="token string">&quot;kernel32&quot;</span> <span class="token keyword">Alias</span> <span class="token string">&quot;CreateFileA&quot;</span> <span class="token punctuation">(</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> lpFileName <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> dwDesiredAccess <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> dwShareMode <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> lpSecurityAttributes <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> dwCreationDisposition <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> dwFlagsAndAttributes <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> hTemplateFile <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Declare</span> <span class="token keyword">Function</span> SetFilePointer <span class="token keyword">Lib</span> <span class="token string">&quot;kernel32&quot;</span> <span class="token punctuation">(</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> hFile <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> lDistanceToMove <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    lpDistanceToMoveHigh <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token operator">_</span>
+    <span class="token keyword">ByVal</span> dwMoveMethod <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Declare</span> <span class="token keyword">Function</span> FlushFileBuffers <span class="token keyword">Lib</span> <span class="token string">&quot;kernel32&quot;</span> <span class="token punctuation">(</span><span class="token keyword">ByVal</span> hFile <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+<span class="token keyword">Private</span> hFile <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> sFName <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> fAutoFlush <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> FileHandle<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    FileHandle <span class="token operator">=</span> hFile
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> FileName<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    FileName <span class="token operator">=</span> sFName
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> IsOpen<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    IsOpen <span class="token operator">=</span> hFile <span class="token operator">&lt;</span><span class="token operator">&gt;</span> INVALID_HANDLE_VALUE
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> AutoFlush<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    AutoFlush <span class="token operator">=</span> fAutoFlush
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> AutoFlush<span class="token punctuation">(</span><span class="token keyword">ByVal</span> NewVal <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    fAutoFlush <span class="token operator">=</span> NewVal
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> OpenFile<span class="token punctuation">(</span><span class="token keyword">ByVal</span> sFileName <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">&lt;</span><span class="token operator">&gt;</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_OPEN<span class="token punctuation">,</span> sFName
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    hFile <span class="token operator">=</span> CreateFile<span class="token punctuation">(</span>sFileName<span class="token punctuation">,</span> GENERIC_WRITE <span class="token keyword">Or</span> GENERIC_READ<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> OPEN_ALWAYS<span class="token punctuation">,</span> FILE_ATTRIBUTE_NORMAL<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_PROBLEM_OPENING_FILE<span class="token punctuation">,</span> sFileName
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    sFName <span class="token operator">=</span> sFileName
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> CloseFile<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    CloseHandle hFile
+    sFName <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+    fAutoFlush <span class="token operator">=</span> <span class="token boolean">False</span>
+    hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> ReadBytes<span class="token punctuation">(</span><span class="token keyword">ByVal</span> ByteCount <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+    <span class="token keyword">Dim</span> BytesRead <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> Bytes<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Byte</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    <span class="token keyword">ReDim</span> Bytes<span class="token punctuation">(</span><span class="token number">0</span> <span class="token keyword">To</span> ByteCount <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Byte</span>
+    ReadFile hFile<span class="token punctuation">,</span> Bytes<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> ByteCount<span class="token punctuation">,</span> BytesRead<span class="token punctuation">,</span> <span class="token number">0</span>
+    ReadBytes <span class="token operator">=</span> Bytes
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> WriteBytes<span class="token punctuation">(</span>DataBytes<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Byte</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fSuccess <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> BytesToWrite <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> BytesWritten <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    BytesToWrite <span class="token operator">=</span> UBound<span class="token punctuation">(</span>DataBytes<span class="token punctuation">)</span> <span class="token operator">-</span> LBound<span class="token punctuation">(</span>DataBytes<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span>
+    fSuccess <span class="token operator">=</span> WriteFile<span class="token punctuation">(</span>hFile<span class="token punctuation">,</span> DataBytes<span class="token punctuation">(</span>LBound<span class="token punctuation">(</span>DataBytes<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> BytesToWrite<span class="token punctuation">,</span> BytesWritten<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> fAutoFlush <span class="token keyword">Then</span> Flush
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> Flush<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    FlushFileBuffers hFile
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> SeekAbsolute<span class="token punctuation">(</span><span class="token keyword">ByVal</span> HighPos <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token keyword">ByVal</span> LowPos <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    LowPos <span class="token operator">=</span> SetFilePointer<span class="token punctuation">(</span>hFile<span class="token punctuation">,</span> LowPos<span class="token punctuation">,</span> HighPos<span class="token punctuation">,</span> FILE_BEGIN<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> SeekRelative<span class="token punctuation">(</span><span class="token keyword">ByVal</span> Offset <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> TempLow <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> TempErr <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span>
+        RaiseError W32F_FILE_ALREADY_CLOSED
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    TempLow <span class="token operator">=</span> SetFilePointer<span class="token punctuation">(</span>hFile<span class="token punctuation">,</span> Offset<span class="token punctuation">,</span> <span class="token keyword">ByVal</span> <span class="token number">0</span><span class="token operator">&amp;</span><span class="token punctuation">,</span> FILE_CURRENT<span class="token punctuation">)</span>
+    <span class="token keyword">If</span> TempLow <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token keyword">Then</span>
+        TempErr <span class="token operator">=</span> Err<span class="token punctuation">.</span>LastDllError
+        <span class="token keyword">If</span> TempErr <span class="token keyword">Then</span>
+            RaiseError W32F_Problem_seeking<span class="token punctuation">,</span> <span class="token string">&quot;Error &quot;</span> <span class="token operator">&amp;</span> TempErr <span class="token operator">&amp;</span> <span class="token string">&quot;.&quot;</span> <span class="token operator">&amp;</span> vbCrLf <span class="token operator">&amp;</span> <span class="token keyword">CStr</span><span class="token punctuation">(</span>TempErr<span class="token punctuation">)</span>
+        <span class="token keyword">End</span> <span class="token keyword">If</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> Class_Initialize<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    hFile <span class="token operator">=</span> INVALID_HANDLE_VALUE
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> Class_Terminate<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> hFile <span class="token operator">&lt;</span><span class="token operator">&gt;</span> INVALID_HANDLE_VALUE <span class="token keyword">Then</span> CloseHandle hFile
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> RaiseError<span class="token punctuation">(</span><span class="token keyword">ByVal</span> ErrorCode <span class="token keyword">As</span> W32F_Errors<span class="token punctuation">,</span> <span class="token keyword">Optional</span> sExtra<span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> Win32Err <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> Win32Text <span class="token keyword">As</span> <span class="token keyword">String</span>
+    Win32Err <span class="token operator">=</span> Err<span class="token punctuation">.</span>LastDllError
+    <span class="token keyword">If</span> Win32Err <span class="token keyword">Then</span>
+        Win32Text <span class="token operator">=</span> vbCrLf <span class="token operator">&amp;</span> <span class="token string">&quot;Error &quot;</span> <span class="token operator">&amp;</span> Win32Err <span class="token operator">&amp;</span> vbCrLf <span class="token operator">&amp;</span> <span class="token operator">_</span>
+        DecodeAPIErrors<span class="token punctuation">(</span>Win32Err<span class="token punctuation">)</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    <span class="token keyword">Select</span> <span class="token keyword">Case</span> ErrorCode
+        <span class="token keyword">Case</span> W32F_FILE_ALREADY_OPEN
+            Err<span class="token punctuation">.</span>Raise W32F_FILE_ALREADY_OPEN<span class="token punctuation">,</span> W32F_SOURCE<span class="token punctuation">,</span> <span class="token string">&quot;The file '&quot;</span> <span class="token operator">&amp;</span> sExtra <span class="token operator">&amp;</span> <span class="token string">&quot;' is already open.&quot;</span> <span class="token operator">&amp;</span> Win32Text
+        <span class="token keyword">Case</span> W32F_PROBLEM_OPENING_FILE
+            Err<span class="token punctuation">.</span>Raise W32F_PROBLEM_OPENING_FILE<span class="token punctuation">,</span> W32F_SOURCE<span class="token punctuation">,</span> <span class="token string">&quot;Error opening '&quot;</span> <span class="token operator">&amp;</span> sExtra <span class="token operator">&amp;</span> <span class="token string">&quot;'.&quot;</span> <span class="token operator">&amp;</span> Win32Text
+        <span class="token keyword">Case</span> W32F_FILE_ALREADY_CLOSED
+            Err<span class="token punctuation">.</span>Raise W32F_FILE_ALREADY_CLOSED<span class="token punctuation">,</span> W32F_SOURCE<span class="token punctuation">,</span> <span class="token string">&quot;There is no open file.&quot;</span>
+        <span class="token keyword">Case</span> W32F_Problem_seeking
+            Err<span class="token punctuation">.</span>Raise W32F_Problem_seeking<span class="token punctuation">,</span> W32F_SOURCE<span class="token punctuation">,</span> <span class="token string">&quot;Seek Error.&quot;</span> <span class="token operator">&amp;</span> vbCrLf <span class="token operator">&amp;</span> sExtra
+        <span class="token keyword">Case</span> <span class="token keyword">Else</span>
+            Err<span class="token punctuation">.</span>Raise W32F_UNKNOWN_ERROR<span class="token punctuation">,</span> W32F_SOURCE<span class="token punctuation">,</span> <span class="token string">&quot;Unknown error.&quot;</span> <span class="token operator">&amp;</span> Win32Text
+    <span class="token keyword">End</span> <span class="token keyword">Select</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Function</span> DecodeAPIErrors<span class="token punctuation">(</span><span class="token keyword">ByVal</span> ErrorCode <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Dim</span> sMessage <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> MessageLength <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    sMessage <span class="token operator">=</span> Space<span class="token operator">$</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span>
+    MessageLength <span class="token operator">=</span> FormatMessage<span class="token punctuation">(</span>FORMAT_MESSAGE_FROM_SYSTEM<span class="token punctuation">,</span> <span class="token number">0</span><span class="token operator">&amp;</span><span class="token punctuation">,</span> ErrorCode<span class="token punctuation">,</span> <span class="token number">0</span><span class="token operator">&amp;</span><span class="token punctuation">,</span> sMessage<span class="token punctuation">,</span> <span class="token number">256</span><span class="token operator">&amp;</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token operator">&amp;</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> MessageLength <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">Then</span>
+        DecodeAPIErrors <span class="token operator">=</span> Left<span class="token punctuation">(</span>sMessage<span class="token punctuation">,</span> MessageLength<span class="token punctuation">)</span>
+    <span class="token keyword">Else</span>
+        DecodeAPIErrors <span class="token operator">=</span> <span class="token string">&quot;Unknown Error.&quot;</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><h2 id="code-for-calculating-file-hash-in-a-standard-module"><a href="#code-for-calculating-file-hash-in-a-standard-module" class="header-anchor">#</a> Code for Calculating File Hash in a Standard module</h2> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeMD5 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;MD5&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.md5cryptoserviceprovider(v=vs.110).aspx</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeSHA1 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;SHA1&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.sha1cryptoserviceprovider(v=vs.110).aspx</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeSHA256 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;SHA256&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.sha256cryptoserviceprovider(v=vs.110).aspx</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeSHA384 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;SHA384&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.sha384cryptoserviceprovider(v=vs.110).aspx</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeSHA512 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;SHA512&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.sha512cryptoserviceprovider(v=vs.110).aspx</span>
+
+<span class="token keyword">Private</span> uFileSize <span class="token keyword">As</span> <span class="token keyword">Double</span> <span class="token comment">' Comment out if not testing performance by FileHashes()</span>
+
+<span class="token keyword">Sub</span> FileHashes<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> tStart <span class="token keyword">As</span> <span class="token keyword">Date</span><span class="token punctuation">,</span> tFinish <span class="token keyword">As</span> <span class="token keyword">Date</span><span class="token punctuation">,</span> sHash <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> aTestFiles <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">,</span> oTestFile <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">,</span> aBlockSizes <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">,</span> oBlockSize <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+    <span class="token keyword">Dim</span> BLOCKSIZE <span class="token keyword">As</span> <span class="token keyword">Double</span>
+    
+    <span class="token comment">' This performs performance testing on different file sizes and block sizes</span>
+    aBlockSizes <span class="token operator">=</span> Array<span class="token punctuation">(</span><span class="token string">&quot;2^12-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^13-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^14-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^15-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^16-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^17-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^18-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^19-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^20-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^21-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^22-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^23-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^24-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^25-1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;2^26-1&quot;</span><span class="token punctuation">)</span>
+    aTestFiles <span class="token operator">=</span> Array<span class="token punctuation">(</span><span class="token string">&quot;C:\ISO\clonezilla-live-2.2.2-37-amd64.iso&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;C:\ISO\HPIP201.2014_0902.29.iso&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;C:\ISO\SW_DVD5_Windows_Vista_Business_W32_32BIT_English.ISO&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;C:\ISO\Win10_1607_English_x64.iso&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;C:\ISO\SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English.ISO&quot;</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Test files: &quot;</span> <span class="token operator">&amp;</span> Join<span class="token punctuation">(</span>aTestFiles<span class="token punctuation">,</span> <span class="token string">&quot; | &quot;</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;BlockSizes: &quot;</span> <span class="token operator">&amp;</span> Join<span class="token punctuation">(</span>aBlockSizes<span class="token punctuation">,</span> <span class="token string">&quot; | &quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">For</span> <span class="token keyword">Each</span> oTestFile <span class="token keyword">In</span> aTestFiles
+        Debug<span class="token punctuation">.</span>Print oTestFile
+        <span class="token keyword">For</span> <span class="token keyword">Each</span> oBlockSize <span class="token keyword">In</span> aBlockSizes
+            BLOCKSIZE <span class="token operator">=</span> Evaluate<span class="token punctuation">(</span>oBlockSize<span class="token punctuation">)</span>
+            tStart <span class="token operator">=</span> Now
+            sHash <span class="token operator">=</span> GetFileHash<span class="token punctuation">(</span><span class="token keyword">CStr</span><span class="token punctuation">(</span>oTestFile<span class="token punctuation">)</span><span class="token punctuation">,</span> BLOCKSIZE<span class="token punctuation">,</span> HashTypeMD5<span class="token punctuation">)</span>
+            tFinish <span class="token operator">=</span> Now
+            Debug<span class="token punctuation">.</span>Print sHash<span class="token punctuation">,</span> uFileSize<span class="token punctuation">,</span> Format<span class="token punctuation">(</span>tFinish <span class="token operator">-</span> tStart<span class="token punctuation">,</span> <span class="token string">&quot;hh:mm:ss&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> oBlockSize <span class="token operator">&amp;</span> <span class="token string">&quot; (&quot;</span> <span class="token operator">&amp;</span> BLOCKSIZE <span class="token operator">&amp;</span> <span class="token string">&quot;)&quot;</span>
+        <span class="token keyword">Next</span>
+    <span class="token keyword">Next</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Function</span> GetFileHash<span class="token punctuation">(</span><span class="token keyword">ByVal</span> sFile <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> <span class="token keyword">ByVal</span> uBlockSize <span class="token keyword">As</span> <span class="token keyword">Double</span><span class="token punctuation">,</span> <span class="token keyword">ByVal</span> sHashType <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Dim</span> oFSO <span class="token keyword">As</span> <span class="token keyword">Object</span> <span class="token comment">' &quot;Scripting.FileSystemObject&quot;</span>
+    <span class="token keyword">Dim</span> oCSP <span class="token keyword">As</span> <span class="token keyword">Object</span> <span class="token comment">' One of the &quot;CryptoServiceProvider&quot;</span>
+    <span class="token keyword">Dim</span> oRnd <span class="token keyword">As</span> Random <span class="token comment">' &quot;Random&quot; Class by Microsoft, must be in the same file</span>
+    <span class="token keyword">Dim</span> uBytesRead <span class="token keyword">As</span> <span class="token keyword">Double</span><span class="token punctuation">,</span> uBytesToRead <span class="token keyword">As</span> <span class="token keyword">Double</span><span class="token punctuation">,</span> bDone <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    <span class="token keyword">Dim</span> aBlock<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Byte</span><span class="token punctuation">,</span> aBytes <span class="token keyword">As</span> <span class="token keyword">Variant</span> <span class="token comment">' Arrays to store bytes</span>
+    <span class="token keyword">Dim</span> aHash<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Byte</span><span class="token punctuation">,</span> sHash <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> i <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    <span class="token comment">'Dim uFileSize As Double ' Un-Comment if GetFileHash() is to be used individually</span>
+    
+    <span class="token keyword">Set</span> oRnd <span class="token operator">=</span> <span class="token keyword">New</span> Random <span class="token comment">' Class by Microsoft: Random</span>
+    <span class="token keyword">Set</span> oFSO <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">Set</span> oCSP <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;System.Security.Cryptography.&quot;</span> <span class="token operator">&amp;</span> sHashType <span class="token operator">&amp;</span> <span class="token string">&quot;CryptoServiceProvider&quot;</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">If</span> oFSO <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Or</span> oRnd <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Or</span> oCSP <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span>
+        MsgBox <span class="token string">&quot;One or more required objects cannot be created&quot;</span>
+        <span class="token keyword">GoTo</span> CleanUp
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    
+    uFileSize <span class="token operator">=</span> oFSO<span class="token punctuation">.</span>GetFile<span class="token punctuation">(</span>sFile<span class="token punctuation">)</span><span class="token punctuation">.</span>Size <span class="token comment">' FILELEN() has 2GB max!</span>
+    uBytesRead <span class="token operator">=</span> <span class="token number">0</span>
+    bDone <span class="token operator">=</span> <span class="token boolean">False</span>
+    sHash <span class="token operator">=</span> <span class="token keyword">String</span><span class="token punctuation">(</span>oCSP<span class="token punctuation">.</span>HashSize <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">)</span> <span class="token comment">' Each hexadecimal has 4 bits</span>
+    
+    Application<span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token boolean">False</span>
+    <span class="token comment">' Process the file in chunks of uBlockSize or less</span>
+    <span class="token keyword">If</span> uFileSize <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">Then</span>
+        <span class="token keyword">ReDim</span> aBlock<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+        oCSP<span class="token punctuation">.</span>TransformFinalBlock aBlock<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span>
+        bDone <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token keyword">Else</span>
+        <span class="token keyword">With</span> oRnd
+            <span class="token punctuation">.</span>OpenFile sFile
+            <span class="token keyword">Do</span>
+                <span class="token keyword">If</span> uBytesRead <span class="token operator">+</span> uBlockSize <span class="token operator">&lt;</span> uFileSize <span class="token keyword">Then</span>
+                    uBytesToRead <span class="token operator">=</span> uBlockSize
+                <span class="token keyword">Else</span>
+                    uBytesToRead <span class="token operator">=</span> uFileSize <span class="token operator">-</span> uBytesRead
+                    bDone <span class="token operator">=</span> <span class="token boolean">True</span>
+                <span class="token keyword">End</span> <span class="token keyword">If</span>
+                <span class="token comment">' Read in some bytes</span>
+                aBytes <span class="token operator">=</span> <span class="token punctuation">.</span>ReadBytes<span class="token punctuation">(</span>uBytesToRead<span class="token punctuation">)</span>
+                aBlock <span class="token operator">=</span> aBytes
+                <span class="token keyword">If</span> bDone <span class="token keyword">Then</span>
+                    oCSP<span class="token punctuation">.</span>TransformFinalBlock aBlock<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> uBytesToRead
+                    uBytesRead <span class="token operator">=</span> uBytesRead <span class="token operator">+</span> uBytesToRead
+                <span class="token keyword">Else</span>
+                    uBytesRead <span class="token operator">=</span> uBytesRead <span class="token operator">+</span> oCSP<span class="token punctuation">.</span>TransformBlock<span class="token punctuation">(</span>aBlock<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> uBytesToRead<span class="token punctuation">,</span> aBlock<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">End</span> <span class="token keyword">If</span>
+                DoEvents
+            <span class="token keyword">Loop</span> Until bDone
+            <span class="token punctuation">.</span>CloseFile
+        <span class="token keyword">End</span> <span class="token keyword">With</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    <span class="token keyword">If</span> bDone <span class="token keyword">Then</span>
+        <span class="token comment">' convert Hash byte array to an hexadecimal string</span>
+        aHash <span class="token operator">=</span> oCSP<span class="token punctuation">.</span>hash
+        <span class="token keyword">For</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">To</span> UBound<span class="token punctuation">(</span>aHash<span class="token punctuation">)</span>
+            Mid<span class="token operator">$</span><span class="token punctuation">(</span>sHash<span class="token punctuation">,</span> i <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token punctuation">(</span>aHash<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">15</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">=</span> Hex<span class="token punctuation">(</span>aHash<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">Next</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    Application<span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token comment">' Clean up</span>
+    oCSP<span class="token punctuation">.</span>Clear
+CleanUp<span class="token punctuation">:</span>
+    <span class="token keyword">Set</span> oFSO <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+    <span class="token keyword">Set</span> oRnd <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+    <span class="token keyword">Set</span> oCSP <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+    GetFileHash <span class="token operator">=</span> sHash
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><blockquote></blockquote> <p>The output is pretty interesting, my test files indicates that <strong><code>BLOCKSIZE = 131071</code> (2^17-1)</strong> gives overall best performance with 32bit Office 2010 on Windows 7 x64, next best is <strong>2^16-1 (65535)</strong>. Note <code>2^27-1</code> yields <strong>Out of memory</strong>.</p> <table><thead><tr><th>File Size (bytes)</th> <th>File Name</th></tr></thead> <tbody><tr><td>146,800,640</td> <td>clonezilla-live-2.2.2-37-amd64.iso</td></tr> <tr><td>798,210,048</td> <td>HPIP201.2014_0902.29.iso</td></tr> <tr><td>2,073,016,320</td> <td>SW_DVD5_Windows_Vista_Business_W32_32BIT_English.ISO</td></tr> <tr><td>4,380,387,328</td> <td>Win10_1607_English_x64.iso</td></tr> <tr><td>5,400,115,200</td> <td>SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English.ISO</td></tr></tbody></table> <h2 id="calculating-all-files-hash-from-a-root-folder"><a href="#calculating-all-files-hash-from-a-root-folder" class="header-anchor">#</a> Calculating all Files Hash from a root Folder</h2> <p>Another variation from the code above gives you more performance when you want to get hash codes of all files from a root folder including all sub folders.</p> <h3 id="example-of-worksheet"><a href="#example-of-worksheet" class="header-anchor">#</a> <strong>Example of Worksheet:</strong></h3> <p><a href="https://i.stack.imgur.com/7wEZ3.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/7wEZ3.png" alt="SampleWorksheet"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h3 id="code"><a href="#code" class="header-anchor">#</a> <strong>Code</strong></h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeMD5 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;MD5&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.md5cryptoserviceprovider(v=vs.110).aspx</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeSHA1 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;SHA1&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.sha1cryptoserviceprovider(v=vs.110).aspx</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeSHA256 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;SHA256&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.sha256cryptoserviceprovider(v=vs.110).aspx</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeSHA384 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;SHA384&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.sha384cryptoserviceprovider(v=vs.110).aspx</span>
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> HashTypeSHA512 <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;SHA512&quot;</span> <span class="token comment">' https://msdn.microsoft.com/en-us/library/system.security.cryptography.sha512cryptoserviceprovider(v=vs.110).aspx</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Const</span> BLOCKSIZE <span class="token keyword">As</span> <span class="token keyword">Double</span> <span class="token operator">=</span> <span class="token number">131071</span> <span class="token comment">' 2^17-1</span>
+
+<span class="token keyword">Private</span> oFSO <span class="token keyword">As</span> <span class="token keyword">Object</span>
+<span class="token keyword">Private</span> oCSP <span class="token keyword">As</span> <span class="token keyword">Object</span>
+<span class="token keyword">Private</span> oRnd <span class="token keyword">As</span> Random <span class="token comment">' Requires the Class from Microsoft https://support.microsoft.com/en-us/kb/189981</span>
+<span class="token keyword">Private</span> sHashType <span class="token keyword">As</span> <span class="token keyword">String</span>
+<span class="token keyword">Private</span> sRootFDR <span class="token keyword">As</span> <span class="token keyword">String</span>
+<span class="token keyword">Private</span> oRng <span class="token keyword">As</span> Range
+<span class="token keyword">Private</span> uFileCount <span class="token keyword">As</span> <span class="token keyword">Double</span>
+
+<span class="token keyword">Sub</span> AllFileHashes<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">' Active-X button calls this</span>
+    <span class="token keyword">Dim</span> oWS <span class="token keyword">As</span> Worksheet
+    <span class="token comment">' | A: FileHash | B: FileSize | C: FileName | D: FilaName and Path | E: File Last Modification Time | F: Time required to calculate has code (seconds)</span>
+    <span class="token keyword">With</span> ThisWorkbook
+        <span class="token comment">' Clear All old entries on all worksheets</span>
+        <span class="token keyword">For</span> <span class="token keyword">Each</span> oWS <span class="token keyword">In</span> <span class="token punctuation">.</span>Worksheets
+            <span class="token keyword">Set</span> oRng <span class="token operator">=</span> Intersect<span class="token punctuation">(</span>oWS<span class="token punctuation">.</span>UsedRange<span class="token punctuation">,</span> oWS<span class="token punctuation">.</span>UsedRange<span class="token punctuation">.</span>Offset<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token keyword">If</span> <span class="token keyword">Not</span> oRng <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span> oRng<span class="token punctuation">.</span>ClearContents
+        <span class="token keyword">Next</span>
+        <span class="token keyword">With</span> <span class="token punctuation">.</span>Worksheets<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+            sHashType <span class="token operator">=</span> Trim<span class="token punctuation">(</span><span class="token punctuation">.</span>Range<span class="token punctuation">(</span><span class="token string">&quot;A1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value<span class="token punctuation">)</span> <span class="token comment">' Range(A1)</span>
+            sRootFDR <span class="token operator">=</span> Trim<span class="token punctuation">(</span><span class="token punctuation">.</span>Range<span class="token punctuation">(</span><span class="token string">&quot;C1&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value<span class="token punctuation">)</span> <span class="token comment">' Range(C1) Column B for file size</span>
+            <span class="token keyword">If</span> Len<span class="token punctuation">(</span>sHashType<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">Or</span> Len<span class="token punctuation">(</span>sRootFDR<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">Then</span> <span class="token keyword">Exit</span> <span class="token keyword">Sub</span>
+            <span class="token keyword">Set</span> oRng <span class="token operator">=</span> <span class="token punctuation">.</span>Range<span class="token punctuation">(</span><span class="token string">&quot;A3&quot;</span><span class="token punctuation">)</span> <span class="token comment">' First entry on First Page</span>
+        <span class="token keyword">End</span> <span class="token keyword">With</span>
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+    
+    uFileCount <span class="token operator">=</span> <span class="token number">0</span>
+    <span class="token keyword">If</span> oRnd <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span> <span class="token keyword">Set</span> oRnd <span class="token operator">=</span> <span class="token keyword">New</span> Random <span class="token comment">' Class by Microsoft: Random</span>
+    <span class="token keyword">If</span> oFSO <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span> <span class="token keyword">Set</span> oFSO <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span> <span class="token comment">' Just to get correct FileSize</span>
+    <span class="token keyword">If</span> oCSP <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span> <span class="token keyword">Set</span> oCSP <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;System.Security.Cryptography.&quot;</span> <span class="token operator">&amp;</span> sHashType <span class="token operator">&amp;</span> <span class="token string">&quot;CryptoServiceProvider&quot;</span><span class="token punctuation">)</span>
+    
+    ProcessFolder oFSO<span class="token punctuation">.</span>GetFolder<span class="token punctuation">(</span>sRootFDR<span class="token punctuation">)</span>
+    
+    Application<span class="token punctuation">.</span>StatusBar <span class="token operator">=</span> <span class="token boolean">False</span>
+    Application<span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token boolean">True</span>
+    oCSP<span class="token punctuation">.</span>Clear
+    <span class="token keyword">Set</span> oCSP <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+    <span class="token keyword">Set</span> oRng <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+    <span class="token keyword">Set</span> oFSO <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+    <span class="token keyword">Set</span> oRnd <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Total file count: &quot;</span> <span class="token operator">&amp;</span> uFileCount
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> ProcessFolder<span class="token punctuation">(</span><span class="token keyword">ByRef</span> oFDR <span class="token keyword">As</span> <span class="token keyword">Object</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> oFile <span class="token keyword">As</span> <span class="token keyword">Object</span><span class="token punctuation">,</span> oSubFDR <span class="token keyword">As</span> <span class="token keyword">Object</span><span class="token punctuation">,</span> sHash <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> dStart <span class="token keyword">As</span> <span class="token keyword">Date</span><span class="token punctuation">,</span> dFinish <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    Application<span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token boolean">False</span>
+    <span class="token keyword">For</span> <span class="token keyword">Each</span> oFile <span class="token keyword">In</span> oFDR<span class="token punctuation">.</span>Files
+        uFileCount <span class="token operator">=</span> uFileCount <span class="token operator">+</span> <span class="token number">1</span>
+        Application<span class="token punctuation">.</span>StatusBar <span class="token operator">=</span> uFileCount <span class="token operator">&amp;</span> <span class="token string">&quot;: &quot;</span> <span class="token operator">&amp;</span> Right<span class="token punctuation">(</span>oFile<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token number">255</span> <span class="token operator">-</span> Len<span class="token punctuation">(</span>uFileCount<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        oCSP<span class="token punctuation">.</span>Initialize <span class="token comment">' Reinitialize the CryptoServiceProvider</span>
+        dStart <span class="token operator">=</span> Now
+        sHash <span class="token operator">=</span> GetFileHash<span class="token punctuation">(</span>oFile<span class="token punctuation">,</span> BLOCKSIZE<span class="token punctuation">,</span> sHashType<span class="token punctuation">)</span>
+        dFinish <span class="token operator">=</span> Now
+        <span class="token keyword">With</span> oRng
+            <span class="token punctuation">.</span>Value <span class="token operator">=</span> sHash
+            <span class="token punctuation">.</span>Offset<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value <span class="token operator">=</span> oFile<span class="token punctuation">.</span>Size <span class="token comment">' File Size in bytes</span>
+            <span class="token punctuation">.</span>Offset<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value <span class="token operator">=</span> oFile<span class="token punctuation">.</span>Name <span class="token comment">' File name with extension</span>
+            <span class="token punctuation">.</span>Offset<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value <span class="token operator">=</span> oFile<span class="token punctuation">.</span>Path <span class="token comment">' Full File name and Path</span>
+            <span class="token punctuation">.</span>Offset<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value <span class="token operator">=</span> FileDateTime<span class="token punctuation">(</span>oFile<span class="token punctuation">.</span>Path<span class="token punctuation">)</span> <span class="token comment">' Last modification timestamp of file</span>
+            <span class="token punctuation">.</span>Offset<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value <span class="token operator">=</span> dFinish <span class="token operator">-</span> dStart <span class="token comment">' Time required to calculate hash code</span>
+        <span class="token keyword">End</span> <span class="token keyword">With</span>
+        <span class="token keyword">If</span> oRng<span class="token punctuation">.</span>Row <span class="token operator">=</span> Rows<span class="token punctuation">.</span>Count <span class="token keyword">Then</span>
+            <span class="token comment">' Max rows reached, start on Next sheet</span>
+            <span class="token keyword">If</span> oRng<span class="token punctuation">.</span>Worksheet<span class="token punctuation">.</span>Index <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&gt;</span> ThisWorkbook<span class="token punctuation">.</span>Worksheets<span class="token punctuation">.</span>Count <span class="token keyword">Then</span>
+                MsgBox <span class="token string">&quot;All rows in all worksheets have been used, please create more sheets&quot;</span>
+                <span class="token keyword">End</span>
+            <span class="token keyword">End</span> <span class="token keyword">If</span>
+            <span class="token keyword">Set</span> oRng <span class="token operator">=</span> ThisWorkbook<span class="token punctuation">.</span>Sheets<span class="token punctuation">(</span>oRng<span class="token punctuation">.</span>Worksheet<span class="token punctuation">.</span>Index <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Range<span class="token punctuation">(</span><span class="token string">&quot;A3&quot;</span><span class="token punctuation">)</span>
+            oRng<span class="token punctuation">.</span>Worksheet<span class="token punctuation">.</span>Activate
+        <span class="token keyword">Else</span>
+            <span class="token comment">' Move to next row otherwise</span>
+            <span class="token keyword">Set</span> oRng <span class="token operator">=</span> oRng<span class="token punctuation">.</span>Offset<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token keyword">End</span> <span class="token keyword">If</span>
+    <span class="token keyword">Next</span>
+    <span class="token comment">'Application.StatusBar = False</span>
+    Application<span class="token punctuation">.</span>ScreenUpdating <span class="token operator">=</span> <span class="token boolean">True</span>
+    oRng<span class="token punctuation">.</span>Activate
+    <span class="token keyword">For</span> <span class="token keyword">Each</span> oSubFDR <span class="token keyword">In</span> oFDR<span class="token punctuation">.</span>SubFolders
+        ProcessFolder oSubFDR
+    <span class="token keyword">Next</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+    
+<span class="token keyword">Private</span> <span class="token keyword">Function</span> GetFileHash<span class="token punctuation">(</span><span class="token keyword">ByVal</span> sFile <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> <span class="token keyword">ByVal</span> uBlockSize <span class="token keyword">As</span> <span class="token keyword">Double</span><span class="token punctuation">,</span> <span class="token keyword">ByVal</span> sHashType <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Dim</span> uBytesRead <span class="token keyword">As</span> <span class="token keyword">Double</span><span class="token punctuation">,</span> uBytesToRead <span class="token keyword">As</span> <span class="token keyword">Double</span><span class="token punctuation">,</span> bDone <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    <span class="token keyword">Dim</span> aBlock<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Byte</span><span class="token punctuation">,</span> aBytes <span class="token keyword">As</span> <span class="token keyword">Variant</span> <span class="token comment">' Arrays to store bytes</span>
+    <span class="token keyword">Dim</span> aHash<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Byte</span><span class="token punctuation">,</span> sHash <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">,</span> i <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> oTmp <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+    <span class="token keyword">Dim</span> uFileSize <span class="token keyword">As</span> <span class="token keyword">Double</span> <span class="token comment">' Un-Comment if GetFileHash() is to be used individually</span>
+    
+    <span class="token keyword">If</span> oRnd <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span> <span class="token keyword">Set</span> oRnd <span class="token operator">=</span> <span class="token keyword">New</span> Random <span class="token comment">' Class by Microsoft: Random</span>
+    <span class="token keyword">If</span> oFSO <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span> <span class="token keyword">Set</span> oFSO <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span> <span class="token comment">' Just to get correct FileSize</span>
+    <span class="token keyword">If</span> oCSP <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span> <span class="token keyword">Set</span> oCSP <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;System.Security.Cryptography.&quot;</span> <span class="token operator">&amp;</span> sHashType <span class="token operator">&amp;</span> <span class="token string">&quot;CryptoServiceProvider&quot;</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">If</span> oFSO <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Or</span> oRnd <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Or</span> oCSP <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span>
+        MsgBox <span class="token string">&quot;One or more required objects cannot be created&quot;</span>
+        <span class="token keyword">Exit</span> <span class="token keyword">Function</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    
+    uFileSize <span class="token operator">=</span> oFSO<span class="token punctuation">.</span>GetFile<span class="token punctuation">(</span>sFile<span class="token punctuation">)</span><span class="token punctuation">.</span>Size <span class="token comment">' FILELEN() has 2GB max</span>
+    uBytesRead <span class="token operator">=</span> <span class="token number">0</span>
+    bDone <span class="token operator">=</span> <span class="token boolean">False</span>
+    sHash <span class="token operator">=</span> <span class="token keyword">String</span><span class="token punctuation">(</span>oCSP<span class="token punctuation">.</span>HashSize <span class="token operator">/</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">&quot;0&quot;</span><span class="token punctuation">)</span> <span class="token comment">' Each hexadecimal is 4 bits</span>
+    
+    <span class="token comment">' Process the file in chunks of uBlockSize or less</span>
+    <span class="token keyword">If</span> uFileSize <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">Then</span>
+        <span class="token keyword">ReDim</span> aBlock<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+        oCSP<span class="token punctuation">.</span>TransformFinalBlock aBlock<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span>
+        bDone <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token keyword">Else</span>
+        <span class="token keyword">With</span> oRnd
+            <span class="token keyword">On</span> <span class="token keyword">Error</span> <span class="token keyword">GoTo</span> CannotOpenFile
+            <span class="token punctuation">.</span>OpenFile sFile
+            <span class="token keyword">Do</span>
+                <span class="token keyword">If</span> uBytesRead <span class="token operator">+</span> uBlockSize <span class="token operator">&lt;</span> uFileSize <span class="token keyword">Then</span>
+                    uBytesToRead <span class="token operator">=</span> uBlockSize
+                <span class="token keyword">Else</span>
+                    uBytesToRead <span class="token operator">=</span> uFileSize <span class="token operator">-</span> uBytesRead
+                    bDone <span class="token operator">=</span> <span class="token boolean">True</span>
+                <span class="token keyword">End</span> <span class="token keyword">If</span>
+                <span class="token comment">' Read in some bytes</span>
+                aBytes <span class="token operator">=</span> <span class="token punctuation">.</span>ReadBytes<span class="token punctuation">(</span>uBytesToRead<span class="token punctuation">)</span>
+                aBlock <span class="token operator">=</span> aBytes
+                <span class="token keyword">If</span> bDone <span class="token keyword">Then</span>
+                    oCSP<span class="token punctuation">.</span>TransformFinalBlock aBlock<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> uBytesToRead
+                    uBytesRead <span class="token operator">=</span> uBytesRead <span class="token operator">+</span> uBytesToRead
+                <span class="token keyword">Else</span>
+                    uBytesRead <span class="token operator">=</span> uBytesRead <span class="token operator">+</span> oCSP<span class="token punctuation">.</span>TransformBlock<span class="token punctuation">(</span>aBlock<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> uBytesToRead<span class="token punctuation">,</span> aBlock<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">End</span> <span class="token keyword">If</span>
+                DoEvents
+            <span class="token keyword">Loop</span> Until bDone
+            <span class="token punctuation">.</span>CloseFile
+CannotOpenFile<span class="token punctuation">:</span>
+            <span class="token keyword">If</span> Err<span class="token punctuation">.</span>Number <span class="token operator">&lt;</span><span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">Then</span> <span class="token comment">' Change the hash code to the Error description</span>
+                oTmp <span class="token operator">=</span> Split<span class="token punctuation">(</span>Err<span class="token punctuation">.</span>Description<span class="token punctuation">,</span> vbCrLf<span class="token punctuation">)</span>
+                sHash <span class="token operator">=</span> oTmp<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token string">&quot;:&quot;</span> <span class="token operator">&amp;</span> oTmp<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+            <span class="token keyword">End</span> <span class="token keyword">If</span>
+        <span class="token keyword">End</span> <span class="token keyword">With</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    <span class="token keyword">If</span> bDone <span class="token keyword">Then</span>
+        <span class="token comment">' convert Hash byte array to an hexadecimal string</span>
+        aHash <span class="token operator">=</span> oCSP<span class="token punctuation">.</span>hash
+        <span class="token keyword">For</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">To</span> UBound<span class="token punctuation">(</span>aHash<span class="token punctuation">)</span>
+            Mid<span class="token operator">$</span><span class="token punctuation">(</span>sHash<span class="token punctuation">,</span> i <span class="token operator">*</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token punctuation">(</span>aHash<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">15</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">=</span> Hex<span class="token punctuation">(</span>aHash<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">Next</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    GetFileHash <span class="token operator">=</span> sHash
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <h3 id="methods-for-the-class-by-microsoft"><a href="#methods-for-the-class-by-microsoft" class="header-anchor">#</a> <strong>METHODS FOR THE CLASS BY MICROSOFT</strong></h3> <table><thead><tr><th>Method Name</th> <th>Description</th></tr></thead> <tbody><tr><td><strong>IsOpen</strong></td> <td>Returns a boolean to indicate whether the file is open.</td></tr> <tr><td><strong>OpenFile</strong>(<strong>sFileNam</strong>e As String)</td> <td>Opens the file specified by the sFileName argument.</td></tr> <tr><td><strong>CloseFile</strong></td> <td>Closes the currently open file.</td></tr> <tr><td><strong>ReadBytes</strong>(<strong>ByteCount</strong> As Long)</td> <td>Reads ByteCount bytes and returns them in a Variant byte array and moves the pointer.</td></tr> <tr><td><strong>WriteBytes</strong>(<strong>DataBytes()</strong> As Byte)</td> <td>Writes the contents of the byte array to the current position in the file and moves the pointer.</td></tr> <tr><td><strong>Flush</strong></td> <td>Forces Windows to flush the write cache.</td></tr> <tr><td><strong>SeekAbsolute</strong>(<strong>HighPos</strong> As Long, <strong>LowPos</strong> As Long)</td> <td>Moves the file pointer to the designated position from the beginning of the file. Though VBA treats the DWORDS as signed values, the API treats them as unsigned. Make the high-order argument non-zero to exceed 4GB. The low-order DWORD will be negative for values between 2GB and 4GB.</td></tr> <tr><td><strong>SeekRelative</strong>(<strong>Offset</strong> As Long)</td> <td>Moves the file pointer up to +/- 2GB from the current location. You can rewrite this method to allow for offsets greater than 2GB by converting a 64-bit signed offset into two 32-bit values.</td></tr></tbody></table> <h3 id="properties-of-the-class-by-microsoft"><a href="#properties-of-the-class-by-microsoft" class="header-anchor">#</a> <strong>PROPERTIES OF THE CLASS BY MICROSOFT</strong></h3> <table><thead><tr><th>Property</th> <th>Description</th></tr></thead> <tbody><tr><td><strong>FileHandle</strong></td> <td>The file handle for the currently open file. This is not compatible with VBA file handles.</td></tr> <tr><td><strong>FileName</strong></td> <td>The name of the currently open file.</td></tr> <tr><td><strong>AutoFlush</strong></td> <td>Sets/indicates whether WriteBytes will automatically call the Flush method.</td></tr></tbody></table> <h3 id="normal-module"><a href="#normal-module" class="header-anchor">#</a> <strong>NORMAL MODULE</strong></h3> <table><thead><tr><th>Function</th> <th>Notes</th></tr></thead> <tbody><tr><td><strong>GetFileHash</strong>(<strong>sFile</strong> As String, <strong>uBlockSize</strong> As Double, <strong>sHashType</strong> As String)</td> <td>Simply throw in the full path to be hashed, Blocksize to use (number of bytes), and the type of Hash to use - one of the private constants: <strong>HashTypeMD5</strong>, <strong>HashTypeSHA1</strong>, <strong>HashTypeSHA256</strong>, <strong>HashTypeSHA384</strong>, <strong>HashTypeSHA512</strong>. This was designed to be as generic as possible.</td></tr></tbody></table> <p>You should un/comment the <strong>uFileSize As Double</strong> accordingly. I have tested MD5 and SHA1.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vba/working-with-files-and-directories-without-using-filesystemobject.html" class="prev">
+        Working With Files and Directories Without Using FileSystemObject
+      </a></span> <span class="next"><a href="/vba/creating-a-procedure.html">
+        Creating a procedure
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3434.2b2aee2c.js" defer></script>
+  </body>
+</html>

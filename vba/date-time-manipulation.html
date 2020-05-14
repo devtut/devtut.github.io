@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VBA - Date Time Manipulation</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Calendar, Base functions, Extraction functions, Calculation functions, Conversion and Creation">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="VBA - Date Time Manipulation">
+    <meta property="og:description" content="Calendar, Base functions, Extraction functions, Calculation functions, Conversion and Creation">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vba/date-time-manipulation.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="VBA - Date Time Manipulation">
+    <meta name="twitter:description" content="Calendar, Base functions, Extraction functions, Calculation functions, Conversion and Creation">
+    <meta name="twitter:url" content="/vba/date-time-manipulation.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3417.683d7a75.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vba/" class="sidebar-link">Disclaimer</a></li><li><a href="/vba/getting-started-with-vba.html" class="sidebar-link">Getting started with VBA</a></li><li><a href="/vba/comments.html" class="sidebar-link">Comments</a></li><li><a href="/vba/string-literals-escaping-non-printable-characters-and-line-continuations.html" class="sidebar-link">String Literals - Escaping, non-printable characters and line-continuations</a></li><li><a href="/vba/vba-option-keyword.html" class="sidebar-link">VBA Option Keyword</a></li><li><a href="/vba/declaring-variables.html" class="sidebar-link">Declaring Variables</a></li><li><a href="/vba/declaring-and-assigning-strings.html" class="sidebar-link">Declaring and assigning strings</a></li><li><a href="/vba/concatenating-strings.html" class="sidebar-link">Concatenating strings</a></li><li><a href="/vba/frequently-used-string-manipulation.html" class="sidebar-link">Frequently used string manipulation</a></li><li><a href="/vba/substrings.html" class="sidebar-link">Substrings</a></li><li><a href="/vba/searching-within-strings-for-the-presence-of-substrings.html" class="sidebar-link">Searching within strings for the presence of substrings</a></li><li><a href="/vba/assigning-strings-with-repeated-characters.html" class="sidebar-link">Assigning strings with repeated characters</a></li><li><a href="/vba/measuring-the-length-of-strings.html" class="sidebar-link">Measuring the length of strings</a></li><li><a href="/vba/converting-other-types-to-strings.html" class="sidebar-link">Converting other types to strings</a></li><li><a href="/vba/date-time-manipulation.html" class="active sidebar-link">Date Time Manipulation</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vba/date-time-manipulation.html#calendar" class="sidebar-link">Calendar</a></li><li class="sidebar-sub-header"><a href="/vba/date-time-manipulation.html#base-functions" class="sidebar-link">Base functions</a></li><li class="sidebar-sub-header"><a href="/vba/date-time-manipulation.html#extraction-functions" class="sidebar-link">Extraction functions</a></li><li class="sidebar-sub-header"><a href="/vba/date-time-manipulation.html#calculation-functions" class="sidebar-link">Calculation functions</a></li><li class="sidebar-sub-header"><a href="/vba/date-time-manipulation.html#conversion-and-creation" class="sidebar-link">Conversion and Creation</a></li></ul></li><li><a href="/vba/data-types-and-limits.html" class="sidebar-link">Data Types and Limits</a></li><li><a href="/vba/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/vba/data-structures.html" class="sidebar-link">Data Structures</a></li><li><a href="/vba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/vba/copying-returning-and-passing-arrays.html" class="sidebar-link">Copying, returning and passing arrays</a></li><li><a href="/vba/collections.html" class="sidebar-link">Collections</a></li><li><a href="/vba/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vba/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/vba/flow-control-structures.html" class="sidebar-link">Flow control structures</a></li><li><a href="/vba/passing-arguments-byref-or-byval.html" class="sidebar-link">Passing Arguments ByRef or ByVal</a></li><li><a href="/vba/scripting-filesystemobject.html" class="sidebar-link">Scripting.FileSystemObject</a></li><li><a href="/vba/working-with-files-and-directories-without-using-filesystemobject.html" class="sidebar-link">Working With Files and Directories Without Using FileSystemObject</a></li><li><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html" class="sidebar-link">Reading 2GB+ files in binary in VBA and File Hashes</a></li><li><a href="/vba/creating-a-procedure.html" class="sidebar-link">Creating a procedure</a></li><li><a href="/vba/procedure-calls.html" class="sidebar-link">Procedure Calls</a></li><li><a href="/vba/conditional-compilation.html" class="sidebar-link">Conditional Compilation</a></li><li><a href="/vba/object-oriented-vba.html" class="sidebar-link">Object-Oriented VBA</a></li><li><a href="/vba/creating-a-custom-class.html" class="sidebar-link">Creating a Custom Class</a></li><li><a href="/vba/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/vba/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vba/events.html" class="sidebar-link">Events</a></li><li><a href="/vba/scripting-dictionary-object.html" class="sidebar-link">Scripting.Dictionary object</a></li><li><a href="/vba/working-with-ado.html" class="sidebar-link">Working with ADO</a></li><li><a href="/vba/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/vba/user-forms.html" class="sidebar-link">User Forms</a></li><li><a href="/vba/createobject-vs-getobject.html" class="sidebar-link">CreateObject vs. GetObject</a></li><li><a href="/vba/non-latin-characters.html" class="sidebar-link">Non-Latin Characters</a></li><li><a href="/vba/api-calls.html" class="sidebar-link">API Calls</a></li><li><a href="/vba/automation-or-using-other-applications-libraries.html" class="sidebar-link">Automation or Using other applications Libraries</a></li><li><a href="/vba/macro-security-and-signing-of-vba-projects-modules.html" class="sidebar-link">Macro security and signing of VBA-projects/-modules</a></li><li><a href="/vba/vba-run-time-errors.html" class="sidebar-link">VBA Run-Time Errors</a></li><li><a href="/vba/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="date-time-manipulation"><a href="#date-time-manipulation" class="header-anchor">#</a> Date Time Manipulation</h1> <h2 id="calendar"><a href="#calendar" class="header-anchor">#</a> Calendar</h2> <p>VBA supports 2 calendars : <a href="https://en.wikipedia.org/wiki/Gregorian_calendar" target="_blank" rel="noopener noreferrer">Gregorian<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> and <a href="https://en.wikipedia.org/wiki/Islamic_calendar" target="_blank" rel="noopener noreferrer">Hijri<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>The <code>Calendar</code> property is used to modify or display the current calendar.</p> <p>The 2 values for the Calendar are:</p> <table><thead><tr><th>Value</th> <th>Constant</th> <th>Description</th></tr></thead> <tbody><tr><td>0</td> <td>vbCalGreg</td> <td>Gregorian calendar (default)</td></tr> <tr><td>1</td> <td>vbCalHijri</td> <td>Hijri calendar</td></tr></tbody></table> <h3 id="example"><a href="#example" class="header-anchor">#</a> Example</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> CalendarExample<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">'Cache the current setting.</span>
+    <span class="token keyword">Dim</span> Cached <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+    Cached <span class="token operator">=</span> Calendar
+
+    <span class="token comment">' Dates in Gregorian Calendar</span>
+    Calendar <span class="token operator">=</span> vbCalGreg
+    <span class="token keyword">Dim</span> Sample <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    <span class="token comment">'Create sample date of 2016-07-28</span>
+    Sample <span class="token operator">=</span> DateSerial<span class="token punctuation">(</span><span class="token number">2016</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span>
+
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Current Calendar : &quot;</span> <span class="token operator">&amp;</span> Calendar
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;SampleDate = &quot;</span> <span class="token operator">&amp;</span> Format<span class="token operator">$</span><span class="token punctuation">(</span>Sample<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>
+    
+    <span class="token comment">' Date in Hijri Calendar</span>
+    Calendar <span class="token operator">=</span> vbCalHijri
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Current Calendar : &quot;</span> <span class="token operator">&amp;</span> Calendar
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;SampleDate = &quot;</span> <span class="token operator">&amp;</span> Format<span class="token operator">$</span><span class="token punctuation">(</span>Sample<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>
+    
+    <span class="token comment">'Reset VBA to cached value.</span>
+    Cached <span class="token operator">=</span> Calendar
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>This Sub prints the following ;</p> <div class="language-vb extra-class"><pre class="language-vb"><code>Current Calendar <span class="token punctuation">:</span> <span class="token number">0</span>
+SampleDate <span class="token operator">=</span> <span class="token number">2016</span><span class="token operator">-</span><span class="token number">07</span><span class="token operator">-</span><span class="token number">28</span>
+Current Calendar <span class="token punctuation">:</span> <span class="token number">1</span>
+SampleDate <span class="token operator">=</span> <span class="token number">1437</span><span class="token operator">-</span><span class="token number">10</span><span class="token operator">-</span><span class="token number">23</span>
+
+</code></pre></div><h2 id="base-functions"><a href="#base-functions" class="header-anchor">#</a> Base functions</h2> <h3 id="retrieve-system-datetime"><a href="#retrieve-system-datetime" class="header-anchor">#</a> Retrieve System DateTime</h3> <p>VBA supports 3 built-in functions to retrieve the date and/or time from the system's clock.</p> <table><thead><tr><th>Function</th> <th>Return Type</th> <th>Return Value</th></tr></thead> <tbody><tr><td>Now</td> <td>Date</td> <td>Returns the current date and time</td></tr> <tr><td>Date</td> <td>Date</td> <td>Returns the date portion of the current date and time</td></tr> <tr><td>Time</td> <td>Date</td> <td>Returns the time portion of the current date and time</td></tr></tbody></table> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> DateTimeExample<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">' -----------------------------------------------------</span>
+    <span class="token comment">' Note : EU system with default date format DD/MM/YYYY</span>
+    <span class="token comment">' -----------------------------------------------------</span>
+    
+    Debug<span class="token punctuation">.</span>Print Now   <span class="token comment">' prints 28/07/2016 10:16:01 (output below assumes this date and time)</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token keyword">Date</span>  <span class="token comment">' prints 28/07/2016</span>
+    Debug<span class="token punctuation">.</span>Print Time  <span class="token comment">' prints 10:16:01</span>
+    
+    <span class="token comment">' Apply a custom format to the current date or time</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>Now<span class="token punctuation">,</span> <span class="token string">&quot;dd mmmm yyyy hh:nn&quot;</span><span class="token punctuation">)</span>  <span class="token comment">' prints 28 July 2016 10:16</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span><span class="token keyword">Date</span><span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>         <span class="token comment">' prints 2016-07-28</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>Time<span class="token punctuation">,</span> <span class="token string">&quot;hh&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token string">&quot; hour &quot;</span> <span class="token operator">&amp;</span> <span class="token operator">_</span>
+                Format<span class="token operator">$</span><span class="token punctuation">(</span>Time<span class="token punctuation">,</span> <span class="token string">&quot;nn&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token string">&quot; min &quot;</span> <span class="token operator">&amp;</span> <span class="token operator">_</span>
+                Format<span class="token operator">$</span><span class="token punctuation">(</span>Time<span class="token punctuation">,</span> <span class="token string">&quot;ss&quot;</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token string">&quot; sec &quot;</span>       <span class="token comment">' prints 10 hour 16 min 01 sec</span>
+    
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="timer-function"><a href="#timer-function" class="header-anchor">#</a> Timer Function</h3> <p>The <code>Timer</code> function returns a Single representing the number of seconds elapsed since midnight. The precision is one hundredth of a second.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> TimerExample<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    Debug<span class="token punctuation">.</span>Print Time    <span class="token comment">' prints 10:36:31  (time at execution)</span>
+    Debug<span class="token punctuation">.</span>Print Timer   <span class="token comment">' prints 38191,13  (seconds since midnight)</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Because <code>Now</code> and <code>Time</code> functions are only precise to seconds, <code>Timer</code> offers a convenient way to increase accuracy of time measurement:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> GetBenchmark<span class="token punctuation">(</span><span class="token punctuation">)</span>
+       
+    <span class="token keyword">Dim</span> StartTime  <span class="token keyword">As</span> <span class="token keyword">Single</span>
+    StartTime <span class="token operator">=</span> Timer       <span class="token comment">'Store the current Time</span>
+    
+    <span class="token keyword">Dim</span> i <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    <span class="token keyword">Dim</span> temp <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">For</span> i <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">To</span> <span class="token number">1000000</span>    <span class="token comment">'See how long it takes Left$ to execute 1,000,000 times</span>
+        temp <span class="token operator">=</span> Left<span class="token operator">$</span><span class="token punctuation">(</span><span class="token string">&quot;Text&quot;</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token keyword">Next</span> i
+    
+    <span class="token keyword">Dim</span> Elapsed <span class="token keyword">As</span> <span class="token keyword">Single</span>
+    Elapsed <span class="token operator">=</span> Timer <span class="token operator">-</span> StartTime
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;Code completed in &quot;</span> <span class="token operator">&amp;</span> <span class="token keyword">CInt</span><span class="token punctuation">(</span>Elapsed <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token string">&quot; ms&quot;</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="isdate"><a href="#isdate" class="header-anchor">#</a> IsDate()</h3> <p>IsDate() tests whether an expression is a valid date or not. Returns a <code>Boolean</code>.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> IsDateExamples<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">Dim</span> anything <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+       
+    anything <span class="token operator">=</span> <span class="token string">&quot;September 11, 2001&quot;</span>
+
+    Debug<span class="token punctuation">.</span>Print IsDate<span class="token punctuation">(</span>anything<span class="token punctuation">)</span>    <span class="token comment">'Prints True</span>
+            
+    anything <span class="token operator">=</span> <span class="token date builtin">#9/11/2001#</span>
+
+    Debug<span class="token punctuation">.</span>Print IsDate<span class="token punctuation">(</span>anything<span class="token punctuation">)</span>    <span class="token comment">'Prints True</span>
+   
+    anything <span class="token operator">=</span> <span class="token string">&quot;just a string&quot;</span>
+
+    Debug<span class="token punctuation">.</span>Print IsDate<span class="token punctuation">(</span>anything<span class="token punctuation">)</span>    <span class="token comment">'Prints False</span>
+
+    anything <span class="token operator">=</span> vbNull
+    
+    Debug<span class="token punctuation">.</span>Print IsDate<span class="token punctuation">(</span>anything<span class="token punctuation">)</span>    <span class="token comment">'Prints False</span>
+    
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="extraction-functions"><a href="#extraction-functions" class="header-anchor">#</a> Extraction functions</h2> <p>These functions take a <code>Variant</code> that can be cast to a <code>Date</code> as a parameter and return an <code>Integer</code> representing a portion of a date or time. If the parameter can not be cast to a <code>Date</code>, it will result in a run-time error 13: Type mismatch.</p> <table><thead><tr><th>Function</th> <th>Description</th> <th>Returned value</th></tr></thead> <tbody><tr><td>Year()</td> <td>Returns the year portion of the date argument.</td> <td>Integer (100 to 9999)</td></tr> <tr><td>Month()</td> <td>Returns the month portion of the date argument.</td> <td>Integer (1 to 12)</td></tr> <tr><td>Day()</td> <td>Returns the day portion of the date argument.</td> <td>Integer (1 to 31)</td></tr> <tr><td>WeekDay()</td> <td>Returns the day of the week of the date argument. Accepts an optional second argument definining the first day of the week</td> <td>Integer (1 to 7)</td></tr> <tr><td>Hour()</td> <td>Returns the hour portion of the date argument.</td> <td>Integer (0 to 23)</td></tr> <tr><td>Minute()</td> <td>Returns the minute portion of the date argument.</td> <td>Integer (0 to 59)</td></tr> <tr><td>Second()</td> <td>Returns the second portion of the date argument.</td> <td>Integer (0 to 59)</td></tr></tbody></table> <p><strong>Examples:</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> ExtractionExamples<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">Dim</span> MyDate <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    
+    MyDate <span class="token operator">=</span> DateSerial<span class="token punctuation">(</span><span class="token number">2016</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span> <span class="token operator">+</span> TimeSerial<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">34</span><span class="token punctuation">,</span> <span class="token number">56</span><span class="token punctuation">)</span>
+
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>MyDate<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd hh:nn:ss&quot;</span><span class="token punctuation">)</span> <span class="token comment">' prints 2016-07-28 12:34:56</span>
+
+    Debug<span class="token punctuation">.</span>Print Year<span class="token punctuation">(</span>MyDate<span class="token punctuation">)</span>                           <span class="token comment">' prints 2016</span>
+    Debug<span class="token punctuation">.</span>Print Month<span class="token punctuation">(</span>MyDate<span class="token punctuation">)</span>                          <span class="token comment">' prints 7</span>
+    Debug<span class="token punctuation">.</span>Print Day<span class="token punctuation">(</span>MyDate<span class="token punctuation">)</span>                            <span class="token comment">' prints 28</span>
+    Debug<span class="token punctuation">.</span>Print Hour<span class="token punctuation">(</span>MyDate<span class="token punctuation">)</span>                           <span class="token comment">' prints 12</span>
+    Debug<span class="token punctuation">.</span>Print Minute<span class="token punctuation">(</span>MyDate<span class="token punctuation">)</span>                         <span class="token comment">' prints 34</span>
+    Debug<span class="token punctuation">.</span>Print Second<span class="token punctuation">(</span>MyDate<span class="token punctuation">)</span>                         <span class="token comment">' prints 56</span>
+    
+    Debug<span class="token punctuation">.</span>Print Weekday<span class="token punctuation">(</span>MyDate<span class="token punctuation">)</span>                        <span class="token comment">' prints 5</span>
+    <span class="token comment">'Varies by locale - i.e. will print 4 in the EU and 5 in the US</span>
+    Debug<span class="token punctuation">.</span>Print Weekday<span class="token punctuation">(</span>MyDate<span class="token punctuation">,</span> vbUseSystemDayOfWeek<span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print Weekday<span class="token punctuation">(</span>MyDate<span class="token punctuation">,</span> vbMonday<span class="token punctuation">)</span>              <span class="token comment">' prints 4</span>
+    Debug<span class="token punctuation">.</span>Print Weekday<span class="token punctuation">(</span>MyDate<span class="token punctuation">,</span> vbSunday<span class="token punctuation">)</span>              <span class="token comment">' prints 5</span>
+    
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="datepart-function"><a href="#datepart-function" class="header-anchor">#</a> DatePart() Function</h3> <p><code>DatePart()</code> is also a function returning a portion of a date, but works differently and allow more possibilities than the functions above. It can for instance return the Quarter of the year or the Week of the year.</p> <p><strong>Syntax:</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code>DatePart <span class="token punctuation">(</span> interval<span class="token punctuation">,</span> <span class="token keyword">date</span>  [<span class="token punctuation">,</span> firstdayofweek] [<span class="token punctuation">,</span> firstweekofyear] <span class="token punctuation">)</span>
+
+</code></pre></div><p><strong>interval</strong> argument can be :</p> <table><thead><tr><th>Interval</th> <th>Description</th></tr></thead> <tbody><tr><td>&quot;yyyy&quot;</td> <td>Year (100 to 9999)</td></tr> <tr><td>&quot;y&quot;</td> <td>Day of the year (1 to 366)</td></tr> <tr><td>&quot;m&quot;</td> <td>Month (1 to 12)</td></tr> <tr><td>&quot;q&quot;</td> <td>Quarter (1 to 4)</td></tr> <tr><td>&quot;ww&quot;</td> <td>Week (1 to 53)</td></tr> <tr><td>&quot;w&quot;</td> <td>Day of the week (1 to 7)</td></tr> <tr><td>&quot;d&quot;</td> <td>Day of the month (1 to 31)</td></tr> <tr><td>&quot;h&quot;</td> <td>Hour (0 to 23)</td></tr> <tr><td>&quot;n&quot;</td> <td>Minute (0 to 59)</td></tr> <tr><td>&quot;s&quot;</td> <td>Second (0 to 59)</td></tr></tbody></table> <p><strong>firstdayofweek</strong> is optional. it is a constant that specifies the first day of the week. If not specified, <code>vbSunday</code> is assumed.</p> <p><strong>firstweekofyear</strong> is optional. it is a constant that specifies the first week of the year. If not specified, the first week is assumed to be the week in which January 1 occurs.</p> <p><strong>Examples:</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> DatePartExample<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">Dim</span> MyDate <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    
+    MyDate <span class="token operator">=</span> DateSerial<span class="token punctuation">(</span><span class="token number">2016</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span> <span class="token operator">+</span> TimeSerial<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">34</span><span class="token punctuation">,</span> <span class="token number">56</span><span class="token punctuation">)</span>
+
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>MyDate<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd hh:nn:ss&quot;</span><span class="token punctuation">)</span> <span class="token comment">' prints 2016-07-28 12:34:56</span>
+    
+    Debug<span class="token punctuation">.</span>Print DatePart<span class="token punctuation">(</span><span class="token string">&quot;yyyy&quot;</span><span class="token punctuation">,</span> MyDate<span class="token punctuation">)</span>              <span class="token comment">' prints 2016</span>
+    Debug<span class="token punctuation">.</span>Print DatePart<span class="token punctuation">(</span><span class="token string">&quot;y&quot;</span><span class="token punctuation">,</span> MyDate<span class="token punctuation">)</span>                 <span class="token comment">' prints 210</span>
+    Debug<span class="token punctuation">.</span>Print DatePart<span class="token punctuation">(</span><span class="token string">&quot;h&quot;</span><span class="token punctuation">,</span> MyDate<span class="token punctuation">)</span>                 <span class="token comment">' prints 12</span>
+    Debug<span class="token punctuation">.</span>Print DatePart<span class="token punctuation">(</span><span class="token string">&quot;Q&quot;</span><span class="token punctuation">,</span> MyDate<span class="token punctuation">)</span>                 <span class="token comment">' prints 3</span>
+    Debug<span class="token punctuation">.</span>Print DatePart<span class="token punctuation">(</span><span class="token string">&quot;w&quot;</span><span class="token punctuation">,</span> MyDate<span class="token punctuation">)</span>                 <span class="token comment">' prints 5</span>
+    Debug<span class="token punctuation">.</span>Print DatePart<span class="token punctuation">(</span><span class="token string">&quot;ww&quot;</span><span class="token punctuation">,</span> MyDate<span class="token punctuation">)</span>                <span class="token comment">' prints 31</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="calculation-functions"><a href="#calculation-functions" class="header-anchor">#</a> Calculation functions</h2> <h3 id="datediff"><a href="#datediff" class="header-anchor">#</a> DateDiff()</h3> <p><code>DateDiff()</code> returns a <code>Long</code> representing the number of time intervals between two specified dates.</p> <p><strong>Syntax</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code>DateDiff <span class="token punctuation">(</span> interval<span class="token punctuation">,</span> date1<span class="token punctuation">,</span> date2  [<span class="token punctuation">,</span> firstdayofweek] [<span class="token punctuation">,</span> firstweekofyear] <span class="token punctuation">)</span>
+
+</code></pre></div><ul><li><strong>interval</strong> can be any of the intervals defined in the <a href="http://stackoverflow.com/documentation/vba/4452/date-time-manipulation/15553/extraction-functions" target="_blank" rel="noopener noreferrer"><code>DatePart()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> function</li> <li><strong>date1</strong> and <strong>date2</strong> are the two dates you want to use in the calculation</li> <li><strong>firstdayofweek</strong> and <strong>firstweekofyear</strong> are optional. Refer to <a href="http://stackoverflow.com/documentation/vba/4452/date-time-manipulation/15553/extraction-functions" target="_blank" rel="noopener noreferrer"><code>DatePart()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> function for explanations</li></ul> <p><strong>Examples</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> DateDiffExamples<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">' Check to see if 2016 is a leap year.</span>
+    <span class="token keyword">Dim</span> NumberOfDays <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    NumberOfDays <span class="token operator">=</span> DateDiff<span class="token punctuation">(</span><span class="token string">&quot;d&quot;</span><span class="token punctuation">,</span> <span class="token date builtin">#1/1/2016#</span><span class="token punctuation">,</span> <span class="token date builtin">#1/1/2017#</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">If</span> NumberOfDays <span class="token operator">=</span> <span class="token number">366</span> <span class="token keyword">Then</span>
+        Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;2016 is a leap year.&quot;</span>              <span class="token comment">'This will output.</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+           
+    <span class="token comment">' Number of seconds in a day</span>
+    <span class="token keyword">Dim</span> StartTime <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    <span class="token keyword">Dim</span> EndTime <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    StartTime <span class="token operator">=</span> TimeSerial<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    EndTime <span class="token operator">=</span> TimeSerial<span class="token punctuation">(</span><span class="token number">24</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print DateDiff<span class="token punctuation">(</span><span class="token string">&quot;s&quot;</span><span class="token punctuation">,</span> StartTime<span class="token punctuation">,</span> EndTime<span class="token punctuation">)</span>       <span class="token comment">'prints 86400</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="dateadd"><a href="#dateadd" class="header-anchor">#</a> DateAdd()</h3> <p><code>DateAdd()</code> returns a <code>Date</code> to which a specified date or time interval has been added.</p> <p><strong>Syntax</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code>DateAdd <span class="token punctuation">(</span> interval<span class="token punctuation">,</span> number<span class="token punctuation">,</span> <span class="token keyword">date</span>  <span class="token punctuation">)</span> 
+
+</code></pre></div><ul><li><strong>interval</strong> can be any of the intervals defined in the <a href="http://stackoverflow.com/documentation/vba/4452/date-time-manipulation/15553/extraction-functions" target="_blank" rel="noopener noreferrer"><code>DatePart()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> function</li> <li><strong>number</strong> Numeric expression that is the number of intervals you want to add. It can be positive (to get dates in the future) or negative (to get dates in the past).</li> <li><strong>date</strong> is a <code>Date</code> or literal representing date to which the interval is added</li></ul> <p><strong>Examples :</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> DateAddExamples<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">Dim</span> Sample <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    <span class="token comment">'Create sample date and time of 2016-07-28 12:34:56</span>
+    Sample <span class="token operator">=</span> DateSerial<span class="token punctuation">(</span><span class="token number">2016</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">)</span> <span class="token operator">+</span> TimeSerial<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">34</span><span class="token punctuation">,</span> <span class="token number">56</span><span class="token punctuation">)</span>
+    
+    <span class="token comment">' Date 5 months previously (prints 2016-02-28):</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>DateAdd<span class="token punctuation">(</span><span class="token string">&quot;m&quot;</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">5</span><span class="token punctuation">,</span> Sample<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>
+    
+    <span class="token comment">' Date 10 months previously (prints 2015-09-28):</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>DateAdd<span class="token punctuation">(</span><span class="token string">&quot;m&quot;</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">10</span><span class="token punctuation">,</span> Sample<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>
+    
+    <span class="token comment">' Date in 8 months (prints 2017-03-28):</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>DateAdd<span class="token punctuation">(</span><span class="token string">&quot;m&quot;</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> Sample<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>
+
+    <span class="token comment">' Date/Time 18 hours previously (prints 2016-07-27 18:34:56):</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>DateAdd<span class="token punctuation">(</span><span class="token string">&quot;h&quot;</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">18</span><span class="token punctuation">,</span> Sample<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd hh:nn:ss&quot;</span><span class="token punctuation">)</span>
+    
+    <span class="token comment">' Date/Time in 36 hours (prints 2016-07-30 00:34:56):</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>DateAdd<span class="token punctuation">(</span><span class="token string">&quot;h&quot;</span><span class="token punctuation">,</span> <span class="token number">36</span><span class="token punctuation">,</span> Sample<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd hh:nn:ss&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="conversion-and-creation"><a href="#conversion-and-creation" class="header-anchor">#</a> Conversion and Creation</h2> <h3 id="cdate"><a href="#cdate" class="header-anchor">#</a> CDate()</h3> <p><code>CDate()</code> converts something from any datatype to a <code>Date</code> datatype</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> CDateExamples<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">Dim</span> sample <span class="token keyword">As</span> <span class="token keyword">Date</span>
+
+    <span class="token comment">' Converts a String representing a date and time to a Date</span>
+    sample <span class="token operator">=</span> <span class="token keyword">CDate</span><span class="token punctuation">(</span><span class="token string">&quot;September 11, 2001 12:34&quot;</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>sample<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd hh:nn:ss&quot;</span><span class="token punctuation">)</span>      <span class="token comment">' prints 2001-09-11 12:34:00</span>
+    
+    <span class="token comment">' Converts a String containing a date to a Date</span>
+    sample <span class="token operator">=</span> <span class="token keyword">CDate</span><span class="token punctuation">(</span><span class="token string">&quot;September 11, 2001&quot;</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>sample<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd hh:nn:ss&quot;</span><span class="token punctuation">)</span>      <span class="token comment">' prints 2001-09-11 00:00:00</span>
+
+    <span class="token comment">' Converts a String containing a time to a Date</span>
+    sample <span class="token operator">=</span> <span class="token keyword">CDate</span><span class="token punctuation">(</span><span class="token string">&quot;12:34:56&quot;</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print Hour<span class="token punctuation">(</span>sample<span class="token punctuation">)</span>                        <span class="token comment">' prints 12</span>
+    Debug<span class="token punctuation">.</span>Print Minute<span class="token punctuation">(</span>sample<span class="token punctuation">)</span>                      <span class="token comment">' prints 34</span>
+    Debug<span class="token punctuation">.</span>Print Second<span class="token punctuation">(</span>sample<span class="token punctuation">)</span>                      <span class="token comment">' prints 56</span>
+    
+    <span class="token comment">' Find the 10000th day from the epoch date of 1899-12-31</span>
+    sample <span class="token operator">=</span> <span class="token keyword">CDate</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>sample<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>       <span class="token comment">' prints 1927-05-18</span>
+    
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Note that VBA also has a loosely typed <code>CVDate()</code> that functions in the same way as the <code>CDate()</code> function other than returning a date typed <code>Variant</code> instead of a strongly typed <code>Date</code>. The <code>CDate()</code> version should be preferred when passing to a <code>Date</code> parameter or assigning to a <code>Date</code> variable, and the <code>CVDate()</code> version should be preferred when when passing to a <code>Variant</code> parameter or assigning to a <code>Variant</code> variable. This avoids implicit type casting.</p> <h3 id="dateserial"><a href="#dateserial" class="header-anchor">#</a> DateSerial()</h3> <p><code>DateSerial()</code> function is used to create a date. It returns a <code>Date</code> for a specified year, month, and day.</p> <p><strong>Syntax:</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code>DateSerial <span class="token punctuation">(</span> year<span class="token punctuation">,</span> month<span class="token punctuation">,</span> day <span class="token punctuation">)</span> 
+
+</code></pre></div><p>With year, month and day arguments being valid Integers (Year from 100 to 9999, Month from 1 to 12, Day from 1 to 31).</p> <p><strong>Examples</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> DateSerialExamples<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">' Build a specific date</span>
+    <span class="token keyword">Dim</span> sample <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    sample <span class="token operator">=</span> DateSerial<span class="token punctuation">(</span><span class="token number">2001</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>sample<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>                   <span class="token comment">' prints 2001-09-11</span>
+    
+    <span class="token comment">' Find the first day of the month for a date.</span>
+    sample <span class="token operator">=</span> DateSerial<span class="token punctuation">(</span>Year<span class="token punctuation">(</span>sample<span class="token punctuation">)</span><span class="token punctuation">,</span> Month<span class="token punctuation">(</span>sample<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>sample<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>                   <span class="token comment">' prints 2001-09-11</span>
+    
+    <span class="token comment">' Find the last day of the previous month.</span>
+    sample <span class="token operator">=</span> DateSerial<span class="token punctuation">(</span>Year<span class="token punctuation">(</span>sample<span class="token punctuation">)</span><span class="token punctuation">,</span> Month<span class="token punctuation">(</span>sample<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>sample<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>                   <span class="token comment">' prints 2001-09-11</span>
+    
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Note that <code>DateSerial()</code> will accept &quot;invalid&quot; dates and calculate a valid date from it. This can be used creatively for good:</p> <p><strong>Positive Example</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> GoodDateSerialExample<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">'Calculate 45 days from today</span>
+    <span class="token keyword">Dim</span> today <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    today <span class="token operator">=</span> DateSerial <span class="token punctuation">(</span><span class="token number">2001</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> futureDate <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    futureDate <span class="token operator">=</span> DateSerial<span class="token punctuation">(</span>Year<span class="token punctuation">(</span>today<span class="token punctuation">)</span><span class="token punctuation">,</span> Month<span class="token punctuation">(</span>today<span class="token punctuation">)</span><span class="token punctuation">,</span> Day<span class="token punctuation">(</span>today<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">45</span><span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>futureDate<span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>            <span class="token comment">'prints 2009-10-26</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>However, it is more likely to cause grief when attempting to create a date from unvalidated user input:</p> <p><strong>Negative Example</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> BadDateSerialExample<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token comment">'Allow user to enter unvalidate date information</span>
+    <span class="token keyword">Dim</span> myYear <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    myYear <span class="token operator">=</span> InputBox<span class="token punctuation">(</span><span class="token string">&quot;Enter Year&quot;</span><span class="token punctuation">)</span>                                         
+            <span class="token comment">'Assume user enters 2009</span>
+    <span class="token keyword">Dim</span> myMonth <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    myMonth <span class="token operator">=</span> InputBox<span class="token punctuation">(</span><span class="token string">&quot;Enter Month&quot;</span><span class="token punctuation">)</span>                                       
+            <span class="token comment">'Assume user enters 2</span>
+    <span class="token keyword">Dim</span> myDay <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    myDay <span class="token operator">=</span> InputBox<span class="token punctuation">(</span><span class="token string">&quot;Enter Day&quot;</span><span class="token punctuation">)</span>                                           
+            <span class="token comment">'Assume user enters 31</span>
+    Debug<span class="token punctuation">.</span>Print Format<span class="token operator">$</span><span class="token punctuation">(</span>DateSerial<span class="token punctuation">(</span>myYear<span class="token punctuation">,</span> myMonth<span class="token punctuation">,</span> myDay<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;yyyy-mm-dd&quot;</span><span class="token punctuation">)</span>   
+            <span class="token comment">'prints  2009-03-03</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vba/date-time-manipulation.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vba/converting-other-types-to-strings.html" class="prev">
+        Converting other types to strings
+      </a></span> <span class="next"><a href="/vba/data-types-and-limits.html">
+        Data Types and Limits
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3417.683d7a75.js" defer></script>
+  </body>
+</html>

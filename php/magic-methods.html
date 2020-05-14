@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PHP - Magic Methods</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="__call() and __callStatic(), __get(), __set(), __isset() and __unset(), __construct() and __destruct(), __toString(), __clone(), __invoke(), __sleep() and __wakeup(), __debugInfo()">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="PHP - Magic Methods">
+    <meta property="og:description" content="__call() and __callStatic(), __get(), __set(), __isset() and __unset(), __construct() and __destruct(), __toString(), __clone(), __invoke(), __sleep() and __wakeup(), __debugInfo()">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/php/magic-methods.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="PHP - Magic Methods">
+    <meta name="twitter:description" content="__call() and __callStatic(), __get(), __set(), __isset() and __unset(), __construct() and __destruct(), __toString(), __clone(), __invoke(), __sleep() and __wakeup(), __debugInfo()">
+    <meta name="twitter:url" content="/php/magic-methods.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2474.18d79bf2.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>PHP</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/php/" class="sidebar-link">Disclaimer</a></li><li><a href="/php/installing-a-php-environment-on-windows.html" class="sidebar-link">Installing a PHP environment on Windows</a></li><li><a href="/php/installing-on-linux-unix-environments.html" class="sidebar-link">Installing on Linux/Unix Environments</a></li><li><a href="/php/getting-started-with-php.html" class="sidebar-link">Getting started with PHP</a></li><li><a href="/php/variables.html" class="sidebar-link">Variables</a></li><li><a href="/php/variable-scope.html" class="sidebar-link">Variable Scope</a></li><li><a href="/php/superglobal-variables-php.html" class="sidebar-link">Superglobal Variables PHP</a></li><li><a href="/php/outputting-the-value-of-a-variable.html" class="sidebar-link">Outputting the Value of a Variable</a></li><li><a href="/php/constants.html" class="sidebar-link">Constants</a></li><li><a href="/php/magic-constants.html" class="sidebar-link">Magic Constants</a></li><li><a href="/php/comments.html" class="sidebar-link">Comments</a></li><li><a href="/php/types.html" class="sidebar-link">Types</a></li><li><a href="/php/operators.html" class="sidebar-link">Operators</a></li><li><a href="/php/references.html" class="sidebar-link">References</a></li><li><a href="/php/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/php/array-iteration.html" class="sidebar-link">Array iteration</a></li><li><a href="/php/executing-upon-an-array.html" class="sidebar-link">Executing Upon an Array</a></li><li><a href="/php/manipulating-an-array.html" class="sidebar-link">Manipulating an Array</a></li><li><a href="/php/processing-multiple-arrays-together.html" class="sidebar-link">Processing Multiple Arrays Together</a></li><li><a href="/php/datetime-class.html" class="sidebar-link">Datetime Class</a></li><li><a href="/php/working-with-dates-and-time.html" class="sidebar-link">Working with Dates and Time</a></li><li><a href="/php/control-structures.html" class="sidebar-link">Control Structures</a></li><li><a href="/php/loops.html" class="sidebar-link">Loops</a></li><li><a href="/php/functions.html" class="sidebar-link">Functions</a></li><li><a href="/php/functional-programming.html" class="sidebar-link">Functional Programming</a></li><li><a href="/php/alternative-syntax-for-control-structures.html" class="sidebar-link">Alternative Syntax for Control Structures</a></li><li><a href="/php/string-formatting.html" class="sidebar-link">String formatting</a></li><li><a href="/php/string-parsing.html" class="sidebar-link">String Parsing</a></li><li><a href="/php/classes-and-objects.html" class="sidebar-link">Classes and Objects</a></li><li><a href="/php/namespaces.html" class="sidebar-link">Namespaces</a></li><li><a href="/php/sessions.html" class="sidebar-link">Sessions</a></li><li><a href="/php/cookies.html" class="sidebar-link">Cookies</a></li><li><a href="/php/output-buffering.html" class="sidebar-link">Output Buffering</a></li><li><a href="/php/json.html" class="sidebar-link">JSON</a></li><li><a href="/php/soap-client.html" class="sidebar-link">SOAP Client</a></li><li><a href="/php/using-curl-in-php.html" class="sidebar-link">Using cURL in PHP</a></li><li><a href="/php/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/php/dependency-injection.html" class="sidebar-link">Dependency Injection</a></li><li><a href="/php/xml.html" class="sidebar-link">XML</a></li><li><a href="/php/simplexml.html" class="sidebar-link">SimpleXML</a></li><li><a href="/php/parsing-html.html" class="sidebar-link">Parsing HTML</a></li><li><a href="/php/regular-expressions-regexp-pcre.html" class="sidebar-link">Regular Expressions (regexp/PCRE)</a></li><li><a href="/php/traits.html" class="sidebar-link">Traits</a></li><li><a href="/php/composer-dependency-manager.html" class="sidebar-link">Composer Dependency Manager</a></li><li><a href="/php/magic-methods.html" class="active sidebar-link">Magic Methods</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/php/magic-methods.html#call-and-callstatic" class="sidebar-link">_call() and _callStatic()</a></li><li class="sidebar-sub-header"><a href="/php/magic-methods.html#get-set-isset-and-unset" class="sidebar-link">_get(), set(), isset() and _unset()</a></li><li class="sidebar-sub-header"><a href="/php/magic-methods.html#construct-and-destruct" class="sidebar-link">_construct() and _destruct()</a></li><li class="sidebar-sub-header"><a href="/php/magic-methods.html#tostring" class="sidebar-link">__toString()</a></li><li class="sidebar-sub-header"><a href="/php/magic-methods.html#clone" class="sidebar-link">__clone()</a></li><li class="sidebar-sub-header"><a href="/php/magic-methods.html#invoke" class="sidebar-link">__invoke()</a></li><li class="sidebar-sub-header"><a href="/php/magic-methods.html#sleep-and-wakeup" class="sidebar-link">_sleep() and _wakeup()</a></li><li class="sidebar-sub-header"><a href="/php/magic-methods.html#debuginfo" class="sidebar-link">__debugInfo()</a></li></ul></li><li><a href="/php/file-handling.html" class="sidebar-link">File handling</a></li><li><a href="/php/streams.html" class="sidebar-link">Streams</a></li><li><a href="/php/type-hinting.html" class="sidebar-link">Type hinting</a></li><li><a href="/php/filters-filter-functions.html" class="sidebar-link">Filters &amp; Filter Functions</a></li><li><a href="/php/generators.html" class="sidebar-link">Generators</a></li><li><a href="/php/utf-8.html" class="sidebar-link">UTF-8</a></li><li><a href="/php/how-to-break-down-an-url.html" class="sidebar-link">How to break down an URL</a></li><li><a href="/php/object-serialization.html" class="sidebar-link">Object Serialization</a></li><li><a href="/php/serialization.html" class="sidebar-link">Serialization</a></li><li><a href="/php/closure.html" class="sidebar-link">Closure</a></li><li><a href="/php/reading-request-data.html" class="sidebar-link">Reading Request Data</a></li><li><a href="/php/type-juggling-and-non-strict-comparison-issues.html" class="sidebar-link">Type juggling and Non-Strict Comparison Issues</a></li><li><a href="/php/sockets.html" class="sidebar-link">Sockets</a></li><li><a href="/php/pdo.html" class="sidebar-link">PDO</a></li><li><a href="/php/php-mysqli.html" class="sidebar-link">PHP MySQLi</a></li><li><a href="/php/sqlite3.html" class="sidebar-link">SQLite3</a></li><li><a href="/php/using-mongodb.html" class="sidebar-link">Using MongoDB</a></li><li><a href="/php/mongo-php.html" class="sidebar-link">mongo-php</a></li><li><a href="/php/using-redis-with-php.html" class="sidebar-link">Using Redis with PHP</a></li><li><a href="/php/sending-email.html" class="sidebar-link">Sending Email</a></li><li><a href="/php/using-sqlsrv.html" class="sidebar-link">Using SQLSRV</a></li><li><a href="/php/command-line-interface-cli.html" class="sidebar-link">Command Line Interface (CLI)</a></li><li><a href="/php/localization.html" class="sidebar-link">Localization</a></li><li><a href="/php/headers-manipulation.html" class="sidebar-link">Headers Manipulation</a></li><li><a href="/php/coding-conventions.html" class="sidebar-link">Coding Conventions</a></li><li><a href="/php/asynchronous-programming.html" class="sidebar-link">Asynchronous programming</a></li><li><a href="/php/how-to-detect-client-ip-address.html" class="sidebar-link">How to Detect Client IP Address</a></li><li><a href="/php/create-pdf-files-in-php.html" class="sidebar-link">Create PDF files in PHP</a></li><li><a href="/php/yaml-in-php.html" class="sidebar-link">YAML in PHP</a></li><li><a href="/php/image-processing-with-gd.html" class="sidebar-link">Image Processing with GD</a></li><li><a href="/php/imagick.html" class="sidebar-link">Imagick</a></li><li><a href="/php/soap-server.html" class="sidebar-link">SOAP Server</a></li><li><a href="/php/machine-learning.html" class="sidebar-link">Machine learning</a></li><li><a href="/php/cache.html" class="sidebar-link">Cache</a></li><li><a href="/php/autoloading-primer.html" class="sidebar-link">Autoloading Primer</a></li><li><a href="/php/spl-data-structures.html" class="sidebar-link">SPL data structures</a></li><li><a href="/php/imap.html" class="sidebar-link">IMAP</a></li><li><a href="/php/http-authentication.html" class="sidebar-link">HTTP Authentication</a></li><li><a href="/php/websockets.html" class="sidebar-link">WebSockets</a></li><li><a href="/php/bc-math-binary-calculator.html" class="sidebar-link">BC Math (Binary Calculator)</a></li><li><a href="/php/docker-deployment.html" class="sidebar-link">Docker deployment</a></li><li><a href="/php/apcu.html" class="sidebar-link">APCu</a></li><li><a href="/php/php-built-in-server.html" class="sidebar-link">PHP Built in server</a></li><li><a href="/php/psr.html" class="sidebar-link">PSR</a></li><li><a href="/php/phpdoc.html" class="sidebar-link">PHPDoc</a></li><li><a href="/php/design-patterns.html" class="sidebar-link">Design Patterns</a></li><li><a href="/php/compile-php-extensions.html" class="sidebar-link">Compile PHP Extensions</a></li><li><a href="/php/common-errors.html" class="sidebar-link">Common Errors</a></li><li><a href="/php/compilation-of-errors-and-warnings.html" class="sidebar-link">Compilation of Errors and Warnings</a></li><li><a href="/php/exception-handling-and-error-reporting.html" class="sidebar-link">Exception Handling and Error Reporting</a></li><li><a href="/php/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/php/unit-testing.html" class="sidebar-link">Unit Testing</a></li><li><a href="/php/performance.html" class="sidebar-link">Performance</a></li><li><a href="/php/multiprocessing.html" class="sidebar-link">Multiprocessing</a></li><li><a href="/php/multi-threading-extension.html" class="sidebar-link">Multi Threading Extension</a></li><li><a href="/php/secure-remeber-me.html" class="sidebar-link">Secure Remeber Me</a></li><li><a href="/php/security.html" class="sidebar-link">Security</a></li><li><a href="/php/cryptography.html" class="sidebar-link">Cryptography</a></li><li><a href="/php/password-hashing-functions.html" class="sidebar-link">Password Hashing Functions</a></li><li><a href="/php/urls.html" class="sidebar-link">URLs</a></li><li><a href="/php/unicode-support-in-php.html" class="sidebar-link">Unicode Support in PHP</a></li><li><a href="/php/getting-started-with-php-7.html" class="sidebar-link">Getting started with php-7</a></li><li><a href="/php/null-coalesce-operator.html" class="sidebar-link">Null Coalesce Operator</a></li><li><a href="/php/spaceship-operator.html" class="sidebar-link">Spaceship operator</a></li><li><a href="/php/anonymous-class.html" class="sidebar-link">Anonymous class</a></li><li><a href="/php/contributing-to-the-php-manual.html" class="sidebar-link">Contributing to the PHP Manual</a></li><li><a href="/php/contributing-to-the-php-core.html" class="sidebar-link">Contributing to the PHP Core</a></li><li><a href="/php/getting-started-with-composer-php.html" class="sidebar-link">Getting started with composer-php</a></li><li><a href="/php/auto-loading-with-composer.html" class="sidebar-link">Auto loading with composer</a></li><li><a href="/php/how-to-use-private-repositories-with-composer.html" class="sidebar-link">How to use private repositories with Composer</a></li><li><a href="/php/getting-started-with-phpunit.html" class="sidebar-link">Getting Started with PHPUnit</a></li><li><a href="/php/assertions.html" class="sidebar-link">Assertions</a></li><li><a href="/php/test-doubles-mocks-and-stubs.html" class="sidebar-link">Test Doubles (Mocks and Stubs)</a></li><li><a href="/php/recipes.html" class="sidebar-link">Recipes</a></li><li><a href="/php/php-mysqli-affected-rows-returns-0-when-it-should-return-a-positive-integer.html" class="sidebar-link">php mysqli affected rows returns 0 when it should return a positive integer</a></li><li><a href="/php/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="magic-methods"><a href="#magic-methods" class="header-anchor">#</a> Magic Methods</h1> <h2 id="call-and-callstatic"><a href="#call-and-callstatic" class="header-anchor">#</a> __call() and __callStatic()</h2> <p><code>__call()</code> and <code>__callStatic()</code> are called when somebody is calling nonexistent object method in
+object or static context.</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">Foo</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * This method will be called when somebody will try to invoke a method in object
+     * context, which does not exist, like:
+     *
+     * $foo-&gt;method($arg, $arg1);
+     *
+     * First argument will contain the method name(in example above it will be &quot;method&quot;),
+     * and the second will contain the values of $arg and $arg1 as an array.
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__call</span><span class="token punctuation">(</span><span class="token variable">$method</span><span class="token punctuation">,</span> <span class="token variable">$arguments</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// do something with that information here, like overloading</span>
+        <span class="token comment">// or something generic.</span>
+        <span class="token comment">// For sake of example let's say we're making a generic class,</span>
+        <span class="token comment">// that holds some data and allows user to get/set/has via</span>
+        <span class="token comment">// getter/setter methods. Also let's assume that there is some</span>
+        <span class="token comment">// CaseHelper which helps to convert camelCase into snake_case.</span>
+        <span class="token comment">// Also this method is simplified, so it does not check if there</span>
+        <span class="token comment">// is a valid name or</span>
+        <span class="token variable">$snakeName</span> <span class="token operator">=</span> CaseHelper<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">camelToSnake</span><span class="token punctuation">(</span><span class="token variable">$method</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Get get/set/has prefix</span>
+        <span class="token variable">$subMethod</span> <span class="token operator">=</span> <span class="token function">substr</span><span class="token punctuation">(</span><span class="token variable">$snakeName</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Drop method name.</span>
+        <span class="token variable">$propertyName</span> <span class="token operator">=</span> <span class="token function">substr</span><span class="token punctuation">(</span><span class="token variable">$snakeName</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">switch</span> <span class="token punctuation">(</span><span class="token variable">$subMethod</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">case</span> <span class="token double-quoted-string string">&quot;get&quot;</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">data</span><span class="token punctuation">[</span><span class="token variable">$propertyName</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token double-quoted-string string">&quot;set&quot;</span><span class="token punctuation">:</span>
+                <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">data</span><span class="token punctuation">[</span><span class="token variable">$propertyName</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$arguments</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token keyword">case</span> <span class="token double-quoted-string string">&quot;has&quot;</span><span class="token punctuation">:</span>
+                <span class="token keyword">return</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">data</span><span class="token punctuation">[</span><span class="token variable">$propertyName</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">default</span><span class="token punctuation">:</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">BadMethodCallException</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&quot;Undefined method <span class="token interpolation"><span class="token variable">$method</span></span>&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * __callStatic will be called from static content, that is, when calling a nonexistent
+     * static method:
+     *
+     * Foo::buildSomethingCool($arg);
+     *
+     * First argument will contain the method name(in example above it will be &quot;buildSomethingCool&quot;),
+     * and the second will contain the value $arg in an array.
+     *
+     * Note that signature of this method is different(requires static keyword). This method was not
+     * available prior PHP 5.3
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">function</span> <span class="token function">__callStatic</span><span class="token punctuation">(</span><span class="token variable">$method</span><span class="token punctuation">,</span> <span class="token variable">$arguments</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// This method can be used when you need something like generic factory</span>
+        <span class="token comment">// or something else(to be honest use case for this is not so clear to me).</span>
+        <span class="token function">print_r</span><span class="token punctuation">(</span><span class="token function">func_get_args</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="example"><a href="#example" class="header-anchor">#</a> Example:</h3> <div class="language-php extra-class"><pre class="language-php"><code><span class="token variable">$instance</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token variable">$instance</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">setSomeState</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&quot;foo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$instance</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">hasSomeState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// bool(true)</span>
+<span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token variable">$instance</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token function">getSomeState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">// string &quot;foo&quot;</span>
+
+Foo<span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">exampleStaticCall</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&quot;test&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// outputs:</span>
+<span class="token keyword">Array</span>
+<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> exampleCallStatic
+    <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> test
+<span class="token punctuation">)</span>
+
+</code></pre></div><h2 id="get-set-isset-and-unset"><a href="#get-set-isset-and-unset" class="header-anchor">#</a> __get(), __set(), __isset() and __unset()</h2> <p>Whenever you attempt to retrieve a certain field from a class like so:</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token variable">$animal</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Animal</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$height</span> <span class="token operator">=</span> <span class="token variable">$animal</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">height</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>PHP invokes the magic method <code>__get($name)</code>, with <code>$name</code> equal to <code>&quot;height&quot;</code> in this case. Writing to a class field like so:</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token variable">$animal</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">height</span> <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Will invoke the magic method <code>__set($name, $value)</code>, with <code>$name</code> equal to <code>&quot;height&quot;</code> and <code>$value</code> equal to <code>10</code>.</p> <p>PHP also has two built-in functions <code>isset()</code>, which check if a variable exists, and <code>unset()</code>, which destroys a variable. Checking whether a objects field is set like so:</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$animal</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">height</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Will invoke the <code>__isset($name)</code> function on that object. Destroying a variable like so:</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">unset</span><span class="token punctuation">(</span><span class="token variable">$animal</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">height</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Will invoke the <code>__unset($name)</code> function on that object.</p> <p>Normally, when you don't define these methods on your class, PHP just retrieves the field as it is stored in your class. However, you can override these methods to create classes that can hold data like an array, but are usable like an object:</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">Example</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token variable">$data</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__set</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">,</span> <span class="token variable">$value</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">data</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token variable">$value</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__get</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">array_key_exists</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">,</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">data</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token constant">null</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">data</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__isset</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">data</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__unset</span><span class="token punctuation">(</span><span class="token variable">$name</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">unset</span><span class="token punctuation">(</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">data</span><span class="token punctuation">[</span><span class="token variable">$name</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token variable">$example</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Example</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Stores 'a' in the $data array with value 15</span>
+<span class="token variable">$example</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">a</span> <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Retrieves array key 'a' from the $data array</span>
+<span class="token keyword">echo</span> <span class="token variable">$example</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">a</span><span class="token punctuation">;</span> <span class="token comment">// prints 15</span>
+
+<span class="token comment">// Attempt to retrieve non-existent key from the array returns null</span>
+<span class="token keyword">echo</span> <span class="token variable">$example</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">b</span><span class="token punctuation">;</span> <span class="token comment">// prints nothing</span>
+
+<span class="token comment">// If __isset('a') returns true, then call __unset('a')</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">isset</span><span class="token punctuation">(</span><span class="token variable">$example</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">a</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">unset</span><span class="token punctuation">(</span><span class="token variable">$example</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">a</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="empty-function-and-magic-methods"><a href="#empty-function-and-magic-methods" class="header-anchor">#</a> empty() function and magic methods</h3> <p>Note that calling <a href="http://php.net/manual/en/function.empty.php" target="_blank" rel="noopener noreferrer"><code>empty()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> on a class attribute will invoke <code>__isset()</code> because as the PHP manual states:</p> <blockquote></blockquote> <p>empty() is essentially the concise equivalent to <strong>!isset($var) || $var == false</strong></p> <h2 id="construct-and-destruct"><a href="#construct-and-destruct" class="header-anchor">#</a> __construct() and __destruct()</h2> <p><code>__construct()</code> is the most common magic method in PHP, because it is used to set up a class when it is initialized. The opposite of the <code>__construct()</code> method is the <code>__destruct()</code> method. This method is called when there are no more references to an object that you created or when you force its deletion. PHP's garbage collection will clean up the object by first calling its destructor and then removing it from memory.</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">Shape</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token double-quoted-string string">&quot;Shape created!\n&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token keyword">extends</span> <span class="token class-name">Shape</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$width</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$height</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__construct</span><span class="token punctuation">(</span><span class="token variable">$width</span><span class="token punctuation">,</span> <span class="token variable">$height</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">parent</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">__construct</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">width</span> <span class="token operator">=</span> <span class="token variable">$width</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">height</span> <span class="token operator">=</span> <span class="token variable">$height</span><span class="token punctuation">;</span>
+        <span class="token keyword">echo</span> <span class="token double-quoted-string string">&quot;Created <span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">width</span><span class="token punctuation">}</span></span>x<span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">height</span><span class="token punctuation">}</span></span> Rectangle\n&quot;</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__destruct</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">echo</span> <span class="token double-quoted-string string">&quot;Destroying <span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">width</span><span class="token punctuation">}</span></span>x<span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">height</span><span class="token punctuation">}</span></span> Rectangle\n&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">createRectangle</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Instantiating an object will call the constructor with the specified arguments</span>
+    <span class="token variable">$rectangle</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Rectangle</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 'Shape Created' will be printed</span>
+    <span class="token comment">// 'Created 20x50 Rectangle' will be printed</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">createRectangle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 'Destroying 20x50 Rectangle' will be printed, because</span>
+<span class="token comment">// the `$rectangle` object was local to the createRectangle function, so</span>
+<span class="token comment">// When the function scope is exited, the object is destroyed and its</span>
+<span class="token comment">// destructor is called.</span>
+
+<span class="token comment">// The destructor of an object is also called when unset is used:</span>
+<span class="token keyword">unset</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Rectangle</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="tostring"><a href="#tostring" class="header-anchor">#</a> __toString()</h2> <p>Whenever an object is treated as a string, the <code>__toString()</code> method is called. This method should return a string representation of the class.</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">User</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$first_name</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$last_name</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$age</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token double-quoted-string string">&quot;<span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">first_name</span><span class="token punctuation">}</span></span> <span class="token interpolation"><span class="token punctuation">{</span><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">last_name</span><span class="token punctuation">}</span></span> (<span class="token interpolation"><span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">age</span></span>)&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token variable">$user</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$user</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">first_name</span> <span class="token operator">=</span> <span class="token double-quoted-string string">&quot;Chuck&quot;</span><span class="token punctuation">;</span>
+<span class="token variable">$user</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">last_name</span> <span class="token operator">=</span> <span class="token double-quoted-string string">&quot;Norris&quot;</span><span class="token punctuation">;</span>
+<span class="token variable">$user</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">age</span> <span class="token operator">=</span> <span class="token number">76</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Anytime the $user object is used in a string context, __toString() is called</span>
+
+<span class="token keyword">echo</span> <span class="token variable">$user</span><span class="token punctuation">;</span> <span class="token comment">// prints 'Chuck Norris (76)'</span>
+
+<span class="token comment">// String value becomes: 'Selected user: Chuck Norris (76)'</span>
+<span class="token variable">$selected_user_string</span> <span class="token operator">=</span> <span class="token function">sprintf</span><span class="token punctuation">(</span><span class="token double-quoted-string string">&quot;Selected user: %s&quot;</span><span class="token punctuation">,</span> <span class="token variable">$user</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Casting to string also calls __toString()</span>
+<span class="token variable">$user_as_string</span> <span class="token operator">=</span> <span class="token punctuation">(</span>string<span class="token punctuation">)</span> <span class="token variable">$user</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="clone"><a href="#clone" class="header-anchor">#</a> __clone()</h2> <p><code>__clone</code> is invoked by use of the <code>clone</code> keyword. It is used to manipulate object state upon cloning, after the object has been actually cloned.</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">CloneableUser</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$name</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$lastName</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * This method will be invoked by a clone operator and will prepend &quot;Copy &quot; to the
+     * name and lastName properties.
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span> <span class="token operator">=</span> <span class="token double-quoted-string string">&quot;Copy &quot;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span><span class="token punctuation">;</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">lastName</span> <span class="token operator">=</span> <span class="token double-quoted-string string">&quot;Copy &quot;</span> <span class="token punctuation">.</span> <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">lastName</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Example:</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token variable">$user1</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CloneableUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$user1</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span> <span class="token operator">=</span> <span class="token double-quoted-string string">&quot;John&quot;</span><span class="token punctuation">;</span>
+<span class="token variable">$user1</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">lastName</span> <span class="token operator">=</span> <span class="token double-quoted-string string">&quot;Doe&quot;</span><span class="token punctuation">;</span>
+
+<span class="token variable">$user2</span> <span class="token operator">=</span> <span class="token keyword">clone</span> <span class="token variable">$user1</span><span class="token punctuation">;</span> <span class="token comment">// triggers the __clone magic method</span>
+
+<span class="token keyword">echo</span> <span class="token variable">$user2</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">name</span><span class="token punctuation">;</span>     <span class="token comment">// Copy John</span>
+<span class="token keyword">echo</span> <span class="token variable">$user2</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">lastName</span><span class="token punctuation">;</span> <span class="token comment">// Copy Doe</span>
+
+</code></pre></div><h2 id="invoke"><a href="#invoke" class="header-anchor">#</a> __invoke()</h2> <p>This magic method is called when user tries to invoke object as a function. Possible use cases may include
+some approaches like functional programming or some callbacks.</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">Invokable</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * This method will be called if object will be executed like a function:
+     *
+     * $invokable();
+     *
+     * Args will be passed as in regular method call.
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__invoke</span><span class="token punctuation">(</span><span class="token variable">$arg</span><span class="token punctuation">,</span> <span class="token variable">$arg</span><span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">print_r</span><span class="token punctuation">(</span><span class="token function">func_get_args</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Example:</span>
+<span class="token variable">$invokable</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Invokable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$invokable</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// optputs:</span>
+<span class="token keyword">Array</span>
+<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">1</span>
+    <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">2</span>
+    <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">3</span>
+<span class="token punctuation">)</span>
+
+</code></pre></div><h2 id="sleep-and-wakeup"><a href="#sleep-and-wakeup" class="header-anchor">#</a> __sleep() and __wakeup()</h2> <p><code>__sleep</code> and <code>__wakeup</code> are methods that are related to the serialization process. <code>serialize</code> function
+checks if a class has a <code>__sleep</code> method. If so, it will be executed before any serialization.
+<code>__sleep</code> is supposed to return an array of the names of all variables of an object that should be
+serialized.</p> <p><code>__wakeup</code> in turn will be executed by <code>unserialize</code> if it is present in class. It's intention is to re-establish
+resources and other things that are needed to be initialized upon unserialization.</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">Sleepy</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token variable">$tableName</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$tableFields</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token variable">$dbConnection</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * This magic method will be invoked by serialize function.
+     * Note that $dbConnection is excluded.
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__sleep</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Only $this-&gt;tableName and $this-&gt;tableFields will be serialized.</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token single-quoted-string string">'tableName'</span><span class="token punctuation">,</span> <span class="token single-quoted-string string">'tableFields'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * This magic method will be called by unserialize function.
+     *
+     * For sake of example, lets assume that $this-&gt;c, which was not serialized,
+     * is some kind of a database connection. So on wake up it will get reconnected.
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__wakeup</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Connect to some default database and store handler/wrapper returned into</span>
+        <span class="token comment">// $this-&gt;dbConnection</span>
+        <span class="token variable">$this</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token property">dbConnection</span> <span class="token operator">=</span> <span class="token constant">DB</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token function">connect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="debuginfo"><a href="#debuginfo" class="header-anchor">#</a> __debugInfo()</h2> <blockquote></blockquote> <p>This method is called by <code>var_dump()</code> when dumping an object to get the properties that should be shown. If the method isn't defined on an object, then all public, protected and private properties will be shown. — <a href="https://secure.php.net/manual/en/language.oop5.magic.php#object.debuginfo" target="_blank" rel="noopener noreferrer">PHP Manual<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">DeepThought</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function">__debugInfo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span><span class="token number">42</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><div class="language-php extra-class"><pre class="language-php"><code><span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">DeepThought</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The above example will output:</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">DeepThought</span><span class="token shell-comment comment">#1 (0) {</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><div class="language-php extra-class"><pre class="language-php"><code><span class="token function">var_dump</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">DeepThought</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The above example will output:</p> <div class="language-php extra-class"><pre class="language-php"><code><span class="token keyword">class</span> <span class="token class-name">DeepThought</span><span class="token shell-comment comment">#1 (1) {</span>
+  <span class="token keyword">public</span> <span class="token variable">$</span><span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">}</span> <span class="token operator">=</span><span class="token operator">&gt;</span>
+  <span class="token function">int</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/php/magic-methods.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/php/composer-dependency-manager.html" class="prev">
+        Composer Dependency Manager
+      </a></span> <span class="next"><a href="/php/file-handling.html">
+        File handling
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2474.18d79bf2.js" defer></script>
+  </body>
+</html>

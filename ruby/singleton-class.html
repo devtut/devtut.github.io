@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ruby - Singleton Class</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Inheritance of Singleton Class, Singleton classes, Introduction, Accessing Singleton Class, Accessing Instance/Class Variables in Singleton Classes, Message Propagation with Singleton Class, Reopening (monkey patching) Singleton Classes">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Ruby - Singleton Class">
+    <meta property="og:description" content="Inheritance of Singleton Class, Singleton classes, Introduction, Accessing Singleton Class, Accessing Instance/Class Variables in Singleton Classes, Message Propagation with Singleton Class, Reopening (monkey patching) Singleton Classes">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/ruby/singleton-class.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Ruby - Singleton Class">
+    <meta name="twitter:description" content="Inheritance of Singleton Class, Singleton classes, Introduction, Accessing Singleton Class, Accessing Instance/Class Variables in Singleton Classes, Message Propagation with Singleton Class, Reopening (monkey patching) Singleton Classes">
+    <meta name="twitter:url" content="/ruby/singleton-class.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3109.c8ac38dd.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Ruby</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ruby/" class="sidebar-link">Disclaimer</a></li><li><a href="/ruby/installation.html" class="sidebar-link">Installation</a></li><li><a href="/ruby/getting-started-with-ruby-language.html" class="sidebar-link">Getting started with Ruby Language</a></li><li><a href="/ruby/casting-type-conversion.html" class="sidebar-link">Casting (type conversion)</a></li><li><a href="/ruby/operators.html" class="sidebar-link">Operators</a></li><li><a href="/ruby/variable-scope-and-visibility.html" class="sidebar-link">Variable Scope and Visibility</a></li><li><a href="/ruby/environment-variables.html" class="sidebar-link">Environment Variables</a></li><li><a href="/ruby/constants.html" class="sidebar-link">Constants</a></li><li><a href="/ruby/special-constants-in-ruby.html" class="sidebar-link">Special Constants in Ruby</a></li><li><a href="/ruby/comments.html" class="sidebar-link">Comments</a></li><li><a href="/ruby/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/ruby/multidimensional-arrays.html" class="sidebar-link">Multidimensional Arrays</a></li><li><a href="/ruby/strings.html" class="sidebar-link">Strings</a></li><li><a href="/ruby/datetime.html" class="sidebar-link">DateTime</a></li><li><a href="/ruby/time.html" class="sidebar-link">Time</a></li><li><a href="/ruby/numbers.html" class="sidebar-link">Numbers</a></li><li><a href="/ruby/symbols.html" class="sidebar-link">Symbols</a></li><li><a href="/ruby/comparable.html" class="sidebar-link">Comparable</a></li><li><a href="/ruby/control-flow.html" class="sidebar-link">Control Flow</a></li><li><a href="/ruby/methods.html" class="sidebar-link">Methods</a></li><li><a href="/ruby/hashes.html" class="sidebar-link">Hashes</a></li><li><a href="/ruby/blocks-and-procs-and-lambdas.html" class="sidebar-link">Blocks and Procs and Lambdas</a></li><li><a href="/ruby/iteration.html" class="sidebar-link">Iteration</a></li><li><a href="/ruby/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/ruby/enumerators.html" class="sidebar-link">Enumerators</a></li><li><a href="/ruby/enumerable-in-ruby.html" class="sidebar-link">Enumerable in Ruby</a></li><li><a href="/ruby/classes.html" class="sidebar-link">Classes</a></li><li><a href="/ruby/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/ruby/method-missing.html" class="sidebar-link">method_missing</a></li><li><a href="/ruby/regular-expressions-and-regex-based-operations.html" class="sidebar-link">Regular Expressions and Regex Based Operations</a></li><li><a href="/ruby/file-and-i-o-operations.html" class="sidebar-link">File and I/O Operations</a></li><li><a href="/ruby/ruby-access-modifiers.html" class="sidebar-link">Ruby Access Modifiers</a></li><li><a href="/ruby/design-patterns-and-idioms-in-ruby.html" class="sidebar-link">Design Patterns and Idioms in Ruby</a></li><li><a href="/ruby/loading-source-files.html" class="sidebar-link">Loading Source Files</a></li><li><a href="/ruby/thread.html" class="sidebar-link">Thread</a></li><li><a href="/ruby/range.html" class="sidebar-link">Range</a></li><li><a href="/ruby/modules.html" class="sidebar-link">Modules</a></li><li><a href="/ruby/introspection-in-ruby.html" class="sidebar-link">Introspection in Ruby</a></li><li><a href="/ruby/monkey-patching-in-ruby.html" class="sidebar-link">Monkey Patching in Ruby</a></li><li><a href="/ruby/recursion-in-ruby.html" class="sidebar-link">Recursion in Ruby</a></li><li><a href="/ruby/splat-operator.html" class="sidebar-link">Splat operator (*)</a></li><li><a href="/ruby/json-with-ruby.html" class="sidebar-link">JSON with Ruby</a></li><li><a href="/ruby/pure-rspec-json-api-testing.html" class="sidebar-link">Pure RSpec JSON API testing</a></li><li><a href="/ruby/gem-creation-management.html" class="sidebar-link">Gem Creation/Management</a></li><li><a href="/ruby/rbenv.html" class="sidebar-link">rbenv</a></li><li><a href="/ruby/gem-usage.html" class="sidebar-link">Gem Usage</a></li><li><a href="/ruby/singleton-class.html" class="active sidebar-link">Singleton Class</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/ruby/singleton-class.html#inheritance-of-singleton-class" class="sidebar-link">Inheritance of Singleton Class</a></li><li class="sidebar-sub-header"><a href="/ruby/singleton-class.html#singleton-classes" class="sidebar-link">Singleton classes</a></li><li class="sidebar-sub-header"><a href="/ruby/singleton-class.html#introduction" class="sidebar-link">Introduction</a></li><li class="sidebar-sub-header"><a href="/ruby/singleton-class.html#accessing-singleton-class" class="sidebar-link">Accessing Singleton Class</a></li><li class="sidebar-sub-header"><a href="/ruby/singleton-class.html#accessing-instance-class-variables-in-singleton-classes" class="sidebar-link">Accessing Instance/Class Variables in Singleton Classes</a></li><li class="sidebar-sub-header"><a href="/ruby/singleton-class.html#message-propagation-with-singleton-class" class="sidebar-link">Message Propagation with Singleton Class</a></li><li class="sidebar-sub-header"><a href="/ruby/singleton-class.html#reopening-monkey-patching-singleton-classes" class="sidebar-link">Reopening (monkey patching) Singleton Classes</a></li></ul></li><li><a href="/ruby/queue.html" class="sidebar-link">Queue</a></li><li><a href="/ruby/destructuring.html" class="sidebar-link">Destructuring</a></li><li><a href="/ruby/struct.html" class="sidebar-link">Struct</a></li><li><a href="/ruby/metaprogramming.html" class="sidebar-link">Metaprogramming</a></li><li><a href="/ruby/dynamic-evaluation.html" class="sidebar-link">Dynamic Evaluation</a></li><li><a href="/ruby/instance-eval.html" class="sidebar-link">instance_eval</a></li><li><a href="/ruby/message-passing.html" class="sidebar-link">Message Passing</a></li><li><a href="/ruby/keyword-arguments.html" class="sidebar-link">Keyword Arguments</a></li><li><a href="/ruby/truthiness.html" class="sidebar-link">Truthiness</a></li><li><a href="/ruby/implicit-receivers-and-understanding-self.html" class="sidebar-link">Implicit Receivers and Understanding Self</a></li><li><a href="/ruby/introspection.html" class="sidebar-link">Introspection</a></li><li><a href="/ruby/refinements.html" class="sidebar-link">Refinements</a></li><li><a href="/ruby/catching-exceptions-with-begin-rescue.html" class="sidebar-link">Catching Exceptions with Begin / Rescue</a></li><li><a href="/ruby/command-line-apps.html" class="sidebar-link">Command Line Apps</a></li><li><a href="/ruby/irb.html" class="sidebar-link">IRB</a></li><li><a href="/ruby/erb.html" class="sidebar-link">ERB</a></li><li><a href="/ruby/generate-a-random-number.html" class="sidebar-link">Generate a random number</a></li><li><a href="/ruby/getting-started-with-hanami.html" class="sidebar-link">Getting started with Hanami</a></li><li><a href="/ruby/optionparser.html" class="sidebar-link">OptionParser</a></li><li><a href="/ruby/operating-system-or-shell-commands.html" class="sidebar-link">Operating System or Shell commands</a></li><li><a href="/ruby/c-extensions.html" class="sidebar-link">C Extensions</a></li><li><a href="/ruby/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/ruby/ruby-version-manager.html" class="sidebar-link">Ruby Version Manager</a></li><li><a href="/ruby/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="singleton-class"><a href="#singleton-class" class="header-anchor">#</a> Singleton Class</h1> <h2 id="inheritance-of-singleton-class"><a href="#inheritance-of-singleton-class" class="header-anchor">#</a> Inheritance of Singleton Class</h2> <h3 id="subclassing-also-subclasses-singleton-class"><a href="#subclassing-also-subclasses-singleton-class" class="header-anchor">#</a> Subclassing also Subclasses Singleton Class</h3> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span>singleton_class <span class="token comment">#=&gt; #&lt;Class:Example&gt;</span>
+
+<span class="token keyword">def</span> <span class="token method-definition"><span class="token constant">Example</span><span class="token punctuation">.</span><span class="token function">foo</span></span>
+  <span class="token symbol">:example</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">SubExample</span> <span class="token operator">&lt;</span> <span class="token constant">Example</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">SubExample</span><span class="token punctuation">.</span>foo <span class="token comment">#=&gt; :example</span>
+
+<span class="token constant">SubExample</span><span class="token punctuation">.</span>singleton_class<span class="token punctuation">.</span>superclass <span class="token comment">#=&gt; #&lt;Class:Example&gt;</span>
+
+</code></pre></div><h3 id="extending-or-including-a-module-does-not-extend-singleton-class"><a href="#extending-or-including-a-module-does-not-extend-singleton-class" class="header-anchor">#</a> Extending or Including a Module does not Extend Singleton Class</h3> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">module</span> <span class="token constant">ExampleModule</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">def</span> <span class="token method-definition"><span class="token constant">ExampleModule</span><span class="token punctuation">.</span><span class="token function">foo</span></span>
+  <span class="token symbol">:foo</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Example</span>
+  <span class="token keyword">extend</span> <span class="token constant">ExampleModule</span>
+  <span class="token keyword">include</span> <span class="token constant">ExampleModule</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span>foo <span class="token comment">#=&gt; NoMethodError: undefined method</span>
+
+</code></pre></div><h2 id="singleton-classes"><a href="#singleton-classes" class="header-anchor">#</a> Singleton classes</h2> <p>All objects are instances of a class. However, that is not the whole truth. In Ruby, every object also has a somewhat hidden <strong>singleton class</strong>.</p> <p>This is what allows methods to be defined on individual objects. The singleton class sits between the object itself and its actual class, so all methods defined on it are available for that object, and that object only.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>object <span class="token operator">=</span> <span class="token builtin">Object</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+
+<span class="token keyword">def</span> <span class="token method-definition">object<span class="token punctuation">.</span><span class="token function">exclusive_method</span></span>
+  <span class="token string">'Only this object will respond to this method'</span>
+<span class="token keyword">end</span>
+
+object<span class="token punctuation">.</span>exclusive_method
+<span class="token comment"># =&gt; &quot;Only this object will respond to this method&quot;</span>
+
+<span class="token builtin">Object</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">.</span>exclusive_method <span class="token keyword">rescue</span> $<span class="token operator">!</span>
+<span class="token comment"># =&gt; #&lt;NoMethodError: undefined method `exclusive_method' for #&lt;Object:0xa17b77c&gt;&gt;</span>
+
+</code></pre></div><p>The example above could have been written using <a href="http://ruby-doc.org/core/Object.html#method-i-define_singleton_method" target="_blank" rel="noopener noreferrer"><code>define_singleton_method</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>object<span class="token punctuation">.</span>define_singleton_method <span class="token symbol">:exclusive_method</span> <span class="token keyword">do</span>
+  <span class="token string">&quot;The method is actually defined in the object's singleton class&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Which is the same as defining the method on <code>object</code>'s <a href="http://ruby-doc.org/core/Object.html#method-i-singleton_class" target="_blank" rel="noopener noreferrer"><code>singleton_class</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># send is used because define_method is private</span>
+object<span class="token punctuation">.</span>singleton_class<span class="token punctuation">.</span>send <span class="token symbol">:define_method</span><span class="token punctuation">,</span> <span class="token symbol">:exclusive_method</span> <span class="token keyword">do</span>
+  <span class="token string">&quot;Now we're defining an instance method directly on the singleton class&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Before the existence of <code>singleton_class</code> as part of Ruby's core API, singleton classes were known as <strong>metaclasses</strong> and could be accessed via the following idiom:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> object
+  <span class="token keyword">self</span>  <span class="token comment"># refers to object's singleton_class</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h2 id="introduction"><a href="#introduction" class="header-anchor">#</a> Introduction</h2> <p>Ruby has three types of objects:</p> <ul><li>Classes and modules which are instances of class Class or class Module.</li> <li>Instances of classes.</li> <li>Singleton Classes.</li></ul> <p>Each object has a class which contains its methods:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+<span class="token keyword">end</span>
+
+object <span class="token operator">=</span> <span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+
+object<span class="token punctuation">.</span><span class="token keyword">class</span>  <span class="token comment"># =&gt; Example</span>
+<span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">class</span> <span class="token comment"># =&gt; Class</span>
+<span class="token builtin">Class</span><span class="token punctuation">.</span><span class="token keyword">class</span>   <span class="token comment"># =&gt; Class</span>
+
+</code></pre></div><p>Objects themselves can't contain methods, only their class can. But with singleton classes, it is possible to add methods to any object including other singleton classes.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">def</span> <span class="token method-definition">object<span class="token punctuation">.</span><span class="token function">foo</span></span>
+  <span class="token symbol">:foo</span>
+<span class="token keyword">end</span>
+object<span class="token punctuation">.</span>foo <span class="token comment">#=&gt; :foo</span>
+
+</code></pre></div><p><code>foo</code> is defined on singleton class of <code>object</code>. Other <code>Example</code> instances can not reply to <code>foo</code>.</p> <p>Ruby creates singleton classes on demand. Accessing them or adding methods to them forces Ruby to create them.</p> <h2 id="accessing-singleton-class"><a href="#accessing-singleton-class" class="header-anchor">#</a> Accessing Singleton Class</h2> <p>There are two ways to get singleton class of an object</p> <ul><li><code>singleton_class</code> method.</li> <li>Reopening singleton class of an object and returning <code>self</code>.</li></ul> <div class="language-ruby extra-class"><pre class="language-ruby"><code>object<span class="token punctuation">.</span>singleton_class
+
+</code></pre></div><div class="language-ruby extra-class"><pre class="language-ruby"><code>singleton_class <span class="token operator">=</span> <span class="token keyword">class</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> object
+  <span class="token keyword">self</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h2 id="accessing-instance-class-variables-in-singleton-classes"><a href="#accessing-instance-class-variables-in-singleton-classes" class="header-anchor">#</a> Accessing Instance/Class Variables in Singleton Classes</h2> <p>Singleton classes share their instance/class variables with their object.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+  <span class="token variable">@@foo</span> <span class="token operator">=</span> <span class="token symbol">:example</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">def</span> <span class="token method-definition"><span class="token constant">Example</span><span class="token punctuation">.</span><span class="token function">foo</span></span>
+  class_variable_get <span class="token punctuation">:</span><span class="token variable">@@foo</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span>foo <span class="token comment">#=&gt; :example</span>
+
+</code></pre></div><div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span>
+    <span class="token variable">@foo</span> <span class="token operator">=</span> <span class="token number">1</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">foo</span></span>
+    <span class="token variable">@foo</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+e <span class="token operator">=</span> <span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+
+e<span class="token punctuation">.</span>instance_eval <span class="token operator">&lt;</span><span class="token operator">&lt;</span><span class="token operator">-</span><span class="token constant">BLOCK</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">increase_foo</span></span>
+    <span class="token variable">@foo</span> <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+  <span class="token keyword">end</span>
+<span class="token constant">BLOCK</span>
+
+e<span class="token punctuation">.</span>increase_foo
+e<span class="token punctuation">.</span>foo <span class="token comment">#=&gt; 2</span>
+
+</code></pre></div><p>Blocks close around their instance/class variables target. Accessing instance or class variables using a block in <code>class_eval</code> or <code>instance_eval</code> isn't possible. Passing a string to <code>class_eval</code> or using <code>class_variable_get</code> works around the problem.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Foo</span>
+  <span class="token variable">@@foo</span> <span class="token operator">=</span> <span class="token symbol">:foo</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Example</span>
+  <span class="token variable">@@foo</span> <span class="token operator">=</span> <span class="token symbol">:example</span> 
+
+  <span class="token constant">Foo</span><span class="token punctuation">.</span>define_singleton_method <span class="token symbol">:foo</span> <span class="token keyword">do</span>
+    <span class="token variable">@@foo</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Foo</span><span class="token punctuation">.</span>foo <span class="token comment">#=&gt; :example</span>
+
+</code></pre></div><h2 id="message-propagation-with-singleton-class"><a href="#message-propagation-with-singleton-class" class="header-anchor">#</a> Message Propagation with Singleton Class</h2> <p>Instances never contain a method they only carry data. However we can define a singleton class for any object including an instance of a class.</p> <p>When a message is passed to an object (method is called) Ruby first checks if a singleton class is defined for that object and if it can reply to that message otherwise Ruby checks instance's class' ancestors chain and walks up on that.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">foo</span></span>
+    <span class="token symbol">:example</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">.</span>foo <span class="token comment">#=&gt; :example</span>
+
+<span class="token keyword">module</span> <span class="token constant">PrependedModule</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">foo</span></span>
+    <span class="token symbol">:prepend</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Example</span>
+  <span class="token keyword">prepend</span> <span class="token constant">PrependedModule</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span>ancestors <span class="token comment">#=&gt; [Prepended, Example, Object, Kernel, BasicObject]</span>
+e <span class="token operator">=</span> <span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+e<span class="token punctuation">.</span>foo <span class="token comment">#=&gt; :prepended</span>
+
+<span class="token keyword">def</span> <span class="token method-definition">e<span class="token punctuation">.</span><span class="token function">foo</span></span>
+  <span class="token symbol">:singleton</span>
+<span class="token keyword">end</span>
+
+e<span class="token punctuation">.</span>foo <span class="token comment">#=&gt; :singleton</span>
+
+</code></pre></div><h2 id="reopening-monkey-patching-singleton-classes"><a href="#reopening-monkey-patching-singleton-classes" class="header-anchor">#</a> Reopening (monkey patching) Singleton Classes</h2> <p>There are three ways to reopen a Singleton Class</p> <ul><li>Using <code>class_eval</code> on a singleton class.</li> <li>Using <code>class &lt;&lt;</code> block.</li> <li>Using <code>def</code> to define a method on the object's singleton class directly</li></ul> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span>singleton_class<span class="token punctuation">.</span>class_eval <span class="token keyword">do</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">foo</span></span>
+    <span class="token symbol">:foo</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span>foo <span class="token comment">#=&gt; :foo</span>
+
+</code></pre></div><div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token constant">Example</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">bar</span></span>
+    <span class="token symbol">:bar</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span>bar <span class="token comment">#=&gt; :bar</span>
+
+</code></pre></div><div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">def</span> <span class="token method-definition"><span class="token constant">Example</span><span class="token punctuation">.</span><span class="token function">baz</span></span>
+  <span class="token symbol">:baz</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span>baz <span class="token comment">#=&gt; :baz</span>
+
+</code></pre></div><p>Every object has a singleton class which you can access</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+<span class="token keyword">end</span>
+ex1 <span class="token operator">=</span> <span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+<span class="token keyword">def</span> <span class="token method-definition">ex1<span class="token punctuation">.</span><span class="token function">foobar</span></span>
+  <span class="token symbol">:foobar</span>
+<span class="token keyword">end</span>
+ex1<span class="token punctuation">.</span>foobar <span class="token comment">#=&gt; :foobar</span>
+
+ex2 <span class="token operator">=</span> <span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+ex2<span class="token punctuation">.</span>foobar <span class="token comment">#=&gt; NoMethodError</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>singleton_class = class &lt;&lt; object; self end</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Singleton classes only have one instance: their corresponding object. This can be verified by querying Ruby's <a href="http://ruby-doc.org/core/ObjectSpace.html" target="_blank" rel="noopener noreferrer"><code>ObjectSpace</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>instances <span class="token operator">=</span> <span class="token constant">ObjectSpace</span><span class="token punctuation">.</span>each_object object<span class="token punctuation">.</span>singleton_class
+
+instances<span class="token punctuation">.</span>count            <span class="token comment"># =&gt; 1</span>
+instances<span class="token punctuation">.</span><span class="token keyword">include</span><span class="token operator">?</span> object  <span class="token comment"># =&gt; true</span>
+
+</code></pre></div><p>Using <a href="http://ruby-doc.org/core/Module.html#method-i-3C" target="_blank" rel="noopener noreferrer"><code>&lt;</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, they can also be verified to be subclasses of the object's actual class:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>object<span class="token punctuation">.</span>singleton_class <span class="token operator">&lt;</span> object<span class="token punctuation">.</span><span class="token keyword">class</span>  <span class="token comment"># =&gt; true</span>
+
+</code></pre></div><p>References:</p> <ul><li><a href="http://yugui.jp/articles/846" target="_blank" rel="noopener noreferrer">Three implicit contexts in Ruby<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/ruby/singleton-class.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/ruby/gem-usage.html" class="prev">
+        Gem Usage
+      </a></span> <span class="next"><a href="/ruby/queue.html">
+        Queue
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3109.c8ac38dd.js" defer></script>
+  </body>
+</html>

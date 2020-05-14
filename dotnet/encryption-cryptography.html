@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>.NET Framework - Encryption / Cryptography</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="RijndaelManaged, Encrypt and decrypt data using AES (in C#), Create a Key from a Password / Random SALT (in C#), Encryption and Decryption using Cryptography (AES)">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content=".NET Framework - Encryption / Cryptography">
+    <meta property="og:description" content="RijndaelManaged, Encrypt and decrypt data using AES (in C#), Create a Key from a Password / Random SALT (in C#), Encryption and Decryption using Cryptography (AES)">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/dotnet/encryption-cryptography.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content=".NET Framework - Encryption / Cryptography">
+    <meta name="twitter:description" content="RijndaelManaged, Encrypt and decrypt data using AES (in C#), Create a Key from a Password / Random SALT (in C#), Encryption and Decryption using Cryptography (AES)">
+    <meta name="twitter:url" content="/dotnet/encryption-cryptography.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/991.e37d6e59.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>.NET Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/dotnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/dotnet/getting-started-with-net-framework.html" class="sidebar-link">Getting started with .NET Framework</a></li><li><a href="/dotnet/strings.html" class="sidebar-link">Strings</a></li><li><a href="/dotnet/datetime-parsing.html" class="sidebar-link">DateTime parsing</a></li><li><a href="/dotnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/dotnet/collections.html" class="sidebar-link">Collections</a></li><li><a href="/dotnet/readonlycollections.html" class="sidebar-link">ReadOnlyCollections</a></li><li><a href="/dotnet/stack-and-heap.html" class="sidebar-link">Stack and Heap</a></li><li><a href="/dotnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/dotnet/foreach.html" class="sidebar-link">ForEach</a></li><li><a href="/dotnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/dotnet/expression-trees.html" class="sidebar-link">Expression Trees</a></li><li><a href="/dotnet/custom-types.html" class="sidebar-link">Custom Types</a></li><li><a href="/dotnet/code-contracts.html" class="sidebar-link">Code Contracts</a></li><li><a href="/dotnet/settings.html" class="sidebar-link">Settings</a></li><li><a href="/dotnet/regular-expressions-system-text-regularexpressions.html" class="sidebar-link">Regular Expressions (System.Text.RegularExpressions)</a></li><li><a href="/dotnet/file-input-output.html" class="sidebar-link">File Input/Output</a></li><li><a href="/dotnet/system-io.html" class="sidebar-link">System.IO</a></li><li><a href="/dotnet/system-io-file-class.html" class="sidebar-link">System.IO.File class</a></li><li><a href="/dotnet/reading-and-writing-zip-files.html" class="sidebar-link">Reading and writing Zip files</a></li><li><a href="/dotnet/managed-extensibility-framework.html" class="sidebar-link">Managed Extensibility Framework</a></li><li><a href="/dotnet/speechrecognitionengine-class-to-recognize-speech.html" class="sidebar-link">SpeechRecognitionEngine class to recognize speech</a></li><li><a href="/dotnet/system-runtime-caching-memorycache-objectcache.html" class="sidebar-link">System.Runtime.Caching.MemoryCache (ObjectCache)</a></li><li><a href="/dotnet/system-reflection-emit-namespace.html" class="sidebar-link">System.Reflection.Emit namespace</a></li><li><a href="/dotnet/net-core.html" class="sidebar-link">.NET Core</a></li><li><a href="/dotnet/ado-net.html" class="sidebar-link">ADO.NET</a></li><li><a href="/dotnet/dependency-injection.html" class="sidebar-link">Dependency Injection</a></li><li><a href="/dotnet/platform-invoke.html" class="sidebar-link">Platform Invoke</a></li><li><a href="/dotnet/nuget-packaging-system.html" class="sidebar-link">NuGet packaging system</a></li><li><a href="/dotnet/globalization-in-asp-net-mvc-using-smart-internationalization-for-asp-net.html" class="sidebar-link">Globalization in ASP.NET MVC using Smart internationalization for ASP.NET</a></li><li><a href="/dotnet/system-net-mail.html" class="sidebar-link">System.Net.Mail</a></li><li><a href="/dotnet/using-progress-t-and-iprogress-t.html" class="sidebar-link">Using Progress</a></li><li><a href="/dotnet/json-serialization.html" class="sidebar-link">JSON Serialization</a></li><li><a href="/dotnet/json-in-net-with-newtonsoft-json.html" class="sidebar-link">JSON in .NET with Newtonsoft.Json</a></li><li><a href="/dotnet/xmlserializer.html" class="sidebar-link">XmlSerializer</a></li><li><a href="/dotnet/vb-forms.html" class="sidebar-link">VB Forms</a></li><li><a href="/dotnet/jit-compiler.html" class="sidebar-link">JIT compiler</a></li><li><a href="/dotnet/clr.html" class="sidebar-link">CLR</a></li><li><a href="/dotnet/tpl-dataflow.html" class="sidebar-link">TPL Dataflow</a></li><li><a href="/dotnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/dotnet/process-and-thread-affinity-setting.html" class="sidebar-link">Process and Thread affinity setting</a></li><li><a href="/dotnet/parallel-processing-using-net-framework.html" class="sidebar-link">Parallel processing using .Net framework</a></li><li><a href="/dotnet/task-parallel-library-tpl.html" class="sidebar-link">Task Parallel Library (TPL)</a></li><li><a href="/dotnet/task-parallel-library-tpl-api-overviews.html" class="sidebar-link">Task Parallel Library (TPL) API Overviews</a></li><li><a href="/dotnet/synchronization-contexts.html" class="sidebar-link">Synchronization Contexts</a></li><li><a href="/dotnet/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/dotnet/garbage-collection.html" class="sidebar-link">Garbage Collection</a></li><li><a href="/dotnet/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/dotnet/system-diagnostics.html" class="sidebar-link">System.Diagnostics</a></li><li><a href="/dotnet/encryption-cryptography.html" class="active sidebar-link">Encryption / Cryptography</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/dotnet/encryption-cryptography.html#rijndaelmanaged" class="sidebar-link">RijndaelManaged</a></li><li class="sidebar-sub-header"><a href="/dotnet/encryption-cryptography.html#encrypt-and-decrypt-data-using-aes-in-c" class="sidebar-link">Encrypt and decrypt data using AES (in C#)</a></li><li class="sidebar-sub-header"><a href="/dotnet/encryption-cryptography.html#create-a-key-from-a-password-random-salt-in-c" class="sidebar-link">Create a Key from a Password / Random SALT (in C#)</a></li><li class="sidebar-sub-header"><a href="/dotnet/encryption-cryptography.html#encryption-and-decryption-using-cryptography-aes" class="sidebar-link">Encryption and Decryption using Cryptography (AES)</a></li></ul></li><li><a href="/dotnet/work-with-sha1-in-c.html" class="sidebar-link">Work with SHA1 in C#</a></li><li><a href="/dotnet/unit-testing.html" class="sidebar-link">Unit testing</a></li><li><a href="/dotnet/write-to-and-read-from-stderr-stream.html" class="sidebar-link">Write to and read from StdErr stream</a></li><li><a href="/dotnet/upload-file-and-post-data-to-webserver.html" class="sidebar-link">Upload file and POST data to webserver</a></li><li><a href="/dotnet/networking.html" class="sidebar-link">Networking</a></li><li><a href="/dotnet/http-servers.html" class="sidebar-link">HTTP servers</a></li><li><a href="/dotnet/http-clients.html" class="sidebar-link">HTTP clients</a></li><li><a href="/dotnet/serial-ports.html" class="sidebar-link">Serial Ports</a></li><li><a href="/dotnet/acronym-glossary.html" class="sidebar-link">Acronym Glossary</a></li><li><a href="/dotnet/work-with-sha1-in-c.html" class="sidebar-link">Work with SHA1 in C#</a></li><li><a href="/dotnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="encryption-cryptography"><a href="#encryption-cryptography" class="header-anchor">#</a> Encryption / Cryptography</h1> <h2 id="rijndaelmanaged"><a href="#rijndaelmanaged" class="header-anchor">#</a> RijndaelManaged</h2> <p>Required Namespace: <code>System.Security.Cryptography</code></p> <div class="language-dotnet extra-class"><pre class="language-dotnet"><code><span class="token keyword">private</span> <span class="token keyword">class</span> <span class="token class-name">Encryption</span> <span class="token punctuation">{</span>
+    
+          <span class="token keyword">private</span> <span class="token keyword">const</span> <span class="token class-name"><span class="token keyword">string</span></span> SecretKey <span class="token operator">=</span> <span class="token string">&quot;topSecretKeyusedforEncryptions&quot;</span><span class="token punctuation">;</span>
+    
+          <span class="token keyword">private</span> <span class="token keyword">const</span> <span class="token class-name"><span class="token keyword">string</span></span> SecretIv <span class="token operator">=</span> <span class="token string">&quot;secretVectorHere&quot;</span><span class="token punctuation">;</span>
+    
+          <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> <span class="token function">Encrypt</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">IsNullOrEmpty</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">?</span> data <span class="token punctuation">:</span> Convert<span class="token punctuation">.</span><span class="token function">ToBase64String</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">EncryptStringToBytesAes</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">GetCryptographyKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">GetCryptographyIv</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+    
+          <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> <span class="token function">Decrypt</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">IsNullOrEmpty</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">?</span> data <span class="token punctuation">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">DecryptStringFromBytesAes</span><span class="token punctuation">(</span>Convert<span class="token punctuation">.</span><span class="token function">FromBase64String</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">GetCryptographyKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">GetCryptographyIv</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+    
+          <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> <span class="token function">GetCryptographyKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> Encoding<span class="token punctuation">.</span>ASCII<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>SecretKey<span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span><span class="token string character">'e'</span><span class="token punctuation">,</span> <span class="token string character">'!'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+    
+          <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> <span class="token function">GetCryptographyIv</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> Encoding<span class="token punctuation">.</span>ASCII<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>SecretIv<span class="token punctuation">.</span><span class="token function">Replace</span><span class="token punctuation">(</span><span class="token string character">'r'</span><span class="token punctuation">,</span> <span class="token string character">'!'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+    
+          <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> <span class="token function">EncryptStringToBytesAes</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> plainText<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> key<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> iv<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">MemoryStream</span> encrypt<span class="token punctuation">;</span>
+            <span class="token class-name">RijndaelManaged</span> aesAlg <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+              aesAlg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">RijndaelManaged</span> <span class="token punctuation">{</span>
+                Key <span class="token operator">=</span> key<span class="token punctuation">,</span>
+                IV <span class="token operator">=</span> iv
+              <span class="token punctuation">}</span><span class="token punctuation">;</span>
+              <span class="token class-name"><span class="token keyword">var</span></span> encryptor <span class="token operator">=</span> aesAlg<span class="token punctuation">.</span><span class="token function">CreateEncryptor</span><span class="token punctuation">(</span>aesAlg<span class="token punctuation">.</span>Key<span class="token punctuation">,</span> aesAlg<span class="token punctuation">.</span>IV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              encrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">MemoryStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> csEncrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">CryptoStream</span><span class="token punctuation">(</span>encrypt<span class="token punctuation">,</span> encryptor<span class="token punctuation">,</span> CryptoStreamMode<span class="token punctuation">.</span>Write<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> swEncrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">StreamWriter</span><span class="token punctuation">(</span>csEncrypt<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  swEncrypt<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>plainText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+              aesAlg<span class="token punctuation">?.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> encrypt<span class="token punctuation">.</span><span class="token function">ToArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+    
+          <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> <span class="token function">DecryptStringFromBytesAes</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> cipherText<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> key<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> iv<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">RijndaelManaged</span> aesAlg <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+            <span class="token class-name"><span class="token keyword">string</span></span> plaintext<span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+              aesAlg <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">RijndaelManaged</span> <span class="token punctuation">{</span>
+                Key <span class="token operator">=</span> key<span class="token punctuation">,</span>
+                IV <span class="token operator">=</span> iv
+              <span class="token punctuation">}</span><span class="token punctuation">;</span>
+              <span class="token class-name"><span class="token keyword">var</span></span> decryptor <span class="token operator">=</span> aesAlg<span class="token punctuation">.</span><span class="token function">CreateDecryptor</span><span class="token punctuation">(</span>aesAlg<span class="token punctuation">.</span>Key<span class="token punctuation">,</span> aesAlg<span class="token punctuation">.</span>IV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+              <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> msDecrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">MemoryStream</span><span class="token punctuation">(</span>cipherText<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> csDecrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">CryptoStream</span><span class="token punctuation">(</span>msDecrypt<span class="token punctuation">,</span> decryptor<span class="token punctuation">,</span> CryptoStreamMode<span class="token punctuation">.</span>Read<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> srDecrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">StreamReader</span><span class="token punctuation">(</span>csDecrypt<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    plaintext <span class="token operator">=</span> srDecrypt<span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+              aesAlg<span class="token punctuation">?.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> plaintext<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Usage</strong></p> <div class="language-dotnet extra-class"><pre class="language-dotnet"><code><span class="token class-name"><span class="token keyword">var</span></span> textToEncrypt <span class="token operator">=</span> <span class="token string">&quot;hello World&quot;</span><span class="token punctuation">;</span>
+
+ <span class="token class-name"><span class="token keyword">var</span></span> encrypted <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Encryption</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Encrypt</span><span class="token punctuation">(</span>textToEncrypt<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//-&gt; zBmW+FUxOvdbpOGm9Ss/vQ==</span>
+
+ <span class="token class-name"><span class="token keyword">var</span></span> decrypted <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Encryption</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Decrypt</span><span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//-&gt; hello World</span>
+
+</code></pre></div><p><strong>Note:</strong></p> <ul><li>Rijndael is the predecessor of the standard symmetric cryptographic algorithm AES.</li></ul> <h2 id="encrypt-and-decrypt-data-using-aes-in-c"><a href="#encrypt-and-decrypt-data-using-aes-in-c" class="header-anchor">#</a> Encrypt and decrypt data using AES (in C#)</h2> <div class="language-dotnet extra-class"><pre class="language-dotnet"><code><span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>IO</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Security<span class="token punctuation">.</span>Cryptography</span><span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> <span class="token namespace">Aes_Example</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">class</span> <span class="token class-name">AesExample</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">try</span>
+            <span class="token punctuation">{</span>
+                <span class="token class-name"><span class="token keyword">string</span></span> original <span class="token operator">=</span> <span class="token string">&quot;Here is some data to encrypt!&quot;</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// Create a new instance of the Aes class.</span>
+                <span class="token comment">// This generates a new key and initialization vector (IV).</span>
+                <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">Aes</span> myAes <span class="token operator">=</span> Aes<span class="token punctuation">.</span><span class="token function">Create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// Encrypt the string to an array of bytes.</span>
+                    <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> encrypted <span class="token operator">=</span> <span class="token function">EncryptStringToBytes_Aes</span><span class="token punctuation">(</span>original<span class="token punctuation">,</span> 
+                                                                myAes<span class="token punctuation">.</span>Key<span class="token punctuation">,</span>
+                                                                myAes<span class="token punctuation">.</span>IV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">// Decrypt the bytes to a string.</span>
+                    <span class="token class-name"><span class="token keyword">string</span></span> roundtrip <span class="token operator">=</span> <span class="token function">DecryptStringFromBytes_Aes</span><span class="token punctuation">(</span>encrypted<span class="token punctuation">,</span> 
+                                                                  myAes<span class="token punctuation">.</span>Key<span class="token punctuation">,</span> 
+                                                                  myAes<span class="token punctuation">.</span>IV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token comment">//Display the original data and the decrypted data.</span>
+                    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;Original:   {0}&quot;</span><span class="token punctuation">,</span> original<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;Round Trip: {0}&quot;</span><span class="token punctuation">,</span> roundtrip<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;Error: {0}&quot;</span><span class="token punctuation">,</span> e<span class="token punctuation">.</span>Message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> <span class="token function">EncryptStringToBytes_Aes</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> plainText<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> Key<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> IV<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// Check arguments.</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>plainText <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> plainText<span class="token punctuation">.</span>Length <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentNullException</span><span class="token punctuation">(</span><span class="token string">&quot;plainText&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Key <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> Key<span class="token punctuation">.</span>Length <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentNullException</span><span class="token punctuation">(</span><span class="token string">&quot;Key&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>IV <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> IV<span class="token punctuation">.</span>Length <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentNullException</span><span class="token punctuation">(</span><span class="token string">&quot;IV&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> encrypted<span class="token punctuation">;</span>
+
+            <span class="token comment">// Create an Aes object with the specified key and IV.</span>
+            <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">Aes</span> aesAlg <span class="token operator">=</span> Aes<span class="token punctuation">.</span><span class="token function">Create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                aesAlg<span class="token punctuation">.</span>Key <span class="token operator">=</span> Key<span class="token punctuation">;</span>
+                aesAlg<span class="token punctuation">.</span>IV <span class="token operator">=</span> IV<span class="token punctuation">;</span>
+
+                <span class="token comment">// Create a decrytor to perform the stream transform.</span>
+                <span class="token class-name">ICryptoTransform</span> encryptor <span class="token operator">=</span> aesAlg<span class="token punctuation">.</span><span class="token function">CreateEncryptor</span><span class="token punctuation">(</span>aesAlg<span class="token punctuation">.</span>Key<span class="token punctuation">,</span>
+                                                                    aesAlg<span class="token punctuation">.</span>IV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// Create the streams used for encryption.</span>
+                <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">MemoryStream</span> msEncrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">MemoryStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">CryptoStream</span> csEncrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">CryptoStream</span><span class="token punctuation">(</span>msEncrypt<span class="token punctuation">,</span>
+                                                                     encryptor<span class="token punctuation">,</span>
+                                                                     CryptoStreamMode<span class="token punctuation">.</span>Write<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">StreamWriter</span> swEncrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">StreamWriter</span><span class="token punctuation">(</span>csEncrypt<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            <span class="token comment">//Write all data to the stream.</span>
+                            swEncrypt<span class="token punctuation">.</span><span class="token function">Write</span><span class="token punctuation">(</span>plainText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+
+                        encrypted <span class="token operator">=</span> msEncrypt<span class="token punctuation">.</span><span class="token function">ToArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token comment">// Return the encrypted bytes from the memory stream.</span>
+            <span class="token keyword">return</span> encrypted<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> <span class="token function">DecryptStringFromBytes_Aes</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> cipherText<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> Key<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> IV<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// Check arguments.</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>cipherText <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> cipherText<span class="token punctuation">.</span>Length <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentNullException</span><span class="token punctuation">(</span><span class="token string">&quot;cipherText&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>Key <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> Key<span class="token punctuation">.</span>Length <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentNullException</span><span class="token punctuation">(</span><span class="token string">&quot;Key&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>IV <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> IV<span class="token punctuation">.</span>Length <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+                <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentNullException</span><span class="token punctuation">(</span><span class="token string">&quot;IV&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Declare the string used to hold the decrypted text.</span>
+            <span class="token class-name"><span class="token keyword">string</span></span> plaintext <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Create an Aes object with the specified key and IV.</span>
+            <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">Aes</span> aesAlg <span class="token operator">=</span> Aes<span class="token punctuation">.</span><span class="token function">Create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                aesAlg<span class="token punctuation">.</span>Key <span class="token operator">=</span> Key<span class="token punctuation">;</span>
+                aesAlg<span class="token punctuation">.</span>IV <span class="token operator">=</span> IV<span class="token punctuation">;</span>
+
+                <span class="token comment">// Create a decrytor to perform the stream transform.</span>
+                <span class="token class-name">ICryptoTransform</span> decryptor <span class="token operator">=</span> aesAlg<span class="token punctuation">.</span><span class="token function">CreateDecryptor</span><span class="token punctuation">(</span>aesAlg<span class="token punctuation">.</span>Key<span class="token punctuation">,</span>
+                                                                    aesAlg<span class="token punctuation">.</span>IV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">// Create the streams used for decryption.</span>
+                <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">MemoryStream</span> msDecrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">MemoryStream</span><span class="token punctuation">(</span>cipherText<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">CryptoStream</span> csDecrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">CryptoStream</span><span class="token punctuation">(</span>msDecrypt<span class="token punctuation">,</span>
+                                                                     decryptor<span class="token punctuation">,</span>
+                                                                     CryptoStreamMode<span class="token punctuation">.</span>Read<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">using</span> <span class="token punctuation">(</span><span class="token class-name">StreamReader</span> srDecrypt <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">StreamReader</span><span class="token punctuation">(</span>csDecrypt<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+
+                            <span class="token comment">// Read the decrypted bytes from the decrypting stream</span>
+                            <span class="token comment">// and place them in a string.</span>
+                            plaintext <span class="token operator">=</span> srDecrypt<span class="token punctuation">.</span><span class="token function">ReadToEnd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">return</span> plaintext<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This example is from <a href="https://msdn.microsoft.com/en-us/library/system.security.cryptography.aes(v=vs.110).aspx" target="_blank" rel="noopener noreferrer">MSDN<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <p>It is a console demo application, showing how to encrypt a string by using the standard <strong>AES</strong> encryption, and how to decrypt it afterwards.</p> <p>(<strong><a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard" target="_blank" rel="noopener noreferrer">AES = Advanced Encryption Standard<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>,</strong> a specification for the encryption of electronic data established by the U.S. National Institute of Standards and Technology (NIST) in 2001 which is still the de-facto standard for symmetric encryption)</p> <p><strong>Notes:</strong></p> <li>
+In a real encryption scenario, you need to choose a proper cipher mode (can be assigned to the `Mode` property by selecting a value from the `CipherMode` enumeration). **Never** use the `CipherMode.ECB` (electronic codebook mode), since this procuces a weak cypher stream
+</li> <li>
+To create a good (and not a weak) `Key`, either use a cryptographic random generator or use the example above (**Create a Key from a Password**). The recommended **KeySize** is 256 bit. Supported key sizes are available via the `LegalKeySizes` property.
+</li> <li>
+To initialize the initialization vector `IV`, you can use a SALT as shown in the example above (**Random SALT**)
+</li> <li>
+Supported block sizes are available via the `SupportedBlockSizes` property, the block size can be assigned via the `BlockSize` property
+</li> <p><strong>Usage:</strong> see Main() method.</p> <h2 id="create-a-key-from-a-password-random-salt-in-c"><a href="#create-a-key-from-a-password-random-salt-in-c" class="header-anchor">#</a> Create a Key from a Password / Random SALT (in C#)</h2> <div class="language-dotnet extra-class"><pre class="language-dotnet"><code><span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Security<span class="token punctuation">.</span>Cryptography</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Text</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PasswordDerivedBytesExample</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Main</span><span class="token punctuation">(</span><span class="token class-name">String<span class="token punctuation">[</span><span class="token punctuation">]</span></span> args<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Get a password from the user.</span>
+        Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;Enter a password to produce a key:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> pwd <span class="token operator">=</span> Encoding<span class="token punctuation">.</span>Unicode<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>Console<span class="token punctuation">.</span><span class="token function">ReadLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> salt <span class="token operator">=</span> <span class="token function">CreateRandomSalt</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Create a TripleDESCryptoServiceProvider object.</span>
+        <span class="token class-name">TripleDESCryptoServiceProvider</span> tdes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">TripleDESCryptoServiceProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">try</span>
+        <span class="token punctuation">{</span>
+            Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;Creating a key with PasswordDeriveBytes...&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Create a PasswordDeriveBytes object and then create</span>
+            <span class="token comment">// a TripleDES key from the password and salt.</span>
+            <span class="token class-name">PasswordDeriveBytes</span> pdb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">PasswordDeriveBytes</span><span class="token punctuation">(</span>pwd<span class="token punctuation">,</span> salt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Create the key and set it to the Key property</span>
+            <span class="token comment">// of the TripleDESCryptoServiceProvider object.</span>
+            tdes<span class="token punctuation">.</span>Key <span class="token operator">=</span> pdb<span class="token punctuation">.</span><span class="token function">CryptDeriveKey</span><span class="token punctuation">(</span><span class="token string">&quot;TripleDES&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;SHA1&quot;</span><span class="token punctuation">,</span> <span class="token number">192</span><span class="token punctuation">,</span> tdes<span class="token punctuation">.</span>IV<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;Operation complete.&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>Message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">finally</span>
+        <span class="token punctuation">{</span>
+            <span class="token comment">// Clear the buffers</span>
+            <span class="token function">ClearBytes</span><span class="token punctuation">(</span>pwd<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">ClearBytes</span><span class="token punctuation">(</span>salt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">// Clear the key.</span>
+            tdes<span class="token punctuation">.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        Console<span class="token punctuation">.</span><span class="token function">ReadLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">region</span> Helper methods</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Generates a random salt value of the specified length.</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> <span class="token function">CreateRandomSalt</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> length<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Create a buffer</span>
+        <span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> randBytes<span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>length <span class="token operator">&gt;=</span> <span class="token number">1</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            randBytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name"><span class="token keyword">byte</span></span><span class="token punctuation">[</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            randBytes <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name"><span class="token keyword">byte</span></span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Create a new RNGCryptoServiceProvider.</span>
+        <span class="token class-name">RNGCryptoServiceProvider</span> rand <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">RNGCryptoServiceProvider</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Fill the buffer with random bytes.</span>
+        rand<span class="token punctuation">.</span><span class="token function">GetBytes</span><span class="token punctuation">(</span>randBytes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// return the bytes.</span>
+        <span class="token keyword">return</span> randBytes<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// Clear the bytes in a buffer so they can't later be read from memory.</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">ClearBytes</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> buffer<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Check arguments.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>buffer <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ArgumentNullException</span><span class="token punctuation">(</span><span class="token string">&quot;buffer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token comment">// Set each byte in the buffer to 0.</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> x <span class="token operator">&lt;</span> buffer<span class="token punctuation">.</span>Length<span class="token punctuation">;</span> x<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            buffer<span class="token punctuation">[</span>x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token preprocessor property">#<span class="token directive keyword">endregion</span></span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This example is taken from <a href="https://msdn.microsoft.com/en-us/library/system.security.cryptography.passwordderivebytes(v=vs.110).aspx" target="_blank" rel="noopener noreferrer">MSDN.<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>It is a console demo, and it shows how to create a secure key based on a user-defined password, and how to create a random SALT based on the cryptographic random generator.</p> <p><strong>Notes:</strong></p> <li>
+The built-in function `PasswordDeriveBytes` uses the standard PBKDF1 algorithm to generate a key from the password. Per default, it uses 100 iterations to generate the key to slow down brute force attacks. The SALT generated randomly further strenghens the key.
+</li> <li>
+The function `CryptDeriveKey` converts the key generated by `PasswordDeriveBytes` into a key compatible with the specified encryption algorithm (here &quot;TripleDES&quot;) by using the specified hash algorithm (here &quot;SHA1&quot;). The keysize in this example is 192 bytes, and the initialization vector IV is taken from the triple-DES crypto provider
+</li> <li>
+Usually, this mechanism is used to protect a stronger random generated key by a password, which encrypts large amount of data. You can also use it to provide multiple passwords of different users to give access to the same data (being protected by a different random key).
+</li> <li>
+Unfortunately, `CryptDeriveKey` does currently not support AES. See [here.](https://social.msdn.microsoft.com/Forums/vstudio/en-US/61d85001-2eae-4419-b4bf-ce98d46f4d21/passwordderivebytescryptderivekey-derives-an-aes-key-but-gets-object-identifier-oid-is-unknown?forum=netfxbcl) <br> **NOTE:** As a workaround, you can create a random AES key for encryption of the data to be protected with AES and store the AES key in a TripleDES-Container which uses the key generated by `CryptDeriveKey`. But that limits the security to TripleDES, does not take advantage of the larger keysizes of AES and creates a dependency to TripleDES.
+</li> <p><strong>Usage:</strong> See Main() method.</p> <h2 id="encryption-and-decryption-using-cryptography-aes"><a href="#encryption-and-decryption-using-cryptography-aes" class="header-anchor">#</a> Encryption and Decryption using Cryptography (AES)</h2> <p>Decryption Code</p> <div class="language- extra-class"><pre class="language-text"><code>
+   public static string Decrypt(string cipherText)
+    {
+        if (cipherText == null)
+            return null;
+
+        byte[] cipherBytes = Convert.FromBase64String(cipherText);
+        using (Aes encryptor = Aes.Create())
+        {
+            Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(CryptKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+            encryptor.Key = pdb.GetBytes(32);
+            encryptor.IV = pdb.GetBytes(16);
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                {
+                    cs.Write(cipherBytes, 0, cipherBytes.Length);
+                    cs.Close();
+                }
+
+                cipherText = Encoding.Unicode.GetString(ms.ToArray());
+            }
+        }
+    
+        return cipherText;
+    }
+
+</code></pre></div><p>Encryption Code</p> <div class="language- extra-class"><pre class="language-text"><code>
+   public static string Encrypt(string cipherText)
+    {
+        if (cipherText == null)
+            return null;
+      
+        byte[] clearBytes = Encoding.Unicode.GetBytes(cipherText);
+        using (Aes encryptor = Aes.Create())
+        {
+            Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(CryptKey, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+            encryptor.Key = pdb.GetBytes(32);
+            encryptor.IV = pdb.GetBytes(16);
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (CryptoStream cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                {
+                    cs.Write(clearBytes, 0, clearBytes.Length);
+                    cs.Close();
+                }
+
+                cipherText = Convert.ToBase64String(ms.ToArray());
+            }
+        }
+        return cipherText;
+    }
+
+</code></pre></div><p>Usage</p> <div class="language-dotnet extra-class"><pre class="language-dotnet"><code><span class="token class-name"><span class="token keyword">var</span></span> textToEncrypt <span class="token operator">=</span> <span class="token string">&quot;TestEncrypt&quot;</span><span class="token punctuation">;</span>
+
+<span class="token class-name"><span class="token keyword">var</span></span> encrypted <span class="token operator">=</span> <span class="token function">Encrypt</span><span class="token punctuation">(</span>textToEncrypt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name"><span class="token keyword">var</span></span> decrypted <span class="token operator">=</span> <span class="token function">Decrypt</span><span class="token punctuation">(</span>encrypted<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>.NET Framework provides implementation of many cryptographic algorithms. They include basically symmetric algorithms, asymmetric algorithms and hashes.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/dotnet/encryption-cryptography.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/dotnet/system-diagnostics.html" class="prev">
+        System.Diagnostics
+      </a></span> <span class="next"><a href="/dotnet/work-with-sha1-in-c.html">
+        Work with SHA1 in C#
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/991.e37d6e59.js" defer></script>
+  </body>
+</html>

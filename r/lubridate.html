@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>R - lubridate</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Parsing dates and datetimes from strings with lubridate, Difference between period and duration, Instants, Intervals, Durations and Periods, Manipulating date and time in lubridate, Time Zones, Parsing date and time in lubridate, Rounding dates">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="R - lubridate">
+    <meta property="og:description" content="Parsing dates and datetimes from strings with lubridate, Difference between period and duration, Instants, Intervals, Durations and Periods, Manipulating date and time in lubridate, Time Zones, Parsing date and time in lubridate, Rounding dates">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/r/lubridate.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="R - lubridate">
+    <meta name="twitter:description" content="Parsing dates and datetimes from strings with lubridate, Difference between period and duration, Instants, Intervals, Durations and Periods, Manipulating date and time in lubridate, Time Zones, Parsing date and time in lubridate, Rounding dates">
+    <meta name="twitter:url" content="/r/lubridate.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2911.f9630617.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>R</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/r/" class="sidebar-link">Disclaimer</a></li><li><a href="/r/getting-started-with-r-language.html" class="sidebar-link">Getting started with R Language</a></li><li><a href="/r/variables.html" class="sidebar-link">Variables</a></li><li><a href="/r/arithmetic-operators.html" class="sidebar-link">Arithmetic Operators</a></li><li><a href="/r/matrices.html" class="sidebar-link">Matrices</a></li><li><a href="/r/formula.html" class="sidebar-link">Formula</a></li><li><a href="/r/reading-and-writing-strings.html" class="sidebar-link">Reading and writing strings</a></li><li><a href="/r/string-manipulation-with-stringi-package.html" class="sidebar-link">String manipulation with stringi package</a></li><li><a href="/r/classes.html" class="sidebar-link">Classes</a></li><li><a href="/r/lists.html" class="sidebar-link">Lists</a></li><li><a href="/r/hashmaps.html" class="sidebar-link">Hashmaps</a></li><li><a href="/r/creating-vectors.html" class="sidebar-link">Creating vectors</a></li><li><a href="/r/date-and-time.html" class="sidebar-link">Date and Time</a></li><li><a href="/r/the-date-class.html" class="sidebar-link">The Date class</a></li><li><a href="/r/date-time-classes-posixct-and-posixlt.html" class="sidebar-link">Date-time classes (POSIXct and POSIXlt)</a></li><li><a href="/r/the-character-class.html" class="sidebar-link">The character class</a></li><li><a href="/r/numeric-classes-and-storage-modes.html" class="sidebar-link">Numeric classes and storage modes</a></li><li><a href="/r/the-logical-class.html" class="sidebar-link">The logical class</a></li><li><a href="/r/data-frames.html" class="sidebar-link">Data frames</a></li><li><a href="/r/split-function.html" class="sidebar-link">Split function</a></li><li><a href="/r/reading-and-writing-tabular-data-in-plain-text-files-csv-tsv-etc.html" class="sidebar-link">Reading and writing tabular data in plain-text files (CSV, TSV, etc.)</a></li><li><a href="/r/pipe-operators-and-others.html" class="sidebar-link">Pipe operators (%&gt;% and others)</a></li><li><a href="/r/linear-models-regression.html" class="sidebar-link">Linear Models (Regression)</a></li><li><a href="/r/data-table.html" class="sidebar-link">data.table</a></li><li><a href="/r/pivot-and-unpivot-with-data-table.html" class="sidebar-link">Pivot and unpivot with data.table</a></li><li><a href="/r/bar-chart.html" class="sidebar-link">Bar Chart</a></li><li><a href="/r/base-plotting.html" class="sidebar-link">Base Plotting</a></li><li><a href="/r/boxplot.html" class="sidebar-link">boxplot</a></li><li><a href="/r/ggplot2.html" class="sidebar-link">ggplot2</a></li><li><a href="/r/factors.html" class="sidebar-link">Factors</a></li><li><a href="/r/pattern-matching-and-replacement.html" class="sidebar-link">Pattern Matching and Replacement</a></li><li><a href="/r/run-length-encoding.html" class="sidebar-link">Run-length encoding</a></li><li><a href="/r/speeding-up-tough-to-vectorize-code.html" class="sidebar-link">Speeding up tough-to-vectorize code</a></li><li><a href="/r/introduction-to-geographical-maps.html" class="sidebar-link">Introduction to Geographical Maps</a></li><li><a href="/r/set-operations.html" class="sidebar-link">Set operations</a></li><li><a href="/r/tidyverse.html" class="sidebar-link">tidyverse</a></li><li><a href="/r/rcpp.html" class="sidebar-link">Rcpp</a></li><li><a href="/r/random-numbers-generator.html" class="sidebar-link">Random Numbers Generator</a></li><li><a href="/r/parallel-processing.html" class="sidebar-link">Parallel processing</a></li><li><a href="/r/subsetting.html" class="sidebar-link">Subsetting</a></li><li><a href="/r/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/r/installing-packages.html" class="sidebar-link">Installing packages</a></li><li><a href="/r/updating-r-and-the-package-library.html" class="sidebar-link">Updating R and the package library</a></li><li><a href="/r/inspecting-packages.html" class="sidebar-link">Inspecting packages</a></li><li><a href="/r/creating-packages-with-devtools.html" class="sidebar-link">Creating packages with devtools</a></li><li><a href="/r/using-pipe-assignment-in-your-own-package-how-to.html" class="sidebar-link">Using pipe assignment in your own package %%: How to ?</a></li><li><a href="/r/arima-models.html" class="sidebar-link">Arima Models</a></li><li><a href="/r/distribution-functions.html" class="sidebar-link">Distribution Functions</a></li><li><a href="/r/shiny.html" class="sidebar-link">Shiny</a></li><li><a href="/r/spatial-analysis.html" class="sidebar-link">spatial analysis</a></li><li><a href="/r/sqldf.html" class="sidebar-link">sqldf</a></li><li><a href="/r/code-profiling.html" class="sidebar-link">Code profiling</a></li><li><a href="/r/control-flow-structures.html" class="sidebar-link">Control flow structures</a></li><li><a href="/r/column-wise-operation.html" class="sidebar-link">Column wise operation</a></li><li><a href="/r/json.html" class="sidebar-link">JSON</a></li><li><a href="/r/rodbc.html" class="sidebar-link">RODBC</a></li><li><a href="/r/lubridate.html" class="active sidebar-link">lubridate</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/r/lubridate.html#parsing-dates-and-datetimes-from-strings-with-lubridate" class="sidebar-link">Parsing dates and datetimes from strings with lubridate</a></li><li class="sidebar-sub-header"><a href="/r/lubridate.html#difference-between-period-and-duration" class="sidebar-link">Difference between period and duration</a></li><li class="sidebar-sub-header"><a href="/r/lubridate.html#instants" class="sidebar-link">Instants</a></li><li class="sidebar-sub-header"><a href="/r/lubridate.html#intervals-durations-and-periods" class="sidebar-link">Intervals, Durations and Periods</a></li><li class="sidebar-sub-header"><a href="/r/lubridate.html#manipulating-date-and-time-in-lubridate" class="sidebar-link">Manipulating date and time in lubridate</a></li><li class="sidebar-sub-header"><a href="/r/lubridate.html#time-zones" class="sidebar-link">Time Zones</a></li><li class="sidebar-sub-header"><a href="/r/lubridate.html#parsing-date-and-time-in-lubridate" class="sidebar-link">Parsing date and time in lubridate</a></li><li class="sidebar-sub-header"><a href="/r/lubridate.html#rounding-dates" class="sidebar-link">Rounding dates</a></li></ul></li><li><a href="/r/time-series-and-forecasting.html" class="sidebar-link">Time Series and Forecasting</a></li><li><a href="/r/strsplit-function.html" class="sidebar-link">strsplit function</a></li><li><a href="/r/web-scraping-and-parsing.html" class="sidebar-link">Web scraping and parsing</a></li><li><a href="/r/generalized-linear-models.html" class="sidebar-link">Generalized linear models</a></li><li><a href="/r/reshaping-data-between-long-and-wide-forms.html" class="sidebar-link">Reshaping data between long and wide forms</a></li><li><a href="/r/rmarkdown-and-knitr-presentation.html" class="sidebar-link">RMarkdown and knitr presentation</a></li><li><a href="/r/scope-of-variables.html" class="sidebar-link">Scope of variables</a></li><li><a href="/r/performing-a-permutation-test.html" class="sidebar-link">Performing a Permutation Test</a></li><li><a href="/r/xgboost.html" class="sidebar-link">xgboost</a></li><li><a href="/r/r-code-vectorization-best-practices.html" class="sidebar-link">R code vectorization best practices</a></li><li><a href="/r/missing-values.html" class="sidebar-link">Missing values</a></li><li><a href="/r/hierarchical-linear-modeling.html" class="sidebar-link">Hierarchical Linear Modeling</a></li><li><a href="/r/apply-family-of-functions-functionals.html" class="sidebar-link">*apply family of functions (functionals)</a></li><li><a href="/r/text-mining.html" class="sidebar-link">Text mining</a></li><li><a href="/r/anova.html" class="sidebar-link">ANOVA</a></li><li><a href="/r/raster-and-image-analysis.html" class="sidebar-link">Raster and Image Analysis</a></li><li><a href="/r/survival-analysis.html" class="sidebar-link">Survival analysis</a></li><li><a href="/r/fault-tolerant-resilient-code.html" class="sidebar-link">Fault-tolerant/resilient code</a></li><li><a href="/r/reproducible-r.html" class="sidebar-link">Reproducible R</a></li><li><a href="/r/fourier-series-and-transformations.html" class="sidebar-link">Fourier Series and Transformations</a></li><li><a href="/r/rprofile.html" class="sidebar-link">.Rprofile</a></li><li><a href="/r/dplyr.html" class="sidebar-link">dplyr</a></li><li><a href="/r/caret.html" class="sidebar-link">caret</a></li><li><a href="/r/extracting-and-listing-files-in-compressed-archives.html" class="sidebar-link">Extracting and Listing Files in Compressed Archives</a></li><li><a href="/r/probability-distributions-with-r.html" class="sidebar-link">Probability Distributions with R</a></li><li><a href="/r/r-in-latex-with-knitr.html" class="sidebar-link">R in LaTeX with knitr</a></li><li><a href="/r/web-crawling-in-r.html" class="sidebar-link">Web Crawling in R</a></li><li><a href="/r/creating-reports-with-rmarkdown.html" class="sidebar-link">Creating reports with RMarkdown</a></li><li><a href="/r/gpu-accelerated-computing.html" class="sidebar-link">GPU-accelerated computing</a></li><li><a href="/r/heatmap-and-heatmap-2.html" class="sidebar-link">heatmap and heatmap.2</a></li><li><a href="/r/network-analysis-with-the-igraph-package.html" class="sidebar-link">Network analysis with the igraph package</a></li><li><a href="/r/functional-programming.html" class="sidebar-link">Functional programming</a></li><li><a href="/r/get-user-input.html" class="sidebar-link">Get user input</a></li><li><a href="/r/spark-api-sparkr.html" class="sidebar-link">Spark API (SparkR)</a></li><li><a href="/r/meta-documentation-guidelines.html" class="sidebar-link">Meta: Documentation Guidelines</a></li><li><a href="/r/input-and-output.html" class="sidebar-link">Input and output</a></li><li><a href="/r/i-o-for-foreign-tables-excel-sas-spss-stata.html" class="sidebar-link">I/O for foreign tables (Excel, SAS, SPSS, Stata)</a></li><li><a href="/r/i-o-for-database-tables.html" class="sidebar-link">I/O for database tables</a></li><li><a href="/r/i-o-for-geographic-data-shapefiles-etc.html" class="sidebar-link">I/O for geographic data (shapefiles, etc.)</a></li><li><a href="/r/i-o-for-raster-images.html" class="sidebar-link">I/O for raster images</a></li><li><a href="/r/i-o-for-r-s-binary-format.html" class="sidebar-link">I/O for R's binary format</a></li><li><a href="/r/recycling.html" class="sidebar-link">Recycling</a></li><li><a href="/r/expression-parse-eval.html" class="sidebar-link">Expression: parse + eval</a></li><li><a href="/r/regular-expression-syntax-in-r.html" class="sidebar-link">Regular Expression Syntax in R</a></li><li><a href="/r/regular-expressions-regex.html" class="sidebar-link">Regular Expressions (regex)</a></li><li><a href="/r/combinatorics.html" class="sidebar-link">Combinatorics</a></li><li><a href="/r/solving-odes-in-r.html" class="sidebar-link">Solving ODEs in R</a></li><li><a href="/r/feature-selection-in-r-removing-extraneous-features.html" class="sidebar-link">Feature Selection in R -- Removing Extraneous Features</a></li><li><a href="/r/bibliography-in-rmd.html" class="sidebar-link">Bibliography in RMD</a></li><li><a href="/r/writing-functions-in-r.html" class="sidebar-link">Writing functions in R</a></li><li><a href="/r/color-schemes-for-graphics.html" class="sidebar-link">Color schemes for graphics</a></li><li><a href="/r/hierarchical-clustering-with-hclust.html" class="sidebar-link">Hierarchical clustering with hclust</a></li><li><a href="/r/random-forest-algorithm.html" class="sidebar-link">Random Forest Algorithm</a></li><li><a href="/r/restful-r-services.html" class="sidebar-link">RESTful R Services</a></li><li><a href="/r/machine-learning.html" class="sidebar-link">Machine learning</a></li><li><a href="/r/using-texreg-to-export-models-in-a-paper-ready-way.html" class="sidebar-link">Using texreg to export models in a paper-ready way</a></li><li><a href="/r/publishing.html" class="sidebar-link">Publishing</a></li><li><a href="/r/implement-state-machine-pattern-using-s4-class.html" class="sidebar-link">Implement State Machine Pattern using S4 Class</a></li><li><a href="/r/reshape-using-tidyr.html" class="sidebar-link">Reshape using tidyr</a></li><li><a href="/r/modifying-strings-by-substitution.html" class="sidebar-link">Modifying strings by substitution</a></li><li><a href="/r/non-standard-evaluation-and-standard-evaluation.html" class="sidebar-link">Non-standard evaluation and standard evaluation</a></li><li><a href="/r/randomization.html" class="sidebar-link">Randomization</a></li><li><a href="/r/object-oriented-programming-in-r.html" class="sidebar-link">Object-Oriented Programming in R</a></li><li><a href="/r/coercion.html" class="sidebar-link">Coercion</a></li><li><a href="/r/standardize-analyses-by-writing-standalone-r-scripts.html" class="sidebar-link">Standardize analyses by writing standalone R scripts</a></li><li><a href="/r/analyze-tweets-with-r.html" class="sidebar-link">Analyze tweets with R</a></li><li><a href="/r/natural-language-processing.html" class="sidebar-link">Natural language processing</a></li><li><a href="/r/r-markdown-notebooks-from-rstudio.html" class="sidebar-link">R Markdown Notebooks (from RStudio)</a></li><li><a href="/r/aggregating-data-frames.html" class="sidebar-link">Aggregating data frames</a></li><li><a href="/r/data-acquisition.html" class="sidebar-link">Data acquisition</a></li><li><a href="/r/r-memento-by-examples.html" class="sidebar-link">R memento by examples</a></li><li><a href="/r/updating-r-version.html" class="sidebar-link">Updating R version</a></li><li><a href="/r/introspection.html" class="sidebar-link">Introspection</a></li><li><a href="/r/roxygen2.html" class="sidebar-link">roxygen2</a></li><li><a href="/r/cleaning-data.html" class="sidebar-link">Cleaning data</a></li><li><a href="/r/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="lubridate"><a href="#lubridate" class="header-anchor">#</a> lubridate</h1> <h2 id="parsing-dates-and-datetimes-from-strings-with-lubridate"><a href="#parsing-dates-and-datetimes-from-strings-with-lubridate" class="header-anchor">#</a> Parsing dates and datetimes from strings with lubridate</h2> <p>The <code>lubridate</code> package provides convenient functions to format date and datetime objects from character strings. The functions are permutations of</p> <table><thead><tr><th>Letter</th> <th>Element to parse</th> <th>Base R equivalent</th></tr></thead> <tbody><tr><td>y</td> <td>year</td> <td><code>%y</code>, <code>%Y</code></td></tr> <tr><td>m (with y and d)</td> <td>month</td> <td><code>%m</code>, <code>%b</code>, <code>%h</code>, <code>%B</code></td></tr> <tr><td>d</td> <td>day</td> <td><code>%d</code>, <code>%e</code></td></tr> <tr><td>h</td> <td>hour</td> <td><code>%H</code>, <code>%I%p</code></td></tr> <tr><td>m (with h and s)</td> <td>minute</td> <td><code>%M</code></td></tr> <tr><td>s</td> <td>seconds</td> <td><code>%S</code></td></tr></tbody></table> <p>e.g. <code>ymd()</code> for parsing a date with the year followed by the month followed by the day, e.g. <code>&quot;2016-07-22&quot;</code>, or <code>ymd_hms()</code> for parsing a datetime in the order year, month, day, hours, minutes, seconds, e.g. <code>&quot;2016-07-22 13:04:47&quot;</code>.</p> <p>The functions are able to recognize most separators (such as <code>/</code>, <code>-</code>, and whitespace) without additional arguments. They also work with inconsistent separators.</p> <h3 id="dates"><a href="#dates" class="header-anchor">#</a> Dates</h3> <p>The date functions return an object of class <code>Date</code>.</p> <div class="language-r extra-class"><pre class="language-r"><code>library<span class="token punctuation">(</span>lubridate<span class="token punctuation">)</span> 
+
+mdy<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">' 07/02/2016 '</span><span class="token punctuation">,</span> <span class="token string">'7 / 03 / 2016'</span><span class="token punctuation">,</span> <span class="token string">' 7 / 4 / 16 '</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-02&quot; &quot;2016-07-03&quot; &quot;2016-07-04&quot;</span>
+
+ymd<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">&quot;20160724&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;2016/07/23&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;2016-07-25&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    <span class="token comment"># inconsistent separators</span>
+<span class="token comment">## [1] &quot;2016-07-24&quot; &quot;2016-07-23&quot; &quot;2016-07-25&quot;</span>
+
+</code></pre></div><h3 id="datetimes"><a href="#datetimes" class="header-anchor">#</a> Datetimes</h3> <h3 id="utility-functions"><a href="#utility-functions" class="header-anchor">#</a> Utility functions</h3> <p>Datetimes can be parsed using <code>ymd_hms</code> variants including <code>ymd_hm</code> and <code>ymd_h</code>. All datetime functions can accept a <code>tz</code> timezone argument akin to that of <code>as.POSIXct</code> or <code>strptime</code>, but which defaults to <code>&quot;UTC&quot;</code> instead of the local timezone.</p> <p>The datetime functions return an object of class <code>POSIXct</code>.</p> <div class="language-r extra-class"><pre class="language-r"><code>x <span class="token operator">&lt;-</span> c<span class="token punctuation">(</span><span class="token string">&quot;20160724 130102&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;2016/07/23 14:02:01&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;2016-07-25 15:03:00&quot;</span><span class="token punctuation">)</span>
+ymd_hms<span class="token punctuation">(</span>x<span class="token punctuation">,</span> tz<span class="token operator">=</span><span class="token string">&quot;EST&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-24 13:01:02 EST&quot; &quot;2016-07-23 14:02:01 EST&quot;</span>
+<span class="token comment">## [3] &quot;2016-07-25 15:03:00 EST&quot;</span>
+
+ymd_hms<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-24 13:01:02 UTC&quot; &quot;2016-07-23 14:02:01 UTC&quot;</span>
+<span class="token comment">## [3] &quot;2016-07-25 15:03:00 UTC&quot;</span>
+
+</code></pre></div><h3 id="parser-functions"><a href="#parser-functions" class="header-anchor">#</a> Parser functions</h3> <p><code>lubridate</code> also includes three functions for parsing datetimes with a formatting string like <code>as.POSIXct</code> or <code>strptime</code>:</p> <table><thead><tr><th>Function</th> <th>Output Class</th> <th>Formatting strings accepted</th></tr></thead> <tbody><tr><td><code>parse_date_time</code></td> <td>POSIXct</td> <td>Flexible. Will accept <code>strptime</code>-style with <code>%</code> or <code>lubridate</code> datetime function name style, e.g <code>&quot;ymd hms&quot;</code>. Will accept a vector of orders for heterogeneous data and guess which is appropriate.</td></tr> <tr><td><code>parse_date_time2</code></td> <td>Default POSIXct; if <code>lt = TRUE</code>, POSIXlt</td> <td>Strict. Accepts only <code>strptime</code> tokens (with or without <code>%</code>) from a limited set.</td></tr> <tr><td><code>fast_strptime</code></td> <td>Default POSIXlt; if <code>lt = FALSE</code>, POSIXct</td> <td>Strict. Accepts only <code>%</code>-delimited <code>strptime</code> tokens with delimiters (<code>-</code>, <code>/</code>, <code>:</code>, etc.) from a limited set.</td></tr></tbody></table> <div class="language-r extra-class"><pre class="language-r"><code>x <span class="token operator">&lt;-</span> c<span class="token punctuation">(</span><span class="token string">'2016-07-22 13:04:47'</span><span class="token punctuation">,</span> <span class="token string">'07/22/2016 1:04:47 pm'</span><span class="token punctuation">)</span>
+
+parse_date_time<span class="token punctuation">(</span>x<span class="token punctuation">,</span> orders <span class="token operator">=</span> c<span class="token punctuation">(</span><span class="token string">'mdy Imsp'</span><span class="token punctuation">,</span> <span class="token string">'ymd hms'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 13:04:47 UTC&quot; &quot;2016-07-22 13:04:47 UTC&quot;</span>
+
+x <span class="token operator">&lt;-</span> c<span class="token punctuation">(</span><span class="token string">'2016-07-22 13:04:47'</span><span class="token punctuation">,</span> <span class="token string">'2016-07-22 14:47:58'</span><span class="token punctuation">)</span>
+
+parse_date_time2<span class="token punctuation">(</span>x<span class="token punctuation">,</span> orders <span class="token operator">=</span> <span class="token string">'Ymd HMS'</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 13:04:47 UTC&quot; &quot;2016-07-22 14:47:58 UTC&quot;</span>
+
+fast_strptime<span class="token punctuation">(</span>x<span class="token punctuation">,</span> format <span class="token operator">=</span> <span class="token string">'%Y-%m-%d %H:%M:%S'</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 13:04:47 UTC&quot; &quot;2016-07-22 14:47:58 UTC&quot;</span>
+
+</code></pre></div><p><code>parse_date_time2</code> and <code>fast_strptime</code> use a fast C parser for efficiency.</p> <p>See <code>?parse_date_time</code> for formatting tokens.</p> <h2 id="difference-between-period-and-duration"><a href="#difference-between-period-and-duration" class="header-anchor">#</a> Difference between period and duration</h2> <p>Unlike durations, periods can be used to accurately model clock times without knowing when events such as leap seconds, leap days, and DST changes occur.</p> <div class="language-r extra-class"><pre class="language-r"><code>start_2012 <span class="token operator">&lt;-</span> ymd_hms<span class="token punctuation">(</span><span class="token string">&quot;2012-01-01 12:00:00&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2012-01-01 12:00:00 UTC&quot;</span>
+
+<span class="token comment"># period() considers leap year calculations.</span>
+start_2012 <span class="token operator">+</span> period<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&quot;years&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2013-01-01 12:00:00 UTC&quot;</span>
+
+<span class="token comment"># Here duration() doesn't consider leap year calculations. </span>
+start_2012 <span class="token operator">+</span> duration<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2012-12-31 12:00:00 UTC&quot;</span>
+
+</code></pre></div><h2 id="instants"><a href="#instants" class="header-anchor">#</a> Instants</h2> <p>An instant is a specific moment in time. Any date-time object that refers to a moment of time is recognized as an instant. To test if an object is an instant, use <code>is.instant</code>.</p> <div class="language-r extra-class"><pre class="language-r"><code>library<span class="token punctuation">(</span>lubridate<span class="token punctuation">)</span>
+
+today_start <span class="token operator">&lt;-</span> dmy_hms<span class="token punctuation">(</span><span class="token string">&quot;22.07.2016 12:00:00&quot;</span><span class="token punctuation">,</span> tz <span class="token operator">=</span> <span class="token string">&quot;IST&quot;</span><span class="token punctuation">)</span> <span class="token comment"># default tz=&quot;UTC&quot;</span>
+today_start
+<span class="token comment">## [1] &quot;2016-07-22 12:00:00 IST&quot;</span>
+is.instant<span class="token punctuation">(</span>today_start<span class="token punctuation">)</span>
+<span class="token comment">## [1] TRUE</span>
+
+now_dt <span class="token operator">&lt;-</span> ymd_hms<span class="token punctuation">(</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tz<span class="token operator">=</span><span class="token string">&quot;IST&quot;</span><span class="token punctuation">)</span>
+now_dt
+<span class="token comment">## [1] &quot;2016-07-22 13:53:09 IST&quot;</span>
+is.instant<span class="token punctuation">(</span>now_dt<span class="token punctuation">)</span>
+<span class="token comment">## [1] TRUE</span>
+
+is.instant<span class="token punctuation">(</span><span class="token string">&quot;helloworld&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] FALSE</span>
+is.instant<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] FALSE</span>
+
+</code></pre></div><h2 id="intervals-durations-and-periods"><a href="#intervals-durations-and-periods" class="header-anchor">#</a> Intervals, Durations and Periods</h2> <p><strong>Intervals</strong> are simplest way of recording timespans in lubridate. An interval is a span of time that occurs between two specific <strong>instants</strong>.</p> <div class="language-r extra-class"><pre class="language-r"><code><span class="token comment"># create interval by substracting two instants</span>
+today_start <span class="token operator">&lt;-</span> ymd_hms<span class="token punctuation">(</span><span class="token string">&quot;2016-07-22 12-00-00&quot;</span><span class="token punctuation">,</span> tz<span class="token operator">=</span><span class="token string">&quot;IST&quot;</span><span class="token punctuation">)</span>
+today_start
+<span class="token comment">## [1] &quot;2016-07-22 12:00:00 IST&quot;</span>
+today_end <span class="token operator">&lt;-</span> ymd_hms<span class="token punctuation">(</span><span class="token string">&quot;2016-07-22 23-59-59&quot;</span><span class="token punctuation">,</span> tz<span class="token operator">=</span><span class="token string">&quot;IST&quot;</span><span class="token punctuation">)</span>
+today_end
+<span class="token comment">## [1] &quot;2016-07-22 23:59:59 IST&quot;</span>
+span <span class="token operator">&lt;-</span> today_end <span class="token operator">-</span> today_start
+span
+<span class="token comment">## Time difference of 11.99972 hours</span>
+as.interval<span class="token punctuation">(</span>span<span class="token punctuation">,</span> today_start<span class="token punctuation">)</span>
+<span class="token comment">## [1] 2016-07-22 12:00:00 IST--2016-07-22 23:59:59 IST</span>
+
+<span class="token comment"># create interval using interval() function</span>
+span <span class="token operator">&lt;-</span> interval<span class="token punctuation">(</span>today_start<span class="token punctuation">,</span> today_end<span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token number">2016</span><span class="token operator">-</span><span class="token number">07</span><span class="token operator">-</span><span class="token number">22</span> <span class="token number">12</span><span class="token operator">:</span><span class="token number">00</span><span class="token operator">:</span><span class="token number">00</span> IST<span class="token operator">-</span><span class="token operator">-</span><span class="token number">2016</span><span class="token operator">-</span><span class="token number">07</span><span class="token operator">-</span><span class="token number">22</span> <span class="token number">23</span><span class="token operator">:</span><span class="token number">59</span><span class="token operator">:</span><span class="token number">59</span> IST
+
+</code></pre></div><p><strong>Durations</strong> measure the exact amount of time that occurs between two instants.</p> <div class="language-r extra-class"><pre class="language-r"><code>duration<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">,</span> <span class="token string">&quot;seconds&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;60s&quot;</span>
+
+duration<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">&quot;minutes&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;120s (~2 minutes)&quot;</span>
+
+</code></pre></div><p><strong>Note:</strong> Units larger than weeks are not used due to their variability.</p> <p>Durations can be created using <code>dseconds</code>, <code>dminutes</code> and other duration helper functions.<br>
+Run <code>?quick_durations</code> for complete list.</p> <div class="language-r extra-class"><pre class="language-r"><code>dseconds<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;60s&quot;</span>
+
+dhours<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;7200s (~2 hours)&quot;</span>
+
+dyears<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;31536000s (~365 days)&quot;</span>
+
+</code></pre></div><p>Durations can be subtracted and added to instants to get new instants.</p> <div class="language-r extra-class"><pre class="language-r"><code>today_start <span class="token operator">+</span> dhours<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 17:00:00 IST&quot;</span>
+
+today_start <span class="token operator">+</span> dhours<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">+</span> dminutes<span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">)</span> <span class="token operator">+</span> dseconds<span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 17:30:15 IST&quot;</span>
+
+</code></pre></div><p>Durations can be created from intervals.</p> <div class="language-r extra-class"><pre class="language-r"><code>as.duration<span class="token punctuation">(</span>span<span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token string">&quot;43199s (~12 hours)&quot;</span>
+
+</code></pre></div><p><strong>Periods</strong> measure the change in clock time that occurs between two instants.</p> <p>Periods can be created using <code>period</code> function as well other helper functions
+like <code>seconds</code>, <code>hours</code>, etc. To get a complete list of period helper functions, Run <code>?quick_periods</code>.</p> <div class="language-r extra-class"><pre class="language-r"><code>period<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&quot;hour&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;1H 0M 0S&quot;</span>
+
+hours<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;1H 0M 0S&quot;</span>
+
+period<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token string">&quot;months&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;6m 0d 0H 0M 0S&quot;</span>
+
+months<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;6m 0d 0H 0M 0S&quot;</span>
+
+years<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;1y 0m 0d 0H 0M 0S&quot;</span>
+
+</code></pre></div><p><code>is.period</code> function can be used to check if an object is a period.</p> <div class="language-r extra-class"><pre class="language-r"><code>is.period<span class="token punctuation">(</span>years<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] TRUE</span>
+
+is.period<span class="token punctuation">(</span>dyears<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>    
+<span class="token comment">## [1] FALSE</span>
+
+</code></pre></div><h2 id="manipulating-date-and-time-in-lubridate"><a href="#manipulating-date-and-time-in-lubridate" class="header-anchor">#</a> Manipulating date and time in lubridate</h2> <div class="language-r extra-class"><pre class="language-r"><code>date <span class="token operator">&lt;-</span> now<span class="token punctuation">(</span><span class="token punctuation">)</span>
+date
+<span class="token comment">## &quot;2016-07-22 03:42:35 IST&quot;</span>
+
+year<span class="token punctuation">(</span>date<span class="token punctuation">)</span>
+<span class="token comment">## 2016</span>
+
+minute<span class="token punctuation">(</span>date<span class="token punctuation">)</span>
+<span class="token comment">## 42</span>
+
+wday<span class="token punctuation">(</span>date<span class="token punctuation">,</span> label <span class="token operator">=</span> T<span class="token punctuation">,</span> abbr <span class="token operator">=</span> T<span class="token punctuation">)</span>
+<span class="token comment"># [1] Fri</span>
+<span class="token comment"># Levels: Sun &lt; Mon &lt; Tues &lt; Wed &lt; Thurs &lt; Fri &lt; Sat</span>
+
+day<span class="token punctuation">(</span>date<span class="token punctuation">)</span> <span class="token operator">&lt;-</span> <span class="token number">31</span>
+<span class="token comment">## &quot;2016-07-31 03:42:35 IST&quot;</span>
+
+<span class="token comment"># If an element is set to a larger value than it supports, the difference</span>
+<span class="token comment">#  will roll over into the next higher element</span>
+day<span class="token punctuation">(</span>date<span class="token punctuation">)</span> <span class="token operator">&lt;-</span> <span class="token number">32</span>
+<span class="token comment">## &quot;2016-08-01 03:42:35 IST&quot;</span>
+
+</code></pre></div><h2 id="time-zones"><a href="#time-zones" class="header-anchor">#</a> Time Zones</h2> <p><code>with_tz</code> returns a date-time as it would appear in a different time zone.</p> <div class="language-r extra-class"><pre class="language-r"><code>nyc_time <span class="token operator">&lt;-</span> now<span class="token punctuation">(</span><span class="token string">&quot;America/New_York&quot;</span><span class="token punctuation">)</span>
+nyc_time
+<span class="token comment">## [1] &quot;2016-07-22 05:49:08 EDT&quot;</span>
+
+<span class="token comment"># corresponding Europe/Moscow time</span>
+with_tz<span class="token punctuation">(</span>nyc_time<span class="token punctuation">,</span> tzone <span class="token operator">=</span> <span class="token string">&quot;Europe/Moscow&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 12:49:08 MSK&quot;</span>
+
+</code></pre></div><p><code>force_tz</code> returns a the date-time that has the same clock time as x in the new time zone.</p> <div class="language-r extra-class"><pre class="language-r"><code>nyc_time <span class="token operator">&lt;-</span> now<span class="token punctuation">(</span><span class="token string">&quot;America/New_York&quot;</span><span class="token punctuation">)</span>
+nyc_time
+<span class="token comment">## [1] &quot;2016-07-22 05:49:08 EDT&quot;</span>
+
+force_tz<span class="token punctuation">(</span>nyc_time<span class="token punctuation">,</span> tzone <span class="token operator">=</span> <span class="token string">&quot;Europe/Moscow&quot;</span><span class="token punctuation">)</span> <span class="token comment"># only timezone changes</span>
+<span class="token comment">## [1] &quot;2016-07-22 05:49:08 MSK&quot;</span>
+
+</code></pre></div><h2 id="parsing-date-and-time-in-lubridate"><a href="#parsing-date-and-time-in-lubridate" class="header-anchor">#</a> Parsing date and time in lubridate</h2> <p>Lubridate provides <code>ymd()</code> series of functions for parsing character strings into dates. The letters y, m, and d correspond to the year, month, and day elements of a date-time.</p> <div class="language-r extra-class"><pre class="language-r"><code>mdy<span class="token punctuation">(</span><span class="token string">&quot;07-21-2016&quot;</span><span class="token punctuation">)</span>                 <span class="token comment"># Returns Date</span>
+
+<span class="token comment">## [1] &quot;2016-07-21&quot;</span>
+
+mdy<span class="token punctuation">(</span><span class="token string">&quot;07-21-2016&quot;</span><span class="token punctuation">,</span> tz <span class="token operator">=</span> <span class="token string">&quot;UTC&quot;</span><span class="token punctuation">)</span>     <span class="token comment"># Returns a vector of class POSIXt</span>
+
+<span class="token comment">## &quot;2016-07-21 UTC&quot;</span>
+
+dmy<span class="token punctuation">(</span><span class="token string">&quot;21-07-2016&quot;</span><span class="token punctuation">)</span>                 <span class="token comment"># Returns Date</span>
+
+<span class="token comment">## [1] &quot;2016-07-21&quot;</span>
+
+dmy<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">&quot;21.07.2016&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;22.07.2016&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># Returns vector of class Date</span>
+
+<span class="token comment">## [1] &quot;2016-07-21&quot; &quot;2016-07-22&quot;</span>
+
+</code></pre></div><h2 id="rounding-dates"><a href="#rounding-dates" class="header-anchor">#</a> Rounding dates</h2> <div class="language-r extra-class"><pre class="language-r"><code>now_dt <span class="token operator">&lt;-</span> ymd_hms<span class="token punctuation">(</span>now<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> tz<span class="token operator">=</span><span class="token string">&quot;IST&quot;</span><span class="token punctuation">)</span>
+now_dt
+<span class="token comment">## [1] &quot;2016-07-22 13:53:09 IST&quot;</span>
+
+</code></pre></div><p><code>round_date()</code> takes a date-time object and rounds it to the nearest integer value of the specified time unit.</p> <div class="language-r extra-class"><pre class="language-r"><code>round_date<span class="token punctuation">(</span>now_dt<span class="token punctuation">,</span> <span class="token string">&quot;minute&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 13:53:00 IST&quot;</span>
+
+round_date<span class="token punctuation">(</span>now_dt<span class="token punctuation">,</span> <span class="token string">&quot;hour&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 14:00:00 IST&quot;</span>
+
+round_date<span class="token punctuation">(</span>now_dt<span class="token punctuation">,</span> <span class="token string">&quot;year&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2017-01-01 IST&quot;</span>
+
+</code></pre></div><p><code>floor_date()</code> takes a date-time object and rounds it down to the nearest integer value of the specified time unit.</p> <div class="language-r extra-class"><pre class="language-r"><code>floor_date<span class="token punctuation">(</span>now_dt<span class="token punctuation">,</span> <span class="token string">&quot;minute&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 13:53:00 IST&quot;</span>
+
+floor_date<span class="token punctuation">(</span>now_dt<span class="token punctuation">,</span> <span class="token string">&quot;hour&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 13:00:00 IST&quot;</span>
+
+floor_date<span class="token punctuation">(</span>now_dt<span class="token punctuation">,</span> <span class="token string">&quot;year&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-01-01 IST&quot;</span>
+
+</code></pre></div><p><code>ceiling_date()</code> takes a date-time object and rounds it up to the nearest integer value of the specified time unit.</p> <div class="language-r extra-class"><pre class="language-r"><code>ceiling_date<span class="token punctuation">(</span>now_dt<span class="token punctuation">,</span> <span class="token string">&quot;minute&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 13:54:00 IST&quot;</span>
+
+ceiling_date<span class="token punctuation">(</span>now_dt<span class="token punctuation">,</span> <span class="token string">&quot;hour&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2016-07-22 14:00:00 IST&quot;</span>
+
+ceiling_date<span class="token punctuation">(</span>now_dt<span class="token punctuation">,</span> <span class="token string">&quot;year&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">## [1] &quot;2017-01-01 IST&quot;</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>ymd_hms(..., quiet = FALSE, tz = &quot;UTC&quot;, locale = Sys.getlocale(&quot;LC_TIME&quot;))</li> <li>now(tzone = &quot;&quot;)</li> <li>interval(start, end, tzone = attr(start, &quot;tzone&quot;))</li> <li>duration(num = NULL, units = &quot;seconds&quot;, ...)</li> <li>period(num = NULL, units = &quot;second&quot;, ...)</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>To install package from CRAN:</p> <div class="language-r extra-class"><pre class="language-r"><code>install.packages<span class="token punctuation">(</span><span class="token string">&quot;lubridate&quot;</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>To install development version from Github:</p> <div class="language-r extra-class"><pre class="language-r"><code>library<span class="token punctuation">(</span>devtools<span class="token punctuation">)</span>
+<span class="token comment"># dev mode allows testing of development packages in a sandbox, without interfering</span>
+<span class="token comment"># with the other packages you have installed.</span>
+dev_mode<span class="token punctuation">(</span>on<span class="token operator">=</span>T<span class="token punctuation">)</span>
+install_github<span class="token punctuation">(</span><span class="token string">&quot;hadley/lubridate&quot;</span><span class="token punctuation">)</span>
+dev_mode<span class="token punctuation">(</span>on<span class="token operator">=</span>F<span class="token punctuation">)</span>
+
+</code></pre></div><p>To get vignettes on lubridate package:</p> <div class="language-r extra-class"><pre class="language-r"><code>vignette<span class="token punctuation">(</span><span class="token string">&quot;lubridate&quot;</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>To get help about some function <code>foo</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>help<span class="token punctuation">(</span>foo<span class="token punctuation">)</span>     <span class="token comment"># help about function foo</span>
+?foo          <span class="token comment"># same thing</span>
+
+<span class="token comment"># Example</span>
+<span class="token comment"># help(&quot;is.period&quot;)</span>
+<span class="token comment"># ?is.period</span>
+
+</code></pre></div><p>To get examples for a function <code>foo</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>example<span class="token punctuation">(</span><span class="token string">&quot;foo&quot;</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Example</span>
+<span class="token comment"># example(&quot;interval&quot;)</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/r/lubridate.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/r/rodbc.html" class="prev">
+        RODBC
+      </a></span> <span class="next"><a href="/r/time-series-and-forecasting.html">
+        Time Series and Forecasting
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2911.f9630617.js" defer></script>
+  </body>
+</html>

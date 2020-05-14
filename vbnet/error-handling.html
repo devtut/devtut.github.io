@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - Error Handling</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Try...Catch...Finally Statement, Creating custom exception and throwing, Try Catch in Database Operation, The Un-catchable Exception, Critical Exceptions">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - Error Handling">
+    <meta property="og:description" content="Try...Catch...Finally Statement, Creating custom exception and throwing, Try Catch in Database Operation, The Un-catchable Exception, Critical Exceptions">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/error-handling.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - Error Handling">
+    <meta name="twitter:description" content="Try...Catch...Finally Statement, Creating custom exception and throwing, Try Catch in Database Operation, The Un-catchable Exception, Critical Exceptions">
+    <meta name="twitter:url" content="/vbnet/error-handling.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3463.c2b9cbc2.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="sidebar-link">Introduction to Syntax</a></li><li><a href="/vbnet/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="sidebar-link">Looping</a></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="sidebar-link">ByVal and ByRef keywords</a></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="active sidebar-link">Error Handling</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/error-handling.html#try-catch-finally-statement" class="sidebar-link">Try...Catch...Finally Statement</a></li><li class="sidebar-sub-header"><a href="/vbnet/error-handling.html#creating-custom-exception-and-throwing" class="sidebar-link">Creating custom exception and throwing</a></li><li class="sidebar-sub-header"><a href="/vbnet/error-handling.html#try-catch-in-database-operation" class="sidebar-link">Try Catch in Database Operation</a></li><li class="sidebar-sub-header"><a href="/vbnet/error-handling.html#the-un-catchable-exception" class="sidebar-link">The Un-catchable Exception</a></li><li class="sidebar-sub-header"><a href="/vbnet/error-handling.html#critical-exceptions" class="sidebar-link">Critical Exceptions</a></li></ul></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="sidebar-link">Extension methods</a></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="sidebar-link">Visual Basic 14.0 Features</a></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="sidebar-link">Google Maps in a Windows Form</a></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="sidebar-link">WinForms SpellCheckBox</a></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="sidebar-link">Task-based asynchronous pattern</a></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="error-handling"><a href="#error-handling" class="header-anchor">#</a> Error Handling</h1> <h2 id="try-catch-finally-statement"><a href="#try-catch-finally-statement" class="header-anchor">#</a> Try...Catch...Finally Statement</h2> <p><strong>Structure:</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Try</span>
+    <span class="token comment">'Your program will try to run the code in this block.  </span>
+    <span class="token comment">'If any exceptions are thrown, the code in the Catch Block will be executed,</span>
+    <span class="token comment">'without executing the lines after the one which caused the exception.</span>
+<span class="token keyword">Catch</span> ex <span class="token keyword">As</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>IOException
+    <span class="token comment">'If an exception occurs when processing the Try block, each Catch statement</span>
+    <span class="token comment">'is examined in textual order to determine which handles the exception. </span>
+    <span class="token comment">'For example, this Catch block handles an IOException.</span>
+<span class="token keyword">Catch</span> ex <span class="token keyword">As</span> Exception
+    <span class="token comment">'This catch block handles all Exception types.</span>
+    <span class="token comment">'Details of the exception, in this case, are in the &quot;ex&quot; variable.</span>
+    <span class="token comment">'You can show the error in a MessageBox with the below line.</span>
+    MessageBox<span class="token punctuation">.</span>Show<span class="token punctuation">(</span>ex<span class="token punctuation">.</span>Message<span class="token punctuation">)</span>
+<span class="token keyword">Finally</span>
+    <span class="token comment">'A finally block is always executed, regardless of if an Exception occurred.</span>
+<span class="token keyword">End</span> <span class="token keyword">Try</span>
+
+</code></pre></div><p><strong>Example Code:</strong></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Try</span>
+    <span class="token keyword">Dim</span> obj <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+    <span class="token keyword">Dim</span> prop <span class="token operator">=</span> obj<span class="token punctuation">.</span>Name <span class="token comment">'This line will throw a NullReferenceException</span>
+
+    Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span><span class="token string">&quot;Test.&quot;</span><span class="token punctuation">)</span> <span class="token comment">' This line will NOT be executed</span>
+<span class="token keyword">Catch</span> ex <span class="token keyword">As</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>IOException
+    <span class="token comment">' Code that reacts to IOException.</span>
+<span class="token keyword">Catch</span> ex <span class="token keyword">As</span> NullReferenceException
+    <span class="token comment">' Code that reacts to a NullReferenceException</span>
+    Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span><span class="token string">&quot;NullReferenceException: &quot;</span> <span class="token operator">&amp;</span> ex<span class="token punctuation">.</span>Message<span class="token punctuation">)</span>
+    Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span><span class="token string">&quot;Stack Trace: &quot;</span> <span class="token operator">&amp;</span> ex<span class="token punctuation">.</span>StackTrace<span class="token punctuation">)</span>
+<span class="token keyword">Catch</span> ex <span class="token keyword">As</span> Exception
+    <span class="token comment">' Code that reacts to any other exception.</span>
+<span class="token keyword">Finally</span>   
+    <span class="token comment">' This will always be run, regardless of if an exception is thrown.</span>
+    Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span><span class="token string">&quot;Completed&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Try</span>
+
+</code></pre></div><h2 id="creating-custom-exception-and-throwing"><a href="#creating-custom-exception-and-throwing" class="header-anchor">#</a> Creating custom exception and throwing</h2> <p>You can create a custom exception and throw them during the execution of your function. As a general practice you should only throw an exception when your function could not achieve its defined functionality.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Function</span> OpenDatabase<span class="token punctuation">(</span><span class="token keyword">Byval</span> Server <span class="token keyword">as</span> <span class="token keyword">String</span><span class="token punctuation">,</span> <span class="token keyword">Byval</span> User <span class="token keyword">as</span> <span class="token keyword">String</span><span class="token punctuation">,</span> <span class="token keyword">Byval</span> Pwd <span class="token keyword">as</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> Server<span class="token punctuation">.</span>trim<span class="token operator">=</span><span class="token string">&quot;&quot;</span> <span class="token keyword">then</span> 
+        <span class="token keyword">Throw</span> <span class="token keyword">new</span> Exception<span class="token punctuation">(</span><span class="token string">&quot;Server Name cannot be blank&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">elseif</span> User<span class="token punctuation">.</span>trim <span class="token operator">=</span><span class="token string">&quot;&quot;</span> <span class="token keyword">then</span> 
+        <span class="token keyword">Throw</span> <span class="token keyword">new</span> Exception<span class="token punctuation">(</span><span class="token string">&quot;User name cannot be blank&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">elseif</span> Pwd<span class="token punctuation">.</span>trim<span class="token operator">=</span><span class="token string">&quot;&quot;</span> <span class="token keyword">then</span> 
+        <span class="token keyword">Throw</span> <span class="token keyword">new</span> Exception<span class="token punctuation">(</span><span class="token string">&quot;Password cannot be blank&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">endif</span>
+
+    <span class="token comment">'Here add codes for connecting to the server</span>
+<span class="token keyword">End</span> <span class="token keyword">function</span>
+
+</code></pre></div><h2 id="try-catch-in-database-operation"><a href="#try-catch-in-database-operation" class="header-anchor">#</a> Try Catch in Database Operation</h2> <p>You can use Try..Catch to rollback database operation by placing the rollback statement at the Catch Segment.</p> <div class="language- extra-class"><pre class="language-text"><code>
+   Try            
+        'Do the database operation...        
+        xCmd.CommandText = &quot;INSERT into ....&quot;
+        xCmd.ExecuteNonQuery()
+
+        objTrans.Commit()
+        conn.Close()
+    Catch ex As Exception 
+        'Rollback action when something goes off           
+        objTrans.Rollback()
+        conn.Close()
+    End Try
+
+</code></pre></div><h2 id="the-un-catchable-exception"><a href="#the-un-catchable-exception" class="header-anchor">#</a> The Un-catchable Exception</h2> <p>Although <code>Catch ex As Exception</code> claims that it can handle all exceptions - there are one exception (no pun intended).</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Imports</span> System
+<span class="token keyword">Static</span> <span class="token keyword">Sub</span> StackOverflow<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">' Again no pun intended</span>
+    StackOverflow<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">Static</span> <span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Try</span>
+        StackOverflow<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Catch</span> ex <span class="token keyword">As</span> Exception
+        Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span><span class="token string">&quot;Exception caught!&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">Finally</span>
+        Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span><span class="token string">&quot;Finally block&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">End</span> <span class="token keyword">Try</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Oops... There is an un-caught <code>System.StackOverflowException</code> while the console didn't even print out anything! According to <a href="https://msdn.microsoft.com/en-us/library/system.stackoverflowexception(v=vs.110).aspx#Remarks" target="_blank" rel="noopener noreferrer">MSDN<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>,</p> <blockquote></blockquote> <p>Starting with the .NET Framework 2.0, you can’t catch a
+StackOverflowException object with a try/catch block, and the
+corresponding process is terminated by default. Consequently, you
+should write your code to detect and prevent a stack overflow.</p> <p>So, <code>System.StackOverflowException</code> is un-catchable. Beware of that!</p> <h2 id="critical-exceptions"><a href="#critical-exceptions" class="header-anchor">#</a> Critical Exceptions</h2> <p>Generally most of the exceptions are not that critical, but there are some really serious exceptions that you might not be capable to handle, such as the famous <code>System.StackOverflowException</code>. However, there are others that might get hidden by <code>Catch ex As Exception</code>, such as <code>System.OutOfMemoryException</code>, <code>System.BadImageFormatException</code> and <code>System.InvalidProgramException</code>. It is a good programming practice to leave these out if you cannot correctly handle them. To filter out these exceptions, we need a helper method:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Shared</span> <span class="token keyword">Function</span> IsCritical<span class="token punctuation">(</span>ex <span class="token keyword">As</span> Exception<span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    <span class="token keyword">Return</span> <span class="token keyword">TypeOf</span> ex <span class="token keyword">Is</span> OutOfMemoryException <span class="token keyword">OrElse</span>
+           <span class="token keyword">TypeOf</span> ex <span class="token keyword">Is</span> AppDomainUnloadedException <span class="token keyword">OrElse</span>
+           <span class="token keyword">TypeOf</span> ex <span class="token keyword">Is</span> AccessViolationException <span class="token keyword">OrElse</span>
+           <span class="token keyword">TypeOf</span> ex <span class="token keyword">Is</span> BadImageFormatException <span class="token keyword">OrElse</span>
+           <span class="token keyword">TypeOf</span> ex <span class="token keyword">Is</span> CannotUnloadAppDomainException <span class="token keyword">OrElse</span>
+           <span class="token keyword">TypeOf</span> ex <span class="token keyword">Is</span> ExecutionEngineException <span class="token keyword">OrElse</span> <span class="token comment">' Obsolete one, but better to include</span>
+           <span class="token keyword">TypeOf</span> ex <span class="token keyword">Is</span> InvalidProgramException <span class="token keyword">OrElse</span>
+           <span class="token keyword">TypeOf</span> ex <span class="token keyword">Is</span> System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>ThreadAbortException
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>Usage:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Try</span>
+    SomeMethod<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">Catch</span> ex <span class="token keyword">As</span> Exception <span class="token keyword">When</span> <span class="token keyword">Not</span> IsCritical<span class="token punctuation">(</span>ex<span class="token punctuation">)</span>
+    Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span><span class="token string">&quot;Exception caught: &quot;</span> <span class="token operator">&amp;</span> ex<span class="token punctuation">.</span>Message<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Try</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/error-handling.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/option-infer.html" class="prev">
+        Option Infer
+      </a></span> <span class="next"><a href="/vbnet/oop-keywords.html">
+        OOP Keywords
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3463.c2b9cbc2.js" defer></script>
+  </body>
+</html>

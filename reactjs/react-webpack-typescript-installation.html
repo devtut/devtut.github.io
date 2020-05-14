@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ReactJS - React, Webpack &amp; Typescript installation</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="webpack.config.js, tsconfig.json, My First Component">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="ReactJS - React, Webpack & Typescript installation">
+    <meta property="og:description" content="webpack.config.js, tsconfig.json, My First Component">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/reactjs/react-webpack-typescript-installation.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="ReactJS - React, Webpack & Typescript installation">
+    <meta name="twitter:description" content="webpack.config.js, tsconfig.json, My First Component">
+    <meta name="twitter:url" content="/reactjs/react-webpack-typescript-installation.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3004.a9043111.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>ReactJS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/reactjs/" class="sidebar-link">Disclaimer</a></li><li><a href="/reactjs/getting-started-with-react.html" class="sidebar-link">Getting started with React</a></li><li><a href="/reactjs/components.html" class="sidebar-link">Components</a></li><li><a href="/reactjs/using-reactjs-with-typescript.html" class="sidebar-link">Using ReactJS with Typescript</a></li><li><a href="/reactjs/state-in-react.html" class="sidebar-link">State in React</a></li><li><a href="/reactjs/props-in-react.html" class="sidebar-link">Props in React</a></li><li><a href="/reactjs/react-component-lifecycle.html" class="sidebar-link">React Component Lifecycle</a></li><li><a href="/reactjs/forms-and-user-input.html" class="sidebar-link">Forms and User Input</a></li><li><a href="/reactjs/react-boilerplate-react-babel-webpack.html" class="sidebar-link">React Boilerplate [React + Babel + Webpack]</a></li><li><a href="/reactjs/using-reactjs-with-jquery.html" class="sidebar-link">Using ReactJS with jQuery</a></li><li><a href="/reactjs/react-routing.html" class="sidebar-link">React Routing</a></li><li><a href="/reactjs/communicate-between-components.html" class="sidebar-link">Communicate Between Components</a></li><li><a href="/reactjs/how-to-setup-a-basic-webpack-react-and-babel-environment.html" class="sidebar-link">How to setup a basic webpack, react and babel environment</a></li><li><a href="/reactjs/react-createclass-vs-extends-react-component.html" class="sidebar-link">React.createClass vs extends React.Component</a></li><li><a href="/reactjs/react-ajax-call.html" class="sidebar-link">React AJAX call</a></li><li><a href="/reactjs/communication-between-components.html" class="sidebar-link">Communication Between Components</a></li><li><a href="/reactjs/stateless-functional-components.html" class="sidebar-link">Stateless Functional Components</a></li><li><a href="/reactjs/performance.html" class="sidebar-link">Performance</a></li><li><a href="/reactjs/introduction-to-server-side-rendering.html" class="sidebar-link">Introduction to Server-Side Rendering</a></li><li><a href="/reactjs/setting-up-react-environment.html" class="sidebar-link">Setting Up React Environment</a></li><li><a href="/reactjs/using-react-with-flow.html" class="sidebar-link">Using React with Flow</a></li><li><a href="/reactjs/jsx.html" class="sidebar-link">JSX</a></li><li><a href="/reactjs/react-forms.html" class="sidebar-link">React Forms</a></li><li><a href="/reactjs/user-interface-solutions.html" class="sidebar-link">User interface solutions</a></li><li><a href="/reactjs/using-reactjs-in-flux-way.html" class="sidebar-link">Using ReactJS in Flux way</a></li><li><a href="/reactjs/react-webpack-typescript-installation.html" class="active sidebar-link">React, Webpack &amp; Typescript installation</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/reactjs/react-webpack-typescript-installation.html#webpack-config-js" class="sidebar-link">webpack.config.js</a></li><li class="sidebar-sub-header"><a href="/reactjs/react-webpack-typescript-installation.html#tsconfig-json" class="sidebar-link">tsconfig.json</a></li><li class="sidebar-sub-header"><a href="/reactjs/react-webpack-typescript-installation.html#my-first-component" class="sidebar-link">My First Component</a></li></ul></li><li><a href="/reactjs/how-and-why-to-use-keys-in-react.html" class="sidebar-link">How and why to use keys in React</a></li><li><a href="/reactjs/keys-in-react.html" class="sidebar-link">Keys in react</a></li><li><a href="/reactjs/higher-order-components.html" class="sidebar-link">Higher Order Components</a></li><li><a href="/reactjs/react-with-redux.html" class="sidebar-link">React with Redux</a></li><li><a href="/reactjs/installation.html" class="sidebar-link">Installation</a></li><li><a href="/reactjs/react-tools.html" class="sidebar-link">React Tools</a></li><li><a href="/reactjs/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="react-webpack-typescript-installation"><a href="#react-webpack-typescript-installation" class="header-anchor">#</a> React, Webpack &amp; Typescript installation</h1> <h2 id="webpack-config-js"><a href="#webpack-config-js" class="header-anchor">#</a> webpack.config.js</h2> <div class="language-js extra-class"><pre class="language-js"><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+    entry<span class="token operator">:</span> <span class="token string">'./src/index'</span><span class="token punctuation">,</span>
+    output<span class="token operator">:</span> <span class="token punctuation">{</span>
+        path<span class="token operator">:</span> __dirname <span class="token operator">+</span> <span class="token string">'/build'</span><span class="token punctuation">,</span>
+        filename<span class="token operator">:</span> <span class="token string">'bundle.js'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    module<span class="token operator">:</span> <span class="token punctuation">{</span>
+        rules<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+            test<span class="token operator">:</span> <span class="token regex">/\.tsx?$/</span><span class="token punctuation">,</span>
+            loader<span class="token operator">:</span> <span class="token string">'ts-loader'</span><span class="token punctuation">,</span>
+            exclude<span class="token operator">:</span> <span class="token regex">/node_modules/</span>
+        <span class="token punctuation">}</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    resolve<span class="token operator">:</span> <span class="token punctuation">{</span>
+        extensions<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'.ts'</span><span class="token punctuation">,</span> <span class="token string">'.tsx'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The main components are (in addition to the standard <code>entry</code>, <code>output</code> and other webpack properties):</p> <h3 id="the-loader"><a href="#the-loader" class="header-anchor">#</a> The loader</h3> <p>For this you need to create a rule that tests for the <code>.ts</code> and <code>.tsx</code> file extensions, specify <code>ts-loader</code> as the loader.</p> <h3 id="resolve-ts-extensions"><a href="#resolve-ts-extensions" class="header-anchor">#</a> Resolve TS extensions</h3> <p>You also need to add the <code>.ts</code> and <code>.tsx</code> extensions in the <code>resolve</code> array, or webpack won't see them.</p> <h2 id="tsconfig-json"><a href="#tsconfig-json" class="header-anchor">#</a> tsconfig.json</h2> <p>This is a minimal tsconfig to get you up and running.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    <span class="token string">&quot;include&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">&quot;src/*&quot;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;compilerOptions&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;target&quot;</span><span class="token operator">:</span> <span class="token string">&quot;es5&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;jsx&quot;</span><span class="token operator">:</span> <span class="token string">&quot;react&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;allowSyntheticDefaultImports&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Let's go through the properties one by one:</p> <h3 id="include"><a href="#include" class="header-anchor">#</a> <code>include</code></h3> <p>This is an array of source code. Here we have only one entry, <code>src/*</code>, which specifies that everything in the <code>src</code> directory is to be included in compilation.</p> <h3 id="compileroptions-target"><a href="#compileroptions-target" class="header-anchor">#</a> <code>compilerOptions.target</code></h3> <p>Specifies that we want to compile to ES5 target</p> <h3 id="compileroptions-jsx"><a href="#compileroptions-jsx" class="header-anchor">#</a> <code>compilerOptions.jsx</code></h3> <p>Setting this to <code>true</code> will make TypeScript automatically compile your tsx syntax from <code>&lt;div /&gt;</code> to <code>React.createElement(&quot;div&quot;)</code>.</p> <h3 id="compileroptions-allowsyntheticdefaultimports"><a href="#compileroptions-allowsyntheticdefaultimports" class="header-anchor">#</a> <code>compilerOptions.allowSyntheticDefaultImports</code></h3> <p>Handy property which will allow you to import node modules as if they are ES6 modules, so instead of doing</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">'react'</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token operator">=</span> React
+
+</code></pre></div><p>you can just do</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span>
+
+</code></pre></div><p>without any errors telling you that React has no default export.</p> <h2 id="my-first-component"><a href="#my-first-component" class="header-anchor">#</a> My First Component</h2> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> ReactDOM <span class="token keyword">from</span> <span class="token string">'react-dom'</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">interface</span> <span class="token class-name">AppProps</span> <span class="token punctuation">{</span>
+    name<span class="token operator">:</span> string<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">interface</span> <span class="token class-name">AppState</span> <span class="token punctuation">{</span>
+    words<span class="token operator">:</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>AppProps<span class="token punctuation">,</span> AppState<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+            words<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'foo'</span><span class="token punctuation">,</span> <span class="token string">'bar'</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> <span class="token punctuation">{</span> name <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span>Hello <span class="token punctuation">{</span>name<span class="token punctuation">}</span><span class="token operator">!</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> root <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'root'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>App name<span class="token operator">=</span><span class="token string">&quot;Foo Bar&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>When using TypeScript with React, once you've downloaded the React DefinitelyTyped type definitions (<code>npm install --save @types/react</code>), every component will require you to add type annotations.</p> <p>You do this like so:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span><span class="token operator">&lt;</span>AppProps<span class="token punctuation">,</span> AppState<span class="token operator">&gt;</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+</code></pre></div><p>where <code>AppProps</code> and <code>AppState</code> are interfaces (or type aliases) for your components' props and state respectively.</p> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>To get syntax highlighting in your editor (e.g. VS Code) you'll need to download typing information for the modules that you use in your project.</p> <p>Say for example you use React and ReactDOM in your project, and you want to get highlighting and Intellisense for them. You will need to add the types to your project using this command:</p> <div class="language-js extra-class"><pre class="language-js"><code>npm install <span class="token operator">--</span>save @types<span class="token operator">/</span>react @types<span class="token operator">/</span>react<span class="token operator">-</span>dom
+
+</code></pre></div><p>Your editor should now automatically pick up on on this typing information and supply you with autocomplete and Intellisense for these modules.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/reactjs/react-webpack-typescript-installation.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/reactjs/using-reactjs-in-flux-way.html" class="prev">
+        Using ReactJS in Flux way
+      </a></span> <span class="next"><a href="/reactjs/how-and-why-to-use-keys-in-react.html">
+        How and why to use keys in React
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3004.a9043111.js" defer></script>
+  </body>
+</html>

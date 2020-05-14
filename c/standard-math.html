@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C - Standard Math</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Double precision floating-point remainder: fmod(), Single precision and long double precision floating-point remainder: fmodf(), fmodl(), Power functions - pow(), powf(), powl()">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C - Standard Math">
+    <meta property="og:description" content="Double precision floating-point remainder: fmod(), Single precision and long double precision floating-point remainder: fmodf(), fmodl(), Power functions - pow(), powf(), powl()">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/c/standard-math.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C - Standard Math">
+    <meta name="twitter:description" content="Double precision floating-point remainder: fmod(), Single precision and long double precision floating-point remainder: fmodf(), fmodl(), Power functions - pow(), powf(), powl()">
+    <meta name="twitter:url" content="/c/standard-math.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/593.acff91dc.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/c/" class="sidebar-link">Disclaimer</a></li><li><a href="/c/getting-started-with-c-language.html" class="sidebar-link">Getting started with C Language</a></li><li><a href="/c/comments.html" class="sidebar-link">Comments</a></li><li><a href="/c/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/c/operators.html" class="sidebar-link">Operators</a></li><li><a href="/c/boolean.html" class="sidebar-link">Boolean</a></li><li><a href="/c/strings.html" class="sidebar-link">Strings</a></li><li><a href="/c/literals-for-numbers-characters-and-strings.html" class="sidebar-link">Literals for numbers, characters and strings</a></li><li><a href="/c/compound-literals.html" class="sidebar-link">Compound Literals</a></li><li><a href="/c/bit-fields.html" class="sidebar-link">Bit-fields</a></li><li><a href="/c/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/c/linked-lists.html" class="sidebar-link">Linked lists</a></li><li><a href="/c/enumerations.html" class="sidebar-link">Enumerations</a></li><li><a href="/c/structs.html" class="sidebar-link">Structs</a></li><li><a href="/c/standard-math.html" class="active sidebar-link">Standard Math</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/c/standard-math.html#double-precision-floating-point-remainder-fmod" class="sidebar-link">Double precision floating-point remainder: fmod()</a></li><li class="sidebar-sub-header"><a href="/c/standard-math.html#single-precision-and-long-double-precision-floating-point-remainder-fmodf-fmodl" class="sidebar-link">Single precision and long double precision floating-point remainder: fmodf(), fmodl()</a></li><li class="sidebar-sub-header"><a href="/c/standard-math.html#power-functions-pow-powf-powl" class="sidebar-link">Power functions - pow(), powf(), powl()</a></li></ul></li><li><a href="/c/iteration-statements-loops-for-while-do-while.html" class="sidebar-link">Iteration Statements/Loops: for, while, do-while</a></li><li><a href="/c/selection-statements.html" class="sidebar-link">Selection Statements</a></li><li><a href="/c/initialization.html" class="sidebar-link">Initialization</a></li><li><a href="/c/declaration-vs-definition.html" class="sidebar-link">Declaration vs Definition</a></li><li><a href="/c/files-and-i-o-streams.html" class="sidebar-link">Files and I/O streams</a></li><li><a href="/c/formatted-input-output.html" class="sidebar-link">Formatted Input/Output</a></li><li><a href="/c/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/c/sequence-points.html" class="sidebar-link">Sequence points</a></li><li><a href="/c/function-pointers.html" class="sidebar-link">Function Pointers</a></li><li><a href="/c/function-parameters.html" class="sidebar-link">Function Parameters</a></li><li><a href="/c/pass-2d-arrays-to-functions.html" class="sidebar-link">Pass 2D-arrays to functions</a></li><li><a href="/c/error-handling.html" class="sidebar-link">Error handling</a></li><li><a href="/c/undefined-behavior.html" class="sidebar-link">Undefined behavior</a></li><li><a href="/c/random-number-generation.html" class="sidebar-link">Random Number Generation</a></li><li><a href="/c/preprocessor-and-macros.html" class="sidebar-link">Preprocessor and Macros</a></li><li><a href="/c/signal-handling.html" class="sidebar-link">Signal handling</a></li><li><a href="/c/variable-arguments.html" class="sidebar-link">Variable arguments</a></li><li><a href="/c/assertion.html" class="sidebar-link">Assertion</a></li><li><a href="/c/generic-selection.html" class="sidebar-link">Generic selection</a></li><li><a href="/c/x-macros.html" class="sidebar-link">X-macros</a></li><li><a href="/c/aliasing-and-effective-type.html" class="sidebar-link">Aliasing and effective type</a></li><li><a href="/c/compilation.html" class="sidebar-link">Compilation</a></li><li><a href="/c/identifier-scope.html" class="sidebar-link">Identifier Scope</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/implicit-and-explicit-conversions.html" class="sidebar-link">Implicit and Explicit Conversions</a></li><li><a href="/c/type-qualifiers.html" class="sidebar-link">Type Qualifiers</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/typedef.html" class="sidebar-link">Typedef</a></li><li><a href="/c/storage-classes.html" class="sidebar-link">Storage Classes</a></li><li><a href="/c/declarations.html" class="sidebar-link">Declarations</a></li><li><a href="/c/inline-assembly.html" class="sidebar-link">Inline assembly</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/structure-padding-and-packing.html" class="sidebar-link">Structure Padding and Packing</a></li><li><a href="/c/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/c/implementation-defined-behaviour.html" class="sidebar-link">Implementation-defined behaviour</a></li><li><a href="/c/atomics.html" class="sidebar-link">Atomics</a></li><li><a href="/c/jump-statements.html" class="sidebar-link">Jump Statements</a></li><li><a href="/c/create-and-include-header-files.html" class="sidebar-link">Create and include header files</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/ctype-h-character-classification-conversion.html" class="sidebar-link">— character classification &amp; conversion</a></li><li><a href="/c/side-effects.html" class="sidebar-link">Side Effects</a></li><li><a href="/c/multi-character-character-sequence.html" class="sidebar-link">Multi-Character Character Sequence</a></li><li><a href="/c/constraints.html" class="sidebar-link">Constraints</a></li><li><a href="/c/inlining.html" class="sidebar-link">Inlining</a></li><li><a href="/c/unions.html" class="sidebar-link">Unions</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/c/interprocess-communication-ipc.html" class="sidebar-link">Interprocess Communication (IPC)</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/common-c-programming-idioms-and-developer-practices.html" class="sidebar-link">Common C programming idioms and developer practices</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="standard-math"><a href="#standard-math" class="header-anchor">#</a> Standard Math</h1> <h2 id="double-precision-floating-point-remainder-fmod"><a href="#double-precision-floating-point-remainder-fmod" class="header-anchor">#</a> Double precision floating-point remainder: fmod()</h2> <p>This function returns the floating-point remainder of the division of <code>x/y</code>. The returned value has the same sign as x.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span> </span><span class="token comment">/* for fmod() */</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span> </span><span class="token comment">/* for printf() */</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">double</span> x <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> y <span class="token operator">=</span> <span class="token number">5.1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">double</span> modulus <span class="token operator">=</span> <span class="token function">fmod</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%lf\n&quot;</span><span class="token punctuation">,</span> modulus<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* f is the same as lf. */</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Output:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token number">4.90000</span>
+
+</code></pre></div><p><strong>Important:</strong> Use this function with care, as it can return unexpected values due to the operation of floating point values.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%f\n&quot;</span><span class="token punctuation">,</span> <span class="token function">fmod</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%19.17f\n&quot;</span><span class="token punctuation">,</span> <span class="token function">fmod</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Output:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token number">0.1</span>
+<span class="token number">0.09999999999999995</span>
+
+</code></pre></div><h2 id="single-precision-and-long-double-precision-floating-point-remainder-fmodf-fmodl"><a href="#single-precision-and-long-double-precision-floating-point-remainder-fmodf-fmodl" class="header-anchor">#</a> Single precision and long double precision floating-point remainder: fmodf(), fmodl()</h2> <p>These functions returns the floating-point remainder of the division of <code>x/y</code>. The returned value has the same sign as x.</p> <p>Single Precision:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span> </span><span class="token comment">/* for fmodf() */</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span> </span><span class="token comment">/* for printf() */</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">float</span> x <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">float</span> y <span class="token operator">=</span> <span class="token number">5.1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">float</span> modulus <span class="token operator">=</span> <span class="token function">fmodf</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%f\n&quot;</span><span class="token punctuation">,</span> modulus<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* lf would do as well as modulus gets promoted to double. */</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Output:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token number">4.90000</span>
+
+</code></pre></div><p>Double Double Precision:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span> </span><span class="token comment">/* for fmodl() */</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span> </span><span class="token comment">/* for printf() */</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">long</span> <span class="token keyword">double</span> x <span class="token operator">=</span> <span class="token number">10.0</span><span class="token punctuation">;</span>
+    <span class="token keyword">long</span> <span class="token keyword">double</span> y <span class="token operator">=</span> <span class="token number">5.1</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">long</span> <span class="token keyword">double</span> modulus <span class="token operator">=</span> <span class="token function">fmodl</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%Lf\n&quot;</span><span class="token punctuation">,</span> modulus<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* Lf is for long double. */</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Output:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token number">4.90000</span>
+
+</code></pre></div><h2 id="power-functions-pow-powf-powl"><a href="#power-functions-pow-powf-powl" class="header-anchor">#</a> Power functions - pow(), powf(), powl()</h2> <p>The following example code computes the sum of <strong>1+4(3+3^2+3^3+3^4+...+3^N)</strong> series using pow() family of standard math library.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;math.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;errno.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;fenv.h&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+        <span class="token keyword">double</span> pwr<span class="token punctuation">,</span> sum<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> i<span class="token punctuation">,</span> n<span class="token punctuation">;</span>
+
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;\n1+4(3+3^2+3^3+3^4+...+3^N)=?\nEnter N:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">&quot;%d&quot;</span><span class="token punctuation">,</span><span class="token operator">&amp;</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n<span class="token operator">&lt;=</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;Invalid power N=%d&quot;</span><span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>n<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                errno <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token function">feclearexcept</span><span class="token punctuation">(</span>FE_ALL_EXCEPT<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                pwr <span class="token operator">=</span> <span class="token function">powl</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">fetestexcept</span><span class="token punctuation">(</span>FE_INVALID <span class="token operator">|</span> FE_DIVBYZERO <span class="token operator">|</span> FE_OVERFLOW <span class="token operator">|</span>
+                        FE_UNDERFLOW<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                        <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">&quot;Math Error&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                sum <span class="token operator">+=</span> i <span class="token operator">?</span> pwr <span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;N= %d\tS= %g\n&quot;</span><span class="token punctuation">,</span> i<span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">+</span><span class="token number">4</span><span class="token operator">*</span>sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Example Output:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token number">1</span><span class="token operator">+</span><span class="token number">4</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">+</span><span class="token number">3</span><span class="token operator">^</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">3</span><span class="token operator">^</span><span class="token number">3</span><span class="token operator">+</span><span class="token number">3</span><span class="token operator">^</span><span class="token number">4</span><span class="token operator">+</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">+</span><span class="token number">3</span><span class="token operator">^</span>N<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">?</span>
+Enter N<span class="token operator">:</span><span class="token number">10</span>
+N<span class="token operator">=</span> <span class="token number">0</span>    S<span class="token operator">=</span> <span class="token number">1</span>
+N<span class="token operator">=</span> <span class="token number">1</span>    S<span class="token operator">=</span> <span class="token number">13</span>
+N<span class="token operator">=</span> <span class="token number">2</span>    S<span class="token operator">=</span> <span class="token number">49</span>
+N<span class="token operator">=</span> <span class="token number">3</span>    S<span class="token operator">=</span> <span class="token number">157</span>
+N<span class="token operator">=</span> <span class="token number">4</span>    S<span class="token operator">=</span> <span class="token number">481</span>
+N<span class="token operator">=</span> <span class="token number">5</span>    S<span class="token operator">=</span> <span class="token number">1453</span>
+N<span class="token operator">=</span> <span class="token number">6</span>    S<span class="token operator">=</span> <span class="token number">4369</span>
+N<span class="token operator">=</span> <span class="token number">7</span>    S<span class="token operator">=</span> <span class="token number">13117</span>
+N<span class="token operator">=</span> <span class="token number">8</span>    S<span class="token operator">=</span> <span class="token number">39361</span>
+N<span class="token operator">=</span> <span class="token number">9</span>    S<span class="token operator">=</span> <span class="token number">118093</span>
+N<span class="token operator">=</span> <span class="token number">10</span>    S<span class="token operator">=</span> <span class="token number">354289</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>#include &lt;math.h&gt;</li> <li>double pow(double x, double y);</li> <li>float powf(float x, float y);</li> <li>long double powl(long double x, long double y);</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <ol><li>To link with math library use <code>-lm</code> with gcc flags.
+</li><li>A  portable  program  that needs to check for an error from a mathematical function should set <code>errno</code> to zero, and make the following call       <code>feclearexcept(FE_ALL_EXCEPT);</code> before calling a mathematical function. Upon return from the mathematical function, if <code>errno</code> is  nonzero,  or  the following call returns nonzero <code>fetestexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);</code>
+then an error occurred in the mathematical function. Read manpage of math_error for more information.</li></ol></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/c/standard-math.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/c/structs.html" class="prev">
+        Structs
+      </a></span> <span class="next"><a href="/c/iteration-statements-loops-for-while-do-while.html">
+        Iteration Statements/Loops: for, while, do-while
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/593.acff91dc.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ruby - Classes</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Constructor, Creating a class, Access Levels, Accessing instance variables with getters and setters, Class Methods types, Dynamic class creation, New, allocate, and initialize, Class and instance variables">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Ruby - Classes">
+    <meta property="og:description" content="Constructor, Creating a class, Access Levels, Accessing instance variables with getters and setters, Class Methods types, Dynamic class creation, New, allocate, and initialize, Class and instance variables">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/ruby/classes.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Ruby - Classes">
+    <meta name="twitter:description" content="Constructor, Creating a class, Access Levels, Accessing instance variables with getters and setters, Class Methods types, Dynamic class creation, New, allocate, and initialize, Class and instance variables">
+    <meta name="twitter:url" content="/ruby/classes.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3054.b3c94d40.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Ruby</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ruby/" class="sidebar-link">Disclaimer</a></li><li><a href="/ruby/installation.html" class="sidebar-link">Installation</a></li><li><a href="/ruby/getting-started-with-ruby-language.html" class="sidebar-link">Getting started with Ruby Language</a></li><li><a href="/ruby/casting-type-conversion.html" class="sidebar-link">Casting (type conversion)</a></li><li><a href="/ruby/operators.html" class="sidebar-link">Operators</a></li><li><a href="/ruby/variable-scope-and-visibility.html" class="sidebar-link">Variable Scope and Visibility</a></li><li><a href="/ruby/environment-variables.html" class="sidebar-link">Environment Variables</a></li><li><a href="/ruby/constants.html" class="sidebar-link">Constants</a></li><li><a href="/ruby/special-constants-in-ruby.html" class="sidebar-link">Special Constants in Ruby</a></li><li><a href="/ruby/comments.html" class="sidebar-link">Comments</a></li><li><a href="/ruby/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/ruby/multidimensional-arrays.html" class="sidebar-link">Multidimensional Arrays</a></li><li><a href="/ruby/strings.html" class="sidebar-link">Strings</a></li><li><a href="/ruby/datetime.html" class="sidebar-link">DateTime</a></li><li><a href="/ruby/time.html" class="sidebar-link">Time</a></li><li><a href="/ruby/numbers.html" class="sidebar-link">Numbers</a></li><li><a href="/ruby/symbols.html" class="sidebar-link">Symbols</a></li><li><a href="/ruby/comparable.html" class="sidebar-link">Comparable</a></li><li><a href="/ruby/control-flow.html" class="sidebar-link">Control Flow</a></li><li><a href="/ruby/methods.html" class="sidebar-link">Methods</a></li><li><a href="/ruby/hashes.html" class="sidebar-link">Hashes</a></li><li><a href="/ruby/blocks-and-procs-and-lambdas.html" class="sidebar-link">Blocks and Procs and Lambdas</a></li><li><a href="/ruby/iteration.html" class="sidebar-link">Iteration</a></li><li><a href="/ruby/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/ruby/enumerators.html" class="sidebar-link">Enumerators</a></li><li><a href="/ruby/enumerable-in-ruby.html" class="sidebar-link">Enumerable in Ruby</a></li><li><a href="/ruby/classes.html" class="active sidebar-link">Classes</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/ruby/classes.html#constructor" class="sidebar-link">Constructor</a></li><li class="sidebar-sub-header"><a href="/ruby/classes.html#creating-a-class" class="sidebar-link">Creating a class</a></li><li class="sidebar-sub-header"><a href="/ruby/classes.html#access-levels" class="sidebar-link">Access Levels</a></li><li class="sidebar-sub-header"><a href="/ruby/classes.html#accessing-instance-variables-with-getters-and-setters" class="sidebar-link">Accessing instance variables with getters and setters</a></li><li class="sidebar-sub-header"><a href="/ruby/classes.html#class-methods-types" class="sidebar-link">Class Methods types</a></li><li class="sidebar-sub-header"><a href="/ruby/classes.html#dynamic-class-creation" class="sidebar-link">Dynamic class creation</a></li><li class="sidebar-sub-header"><a href="/ruby/classes.html#new-allocate-and-initialize" class="sidebar-link">New, allocate, and initialize</a></li><li class="sidebar-sub-header"><a href="/ruby/classes.html#class-and-instance-variables" class="sidebar-link">Class and instance variables</a></li></ul></li><li><a href="/ruby/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/ruby/method-missing.html" class="sidebar-link">method_missing</a></li><li><a href="/ruby/regular-expressions-and-regex-based-operations.html" class="sidebar-link">Regular Expressions and Regex Based Operations</a></li><li><a href="/ruby/file-and-i-o-operations.html" class="sidebar-link">File and I/O Operations</a></li><li><a href="/ruby/ruby-access-modifiers.html" class="sidebar-link">Ruby Access Modifiers</a></li><li><a href="/ruby/design-patterns-and-idioms-in-ruby.html" class="sidebar-link">Design Patterns and Idioms in Ruby</a></li><li><a href="/ruby/loading-source-files.html" class="sidebar-link">Loading Source Files</a></li><li><a href="/ruby/thread.html" class="sidebar-link">Thread</a></li><li><a href="/ruby/range.html" class="sidebar-link">Range</a></li><li><a href="/ruby/modules.html" class="sidebar-link">Modules</a></li><li><a href="/ruby/introspection-in-ruby.html" class="sidebar-link">Introspection in Ruby</a></li><li><a href="/ruby/monkey-patching-in-ruby.html" class="sidebar-link">Monkey Patching in Ruby</a></li><li><a href="/ruby/recursion-in-ruby.html" class="sidebar-link">Recursion in Ruby</a></li><li><a href="/ruby/splat-operator.html" class="sidebar-link">Splat operator (*)</a></li><li><a href="/ruby/json-with-ruby.html" class="sidebar-link">JSON with Ruby</a></li><li><a href="/ruby/pure-rspec-json-api-testing.html" class="sidebar-link">Pure RSpec JSON API testing</a></li><li><a href="/ruby/gem-creation-management.html" class="sidebar-link">Gem Creation/Management</a></li><li><a href="/ruby/rbenv.html" class="sidebar-link">rbenv</a></li><li><a href="/ruby/gem-usage.html" class="sidebar-link">Gem Usage</a></li><li><a href="/ruby/singleton-class.html" class="sidebar-link">Singleton Class</a></li><li><a href="/ruby/queue.html" class="sidebar-link">Queue</a></li><li><a href="/ruby/destructuring.html" class="sidebar-link">Destructuring</a></li><li><a href="/ruby/struct.html" class="sidebar-link">Struct</a></li><li><a href="/ruby/metaprogramming.html" class="sidebar-link">Metaprogramming</a></li><li><a href="/ruby/dynamic-evaluation.html" class="sidebar-link">Dynamic Evaluation</a></li><li><a href="/ruby/instance-eval.html" class="sidebar-link">instance_eval</a></li><li><a href="/ruby/message-passing.html" class="sidebar-link">Message Passing</a></li><li><a href="/ruby/keyword-arguments.html" class="sidebar-link">Keyword Arguments</a></li><li><a href="/ruby/truthiness.html" class="sidebar-link">Truthiness</a></li><li><a href="/ruby/implicit-receivers-and-understanding-self.html" class="sidebar-link">Implicit Receivers and Understanding Self</a></li><li><a href="/ruby/introspection.html" class="sidebar-link">Introspection</a></li><li><a href="/ruby/refinements.html" class="sidebar-link">Refinements</a></li><li><a href="/ruby/catching-exceptions-with-begin-rescue.html" class="sidebar-link">Catching Exceptions with Begin / Rescue</a></li><li><a href="/ruby/command-line-apps.html" class="sidebar-link">Command Line Apps</a></li><li><a href="/ruby/irb.html" class="sidebar-link">IRB</a></li><li><a href="/ruby/erb.html" class="sidebar-link">ERB</a></li><li><a href="/ruby/generate-a-random-number.html" class="sidebar-link">Generate a random number</a></li><li><a href="/ruby/getting-started-with-hanami.html" class="sidebar-link">Getting started with Hanami</a></li><li><a href="/ruby/optionparser.html" class="sidebar-link">OptionParser</a></li><li><a href="/ruby/operating-system-or-shell-commands.html" class="sidebar-link">Operating System or Shell commands</a></li><li><a href="/ruby/c-extensions.html" class="sidebar-link">C Extensions</a></li><li><a href="/ruby/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/ruby/ruby-version-manager.html" class="sidebar-link">Ruby Version Manager</a></li><li><a href="/ruby/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="classes"><a href="#classes" class="header-anchor">#</a> Classes</h1> <h2 id="constructor"><a href="#constructor" class="header-anchor">#</a> Constructor</h2> <p>A class can have only one constructor, that is a method called <code>initialize</code>. The method is automatically invoked when a new instance of the class is created.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Customer</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+     <span class="token variable">@name</span> <span class="token operator">=</span> name<span class="token punctuation">.</span>capitalize 
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+sarah <span class="token operator">=</span> <span class="token constant">Customer</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">'sarah'</span><span class="token punctuation">)</span>
+sarah<span class="token punctuation">.</span>name <span class="token comment">#=&gt; 'Sarah'</span>
+
+</code></pre></div><h2 id="creating-a-class"><a href="#creating-a-class" class="header-anchor">#</a> Creating a class</h2> <p>You can define a new class using the <code>class</code> keyword.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">MyClass</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Once defined, you can create a new instance using the <code>.new</code> method</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>somevar <span class="token operator">=</span> <span class="token constant">MyClass</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+<span class="token comment"># =&gt; #&lt;MyClass:0x007fe2b8aa4a18&gt;</span>
+
+</code></pre></div><h2 id="access-levels"><a href="#access-levels" class="header-anchor">#</a> Access Levels</h2> <p>Ruby has three access levels. They are <code>public</code>, <code>private</code> and <code>protected</code>.</p> <p>Methods that follow the <code>private</code> or <code>protected</code> keywords are defined as such. Methods that come before these are implicitly <code>public</code> methods.</p> <h3 id="public-methods"><a href="#public-methods" class="header-anchor">#</a> <strong>Public Methods</strong></h3> <p>A public method should describe the behavior of the object being created. These methods can be called from outside the scope of the created object.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Cat</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    <span class="token variable">@name</span> <span class="token operator">=</span> name
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">speak</span></span>
+    puts <span class="token string">&quot;I'm <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">@name</span><span class="token delimiter tag">}</span></span> and I'm 2 years old&quot;</span>
+  <span class="token keyword">end</span>
+  
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword">end</span>
+
+new_cat <span class="token operator">=</span> <span class="token constant">Cat</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">&quot;garfield&quot;</span><span class="token punctuation">)</span>
+<span class="token comment">#=&gt; &lt;Cat:0x2321868 @name=&quot;garfield&quot;&gt;</span>
+ 
+new_cat<span class="token punctuation">.</span>speak
+<span class="token comment">#=&gt; I'm garfield and I'm 2 years old</span>
+
+</code></pre></div><p>These methods are public ruby methods, they describe the behavior for initializing a new cat and the behavior of the speak method.</p> <p><code>public</code> keyword is unnecessary, but can be used to escape <code>private</code> or <code>protected</code></p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">MyClass</span></span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">first_public_method</span></span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">private_method</span></span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">public</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">second_public_method</span></span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h3 id="private-methods"><a href="#private-methods" class="header-anchor">#</a> <strong>Private Methods</strong></h3> <p>Private methods are not accessible from outside of the object. They are used internally by the object. Using the cat example again:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Cat</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    <span class="token variable">@name</span> <span class="token operator">=</span> name
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">speak</span></span>
+    age <span class="token operator">=</span> calculate_cat_age <span class="token comment"># here we call the private method </span>
+    puts <span class="token string">&quot;I'm <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">@name</span><span class="token delimiter tag">}</span></span> and I'm <span class="token interpolation"><span class="token delimiter tag">#{</span>age<span class="token delimiter tag">}</span></span> years old&quot;</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">private</span>
+     <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">calculate_cat_age</span></span>
+       <span class="token number">2</span> <span class="token operator">*</span> <span class="token number">3</span> <span class="token operator">-</span> <span class="token number">4</span> 
+     <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+my_cat <span class="token operator">=</span> <span class="token constant">Cat</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">&quot;Bilbo&quot;</span><span class="token punctuation">)</span>
+my_cat<span class="token punctuation">.</span>speak <span class="token comment">#=&gt; I'm Bilbo and I'm 2 years old</span>
+my_cat<span class="token punctuation">.</span>calculate_cat_age <span class="token comment">#=&gt; NoMethodError: private method `calculate_cat_age' called for #&lt;Cat:0x2321868 @name=&quot;Bilbo&quot;&gt;</span>
+
+</code></pre></div><p>As you can see in the example above, the newly created Cat object has access to the <code>calculate_cat_age</code> method internally. We assign the variable <code>age</code> to the result of running the private <code>calculate_cat_age</code> method which prints the name and age of the cat to the console.</p> <p>When we try and call the <code>calculate_cat_age</code> method from outside the <code>my_cat</code> object, we receive a <code>NoMethodError</code> because it's private. Get it?</p> <h3 id="protected-methods"><a href="#protected-methods" class="header-anchor">#</a> <strong>Protected Methods</strong></h3> <p>Protected methods are very similar to private methods. They cannot be accessed outside the instance of object in the same way private methods can't be. However, using the <code>self</code> ruby method, protected methods can be called within the context of an object of the same type.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Cat</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> age<span class="token punctuation">)</span>
+    <span class="token variable">@name</span> <span class="token operator">=</span> name
+    <span class="token variable">@age</span> <span class="token operator">=</span> age
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">speak</span></span>
+    puts <span class="token string">&quot;I'm <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">@name</span><span class="token delimiter tag">}</span></span> and I'm <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">@age</span><span class="token delimiter tag">}</span></span> years old&quot;</span>
+  <span class="token keyword">end</span>
+
+  <span class="token comment"># this == method allows us to compare two objects own ages. </span>
+  <span class="token comment"># if both Cat's have the same age they will be considered equal.</span>
+  <span class="token keyword">def</span> <span class="token operator">==</span><span class="token punctuation">(</span>other<span class="token punctuation">)</span>
+     <span class="token keyword">self</span><span class="token punctuation">.</span>own_age <span class="token operator">==</span> other<span class="token punctuation">.</span>own_age
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">protected</span>
+     <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">own_age</span></span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>age
+     <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+cat1 <span class="token operator">=</span> <span class="token constant">Cat</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">&quot;ricky&quot;</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token comment">#&lt;Cat:0x007fe2b8aa4a18 @name=&quot;ricky&quot;, @age=2&gt;</span>
+
+cat2 <span class="token operator">=</span> <span class="token constant">Cat</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">&quot;lucy&quot;</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token comment">#&lt;Cat:0x008gfb7aa6v67 @name=&quot;lucy&quot;, @age=4&gt;</span>
+
+cat3 <span class="token operator">=</span> <span class="token constant">Cat</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">&quot;felix&quot;</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token comment">#&lt;Cat:0x009frbaa8V76 @name=&quot;felix&quot;, @age=2&gt;</span>
+
+</code></pre></div><p>You can see we've added an age parameter to the cat class and created three new cat objects with the name and age. We are going to call the <code>own_age</code> protected method to compare the age's of our cat objects.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>cat1 <span class="token operator">==</span> cat2
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token boolean">false</span>
+
+cat1 <span class="token operator">==</span> cat3
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token boolean">true</span>
+
+</code></pre></div><p>Look at that, we were able to retrieve cat1's age using the <code>self.own_age</code> protected method and compare it against cat2's age by calling <code>cat2.own_age</code> inside of cat1.</p> <h2 id="accessing-instance-variables-with-getters-and-setters"><a href="#accessing-instance-variables-with-getters-and-setters" class="header-anchor">#</a> Accessing instance variables with getters and setters</h2> <p>We have three methods:</p> <ol><li><strong><code>attr_reader</code></strong>: used to allow <code>read</code>ing the variable outside the class.</li> <li><strong><code>attr_writer</code></strong>: used to allow modifying the variable outside the class.</li> <li><strong><code>attr_accessor</code></strong>: combines both methods.</li></ol> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Cat</span>
+  attr_reader <span class="token symbol">:age</span> <span class="token comment"># you can read the age but you can never change it</span>
+  attr_writer <span class="token symbol">:name</span> <span class="token comment"># you can change name but you are not allowed to read</span>
+  attr_accessor <span class="token symbol">:breed</span> <span class="token comment"># you can both change the breed and read it</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> breed<span class="token punctuation">)</span>
+    <span class="token variable">@name</span> <span class="token operator">=</span> name
+    <span class="token variable">@breed</span> <span class="token operator">=</span> breed
+    <span class="token variable">@age</span> <span class="token operator">=</span> <span class="token number">2</span> 
+  <span class="token keyword">end</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">speak</span></span>
+    puts <span class="token string">&quot;I'm <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">@name</span><span class="token delimiter tag">}</span></span> and I am a <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">@breed</span><span class="token delimiter tag">}</span></span> cat&quot;</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+ 
+my_cat <span class="token operator">=</span> <span class="token constant">Cat</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">&quot;Banjo&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;birman&quot;</span><span class="token punctuation">)</span>
+<span class="token comment"># reading values:</span>
+
+my_cat<span class="token punctuation">.</span>age  <span class="token comment">#=&gt; 2</span>
+my_cat<span class="token punctuation">.</span>breed <span class="token comment">#=&gt; &quot;birman&quot;</span>
+my_cat<span class="token punctuation">.</span>name <span class="token comment">#=&gt; Error</span>
+
+<span class="token comment"># changing values</span>
+ 
+my_cat<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">3</span> <span class="token comment">#=&gt; Error</span>
+my_cat<span class="token punctuation">.</span>breed <span class="token operator">=</span> <span class="token string">&quot;sphynx&quot;</span> 
+my_cat<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">&quot;Bilbo&quot;</span>
+
+my_cat<span class="token punctuation">.</span>speak <span class="token comment">#=&gt; I'm Bilbo and I am a sphynx cat</span>
+
+</code></pre></div><p>Note that the parameters are symbols. this works by creating a method.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Cat</span>
+  attr_accessor <span class="token symbol">:breed</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Is basically the same as:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Cat</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">breed</span></span>
+    <span class="token variable">@breed</span>
+  <span class="token keyword">end</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">breed</span></span><span class="token operator">=</span> value
+    <span class="token variable">@breed</span> <span class="token operator">=</span> value
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h2 id="class-methods-types"><a href="#class-methods-types" class="header-anchor">#</a> Class Methods types</h2> <p>Classes have 3 types of methods: instance, singleton and class methods.</p> <h3 id="instance-methods"><a href="#instance-methods" class="header-anchor">#</a> Instance Methods</h3> <p>These are methods that can be called from an <code>instance</code> of the class.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Thing</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">somemethod</span></span>
+    puts <span class="token string">&quot;something&quot;</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+foo <span class="token operator">=</span> <span class="token constant">Thing</span><span class="token punctuation">.</span><span class="token keyword">new</span> <span class="token comment"># create an instance of the class</span>
+foo<span class="token punctuation">.</span>somemethod <span class="token comment"># =&gt; something</span>
+
+</code></pre></div><h3 id="class-method"><a href="#class-method" class="header-anchor">#</a> Class Method</h3> <p>These are static methods, i.e,  they can be invoked on the class, and not on an instantiation of that class.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Thing</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token constant">Thing</span><span class="token punctuation">.</span><span class="token function">hello</span></span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    puts <span class="token string">&quot;Hello, <span class="token interpolation"><span class="token delimiter tag">#{</span>name<span class="token delimiter tag">}</span></span>!&quot;</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>It is equivalent to use <code>self</code> in place of the class name. The following code is equivalent to the code above:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Thing</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">hello</span></span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    puts <span class="token string">&quot;Hello, <span class="token interpolation"><span class="token delimiter tag">#{</span>name<span class="token delimiter tag">}</span></span>!&quot;</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Invoke the method by writing</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token constant">Thing</span><span class="token punctuation">.</span>hello<span class="token punctuation">(</span><span class="token string">&quot;John Doe&quot;</span><span class="token punctuation">)</span>  <span class="token comment"># prints: &quot;Hello, John Doe!&quot;</span>
+
+</code></pre></div><h3 id="singleton-methods"><a href="#singleton-methods" class="header-anchor">#</a> Singleton Methods</h3> <p>These are only available to specific instances of the class, but not to all.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># create an empty class</span>
+<span class="token keyword">class</span> <span class="token class-name">Thing</span>
+<span class="token keyword">end</span>
+
+<span class="token comment"># two instances of the class</span>
+thing1 <span class="token operator">=</span> <span class="token constant">Thing</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+thing2 <span class="token operator">=</span> <span class="token constant">Thing</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+
+<span class="token comment"># create a singleton method</span>
+<span class="token keyword">def</span> <span class="token method-definition">thing1<span class="token punctuation">.</span><span class="token function">makestuff</span></span>
+  puts <span class="token string">&quot;I belong to thing one&quot;</span>
+<span class="token keyword">end</span>
+
+thing1<span class="token punctuation">.</span>makestuff <span class="token comment"># =&gt; prints: I belong to thing one</span>
+thing2<span class="token punctuation">.</span>makestuff <span class="token comment"># NoMethodError: undefined method `makestuff' for #&lt;Thing&gt;</span>
+
+</code></pre></div><p>Both the <code>singleton</code> and <code>class</code> methods are called <code>eigenclass</code>es. Basically, what ruby does is to create an anonymous class that holds such methods so that it won't interfere with the instances that are created.</p> <p>Another way of doing this is by the <code>class &lt;&lt;</code> constructor. For example:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># a class method (same as the above example)</span>
+<span class="token keyword">class</span> <span class="token class-name">Thing</span>
+  <span class="token keyword">class</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> <span class="token keyword">self</span> <span class="token comment"># the anonymous class</span>
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">hello</span></span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+      puts <span class="token string">&quot;Hello, <span class="token interpolation"><span class="token delimiter tag">#{</span>name<span class="token delimiter tag">}</span></span>!&quot;</span>
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Thing</span><span class="token punctuation">.</span>hello<span class="token punctuation">(</span><span class="token string">&quot;sarah&quot;</span><span class="token punctuation">)</span> <span class="token comment"># =&gt; Hello, sarah!</span>
+
+<span class="token comment"># singleton method</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Thing</span>
+<span class="token keyword">end</span>
+
+thing1 <span class="token operator">=</span> <span class="token constant">Thing</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+
+<span class="token keyword">class</span> <span class="token operator">&lt;</span><span class="token operator">&lt;</span> thing1
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">makestuff</span></span>
+    puts <span class="token string">&quot;I belong to thing one&quot;</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+thing1<span class="token punctuation">.</span>makestuff <span class="token comment"># =&gt; prints: &quot;I belong to thing one&quot;</span>
+
+</code></pre></div><h2 id="dynamic-class-creation"><a href="#dynamic-class-creation" class="header-anchor">#</a> Dynamic class creation</h2> <p>Classes can be created dynamically through the use of <code>Class.new</code>.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># create a new class dynamically</span>
+<span class="token constant">MyClass</span> <span class="token operator">=</span> <span class="token builtin">Class</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+
+<span class="token comment"># instantiate an object of type MyClass</span>
+my_class <span class="token operator">=</span> <span class="token constant">MyClass</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+
+</code></pre></div><p>In the above example, a new class is created and assigned to the constant <code>MyClass</code>.  This class can be instantiated and used just like any other class.</p> <p>The <code>Class.new</code> method accepts a <code>Class</code> which will become the superclass of the dynamically created class.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token comment"># dynamically create a class that subclasses another</span>
+<span class="token constant">Staffy</span> <span class="token operator">=</span> <span class="token builtin">Class</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token constant">Dog</span><span class="token punctuation">)</span>
+
+<span class="token comment"># instantiate an object of type Staffy</span>
+lucky <span class="token operator">=</span> <span class="token constant">Staffy</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+lucky<span class="token punctuation">.</span>is_a<span class="token operator">?</span><span class="token punctuation">(</span><span class="token constant">Staffy</span><span class="token punctuation">)</span> <span class="token comment"># true</span>
+lucky<span class="token punctuation">.</span>is_a<span class="token operator">?</span><span class="token punctuation">(</span><span class="token constant">Dog</span><span class="token punctuation">)</span>    <span class="token comment"># true</span>
+
+</code></pre></div><p>The <code>Class.new</code> method also accepts a block.  The context of the block is the newly created class.  This allows methods to be defined.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token constant">Duck</span> <span class="token operator">=</span> 
+  <span class="token builtin">Class</span><span class="token punctuation">.</span><span class="token keyword">new</span> <span class="token keyword">do</span>
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">quack</span></span>
+      <span class="token string">'Quack!!'</span>
+    <span class="token keyword">end</span>
+  <span class="token keyword">end</span>
+
+<span class="token comment"># instantiate an object of type Duck</span>
+duck <span class="token operator">=</span> <span class="token constant">Duck</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+duck<span class="token punctuation">.</span>quack <span class="token comment"># 'Quack!!'</span>
+
+</code></pre></div><h2 id="new-allocate-and-initialize"><a href="#new-allocate-and-initialize" class="header-anchor">#</a> New, allocate, and initialize</h2> <p>In many languages, new instances of a class are created using a special <code>new</code> keyword. In Ruby, <code>new</code> is also used to create instances of a class, but it isn't a keyword; instead, it's a static/class method, no different from any other static/class method. The definition is roughly this:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">MyClass</span>
+   <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">new</span></span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span>
+     obj <span class="token operator">=</span> allocate
+     obj<span class="token punctuation">.</span>initialize<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span> <span class="token comment"># oversimplied; initialize is actually private</span>
+     obj
+   <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p><code>allocate</code> performs the real 'magic' of creating an uninitialized instance of the class</p> <p>Note also that the return value of <code>initialize</code> is discarded, and obj is returned instead. This makes it immediately clear why you can code your initialize method without worrying about returning <code>self</code> at the end.</p> <p>The 'normal' <code>new</code> method that all classes get from <code>Class</code> works as above, but it's possible to redefine it however you like, or to define alternatives that work differently. For example:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">MyClass</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">extraNew</span></span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span>
+    obj <span class="token operator">=</span> allocate
+    obj<span class="token punctuation">.</span>pre_initialize<span class="token punctuation">(</span><span class="token symbol">:foo</span><span class="token punctuation">)</span>
+    obj<span class="token punctuation">.</span>initialize<span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span>
+    obj<span class="token punctuation">.</span>post_initialize<span class="token punctuation">(</span><span class="token symbol">:bar</span><span class="token punctuation">)</span>
+    obj
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h2 id="class-and-instance-variables"><a href="#class-and-instance-variables" class="header-anchor">#</a> Class and instance variables</h2> <p>There are several special variable types that a class can use for more easily sharing data.</p> <p>Instance variables, preceded by <code>@</code>. They are useful if you want to use the same variable in different methods.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Person</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> age<span class="token punctuation">)</span>
+    my_age <span class="token operator">=</span> age <span class="token comment"># local variable, will be destroyed at end of constructor</span>
+    <span class="token variable">@name</span> <span class="token operator">=</span> name <span class="token comment"># instance variable, is only destroyed when the object is</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">some_method</span></span>
+    puts <span class="token string">&quot;My name is <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">@name</span><span class="token delimiter tag">}</span></span>.&quot;</span> <span class="token comment"># we can use @name with no problem</span>
+  <span class="token keyword">end</span>
+   
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">another_method</span></span>
+    puts <span class="token string">&quot;My age is <span class="token interpolation"><span class="token delimiter tag">#{</span>my_age<span class="token delimiter tag">}</span></span>.&quot;</span> <span class="token comment"># this will not work!</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+mhmd <span class="token operator">=</span> <span class="token constant">Person</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">&quot;Mark&quot;</span><span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">)</span>
+
+mhmd<span class="token punctuation">.</span>some_method <span class="token comment">#=&gt; My name is Mark.</span>
+mhmd<span class="token punctuation">.</span>another_method <span class="token comment">#=&gt; throws an error</span>
+
+</code></pre></div><p>Class variable, preceded by <code>@@</code>. They contain the same values across all instances of a class.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Person</span>
+  <span class="token variable">@@persons_created</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment"># class variable, available to all objects of this class</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+    <span class="token variable">@name</span> <span class="token operator">=</span> name
+
+    <span class="token comment"># modification of class variable persists across all objects of this class</span>
+    <span class="token variable">@@persons_created</span> <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+  <span class="token keyword">end</span>  
+      
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">how_many_persons</span></span>
+    puts <span class="token string">&quot;persons created so far: <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">@@persons_created</span><span class="token delimiter tag">}</span></span>&quot;</span>
+  <span class="token keyword">end</span> 
+<span class="token keyword">end</span>
+    
+mark <span class="token operator">=</span> <span class="token constant">Person</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">&quot;Mark&quot;</span><span class="token punctuation">)</span>
+mark<span class="token punctuation">.</span>how_many_persons <span class="token comment">#=&gt; persons created so far: 1</span>
+helen <span class="token operator">=</span> <span class="token constant">Person</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token string">&quot;Helen&quot;</span><span class="token punctuation">)</span>
+
+mark<span class="token punctuation">.</span>how_many_persons <span class="token comment">#=&gt; persons created so far: 2</span>
+helen<span class="token punctuation">.</span>how_many_persons <span class="token comment">#=&gt; persons created so far: 2</span>
+<span class="token comment"># you could either ask mark or helen</span>
+
+</code></pre></div><p>Global Variables, preceded by <code>$</code>. These are available anywhere to the program, so make sure to use them wisely.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token variable">$total_animals</span> <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Cat</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span>
+    <span class="token variable">$total_animals</span> <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Dog</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span>
+    <span class="token variable">$total_animals</span> <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+bob <span class="token operator">=</span> <span class="token constant">Cat</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+puts <span class="token variable">$total_animals</span> <span class="token comment">#=&gt; 1</span>
+fred <span class="token operator">=</span> <span class="token constant">Dog</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+puts <span class="token variable">$total_animals</span> <span class="token comment">#=&gt; 2</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>class Name</li> <li>#some code describing the class behavior</li> <li>end</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Class names in Ruby are Constants, so the first letter should be a capital.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Cat</span> <span class="token comment"># correct</span>
+<span class="token keyword">end</span>  
+
+<span class="token keyword">class</span> <span class="token class-name">dog</span> <span class="token comment"># wrong, throws an error</span>
+<span class="token keyword">end</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/ruby/classes.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/ruby/enumerable-in-ruby.html" class="prev">
+        Enumerable in Ruby
+      </a></span> <span class="next"><a href="/ruby/inheritance.html">
+        Inheritance
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3054.b3c94d40.js" defer></script>
+  </body>
+</html>

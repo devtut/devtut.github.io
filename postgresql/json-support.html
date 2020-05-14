@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PostgreSQL - JSON Support</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Using JSONb operators, Querying complex JSON documents, Creating a pure JSON table">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="PostgreSQL - JSON Support">
+    <meta property="og:description" content="Using JSONb operators, Querying complex JSON documents, Creating a pure JSON table">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/postgresql/json-support.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="PostgreSQL - JSON Support">
+    <meta name="twitter:description" content="Using JSONb operators, Querying complex JSON documents, Creating a pure JSON table">
+    <meta name="twitter:url" content="/postgresql/json-support.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2554.b3bcf998.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>PostgreSQL</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/postgresql/" class="sidebar-link">Disclaimer</a></li><li><a href="/postgresql/getting-started-with-postgresql.html" class="sidebar-link">Getting started with postgresql</a></li><li><a href="/postgresql/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/postgresql/dates-timestamps-and-intervals.html" class="sidebar-link">Dates, Timestamps, and Intervals</a></li><li><a href="/postgresql/table-creation.html" class="sidebar-link">Table Creation</a></li><li><a href="/postgresql/select.html" class="sidebar-link">SELECT</a></li><li><a href="/postgresql/find-string-length-character-length.html" class="sidebar-link">Find String Length / Character Length</a></li><li><a href="/postgresql/coalesce.html" class="sidebar-link">COALESCE</a></li><li><a href="/postgresql/insert.html" class="sidebar-link">INSERT</a></li><li><a href="/postgresql/update.html" class="sidebar-link">UPDATE</a></li><li><a href="/postgresql/json-support.html" class="active sidebar-link">JSON Support</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/postgresql/json-support.html#using-jsonb-operators" class="sidebar-link">Using JSONb operators</a></li><li class="sidebar-sub-header"><a href="/postgresql/json-support.html#querying-complex-json-documents" class="sidebar-link">Querying complex JSON documents</a></li><li class="sidebar-sub-header"><a href="/postgresql/json-support.html#creating-a-pure-json-table" class="sidebar-link">Creating a pure JSON table</a></li></ul></li><li><a href="/postgresql/aggregate-functions.html" class="sidebar-link">Aggregate Functions</a></li><li><a href="/postgresql/common-table-expressions-with.html" class="sidebar-link">Common Table Expressions (WITH)</a></li><li><a href="/postgresql/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/postgresql/recursive-queries.html" class="sidebar-link">Recursive queries</a></li><li><a href="/postgresql/programming-with-pl-pgsql.html" class="sidebar-link">Programming with PL/pgSQL</a></li><li><a href="/postgresql/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/postgresql/export-postgresql-database-table-header-and-data-to-csv-file.html" class="sidebar-link">Export PostgreSQL database table header and data to CSV file</a></li><li><a href="/postgresql/triggers-and-trigger-functions.html" class="sidebar-link">Triggers and Trigger Functions</a></li><li><a href="/postgresql/event-triggers.html" class="sidebar-link">Event Triggers</a></li><li><a href="/postgresql/role-management.html" class="sidebar-link">Role Management</a></li><li><a href="/postgresql/postgres-cryptographic-functions.html" class="sidebar-link">Postgres cryptographic functions</a></li><li><a href="/postgresql/comments-in-postgresql.html" class="sidebar-link">Comments in postgresql</a></li><li><a href="/postgresql/backup-and-restore.html" class="sidebar-link">Backup and Restore</a></li><li><a href="/postgresql/backup-script-for-a-production-db.html" class="sidebar-link">Backup script for a production DB</a></li><li><a href="/postgresql/accessing-data-programmatically.html" class="sidebar-link">Accessing Data Programmatically</a></li><li><a href="/postgresql/connect-to-postgresql-from-java.html" class="sidebar-link">Connect to PostgreSQL from Java</a></li><li><a href="/postgresql/postgresql-high-availability.html" class="sidebar-link">PostgreSQL High Availability</a></li><li><a href="/postgresql/extension-dblink-and-postgres-fdw.html" class="sidebar-link">EXTENSION dblink and postgres_fdw</a></li><li><a href="/postgresql/postgres-tip-and-tricks.html" class="sidebar-link">Postgres Tip and Tricks</a></li><li><a href="/postgresql/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="json-support"><a href="#json-support" class="header-anchor">#</a> JSON Support</h1> <h2 id="using-jsonb-operators"><a href="#using-jsonb-operators" class="header-anchor">#</a> Using JSONb operators</h2> <h3 id="creating-a-db-and-a-table"><a href="#creating-a-db-and-a-table" class="header-anchor">#</a> Creating a DB and a Table</h3> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">DROP</span> <span class="token keyword">DATABASE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> books_db<span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> books_db <span class="token keyword">WITH</span> ENCODING<span class="token operator">=</span><span class="token string">'UTF8'</span> TEMPLATE template0<span class="token punctuation">;</span>
+
+<span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> books<span class="token punctuation">;</span>
+
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> books <span class="token punctuation">(</span>
+  id <span class="token keyword">SERIAL</span> <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">,</span>
+  client <span class="token keyword">TEXT</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+  <span class="token keyword">data</span> JSONb <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="populating-the-db"><a href="#populating-the-db" class="header-anchor">#</a> Populating the DB</h3> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> books<span class="token punctuation">(</span>client<span class="token punctuation">,</span> <span class="token keyword">data</span><span class="token punctuation">)</span> <span class="token keyword">values</span> <span class="token punctuation">(</span>
+    <span class="token string">'Joe'</span><span class="token punctuation">,</span> 
+    <span class="token string">'{ &quot;title&quot;: &quot;Siddhartha&quot;, &quot;author&quot;: { &quot;first_name&quot;: &quot;Herman&quot;, &quot;last_name&quot;: &quot;Hesse&quot; } }'</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>
+    <span class="token string">'Jenny'</span><span class="token punctuation">,</span> 
+    <span class="token string">'{ &quot;title&quot;: &quot;Dharma Bums&quot;, &quot;author&quot;: { &quot;first_name&quot;: &quot;Jack&quot;, &quot;last_name&quot;: &quot;Kerouac&quot; } }'</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>
+    <span class="token string">'Jenny'</span><span class="token punctuation">,</span> 
+    <span class="token string">'{ &quot;title&quot;: &quot;100 años de soledad&quot;, &quot;author&quot;: { &quot;first_name&quot;: &quot;Gabo&quot;, &quot;last_name&quot;: &quot;Marquéz&quot; } }'</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Lets see everything inside the table books:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> books<span class="token punctuation">;</span>
+
+</code></pre></div><p>Output:</p> <img src="http://i.imgur.com/T26elII.png" alt=""> <h3 id="operator-returns-values-out-of-json-columns"><a href="#operator-returns-values-out-of-json-columns" class="header-anchor">#</a> <code>-&gt;</code> operator returns values out of JSON columns</h3> <p>Selecting 1 column:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> client<span class="token punctuation">,</span> 
+    <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'title'</span> <span class="token keyword">AS</span> title
+    <span class="token keyword">FROM</span> books<span class="token punctuation">;</span>
+
+</code></pre></div><p>Output:</p> <img src="http://i.imgur.com/Pab2puE.png" alt="enter image description here"> <p>Selecting 2 columns:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> client<span class="token punctuation">,</span> 
+   <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'title'</span> <span class="token keyword">AS</span> title<span class="token punctuation">,</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'author'</span> <span class="token keyword">AS</span> author
+   <span class="token keyword">FROM</span> books<span class="token punctuation">;</span>
+
+</code></pre></div><p>Output:</p> <img src="http://i.imgur.com/fWHUsre.png" alt="enter image description here"> <h3 id="vs"><a href="#vs" class="header-anchor">#</a> <code>-&gt;</code> vs <code>-&gt;&gt;</code></h3> <p>The <code>-&gt;</code> operator returns the original JSON type (which might be an object), whereas <code>-&gt;&gt;</code> returns text.</p> <h3 id="return-nested-objects"><a href="#return-nested-objects" class="header-anchor">#</a> Return NESTED objects</h3> <p>You can use the <code>-&gt;</code> to return a nested object and thus chain the operators:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> client<span class="token punctuation">,</span> 
+   <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'author'</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'last_name'</span> <span class="token keyword">AS</span> author
+   <span class="token keyword">FROM</span> books<span class="token punctuation">;</span>
+
+</code></pre></div><p>Output:</p> <img src="http://i.imgur.com/NgSPIFU.png" alt="enter image description here"> <h3 id="filtering"><a href="#filtering" class="header-anchor">#</a> Filtering</h3> <p>Select rows based on a value inside your JSON:</p> <div class="language- extra-class"><pre class="language-text"><code>
+SELECT 
+ client,
+ data-&gt;'title' AS title
+ FROM books
+  WHERE data-&gt;'title' = '&quot;Dharma Bums&quot;';
+
+</code></pre></div><p>Notice WHERE uses <code>-&gt;</code> so we must compare to JSON <code>'&quot;Dharma Bums&quot;'</code></p> <p>Or we could use <code>-&gt;&gt;</code> and compare to <code>'Dharma Bums'</code></p> <p>Output:</p> <img src="http://i.imgur.com/2seaUNK.png" alt="enter image description here"> <h3 id="nested-filtering"><a href="#nested-filtering" class="header-anchor">#</a> Nested filtering</h3> <p>Find rows based on the value of a nested JSON object:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> 
+ client<span class="token punctuation">,</span>
+ <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'title'</span> <span class="token keyword">AS</span> title
+ <span class="token keyword">FROM</span> books
+  <span class="token keyword">WHERE</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'author'</span><span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'last_name'</span> <span class="token operator">=</span> <span class="token string">'Kerouac'</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Output:</p> <img src="http://i.imgur.com/yeBMj0T.png" alt="enter image description here"> <h3 id="a-real-world-example"><a href="#a-real-world-example" class="header-anchor">#</a> A real world example</h3> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> events <span class="token punctuation">(</span>
+  name <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  visitor_id <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  properties json<span class="token punctuation">,</span>
+  browser json
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>We’re going to store events in this table, like pageviews. Each event has properties, which could be anything (e.g. current page) and also sends information about the browser (like OS, screen resolution, etc). Both of these are completely free form and could change over time (as we think of extra stuff to track).</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> events <span class="token punctuation">(</span>name<span class="token punctuation">,</span> visitor_id<span class="token punctuation">,</span> properties<span class="token punctuation">,</span> browser<span class="token punctuation">)</span> <span class="token keyword">VALUES</span>
+<span class="token punctuation">(</span>
+  <span class="token string">'pageview'</span><span class="token punctuation">,</span> <span class="token string">'1'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;page&quot;: &quot;/&quot; }'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;name&quot;: &quot;Chrome&quot;, &quot;os&quot;: &quot;Mac&quot;, &quot;resolution&quot;: { &quot;x&quot;: 1440, &quot;y&quot;: 900 } }'</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>
+  <span class="token string">'pageview'</span><span class="token punctuation">,</span> <span class="token string">'2'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;page&quot;: &quot;/&quot; }'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;name&quot;: &quot;Firefox&quot;, &quot;os&quot;: &quot;Windows&quot;, &quot;resolution&quot;: { &quot;x&quot;: 1920, &quot;y&quot;: 1200 } }'</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>
+  <span class="token string">'pageview'</span><span class="token punctuation">,</span> <span class="token string">'1'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;page&quot;: &quot;/account&quot; }'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;name&quot;: &quot;Chrome&quot;, &quot;os&quot;: &quot;Mac&quot;, &quot;resolution&quot;: { &quot;x&quot;: 1440, &quot;y&quot;: 900 } }'</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>
+  <span class="token string">'purchase'</span><span class="token punctuation">,</span> <span class="token string">'5'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;amount&quot;: 10 }'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;name&quot;: &quot;Firefox&quot;, &quot;os&quot;: &quot;Windows&quot;, &quot;resolution&quot;: { &quot;x&quot;: 1024, &quot;y&quot;: 768 } }'</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>
+  <span class="token string">'purchase'</span><span class="token punctuation">,</span> <span class="token string">'15'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;amount&quot;: 200 }'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;name&quot;: &quot;Firefox&quot;, &quot;os&quot;: &quot;Windows&quot;, &quot;resolution&quot;: { &quot;x&quot;: 1280, &quot;y&quot;: 800 } }'</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">(</span>
+  <span class="token string">'purchase'</span><span class="token punctuation">,</span> <span class="token string">'15'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;amount&quot;: 500 }'</span><span class="token punctuation">,</span>
+  <span class="token string">'{ &quot;name&quot;: &quot;Firefox&quot;, &quot;os&quot;: &quot;Windows&quot;, &quot;resolution&quot;: { &quot;x&quot;: 1280, &quot;y&quot;: 800 } }'</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Now lets select everything:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> events<span class="token punctuation">;</span>
+
+</code></pre></div><p>Output:</p> <img src="http://i.imgur.com/b5Hw0NN.png" alt="enter image description here"> <h3 id="json-operators-postgresql-aggregate-functions"><a href="#json-operators-postgresql-aggregate-functions" class="header-anchor">#</a> JSON operators + PostgreSQL aggregate functions</h3> <p>Using the JSON operators, combined with traditional PostgreSQL aggregate functions, we can pull out whatever we want. You have the full might of an RDBMS at your disposal.</p> <li>
+Lets see browser usage:
+<div class="language-sql extra-class"><pre class="language-sql"><code>  <span class="token keyword">SELECT</span> browser<span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'name'</span> <span class="token keyword">AS</span> browser<span class="token punctuation">,</span> 
+    <span class="token function">count</span><span class="token punctuation">(</span>browser<span class="token punctuation">)</span>
+    <span class="token keyword">FROM</span> events
+    <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> browser<span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'name'</span><span class="token punctuation">;</span>
+
+</code></pre></div></li> <p>Output:</p> <img src="http://i.imgur.com/jvw6bz7.png" alt="enter image description here"> <li>
+Total revenue per visitor:
+<div class="language-sql extra-class"><pre class="language-sql"><code>  <span class="token keyword">SELECT</span> visitor_id<span class="token punctuation">,</span> <span class="token function">SUM</span><span class="token punctuation">(</span>CAST<span class="token punctuation">(</span>properties<span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'amount'</span> <span class="token keyword">AS</span> <span class="token keyword">integer</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> total
+  <span class="token keyword">FROM</span> events
+  <span class="token keyword">WHERE</span> CAST<span class="token punctuation">(</span>properties<span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'amount'</span> <span class="token keyword">AS</span> <span class="token keyword">integer</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span>
+  <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> visitor_id<span class="token punctuation">;</span>
+
+</code></pre></div></li> <p>Output:</p> <img src="http://i.imgur.com/6cOnNl9.png" alt="enter image description here"> <li>
+Average screen resolution
+<div class="language-sql extra-class"><pre class="language-sql"><code>  <span class="token keyword">SELECT</span> <span class="token function">AVG</span><span class="token punctuation">(</span>CAST<span class="token punctuation">(</span>browser<span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'resolution'</span><span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'x'</span> <span class="token keyword">AS</span> <span class="token keyword">integer</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> width<span class="token punctuation">,</span>
+    <span class="token function">AVG</span><span class="token punctuation">(</span>CAST<span class="token punctuation">(</span>browser<span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'resolution'</span><span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'y'</span> <span class="token keyword">AS</span> <span class="token keyword">integer</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> height
+  <span class="token keyword">FROM</span> events<span class="token punctuation">;</span>
+
+</code></pre></div></li> <p>Output:</p> <img src="http://i.imgur.com/RfVELht.png" alt="enter image description here"> <p>More examples and documentation <a href="http://schinckel.net/2014/05/25/querying-json-in-postgres/" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> and <a href="http://clarkdave.net/2013/06/what-can-you-do-with-postgresql-and-json/" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <h2 id="querying-complex-json-documents"><a href="#querying-complex-json-documents" class="header-anchor">#</a> Querying complex JSON documents</h2> <p>Taking a complex JSON document in a table:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> mytable <span class="token punctuation">(</span><span class="token keyword">data</span> JSONB <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> mytable_idx <span class="token keyword">ON</span> mytable <span class="token keyword">USING</span> gin <span class="token punctuation">(</span><span class="token keyword">data</span> jsonb_path_ops<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> mytable <span class="token keyword">VALUES</span><span class="token punctuation">(</span>$$
+{
+    <span class="token string">&quot;name&quot;</span>: <span class="token string">&quot;Alice&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;emails&quot;</span>: <span class="token punctuation">[</span>
+        <span class="token string">&quot;alice1@test.com&quot;</span><span class="token punctuation">,</span>
+        <span class="token string">&quot;alice2@test.com&quot;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;events&quot;</span>: <span class="token punctuation">[</span>
+        {
+            <span class="token string">&quot;type&quot;</span>: <span class="token string">&quot;birthday&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;date&quot;</span>: <span class="token string">&quot;1970-01-01&quot;</span>
+        }<span class="token punctuation">,</span>
+        {
+            <span class="token string">&quot;type&quot;</span>: <span class="token string">&quot;anniversary&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;date&quot;</span>: <span class="token string">&quot;2001-05-05&quot;</span>
+        }
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;locations&quot;</span>: {
+        <span class="token string">&quot;home&quot;</span>: {
+            <span class="token string">&quot;city&quot;</span>: <span class="token string">&quot;London&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;country&quot;</span>: <span class="token string">&quot;United Kingdom&quot;</span>
+        }<span class="token punctuation">,</span>
+        <span class="token string">&quot;work&quot;</span>: {
+            <span class="token string">&quot;city&quot;</span>: <span class="token string">&quot;Edinburgh&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;country&quot;</span>: <span class="token string">&quot;United Kingdom&quot;</span>
+        }
+    }
+}
+$$<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Query for a top-level element:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'name'</span> <span class="token keyword">FROM</span> mytable <span class="token keyword">WHERE</span> <span class="token keyword">data</span> @<span class="token operator">&gt;</span> <span class="token string">'{&quot;name&quot;:&quot;Alice&quot;}'</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Query for a simple item in an array:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'name'</span> <span class="token keyword">FROM</span> mytable <span class="token keyword">WHERE</span> <span class="token keyword">data</span> @<span class="token operator">&gt;</span> <span class="token string">'{&quot;emails&quot;:[&quot;alice1@test.com&quot;]}'</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Query for an object in an array:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'name'</span> <span class="token keyword">FROM</span> mytable <span class="token keyword">WHERE</span> <span class="token keyword">data</span> @<span class="token operator">&gt;</span> <span class="token string">'{&quot;events&quot;:[{&quot;type&quot;:&quot;anniversary&quot;}]}'</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Query for a nested object:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'name'</span> <span class="token keyword">FROM</span> mytable <span class="token keyword">WHERE</span> <span class="token keyword">data</span> @<span class="token operator">&gt;</span> <span class="token string">'{&quot;locations&quot;:{&quot;home&quot;:{&quot;city&quot;:&quot;London&quot;}}}'</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="performance-of-compared-to-and"><a href="#performance-of-compared-to-and" class="header-anchor">#</a> Performance of <code>@&gt;</code> compared to <code>-&gt;</code> and <code>-&gt;&gt;</code></h3> <p>It is important to understand the performance difference between using <code>@&gt;</code>, <code>-&gt;</code> and <code>-&gt;&gt;</code> in the <code>WHERE</code> part of the query.  Although these two queries appear to be broadly equivalent:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token keyword">data</span> <span class="token keyword">FROM</span> mytable <span class="token keyword">WHERE</span> <span class="token keyword">data</span> @<span class="token operator">&gt;</span> <span class="token string">'{&quot;name&quot;:&quot;Alice&quot;}'</span><span class="token punctuation">;</span>
+<span class="token keyword">SELECT</span> <span class="token keyword">data</span> <span class="token keyword">FROM</span> mytable <span class="token keyword">WHERE</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'name'</span> <span class="token operator">=</span> <span class="token string">'&quot;Alice&quot;'</span><span class="token punctuation">;</span>
+<span class="token keyword">SELECT</span> <span class="token keyword">data</span> <span class="token keyword">FROM</span> mytable <span class="token keyword">WHERE</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'name'</span> <span class="token operator">=</span> <span class="token string">'Alice'</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>the first statement will use the index created above whereas the latter two will not, requiring a complete table scan.</p> <p>It is still allowable to use the <code>-&gt;</code> operator when obtaining resultant data, so the following queries will also use the index:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'locations'</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'work'</span> <span class="token keyword">FROM</span> mytable <span class="token keyword">WHERE</span> <span class="token keyword">data</span> @<span class="token operator">&gt;</span> <span class="token string">'{&quot;name&quot;:&quot;Alice&quot;}'</span><span class="token punctuation">;</span>
+<span class="token keyword">SELECT</span> <span class="token keyword">data</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'locations'</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token string">'work'</span><span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'city'</span> <span class="token keyword">FROM</span> mytable <span class="token keyword">WHERE</span> <span class="token keyword">data</span> @<span class="token operator">&gt;</span> <span class="token string">'{&quot;name&quot;:&quot;Alice&quot;}'</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="creating-a-pure-json-table"><a href="#creating-a-pure-json-table" class="header-anchor">#</a> Creating a pure JSON table</h2> <p>To create a pure JSON table you need to provide a single field with the type <code>JSONB</code>:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> mytable <span class="token punctuation">(</span><span class="token keyword">data</span> JSONB <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>You should also create a basic index:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token keyword">INDEX</span> mytable_idx <span class="token keyword">ON</span> mytable <span class="token keyword">USING</span> gin <span class="token punctuation">(</span><span class="token keyword">data</span> jsonb_path_ops<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>At this point you can insert data in to the table and query it efficiently.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/postgresql/json-support.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/postgresql/update.html" class="prev">
+        UPDATE
+      </a></span> <span class="next"><a href="/postgresql/aggregate-functions.html">
+        Aggregate Functions
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2554.b3bcf998.js" defer></script>
+  </body>
+</html>

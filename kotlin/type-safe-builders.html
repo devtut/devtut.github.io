@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Kotlin - Type-Safe Builders</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Type-safe tree structure builder">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Kotlin - Type-Safe Builders">
+    <meta property="og:description" content="Type-safe tree structure builder">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/kotlin/type-safe-builders.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Kotlin - Type-Safe Builders">
+    <meta name="twitter:description" content="Type-safe tree structure builder">
+    <meta name="twitter:url" content="/kotlin/type-safe-builders.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1861.c3c23461.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Kotlin</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/kotlin/" class="sidebar-link">Disclaimer</a></li><li><a href="/kotlin/getting-started-with-kotlin.html" class="sidebar-link">Getting started with Kotlin</a></li><li><a href="/kotlin/basics-of-kotlin.html" class="sidebar-link">Basics of Kotlin</a></li><li><a href="/kotlin/strings.html" class="sidebar-link">Strings</a></li><li><a href="/kotlin/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/kotlin/collections.html" class="sidebar-link">Collections</a></li><li><a href="/kotlin/enum.html" class="sidebar-link">Enum</a></li><li><a href="/kotlin/functions.html" class="sidebar-link">Functions</a></li><li><a href="/kotlin/vararg-parameters-in-functions.html" class="sidebar-link">Vararg Parameters in Functions</a></li><li><a href="/kotlin/conditional-statements.html" class="sidebar-link">Conditional Statements</a></li><li><a href="/kotlin/loops-in-kotlin.html" class="sidebar-link">Loops in Kotlin</a></li><li><a href="/kotlin/ranges.html" class="sidebar-link">Ranges</a></li><li><a href="/kotlin/regex.html" class="sidebar-link">Regex</a></li><li><a href="/kotlin/basic-lambdas.html" class="sidebar-link">Basic Lambdas</a></li><li><a href="/kotlin/null-safety.html" class="sidebar-link">Null Safety</a></li><li><a href="/kotlin/class-delegation.html" class="sidebar-link">Class Delegation</a></li><li><a href="/kotlin/class-inheritance.html" class="sidebar-link">Class Inheritance</a></li><li><a href="/kotlin/visibility-modifiers.html" class="sidebar-link">Visibility Modifiers</a></li><li><a href="/kotlin/generics.html" class="sidebar-link">Generics</a></li><li><a href="/kotlin/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/kotlin/singleton-objects.html" class="sidebar-link">Singleton objects</a></li><li><a href="/kotlin/coroutines.html" class="sidebar-link">coroutines</a></li><li><a href="/kotlin/annotations.html" class="sidebar-link">Annotations</a></li><li><a href="/kotlin/type-aliases.html" class="sidebar-link">Type aliases</a></li><li><a href="/kotlin/type-safe-builders.html" class="active sidebar-link">Type-Safe Builders</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/kotlin/type-safe-builders.html#type-safe-tree-structure-builder" class="sidebar-link">Type-safe tree structure builder</a></li></ul></li><li><a href="/kotlin/delegated-properties.html" class="sidebar-link">Delegated properties</a></li><li><a href="/kotlin/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/kotlin/extension-methods.html" class="sidebar-link">Extension Methods</a></li><li><a href="/kotlin/dsl-building.html" class="sidebar-link">DSL Building</a></li><li><a href="/kotlin/idioms.html" class="sidebar-link">Idioms</a></li><li><a href="/kotlin/recyclerview-in-kotlin.html" class="sidebar-link">RecyclerView in Kotlin</a></li><li><a href="/kotlin/logging-in-kotlin.html" class="sidebar-link">logging in kotlin</a></li><li><a href="/kotlin/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/kotlin/junit.html" class="sidebar-link">JUnit</a></li><li><a href="/kotlin/kotlin-android-extensions.html" class="sidebar-link">Kotlin Android Extensions</a></li><li><a href="/kotlin/kotlin-for-java-developers.html" class="sidebar-link">Kotlin for Java Developers</a></li><li><a href="/kotlin/java-8-stream-equivalents.html" class="sidebar-link">Java 8 Stream Equivalents</a></li><li><a href="/kotlin/kotlin-caveats.html" class="sidebar-link">Kotlin Caveats</a></li><li><a href="/kotlin/configuring-kotlin-build.html" class="sidebar-link">Configuring Kotlin build</a></li><li><a href="/kotlin/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="type-safe-builders"><a href="#type-safe-builders" class="header-anchor">#</a> Type-Safe Builders</h1> <h2 id="type-safe-tree-structure-builder"><a href="#type-safe-tree-structure-builder" class="header-anchor">#</a> Type-safe tree structure builder</h2> <p>Builders can be defined as a set of extension functions taking lambda expressions with receivers as arguments. In this example, a menu of a <code>JFrame</code> is being built:</p> <div class="language-kotlin extra-class"><pre class="language-kotlin"><code><span class="token keyword">import</span> javax<span class="token punctuation">.</span>swing<span class="token punctuation">.</span><span class="token operator">*</span>
+
+<span class="token keyword">fun</span> JFrame<span class="token punctuation">.</span><span class="token function">menuBar</span><span class="token punctuation">(</span><span class="token keyword">init</span><span class="token operator">:</span> JMenuBar<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">val</span> menuBar <span class="token operator">=</span> <span class="token function">JMenuBar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    menuBar<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">setJMenuBar</span><span class="token punctuation">(</span>menuBar<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fun</span> JMenuBar<span class="token punctuation">.</span><span class="token function">menu</span><span class="token punctuation">(</span>caption<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token keyword">init</span><span class="token operator">:</span> JMenu<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">val</span> menu <span class="token operator">=</span> <span class="token function">JMenu</span><span class="token punctuation">(</span>caption<span class="token punctuation">)</span>
+    menu<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">add</span><span class="token punctuation">(</span>menu<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fun</span> JMenu<span class="token punctuation">.</span><span class="token function">menuItem</span><span class="token punctuation">(</span>caption<span class="token operator">:</span> String<span class="token punctuation">,</span> <span class="token keyword">init</span><span class="token operator">:</span> JMenuItem<span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-&gt;</span> Unit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">val</span> menuItem <span class="token operator">=</span> <span class="token function">JMenuItem</span><span class="token punctuation">(</span>caption<span class="token punctuation">)</span>
+    menuItem<span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">add</span><span class="token punctuation">(</span>menuItem<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>These functions can then be used to build a tree structure of objects in an easy way:</p> <div class="language-kotlin extra-class"><pre class="language-kotlin"><code><span class="token keyword">class</span> MyFrame <span class="token operator">:</span> <span class="token function">JFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">init</span> <span class="token punctuation">{</span>
+        menuBar <span class="token punctuation">{</span>
+            <span class="token function">menu</span><span class="token punctuation">(</span><span class="token string">&quot;Menu1&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">menuItem</span><span class="token punctuation">(</span><span class="token string">&quot;Item1&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment">// Initialize MenuItem with some Action</span>
+                <span class="token punctuation">}</span>
+                <span class="token function">menuItem</span><span class="token punctuation">(</span><span class="token string">&quot;Item2&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token function">menu</span><span class="token punctuation">(</span><span class="token string">&quot;Menu2&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">menuItem</span><span class="token punctuation">(</span><span class="token string">&quot;Item3&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+                <span class="token function">menuItem</span><span class="token punctuation">(</span><span class="token string">&quot;Item4&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>A <strong>type-safe builder</strong> is a concept, rather than a language feature, so it is not strictly formalized.</p> <h3 id="a-typical-structure-of-a-type-safe-builder"><a href="#a-typical-structure-of-a-type-safe-builder" class="header-anchor">#</a> A typical structure of a type-safe builder</h3> <p>A single builder function usually consists of 3 steps:</p> <ol><li>Create an object.</li> <li>Execute lambda to initialize the object.</li> <li>Add the object to structure or return it.</li></ol> <h3 id="type-safe-builders-in-kotlin-libraries"><a href="#type-safe-builders-in-kotlin-libraries" class="header-anchor">#</a> Type-safe builders in Kotlin libraries</h3> <p>The concept of type-safe builders is widely used in some Kotlin libraries and frameworks, eg.:</p> <ul><li>Anko</li> <li>Wasabi</li> <li>Ktor</li> <li>Spec</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/kotlin/type-safe-builders.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/kotlin/type-aliases.html" class="prev">
+        Type aliases
+      </a></span> <span class="next"><a href="/kotlin/delegated-properties.html">
+        Delegated properties
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1861.c3c23461.js" defer></script>
+  </body>
+</html>

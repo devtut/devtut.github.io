@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux - File Compression with &#39;tar&#39; command</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Compress a folder, Extract a folder from an archive, List archive content, Compress and exclude one or multiple folder, Strip leading components, List contents of an archive">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Linux - File Compression with 'tar' command">
+    <meta property="og:description" content="Compress a folder, Extract a folder from an archive, List archive content, Compress and exclude one or multiple folder, Strip leading components, List contents of an archive">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/linux/file-compression-with-tar-command.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Linux - File Compression with 'tar' command">
+    <meta name="twitter:description" content="Compress a folder, Extract a folder from an archive, List archive content, Compress and exclude one or multiple folder, Strip leading components, List contents of an archive">
+    <meta name="twitter:url" content="/linux/file-compression-with-tar-command.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1889.844d522b.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/linux/" class="sidebar-link">Disclaimer</a></li><li><a href="/linux/getting-started-with-gnu-linux.html" class="sidebar-link">Getting started with GNU/Linux</a></li><li><a href="/linux/detecting-linux-distribution-name-and-version.html" class="sidebar-link">Detecting Linux distribution name and version</a></li><li><a href="/linux/getting-information-on-a-running-linux-kernel.html" class="sidebar-link">Getting information on a running Linux kernel</a></li><li><a href="/linux/shell.html" class="sidebar-link">Shell</a></li><li><a href="/linux/check-disk-space.html" class="sidebar-link">Check Disk Space</a></li><li><a href="/linux/getting-system-information.html" class="sidebar-link">Getting System Information</a></li><li><a href="/linux/ls-command.html" class="sidebar-link">ls command</a></li><li><a href="/linux/file-compression-with-tar-command.html" class="active sidebar-link">File Compression with 'tar' command</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/linux/file-compression-with-tar-command.html#compress-a-folder" class="sidebar-link">Compress a folder</a></li><li class="sidebar-sub-header"><a href="/linux/file-compression-with-tar-command.html#extract-a-folder-from-an-archive" class="sidebar-link">Extract a folder from an archive</a></li><li class="sidebar-sub-header"><a href="/linux/file-compression-with-tar-command.html#list-archive-content" class="sidebar-link">List archive content</a></li><li class="sidebar-sub-header"><a href="/linux/file-compression-with-tar-command.html#compress-and-exclude-one-or-multiple-folder" class="sidebar-link">Compress and exclude one or multiple folder</a></li><li class="sidebar-sub-header"><a href="/linux/file-compression-with-tar-command.html#strip-leading-components" class="sidebar-link">Strip leading components</a></li><li class="sidebar-sub-header"><a href="/linux/file-compression-with-tar-command.html#list-contents-of-an-archive" class="sidebar-link">List contents of an archive</a></li></ul></li><li><a href="/linux/services.html" class="sidebar-link">Services</a></li><li><a href="/linux/managing-services.html" class="sidebar-link">Managing Services</a></li><li><a href="/linux/modifying-users.html" class="sidebar-link">Modifying Users</a></li><li><a href="/linux/lamp-stack.html" class="sidebar-link">LAMP Stack</a></li><li><a href="/linux/tee-command.html" class="sidebar-link">tee command</a></li><li><a href="/linux/secure-shell-ssh.html" class="sidebar-link">Secure Shell (SSH)</a></li><li><a href="/linux/scp.html" class="sidebar-link">SCP</a></li><li><a href="/linux/gnupg-gpg.html" class="sidebar-link">GnuPG (GPG)</a></li><li><a href="/linux/network-configuration.html" class="sidebar-link">Network Configuration</a></li><li><a href="/linux/midnight-commander.html" class="sidebar-link">Midnight Commander</a></li><li><a href="/linux/change-root-chroot.html" class="sidebar-link">Change root (chroot)</a></li><li><a href="/linux/package-managers.html" class="sidebar-link">Package Managers</a></li><li><a href="/linux/compiling-the-linux-kernel.html" class="sidebar-link">Compiling the Linux kernel</a></li><li><a href="/linux/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="file-compression-with-tar-command"><a href="#file-compression-with-tar-command" class="header-anchor">#</a> File Compression with 'tar' command</h1> <h2 id="compress-a-folder"><a href="#compress-a-folder" class="header-anchor">#</a> Compress a folder</h2> <p>This creates a simple archive of a folder :</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -cf ./my-archive.tar ./my-folder/
+
+</code></pre></div><p>Verbose output shows which files and directories are added to the archive, use the -v option:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -cvf ./my-archive.tar ./my-folder/
+
+</code></pre></div><p>For archiving a folder compressed 'gzip', you have to use the -z option :</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -czf ./my-archive.tar.gz ./my-folder/
+
+</code></pre></div><p>You can instead compress the archive with 'bzip2', by using the -j option:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -cjf  ./my-archive.tar.bz2 ./my-folder/
+
+</code></pre></div><p>Or compress with 'xz', by using the -J option:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -cJf  ./my-archive.tar.xz ./my-folder/
+
+</code></pre></div><h2 id="extract-a-folder-from-an-archive"><a href="#extract-a-folder-from-an-archive" class="header-anchor">#</a> Extract a folder from an archive</h2> <p>There is an example for extract a folder from an archive in the current location :</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -xf archive-name.tar
+
+</code></pre></div><p>If you want to extract a folder from an archive to a specfic destination :</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -xf archive-name.tar -C ./directory/destination
+
+</code></pre></div><h2 id="list-archive-content"><a href="#list-archive-content" class="header-anchor">#</a> List archive content</h2> <p>There is an example of listing content :</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -tvf archive.tar
+
+</code></pre></div><p>The option <code>-t</code> is used for the listing. For listing the content of a tar.gz archive, you have to use the <code>-z</code> option anymore :</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -tzvf archive.tar.gz
+
+</code></pre></div><h2 id="compress-and-exclude-one-or-multiple-folder"><a href="#compress-and-exclude-one-or-multiple-folder" class="header-anchor">#</a> Compress and exclude one or multiple folder</h2> <p>If you want to extract a folder, but you want to exclude one or several folders during the extraction, you can use the <code>--exclude</code> option.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -cf archive.tar ./my-folder/ --exclude<span class="token operator">=</span><span class="token string">&quot;my-folder/sub1&quot;</span> --exclude<span class="token operator">=</span><span class="token string">&quot;my-folder/sub3&quot;</span>
+
+</code></pre></div><p>With this folder tree :</p> <div class="language-bash extra-class"><pre class="language-bash"><code>my-folder/
+   sub1/
+   sub2/
+   sub3/
+
+</code></pre></div><p>The result will be :</p> <div class="language-bash extra-class"><pre class="language-bash"><code>./archive.tar
+   my-folder/
+      sub2/
+
+</code></pre></div><h2 id="strip-leading-components"><a href="#strip-leading-components" class="header-anchor">#</a> Strip leading components</h2> <p>To strip any number of leading components, use the --strip-components option:</p> <div class="language- extra-class"><pre class="language-text"><code>
+--strip-components=NUMBER
+   strip NUMBER leading components from file names on extraction
+
+</code></pre></div><p>For example to strip the leading folder, use:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -xf --strip-components<span class="token operator">=</span><span class="token number">1</span> archive-name.tar
+
+</code></pre></div><h2 id="list-contents-of-an-archive"><a href="#list-contents-of-an-archive" class="header-anchor">#</a> List contents of an archive</h2> <p>List the contents of an archive file without extracting it:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">tar</span> -tf archive.tar.gz
+Folder-In-Archive/
+Folder-In-Archive/file1
+Folder-In-Archive/Another-Folder/
+Folder-In-Archive/Another-Folder/file2
+
+</code></pre></div><h4 id="parameters"><a href="#parameters" class="header-anchor">#</a> Parameters</h4> <table><thead><tr><th>Common Options</th> <th>-</th></tr></thead> <tbody><tr><td>-c --create</td> <td>Create a new archive.</td></tr> <tr><td>-x --extract</td> <td>Extract files from an archive.</td></tr> <tr><td>-t --list</td> <td>List the contents of an archive.</td></tr> <tr><td>-f --file=<strong>ARCHIVE</strong></td> <td>Use archive file or dir <strong>ARCHIVE</strong>.</td></tr> <tr><td>-v --verbose</td> <td>Verbosely list files processed.</td></tr> <tr><td><strong>Compression Options</strong></td> <td>-</td></tr> <tr><td>-a --auto-compress</td> <td>Use archive suffix to determine the compression program.</td></tr> <tr><td>-j --bzip2</td> <td>Filter the archive through bzip2.</td></tr> <tr><td>-J --xz --lzma</td> <td>Filter the archive through xz.</td></tr> <tr><td>-z --gzip</td> <td>Filter the archive through gzip.</td></tr></tbody></table></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/linux/file-compression-with-tar-command.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/linux/ls-command.html" class="prev">
+        ls command
+      </a></span> <span class="next"><a href="/linux/services.html">
+        Services
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1889.844d522b.js" defer></script>
+  </body>
+</html>

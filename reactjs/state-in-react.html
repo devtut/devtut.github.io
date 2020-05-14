@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ReactJS - State in React</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Basic State, Common Antipattern, setState(), State, Events And Managed Controls">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="ReactJS - State in React">
+    <meta property="og:description" content="Basic State, Common Antipattern, setState(), State, Events And Managed Controls">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/reactjs/state-in-react.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="ReactJS - State in React">
+    <meta name="twitter:description" content="Basic State, Common Antipattern, setState(), State, Events And Managed Controls">
+    <meta name="twitter:url" content="/reactjs/state-in-react.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3007.6dc359f2.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>ReactJS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/reactjs/" class="sidebar-link">Disclaimer</a></li><li><a href="/reactjs/getting-started-with-react.html" class="sidebar-link">Getting started with React</a></li><li><a href="/reactjs/components.html" class="sidebar-link">Components</a></li><li><a href="/reactjs/using-reactjs-with-typescript.html" class="sidebar-link">Using ReactJS with Typescript</a></li><li><a href="/reactjs/state-in-react.html" class="active sidebar-link">State in React</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/reactjs/state-in-react.html#basic-state" class="sidebar-link">Basic State</a></li><li class="sidebar-sub-header"><a href="/reactjs/state-in-react.html#common-antipattern" class="sidebar-link">Common Antipattern</a></li><li class="sidebar-sub-header"><a href="/reactjs/state-in-react.html#setstate" class="sidebar-link">setState()</a></li><li class="sidebar-sub-header"><a href="/reactjs/state-in-react.html#state-events-and-managed-controls" class="sidebar-link">State, Events And Managed Controls</a></li></ul></li><li><a href="/reactjs/props-in-react.html" class="sidebar-link">Props in React</a></li><li><a href="/reactjs/react-component-lifecycle.html" class="sidebar-link">React Component Lifecycle</a></li><li><a href="/reactjs/forms-and-user-input.html" class="sidebar-link">Forms and User Input</a></li><li><a href="/reactjs/react-boilerplate-react-babel-webpack.html" class="sidebar-link">React Boilerplate [React + Babel + Webpack]</a></li><li><a href="/reactjs/using-reactjs-with-jquery.html" class="sidebar-link">Using ReactJS with jQuery</a></li><li><a href="/reactjs/react-routing.html" class="sidebar-link">React Routing</a></li><li><a href="/reactjs/communicate-between-components.html" class="sidebar-link">Communicate Between Components</a></li><li><a href="/reactjs/how-to-setup-a-basic-webpack-react-and-babel-environment.html" class="sidebar-link">How to setup a basic webpack, react and babel environment</a></li><li><a href="/reactjs/react-createclass-vs-extends-react-component.html" class="sidebar-link">React.createClass vs extends React.Component</a></li><li><a href="/reactjs/react-ajax-call.html" class="sidebar-link">React AJAX call</a></li><li><a href="/reactjs/communication-between-components.html" class="sidebar-link">Communication Between Components</a></li><li><a href="/reactjs/stateless-functional-components.html" class="sidebar-link">Stateless Functional Components</a></li><li><a href="/reactjs/performance.html" class="sidebar-link">Performance</a></li><li><a href="/reactjs/introduction-to-server-side-rendering.html" class="sidebar-link">Introduction to Server-Side Rendering</a></li><li><a href="/reactjs/setting-up-react-environment.html" class="sidebar-link">Setting Up React Environment</a></li><li><a href="/reactjs/using-react-with-flow.html" class="sidebar-link">Using React with Flow</a></li><li><a href="/reactjs/jsx.html" class="sidebar-link">JSX</a></li><li><a href="/reactjs/react-forms.html" class="sidebar-link">React Forms</a></li><li><a href="/reactjs/user-interface-solutions.html" class="sidebar-link">User interface solutions</a></li><li><a href="/reactjs/using-reactjs-in-flux-way.html" class="sidebar-link">Using ReactJS in Flux way</a></li><li><a href="/reactjs/react-webpack-typescript-installation.html" class="sidebar-link">React, Webpack &amp; Typescript installation</a></li><li><a href="/reactjs/how-and-why-to-use-keys-in-react.html" class="sidebar-link">How and why to use keys in React</a></li><li><a href="/reactjs/keys-in-react.html" class="sidebar-link">Keys in react</a></li><li><a href="/reactjs/higher-order-components.html" class="sidebar-link">Higher Order Components</a></li><li><a href="/reactjs/react-with-redux.html" class="sidebar-link">React with Redux</a></li><li><a href="/reactjs/installation.html" class="sidebar-link">Installation</a></li><li><a href="/reactjs/react-tools.html" class="sidebar-link">React Tools</a></li><li><a href="/reactjs/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="state-in-react"><a href="#state-in-react" class="header-anchor">#</a> State in React</h1> <h2 id="basic-state"><a href="#basic-state" class="header-anchor">#</a> Basic State</h2> <p>State in React components is essential to manage and communicate data in your application. It is represented as a JavaScript object and has <strong>component level</strong> scope, it can be thought of as the private data of your component.</p> <p>In the example below we are defining some initial state in the <code>constructor</code> function of our component and make use of it in the <code>render</code> function.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">class</span> <span class="token class-name">ExampleComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// Set-up our initial state</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+      greeting<span class="token operator">:</span> <span class="token string">'Hiya Buddy!'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// We can access the greeting property through this.state</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>greeting<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="common-antipattern"><a href="#common-antipattern" class="header-anchor">#</a> Common Antipattern</h2> <p>You should not save <code>props</code> into <code>state</code>. It is considered an <a href="https://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html" target="_blank" rel="noopener noreferrer">anti-pattern<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. For example:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">MyComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+            url<span class="token operator">:</span> <span class="token string">''</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>onChange <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">onChange</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">onChange</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            url<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>url <span class="token operator">+</span> <span class="token string">'/days=?'</span> <span class="token operator">+</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">componentWillMount</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>url<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>
+            <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>input defaultValue<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">}</span> onChange<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>onChange<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+
+                <span class="token constant">URL</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>url<span class="token punctuation">}</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The prop <code>url</code> is saved on <code>state</code> and then modified. Instead, choose to save the changes to a state, and then build the full path using both <code>state</code> and <code>props</code>:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">MyComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+            days<span class="token operator">:</span> <span class="token string">''</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">this</span><span class="token punctuation">.</span>onChange <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">onChange</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">onChange</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            days<span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>
+            <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>input defaultValue<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">}</span> onChange<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>onChange<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+
+                <span class="token constant">URL</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>url <span class="token operator">+</span> <span class="token string">'/days?='</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>days<span class="token punctuation">}</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This is because in a React application we want to have a single source of truth - i.e. all data is the responsibility of one single component, and only one component. It is the responsibility of this component to store the data within its state, and distribute the data to other components via props.</p> <p>In the first example, both the MyComponent class and its parent are maintaining 'url' within their state. If we update state.url in MyComponent, these changes are not reflected in the parent. We have lost our single source of truth, and it becomes increasingly difficult to track the flow of data through our application.  Contrast this with the second example - url is only maintained in the state of the parent component, and utilised as a prop in MyComponent - we therefore maintain a single source of truth.</p> <h2 id="setstate"><a href="#setstate" class="header-anchor">#</a> setState()</h2> <p>The primary way that you make UI updates to your React applications is through a call to the <code>setState()</code> function. This function will perform a <a href="https://github.com/kolodny/immutability-helper#shallow-merge" target="_blank" rel="noopener noreferrer"><strong>shallow merge</strong><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> between the new state that you provide and the previous state, and will trigger a re-render of your component and all decedents.</p> <p><strong>Parameters</strong></p> <ol><li><code>updater</code>:  It can be an object with a number of key-value pairs that should be merged into the state or a function that returns such an object.</li> <li><code>callback (optional)</code>: a function which will be executed after <code>setState()</code> has been executed successfully. Due to the fact that calls to <code>setState()</code> are not guaranteed by React to be atomic, this can sometimes be useful if you want to perform some action after you are positive that <code>setState()</code> has been executed successfully.</li></ol> <p><strong>Usage:</strong></p> <p>The <code>setState</code> method accepts an <code>updater</code> argument that can either be an object with a number of key-value-pairs that should be merged into the state, or a function that returns such an object computed from <code>prevState</code> and <code>props</code>.</p> <h3 id="using-setstate-with-an-object-as-updater"><a href="#using-setstate-with-an-object-as-updater" class="header-anchor">#</a> Using <code>setState()</code> with an Object as <code>updater</code></h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//</span>
+<span class="token comment">// An example ES6 style component, updating the state on a simple button click.</span>
+<span class="token comment">// Also demonstrates where the state can be set directly and where setState should be used.</span>
+<span class="token comment">//</span>
+<span class="token keyword">class</span> <span class="token class-name">Greeting</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>click <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Set initial state (ONLY ALLOWED IN CONSTRUCTOR)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+            greeting<span class="token operator">:</span> <span class="token string">'Hello!'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">click</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+              greeting<span class="token operator">:</span> <span class="token string">'Hello World!'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span><span class="token punctuation">(</span>
+            <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>greeting<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>click<span class="token punctuation">}</span><span class="token operator">&gt;</span>Click me<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="using-setstate-with-a-function-as-updater"><a href="#using-setstate-with-a-function-as-updater" class="header-anchor">#</a> Using <code>setState()</code> with a Function  as <code>updater</code></h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//</span>
+<span class="token comment">// This is most often used when you want to check or make use </span>
+<span class="token comment">// of previous state before updating any values.</span>
+<span class="token comment">//</span>
+
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">previousState<span class="token punctuation">,</span> currentProps</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    counter<span class="token operator">:</span> previousState<span class="token punctuation">.</span>counter <span class="token operator">+</span> <span class="token number">1</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>This can be safer than using an object argument where multiple calls to <code>setState()</code> are used, as multiple calls may be batched together by React and executed at once, and is the preferred approach when using current props to set state.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> counter<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>counter <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> counter<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>counter <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> counter<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>counter <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>These calls may be batched together by React using <code>Object.assign()</code>, resulting in the counter being incremented by 1 rather than 3.</p> <p>The functional approach can also be used to move state setting logic outside of components.  This allows for isolation and re-use of state logic.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// Outside of component class, potentially in another file/module</span>
+
+<span class="token keyword">function</span> <span class="token function">incrementCounter</span><span class="token punctuation">(</span><span class="token parameter">previousState<span class="token punctuation">,</span> currentProps</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        counter<span class="token operator">:</span> previousState<span class="token punctuation">.</span>counter <span class="token operator">+</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Within component</span>
+
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span>incrementCounter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="calling-setstate-with-an-object-and-a-callback-function"><a href="#calling-setstate-with-an-object-and-a-callback-function" class="header-anchor">#</a> Calling <code>setState()</code> with an Object and a callback function</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//</span>
+<span class="token comment">// 'Hi There' will be logged to the console after setState completes</span>
+<span class="token comment">//</span>
+
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> name<span class="token operator">:</span> <span class="token string">'John Doe'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Hi there'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="state-events-and-managed-controls"><a href="#state-events-and-managed-controls" class="header-anchor">#</a> State, Events And Managed Controls</h2> <p>Here's an example of a React component with a &quot;managed&quot; input field.  Whenever the value of the input field changes, an event handler is called which updates the state of the component with the new value of the input field.  The call to <code>setState</code> in the event handler will trigger a call to <code>render</code> updating the component in the dom.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>render<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-dom'</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">ManagedControlDemo</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>message<span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">handleChange</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>message<span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>legend<span class="token operator">&gt;</span>Type something here<span class="token operator">&lt;</span><span class="token operator">/</span>legend<span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span>input 
+            onChange<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handleChange</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">}</span> 
+            value<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>message<span class="token punctuation">}</span> 
+            autoFocus <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>message<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+   <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span> 
+<span class="token punctuation">}</span>
+
+
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>ManagedControlDemo<span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'#app'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Its very important to note the runtime behavior.  Everytime a user changes the value in the input field</p> <ul><li><code>handleChange</code> will be called and so</li> <li><code>setState</code> will be called and so</li> <li><code>render</code> will be called</li></ul> <p>Pop quiz, after you type a character in the input field, which DOM elements change</p> <ol><li>all of these - the top level div, legend, input, h1</li> <li>only the input and h1</li> <li>nothing</li> <li>whats a DOM?</li></ol> <p>You can experiment with this more <a href="http://www.webpackbin.com/Vy_PgAeWz" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> to find the answer</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/reactjs/state-in-react.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/reactjs/using-reactjs-with-typescript.html" class="prev">
+        Using ReactJS with Typescript
+      </a></span> <span class="next"><a href="/reactjs/props-in-react.html">
+        Props in React
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3007.6dc359f2.js" defer></script>
+  </body>
+</html>

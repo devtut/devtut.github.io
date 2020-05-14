@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PostgreSQL - Aggregate Functions</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Simple statistics: min(), max(), avg(), string_agg(expression, delimiter), regr_slope(Y, X) : slope of the least-squares-fit linear equation determined by the (X, Y) pairs">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="PostgreSQL - Aggregate Functions">
+    <meta property="og:description" content="Simple statistics: min(), max(), avg(), string_agg(expression, delimiter), regr_slope(Y, X) : slope of the least-squares-fit linear equation determined by the (X, Y) pairs">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/postgresql/aggregate-functions.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="PostgreSQL - Aggregate Functions">
+    <meta name="twitter:description" content="Simple statistics: min(), max(), avg(), string_agg(expression, delimiter), regr_slope(Y, X) : slope of the least-squares-fit linear equation determined by the (X, Y) pairs">
+    <meta name="twitter:url" content="/postgresql/aggregate-functions.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2537.75bbb35d.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>PostgreSQL</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/postgresql/" class="sidebar-link">Disclaimer</a></li><li><a href="/postgresql/getting-started-with-postgresql.html" class="sidebar-link">Getting started with postgresql</a></li><li><a href="/postgresql/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/postgresql/dates-timestamps-and-intervals.html" class="sidebar-link">Dates, Timestamps, and Intervals</a></li><li><a href="/postgresql/table-creation.html" class="sidebar-link">Table Creation</a></li><li><a href="/postgresql/select.html" class="sidebar-link">SELECT</a></li><li><a href="/postgresql/find-string-length-character-length.html" class="sidebar-link">Find String Length / Character Length</a></li><li><a href="/postgresql/coalesce.html" class="sidebar-link">COALESCE</a></li><li><a href="/postgresql/insert.html" class="sidebar-link">INSERT</a></li><li><a href="/postgresql/update.html" class="sidebar-link">UPDATE</a></li><li><a href="/postgresql/json-support.html" class="sidebar-link">JSON Support</a></li><li><a href="/postgresql/aggregate-functions.html" class="active sidebar-link">Aggregate Functions</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/postgresql/aggregate-functions.html#simple-statistics-min-max-avg" class="sidebar-link">Simple statistics: min(), max(), avg()</a></li><li class="sidebar-sub-header"><a href="/postgresql/aggregate-functions.html#string-agg-expression-delimiter" class="sidebar-link">string_agg(expression, delimiter)</a></li><li class="sidebar-sub-header"><a href="/postgresql/aggregate-functions.html#regr-slope-y-x-slope-of-the-least-squares-fit-linear-equation-determined-by-the-x-y-pairs" class="sidebar-link">regr_slope(Y, X) : slope of the least-squares-fit linear equation determined by the (X, Y) pairs</a></li></ul></li><li><a href="/postgresql/common-table-expressions-with.html" class="sidebar-link">Common Table Expressions (WITH)</a></li><li><a href="/postgresql/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/postgresql/recursive-queries.html" class="sidebar-link">Recursive queries</a></li><li><a href="/postgresql/programming-with-pl-pgsql.html" class="sidebar-link">Programming with PL/pgSQL</a></li><li><a href="/postgresql/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/postgresql/export-postgresql-database-table-header-and-data-to-csv-file.html" class="sidebar-link">Export PostgreSQL database table header and data to CSV file</a></li><li><a href="/postgresql/triggers-and-trigger-functions.html" class="sidebar-link">Triggers and Trigger Functions</a></li><li><a href="/postgresql/event-triggers.html" class="sidebar-link">Event Triggers</a></li><li><a href="/postgresql/role-management.html" class="sidebar-link">Role Management</a></li><li><a href="/postgresql/postgres-cryptographic-functions.html" class="sidebar-link">Postgres cryptographic functions</a></li><li><a href="/postgresql/comments-in-postgresql.html" class="sidebar-link">Comments in postgresql</a></li><li><a href="/postgresql/backup-and-restore.html" class="sidebar-link">Backup and Restore</a></li><li><a href="/postgresql/backup-script-for-a-production-db.html" class="sidebar-link">Backup script for a production DB</a></li><li><a href="/postgresql/accessing-data-programmatically.html" class="sidebar-link">Accessing Data Programmatically</a></li><li><a href="/postgresql/connect-to-postgresql-from-java.html" class="sidebar-link">Connect to PostgreSQL from Java</a></li><li><a href="/postgresql/postgresql-high-availability.html" class="sidebar-link">PostgreSQL High Availability</a></li><li><a href="/postgresql/extension-dblink-and-postgres-fdw.html" class="sidebar-link">EXTENSION dblink and postgres_fdw</a></li><li><a href="/postgresql/postgres-tip-and-tricks.html" class="sidebar-link">Postgres Tip and Tricks</a></li><li><a href="/postgresql/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="aggregate-functions"><a href="#aggregate-functions" class="header-anchor">#</a> Aggregate Functions</h1> <h2 id="simple-statistics-min-max-avg"><a href="#simple-statistics-min-max-avg" class="header-anchor">#</a> Simple statistics: min(), max(), avg()</h2> <p>In order to determine some simple statistics of a value in a column of a table, you can use an aggregate function.</p> <p>If your <code>individuals</code> table is:</p> <table><thead><tr><th>Name</th> <th>Age</th></tr></thead> <tbody><tr><td>Allie</td> <td>17</td></tr> <tr><td>Amanda</td> <td>14</td></tr> <tr><td>Alana</td> <td>20</td></tr></tbody></table> <p>You could write this statement to get the minimum, maximum and average value:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> <span class="token function">min</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">max</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">avg</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span>
+<span class="token keyword">FROM</span> individuals<span class="token punctuation">;</span>
+
+</code></pre></div><p>Result:</p> <table><thead><tr><th>min</th> <th>max</th> <th>avg</th></tr></thead> <tbody><tr><td>14</td> <td>20</td> <td>17</td></tr></tbody></table> <h2 id="string-agg-expression-delimiter"><a href="#string-agg-expression-delimiter" class="header-anchor">#</a> string_agg(expression, delimiter)</h2> <p>You can concatenate strings separated by delimiter using the <code>string_agg()</code> function.</p> <p>If your <code>individuals</code> table is:</p> <table><thead><tr><th>Name</th> <th>Age</th> <th>Country</th></tr></thead> <tbody><tr><td>Allie</td> <td>15</td> <td>USA</td></tr> <tr><td>Amanda</td> <td>14</td> <td>USA</td></tr> <tr><td>Alana</td> <td>20</td> <td>Russia</td></tr></tbody></table> <p>You could write <code>SELECT ... GROUP BY</code> statement to get names from each country:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> string_agg<span class="token punctuation">(</span>name<span class="token punctuation">,</span> <span class="token string">', '</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> names<span class="token punctuation">,</span> country 
+<span class="token keyword">FROM</span> individuals 
+<span class="token keyword">GROUP</span> <span class="token keyword">BY</span> country<span class="token punctuation">;</span>
+
+</code></pre></div><p>Note that you need to use a <code>GROUP BY</code> clause because <code>string_agg()</code> is an aggregate function.</p> <p><strong>Result:</strong></p> <table><thead><tr><th>names</th> <th>country</th></tr></thead> <tbody><tr><td>Allie, Amanda</td> <td>USA</td></tr> <tr><td>Alana</td> <td>Russia</td></tr></tbody></table> <p><a href="https://www.postgresql.org/docs/devel/static/functions-aggregate.html" target="_blank" rel="noopener noreferrer">More PostgreSQL aggregate function described here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="regr-slope-y-x-slope-of-the-least-squares-fit-linear-equation-determined-by-the-x-y-pairs"><a href="#regr-slope-y-x-slope-of-the-least-squares-fit-linear-equation-determined-by-the-x-y-pairs" class="header-anchor">#</a> regr_slope(Y, X) : slope of the least-squares-fit linear equation determined by the (X, Y) pairs</h2> <p>To illustrate how to use regr_slope(Y,X), I applied it to a real world problem. In Java, if you don't clean up memory properly, the garbage can get stuck and fill up the memory. You dump statistics every hour about memory utilization of different classes and load it into a postgres database for analysis.</p> <p>All memory leak candidates will have a trend of consuming more memory as more time passes. If you plot this trend, you would imagine a line going up and to the left:</p> <div class="language- extra-class"><pre class="language-text"><code>
+   ^
+    |
+s   |  Legend:
+i   |  *  - data point
+z   |  -- - trend
+e   |
+(   |
+b   |                 *
+y   |                     --
+t   |                  --
+e   |             * --    *
+s   |           --
+)   |       *--      *
+    |     --    *
+    |  -- *
+   ---------------------------------------&gt;
+                      time
+
+</code></pre></div><p>Suppose you have a table containing heap dump histogram data (a mapping of classes to how much memory they consume):</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> heap_histogram <span class="token punctuation">(</span>
+    <span class="token comment">-- when the heap histogram was taken</span>
+    histwhen <span class="token keyword">timestamp</span> without <span class="token keyword">time</span> zone <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span> 
+    <span class="token comment">-- the object type bytes are referring to</span>
+    <span class="token comment">-- ex: java.util.String</span>
+    class <span class="token keyword">character</span> <span class="token keyword">varying</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    <span class="token comment">-- the size in bytes used by the above class</span>
+    bytes <span class="token keyword">integer</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>To compute the slope for each class, we group by over the class. The HAVING clause &gt; 0 ensures that we get only candidates with a positive slop (a line going up and to the left). We sort by the slope descending so that we get the classes with the largest rate of memory increase at the top.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">-- epoch returns seconds</span>
+<span class="token keyword">SELECT</span> class<span class="token punctuation">,</span> REGR_SLOPE<span class="token punctuation">(</span>bytes<span class="token punctuation">,</span>extract<span class="token punctuation">(</span>epoch <span class="token keyword">from</span> histwhen<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> slope
+    <span class="token keyword">FROM</span> <span class="token keyword">public</span><span class="token punctuation">.</span>heap_histogram
+    <span class="token keyword">GROUP</span> <span class="token keyword">BY</span> class
+    <span class="token keyword">HAVING</span> REGR_SLOPE<span class="token punctuation">(</span>bytes<span class="token punctuation">,</span>extract<span class="token punctuation">(</span>epoch <span class="token keyword">from</span> histwhen<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span>
+    <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> slope <span class="token keyword">DESC</span> <span class="token punctuation">;</span>
+
+</code></pre></div><p>Output:</p> <div class="language- extra-class"><pre class="language-text"><code>
+        class             |        slope         
+---------------------------+----------------------
+ java.util.ArrayList       |     71.7993806279174
+ java.util.HashMap         |     49.0324576155785
+ java.lang.String          |     31.7770770326123
+ joe.schmoe.BusinessObject |     23.2036817108056
+ java.lang.ThreadLocal     |     20.9013528767851
+
+</code></pre></div><p>From the output we see that java.util.ArrayList's memory consumption is increasing the fastest at 71.799 bytes per second and is potentially part of the memory leak.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/postgresql/aggregate-functions.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/postgresql/json-support.html" class="prev">
+        JSON Support
+      </a></span> <span class="next"><a href="/postgresql/common-table-expressions-with.html">
+        Common Table Expressions (WITH)
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2537.75bbb35d.js" defer></script>
+  </body>
+</html>

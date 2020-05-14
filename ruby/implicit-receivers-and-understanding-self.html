@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ruby - Implicit Receivers and Understanding Self</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="There is always an implicit receiver, Keywords change the implicit receiver, When to use self?">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Ruby - Implicit Receivers and Understanding Self">
+    <meta property="og:description" content="There is always an implicit receiver, Keywords change the implicit receiver, When to use self?">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/ruby/implicit-receivers-and-understanding-self.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Ruby - Implicit Receivers and Understanding Self">
+    <meta name="twitter:description" content="There is always an implicit receiver, Keywords change the implicit receiver, When to use self?">
+    <meta name="twitter:url" content="/ruby/implicit-receivers-and-understanding-self.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3078.2b70d6ff.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Ruby</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ruby/" class="sidebar-link">Disclaimer</a></li><li><a href="/ruby/installation.html" class="sidebar-link">Installation</a></li><li><a href="/ruby/getting-started-with-ruby-language.html" class="sidebar-link">Getting started with Ruby Language</a></li><li><a href="/ruby/casting-type-conversion.html" class="sidebar-link">Casting (type conversion)</a></li><li><a href="/ruby/operators.html" class="sidebar-link">Operators</a></li><li><a href="/ruby/variable-scope-and-visibility.html" class="sidebar-link">Variable Scope and Visibility</a></li><li><a href="/ruby/environment-variables.html" class="sidebar-link">Environment Variables</a></li><li><a href="/ruby/constants.html" class="sidebar-link">Constants</a></li><li><a href="/ruby/special-constants-in-ruby.html" class="sidebar-link">Special Constants in Ruby</a></li><li><a href="/ruby/comments.html" class="sidebar-link">Comments</a></li><li><a href="/ruby/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/ruby/multidimensional-arrays.html" class="sidebar-link">Multidimensional Arrays</a></li><li><a href="/ruby/strings.html" class="sidebar-link">Strings</a></li><li><a href="/ruby/datetime.html" class="sidebar-link">DateTime</a></li><li><a href="/ruby/time.html" class="sidebar-link">Time</a></li><li><a href="/ruby/numbers.html" class="sidebar-link">Numbers</a></li><li><a href="/ruby/symbols.html" class="sidebar-link">Symbols</a></li><li><a href="/ruby/comparable.html" class="sidebar-link">Comparable</a></li><li><a href="/ruby/control-flow.html" class="sidebar-link">Control Flow</a></li><li><a href="/ruby/methods.html" class="sidebar-link">Methods</a></li><li><a href="/ruby/hashes.html" class="sidebar-link">Hashes</a></li><li><a href="/ruby/blocks-and-procs-and-lambdas.html" class="sidebar-link">Blocks and Procs and Lambdas</a></li><li><a href="/ruby/iteration.html" class="sidebar-link">Iteration</a></li><li><a href="/ruby/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/ruby/enumerators.html" class="sidebar-link">Enumerators</a></li><li><a href="/ruby/enumerable-in-ruby.html" class="sidebar-link">Enumerable in Ruby</a></li><li><a href="/ruby/classes.html" class="sidebar-link">Classes</a></li><li><a href="/ruby/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/ruby/method-missing.html" class="sidebar-link">method_missing</a></li><li><a href="/ruby/regular-expressions-and-regex-based-operations.html" class="sidebar-link">Regular Expressions and Regex Based Operations</a></li><li><a href="/ruby/file-and-i-o-operations.html" class="sidebar-link">File and I/O Operations</a></li><li><a href="/ruby/ruby-access-modifiers.html" class="sidebar-link">Ruby Access Modifiers</a></li><li><a href="/ruby/design-patterns-and-idioms-in-ruby.html" class="sidebar-link">Design Patterns and Idioms in Ruby</a></li><li><a href="/ruby/loading-source-files.html" class="sidebar-link">Loading Source Files</a></li><li><a href="/ruby/thread.html" class="sidebar-link">Thread</a></li><li><a href="/ruby/range.html" class="sidebar-link">Range</a></li><li><a href="/ruby/modules.html" class="sidebar-link">Modules</a></li><li><a href="/ruby/introspection-in-ruby.html" class="sidebar-link">Introspection in Ruby</a></li><li><a href="/ruby/monkey-patching-in-ruby.html" class="sidebar-link">Monkey Patching in Ruby</a></li><li><a href="/ruby/recursion-in-ruby.html" class="sidebar-link">Recursion in Ruby</a></li><li><a href="/ruby/splat-operator.html" class="sidebar-link">Splat operator (*)</a></li><li><a href="/ruby/json-with-ruby.html" class="sidebar-link">JSON with Ruby</a></li><li><a href="/ruby/pure-rspec-json-api-testing.html" class="sidebar-link">Pure RSpec JSON API testing</a></li><li><a href="/ruby/gem-creation-management.html" class="sidebar-link">Gem Creation/Management</a></li><li><a href="/ruby/rbenv.html" class="sidebar-link">rbenv</a></li><li><a href="/ruby/gem-usage.html" class="sidebar-link">Gem Usage</a></li><li><a href="/ruby/singleton-class.html" class="sidebar-link">Singleton Class</a></li><li><a href="/ruby/queue.html" class="sidebar-link">Queue</a></li><li><a href="/ruby/destructuring.html" class="sidebar-link">Destructuring</a></li><li><a href="/ruby/struct.html" class="sidebar-link">Struct</a></li><li><a href="/ruby/metaprogramming.html" class="sidebar-link">Metaprogramming</a></li><li><a href="/ruby/dynamic-evaluation.html" class="sidebar-link">Dynamic Evaluation</a></li><li><a href="/ruby/instance-eval.html" class="sidebar-link">instance_eval</a></li><li><a href="/ruby/message-passing.html" class="sidebar-link">Message Passing</a></li><li><a href="/ruby/keyword-arguments.html" class="sidebar-link">Keyword Arguments</a></li><li><a href="/ruby/truthiness.html" class="sidebar-link">Truthiness</a></li><li><a href="/ruby/implicit-receivers-and-understanding-self.html" class="active sidebar-link">Implicit Receivers and Understanding Self</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/ruby/implicit-receivers-and-understanding-self.html#there-is-always-an-implicit-receiver" class="sidebar-link">There is always an implicit receiver</a></li><li class="sidebar-sub-header"><a href="/ruby/implicit-receivers-and-understanding-self.html#keywords-change-the-implicit-receiver" class="sidebar-link">Keywords change the implicit receiver</a></li><li class="sidebar-sub-header"><a href="/ruby/implicit-receivers-and-understanding-self.html#when-to-use-self" class="sidebar-link">When to use self?</a></li></ul></li><li><a href="/ruby/introspection.html" class="sidebar-link">Introspection</a></li><li><a href="/ruby/refinements.html" class="sidebar-link">Refinements</a></li><li><a href="/ruby/catching-exceptions-with-begin-rescue.html" class="sidebar-link">Catching Exceptions with Begin / Rescue</a></li><li><a href="/ruby/command-line-apps.html" class="sidebar-link">Command Line Apps</a></li><li><a href="/ruby/irb.html" class="sidebar-link">IRB</a></li><li><a href="/ruby/erb.html" class="sidebar-link">ERB</a></li><li><a href="/ruby/generate-a-random-number.html" class="sidebar-link">Generate a random number</a></li><li><a href="/ruby/getting-started-with-hanami.html" class="sidebar-link">Getting started with Hanami</a></li><li><a href="/ruby/optionparser.html" class="sidebar-link">OptionParser</a></li><li><a href="/ruby/operating-system-or-shell-commands.html" class="sidebar-link">Operating System or Shell commands</a></li><li><a href="/ruby/c-extensions.html" class="sidebar-link">C Extensions</a></li><li><a href="/ruby/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/ruby/ruby-version-manager.html" class="sidebar-link">Ruby Version Manager</a></li><li><a href="/ruby/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="implicit-receivers-and-understanding-self"><a href="#implicit-receivers-and-understanding-self" class="header-anchor">#</a> Implicit Receivers and Understanding Self</h1> <h2 id="there-is-always-an-implicit-receiver"><a href="#there-is-always-an-implicit-receiver" class="header-anchor">#</a> There is always an implicit receiver</h2> <p>In Ruby, there is always an implicit receiver for all method calls. The language keeps a reference to the current implicit receiver stored in the variable <code>self</code>. Certain language keywords like <code>class</code> and <code>module</code> will change what <code>self</code> points to. Understanding these behaviors is very helpful in mastering the language.</p> <p>For example, when you first open <code>irb</code></p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">001</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">&gt;</span> <span class="token keyword">self</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> main
+
+</code></pre></div><p>In this case the <code>main</code> object is the implicit receiver (see <a href="http://stackoverflow.com/a/917842/417872" target="_blank" rel="noopener noreferrer">http://stackoverflow.com/a/917842/417872<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> for more about <code>main</code>).</p> <p>You can define methods on the implicit receiver using the <code>def</code> keyword. For example:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">001</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">&gt;</span> <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">foo</span></span><span class="token punctuation">(</span>arg<span class="token punctuation">)</span>
+irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">002</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token operator">&gt;</span> arg<span class="token punctuation">.</span>to_s
+irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">003</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token operator">&gt;</span> <span class="token keyword">end</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token symbol">:foo</span>
+irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">004</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">&gt;</span> foo <span class="token number">1</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&quot;1&quot;</span>
+
+</code></pre></div><p>This has defined the method foo on the instance of main object running in your repl.</p> <p>Note that local variables are looked up before method names, so that if you define a local variable with the same name, its reference will supersede the method reference. Continuing from the previous example:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">005</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">&gt;</span> <span class="token keyword">defined</span><span class="token operator">?</span> foo
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&quot;method&quot;</span>
+irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">006</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">&gt;</span> foo <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">1</span>
+irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">007</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">&gt;</span> <span class="token keyword">defined</span><span class="token operator">?</span> foo
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token string">&quot;local-variable&quot;</span>
+irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">008</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">&gt;</span> foo
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token number">1</span>
+irb<span class="token punctuation">(</span>main<span class="token punctuation">)</span><span class="token punctuation">:</span><span class="token number">009</span><span class="token punctuation">:</span><span class="token number">0</span><span class="token operator">&gt;</span> method <span class="token symbol">:foo</span>
+<span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token comment">#&lt;Method: Object#foo&gt;</span>
+
+</code></pre></div><p>The <code>method</code> method can still find the <code>foo</code> method because it doesn't check for local variables, while the normal reference <code>foo</code> does.</p> <h2 id="keywords-change-the-implicit-receiver"><a href="#keywords-change-the-implicit-receiver" class="header-anchor">#</a> Keywords change the implicit receiver</h2> <p>When you define a class or module, the implicit receiver becomes a reference to the class itself. For example:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>puts <span class="token string">&quot;I am <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token keyword">self</span><span class="token delimiter tag">}</span></span>&quot;</span>
+<span class="token keyword">class</span> <span class="token class-name">Example</span>
+  puts <span class="token string">&quot;I am <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token keyword">self</span><span class="token delimiter tag">}</span></span>&quot;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Executing the above code will print:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token string">&quot;I am main&quot;</span>
+<span class="token string">&quot;I am Example&quot;</span>
+
+</code></pre></div><h2 id="when-to-use-self"><a href="#when-to-use-self" class="header-anchor">#</a> When to use self?</h2> <p>Most Ruby code utilizes the implicit receiver, so programmers who are new to Ruby are often confused about when to use <code>self</code>. The practical answer is that <code>self</code> is used in two major ways:</p> <p><strong>1. To change the receiver.</strong></p> <p>Ordinarily the behavior of <code>def</code> inside a class or module is to create instance methods. Self can be used to define methods on the class instead.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Foo</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">bar</span></span>
+    <span class="token number">1</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">bar</span></span>
+    <span class="token number">2</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Foo</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">.</span>bar <span class="token comment">#=&gt; 1</span>
+<span class="token constant">Foo</span><span class="token punctuation">.</span>bar <span class="token comment">#=&gt; 2</span>
+
+</code></pre></div><p><strong>2. To disambiguate the receiver</strong></p> <p>When local variables may have the same name as a method an explicit receiver may be required to disambiguate.</p> <p>Examples:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">foo</span></span>
+    <span class="token number">1</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">bar</span></span>
+    foo <span class="token operator">+</span> <span class="token number">1</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">baz</span></span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>foo <span class="token operator">+</span> foo <span class="token comment"># self.foo is the method, foo is the local variable</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">qux</span></span>
+    bar <span class="token operator">=</span> <span class="token number">2</span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>bar <span class="token operator">+</span> bar <span class="token comment"># self.bar is the method, bar is the local variable</span>
+  <span class="token keyword">end</span> 
+<span class="token keyword">end</span>
+
+<span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">.</span>foo    <span class="token comment">#=&gt; 1</span>
+<span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">.</span>bar    <span class="token comment">#=&gt; 2</span>
+<span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">.</span>baz<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">#=&gt; 3</span>
+<span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span><span class="token punctuation">.</span>qux    <span class="token comment">#=&gt; 4</span>
+
+</code></pre></div><p>The other common case requiring disambiguation involves methods that end in the equals sign. For instance:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Example</span>
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">foo</span></span><span class="token operator">=</span><span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+    <span class="token variable">@foo</span> <span class="token operator">=</span> input
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">get_foo</span></span>
+    <span class="token variable">@foo</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">bar</span></span><span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+    foo <span class="token operator">=</span> input <span class="token comment"># will create a local variable</span>
+  <span class="token keyword">end</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">baz</span></span><span class="token punctuation">(</span>input<span class="token punctuation">)</span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>foo <span class="token operator">=</span> input <span class="token comment"># will call the method</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+e <span class="token operator">=</span> <span class="token constant">Example</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+e<span class="token punctuation">.</span>get_foo <span class="token comment">#=&gt; nil</span>
+e<span class="token punctuation">.</span>foo <span class="token operator">=</span> <span class="token number">1</span>
+e<span class="token punctuation">.</span>get_foo <span class="token comment">#=&gt; 1</span>
+e<span class="token punctuation">.</span>bar<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+e<span class="token punctuation">.</span>get_foo <span class="token comment">#=&gt; 1</span>
+e<span class="token punctuation">.</span>baz<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+e<span class="token punctuation">.</span>get_foo <span class="token comment">#=&gt; 2</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/ruby/implicit-receivers-and-understanding-self.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/ruby/truthiness.html" class="prev">
+        Truthiness
+      </a></span> <span class="next"><a href="/ruby/introspection.html">
+        Introspection
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3078.2b70d6ff.js" defer></script>
+  </body>
+</html>

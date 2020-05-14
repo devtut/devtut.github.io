@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring - Creating and using beans</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Autowiring all beans of a specific type, Basic annotation autowiring, Declaring Bean, Using FactoryBean for dynamic bean instantiation, Inject prototype-scoped beans into singletons, Autowiring specific bean instances with @Qualifier, Autowiring specific instances of classes using generic type parameters">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Spring - Creating and using beans">
+    <meta property="og:description" content="Autowiring all beans of a specific type, Basic annotation autowiring, Declaring Bean, Using FactoryBean for dynamic bean instantiation, Inject prototype-scoped beans into singletons, Autowiring specific bean instances with @Qualifier, Autowiring specific instances of classes using generic type parameters">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/spring/creating-and-using-beans.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Spring - Creating and using beans">
+    <meta name="twitter:description" content="Autowiring all beans of a specific type, Basic annotation autowiring, Declaring Bean, Using FactoryBean for dynamic bean instantiation, Inject prototype-scoped beans into singletons, Autowiring specific bean instances with @Qualifier, Autowiring specific instances of classes using generic type parameters">
+    <meta name="twitter:url" content="/spring/creating-and-using-beans.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3202.0659a9f7.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Spring Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/spring/" class="sidebar-link">Disclaimer</a></li><li><a href="/spring/getting-started-with-spring.html" class="sidebar-link">Getting started with spring</a></li><li><a href="/spring/spring-core.html" class="sidebar-link">Spring Core</a></li><li><a href="/spring/spring-expression-language-spel.html" class="sidebar-link">Spring Expression Language (SpEL)</a></li><li><a href="/spring/obtaining-a-sqlrowset-from-simplejdbccall.html" class="sidebar-link">Obtaining a SqlRowSet from SimpleJdbcCall</a></li><li><a href="/spring/creating-and-using-beans.html" class="active sidebar-link">Creating and using beans</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/spring/creating-and-using-beans.html#autowiring-all-beans-of-a-specific-type" class="sidebar-link">Autowiring all beans of a specific type</a></li><li class="sidebar-sub-header"><a href="/spring/creating-and-using-beans.html#basic-annotation-autowiring" class="sidebar-link">Basic annotation autowiring</a></li><li class="sidebar-sub-header"><a href="/spring/creating-and-using-beans.html#declaring-bean" class="sidebar-link">Declaring Bean</a></li><li class="sidebar-sub-header"><a href="/spring/creating-and-using-beans.html#using-factorybean-for-dynamic-bean-instantiation" class="sidebar-link">Using FactoryBean for dynamic bean instantiation</a></li><li class="sidebar-sub-header"><a href="/spring/creating-and-using-beans.html#inject-prototype-scoped-beans-into-singletons" class="sidebar-link">Inject prototype-scoped beans into singletons</a></li><li class="sidebar-sub-header"><a href="/spring/creating-and-using-beans.html#autowiring-specific-bean-instances-with-qualifier" class="sidebar-link">Autowiring specific bean instances with @Qualifier</a></li><li class="sidebar-sub-header"><a href="/spring/creating-and-using-beans.html#autowiring-specific-instances-of-classes-using-generic-type-parameters" class="sidebar-link">Autowiring specific instances of classes using generic type parameters</a></li></ul></li><li><a href="/spring/bean-scopes.html" class="sidebar-link">Bean scopes</a></li><li><a href="/spring/conditional-bean-registration-in-spring.html" class="sidebar-link">Conditional bean registration in Spring</a></li><li><a href="/spring/spring-jsr-303-bean-validation.html" class="sidebar-link">Spring JSR 303 Bean Validation</a></li><li><a href="/spring/applicationcontext-configuration.html" class="sidebar-link">ApplicationContext Configuration</a></li><li><a href="/spring/resttemplate.html" class="sidebar-link">RestTemplate</a></li><li><a href="/spring/task-execution-and-scheduling.html" class="sidebar-link">Task Execution and Scheduling</a></li><li><a href="/spring/spring-lazy-initialization.html" class="sidebar-link">Spring Lazy Initialization</a></li><li><a href="/spring/property-source.html" class="sidebar-link">Property Source</a></li><li><a href="/spring/dependency-injection-di-and-inversion-of-control-ioc.html" class="sidebar-link">Dependency Injection (DI) and Inversion of Control (IoC)</a></li><li><a href="/spring/jdbctemplate.html" class="sidebar-link">JdbcTemplate</a></li><li><a href="/spring/soap-ws-consumption.html" class="sidebar-link">SOAP WS Consumption</a></li><li><a href="/spring/spring-profile.html" class="sidebar-link">Spring profile</a></li><li><a href="/spring/understanding-the-dispatcher-servlet-xml.html" class="sidebar-link">Understanding the dispatcher-servlet.xml</a></li><li><a href="/spring/getting-started-with-spring-mvc.html" class="sidebar-link">Getting started with spring-mvc</a></li><li><a href="/spring/spring-mvc-with-annotations.html" class="sidebar-link">Spring-MVC with annotations</a></li><li><a href="/spring/spring-mvc-validation.html" class="sidebar-link">Spring MVC Validation</a></li><li><a href="/spring/file-upload.html" class="sidebar-link">File Upload</a></li><li><a href="/spring/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/spring/global-exception-handling.html" class="sidebar-link">Global Exception Handling</a></li><li><a href="/spring/getting-started-with-spring-boot.html" class="sidebar-link">Getting started with spring-boot</a></li><li><a href="/spring/installing-the-spring-boot-cli.html" class="sidebar-link">Installing the Spring Boot CLI</a></li><li><a href="/spring/controllers.html" class="sidebar-link">Controllers</a></li><li><a href="/spring/package-scanning.html" class="sidebar-link">Package scanning</a></li><li><a href="/spring/rest-services.html" class="sidebar-link">REST Services</a></li><li><a href="/spring/create-and-use-of-multiple-application-properties-files.html" class="sidebar-link">Create and Use of multiple application.properties files</a></li><li><a href="/spring/threadpooltaskexecutor-configuration-and-usage.html" class="sidebar-link">ThreadPoolTaskExecutor: configuration and usage</a></li><li><a href="/spring/fully-responsive-spring-boot-web-application-with-jhipster.html" class="sidebar-link">Fully-Responsive Spring Boot Web Application with JHipster</a></li><li><a href="/spring/connecting-a-spring-boot-application-to-mysql.html" class="sidebar-link">Connecting a spring-boot application to MySQL</a></li><li><a href="/spring/caching-with-redis-using-spring-boot-for-mongodb.html" class="sidebar-link">Caching with Redis Using Spring Boot for MongoDB</a></li><li><a href="/spring/deploying-sample-application-using-spring-boot-on-amazon-elastic-beanstalk.html" class="sidebar-link">Deploying Sample application using Spring-boot on Amazon Elastic Beanstalk</a></li><li><a href="/spring/testing-in-spring-boot.html" class="sidebar-link">Testing in Spring Boot</a></li><li><a href="/spring/spring-boot-hibernate-web-ui-thymeleaf.html" class="sidebar-link">Spring boot + Hibernate + Web UI (Thymeleaf)</a></li><li><a href="/spring/spring-boot-hibernate-rest-integration.html" class="sidebar-link">Spring Boot- Hibernate-REST Integration</a></li><li><a href="/spring/spring-boot-microservice-with-jpa.html" class="sidebar-link">Spring-Boot Microservice with JPA</a></li><li><a href="/spring/spring-boot-jpa-rest.html" class="sidebar-link">Spring Boot + JPA + REST</a></li><li><a href="/spring/spring-boot-jdbc.html" class="sidebar-link">Spring-Boot + JDBC</a></li><li><a href="/spring/spring-boot-jpa-mongodb.html" class="sidebar-link">Spring boot + JPA + mongoDB</a></li><li><a href="/spring/spring-boot-spring-data-elasticsearch.html" class="sidebar-link">Spring Boot + Spring Data Elasticsearch</a></li><li><a href="/spring/spring-boot-spring-data-jpa.html" class="sidebar-link">Spring boot + Spring Data JPA</a></li><li><a href="/spring/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="creating-and-using-beans"><a href="#creating-and-using-beans" class="header-anchor">#</a> Creating and using beans</h1> <h2 id="autowiring-all-beans-of-a-specific-type"><a href="#autowiring-all-beans-of-a-specific-type" class="header-anchor">#</a> Autowiring all beans of a specific type</h2> <p>If you've got multiple implementations of the same interface, Spring can autowire them all into a collection object. I'm going to use an example using a Validator pattern<sup>1</sup></p> <p>Foo Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Foo</span> <span class="token punctuation">{</span>
+     <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+     <span class="token keyword">private</span> <span class="token class-name">String</span> emailAddress<span class="token punctuation">;</span>
+     <span class="token keyword">private</span> <span class="token class-name">String</span> errorMessage<span class="token punctuation">;</span>
+     <span class="token comment">/** Getters &amp; Setters omitted **/</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Interface:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">FooValidator</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token class-name">Foo</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Name Validator Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Component</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;FooNameValidator&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FooNameValidator</span> <span class="token keyword">implements</span> <span class="token class-name">FooValidator</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Foo</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Validation logic goes here.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Email Validator Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Component</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;FooEmailValidator&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FooEmailValidator</span> <span class="token keyword">implements</span> <span class="token class-name">FooValidator</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Foo</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Different validation logic goes here.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You can now autowire these validators individually or together into a class.</p> <p>Interface:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">FooService</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handleFoo</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FooServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">FooService</span> <span class="token punctuation">{</span>
+    <span class="token comment">/** Autowire all classes implementing FooValidator interface**/</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">FooValidator</span><span class="token punctuation">&gt;</span></span> allValidators<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handleFoo</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token comment">/**You can use all instances from the list**/</span>
+       <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token class-name">FooValidator</span> validator <span class="token operator">:</span> allValidators<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           foo <span class="token operator">=</span> validator<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span>               
+       <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>   
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>It's worth noting that if you have more than one implementation of an interface in the Spring IoC container and don't specify which one you want to use with the <code>@Qualifier</code> annotation, Spring will throw an exception when trying to start, because it won't know which instance to use.</p> <p><sub>1: This is not the right way to do such simple validations. This is a simple example about autowiring. If you want an idea of a much easier validation method look up how Spring does validation with annotations.</sub></p> <h2 id="basic-annotation-autowiring"><a href="#basic-annotation-autowiring" class="header-anchor">#</a> Basic annotation autowiring</h2> <p>Interface:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">FooService</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FooServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">FooService</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Do some stuff here</span>
+        <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>It should be noted that a class must implement an interface for Spring to be able to autowire this class. There is a method to allow Spring to autowire stand-alone classes using load time weaving, but that is out of scope for this example.</p> <p>You can gain access to this bean in any class that instantiated by the Spring IoC container using the <code>@Autowired</code> annotation.</p> <p>Usage:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Autowired</span><span class="token punctuation">(</span><span class="token punctuation">[</span>required<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>The <code>@Autowired</code> annotation will first attempt to autowire by type, and then fall back on bean name in the event of ambiguity.</p> <p>This annotation can be applied in several different ways.</p> <p>Constructor injection:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BarClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">FooService</span> fooService         
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">public</span> <span class="token class-name">BarClass</span><span class="token punctuation">(</span><span class="token class-name">FooService</span> fooService<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>fooService <span class="token operator">=</span> fooService<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Field injection:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BarClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">FooService</span> fooService<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Setter injection:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BarClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token class-name">FooService</span> fooService<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setFooService</span><span class="token punctuation">(</span><span class="token class-name">FooService</span> fooService<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>fooService <span class="token operator">=</span> fooService<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="declaring-bean"><a href="#declaring-bean" class="header-anchor">#</a> Declaring Bean</h2> <p>To declare a bean, simply annotate a method with the <code>@Bean</code> annotation or annotate a class with the <code>@Component</code> annotation (annotations <code>@Service</code>, <code>@Repository</code>, <code>@Controller</code> could be used as well).</p> <p>When JavaConfig encounters such a method, it will execute that method and register the return value as a bean within a BeanFactory. By default, the bean name will be that of the method name.</p> <p>We can create bean using one of three ways:</p> <li>
+**Using Java based Configuration**: In Configuration file we need to declare bean using @bean annotation
+<div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AppConfig</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">TransferService</span> <span class="token function">transferService</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">TransferServiceImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></li> <li>
+**Using XML based configuration**: For XML based configuration we need to create declare bean in application configuration XML i.e.
+<div class="language-java extra-class"><pre class="language-java"><code> <span class="token generics"><span class="token punctuation">&lt;</span>beans<span class="token punctuation">&gt;</span></span>
+     <span class="token operator">&lt;</span>bean name<span class="token operator">=</span><span class="token string">&quot;transferService&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;com.acme.TransferServiceImpl&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+ <span class="token operator">&lt;</span><span class="token operator">/</span>beans<span class="token operator">&gt;</span>
+
+</code></pre></div></li> <li>
+**Annotation-Driven Component**: For annotation-driven components, we need to add the @Component annotation to the class we want to declare as bean.
+<div class="language-java extra-class"><pre class="language-java"><code> <span class="token annotation punctuation">@Component</span><span class="token punctuation">(</span><span class="token string">&quot;transferService&quot;</span><span class="token punctuation">)</span>
+ <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TransferServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">TransferService</span> <span class="token punctuation">{</span>
+     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+ <span class="token punctuation">}</span>
+
+</code></pre></div></li> <p>Now all three beans with name <code>transferService</code> are available in <code>BeanFactory</code> or <code>ApplicationContext</code>.</p> <h2 id="using-factorybean-for-dynamic-bean-instantiation"><a href="#using-factorybean-for-dynamic-bean-instantiation" class="header-anchor">#</a> Using FactoryBean for dynamic bean instantiation</h2> <p>In order to dynamically decide what beans to inject, we can use <code>FactoryBean</code>s. These are classes which implement the factory method pattern, providing instances of beans for the container. They are recognized by Spring and can be used transparently, without need to know that the bean comes from a factory. For example:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ExampleFactoryBean</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractFactoryBean</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+    <span class="token comment">// This method determines the type of the bean for autowiring purposes</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">&gt;</span></span> <span class="token function">getObjectType</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// this factory method produces the actual bean</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token class-name">String</span> <span class="token function">createInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+        <span class="token comment">// The thing you return can be defined dynamically,</span>
+        <span class="token comment">// that is read from a file, database, network or just</span>
+        <span class="token comment">// simply randomly generated if you wish.</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;Something from factory&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Configuration:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ExampleConfig</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">FactoryBean</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> <span class="token function">fromFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ExampleFactoryBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Getting the bean:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name">AbstractApplicationContext</span> context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AnnotationConfigApplicationContext</span><span class="token punctuation">(</span><span class="token class-name">ExampleConfig</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> exampleString <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;fromFactory&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>To get the actual FactoryBean, use the ampersand prefix before the bean's name:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token class-name">FactoryBean</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> bean <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token class-name">FactoryBean</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">)</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;&amp;fromFactory&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Please note that you can only use <code>prototype</code> or <code>singleton</code> scopes - to change the scope to <code>prototype</code> override <code>isSingleton</code> method:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ExampleFactoryBean</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractFactoryBean</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">isSingleton</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// other methods omitted for readability reasons</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Note that scoping refers to the actual instances being created, not the factory bean itself.</p> <h2 id="inject-prototype-scoped-beans-into-singletons"><a href="#inject-prototype-scoped-beans-into-singletons" class="header-anchor">#</a> Inject prototype-scoped beans into singletons</h2> <p>The container creates a singleton bean and injects collaborators into it only once. This is not the desired behavior when a singleton bean has a prototype-scoped collaborator, since the prototype-scoped bean should be injected every time it is being accessed via accessor.</p> <p>There are several solutions to this problem:</p> <ol><li>Use lookup method injection</li> <li>Retrieve a prototype-scoped bean via <code>javax.inject.Provider</code></li> <li>Retrieve a prototype-scoped bean via <code>org.springframework.beans.factory.ObjectFactory</code> (an equivalent of #2, but with the class that is specific to Spring)</li> <li>Make a singleton bean container aware via implementing <code>ApplicationContextAware</code> interface</li></ol> <p>Approaches #3 and #4 are generally discouraged, since they strongly tie an app to Spring framework. Thus, they are not covered in this example.</p> <p><strong>Lookup method injection via XML configuration and an abstract method</strong></p> <p>Java Classes</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Window</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">WindowGenerator</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Window</span> <span class="token function">generateWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Window</span> window <span class="token operator">=</span> <span class="token function">createNewWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// new instance for each call</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> 
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">protected</span> <span class="token keyword">abstract</span> <span class="token class-name">Window</span> <span class="token function">createNewWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// lookup method</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>XML</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;window&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;somepackage.Window&quot;</span> scope<span class="token operator">=</span><span class="token string">&quot;prototype&quot;</span> lazy<span class="token operator">-</span>init<span class="token operator">=</span><span class="token string">&quot;true&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;windowGenerator&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;somepackage.WindowGenerator&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>lookup<span class="token operator">-</span>method name<span class="token operator">=</span><span class="token string">&quot;createNewWindow&quot;</span> bean<span class="token operator">=</span><span class="token string">&quot;window&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">&gt;</span>
+
+</code></pre></div><p><strong>Lookup method injection via Java configuration and @Component</strong></p> <p>Java Classes</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Window</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">WindowGenerator</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Window</span> <span class="token function">generateWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Window</span> window <span class="token operator">=</span> <span class="token function">createNewWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// new instance for each call</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Lookup</span>
+    <span class="token keyword">protected</span> <span class="token class-name">Window</span> <span class="token function">createNewWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">UnsupportedOperationException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Java configuration</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span>
+<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span><span class="token string">&quot;somepackage&quot;</span><span class="token punctuation">)</span> <span class="token comment">// package where WindowGenerator is located</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyConfiguration</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@Lazy</span>
+    <span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span>scopeName <span class="token operator">=</span> <span class="token class-name">ConfigurableBeanFactory</span><span class="token punctuation">.</span>SCOPE_PROTOTYPE<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Window</span> <span class="token function">window</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Window</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Manual lookup method injection via Java configuration</strong></p> <p>Java Classes</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Window</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">WindowGenerator</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Window</span> <span class="token function">generateWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Window</span> window <span class="token operator">=</span> <span class="token function">createNewWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// new instance for each call</span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">protected</span> <span class="token keyword">abstract</span> <span class="token class-name">Window</span> <span class="token function">createNewWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// lookup method</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Java configuration</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyConfiguration</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token annotation punctuation">@Lazy</span>
+    <span class="token annotation punctuation">@Scope</span><span class="token punctuation">(</span>scopeName <span class="token operator">=</span> <span class="token class-name">ConfigurableBeanFactory</span><span class="token punctuation">.</span>SCOPE_PROTOTYPE<span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Window</span> <span class="token function">window</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Window</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">WindowGenerator</span> <span class="token function">windowGenerator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">WindowGenerator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">protected</span> <span class="token class-name">Window</span> <span class="token function">createNewWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token function">window</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Injection of a protoype-scoped bean into singleton via <code>javax.inject.Provider</code></strong></p> <p>Java classes</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Window</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">WindowGenerator</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">Provider</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Window</span><span class="token punctuation">&gt;</span></span> windowProvider<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">WindowGenerator</span><span class="token punctuation">(</span><span class="token keyword">final</span> <span class="token class-name">Provider</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Window</span><span class="token punctuation">&gt;</span></span> windowProvider<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>windowProvider <span class="token operator">=</span> windowProvider<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Window</span> <span class="token function">generateWindow</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Window</span> window <span class="token operator">=</span> windowProvider<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// new instance for each call   </span>
+        <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>XML</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;window&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;somepackage.Window&quot;</span> scope<span class="token operator">=</span><span class="token string">&quot;prototype&quot;</span> lazy<span class="token operator">-</span>init<span class="token operator">=</span><span class="token string">&quot;true&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">&quot;windowGenerator&quot;</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;somepackage.WindowGenerator&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>constructor<span class="token operator">-</span>arg<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>bean <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">&quot;org.springframework.beans.factory.config.ProviderCreatingFactoryBean&quot;</span><span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">&quot;targetBeanName&quot;</span> value<span class="token operator">=</span><span class="token string">&quot;window&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>constructor<span class="token operator">-</span>arg<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">&gt;</span>
+
+</code></pre></div><p>The same approaches can be used for other scopes as well (e.g. for injection a request-scoped bean into singleton).</p> <h2 id="autowiring-specific-bean-instances-with-qualifier"><a href="#autowiring-specific-bean-instances-with-qualifier" class="header-anchor">#</a> Autowiring specific bean instances with @Qualifier</h2> <p>If you've got multiple implementations of the same interface, Spring needs to know which one it should autowire into a class. I'm going to use a Validator pattern in this example.<sup>1</sup></p> <p>Foo Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Foo</span> <span class="token punctuation">{</span>
+     <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+     <span class="token keyword">private</span> <span class="token class-name">String</span> emailAddress<span class="token punctuation">;</span>
+     <span class="token keyword">private</span> <span class="token class-name">String</span> errorMessage<span class="token punctuation">;</span>
+     <span class="token comment">/** Getters &amp; Setters omitted **/</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Interface:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">FooValidator</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token class-name">Foo</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Name Validator Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Component</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;FooNameValidator&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FooNameValidator</span> <span class="token keyword">implements</span> <span class="token class-name">FooValidator</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Foo</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Validation logic goes here.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Email Validator Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Component</span><span class="token punctuation">(</span>value<span class="token operator">=</span><span class="token string">&quot;FooEmailValidator&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FooEmailValidator</span> <span class="token keyword">implements</span> <span class="token class-name">FooValidator</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Foo</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Different validation logic goes here.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You can now autowire these validators individually into a class.</p> <p>Interface:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">FooService</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handleFoo</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FooServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">FooService</span> <span class="token punctuation">{</span>
+    <span class="token comment">/** Autowire validators individually **/</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token comment">/* 
+     * Notice how the String value here matches the value 
+     * on the @Component annotation? That's how Spring knows which 
+     * instance to autowire.
+     */</span>
+    <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">&quot;FooNameValidator&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">FooValidator</span> nameValidator<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token annotation punctuation">@Qualifier</span><span class="token punctuation">(</span><span class="token string">&quot;FooEmailValidator&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">FooValidator</span> emailValidator<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handleFoo</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">/**You can use just one instance if you need**/</span>
+        foo <span class="token operator">=</span> nameValidator<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>   
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>It's worth noting that if you have more than one implementation of an interface in the Spring IoC container and don't specify which one you want to use with the <code>@Qualifier</code> annotation, Spring will throw an exception when trying to start, because it won't know which instance to use.</p> <p><sub>1: This is not the right way to do such simple validations. This is a simple example about autowiring. If you want an idea of a much easier validation method look up how Spring does validation with annotations.</sub></p> <h2 id="autowiring-specific-instances-of-classes-using-generic-type-parameters"><a href="#autowiring-specific-instances-of-classes-using-generic-type-parameters" class="header-anchor">#</a> Autowiring specific instances of classes using generic type parameters</h2> <p>If you've got an interface with a generic type parameter, Spring can use that to only autowire implementations that implement a type parameter you specify.</p> <p>Interface:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">GenericValidator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">T</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token class-name">T</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">T</span> object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Foo Validator Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FooValidator</span> <span class="token keyword">implements</span> <span class="token class-name">GenericValidator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Foo</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Foo</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Logic here to validate foo objects.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Bar Validator Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Component</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BarValidator</span> <span class="token keyword">implements</span> <span class="token class-name">GenericValidator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Bar</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">Bar</span> <span class="token function">validate</span><span class="token punctuation">(</span><span class="token class-name">Bar</span> bar<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//Bar validation logic here</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You can now autowire these validators using type parameters to decide which instance to autowire.</p> <p>Interface:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">FooService</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handleFoo</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Class:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FooServiceImpl</span> <span class="token keyword">implements</span> <span class="token class-name">FooService</span> <span class="token punctuation">{</span>
+    <span class="token comment">/** Autowire Foo Validator **/</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">GenericValidator</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Foo</span><span class="token punctuation">&gt;</span></span> fooValidator<span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">handleFoo</span><span class="token punctuation">(</span><span class="token class-name">Foo</span> foo<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        foo <span class="token operator">=</span> fooValidator<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>   
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/spring/creating-and-using-beans.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/spring/obtaining-a-sqlrowset-from-simplejdbccall.html" class="prev">
+        Obtaining a SqlRowSet from SimpleJdbcCall
+      </a></span> <span class="next"><a href="/spring/bean-scopes.html">
+        Bean scopes
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3202.0659a9f7.js" defer></script>
+  </body>
+</html>

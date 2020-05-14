@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C - Structs</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Typedef Structs, Flexible Array Members, Pointers to structs, Passing structs to functions, Object-based programming using structs, Simple data structures">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C - Structs">
+    <meta property="og:description" content="Typedef Structs, Flexible Array Members, Pointers to structs, Passing structs to functions, Object-based programming using structs, Simple data structures">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/c/structs.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C - Structs">
+    <meta name="twitter:description" content="Typedef Structs, Flexible Array Members, Pointers to structs, Passing structs to functions, Object-based programming using structs, Simple data structures">
+    <meta name="twitter:url" content="/c/structs.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/596.deb9ebe2.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/c/" class="sidebar-link">Disclaimer</a></li><li><a href="/c/getting-started-with-c-language.html" class="sidebar-link">Getting started with C Language</a></li><li><a href="/c/comments.html" class="sidebar-link">Comments</a></li><li><a href="/c/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/c/operators.html" class="sidebar-link">Operators</a></li><li><a href="/c/boolean.html" class="sidebar-link">Boolean</a></li><li><a href="/c/strings.html" class="sidebar-link">Strings</a></li><li><a href="/c/literals-for-numbers-characters-and-strings.html" class="sidebar-link">Literals for numbers, characters and strings</a></li><li><a href="/c/compound-literals.html" class="sidebar-link">Compound Literals</a></li><li><a href="/c/bit-fields.html" class="sidebar-link">Bit-fields</a></li><li><a href="/c/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/c/linked-lists.html" class="sidebar-link">Linked lists</a></li><li><a href="/c/enumerations.html" class="sidebar-link">Enumerations</a></li><li><a href="/c/structs.html" class="active sidebar-link">Structs</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/c/structs.html#typedef-structs" class="sidebar-link">Typedef Structs</a></li><li class="sidebar-sub-header"><a href="/c/structs.html#flexible-array-members" class="sidebar-link">Flexible Array Members</a></li><li class="sidebar-sub-header"><a href="/c/structs.html#pointers-to-structs" class="sidebar-link">Pointers to structs</a></li><li class="sidebar-sub-header"><a href="/c/structs.html#passing-structs-to-functions" class="sidebar-link">Passing structs to functions</a></li><li class="sidebar-sub-header"><a href="/c/structs.html#object-based-programming-using-structs" class="sidebar-link">Object-based programming using structs</a></li><li class="sidebar-sub-header"><a href="/c/structs.html#simple-data-structures" class="sidebar-link">Simple data structures</a></li></ul></li><li><a href="/c/standard-math.html" class="sidebar-link">Standard Math</a></li><li><a href="/c/iteration-statements-loops-for-while-do-while.html" class="sidebar-link">Iteration Statements/Loops: for, while, do-while</a></li><li><a href="/c/selection-statements.html" class="sidebar-link">Selection Statements</a></li><li><a href="/c/initialization.html" class="sidebar-link">Initialization</a></li><li><a href="/c/declaration-vs-definition.html" class="sidebar-link">Declaration vs Definition</a></li><li><a href="/c/files-and-i-o-streams.html" class="sidebar-link">Files and I/O streams</a></li><li><a href="/c/formatted-input-output.html" class="sidebar-link">Formatted Input/Output</a></li><li><a href="/c/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/c/sequence-points.html" class="sidebar-link">Sequence points</a></li><li><a href="/c/function-pointers.html" class="sidebar-link">Function Pointers</a></li><li><a href="/c/function-parameters.html" class="sidebar-link">Function Parameters</a></li><li><a href="/c/pass-2d-arrays-to-functions.html" class="sidebar-link">Pass 2D-arrays to functions</a></li><li><a href="/c/error-handling.html" class="sidebar-link">Error handling</a></li><li><a href="/c/undefined-behavior.html" class="sidebar-link">Undefined behavior</a></li><li><a href="/c/random-number-generation.html" class="sidebar-link">Random Number Generation</a></li><li><a href="/c/preprocessor-and-macros.html" class="sidebar-link">Preprocessor and Macros</a></li><li><a href="/c/signal-handling.html" class="sidebar-link">Signal handling</a></li><li><a href="/c/variable-arguments.html" class="sidebar-link">Variable arguments</a></li><li><a href="/c/assertion.html" class="sidebar-link">Assertion</a></li><li><a href="/c/generic-selection.html" class="sidebar-link">Generic selection</a></li><li><a href="/c/x-macros.html" class="sidebar-link">X-macros</a></li><li><a href="/c/aliasing-and-effective-type.html" class="sidebar-link">Aliasing and effective type</a></li><li><a href="/c/compilation.html" class="sidebar-link">Compilation</a></li><li><a href="/c/identifier-scope.html" class="sidebar-link">Identifier Scope</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/implicit-and-explicit-conversions.html" class="sidebar-link">Implicit and Explicit Conversions</a></li><li><a href="/c/type-qualifiers.html" class="sidebar-link">Type Qualifiers</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/typedef.html" class="sidebar-link">Typedef</a></li><li><a href="/c/storage-classes.html" class="sidebar-link">Storage Classes</a></li><li><a href="/c/declarations.html" class="sidebar-link">Declarations</a></li><li><a href="/c/inline-assembly.html" class="sidebar-link">Inline assembly</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/structure-padding-and-packing.html" class="sidebar-link">Structure Padding and Packing</a></li><li><a href="/c/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/c/implementation-defined-behaviour.html" class="sidebar-link">Implementation-defined behaviour</a></li><li><a href="/c/atomics.html" class="sidebar-link">Atomics</a></li><li><a href="/c/jump-statements.html" class="sidebar-link">Jump Statements</a></li><li><a href="/c/create-and-include-header-files.html" class="sidebar-link">Create and include header files</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/ctype-h-character-classification-conversion.html" class="sidebar-link">— character classification &amp; conversion</a></li><li><a href="/c/side-effects.html" class="sidebar-link">Side Effects</a></li><li><a href="/c/multi-character-character-sequence.html" class="sidebar-link">Multi-Character Character Sequence</a></li><li><a href="/c/constraints.html" class="sidebar-link">Constraints</a></li><li><a href="/c/inlining.html" class="sidebar-link">Inlining</a></li><li><a href="/c/unions.html" class="sidebar-link">Unions</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/c/interprocess-communication-ipc.html" class="sidebar-link">Interprocess Communication (IPC)</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/common-c-programming-idioms-and-developer-practices.html" class="sidebar-link">Common C programming idioms and developer practices</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="structs"><a href="#structs" class="header-anchor">#</a> Structs</h1> <p>Structures provide a way to group a set of related variables of diverse types into a single unit of memory. The structure as a whole can be referenced by a single name or pointer; the structure members can be accessed individually too. Structures can be passed to functions and returned from functions.  They are defined using the keyword <code>struct</code>.</p> <h2 id="typedef-structs"><a href="#typedef-structs" class="header-anchor">#</a> Typedef Structs</h2> <p>Combining <code>typedef</code> with <code>struct</code> can make code clearer. For example:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">typedef</span> <span class="token keyword">struct</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> Point<span class="token punctuation">;</span>
+
+</code></pre></div><p>as opposed to:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">Point</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>could be declared as:</p> <div class="language-c extra-class"><pre class="language-c"><code>Point point<span class="token punctuation">;</span>
+
+</code></pre></div><p>instead of:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">Point</span> point<span class="token punctuation">;</span>
+
+</code></pre></div><p>Even better is to use the following</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">Point</span> Point<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">Point</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>to have advantage of both possible definitions of <code>point</code>. Such a declaration is most convenient if you learned C++ first, where you may omit the <code>struct</code> keyword if the name is not ambiguous.</p> <p><code>typedef</code> names for structs could be in conflict with other identifiers of other parts of the program. Some consider this a disadvantage, but for most people having a <code>struct</code> and another identifier the same is quite disturbing. Notorious is e.g POSIX' <code>stat</code></p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">int</span> <span class="token function">stat</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>pathname<span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">stat</span> <span class="token operator">*</span>buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>where you see a function <code>stat</code> that has one argument that is <code>struct stat</code>.</p> <p><code>typedef</code>'d structs without a tag name always impose that the whole <code>struct</code> declaration is visible to code that uses it. The entire <code>struct</code> declaration must then be placed in a header file.</p> <p>Consider:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;bar.h&quot;</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">foo</span> 
+<span class="token punctuation">{</span>
+    bar <span class="token operator">*</span>aBar<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>So with a <code>typedef</code>d <code>struct</code> that has no tag name, the <code>bar.h</code> file always has to include the whole definition of <code>bar</code>. If we use</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">bar</span> bar<span class="token punctuation">;</span>
+
+</code></pre></div><p>in <code>bar.h</code>, the details of the <code>bar</code> structure can be hidden.</p> <p>See <a href="https://stackoverflow.com/documentation/c/2681/typedef" target="_blank" rel="noopener noreferrer">Typedef<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="flexible-array-members"><a href="#flexible-array-members" class="header-anchor">#</a> Flexible Array Members</h2> <h3 id="type-declaration"><a href="#type-declaration" class="header-anchor">#</a> Type Declaration</h3> <p>A structure <strong>with at least one member</strong> may additionally contain a single array member of unspecified length at the end of the structure. This is called a flexible array member:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">ex1</span> 
+<span class="token punctuation">{</span>
+    size_t foo<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> flex<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">ex2_header</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> foo<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> bar<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">ex2</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> <span class="token class-name">ex2_header</span> hdr<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> flex<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* Merged ex2_header and ex2 structures. */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ex3</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> foo<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> bar<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> flex<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="effects-on-size-and-padding"><a href="#effects-on-size-and-padding" class="header-anchor">#</a> Effects on Size and Padding</h3> <p>A flexible array member is treated as having no size when calculating the size of a structure, though padding between that member and the previous member of the structure may still exist:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* Prints &quot;8,8&quot; on my machine, so there is no padding. */</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%zu,%zu\n&quot;</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>size_t<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">ex1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* Also prints &quot;8,8&quot; on my machine, so there is no padding in the ex2 structure itself. */</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%zu,%zu\n&quot;</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">ex2_header</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">ex2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* Prints &quot;5,8&quot; on my machine, so there are 3 bytes of padding. */</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%zu,%zu\n&quot;</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">ex3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The flexible array member is considered to have an incomplete array type, so its size cannot be calculated using <code>sizeof</code>.</p> <h3 id="usage"><a href="#usage" class="header-anchor">#</a> Usage</h3> <p>You can declare and initialize an object with a structure type containing a flexible array member, but you must not attempt to initialize the flexible array member since it is treated as if it does not exist. It is forbidden to try to do this, and compile errors will result.</p> <p>Similarly, you should not attempt to assign a value to any element of a flexible array member when declaring a structure in this way since there may not be enough padding at the end of the structure to allow for any objects required by the flexible array member. The compiler will not necessarily prevent you from doing this, however, so this can lead to undefined behavior.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* invalid: cannot initialize flexible array member */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ex1</span> e1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">/* invalid: hdr={foo=1, bar=2} OK, but cannot initialize flexible array member */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ex2</span> e2 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">/* valid: initialize foo=1, bar=2 members */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ex3</span> e3 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+e1<span class="token punctuation">.</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">/* undefined behavior, in my case */</span>
+e3<span class="token punctuation">.</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">/* undefined behavior again */</span>
+e2<span class="token punctuation">.</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> e3<span class="token punctuation">.</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">/* undefined behavior */</span>
+
+</code></pre></div><p>You may instead choose to use <code>malloc</code>, <code>calloc</code>, or <code>realloc</code> to allocate the structure with extra storage and later free it, which allows you to use the flexible array member as you wish:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* valid: allocate an object of structure type `ex1` along with an array of 2 ints */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ex1</span> <span class="token operator">*</span>pe1 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token operator">*</span>pe1<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>pe1<span class="token operator">-&gt;</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* valid: allocate an object of structure type ex2 along with an array of 4 ints */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ex2</span> <span class="token operator">*</span>pe2 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">ex2</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* valid: allocate 5 structure type ex3 objects along with an array of 3 ints per object */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ex3</span> <span class="token operator">*</span>pe3 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token number">5</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token operator">*</span>pe3<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+pe1<span class="token operator">-&gt;</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">/* valid */</span>
+pe3<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">-&gt;</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> pe1<span class="token operator">-&gt;</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">/* valid */</span>
+
+</code></pre></div><h3 id="the-struct-hack"><a href="#the-struct-hack" class="header-anchor">#</a> The 'struct hack'</h3> <p>Flexible array members did not exist prior to C99 and are treated as errors. A common workaround is to declare an array of length 1, a technique called the 'struct hack':</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">ex1</span> 
+<span class="token punctuation">{</span>
+    size_t foo<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> flex<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>This will affect the size of the structure, however, unlike a true flexible array member:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* Prints &quot;8,4,16&quot; on my machine, signifying that there are 4 bytes of padding. */</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%d,%d,%d\n&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>size_t<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">ex1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>To use the <code>flex</code> member as a flexible array member, you'd allocate it with <code>malloc</code> as shown above, except that <code>sizeof(*pe1)</code> (or the equivalent <code>sizeof(struct ex1)</code>) would be replaced with <code>offsetof(struct ex1, flex)</code> or the longer, type-agnostic expression <code>sizeof(*pe1)-sizeof(pe1-&gt;flex)</code>. Alternatively, you might subtract 1 from the desired length of the &quot;flexible&quot; array since it's already included in the structure size, assuming the desired length is greater than 0. The same logic may be applied to the other usage examples.</p> <h3 id="compatibility"><a href="#compatibility" class="header-anchor">#</a> Compatibility</h3> <p>If compatibility with compilers that do not support flexible array members is desired, you may use a macro defined like <code>FLEXMEMB_SIZE</code> below:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">if</span> __STDC_VERSION__ &lt; 199901L</span>
+<span class="token macro property">#<span class="token directive keyword">define</span> FLEXMEMB_SIZE 1</span>
+<span class="token macro property">#<span class="token directive keyword">else</span></span>
+<span class="token macro property">#<span class="token directive keyword">define</span> FLEXMEMB_SIZE </span><span class="token comment">/* nothing */</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+
+<span class="token keyword">struct</span> <span class="token class-name">ex1</span> 
+<span class="token punctuation">{</span>
+    size_t foo<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> flex<span class="token punctuation">[</span>FLEXMEMB_SIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>When allocating objects, you should use the <code>offsetof(struct ex1, flex)</code> form to refer to the structure size (excluding the flexible array member) since it is the only expression that will remain consistent between compilers that support flexible array members and compilers that do not:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">ex1</span> <span class="token operator">*</span>pe10 <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token function">offsetof</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">ex1</span><span class="token punctuation">,</span> flex<span class="token punctuation">)</span> <span class="token operator">+</span> n <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>pe10<span class="token operator">-&gt;</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The alternative is to use the preprocessor to conditionally subtract 1 from the specified length. Due to the increased potential for inconsistency and general human error in this form, I moved the logic into a separate function:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">ex1</span> <span class="token operator">*</span><span class="token function">ex1_alloc</span><span class="token punctuation">(</span>size_t n<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> <span class="token class-name">ex1</span> tmp<span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">if</span> __STDC_VERSION__ &lt; 199901L</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        n<span class="token operator">--</span><span class="token punctuation">;</span>
+<span class="token macro property">#<span class="token directive keyword">endif</span></span>
+    <span class="token keyword">return</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span>tmp<span class="token punctuation">)</span> <span class="token operator">+</span> n <span class="token operator">*</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>tmp<span class="token punctuation">.</span>flex<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token comment">/* allocate an ex1 object with &quot;flex&quot; array of length 3 */</span>
+<span class="token keyword">struct</span> <span class="token class-name">ex1</span> <span class="token operator">*</span>pe1 <span class="token operator">=</span> <span class="token function">ex1_alloc</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="pointers-to-structs"><a href="#pointers-to-structs" class="header-anchor">#</a> Pointers to structs</h2> <p>When you have a variable containing a <code>struct</code>, you can access its fields using the dot operator (<code>.</code>).  However, if you have a pointer to a <code>struct</code>, this will not work.  You have to use the arrow operator (<code>-&gt;</code>) to access its fields.  Here's an example of a terribly simple (some might say &quot;terrible and simple&quot;) implementation of a stack that uses pointers to <code>struct</code>s and demonstrates the arrow operator.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token comment">/* structs */</span>
+<span class="token keyword">struct</span> <span class="token class-name">stack</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> <span class="token class-name">node</span> <span class="token operator">*</span>top<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> size<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">node</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> data<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> <span class="token class-name">node</span> <span class="token operator">*</span>next<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">/* function declarations */</span>
+<span class="token keyword">int</span> <span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">stack</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">pop</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">stack</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">stack</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> result <span class="token operator">=</span> EXIT_SUCCESS<span class="token punctuation">;</span>
+
+    size_t i<span class="token punctuation">;</span>
+
+    <span class="token comment">/* allocate memory for a struct stack and record its pointer */</span>
+    <span class="token keyword">struct</span> <span class="token class-name">stack</span> <span class="token operator">*</span>stack <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span> <span class="token operator">*</span>stack<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> stack<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">&quot;malloc() failed&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* initialize stack */</span>
+    stack<span class="token operator">-&gt;</span>top <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    stack<span class="token operator">-&gt;</span>size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* push 10 ints */</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> data <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;Pushing: %d\n&quot;</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">==</span> <span class="token function">push</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> stack<span class="token punctuation">)</span><span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">&quot;push() failed&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                result <span class="token operator">=</span> EXIT_FAILURE<span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token operator">++</span>data<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>EXIT_SUCCESS <span class="token operator">==</span> result<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">/* pop 5 ints */</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;Popped: %i\n&quot;</span><span class="token punctuation">,</span> <span class="token function">pop</span><span class="token punctuation">(</span>stack<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* destroy stack */</span>
+    <span class="token function">destroy</span><span class="token punctuation">(</span>stack<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Push a value onto the stack. */</span>
+<span class="token comment">/* Returns 0 on success and -1 on failure. */</span>
+<span class="token keyword">int</span> <span class="token function">push</span><span class="token punctuation">(</span><span class="token keyword">int</span> data<span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">stack</span> <span class="token operator">*</span>stack<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* allocate memory for new node */</span>
+    <span class="token keyword">struct</span> <span class="token class-name">node</span> <span class="token operator">*</span>new_node <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span> <span class="token operator">*</span>new_node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token constant">NULL</span> <span class="token operator">==</span> new_node<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        result <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        new_node<span class="token operator">-&gt;</span>data <span class="token operator">=</span> data<span class="token punctuation">;</span>
+        new_node<span class="token operator">-&gt;</span>next <span class="token operator">=</span> stack<span class="token operator">-&gt;</span>top<span class="token punctuation">;</span>
+        stack<span class="token operator">-&gt;</span>top <span class="token operator">=</span> new_node<span class="token punctuation">;</span>
+        stack<span class="token operator">-&gt;</span>size<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Pop a value off of the stack. */</span>
+<span class="token comment">/* Returns the value popped off the stack */</span>
+<span class="token keyword">int</span> <span class="token function">pop</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">stack</span> <span class="token operator">*</span>stack<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> <span class="token class-name">node</span> <span class="token operator">*</span>top <span class="token operator">=</span> stack<span class="token operator">-&gt;</span>top<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> data <span class="token operator">=</span> top<span class="token operator">-&gt;</span>data<span class="token punctuation">;</span>
+    stack<span class="token operator">-&gt;</span>top <span class="token operator">=</span> top<span class="token operator">-&gt;</span>next<span class="token punctuation">;</span>
+    stack<span class="token operator">-&gt;</span>size<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token function">free</span><span class="token punctuation">(</span>top<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> data<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* destroy the stack */</span>
+<span class="token keyword">void</span> <span class="token function">destroy</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">stack</span> <span class="token operator">*</span>stack<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* free all pointers */</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>stack<span class="token operator">-&gt;</span>top <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">pop</span><span class="token punctuation">(</span>stack<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="passing-structs-to-functions"><a href="#passing-structs-to-functions" class="header-anchor">#</a> Passing structs to functions</h2> <p>In C, all arguments are passed to functions by value, including structs. For small structs, this is a good thing as it means there is no overhead from accessing the data through a pointer. However, it also makes it very easy to accidentally pass a huge struct resulting in poor performance, particularly if the programmer is used to other languages where arguments are passed by reference.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">coordinates</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> z<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Passing and returning a small struct by value, very fast</span>
+<span class="token keyword">struct</span> <span class="token class-name">coordinates</span> <span class="token function">move</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">coordinates</span> position<span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">coordinates</span> movement<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    position<span class="token punctuation">.</span>x <span class="token operator">+=</span> movement<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+    position<span class="token punctuation">.</span>y <span class="token operator">+=</span> movement<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+    position<span class="token punctuation">.</span>z <span class="token operator">+=</span> movement<span class="token punctuation">.</span>z<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> position<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// A very big struct</span>
+<span class="token keyword">struct</span> <span class="token class-name">lotsOfData</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> param1<span class="token punctuation">;</span>
+    <span class="token keyword">char</span> param2<span class="token punctuation">[</span><span class="token number">80000</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Passing and returning a large struct by value, very slow!</span>
+<span class="token comment">// Given the large size of the struct this could even cause stack overflow</span>
+<span class="token keyword">struct</span> <span class="token class-name">lotsOfData</span> <span class="token function">doubleParam1</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">lotsOfData</span> value<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    value<span class="token punctuation">.</span>param1 <span class="token operator">*=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> value<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Passing the large struct by pointer instead, fairly fast</span>
+<span class="token keyword">void</span> <span class="token function">doubleParam1ByPtr</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">lotsOfData</span> <span class="token operator">*</span>value<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    value<span class="token operator">-&gt;</span>param1 <span class="token operator">*=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="object-based-programming-using-structs"><a href="#object-based-programming-using-structs" class="header-anchor">#</a> Object-based programming using structs</h2> <p>Structs may be used to implement code in an object oriented manner. A struct is similar to a class, but is missing the functions which normally also form part of a class, we can add these as function pointer member variables. To stay with our coordinates example:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* coordinates.h */</span>
+
+<span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token class-name">coordinate_s</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment">/* Pointers to method functions */</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>setx<span class="token punctuation">)</span><span class="token punctuation">(</span>coordinate <span class="token operator">*</span>this<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>sety<span class="token punctuation">)</span><span class="token punctuation">(</span>coordinate <span class="token operator">*</span>this<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token punctuation">(</span><span class="token operator">*</span>print<span class="token punctuation">)</span><span class="token punctuation">(</span>coordinate <span class="token operator">*</span>this<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/* Data */</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> coordinate<span class="token punctuation">;</span>
+
+<span class="token comment">/* Constructor */</span>
+coordinate <span class="token operator">*</span><span class="token function">coordinate_create</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">/* Destructor */</span>
+<span class="token keyword">void</span> <span class="token function">coordinate_destroy</span><span class="token punctuation">(</span>coordinate <span class="token operator">*</span>this<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>And now the implementing C file:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* coordinates.c */</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;coordinates.h&quot;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span></span>
+
+<span class="token comment">/* Constructor */</span>
+coordinate <span class="token operator">*</span><span class="token function">coordinate_create</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    coordinate <span class="token operator">*</span>c <span class="token operator">=</span> <span class="token function">malloc</span><span class="token punctuation">(</span><span class="token keyword">sizeof</span><span class="token punctuation">(</span><span class="token operator">*</span>c<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        c<span class="token operator">-&gt;</span>setx <span class="token operator">=</span> <span class="token operator">&amp;</span>coordinate_setx<span class="token punctuation">;</span>
+        c<span class="token operator">-&gt;</span>sety <span class="token operator">=</span> <span class="token operator">&amp;</span>coordinate_sety<span class="token punctuation">;</span>
+        c<span class="token operator">-&gt;</span>print <span class="token operator">=</span> <span class="token operator">&amp;</span>coordinate_print<span class="token punctuation">;</span>
+        c<span class="token operator">-&gt;</span>x <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        c<span class="token operator">-&gt;</span>y <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Destructor */</span>
+<span class="token keyword">void</span> <span class="token function">coordinate_destroy</span><span class="token punctuation">(</span>coordinate <span class="token operator">*</span>this<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>this <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">free</span><span class="token punctuation">(</span>this<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+    <span class="token punctuation">}</span>  
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Methods */</span>
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">coordinate_setx</span><span class="token punctuation">(</span>coordinate <span class="token operator">*</span>this<span class="token punctuation">,</span> <span class="token keyword">int</span> x<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>this <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>    
+        this<span class="token operator">-&gt;</span>x <span class="token operator">=</span> x<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">coordinate_sety</span><span class="token punctuation">(</span>coordinate <span class="token operator">*</span>this<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>this <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        this<span class="token operator">-&gt;</span>y <span class="token operator">=</span> y<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">coordinate_print</span><span class="token punctuation">(</span>coordinate <span class="token operator">*</span>this<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>this <span class="token operator">!=</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;Coordinate: (%i, %i)\n&quot;</span><span class="token punctuation">,</span> this<span class="token operator">-&gt;</span>x<span class="token punctuation">,</span> this<span class="token operator">-&gt;</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;NULL pointer exception!\n&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>An example usage of our coordinate class would be:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* main.c */</span>
+
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;coordinates.h&quot;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stddef.h&gt;</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token comment">/* Create and initialize pointers to coordinate objects */</span>
+    coordinate <span class="token operator">*</span>c1 <span class="token operator">=</span> <span class="token function">coordinate_create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    coordinate <span class="token operator">*</span>c2 <span class="token operator">=</span> <span class="token function">coordinate_create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">/* Now we can use our objects using our methods and passing the object as parameter */</span>
+    c1<span class="token operator">-&gt;</span><span class="token function">setx</span><span class="token punctuation">(</span>c1<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    c1<span class="token operator">-&gt;</span><span class="token function">sety</span><span class="token punctuation">(</span>c1<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    c2<span class="token operator">-&gt;</span><span class="token function">setx</span><span class="token punctuation">(</span>c2<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    c2<span class="token operator">-&gt;</span><span class="token function">sety</span><span class="token punctuation">(</span>c2<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    c1<span class="token operator">-&gt;</span><span class="token function">print</span><span class="token punctuation">(</span>c1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    c2<span class="token operator">-&gt;</span><span class="token function">print</span><span class="token punctuation">(</span>c2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* After using our objects we destroy them using our &quot;destructor&quot; function */</span>
+    <span class="token function">coordinate_destroy</span><span class="token punctuation">(</span>c1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    c1 <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token function">coordinate_destroy</span><span class="token punctuation">(</span>c2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    c2 <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="simple-data-structures"><a href="#simple-data-structures" class="header-anchor">#</a> Simple data structures</h2> <p>Structure data types are useful way to package related data and have them behave
+like a single variable.</p> <p>Declaring a simple <code>struct</code> that holds two <code>int</code> members:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">point</span> 
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> x<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> y<span class="token punctuation">;</span> 
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p><code>x</code> and <code>y</code> are called the <strong>members</strong> (or <strong>fields</strong>) of <code>point</code> struct.</p> <p>Defining and using structs:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">point</span> p<span class="token punctuation">;</span>    <span class="token comment">// declare p as a point struct</span>
+p<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>           <span class="token comment">// assign p member variables</span>
+p<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Structs can be initialized at definition. The above is equivalent to:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">struct</span> <span class="token class-name">point</span> p <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Structs may also be initialized using <a href="http://stackoverflow.com/documentation/c/4547/initialization/18609/using-designated-initializers#t=201701171109187948404" target="_blank" rel="noopener noreferrer">designated initializers<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <p>Accessing fields is also done using the <code>.</code> operator</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;point is (x = %d, y = %d)&quot;</span><span class="token punctuation">,</span> p<span class="token punctuation">.</span>x<span class="token punctuation">,</span> p<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/c/structs.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/c/enumerations.html" class="prev">
+        Enumerations
+      </a></span> <span class="next"><a href="/c/standard-math.html">
+        Standard Math
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/596.deb9ebe2.js" defer></script>
+  </body>
+</html>

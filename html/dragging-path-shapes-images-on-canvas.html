@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>HTML - Dragging Path Shapes &amp; Images on Canvas</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="How shapes & images REALLY(!) move on the Canvas, Dragging circles & rectangles around the Canvas, Dragging irregular shapes around the Canvas, Dragging images around the Canvas">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="HTML - Dragging Path Shapes & Images on Canvas">
+    <meta property="og:description" content="How shapes & images REALLY(!) move on the Canvas, Dragging circles & rectangles around the Canvas, Dragging irregular shapes around the Canvas, Dragging images around the Canvas">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/html/dragging-path-shapes-images-on-canvas.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="HTML - Dragging Path Shapes & Images on Canvas">
+    <meta name="twitter:description" content="How shapes & images REALLY(!) move on the Canvas, Dragging circles & rectangles around the Canvas, Dragging irregular shapes around the Canvas, Dragging images around the Canvas">
+    <meta name="twitter:url" content="/html/dragging-path-shapes-images-on-canvas.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1258.b8db11ee.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>HTML</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/html/" class="sidebar-link">Disclaimer</a></li><li><a href="/html/getting-started-with-html.html" class="sidebar-link">Getting started with HTML</a></li><li><a href="/html/doctypes.html" class="sidebar-link">Doctypes</a></li><li><a href="/html/headings.html" class="sidebar-link">Headings</a></li><li><a href="/html/paragraphs.html" class="sidebar-link">Paragraphs</a></li><li><a href="/html/text-formatting.html" class="sidebar-link">Text Formatting</a></li><li><a href="/html/anchors-and-hyperlinks.html" class="sidebar-link">Anchors and Hyperlinks</a></li><li><a href="/html/lists.html" class="sidebar-link">Lists</a></li><li><a href="/html/tables.html" class="sidebar-link">Tables</a></li><li><a href="/html/comments.html" class="sidebar-link">Comments</a></li><li><a href="/html/classes-and-ids.html" class="sidebar-link">Classes and IDs</a></li><li><a href="/html/data-attributes.html" class="sidebar-link">Data Attributes</a></li><li><a href="/html/linking-resources.html" class="sidebar-link">Linking Resources</a></li><li><a href="/html/include-javascript-code-in-html.html" class="sidebar-link">Include JavaScript Code in HTML</a></li><li><a href="/html/using-html-with-css.html" class="sidebar-link">Using HTML with CSS</a></li><li><a href="/html/images.html" class="sidebar-link">Images</a></li><li><a href="/html/image-maps.html" class="sidebar-link">Image Maps</a></li><li><a href="/html/input-control-elements.html" class="sidebar-link">Input Control Elements</a></li><li><a href="/html/forms.html" class="sidebar-link">Forms</a></li><li><a href="/html/div-element.html" class="sidebar-link">Div Element</a></li><li><a href="/html/sectioning-elements.html" class="sidebar-link">Sectioning Elements</a></li><li><a href="/html/navigation-bars.html" class="sidebar-link">Navigation Bars</a></li><li><a href="/html/label-element.html" class="sidebar-link">Label Element</a></li><li><a href="/html/output-element.html" class="sidebar-link">Output Element</a></li><li><a href="/html/void-elements.html" class="sidebar-link">Void Elements</a></li><li><a href="/html/media-elements.html" class="sidebar-link">Media Elements</a></li><li><a href="/html/progress-element.html" class="sidebar-link">Progress Element</a></li><li><a href="/html/selection-menu-controls.html" class="sidebar-link">Selection Menu Controls</a></li><li><a href="/html/embed.html" class="sidebar-link">Embed</a></li><li><a href="/html/iframes.html" class="sidebar-link">IFrames</a></li><li><a href="/html/content-languages.html" class="sidebar-link">Content Languages</a></li><li><a href="/html/svg.html" class="sidebar-link">SVG</a></li><li><a href="/html/canvas.html" class="sidebar-link">Canvas</a></li><li><a href="/html/meta-information.html" class="sidebar-link">Meta Information</a></li><li><a href="/html/marking-up-computer-code.html" class="sidebar-link">Marking up computer code</a></li><li><a href="/html/marking-up-quotes.html" class="sidebar-link">Marking-up Quotes</a></li><li><a href="/html/tabindex.html" class="sidebar-link">Tabindex</a></li><li><a href="/html/global-attributes.html" class="sidebar-link">Global Attributes</a></li><li><a href="/html/html-5-cache.html" class="sidebar-link">HTML 5 Cache</a></li><li><a href="/html/html-event-attributes.html" class="sidebar-link">HTML Event Attributes</a></li><li><a href="/html/character-entities.html" class="sidebar-link">Character Entities</a></li><li><a href="/html/aria.html" class="sidebar-link">ARIA</a></li><li><a href="/html/getting-started-with-html5-canvas.html" class="sidebar-link">Getting started with html5-canvas</a></li><li><a href="/html/text.html" class="sidebar-link">Text</a></li><li><a href="/html/polygons.html" class="sidebar-link">Polygons</a></li><li><a href="/html/images.html" class="sidebar-link">Images</a></li><li><a href="/html/path-syntax-only.html" class="sidebar-link">Path (Syntax only)</a></li><li><a href="/html/paths.html" class="sidebar-link">Paths</a></li><li><a href="/html/navigating-along-a-path.html" class="sidebar-link">Navigating along a Path</a></li><li><a href="/html/dragging-path-shapes-images-on-canvas.html" class="active sidebar-link">Dragging Path Shapes &amp; Images on Canvas</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/html/dragging-path-shapes-images-on-canvas.html#how-shapes-images-really-move-on-the-canvas" class="sidebar-link">How shapes &amp; images REALLY(!) &quot;move&quot; on the Canvas</a></li><li class="sidebar-sub-header"><a href="/html/dragging-path-shapes-images-on-canvas.html#dragging-circles-rectangles-around-the-canvas" class="sidebar-link">Dragging circles &amp; rectangles around the Canvas</a></li><li class="sidebar-sub-header"><a href="/html/dragging-path-shapes-images-on-canvas.html#dragging-irregular-shapes-around-the-canvas" class="sidebar-link">Dragging irregular shapes around the Canvas</a></li><li class="sidebar-sub-header"><a href="/html/dragging-path-shapes-images-on-canvas.html#dragging-images-around-the-canvas" class="sidebar-link">Dragging images around the Canvas</a></li></ul></li><li><a href="/html/media-types-and-the-canvas.html" class="sidebar-link">Media types and the canvas</a></li><li><a href="/html/animation.html" class="sidebar-link">Animation</a></li><li><a href="/html/collisions-and-intersections.html" class="sidebar-link">Collisions and Intersections</a></li><li><a href="/html/clearing-the-screen.html" class="sidebar-link">Clearing the screen</a></li><li><a href="/html/responsive-design.html" class="sidebar-link">Responsive Design</a></li><li><a href="/html/shadows.html" class="sidebar-link">Shadows</a></li><li><a href="/html/charts-diagrams.html" class="sidebar-link">Charts &amp; Diagrams</a></li><li><a href="/html/transformations.html" class="sidebar-link">Transformations</a></li><li><a href="/html/compositing.html" class="sidebar-link">Compositing</a></li><li><a href="/html/pixel-manipulation-with-getimagedata-and-putimagedata.html" class="sidebar-link">Pixel Manipulation with &quot;getImageData&quot; and &quot;putImageData&quot;</a></li><li><a href="/html/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="dragging-path-shapes-images-on-canvas"><a href="#dragging-path-shapes-images-on-canvas" class="header-anchor">#</a> Dragging Path Shapes &amp; Images on Canvas</h1> <h2 id="how-shapes-images-really-move-on-the-canvas"><a href="#how-shapes-images-really-move-on-the-canvas" class="header-anchor">#</a> How shapes &amp; images REALLY(!) &quot;move&quot; on the Canvas</h2> <p><strong>A problem: Canvas only remembers pixels, not shapes or images</strong></p> <p>This is an image of a circular beach ball, and of course, you can't drag the ball around the image.</p> <p><a href="http://i.stack.imgur.com/OEmkE.jpg" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/OEmkE.jpg" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>It may surprise you that just like an image, if you draw a circle on a Canvas you cannot drag that circle around the canvas. That's because the canvas won't remember where it drew the circle.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// this arc (==circle) is not draggable!!</span>
+context<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+context<span class="token punctuation">.</span><span class="token function">arc</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> Math<span class="token punctuation">.</span><span class="token constant">PI</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+context<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span><span class="token string">'blue'</span><span class="token punctuation">;</span>
+context<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>What the Canvas DOESN'T know...</strong></p> <ul><li>...where you drew the circle (it does not know x,y =[20,30]).</li> <li>...the size of the circle (it does not know radius=15).</li> <li>...the color of the circle. (it does not know the circle is blue).</li></ul> <p><strong>What the Canvas DOES know...</strong></p> <p>Canvas knows the color of every pixel on it's drawing surface.</p> <p>The canvas can tell you that at x,y==[20,30] there is a blue pixel, but it does not know if this blue pixel is part of a circle.</p> <p><strong>What this means...</strong></p> <p>This means everything drawn on the Canvas is permanent: immovable and unchangeable.</p> <ul><li>Canvas can't move the circle or resize the circle.</li> <li>Canvas can't recolor the circle or erase the circle.</li> <li>Canvas can't say if the mouse is hovering over the circle.</li> <li>Canvas can't say if the circle is colliding with another circle.</li> <li>Canvas can't let a user drag the circle around the Canvas.</li></ul> <p><strong>But Canvas can give the I-L-L-U-S-I-O-N of movement</strong></p> <p>Canvas can give the <strong>illusion of movement</strong> by continuously erasing the circle and redrawing it in a different position. By redrawing the Canvas many times per second, the eye is fooled into seeing the circle move across the Canvas.</p> <li>
+Erase the canvas
+</li> <li>
+Update the circle's position
+</li> <li>
+Redraw the circle in it's new position
+</li> <li>
+Repeat, repeat, repeat ...
+</li> <p>This code gives the <strong>illusion of movement</strong> by continuously redrawing a circle in new positions.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// create a canvas</span>
+<span class="token keyword">var</span> canvas<span class="token operator">=</span>document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;canvas&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ctx<span class="token operator">=</span>canvas<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">&quot;2d&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ctx<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span><span class="token string">'red'</span><span class="token punctuation">;</span>
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>canvas<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// a variable indicating a circle's X position</span>
+<span class="token keyword">var</span> circleX<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">;</span>
+
+<span class="token comment">// start animating the circle across the canvas</span>
+<span class="token comment">// by continuously erasing &amp; redrawing the circle</span>
+<span class="token comment">// in new positions</span>
+<span class="token function">requestAnimationFrame</span><span class="token punctuation">(</span>animate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">animate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// update the X position of the circle</span>
+    circleX<span class="token operator">++</span><span class="token punctuation">;</span>      
+    <span class="token comment">// redraw the circle in it's new position</span>
+    ctx<span class="token punctuation">.</span><span class="token function">clearRect</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>canvas<span class="token punctuation">.</span>width<span class="token punctuation">,</span>canvas<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">arc</span><span class="token punctuation">(</span> circleX<span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token constant">PI</span><span class="token operator">*</span><span class="token number">2</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// request another animate() loop</span>
+    <span class="token function">requestAnimationFrame</span><span class="token punctuation">(</span>animate<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="dragging-circles-rectangles-around-the-canvas"><a href="#dragging-circles-rectangles-around-the-canvas" class="header-anchor">#</a> Dragging circles &amp; rectangles around the Canvas</h2> <h3 id="what-is-a-shape"><a href="#what-is-a-shape" class="header-anchor">#</a> What is a &quot;Shape&quot;?</h3> <p>You typically save your shapes by creating a JavaScript &quot;shape&quot; object representing each shape.</p> <div class="language-html extra-class"><pre class="language-html"><code>var myCircle = { x:30, y:20, radius:15 };
+
+</code></pre></div><p>Of course, you're not really saving shapes. Instead, you're saving the definition of how to draw the shapes.</p> <p>Then put every shape-object into an array for easy reference.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// save relevant information about shapes drawn on the canvas</span>
+<span class="token keyword">var</span> shapes<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// define one circle and save it in the shapes[] array</span>
+shapes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span> y<span class="token operator">:</span><span class="token number">20</span><span class="token punctuation">,</span> radius<span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span> fillcolor<span class="token operator">:</span><span class="token string">'blue'</span><span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// define one rectangle and save it in the shapes[] array</span>
+shapes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span> y<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> width<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">,</span> height<span class="token operator">:</span><span class="token number">35</span><span class="token punctuation">,</span> fillcolor<span class="token operator">:</span><span class="token string">'red'</span><span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="using-mouse-events-to-do-dragging"><a href="#using-mouse-events-to-do-dragging" class="header-anchor">#</a> Using mouse events to do Dragging</h3> <p>Dragging a shape or image requires responding to these mouse events:</p> <p><strong>On mousedown:</strong></p> <p>Test if any shape is under the mouse. If a shape is under the mouse, the user is intending to drag that shape. So keep a reference to that shape and set a true/false <code>isDragging</code> flag indicating that a drag is in process.</p> <p><strong>On mousemove:</strong></p> <p>Calculate the distance that the mouse has been dragged since the last <code>mousemove</code> event and change the dragged shape's position by that distance. To change the shape's position, you change the <code>x,y</code> position properties in that shape's object.</p> <p><strong>On mouseup or mouseout:</strong></p> <p>The user is intending to stop the drag operation, so clear the &quot;isDragging&quot; flag. Dragging is completed.</p> <h3 id="demo-dragging-circles-rectangles-on-the-canvas"><a href="#demo-dragging-circles-rectangles-on-the-canvas" class="header-anchor">#</a> Demo: Dragging circles &amp; rectangles on the canvas</h3> <p>This demo drags circles &amp; rectangles on the canvas by responding to mouse events and giving the illusion of movement by clearing and redrawing.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// canvas related vars</span>
+<span class="token keyword">var</span> canvas<span class="token operator">=</span>document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;canvas&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ctx<span class="token operator">=</span>canvas<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">&quot;2d&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> cw<span class="token operator">=</span>canvas<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+<span class="token keyword">var</span> ch<span class="token operator">=</span>canvas<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>canvas<span class="token punctuation">)</span><span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>style<span class="token punctuation">.</span>border<span class="token operator">=</span><span class="token string">'1px solid red'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// used to calc canvas position relative to window</span>
+<span class="token keyword">function</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> <span class="token constant">BB</span><span class="token operator">=</span>canvas<span class="token punctuation">.</span><span class="token function">getBoundingClientRect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    offsetX<span class="token operator">=</span><span class="token constant">BB</span><span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+    offsetY<span class="token operator">=</span><span class="token constant">BB</span><span class="token punctuation">.</span>top<span class="token punctuation">;</span>        
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> offsetX<span class="token punctuation">,</span>offsetY<span class="token punctuation">;</span>
+<span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+window<span class="token punctuation">.</span><span class="token function-variable function">onscroll</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+window<span class="token punctuation">.</span><span class="token function-variable function">onresize</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+canvas<span class="token punctuation">.</span><span class="token function-variable function">onresize</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// save relevant information about shapes drawn on the canvas</span>
+<span class="token keyword">var</span> shapes<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// define one circle and save it in the shapes[] array</span>
+shapes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">30</span><span class="token punctuation">,</span> y<span class="token operator">:</span><span class="token number">30</span><span class="token punctuation">,</span> radius<span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span> color<span class="token operator">:</span><span class="token string">'blue'</span><span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// define one rectangle and save it in the shapes[] array</span>
+shapes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> y<span class="token operator">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> width<span class="token operator">:</span><span class="token number">75</span><span class="token punctuation">,</span> height<span class="token operator">:</span><span class="token number">35</span><span class="token punctuation">,</span> color<span class="token operator">:</span><span class="token string">'red'</span><span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// drag related vars</span>
+<span class="token keyword">var</span> isDragging<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> startX<span class="token punctuation">,</span>startY<span class="token punctuation">;</span>
+
+<span class="token comment">// hold the index of the shape being dragged (if any)</span>
+<span class="token keyword">var</span> selectedShapeIndex<span class="token punctuation">;</span>
+
+<span class="token comment">// draw the shapes on the canvas</span>
+<span class="token function">drawAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// listen for mouse events</span>
+canvas<span class="token punctuation">.</span>onmousedown<span class="token operator">=</span>handleMouseDown<span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>onmousemove<span class="token operator">=</span>handleMouseMove<span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>onmouseup<span class="token operator">=</span>handleMouseUp<span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>onmouseout<span class="token operator">=</span>handleMouseOut<span class="token punctuation">;</span>
+
+<span class="token comment">// given mouse X &amp; Y (mx &amp; my) and shape object</span>
+<span class="token comment">// return true/false whether mouse is inside the shape</span>
+<span class="token keyword">function</span> <span class="token function">isMouseInShape</span><span class="token punctuation">(</span><span class="token parameter">mx<span class="token punctuation">,</span>my<span class="token punctuation">,</span>shape</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>radius<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// this is a circle</span>
+        <span class="token keyword">var</span> dx<span class="token operator">=</span>mx<span class="token operator">-</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> dy<span class="token operator">=</span>my<span class="token operator">-</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token comment">// math test to see if mouse is inside circle</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>dx<span class="token operator">*</span>dx<span class="token operator">+</span>dy<span class="token operator">*</span>dy<span class="token operator">&lt;</span>shape<span class="token punctuation">.</span>radius<span class="token operator">*</span>shape<span class="token punctuation">.</span>radius<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// yes, mouse is inside this circle</span>
+            <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>width<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// this is a rectangle</span>
+        <span class="token keyword">var</span> rLeft<span class="token operator">=</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rRight<span class="token operator">=</span>shape<span class="token punctuation">.</span>x<span class="token operator">+</span>shape<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rTop<span class="token operator">=</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rBott<span class="token operator">=</span>shape<span class="token punctuation">.</span>y<span class="token operator">+</span>shape<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+        <span class="token comment">// math test to see if mouse is inside rectangle</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> mx<span class="token operator">&gt;</span>rLeft <span class="token operator">&amp;&amp;</span> mx<span class="token operator">&lt;</span>rRight <span class="token operator">&amp;&amp;</span> my<span class="token operator">&gt;</span>rTop <span class="token operator">&amp;&amp;</span> my<span class="token operator">&lt;</span>rBott<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// the mouse isn't in any of the shapes</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseDown</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// calculate the current mouse position</span>
+    startX<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientX<span class="token operator">-</span>offsetX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    startY<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientY<span class="token operator">-</span>offsetY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// test mouse position against all shapes</span>
+    <span class="token comment">// post result if mouse is in a shape</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>shapes<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isMouseInShape</span><span class="token punctuation">(</span>startX<span class="token punctuation">,</span>startY<span class="token punctuation">,</span>shapes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// the mouse is inside this shape</span>
+            <span class="token comment">// select this shape</span>
+            selectedShapeIndex<span class="token operator">=</span>i<span class="token punctuation">;</span>
+            <span class="token comment">// set the isDragging flag</span>
+            isDragging<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token comment">// and return (==stop looking for </span>
+            <span class="token comment">//     further shapes under the mouse)</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseUp</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return if we're not dragging</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isDragging<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// the drag is over -- clear the isDragging flag</span>
+    isDragging<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseOut</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return if we're not dragging</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isDragging<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// the drag is over -- clear the isDragging flag</span>
+    isDragging<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseMove</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return if we're not dragging</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isDragging<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// calculate the current mouse position         </span>
+    mouseX<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientX<span class="token operator">-</span>offsetX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    mouseY<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientY<span class="token operator">-</span>offsetY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// how far has the mouse dragged from its previous mousemove position?</span>
+    <span class="token keyword">var</span> dx<span class="token operator">=</span>mouseX<span class="token operator">-</span>startX<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> dy<span class="token operator">=</span>mouseY<span class="token operator">-</span>startY<span class="token punctuation">;</span>
+    <span class="token comment">// move the selected shape by the drag distance</span>
+    <span class="token keyword">var</span> selectedShape<span class="token operator">=</span>shapes<span class="token punctuation">[</span>selectedShapeIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    selectedShape<span class="token punctuation">.</span>x<span class="token operator">+=</span>dx<span class="token punctuation">;</span>
+    selectedShape<span class="token punctuation">.</span>y<span class="token operator">+=</span>dy<span class="token punctuation">;</span>
+    <span class="token comment">// clear the canvas and redraw all shapes</span>
+    <span class="token function">drawAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// update the starting drag position (== the current mouse position)</span>
+    startX<span class="token operator">=</span>mouseX<span class="token punctuation">;</span>
+    startY<span class="token operator">=</span>mouseY<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// clear the canvas and </span>
+<span class="token comment">// redraw all shapes in their current positions</span>
+<span class="token keyword">function</span> <span class="token function">drawAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span><span class="token function">clearRect</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>cw<span class="token punctuation">,</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>shapes<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> shape<span class="token operator">=</span>shapes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>radius<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// it's a circle</span>
+            ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">arc</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>radius<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token constant">PI</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span>shape<span class="token punctuation">.</span>color<span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>width<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// it's a rectangle</span>
+            ctx<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span>shape<span class="token punctuation">.</span>color<span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">fillRect</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>width<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="dragging-irregular-shapes-around-the-canvas"><a href="#dragging-irregular-shapes-around-the-canvas" class="header-anchor">#</a> Dragging irregular shapes around the Canvas</h2> <p>Most Canvas drawings are either rectangular (rectangles, images, text-blocks) or circular (circles).</p> <p>Circles &amp; rectangles have mathematical tests to check if the mouse is inside them. This makes testing circles and rectangles easy, quick and efficient. You can &quot;hit-test&quot; hundreds of circles or rectangles in a fraction of a second.</p> <p>You can also drag irregular shapes. But irregular shapes have no quick mathematical hit-test. Fortunately, irregular shapes do have a built-in hit-test to determine if a point (mouse) is inside the shape: <code>context.isPointInPath</code>. While <code>isPointInPath</code> works well, it is not nearly as efficient as purely mathematical hit-tests -- it is often up to 10X slower than pure mathematical hit-tests.</p> <p>One requirement when using <code>isPointInPath</code> is that you must &quot;redefine&quot; the Path being tested immediately before calling <code>isPointInPath</code>. &quot;Redefine&quot; means you must issue the path drawing commands (as above), but you don't need to stroke() or fill() the Path before testing it with <code>isPointInPath</code>. This way you can test previously drawn Paths without having to overwrite (stroke/fill) those previous Paths on the Canvas itself.</p> <p>The irregular shape doesn't need to be as common as the everyday triangle. You can also hit-test any wildly irregular Paths.</p> <p>This annotated example shows how to drag irregular Path shapes as well as circles and rectangles:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// canvas related vars</span>
+<span class="token keyword">var</span> canvas<span class="token operator">=</span>document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;canvas&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ctx<span class="token operator">=</span>canvas<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">&quot;2d&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> cw<span class="token operator">=</span>canvas<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+<span class="token keyword">var</span> ch<span class="token operator">=</span>canvas<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>canvas<span class="token punctuation">)</span><span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>style<span class="token punctuation">.</span>border<span class="token operator">=</span><span class="token string">'1px solid red'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// used to calc canvas position relative to window</span>
+<span class="token keyword">function</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> <span class="token constant">BB</span><span class="token operator">=</span>canvas<span class="token punctuation">.</span><span class="token function">getBoundingClientRect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    offsetX<span class="token operator">=</span><span class="token constant">BB</span><span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+    offsetY<span class="token operator">=</span><span class="token constant">BB</span><span class="token punctuation">.</span>top<span class="token punctuation">;</span>        
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> offsetX<span class="token punctuation">,</span>offsetY<span class="token punctuation">;</span>
+<span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+window<span class="token punctuation">.</span><span class="token function-variable function">onscroll</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+window<span class="token punctuation">.</span><span class="token function-variable function">onresize</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+canvas<span class="token punctuation">.</span><span class="token function-variable function">onresize</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// save relevant information about shapes drawn on the canvas</span>
+<span class="token keyword">var</span> shapes<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token comment">// define one circle and save it in the shapes[] array</span>
+shapes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">20</span><span class="token punctuation">,</span> y<span class="token operator">:</span><span class="token number">20</span><span class="token punctuation">,</span> radius<span class="token operator">:</span><span class="token number">15</span><span class="token punctuation">,</span> color<span class="token operator">:</span><span class="token string">'blue'</span><span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// define one rectangle and save it in the shapes[] array</span>
+shapes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> y<span class="token operator">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> width<span class="token operator">:</span><span class="token number">75</span><span class="token punctuation">,</span> height<span class="token operator">:</span><span class="token number">35</span><span class="token punctuation">,</span> color<span class="token operator">:</span><span class="token string">'red'</span><span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// define one triangle path and save it in the shapes[] array</span>
+shapes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span> y<span class="token operator">:</span><span class="token number">0</span><span class="token punctuation">,</span> points<span class="token operator">:</span><span class="token punctuation">[</span><span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">50</span><span class="token punctuation">,</span>y<span class="token operator">:</span><span class="token number">30</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">75</span><span class="token punctuation">,</span>y<span class="token operator">:</span><span class="token number">60</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">25</span><span class="token punctuation">,</span>y<span class="token operator">:</span><span class="token number">60</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>color<span class="token operator">:</span><span class="token string">'green'</span><span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// drag related vars</span>
+<span class="token keyword">var</span> isDragging<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> startX<span class="token punctuation">,</span>startY<span class="token punctuation">;</span>
+
+<span class="token comment">// hold the index of the shape being dragged (if any)</span>
+<span class="token keyword">var</span> selectedShapeIndex<span class="token punctuation">;</span>
+
+<span class="token comment">// draw the shapes on the canvas</span>
+<span class="token function">drawAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// listen for mouse events</span>
+canvas<span class="token punctuation">.</span>onmousedown<span class="token operator">=</span>handleMouseDown<span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>onmousemove<span class="token operator">=</span>handleMouseMove<span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>onmouseup<span class="token operator">=</span>handleMouseUp<span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>onmouseout<span class="token operator">=</span>handleMouseOut<span class="token punctuation">;</span>
+
+<span class="token comment">// given mouse X &amp; Y (mx &amp; my) and shape object</span>
+<span class="token comment">// return true/false whether mouse is inside the shape</span>
+<span class="token keyword">function</span> <span class="token function">isMouseInShape</span><span class="token punctuation">(</span><span class="token parameter">mx<span class="token punctuation">,</span>my<span class="token punctuation">,</span>shape</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>radius<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// this is a circle</span>
+        <span class="token keyword">var</span> dx<span class="token operator">=</span>mx<span class="token operator">-</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> dy<span class="token operator">=</span>my<span class="token operator">-</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token comment">// math test to see if mouse is inside circle</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>dx<span class="token operator">*</span>dx<span class="token operator">+</span>dy<span class="token operator">*</span>dy<span class="token operator">&lt;</span>shape<span class="token punctuation">.</span>radius<span class="token operator">*</span>shape<span class="token punctuation">.</span>radius<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// yes, mouse is inside this circle</span>
+            <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>width<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// this is a rectangle</span>
+        <span class="token keyword">var</span> rLeft<span class="token operator">=</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rRight<span class="token operator">=</span>shape<span class="token punctuation">.</span>x<span class="token operator">+</span>shape<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rTop<span class="token operator">=</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rBott<span class="token operator">=</span>shape<span class="token punctuation">.</span>y<span class="token operator">+</span>shape<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+        <span class="token comment">// math test to see if mouse is inside rectangle</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> mx<span class="token operator">&gt;</span>rLeft <span class="token operator">&amp;&amp;</span> mx<span class="token operator">&lt;</span>rRight <span class="token operator">&amp;&amp;</span> my<span class="token operator">&gt;</span>rTop <span class="token operator">&amp;&amp;</span> my<span class="token operator">&lt;</span>rBott<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>points<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// this is a polyline path</span>
+        <span class="token comment">// First redefine the path again (no need to stroke/fill!)</span>
+        <span class="token function">defineIrregularPath</span><span class="token punctuation">(</span>shape<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// Then hit-test with isPointInPath</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>ctx<span class="token punctuation">.</span><span class="token function">isPointInPath</span><span class="token punctuation">(</span>mx<span class="token punctuation">,</span>my<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>                
+    <span class="token punctuation">}</span>
+    <span class="token comment">// the mouse isn't in any of the shapes</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseDown</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// calculate the current mouse position</span>
+    startX<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientX<span class="token operator">-</span>offsetX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    startY<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientY<span class="token operator">-</span>offsetY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// test mouse position against all shapes</span>
+    <span class="token comment">// post result if mouse is in a shape</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>shapes<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isMouseInShape</span><span class="token punctuation">(</span>startX<span class="token punctuation">,</span>startY<span class="token punctuation">,</span>shapes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// the mouse is inside this shape</span>
+            <span class="token comment">// select this shape</span>
+            selectedShapeIndex<span class="token operator">=</span>i<span class="token punctuation">;</span>
+            <span class="token comment">// set the isDragging flag</span>
+            isDragging<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token comment">// and return (==stop looking for </span>
+            <span class="token comment">//     further shapes under the mouse)</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseUp</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return if we're not dragging</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isDragging<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// the drag is over -- clear the isDragging flag</span>
+    isDragging<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseOut</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return if we're not dragging</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isDragging<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// the drag is over -- clear the isDragging flag</span>
+    isDragging<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseMove</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return if we're not dragging</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isDragging<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// calculate the current mouse position         </span>
+    mouseX<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientX<span class="token operator">-</span>offsetX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    mouseY<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientY<span class="token operator">-</span>offsetY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// how far has the mouse dragged from its previous mousemove position?</span>
+    <span class="token keyword">var</span> dx<span class="token operator">=</span>mouseX<span class="token operator">-</span>startX<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> dy<span class="token operator">=</span>mouseY<span class="token operator">-</span>startY<span class="token punctuation">;</span>
+    <span class="token comment">// move the selected shape by the drag distance</span>
+    <span class="token keyword">var</span> selectedShape<span class="token operator">=</span>shapes<span class="token punctuation">[</span>selectedShapeIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    selectedShape<span class="token punctuation">.</span>x<span class="token operator">+=</span>dx<span class="token punctuation">;</span>
+    selectedShape<span class="token punctuation">.</span>y<span class="token operator">+=</span>dy<span class="token punctuation">;</span>
+    <span class="token comment">// clear the canvas and redraw all shapes</span>
+    <span class="token function">drawAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// update the starting drag position (== the current mouse position)</span>
+    startX<span class="token operator">=</span>mouseX<span class="token punctuation">;</span>
+    startY<span class="token operator">=</span>mouseY<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// clear the canvas and </span>
+<span class="token comment">// redraw all shapes in their current positions</span>
+<span class="token keyword">function</span> <span class="token function">drawAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span><span class="token function">clearRect</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>cw<span class="token punctuation">,</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>shapes<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> shape<span class="token operator">=</span>shapes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>radius<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// it's a circle</span>
+            ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">arc</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>radius<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token constant">PI</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span>shape<span class="token punctuation">.</span>color<span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>width<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// it's a rectangle</span>
+            ctx<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span>shape<span class="token punctuation">.</span>color<span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">fillRect</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>width<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>points<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// its a polyline path</span>
+            <span class="token function">defineIrregularPath</span><span class="token punctuation">(</span>shape<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span>fillStyle<span class="token operator">=</span>shape<span class="token punctuation">.</span>color<span class="token punctuation">;</span>
+            ctx<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">defineIrregularPath</span><span class="token punctuation">(</span><span class="token parameter">shape</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> points<span class="token operator">=</span>shape<span class="token punctuation">.</span>points<span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">beginPath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">moveTo</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>x<span class="token operator">+</span>points<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>y<span class="token operator">+</span>points<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>points<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        ctx<span class="token punctuation">.</span><span class="token function">lineTo</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>x<span class="token operator">+</span>points<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>x<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>y<span class="token operator">+</span>points<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    ctx<span class="token punctuation">.</span><span class="token function">closePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="dragging-images-around-the-canvas"><a href="#dragging-images-around-the-canvas" class="header-anchor">#</a> Dragging images around the Canvas</h2> <p>See this <a href="http://stackoverflow.com/documentation/html5-canvas/5318/dragging-path-shapes-images-on-canvas" target="_blank" rel="noopener noreferrer">Example<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> for a general explanation of dragging Shapes around the Canvas.</p> <p>This annotated example shows how to drag images around the Canvas</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// canvas related vars</span>
+<span class="token keyword">var</span> canvas<span class="token operator">=</span>document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">&quot;canvas&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> ctx<span class="token operator">=</span>canvas<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">&quot;2d&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>width<span class="token operator">=</span><span class="token number">378</span><span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>height<span class="token operator">=</span><span class="token number">378</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> cw<span class="token operator">=</span>canvas<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+<span class="token keyword">var</span> ch<span class="token operator">=</span>canvas<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>canvas<span class="token punctuation">)</span><span class="token punctuation">;</span>
+canvas<span class="token punctuation">.</span>style<span class="token punctuation">.</span>border<span class="token operator">=</span><span class="token string">'1px solid red'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// used to calc canvas position relative to window</span>
+<span class="token keyword">function</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> <span class="token constant">BB</span><span class="token operator">=</span>canvas<span class="token punctuation">.</span><span class="token function">getBoundingClientRect</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    offsetX<span class="token operator">=</span><span class="token constant">BB</span><span class="token punctuation">.</span>left<span class="token punctuation">;</span>
+    offsetY<span class="token operator">=</span><span class="token constant">BB</span><span class="token punctuation">.</span>top<span class="token punctuation">;</span>        
+<span class="token punctuation">}</span>
+<span class="token keyword">var</span> offsetX<span class="token punctuation">,</span>offsetY<span class="token punctuation">;</span>
+<span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+window<span class="token punctuation">.</span><span class="token function-variable function">onscroll</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+window<span class="token punctuation">.</span><span class="token function-variable function">onresize</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+canvas<span class="token punctuation">.</span><span class="token function-variable function">onresize</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token function">reOffset</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+<span class="token comment">// save relevant information about shapes drawn on the canvas</span>
+<span class="token keyword">var</span> shapes<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token comment">// drag related vars</span>
+<span class="token keyword">var</span> isDragging<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> startX<span class="token punctuation">,</span>startY<span class="token punctuation">;</span>
+
+<span class="token comment">// hold the index of the shape being dragged (if any)</span>
+<span class="token keyword">var</span> selectedShapeIndex<span class="token punctuation">;</span>
+
+<span class="token comment">// load the image</span>
+<span class="token keyword">var</span> card<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+card<span class="token punctuation">.</span><span class="token function-variable function">onload</span><span class="token operator">=</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// define one image and save it in the shapes[] array</span>
+    shapes<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span> <span class="token punctuation">{</span>x<span class="token operator">:</span><span class="token number">30</span><span class="token punctuation">,</span> y<span class="token operator">:</span><span class="token number">10</span><span class="token punctuation">,</span> width<span class="token operator">:</span><span class="token number">127</span><span class="token punctuation">,</span> height<span class="token operator">:</span><span class="token number">150</span><span class="token punctuation">,</span> image<span class="token operator">:</span>card<span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// draw the shapes on the canvas</span>
+    <span class="token function">drawAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// listen for mouse events</span>
+    canvas<span class="token punctuation">.</span>onmousedown<span class="token operator">=</span>handleMouseDown<span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span>onmousemove<span class="token operator">=</span>handleMouseMove<span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span>onmouseup<span class="token operator">=</span>handleMouseUp<span class="token punctuation">;</span>
+    canvas<span class="token punctuation">.</span>onmouseout<span class="token operator">=</span>handleMouseOut<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// put your image src here!</span>
+card<span class="token punctuation">.</span>src<span class="token operator">=</span><span class="token string">'https://dl.dropboxusercontent.com/u/139992952/stackoverflow/card.png'</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">// given mouse X &amp; Y (mx &amp; my) and shape object</span>
+<span class="token comment">// return true/false whether mouse is inside the shape</span>
+<span class="token keyword">function</span> <span class="token function">isMouseInShape</span><span class="token punctuation">(</span><span class="token parameter">mx<span class="token punctuation">,</span>my<span class="token punctuation">,</span>shape</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// is this shape an image?</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>image<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment">// this is a rectangle</span>
+        <span class="token keyword">var</span> rLeft<span class="token operator">=</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rRight<span class="token operator">=</span>shape<span class="token punctuation">.</span>x<span class="token operator">+</span>shape<span class="token punctuation">.</span>width<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rTop<span class="token operator">=</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+        <span class="token keyword">var</span> rBott<span class="token operator">=</span>shape<span class="token punctuation">.</span>y<span class="token operator">+</span>shape<span class="token punctuation">.</span>height<span class="token punctuation">;</span>
+        <span class="token comment">// math test to see if mouse is inside image</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span> mx<span class="token operator">&gt;</span>rLeft <span class="token operator">&amp;&amp;</span> mx<span class="token operator">&lt;</span>rRight <span class="token operator">&amp;&amp;</span> my<span class="token operator">&gt;</span>rTop <span class="token operator">&amp;&amp;</span> my<span class="token operator">&lt;</span>rBott<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// the mouse isn't in any of this shapes</span>
+    <span class="token keyword">return</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseDown</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// calculate the current mouse position</span>
+    startX<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientX<span class="token operator">-</span>offsetX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    startY<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientY<span class="token operator">-</span>offsetY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// test mouse position against all shapes</span>
+    <span class="token comment">// post result if mouse is in a shape</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>shapes<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token function">isMouseInShape</span><span class="token punctuation">(</span>startX<span class="token punctuation">,</span>startY<span class="token punctuation">,</span>shapes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// the mouse is inside this shape</span>
+            <span class="token comment">// select this shape</span>
+            selectedShapeIndex<span class="token operator">=</span>i<span class="token punctuation">;</span>
+            <span class="token comment">// set the isDragging flag</span>
+            isDragging<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token comment">// and return (==stop looking for </span>
+            <span class="token comment">//     further shapes under the mouse)</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseUp</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return if we're not dragging</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isDragging<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// the drag is over -- clear the isDragging flag</span>
+    isDragging<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseOut</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return if we're not dragging</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isDragging<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// the drag is over -- clear the isDragging flag</span>
+    isDragging<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">handleMouseMove</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token comment">// return if we're not dragging</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>isDragging<span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+    <span class="token comment">// tell the browser we're handling this event</span>
+    e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    e<span class="token punctuation">.</span><span class="token function">stopPropagation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// calculate the current mouse position         </span>
+    mouseX<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientX<span class="token operator">-</span>offsetX<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    mouseY<span class="token operator">=</span><span class="token function">parseInt</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>clientY<span class="token operator">-</span>offsetY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// how far has the mouse dragged from its previous mousemove position?</span>
+    <span class="token keyword">var</span> dx<span class="token operator">=</span>mouseX<span class="token operator">-</span>startX<span class="token punctuation">;</span>
+    <span class="token keyword">var</span> dy<span class="token operator">=</span>mouseY<span class="token operator">-</span>startY<span class="token punctuation">;</span>
+    <span class="token comment">// move the selected shape by the drag distance</span>
+    <span class="token keyword">var</span> selectedShape<span class="token operator">=</span>shapes<span class="token punctuation">[</span>selectedShapeIndex<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    selectedShape<span class="token punctuation">.</span>x<span class="token operator">+=</span>dx<span class="token punctuation">;</span>
+    selectedShape<span class="token punctuation">.</span>y<span class="token operator">+=</span>dy<span class="token punctuation">;</span>
+    <span class="token comment">// clear the canvas and redraw all shapes</span>
+    <span class="token function">drawAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// update the starting drag position (== the current mouse position)</span>
+    startX<span class="token operator">=</span>mouseX<span class="token punctuation">;</span>
+    startY<span class="token operator">=</span>mouseY<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// clear the canvas and </span>
+<span class="token comment">// redraw all shapes in their current positions</span>
+<span class="token keyword">function</span> <span class="token function">drawAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    ctx<span class="token punctuation">.</span><span class="token function">clearRect</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span>cw<span class="token punctuation">,</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">var</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>shapes<span class="token punctuation">.</span>length<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> shape<span class="token operator">=</span>shapes<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>image<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">// it's an image</span>
+            ctx<span class="token punctuation">.</span><span class="token function">drawImage</span><span class="token punctuation">(</span>shape<span class="token punctuation">.</span>image<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>x<span class="token punctuation">,</span>shape<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/html/dragging-path-shapes-images-on-canvas.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/html/navigating-along-a-path.html" class="prev">
+        Navigating along a Path
+      </a></span> <span class="next"><a href="/html/media-types-and-the-canvas.html">
+        Media types and the canvas
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1258.b8db11ee.js" defer></script>
+  </body>
+</html>

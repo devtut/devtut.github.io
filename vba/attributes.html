@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VBA - Attributes</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="VB_PredeclaredId, VB_[Var]UserMemId, VB_Exposed, VB_Description, VB_Name, VB_GlobalNameSpace, VB_Createable">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="VBA - Attributes">
+    <meta property="og:description" content="VB_PredeclaredId, VB_[Var]UserMemId, VB_Exposed, VB_Description, VB_Name, VB_GlobalNameSpace, VB_Createable">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vba/attributes.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="VBA - Attributes">
+    <meta name="twitter:description" content="VB_PredeclaredId, VB_[Var]UserMemId, VB_Exposed, VB_Description, VB_Name, VB_GlobalNameSpace, VB_Createable">
+    <meta name="twitter:url" content="/vba/attributes.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3403.57c4c2ec.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vba/" class="sidebar-link">Disclaimer</a></li><li><a href="/vba/getting-started-with-vba.html" class="sidebar-link">Getting started with VBA</a></li><li><a href="/vba/comments.html" class="sidebar-link">Comments</a></li><li><a href="/vba/string-literals-escaping-non-printable-characters-and-line-continuations.html" class="sidebar-link">String Literals - Escaping, non-printable characters and line-continuations</a></li><li><a href="/vba/vba-option-keyword.html" class="sidebar-link">VBA Option Keyword</a></li><li><a href="/vba/declaring-variables.html" class="sidebar-link">Declaring Variables</a></li><li><a href="/vba/declaring-and-assigning-strings.html" class="sidebar-link">Declaring and assigning strings</a></li><li><a href="/vba/concatenating-strings.html" class="sidebar-link">Concatenating strings</a></li><li><a href="/vba/frequently-used-string-manipulation.html" class="sidebar-link">Frequently used string manipulation</a></li><li><a href="/vba/substrings.html" class="sidebar-link">Substrings</a></li><li><a href="/vba/searching-within-strings-for-the-presence-of-substrings.html" class="sidebar-link">Searching within strings for the presence of substrings</a></li><li><a href="/vba/assigning-strings-with-repeated-characters.html" class="sidebar-link">Assigning strings with repeated characters</a></li><li><a href="/vba/measuring-the-length-of-strings.html" class="sidebar-link">Measuring the length of strings</a></li><li><a href="/vba/converting-other-types-to-strings.html" class="sidebar-link">Converting other types to strings</a></li><li><a href="/vba/date-time-manipulation.html" class="sidebar-link">Date Time Manipulation</a></li><li><a href="/vba/data-types-and-limits.html" class="sidebar-link">Data Types and Limits</a></li><li><a href="/vba/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/vba/data-structures.html" class="sidebar-link">Data Structures</a></li><li><a href="/vba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/vba/copying-returning-and-passing-arrays.html" class="sidebar-link">Copying, returning and passing arrays</a></li><li><a href="/vba/collections.html" class="sidebar-link">Collections</a></li><li><a href="/vba/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vba/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/vba/flow-control-structures.html" class="sidebar-link">Flow control structures</a></li><li><a href="/vba/passing-arguments-byref-or-byval.html" class="sidebar-link">Passing Arguments ByRef or ByVal</a></li><li><a href="/vba/scripting-filesystemobject.html" class="sidebar-link">Scripting.FileSystemObject</a></li><li><a href="/vba/working-with-files-and-directories-without-using-filesystemobject.html" class="sidebar-link">Working With Files and Directories Without Using FileSystemObject</a></li><li><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html" class="sidebar-link">Reading 2GB+ files in binary in VBA and File Hashes</a></li><li><a href="/vba/creating-a-procedure.html" class="sidebar-link">Creating a procedure</a></li><li><a href="/vba/procedure-calls.html" class="sidebar-link">Procedure Calls</a></li><li><a href="/vba/conditional-compilation.html" class="sidebar-link">Conditional Compilation</a></li><li><a href="/vba/object-oriented-vba.html" class="sidebar-link">Object-Oriented VBA</a></li><li><a href="/vba/creating-a-custom-class.html" class="sidebar-link">Creating a Custom Class</a></li><li><a href="/vba/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/vba/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vba/events.html" class="sidebar-link">Events</a></li><li><a href="/vba/scripting-dictionary-object.html" class="sidebar-link">Scripting.Dictionary object</a></li><li><a href="/vba/working-with-ado.html" class="sidebar-link">Working with ADO</a></li><li><a href="/vba/attributes.html" class="active sidebar-link">Attributes</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vba/attributes.html#vb-predeclaredid" class="sidebar-link">VB_PredeclaredId</a></li><li class="sidebar-sub-header"><a href="/vba/attributes.html#vb-var-usermemid" class="sidebar-link">VB_[Var]UserMemId</a></li><li class="sidebar-sub-header"><a href="/vba/attributes.html#vb-exposed" class="sidebar-link">VB_Exposed</a></li><li class="sidebar-sub-header"><a href="/vba/attributes.html#vb-description" class="sidebar-link">VB_Description</a></li><li class="sidebar-sub-header"><a href="/vba/attributes.html#vb-name" class="sidebar-link">VB_Name</a></li><li class="sidebar-sub-header"><a href="/vba/attributes.html#vb-globalnamespace" class="sidebar-link">VB_GlobalNameSpace</a></li><li class="sidebar-sub-header"><a href="/vba/attributes.html#vb-createable" class="sidebar-link">VB_Createable</a></li></ul></li><li><a href="/vba/user-forms.html" class="sidebar-link">User Forms</a></li><li><a href="/vba/createobject-vs-getobject.html" class="sidebar-link">CreateObject vs. GetObject</a></li><li><a href="/vba/non-latin-characters.html" class="sidebar-link">Non-Latin Characters</a></li><li><a href="/vba/api-calls.html" class="sidebar-link">API Calls</a></li><li><a href="/vba/automation-or-using-other-applications-libraries.html" class="sidebar-link">Automation or Using other applications Libraries</a></li><li><a href="/vba/macro-security-and-signing-of-vba-projects-modules.html" class="sidebar-link">Macro security and signing of VBA-projects/-modules</a></li><li><a href="/vba/vba-run-time-errors.html" class="sidebar-link">VBA Run-Time Errors</a></li><li><a href="/vba/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="attributes"><a href="#attributes" class="header-anchor">#</a> Attributes</h1> <h2 id="vb-predeclaredid"><a href="#vb-predeclaredid" class="header-anchor">#</a> VB_PredeclaredId</h2> <p>Creates a Global Default Instance of a class. The default instance is accessed via the name of the class.</p> <h3 id="declaration"><a href="#declaration" class="header-anchor">#</a> Declaration</h3> <div class="language-vb extra-class"><pre class="language-vb"><code>VERSION <span class="token number">1.0</span> <span class="token keyword">CLASS</span>
+BEGIN
+  MultiUse <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span>  <span class="token comment">'True</span>
+<span class="token keyword">END</span>
+Attribute VB_Name <span class="token operator">=</span> <span class="token string">&quot;Class1&quot;</span>
+Attribute VB_GlobalNameSpace <span class="token operator">=</span> <span class="token boolean">False</span>
+Attribute VB_Creatable <span class="token operator">=</span> <span class="token boolean">False</span>
+Attribute VB_PredeclaredId <span class="token operator">=</span> <span class="token boolean">True</span>
+Attribute VB_Exposed <span class="token operator">=</span> <span class="token boolean">False</span>
+<span class="token keyword">Option</span> Explicit
+
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> GiveMeATwo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+    GiveMeATwo <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><h3 id="call"><a href="#call" class="header-anchor">#</a> Call</h3> <div class="language-vb extra-class"><pre class="language-vb"><code>Debug<span class="token punctuation">.</span>Print Class1<span class="token punctuation">.</span>GiveMeATwo
+
+</code></pre></div><p>In some ways, this simulates the behavior of static classes in other languages, but unlike other languages, you can still create an instance of the class.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> cls <span class="token keyword">As</span> Class1
+<span class="token keyword">Set</span> cls <span class="token operator">=</span> <span class="token keyword">New</span> Class1
+Debug<span class="token punctuation">.</span>Print cls<span class="token punctuation">.</span>GiveMeATwo
+
+</code></pre></div><h2 id="vb-var-usermemid"><a href="#vb-var-usermemid" class="header-anchor">#</a> VB_[Var]UserMemId</h2> <p><code>VB_VarUserMemId</code> (for module-scope variables) and <code>VB_UserMemId</code> (for procedures) attributes are used in VBA mostly for two things.</p> <h3 id="specifying-the-default-member-of-a-class"><a href="#specifying-the-default-member-of-a-class" class="header-anchor">#</a> Specifying the default member of a class</h3> <p>A <code>List</code> class that would encapsulate a <code>Collection</code> would want to have an <code>Item</code> property, so the client code can do this:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">For</span> i <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">To</span> myList<span class="token punctuation">.</span>Count <span class="token comment">'VBA Collection Objects are 1-based</span>
+    Debug<span class="token punctuation">.</span>Print myList<span class="token punctuation">.</span>Item<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span class="token keyword">Next</span>
+
+</code></pre></div><p>But with a <code>VB_UserMemId</code> attribute set to 0 on the <code>Item</code> property, the client code can do this:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">For</span> i <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">To</span> myList<span class="token punctuation">.</span>Count <span class="token comment">'VBA Collection Objects are 1-based</span>
+    Debug<span class="token punctuation">.</span>Print myList<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span class="token keyword">Next</span>
+
+</code></pre></div><p>Only one member can legally have <code>VB_UserMemId = 0</code> in any given class. For properties, specify the attribute in the <code>Get</code> accessor:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+<span class="token keyword">Private</span> internal <span class="token keyword">As</span> <span class="token keyword">New</span> Collection
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> Count<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    Count <span class="token operator">=</span> internal<span class="token punctuation">.</span>Count
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> Item<span class="token punctuation">(</span><span class="token keyword">ByVal</span> index <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+Attribute Item<span class="token punctuation">.</span>VB_Description <span class="token operator">=</span> <span class="token string">&quot;Gets or sets the element at the specified index.&quot;</span>
+Attribute Item<span class="token punctuation">.</span>VB_UserMemId <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token comment">'Gets the element at the specified index.</span>
+    Item <span class="token operator">=</span> internal<span class="token punctuation">(</span>index<span class="token punctuation">)</span>    
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> Item<span class="token punctuation">(</span><span class="token keyword">ByVal</span> index <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">)</span>
+<span class="token comment">'Sets the element at the specified index.    </span>
+    <span class="token keyword">With</span> internal
+        <span class="token keyword">If</span> index <span class="token operator">=</span> <span class="token punctuation">.</span>Count <span class="token operator">+</span> <span class="token number">1</span> <span class="token keyword">Then</span>
+            <span class="token punctuation">.</span>Add item<span class="token punctuation">:</span><span class="token operator">=</span>value
+        <span class="token keyword">ElseIf</span> index <span class="token operator">=</span> <span class="token punctuation">.</span>Count <span class="token keyword">Then</span>
+            <span class="token punctuation">.</span>Remove index
+            <span class="token punctuation">.</span>Add item<span class="token punctuation">:</span><span class="token operator">=</span>value
+        <span class="token keyword">ElseIf</span> index <span class="token operator">&lt;</span> <span class="token punctuation">.</span>Count <span class="token keyword">Then</span>
+            <span class="token punctuation">.</span>Remove index
+            <span class="token punctuation">.</span>Add item<span class="token punctuation">:</span><span class="token operator">=</span>value<span class="token punctuation">,</span> before<span class="token punctuation">:</span><span class="token operator">=</span>index
+        <span class="token keyword">End</span> <span class="token keyword">If</span>
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+</code></pre></div><h3 id="making-a-class-iteratable-with-a-for-each-loop-construct"><a href="#making-a-class-iteratable-with-a-for-each-loop-construct" class="header-anchor">#</a> Making a class iteratable with a <code>For Each</code> loop construct</h3> <p>With the magic value <code>-4</code>, the <code>VB_UserMemId</code> attribute tells VBA that this member yields an enumerator - which allows the client code to do this:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> item <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+<span class="token keyword">For</span> <span class="token keyword">Each</span> item <span class="token keyword">In</span> myList
+    Debug<span class="token punctuation">.</span>Print item
+<span class="token keyword">Next</span>
+
+</code></pre></div><p>The easiest way to implement this method is by calling the hidden <code>[_NewEnum]</code> property getter on an internal/encapsulated <code>Collection</code>; the identifier needs to be enclosed in square brackets because of the leading underscore that makes it an illegal VBA identifier:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> NewEnum<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> IUnknown
+Attribute NewEnum<span class="token punctuation">.</span>VB_Description <span class="token operator">=</span> <span class="token string">&quot;Gets an enumerator that iterates through the List.&quot;</span>
+Attribute NewEnum<span class="token punctuation">.</span>VB_UserMemId <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">4</span>
+Attribute NewEnum<span class="token punctuation">.</span>VB_MemberFlags <span class="token operator">=</span> <span class="token string">&quot;40&quot;</span> <span class="token comment">'would hide the member in VB6. not supported in VBA.</span>
+<span class="token comment">'Gets an enumerator that iterates through the List.</span>
+    <span class="token keyword">Set</span> NewEnum <span class="token operator">=</span> internal<span class="token punctuation">.</span>[_NewEnum]    
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+</code></pre></div><h2 id="vb-exposed"><a href="#vb-exposed" class="header-anchor">#</a> VB_Exposed</h2> <p>Controls the instancing characteristics of a class.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>Attribute VB_Exposed <span class="token operator">=</span> <span class="token boolean">False</span>
+
+</code></pre></div><p>Makes the class <code>Private</code>. It cannot be accessed outside of the current project.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>Attribute VB_Exposed <span class="token operator">=</span> <span class="token boolean">True</span>
+
+</code></pre></div><p>Exposes the class <code>Public</code>ly, outside of the project. However, since <code>VB_Createable</code> is ignored in VBA, instances of the class can not be created directly. This is equivalent to a the following VB.Net class.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Class</span> Foo
+    <span class="token keyword">Friend</span> <span class="token keyword">Sub</span> <span class="token keyword">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Class</span>    
+
+</code></pre></div><p>In order to get an instance from outside the project, you must expose a factory to create instances. One way of doing this is with a regular <code>Public</code> module.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Function</span> CreateFoo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> Foo
+    CreateFoo <span class="token operator">=</span> <span class="token keyword">New</span> Foo
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>Since public modules are accessible from other projects, this allows us to create new instances of our <code>Public - Not Createable</code> classes.</p> <h2 id="vb-description"><a href="#vb-description" class="header-anchor">#</a> VB_Description</h2> <p>Adds a text description to a class or module member that becomes visible in the Object Explorer. Ideally, all public members of a public interface / API should have a description.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Function</span> GiveMeATwo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+    Attribute GiveMeATwo<span class="token punctuation">.</span>VB_Description <span class="token operator">=</span> <span class="token string">&quot;Returns a two!&quot;</span>        
+    GiveMeATwo <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+</code></pre></div><img src="http://i.stack.imgur.com/VbxOf.png" alt="Description Text in Object Explorer"> <p>Note: all accessor members of a property (<code>Get</code>, <code>Let</code>, <code>Set</code>) use the same description.</p> <h2 id="vb-name"><a href="#vb-name" class="header-anchor">#</a> VB_Name</h2> <p>VB_Name specifies the class or module name.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>Attribute VB_Name <span class="token operator">=</span> <span class="token string">&quot;Class1&quot;</span>
+
+</code></pre></div><p>A new instance of this class would be created with</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> <span class="token keyword">myClass</span> <span class="token keyword">As</span> Class1
+<span class="token keyword">myClass</span> <span class="token operator">=</span> <span class="token keyword">new</span> Class1
+
+</code></pre></div><h2 id="vb-globalnamespace"><a href="#vb-globalnamespace" class="header-anchor">#</a> VB_GlobalNameSpace</h2> <p><strong>In VBA, this attribute is ignored.</strong> It was not ported over from VB6.</p> <p>In VB6, it creates a Default Global Instance of the class (a &quot;shortcut&quot;) so that class members can be accessed without using the class name. For example, <code>DateTime</code> (as in <code>DateTime.Now</code>) is actually part of the <code>VBA.Conversion</code> class.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>Debug<span class="token punctuation">.</span>Print VBA<span class="token punctuation">.</span>Conversion<span class="token punctuation">.</span>DateTime<span class="token punctuation">.</span>Now
+Debug<span class="token punctuation">.</span>Print DateTime<span class="token punctuation">.</span>Now
+
+</code></pre></div><h2 id="vb-createable"><a href="#vb-createable" class="header-anchor">#</a> VB_Createable</h2> <p><strong>This attribute is ignored.</strong> It was not ported over from VB6.</p> <p>In VB6, it was used in combination with the <code>VB_Exposed</code> attribute to control accessibility of classes outside of the current project.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>VB_Exposed<span class="token operator">=</span><span class="token boolean">True</span> 
+VB_Creatable<span class="token operator">=</span><span class="token boolean">True</span>
+
+</code></pre></div><p>Would result in a <code>Public Class</code>, that could be accessed from other projects, but this functionality does not exist in VBA.</p> <h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>Attribute VB_Name = &quot;ClassOrModuleName&quot;</li> <li>Attribute VB_GlobalNameSpace = False ' Ignored</li> <li>Attribute VB_Creatable = False ' Ignored</li> <li>Attribute VB_PredeclaredId = {True | False}</li> <li>Attribute VB_Exposed = {True | False}</li> <li>Attribute variableName.VB_VarUserMemId = 0 ' Zero indicates that this is the default member of the class.</li> <li>Attribute variableName.VB_VarDescription = &quot;some string&quot; ' Adds the text to the Object Browser information for this variable.</li> <li>Attribute procName.VB_Description = &quot;some string&quot; ' Adds the text to the Object Browser information for the procedure.
+</li><li>Attribute procName.VB_UserMemId = {0 | -4}
+<ul></ul></li> <li>'  0: Makes the function the default member of the class.</li> <li>' -4: Specifies that the function returns an Enumerator.</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vba/attributes.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vba/working-with-ado.html" class="prev">
+        Working with ADO
+      </a></span> <span class="next"><a href="/vba/user-forms.html">
+        User Forms
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3403.57c4c2ec.js" defer></script>
+  </body>
+</html>

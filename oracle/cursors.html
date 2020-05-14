@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Oracle Database - Cursors</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Parameterized FOR loop Cursor , Implicit FOR loop cursor, Handling a CURSOR, Working with SYS_REFCURSOR">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Oracle Database - Cursors">
+    <meta property="og:description" content="Parameterized FOR loop Cursor , Implicit FOR loop cursor, Handling a CURSOR, Working with SYS_REFCURSOR">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/oracle/cursors.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Oracle Database - Cursors">
+    <meta name="twitter:description" content="Parameterized FOR loop Cursor , Implicit FOR loop cursor, Handling a CURSOR, Working with SYS_REFCURSOR">
+    <meta name="twitter:url" content="/oracle/cursors.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2334.bc6dc653.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Oracle Database</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/oracle/" class="sidebar-link">Disclaimer</a></li><li><a href="/oracle/getting-started-with-oracle-database.html" class="sidebar-link">Getting started with Oracle Database</a></li><li><a href="/oracle/anonymous-pl-sql-block.html" class="sidebar-link">Anonymous PL/SQL Block</a></li><li><a href="/oracle/data-dictionary.html" class="sidebar-link">Data Dictionary</a></li><li><a href="/oracle/dates.html" class="sidebar-link">Dates</a></li><li><a href="/oracle/working-with-dates.html" class="sidebar-link">Working with Dates</a></li><li><a href="/oracle/dual-table.html" class="sidebar-link">DUAL table</a></li><li><a href="/oracle/joins.html" class="sidebar-link">JOINS</a></li><li><a href="/oracle/handling-null-values.html" class="sidebar-link">Handling NULL values</a></li><li><a href="/oracle/string-manipulation.html" class="sidebar-link">String Manipulation</a></li><li><a href="/oracle/limiting-the-rows-returned-by-a-query-pagination.html" class="sidebar-link">Limiting the rows returned by a query (Pagination)</a></li><li><a href="/oracle/recursive-sub-query-factoring-using-the-with-clause-a-k-a-common-table-expressions.html" class="sidebar-link">Recursive Sub-Query Factoring using the WITH Clause (A.K.A. Common Table Expressions)</a></li><li><a href="/oracle/different-ways-to-update-records.html" class="sidebar-link">Different ways to update records</a></li><li><a href="/oracle/update-with-joins.html" class="sidebar-link">Update with Joins</a></li><li><a href="/oracle/statistical-functions.html" class="sidebar-link">Statistical functions</a></li><li><a href="/oracle/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/oracle/creating-a-context.html" class="sidebar-link">Creating a Context</a></li><li><a href="/oracle/splitting-delimited-strings.html" class="sidebar-link">Splitting Delimited Strings</a></li><li><a href="/oracle/sequences.html" class="sidebar-link">Sequences</a></li><li><a href="/oracle/indexes.html" class="sidebar-link">Indexes</a></li><li><a href="/oracle/hints.html" class="sidebar-link">Hints</a></li><li><a href="/oracle/error-logging.html" class="sidebar-link">Error logging</a></li><li><a href="/oracle/database-links.html" class="sidebar-link">Database Links</a></li><li><a href="/oracle/table-partitioning.html" class="sidebar-link">Table partitioning</a></li><li><a href="/oracle/oracle-advanced-queuing-aq.html" class="sidebar-link">Oracle Advanced Queuing (AQ)</a></li><li><a href="/oracle/constraints.html" class="sidebar-link">constraints</a></li><li><a href="/oracle/autonomous-transactions.html" class="sidebar-link">Autonomous Transactions</a></li><li><a href="/oracle/oracle-maf.html" class="sidebar-link">Oracle MAF</a></li><li><a href="/oracle/level-query.html" class="sidebar-link">level query</a></li><li><a href="/oracle/hierarchical-retrieval-with-oracle-database-12c.html" class="sidebar-link">Hierarchical Retrieval With Oracle Database 12C</a></li><li><a href="/oracle/data-pump.html" class="sidebar-link">Data Pump</a></li><li><a href="/oracle/real-application-security.html" class="sidebar-link">Real Application Security</a></li><li><a href="/oracle/dynamic-sql.html" class="sidebar-link">Dynamic SQL</a></li><li><a href="/oracle/delimiting-keywords-or-special-characters.html" class="sidebar-link">Delimiting keywords or special characters</a></li><li><a href="/oracle/getting-started-with-plsql.html" class="sidebar-link">Getting started with plsql</a></li><li><a href="/oracle/plsql-procedure.html" class="sidebar-link">PLSQL procedure</a></li><li><a href="/oracle/if-then-else-statement.html" class="sidebar-link">IF-THEN-ELSE Statement</a></li><li><a href="/oracle/functions.html" class="sidebar-link">Functions</a></li><li><a href="/oracle/collections-and-records.html" class="sidebar-link">Collections and Records</a></li><li><a href="/oracle/object-types.html" class="sidebar-link">Object Types</a></li><li><a href="/oracle/loop.html" class="sidebar-link">Loop</a></li><li><a href="/oracle/cursors.html" class="active sidebar-link">Cursors</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/oracle/cursors.html#parameterized-for-loop-cursor" class="sidebar-link">Parameterized &quot;FOR loop&quot; Cursor</a></li><li class="sidebar-sub-header"><a href="/oracle/cursors.html#implicit-for-loop-cursor" class="sidebar-link">Implicit &quot;FOR loop&quot; cursor</a></li><li class="sidebar-sub-header"><a href="/oracle/cursors.html#handling-a-cursor" class="sidebar-link">Handling a CURSOR</a></li><li class="sidebar-sub-header"><a href="/oracle/cursors.html#working-with-sys-refcursor" class="sidebar-link">Working with SYS_REFCURSOR</a></li></ul></li><li><a href="/oracle/packages.html" class="sidebar-link">Packages</a></li><li><a href="/oracle/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/oracle/bulk-collect.html" class="sidebar-link">Bulk collect</a></li><li><a href="/oracle/assignments-model-and-language.html" class="sidebar-link">Assignments model and language</a></li><li><a href="/oracle/triggers.html" class="sidebar-link">Triggers</a></li><li><a href="/oracle/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/oracle/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="cursors"><a href="#cursors" class="header-anchor">#</a> Cursors</h1> <h2 id="parameterized-for-loop-cursor"><a href="#parameterized-for-loop-cursor" class="header-anchor">#</a> Parameterized &quot;FOR loop&quot; Cursor</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">DECLARE</span>
+  <span class="token keyword">CURSOR</span> c_emp_to_be_raised<span class="token punctuation">(</span>p_sal emp<span class="token punctuation">.</span>sal<span class="token operator">%</span><span class="token keyword">TYPE</span><span class="token punctuation">)</span> <span class="token operator">IS</span> 
+    <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> emp <span class="token keyword">WHERE</span>  sal <span class="token operator">&lt;</span> p_sal<span class="token punctuation">;</span>
+<span class="token keyword">BEGIN</span>
+  <span class="token keyword">FOR</span> cRowEmp <span class="token operator">IN</span> c_emp_to_be_raised<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span> <span class="token keyword">LOOP</span>
+    dbms_Output<span class="token punctuation">.</span>Put_Line<span class="token punctuation">(</span>cRowEmp <span class="token punctuation">.</span>eName <span class="token operator">||</span><span class="token string">' '</span> <span class="token operator">||</span>cRowEmp<span class="token punctuation">.</span>sal<span class="token operator">||</span><span class="token string">'... should be raised ;)'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">END</span> <span class="token keyword">LOOP</span><span class="token punctuation">;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+
+</code></pre></div><h2 id="implicit-for-loop-cursor"><a href="#implicit-for-loop-cursor" class="header-anchor">#</a> Implicit &quot;FOR loop&quot; cursor</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">BEGIN</span>
+  <span class="token keyword">FOR</span> x <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> emp <span class="token keyword">WHERE</span> sal <span class="token operator">&lt;</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token keyword">LOOP</span>
+    dbms_Output<span class="token punctuation">.</span>Put_Line<span class="token punctuation">(</span>x<span class="token punctuation">.</span>eName <span class="token operator">||</span><span class="token string">' '</span><span class="token operator">||</span>x<span class="token punctuation">.</span>sal<span class="token operator">||</span><span class="token string">'... should REALLY be raised :D'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">END</span> <span class="token keyword">LOOP</span><span class="token punctuation">;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+
+</code></pre></div><ul><li>First advantage is there is no tedious declaration to do (think of this horrible &quot;CURSOR&quot; thing you had in previous versions)</li> <li>second advantage is you first build your select query, then when you have what you want, you immediately can access the fields of your query (<code>x.&lt;myfield&gt;</code>) in your PL/SQL loop</li> <li>The loop opens the cursor and fetches one record at a time for every loop. At the end of the loop the cursor is closed.</li> <li>Implicit cursors are faster because the interpreter's work grows as the code gets longer. The less code the less work the interpreter has to do.</li></ul> <h2 id="handling-a-cursor"><a href="#handling-a-cursor" class="header-anchor">#</a> Handling a CURSOR</h2> <ul><li>Declare the cursor to scan a list of records</li> <li>Open it</li> <li>Fetch current record into variables (this increments position)</li> <li>Use <code>%notfound</code> to detect end of list</li> <li>Don't forget to close the cursor to limit resources consumption in current context</li></ul> <p>--</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">DECLARE</span>
+  <span class="token keyword">CURSOR</span> curCols <span class="token operator">IS</span> <span class="token comment">-- select column name and type from a given table</span>
+         <span class="token keyword">SELECT</span> column_name<span class="token punctuation">,</span> data_type <span class="token keyword">FROM</span> all_tab_columns <span class="token keyword">where</span> table_name<span class="token operator">=</span><span class="token string">'MY_TABLE'</span><span class="token punctuation">;</span>
+  v_tab_column all_tab_columns<span class="token punctuation">.</span>column_name<span class="token operator">%</span><span class="token keyword">TYPE</span><span class="token punctuation">;</span>
+  v_data_type all_tab_columns<span class="token punctuation">.</span>data_type<span class="token operator">%</span><span class="token keyword">TYPE</span><span class="token punctuation">;</span>
+  v_ <span class="token keyword">INTEGER</span> :<span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">BEGIN</span>
+  <span class="token keyword">OPEN</span> curCols<span class="token punctuation">;</span>
+  <span class="token keyword">LOOP</span>
+     <span class="token keyword">FETCH</span> curCols <span class="token keyword">INTO</span> v_tab_column<span class="token punctuation">,</span> v_data_type<span class="token punctuation">;</span>
+     <span class="token keyword">IF</span> curCols<span class="token operator">%</span>notfound <span class="token operator">OR</span> v_ <span class="token operator">&gt;</span> <span class="token number">2000</span> <span class="token keyword">THEN</span>
+       <span class="token keyword">EXIT</span><span class="token punctuation">;</span>
+     <span class="token keyword">END</span> <span class="token keyword">IF</span><span class="token punctuation">;</span>
+     dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span>v_<span class="token operator">||</span><span class="token string">':Column '</span><span class="token operator">||</span>v_tab_column<span class="token operator">||</span><span class="token string">' is of '</span><span class="token operator">||</span> v_data_type<span class="token operator">||</span><span class="token string">' Type.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     v_:<span class="token operator">=</span> v_ <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">END</span> <span class="token keyword">LOOP</span><span class="token punctuation">;</span>
+
+  <span class="token comment">-- Close in any case</span>
+  <span class="token keyword">IF</span> curCols<span class="token operator">%</span>ISOPEN <span class="token keyword">THEN</span>  
+     <span class="token keyword">CLOSE</span> curCols<span class="token punctuation">;</span>
+  <span class="token keyword">END</span> <span class="token keyword">IF</span><span class="token punctuation">;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+
+</code></pre></div><h2 id="working-with-sys-refcursor"><a href="#working-with-sys-refcursor" class="header-anchor">#</a> Working with SYS_REFCURSOR</h2> <p><code>SYS_REFCURSOR</code> can be used as a return type when you need to easily handle a list returned not from a table, but more specifically from a function:</p> <h3 id="function-returning-a-cursor"><a href="#function-returning-a-cursor" class="header-anchor">#</a> function returning a cursor</h3> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">FUNCTION</span> list_of <span class="token punctuation">(</span>required_type_in <span class="token operator">IN</span> VARCHAR2<span class="token punctuation">)</span>
+   <span class="token keyword">RETURN</span> SYS_REFCURSOR
+<span class="token operator">IS</span>
+   v_ SYS_REFCURSOR<span class="token punctuation">;</span>
+<span class="token keyword">BEGIN</span>
+   <span class="token keyword">CASE</span> required_type_in
+      <span class="token keyword">WHEN</span> <span class="token string">'CATS'</span>
+      <span class="token keyword">THEN</span>
+         <span class="token keyword">OPEN</span> v_ <span class="token keyword">FOR</span>
+           <span class="token keyword">SELECT</span> nickname <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
+                <span class="token keyword">select</span> <span class="token string">'minou'</span> nickname <span class="token keyword">from</span> dual
+      <span class="token keyword">union</span> <span class="token keyword">all</span> <span class="token keyword">select</span> <span class="token string">'minâ'</span>           <span class="token keyword">from</span> dual
+      <span class="token keyword">union</span> <span class="token keyword">all</span> <span class="token keyword">select</span> <span class="token string">'minon'</span>          <span class="token keyword">from</span> dual         
+           <span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">WHEN</span> <span class="token string">'DOGS'</span>
+      <span class="token keyword">THEN</span>
+         <span class="token keyword">OPEN</span> v_ <span class="token keyword">FOR</span>
+              <span class="token keyword">SELECT</span> dog_call <span class="token keyword">FROM</span> <span class="token punctuation">(</span>
+                <span class="token keyword">select</span> <span class="token string">'bill'</span>   dog_call <span class="token keyword">from</span> dual
+      <span class="token keyword">union</span> <span class="token keyword">all</span> <span class="token keyword">select</span> <span class="token string">'nestor'</span>          <span class="token keyword">from</span> dual
+      <span class="token keyword">union</span> <span class="token keyword">all</span> <span class="token keyword">select</span> <span class="token string">'raoul'</span>           <span class="token keyword">from</span> dual         
+           <span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">END</span> <span class="token keyword">CASE</span><span class="token punctuation">;</span>
+   <span class="token comment">-- Whit this use, you must not close the cursor.</span>
+   <span class="token keyword">RETURN</span> v_<span class="token punctuation">;</span>
+<span class="token keyword">END</span> list_of<span class="token punctuation">;</span>
+<span class="token operator">/</span>
+
+</code></pre></div><h3 id="and-how-to-use-it"><a href="#and-how-to-use-it" class="header-anchor">#</a> and how to use it:</h3> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">DECLARE</span>
+   v_names   SYS_REFCURSOR<span class="token punctuation">;</span>
+   v_        VARCHAR2 <span class="token punctuation">(</span><span class="token number">32767</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">BEGIN</span>
+   v_names :<span class="token operator">=</span> list_of<span class="token punctuation">(</span><span class="token string">'CATS'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">LOOP</span>
+      <span class="token keyword">FETCH</span> v_names <span class="token keyword">INTO</span> v_<span class="token punctuation">;</span>
+      <span class="token keyword">EXIT</span> <span class="token keyword">WHEN</span> v_names<span class="token operator">%</span>NOTFOUND<span class="token punctuation">;</span>
+      DBMS_OUTPUT<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span>v_<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token keyword">END</span> <span class="token keyword">LOOP</span><span class="token punctuation">;</span>
+   <span class="token comment">-- here you close it</span>
+   <span class="token keyword">CLOSE</span> v_names<span class="token punctuation">;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>Cursor <strong>cursor_name</strong> Is <strong>your_select_statement</strong></li> <li>Cursor <strong>cursor_name</strong>(param TYPE) Is <strong>your_select_statement_using_param</strong></li> <li>FOR x in (<strong>your_select_statement</strong>) LOOP ...</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p><strong>Declared Cursors</strong> are difficult to use, and you should prefer <code>FOR</code> loops in most cases. What's very interesting in cursors compared to simple <code>FOR</code> loops, is that you can parameterize them.</p> <p>It's better to avoid doing loops with PL/SQL and cursors instead of using Oracle SQL anyway. However, For people accustomed to procedural language, it can be far easier to understand.</p> <p>If you want to check if a record exists, and then do different things depending on whether the record exists or not, then it makes sense to <a href="http://stackoverflow.com/documentation/oracle/4193/different-ways-to-update-records/14689/update-using-merge#t=20160803063310475484" target="_blank" rel="noopener noreferrer">use <code>MERGE</code> statements<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> in pure ORACLE SQL queries instead of using cursor loops.
+(Please note that <code>MERGE</code> is only available in Oracle releases &gt;= 9i).</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/oracle/cursors.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/oracle/loop.html" class="prev">
+        Loop
+      </a></span> <span class="next"><a href="/oracle/packages.html">
+        Packages
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2334.bc6dc653.js" defer></script>
+  </body>
+</html>

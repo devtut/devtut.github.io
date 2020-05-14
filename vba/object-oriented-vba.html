@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VBA - Object-Oriented VBA</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Abstraction, Encapsulation, Polymorphism">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="VBA - Object-Oriented VBA">
+    <meta property="og:description" content="Abstraction, Encapsulation, Polymorphism">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vba/object-oriented-vba.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="VBA - Object-Oriented VBA">
+    <meta name="twitter:description" content="Abstraction, Encapsulation, Polymorphism">
+    <meta name="twitter:url" content="/vba/object-oriented-vba.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3430.6ff53f60.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vba/" class="sidebar-link">Disclaimer</a></li><li><a href="/vba/getting-started-with-vba.html" class="sidebar-link">Getting started with VBA</a></li><li><a href="/vba/comments.html" class="sidebar-link">Comments</a></li><li><a href="/vba/string-literals-escaping-non-printable-characters-and-line-continuations.html" class="sidebar-link">String Literals - Escaping, non-printable characters and line-continuations</a></li><li><a href="/vba/vba-option-keyword.html" class="sidebar-link">VBA Option Keyword</a></li><li><a href="/vba/declaring-variables.html" class="sidebar-link">Declaring Variables</a></li><li><a href="/vba/declaring-and-assigning-strings.html" class="sidebar-link">Declaring and assigning strings</a></li><li><a href="/vba/concatenating-strings.html" class="sidebar-link">Concatenating strings</a></li><li><a href="/vba/frequently-used-string-manipulation.html" class="sidebar-link">Frequently used string manipulation</a></li><li><a href="/vba/substrings.html" class="sidebar-link">Substrings</a></li><li><a href="/vba/searching-within-strings-for-the-presence-of-substrings.html" class="sidebar-link">Searching within strings for the presence of substrings</a></li><li><a href="/vba/assigning-strings-with-repeated-characters.html" class="sidebar-link">Assigning strings with repeated characters</a></li><li><a href="/vba/measuring-the-length-of-strings.html" class="sidebar-link">Measuring the length of strings</a></li><li><a href="/vba/converting-other-types-to-strings.html" class="sidebar-link">Converting other types to strings</a></li><li><a href="/vba/date-time-manipulation.html" class="sidebar-link">Date Time Manipulation</a></li><li><a href="/vba/data-types-and-limits.html" class="sidebar-link">Data Types and Limits</a></li><li><a href="/vba/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/vba/data-structures.html" class="sidebar-link">Data Structures</a></li><li><a href="/vba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/vba/copying-returning-and-passing-arrays.html" class="sidebar-link">Copying, returning and passing arrays</a></li><li><a href="/vba/collections.html" class="sidebar-link">Collections</a></li><li><a href="/vba/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vba/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/vba/flow-control-structures.html" class="sidebar-link">Flow control structures</a></li><li><a href="/vba/passing-arguments-byref-or-byval.html" class="sidebar-link">Passing Arguments ByRef or ByVal</a></li><li><a href="/vba/scripting-filesystemobject.html" class="sidebar-link">Scripting.FileSystemObject</a></li><li><a href="/vba/working-with-files-and-directories-without-using-filesystemobject.html" class="sidebar-link">Working With Files and Directories Without Using FileSystemObject</a></li><li><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html" class="sidebar-link">Reading 2GB+ files in binary in VBA and File Hashes</a></li><li><a href="/vba/creating-a-procedure.html" class="sidebar-link">Creating a procedure</a></li><li><a href="/vba/procedure-calls.html" class="sidebar-link">Procedure Calls</a></li><li><a href="/vba/conditional-compilation.html" class="sidebar-link">Conditional Compilation</a></li><li><a href="/vba/object-oriented-vba.html" class="active sidebar-link">Object-Oriented VBA</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vba/object-oriented-vba.html#abstraction" class="sidebar-link">Abstraction</a></li><li class="sidebar-sub-header"><a href="/vba/object-oriented-vba.html#encapsulation" class="sidebar-link">Encapsulation</a></li><li class="sidebar-sub-header"><a href="/vba/object-oriented-vba.html#polymorphism" class="sidebar-link">Polymorphism</a></li></ul></li><li><a href="/vba/creating-a-custom-class.html" class="sidebar-link">Creating a Custom Class</a></li><li><a href="/vba/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/vba/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vba/events.html" class="sidebar-link">Events</a></li><li><a href="/vba/scripting-dictionary-object.html" class="sidebar-link">Scripting.Dictionary object</a></li><li><a href="/vba/working-with-ado.html" class="sidebar-link">Working with ADO</a></li><li><a href="/vba/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/vba/user-forms.html" class="sidebar-link">User Forms</a></li><li><a href="/vba/createobject-vs-getobject.html" class="sidebar-link">CreateObject vs. GetObject</a></li><li><a href="/vba/non-latin-characters.html" class="sidebar-link">Non-Latin Characters</a></li><li><a href="/vba/api-calls.html" class="sidebar-link">API Calls</a></li><li><a href="/vba/automation-or-using-other-applications-libraries.html" class="sidebar-link">Automation or Using other applications Libraries</a></li><li><a href="/vba/macro-security-and-signing-of-vba-projects-modules.html" class="sidebar-link">Macro security and signing of VBA-projects/-modules</a></li><li><a href="/vba/vba-run-time-errors.html" class="sidebar-link">VBA Run-Time Errors</a></li><li><a href="/vba/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="object-oriented-vba"><a href="#object-oriented-vba" class="header-anchor">#</a> Object-Oriented VBA</h1> <h2 id="abstraction"><a href="#abstraction" class="header-anchor">#</a> Abstraction</h2> <h3 id="abstraction-levels-help-determine-when-to-split-things-up"><a href="#abstraction-levels-help-determine-when-to-split-things-up" class="header-anchor">#</a> Abstraction levels help determine when to split things up.</h3> <p>Abstraction is achieved by implementing functionality with increasingly detailed code. The entry point of a macro should be a small procedure with a <strong>high abstraction level</strong> that makes it easy to grasp at a glance what's going on:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">With</span> <span class="token keyword">New</span> SomeForm
+        <span class="token keyword">Set</span> <span class="token punctuation">.</span>Model <span class="token operator">=</span> CreateViewModel
+        <span class="token punctuation">.</span>Show vbModal            
+        <span class="token keyword">If</span> <span class="token punctuation">.</span>IsCancelled <span class="token keyword">Then</span> <span class="token keyword">Exit</span> <span class="token keyword">Sub</span>
+        ProcessUserData <span class="token punctuation">.</span>Model
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The <code>DoSomething</code> procedure has a high <strong>abstraction level</strong>: we can tell that it's displaying a form and creating some model, and passing that object to some <code>ProcessUserData</code> procedure that knows what to do with it - how the model is created is the job of another procedure:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Function</span> CreateViewModel<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> ISomeModel
+    <span class="token keyword">Dim</span> result <span class="token keyword">As</span> ISomeModel
+    <span class="token keyword">Set</span> result <span class="token operator">=</span> SomeModel<span class="token punctuation">.</span>Create<span class="token punctuation">(</span>Now<span class="token punctuation">,</span> Environ<span class="token operator">$</span><span class="token punctuation">(</span><span class="token string">&quot;UserName&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    result<span class="token punctuation">.</span>AvailableItems <span class="token operator">=</span> GetAvailableItems
+    <span class="token keyword">Set</span> CreateViewModel <span class="token operator">=</span> result
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>The <code>CreateViewModel</code> function is only responsible for creating some <code>ISomeModel</code> instance. Part of that responsibility is to acquire an array of <strong>available items</strong> - how these items are acquired is an implementation detail that's abstracted behind the <code>GetAvailableItems</code> procedure:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Function</span> GetAvailableItems<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+    GetAvailableItems <span class="token operator">=</span> DataSheet<span class="token punctuation">.</span>Names<span class="token punctuation">(</span><span class="token string">&quot;AvailableItems&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>RefersToRange
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>Here the procedure is reading the available values from a named range on a <code>DataSheet</code> worksheet. It could just as well be reading them from a database, or the values could be hard-coded: it's an <strong>implementation detail</strong> that's none of a concern for any of the higher abstraction levels.</p> <h2 id="encapsulation"><a href="#encapsulation" class="header-anchor">#</a> Encapsulation</h2> <h3 id="encapsulation-hides-implementation-details-from-client-code"><a href="#encapsulation-hides-implementation-details-from-client-code" class="header-anchor">#</a> Encapsulation hides implementation details from client code.</h3> <p>The <a href="http://stackoverflow.com/documentation/vba/5351/user-forms/19037/handling-queryclose#t=201608091819108848528" target="_blank" rel="noopener noreferrer">Handling QueryClose<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> example demonstrates encapsulation: the form has a checkbox control, but its client code doesn't work with it directly - the checkbox is an <strong>implementation detail</strong>, what the client code needs to know is whether the setting is enabled or not.</p> <p>When the checkbox value changes, the handler assigns a private field member:</p> <blockquote></blockquote> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> Type TView
+    IsCancelled <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    SomeOtherSetting <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    <span class="token comment">'other properties skipped for brievety</span>
+<span class="token keyword">End</span> Type
+<span class="token keyword">Private</span> this <span class="token keyword">As</span> TView
+
+<span class="token comment">'...</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> SomeOtherSettingInput_Change<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>SomeOtherSetting <span class="token operator">=</span> <span class="token keyword">CBool</span><span class="token punctuation">(</span>SomeOtherSettingInput<span class="token punctuation">.</span>Value<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>And when the client code wants to read that value, it doesn't need to worry about a checkbox - instead it simply uses the <code>SomeOtherSetting</code> property:</p> <blockquote></blockquote> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> SomeOtherSetting<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    SomeOtherSetting <span class="token operator">=</span> this<span class="token punctuation">.</span>SomeOtherSetting
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+</code></pre></div><p>The <code>SomeOtherSetting</code> property <strong>encapsulates</strong> the checkbox' state; client code doesn't need to know that there's a checkbox involved, only that there's a setting with a Boolean value. By <strong>encapsulating</strong> the <code>Boolean</code> value, we've added an <strong>abstraction layer</strong> around the checkbox.</p> <h3 id="using-interfaces-to-enforce-immutability"><a href="#using-interfaces-to-enforce-immutability" class="header-anchor">#</a> Using interfaces to enforce immutability</h3> <p>Let's push that a step further by <strong>encapsulating</strong> the form's <strong>model</strong> in a dedicated class module. But if we made a <code>Public Property</code> for the <code>UserName</code> and <code>Timestamp</code>, we would have to expose <code>Property Let</code> accessors, making the properties mutable, and we don't want the client code to have the ability to change these values after they're set.</p> <p>The <code>CreateViewModel</code> function in the <strong>Abstraction</strong> example returns an <code>ISomeModel</code> class: that's our <strong>interface</strong>, and it looks something like this:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> Timestamp<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Date</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> UserName<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> AvailableItems<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> AvailableItems<span class="token punctuation">(</span><span class="token keyword">ByRef</span> value <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> SomeSetting<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> SomeSetting<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> SomeOtherSetting<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> SomeOtherSetting<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+</code></pre></div><p>Notice <code>Timestamp</code> and <code>UserName</code> properties only expose a <code>Property Get</code> accessor. Now the <code>SomeModel</code> class can implement that interface:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+<span class="token keyword">Implements</span> ISomeModel
+
+<span class="token keyword">Private</span> Type TModel
+    Timestamp <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    UserName <span class="token keyword">As</span> <span class="token keyword">String</span>
+    SomeSetting <span class="token keyword">As</span> <span class="token keyword">String</span>
+    SomeOtherSetting <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    AvailableItems <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+<span class="token keyword">End</span> Type
+<span class="token keyword">Private</span> this <span class="token keyword">As</span> TModel
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ISomeModel_Timestamp<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    ISomeModel_Timestamp <span class="token operator">=</span> this<span class="token punctuation">.</span>Timestamp
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ISomeModel_UserName<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    ISomeModel_UserName <span class="token operator">=</span> this<span class="token punctuation">.</span>UserName
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ISomeModel_AvailableItems<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+    ISomeModel_AvailableItems <span class="token operator">=</span> this<span class="token punctuation">.</span>AvailableItems
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> ISomeModel_AvailableItems<span class="token punctuation">(</span><span class="token keyword">ByRef</span> value <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>AvailableItems <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ISomeModel_SomeSetting<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    ISomeModel_SomeSetting <span class="token operator">=</span> this<span class="token punctuation">.</span>SomeSetting
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> ISomeModel_SomeSetting<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>SomeSetting <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ISomeModel_SomeOtherSetting<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    ISomeModel_SomeOtherSetting <span class="token operator">=</span> this<span class="token punctuation">.</span>SomeOtherSetting
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> ISomeModel_SomeOtherSetting<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>SomeOtherSetting <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> Timestamp<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Date</span>
+    Timestamp <span class="token operator">=</span> this<span class="token punctuation">.</span>Timestamp
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> Timestamp<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">Date</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>Timestamp <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> UserName<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    UserName <span class="token operator">=</span> this<span class="token punctuation">.</span>UserName
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> UserName<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>UserName <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> AvailableItems<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Variant</span>
+    AvailableItems <span class="token operator">=</span> this<span class="token punctuation">.</span>AvailableItems
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> AvailableItems<span class="token punctuation">(</span><span class="token keyword">ByRef</span> value <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>AvailableItems <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> SomeSetting<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    SomeSetting <span class="token operator">=</span> this<span class="token punctuation">.</span>SomeSetting
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> SomeSetting<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>SomeSetting <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> SomeOtherSetting<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    SomeOtherSetting <span class="token operator">=</span> this<span class="token punctuation">.</span>SomeOtherSetting
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> SomeOtherSetting<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>SomeOtherSetting <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+</code></pre></div><p>The interface members are all <code>Private</code>, and all members of the interface must be implemented for the code to compile. The <code>Public</code> members are not part of the interface, and are therefore not exposed to code written against the <code>ISomeModel</code> interface.</p> <h3 id="using-a-factory-method-to-simulate-a-constructor"><a href="#using-a-factory-method-to-simulate-a-constructor" class="header-anchor">#</a> Using a <strong>Factory Method</strong> to simulate a constructor</h3> <p>Using a <a href="http://stackoverflow.com/documentation/vba/5321/attributes/18932/vb-predeclaredid#t=201608091940164849835" target="_blank" rel="noopener noreferrer">VB_PredeclaredId<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> attribute, we can make the <code>SomeModel</code> class have a <strong>default instance</strong>, and write a function that works like a type-level (<code>Shared</code> in VB.NET, <code>static</code> in C#) member that the client code can call without needing to first create an instance, like we did here:</p> <blockquote></blockquote> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Function</span> CreateViewModel<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> ISomeModel
+    <span class="token keyword">Dim</span> result <span class="token keyword">As</span> ISomeModel
+    <span class="token keyword">Set</span> result <span class="token operator">=</span> SomeModel<span class="token punctuation">.</span>Create<span class="token punctuation">(</span>Now<span class="token punctuation">,</span> Environ<span class="token operator">$</span><span class="token punctuation">(</span><span class="token string">&quot;UserName&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    result<span class="token punctuation">.</span>AvailableItems <span class="token operator">=</span> GetAvailableItems
+    <span class="token keyword">Set</span> CreateViewModel <span class="token operator">=</span> result
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>This <strong>factory method</strong> assigns the property values that are read-only when accessed from the <code>ISomeModel</code> interface, here <code>Timestamp</code> and <code>UserName</code>:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Function</span> Create<span class="token punctuation">(</span><span class="token keyword">ByVal</span> pTimeStamp <span class="token keyword">As</span> <span class="token keyword">Date</span><span class="token punctuation">,</span> <span class="token keyword">ByVal</span> pUserName <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span> <span class="token keyword">As</span> ISomeModel
+    <span class="token keyword">With</span> <span class="token keyword">New</span> SomeModel
+        <span class="token punctuation">.</span>Timestamp <span class="token operator">=</span> pTimeStamp
+        <span class="token punctuation">.</span>UserName <span class="token operator">=</span> pUserName
+        <span class="token keyword">Set</span> Create <span class="token operator">=</span> <span class="token punctuation">.</span>Self
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> Self<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> ISomeModel
+    <span class="token keyword">Set</span> Self <span class="token operator">=</span> <span class="token keyword">Me</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+</code></pre></div><p>And now we can code against the <code>ISomeModel</code> interface, which exposes <code>Timestamp</code> and <code>UserName</code> as read-only properties that can never be reassigned (as long as the code is written against the interface).</p> <h2 id="polymorphism"><a href="#polymorphism" class="header-anchor">#</a> Polymorphism</h2> <h3 id="polymorphism-is-the-ability-to-present-the-same-interface-for-different-underlying-implementations"><a href="#polymorphism-is-the-ability-to-present-the-same-interface-for-different-underlying-implementations" class="header-anchor">#</a> Polymorphism is the ability to present the same interface for different underlying implementations.</h3> <p>The ability to implement interfaces allows completely decoupling the application logic from the UI, or from the database, or from this or that worksheet.</p> <p>Say you have an <code>ISomeView</code> interface that the form itself implements:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> IsCancelled<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> Model<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> ISomeModel
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Set</span> Model<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> ISomeModel<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> Show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The form's code-behind could look like this:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit 
+<span class="token keyword">Implements</span> ISomeView
+
+<span class="token keyword">Private</span> Type TView
+    IsCancelled <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    Model <span class="token keyword">As</span> ISomeModel
+<span class="token keyword">End</span> Type
+<span class="token keyword">Private</span> this <span class="token keyword">As</span> TView
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ISomeView_IsCancelled<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    ISomeView_IsCancelled <span class="token operator">=</span> this<span class="token punctuation">.</span>IsCancelled
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ISomeView_Model<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> ISomeModel
+    <span class="token keyword">Set</span> ISomeView_Model <span class="token operator">=</span> this<span class="token punctuation">.</span>Model
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Set</span> ISomeView_Model<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> ISomeModel<span class="token punctuation">)</span>
+    <span class="token keyword">Set</span> this<span class="token punctuation">.</span>Model <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> ISomeView_Show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Me</span><span class="token punctuation">.</span>Show vbModal
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> SomeOtherSettingInput_Change<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>Model<span class="token punctuation">.</span>SomeOtherSetting <span class="token operator">=</span> <span class="token keyword">CBool</span><span class="token punctuation">(</span>SomeOtherSettingInput<span class="token punctuation">.</span>Value<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token comment">'...other event handlers...</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> OkButton_Click<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Me</span><span class="token punctuation">.</span>Hide
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> CancelButton_Click<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>IsCancelled <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token keyword">Me</span><span class="token punctuation">.</span>Hide
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> UserForm_QueryClose<span class="token punctuation">(</span>Cancel <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> CloseMode <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> CloseMode <span class="token operator">=</span> VbQueryClose<span class="token punctuation">.</span>vbFormControlMenu <span class="token keyword">Then</span>
+        Cancel <span class="token operator">=</span> <span class="token boolean">True</span>
+        this<span class="token punctuation">.</span>IsCancelled <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token keyword">Me</span><span class="token punctuation">.</span>Hide
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>But then, nothing forbids creating another class module that implements the <code>ISomeView</code> interface <strong>without being a user form</strong> - this could be a <code>SomeViewMock</code> class:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+<span class="token keyword">Implements</span> ISomeView
+
+<span class="token keyword">Private</span> Type TView
+    IsCancelled <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    Model <span class="token keyword">As</span> ISomeModel
+<span class="token keyword">End</span> Type
+<span class="token keyword">Private</span> this <span class="token keyword">As</span> TView
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> IsCancelled<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    IsCancelled <span class="token operator">=</span> this<span class="token punctuation">.</span>IsCancelled
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> IsCancelled<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+    this<span class="token punctuation">.</span>IsCancelled <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ISomeView_IsCancelled<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    ISomeView_IsCancelled <span class="token operator">=</span> this<span class="token punctuation">.</span>IsCancelled
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ISomeView_Model<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> ISomeModel
+    <span class="token keyword">Set</span> ISomeView_Model <span class="token operator">=</span> this<span class="token punctuation">.</span>Model
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Property</span> <span class="token keyword">Set</span> ISomeView_Model<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> ISomeModel<span class="token punctuation">)</span>
+    <span class="token keyword">Set</span> this<span class="token punctuation">.</span>Model <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> ISomeView_Show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment">'do nothing</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>And now we can change the code that works with a <code>UserForm</code> and make it work off the <code>ISomeView</code> interface, e.g. by giving it the form as a parameter instead of instantiating it:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token keyword">ByVal</span> view <span class="token keyword">As</span> ISomeView<span class="token punctuation">)</span>
+    <span class="token keyword">With</span> view
+        <span class="token keyword">Set</span> <span class="token punctuation">.</span>Model <span class="token operator">=</span> CreateViewModel
+        <span class="token punctuation">.</span>Show
+        <span class="token keyword">If</span> <span class="token punctuation">.</span>IsCancelled <span class="token keyword">Then</span> <span class="token keyword">Exit</span> <span class="token keyword">Sub</span>
+        ProcessUserData <span class="token punctuation">.</span>Model
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Because the <code>DoSomething</code> method depends on an interface (i.e. an <strong>abstraction</strong>) and not a <strong>concrete class</strong> (e.g. a specific <code>UserForm</code>), we can write an automated unit test that ensures that <code>ProcessUserData</code> isn't executed when <code>view.IsCancelled</code> is <code>True</code>, by making our test create a <code>SomeViewMock</code> instance, setting its <code>IsCancelled</code> property to <code>True</code>, and passing it to <code>DoSomething</code>.</p> <h3 id="testable-code-depends-on-abstractions"><a href="#testable-code-depends-on-abstractions" class="header-anchor">#</a> Testable code depends on abstractions</h3> <p>Writing unit tests in VBA can be done, there are add-ins out there that even integrate it into the IDE. But when code is <strong>tightly coupled</strong> with a worksheet, a database, a form, or the file system, then the unit test starts requiring an actual worksheet, database, form, or file system - and these <strong>dependencies</strong> are new out-of-control failure points that testable code should isolate, so that unit tests <strong>don't</strong> require an actual worksheet, database, form, or file system.</p> <p>By writing code against interfaces, in a way that allows test code to <strong>inject</strong> stub/mock implementations (like the above <code>SomeViewMock</code> example), you can write tests in a  &quot;controlled environment&quot;, and simulate what happens when every single one of the 42 possible permutations of user interactions on the form's data, without even once displaying a form and manually clicking on a form control.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vba/object-oriented-vba.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vba/conditional-compilation.html" class="prev">
+        Conditional Compilation
+      </a></span> <span class="next"><a href="/vba/creating-a-custom-class.html">
+        Creating a Custom Class
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3430.6ff53f60.js" defer></script>
+  </body>
+</html>

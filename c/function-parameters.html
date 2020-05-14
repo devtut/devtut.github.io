@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C - Function Parameters</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Parameters are passed by value, Passing in Arrays to Functions, Order of function parameter execution, Using pointer parameters to return multiple values, Example of function returning struct containing values with error codes">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C - Function Parameters">
+    <meta property="og:description" content="Parameters are passed by value, Passing in Arrays to Functions, Order of function parameter execution, Using pointer parameters to return multiple values, Example of function returning struct containing values with error codes">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/c/function-parameters.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C - Function Parameters">
+    <meta name="twitter:description" content="Parameters are passed by value, Passing in Arrays to Functions, Order of function parameter execution, Using pointer parameters to return multiple values, Example of function returning struct containing values with error codes">
+    <meta name="twitter:url" content="/c/function-parameters.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/566.86479dbe.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/c/" class="sidebar-link">Disclaimer</a></li><li><a href="/c/getting-started-with-c-language.html" class="sidebar-link">Getting started with C Language</a></li><li><a href="/c/comments.html" class="sidebar-link">Comments</a></li><li><a href="/c/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/c/operators.html" class="sidebar-link">Operators</a></li><li><a href="/c/boolean.html" class="sidebar-link">Boolean</a></li><li><a href="/c/strings.html" class="sidebar-link">Strings</a></li><li><a href="/c/literals-for-numbers-characters-and-strings.html" class="sidebar-link">Literals for numbers, characters and strings</a></li><li><a href="/c/compound-literals.html" class="sidebar-link">Compound Literals</a></li><li><a href="/c/bit-fields.html" class="sidebar-link">Bit-fields</a></li><li><a href="/c/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/c/linked-lists.html" class="sidebar-link">Linked lists</a></li><li><a href="/c/enumerations.html" class="sidebar-link">Enumerations</a></li><li><a href="/c/structs.html" class="sidebar-link">Structs</a></li><li><a href="/c/standard-math.html" class="sidebar-link">Standard Math</a></li><li><a href="/c/iteration-statements-loops-for-while-do-while.html" class="sidebar-link">Iteration Statements/Loops: for, while, do-while</a></li><li><a href="/c/selection-statements.html" class="sidebar-link">Selection Statements</a></li><li><a href="/c/initialization.html" class="sidebar-link">Initialization</a></li><li><a href="/c/declaration-vs-definition.html" class="sidebar-link">Declaration vs Definition</a></li><li><a href="/c/files-and-i-o-streams.html" class="sidebar-link">Files and I/O streams</a></li><li><a href="/c/formatted-input-output.html" class="sidebar-link">Formatted Input/Output</a></li><li><a href="/c/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/c/sequence-points.html" class="sidebar-link">Sequence points</a></li><li><a href="/c/function-pointers.html" class="sidebar-link">Function Pointers</a></li><li><a href="/c/function-parameters.html" class="active sidebar-link">Function Parameters</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/c/function-parameters.html#parameters-are-passed-by-value" class="sidebar-link">Parameters are passed by value</a></li><li class="sidebar-sub-header"><a href="/c/function-parameters.html#passing-in-arrays-to-functions" class="sidebar-link">Passing in Arrays to Functions</a></li><li class="sidebar-sub-header"><a href="/c/function-parameters.html#order-of-function-parameter-execution" class="sidebar-link">Order of function parameter execution</a></li><li class="sidebar-sub-header"><a href="/c/function-parameters.html#using-pointer-parameters-to-return-multiple-values" class="sidebar-link">Using pointer parameters to return multiple values</a></li><li class="sidebar-sub-header"><a href="/c/function-parameters.html#example-of-function-returning-struct-containing-values-with-error-codes" class="sidebar-link">Example of function returning struct containing values with error codes</a></li></ul></li><li><a href="/c/pass-2d-arrays-to-functions.html" class="sidebar-link">Pass 2D-arrays to functions</a></li><li><a href="/c/error-handling.html" class="sidebar-link">Error handling</a></li><li><a href="/c/undefined-behavior.html" class="sidebar-link">Undefined behavior</a></li><li><a href="/c/random-number-generation.html" class="sidebar-link">Random Number Generation</a></li><li><a href="/c/preprocessor-and-macros.html" class="sidebar-link">Preprocessor and Macros</a></li><li><a href="/c/signal-handling.html" class="sidebar-link">Signal handling</a></li><li><a href="/c/variable-arguments.html" class="sidebar-link">Variable arguments</a></li><li><a href="/c/assertion.html" class="sidebar-link">Assertion</a></li><li><a href="/c/generic-selection.html" class="sidebar-link">Generic selection</a></li><li><a href="/c/x-macros.html" class="sidebar-link">X-macros</a></li><li><a href="/c/aliasing-and-effective-type.html" class="sidebar-link">Aliasing and effective type</a></li><li><a href="/c/compilation.html" class="sidebar-link">Compilation</a></li><li><a href="/c/identifier-scope.html" class="sidebar-link">Identifier Scope</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/implicit-and-explicit-conversions.html" class="sidebar-link">Implicit and Explicit Conversions</a></li><li><a href="/c/type-qualifiers.html" class="sidebar-link">Type Qualifiers</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/typedef.html" class="sidebar-link">Typedef</a></li><li><a href="/c/storage-classes.html" class="sidebar-link">Storage Classes</a></li><li><a href="/c/declarations.html" class="sidebar-link">Declarations</a></li><li><a href="/c/inline-assembly.html" class="sidebar-link">Inline assembly</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/structure-padding-and-packing.html" class="sidebar-link">Structure Padding and Packing</a></li><li><a href="/c/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/c/implementation-defined-behaviour.html" class="sidebar-link">Implementation-defined behaviour</a></li><li><a href="/c/atomics.html" class="sidebar-link">Atomics</a></li><li><a href="/c/jump-statements.html" class="sidebar-link">Jump Statements</a></li><li><a href="/c/create-and-include-header-files.html" class="sidebar-link">Create and include header files</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/ctype-h-character-classification-conversion.html" class="sidebar-link">— character classification &amp; conversion</a></li><li><a href="/c/side-effects.html" class="sidebar-link">Side Effects</a></li><li><a href="/c/multi-character-character-sequence.html" class="sidebar-link">Multi-Character Character Sequence</a></li><li><a href="/c/constraints.html" class="sidebar-link">Constraints</a></li><li><a href="/c/inlining.html" class="sidebar-link">Inlining</a></li><li><a href="/c/unions.html" class="sidebar-link">Unions</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/c/interprocess-communication-ipc.html" class="sidebar-link">Interprocess Communication (IPC)</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/common-c-programming-idioms-and-developer-practices.html" class="sidebar-link">Common C programming idioms and developer practices</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="function-parameters"><a href="#function-parameters" class="header-anchor">#</a> Function Parameters</h1> <h2 id="parameters-are-passed-by-value"><a href="#parameters-are-passed-by-value" class="header-anchor">#</a> Parameters are passed by value</h2> <p>In C, all function parameters are passed by value, so modifying what is passed in callee functions won't affect caller functions' local variables.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">modify</span><span class="token punctuation">(</span><span class="token keyword">int</span> v<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;modify 1: %d\n&quot;</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 0 is printed */</span>
+    v <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;modify 2: %d\n&quot;</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 42 is printed */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> v <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;main 1: %d\n&quot;</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 0 is printed */</span>
+    <span class="token function">modify</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;main 2: %d\n&quot;</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 0 is printed, not 42 */</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You can use pointers to let callee functions modify caller functions' local variables. Note that this is not <strong>pass by reference</strong> but the pointer <strong>values</strong> pointing at the local variables are passed.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">modify</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span> v<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;modify 1: %d\n&quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 0 is printed */</span>
+    <span class="token operator">*</span>v <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;modify 2: %d\n&quot;</span><span class="token punctuation">,</span> <span class="token operator">*</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 42 is printed */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> v <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;main 1: %d\n&quot;</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 0 is printed */</span>
+    <span class="token function">modify</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>v<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;main 2: %d\n&quot;</span><span class="token punctuation">,</span> v<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 42 is printed */</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>However returning the address of a local variable to the callee results in undefined behaviour. See <a href="http://stackoverflow.com/documentation/c/364/undefined-behavior/2034/dereferencing-a-pointer-to-variable-beyond-its-lifetime#t=201608112325484278857" target="_blank" rel="noopener noreferrer">Dereferencing a pointer to variable beyond its lifetime<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <h2 id="passing-in-arrays-to-functions"><a href="#passing-in-arrays-to-functions" class="header-anchor">#</a> Passing in Arrays to Functions</h2> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">int</span> <span class="token function">getListOfFriends</span><span class="token punctuation">(</span>size_t size<span class="token punctuation">,</span> <span class="token keyword">int</span> friend_indexes<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    friend_indexes<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><div class="language-c extra-class"><pre class="language-c"><code><span class="token comment">/* Type &quot;void&quot; and VLAs (&quot;int friend_indexes[static size]&quot;) require C99 at least. 
+   In C11 VLAs are optional. */</span>
+<span class="token keyword">void</span> <span class="token function">getListOfFriends</span><span class="token punctuation">(</span>size_t size<span class="token punctuation">,</span> <span class="token keyword">int</span> friend_indexes<span class="token punctuation">[</span><span class="token keyword">static</span> size<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>    
+  size_t i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> size<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    friend_indexes<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Here the <code>static</code> inside the <code>[]</code> of the function parameter, request that the argument array must have at least as many elements as are specified (i.e. <code>size</code> elements). To be able to use that feature we have to ensure that the <code>size</code> parameter comes before the array parameter in the list.
+<br></p> <p>Use <code>getListOfFriends()</code> like this:</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">define</span> LIST_SIZE (50)</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  size_t size_of_list <span class="token operator">=</span> LIST_SIZE<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> friends_indexes<span class="token punctuation">[</span>size_of_list<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token function">getListOfFriends</span><span class="token punctuation">(</span>size_of_list<span class="token punctuation">,</span> friend_indexes<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* friend_indexes decays to a pointer to the
+                                                     address of its 1st element: 
+                                                                      &amp;friend_indexes[0] */</span>
+
+  <span class="token comment">/* Here friend_indexes carries: {0, 1, 2, ..., 49}; */</span>
+
+  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="see-also"><a href="#see-also" class="header-anchor">#</a> See also</h3> <p><a href="http://stackoverflow.com/documentation/c/322/arrays/22905/passing-multidimensional-arrays-to-a-function#t=201701141221030574016" target="_blank" rel="noopener noreferrer">Passing multidimensional arrays to a function<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="order-of-function-parameter-execution"><a href="#order-of-function-parameter-execution" class="header-anchor">#</a> Order of function parameter execution</h2> <p>The order of execution of parameters is undefined in C programming. Here it may execute from left to right or from right to left. The order depends on the implementation.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">function</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span> 
+<span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%d %d\n&quot;</span><span class="token punctuation">,</span> a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token function">function</span><span class="token punctuation">(</span>a<span class="token operator">++</span><span class="token punctuation">,</span> <span class="token operator">++</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="using-pointer-parameters-to-return-multiple-values"><a href="#using-pointer-parameters-to-return-multiple-values" class="header-anchor">#</a> Using pointer parameters to return multiple values</h2> <p>A common pattern in C, to easily imitate returning multiple values from a function, is to use pointers.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">Get</span><span class="token punctuation">(</span> <span class="token keyword">int</span><span class="token operator">*</span> c <span class="token punctuation">,</span> <span class="token keyword">double</span><span class="token operator">*</span> d <span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token operator">*</span>c <span class="token operator">=</span> <span class="token number">72</span><span class="token punctuation">;</span> 
+    <span class="token operator">*</span>d <span class="token operator">=</span> <span class="token number">175.0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> b <span class="token operator">=</span> <span class="token number">0.0</span><span class="token punctuation">;</span>
+
+    <span class="token function">Get</span><span class="token punctuation">(</span> <span class="token operator">&amp;</span>a <span class="token punctuation">,</span> <span class="token operator">&amp;</span>b <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;a: %d, b: %f\n&quot;</span><span class="token punctuation">,</span> a <span class="token punctuation">,</span> b <span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="example-of-function-returning-struct-containing-values-with-error-codes"><a href="#example-of-function-returning-struct-containing-values-with-error-codes" class="header-anchor">#</a> Example of function returning struct containing values with error codes</h2> <p>Most examples of a function returning a value involve providing a pointer as one of the arguments to allow the function to modify the value pointed to, similar to the following. The actual return value of the function is usually some type such as an <code>int</code> to indicate the status of the result, whether it worked or not.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">int</span> <span class="token function">func</span> <span class="token punctuation">(</span><span class="token keyword">int</span> <span class="token operator">*</span>pIvalue<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> iRetStatus <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>             <span class="token comment">/* Default status is no change */</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">*</span>pIvalue <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token operator">*</span>pIvalue <span class="token operator">=</span> <span class="token operator">*</span>pIvalue <span class="token operator">*</span> <span class="token number">45</span><span class="token punctuation">;</span>   <span class="token comment">/* Modify the value pointed to */</span>
+        iRetStatus <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>             <span class="token comment">/* indicate value was changed */</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> iRetStatus<span class="token punctuation">;</span>              <span class="token comment">/* Return an error code */</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>However you can also use a <code>struct</code> as a return value which allows you to return both an error status along with other values as well. For instance.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span>    iStat<span class="token punctuation">;</span>      <span class="token comment">/* Return status */</span>
+    <span class="token keyword">int</span>    iValue<span class="token punctuation">;</span>     <span class="token comment">/* Return value */</span>
+<span class="token punctuation">}</span>  RetValue<span class="token punctuation">;</span>
+
+RetValue <span class="token function">func</span> <span class="token punctuation">(</span><span class="token keyword">int</span> iValue<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    RetValue iRetStatus <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> iValue<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>iValue <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        iRetStatus<span class="token punctuation">.</span>iValue <span class="token operator">=</span> iValue <span class="token operator">*</span> <span class="token number">45</span><span class="token punctuation">;</span>
+        iRetStatus<span class="token punctuation">.</span>iStat <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">return</span> iRetStatus<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This function could then be used like the following sample.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">int</span> <span class="token function">usingFunc</span> <span class="token punctuation">(</span><span class="token keyword">int</span> iValue<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    RetValue iRet <span class="token operator">=</span> <span class="token function">func</span> <span class="token punctuation">(</span>iValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>iRet<span class="token punctuation">.</span>iStat <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">/* do things with iRet.iValue, the returned value */</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Or it could be used like the following.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token keyword">int</span> <span class="token function">usingFunc</span> <span class="token punctuation">(</span><span class="token keyword">int</span> iValue<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    RetValue iRet<span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>iRet <span class="token operator">=</span> <span class="token function">func</span> <span class="token punctuation">(</span>iValue<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>iStat <span class="token operator">==</span> <span class="token number">1</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">/* do things with iRet.iValue, the returned value */</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>In C, it is common to use return values to denote errors that occur; and to return data through the use of passed in pointers. This can be done for multiple reasons; including not having to allocate memory on the heap or using static allocation at the point where the function is called.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/c/function-parameters.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/c/function-pointers.html" class="prev">
+        Function Pointers
+      </a></span> <span class="next"><a href="/c/pass-2d-arrays-to-functions.html">
+        Pass 2D-arrays to functions
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/566.86479dbe.js" defer></script>
+  </body>
+</html>

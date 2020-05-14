@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - Introduction to Syntax</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Intellisense Helper, Declaring a Variable, Comments, Modifiers, Writing a function, Object Initializers, Collection Initializer">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - Introduction to Syntax">
+    <meta property="og:description" content="Intellisense Helper, Declaring a Variable, Comments, Modifiers, Writing a function, Object Initializers, Collection Initializer">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/introduction-to-syntax.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - Introduction to Syntax">
+    <meta name="twitter:description" content="Intellisense Helper, Declaring a Variable, Comments, Modifiers, Writing a function, Object Initializers, Collection Initializer">
+    <meta name="twitter:url" content="/vbnet/introduction-to-syntax.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3473.8e08a00b.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="active sidebar-link">Introduction to Syntax</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/introduction-to-syntax.html#intellisense-helper" class="sidebar-link">Intellisense Helper</a></li><li class="sidebar-sub-header"><a href="/vbnet/introduction-to-syntax.html#declaring-a-variable" class="sidebar-link">Declaring a Variable</a></li><li class="sidebar-sub-header"><a href="/vbnet/introduction-to-syntax.html#comments" class="sidebar-link">Comments</a></li><li class="sidebar-sub-header"><a href="/vbnet/introduction-to-syntax.html#modifiers" class="sidebar-link">Modifiers</a></li><li class="sidebar-sub-header"><a href="/vbnet/introduction-to-syntax.html#writing-a-function" class="sidebar-link">Writing a function</a></li><li class="sidebar-sub-header"><a href="/vbnet/introduction-to-syntax.html#object-initializers" class="sidebar-link">Object Initializers</a></li><li class="sidebar-sub-header"><a href="/vbnet/introduction-to-syntax.html#collection-initializer" class="sidebar-link">Collection Initializer</a></li></ul></li><li><a href="/vbnet/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="sidebar-link">Looping</a></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="sidebar-link">ByVal and ByRef keywords</a></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="sidebar-link">Extension methods</a></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="sidebar-link">Visual Basic 14.0 Features</a></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="sidebar-link">Google Maps in a Windows Form</a></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="sidebar-link">WinForms SpellCheckBox</a></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="sidebar-link">Task-based asynchronous pattern</a></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="introduction-to-syntax"><a href="#introduction-to-syntax" class="header-anchor">#</a> Introduction to Syntax</h1> <h2 id="intellisense-helper"><a href="#intellisense-helper" class="header-anchor">#</a> Intellisense Helper</h2> <p>One interesting thing is the ability to add you own comments into Visual Studio Intellisense. So you can make your own written functions and classes self-explanatory. To do so, you must type the comment symbol three times the line above your function.</p> <p>Once done, Visual Studio will automatically add an XML documentation :</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token comment">''' &lt;summary&gt;</span>
+<span class="token comment">''' This function returns a hello to your name</span>
+<span class="token comment">''' &lt;/summary&gt;</span>
+<span class="token comment">''' &lt;param name=&quot;Name&quot;&gt;Your Name&lt;/param&gt;</span>
+<span class="token comment">''' &lt;returns&gt;&lt;/returns&gt;</span>
+<span class="token comment">''' &lt;remarks&gt;&lt;/remarks&gt;</span>
+<span class="token keyword">Public</span> <span class="token keyword">Function</span> Test<span class="token punctuation">(</span>Name <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Return</span> <span class="token string">&quot;Hello &quot;</span> <span class="token operator">&amp;</span> Name
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>After that, if you type in your Test function somewhere in your code, this little help will show up :</p> <p><a href="http://i.stack.imgur.com/0RsEi.png" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/0RsEi.png" alt="Intellisense Help"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="declaring-a-variable"><a href="#declaring-a-variable" class="header-anchor">#</a> Declaring a Variable</h2> <p>In VB.NET, every variable must be declared before it is used (If <a href="https://msdn.microsoft.com/en-us/library/y9341s4f.aspx" target="_blank" rel="noopener noreferrer">Option Explicit<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> is set to <strong>On</strong>). There are two ways of declaring variables:</p> <ul><li>Inside a <code>Function</code> or a <code>Sub</code>:</li></ul> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> w <span class="token comment">'Declares a variable named w of type Object (invalid if Option Strict is On)</span>
+<span class="token keyword">Dim</span> x <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token comment">'Declares a variable named x of type String</span>
+<span class="token keyword">Dim</span> y <span class="token keyword">As</span> <span class="token keyword">Long</span> <span class="token operator">=</span> <span class="token number">45</span> <span class="token comment">'Declares a variable named y of type Long and assigns it the value 45</span>
+<span class="token keyword">Dim</span> z <span class="token operator">=</span> <span class="token number">45</span> <span class="token comment">'Declares a variable named z whose type is inferred</span>
+           <span class="token comment">'from the type of the assigned value (Integer here) (if Option Infer is On)</span>
+           <span class="token comment">'otherwise the type is Object (invalid if Option Strict is On)</span>
+           <span class="token comment">'and assigns that value (45) to it </span>
+
+</code></pre></div><p>See <a href="http://stackoverflow.com/a/2489467/256431" target="_blank" rel="noopener noreferrer">this answer<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> for full details about <code>Option Explicit</code>, <code>Strict</code> and <code>Infer</code>.</p> <ul><li>Inside a <code>Class</code> or a <code>Module</code>:</li></ul> <p>These variables (also called fields in this context) will be accessible for each instance of the <code>Class</code> they are declared in. They might be accessible from outside the declared <code>Class</code> depending on the modifier (<code>Public</code>, <code>Private</code>, <code>Protected</code>, <code>Protected Friend</code> or <code>Friend</code>)</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> x <span class="token comment">'Declares a private field named x of type Object (invalid if Option Strict is On)</span>
+<span class="token keyword">Public</span> y <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token comment">'Declares a public field named y of type String</span>
+<span class="token keyword">Friend</span> z <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">45</span> <span class="token comment">'Declares a friend field named z of type Integer and assigns it the value 45</span>
+
+</code></pre></div><p>These fields can also be declared with <code>Dim</code> but the meaning changes depending on the enclosing type:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Class</span> SomeClass
+    <span class="token keyword">Dim</span> z <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">45</span> <span class="token comment">' Same meaning as Private z As Integer = 45</span>
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+<span class="token keyword">Structure</span> SomeStructure
+    <span class="token keyword">Dim</span> y <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token comment">' Same meaning as Public y As String</span>
+<span class="token keyword">End</span> <span class="token keyword">Structure</span>
+
+</code></pre></div><h2 id="comments"><a href="#comments" class="header-anchor">#</a> Comments</h2> <p>The first interesting thing to know is how to write comments.</p> <p>In VB .NET, you write a comment by writing an apostrophe ' or writing <code>REM</code>. This means the rest of the line will not be taken into account by the compiler.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token comment">'This entire line is a comment</span>
+<span class="token keyword">Dim</span> x <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment">'This comment is here to say we give 0 value to x</span>
+
+<span class="token comment"><span class="token keyword">REM</span> There are no such things as multiline comments</span>
+<span class="token comment">'So we have to start everyline with the apostrophe or REM</span>
+
+</code></pre></div><h2 id="modifiers"><a href="#modifiers" class="header-anchor">#</a> Modifiers</h2> <p>Modifiers are a way to indicate how external objects can access an object's data.</p> <ul><li>Public</li></ul> <p>Means any object can access this without restriction</p> <ul><li>Private</li></ul> <p>Means only the declaring object can access and view this</p> <ul><li>Protected</li></ul> <p>Means only the declaring object and any object that inherits from it can access and view this.</p> <ul><li>Friend</li></ul> <p>Means only the delcaring object, any object that inherits from it and any object in the same namespace can access and view this.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Class</span> <span class="token keyword">MyClass</span>
+    <span class="token keyword">Private</span> x <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+
+    <span class="token keyword">Friend</span> <span class="token keyword">Property</span> Hello <span class="token keyword">As</span> <span class="token keyword">String</span>
+  
+    <span class="token keyword">Public</span> <span class="token keyword">Sub</span> <span class="token keyword">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+    <span class="token keyword">Protected</span> <span class="token keyword">Function</span> Test<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+        <span class="token keyword">Return</span> <span class="token number">0</span>
+    <span class="token keyword">End</span> <span class="token keyword">Function</span>
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+</code></pre></div><h2 id="writing-a-function"><a href="#writing-a-function" class="header-anchor">#</a> Writing a function</h2> <p>A function is a block of code that will be called several times during the execution. Instead of writing the same piece of code again and again, one can write this code inside a function and call that function whenever it is needed.</p> <p>A function :</p> <ul><li>Must be declared in a <strong>class</strong> or a <strong>module</strong></li> <li>Returns a value (specified by the return type)</li> <li>Has a <strong>modifier</strong></li> <li>Can take parameters to do its processing</li></ul> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Function</span> AddNumbers<span class="token punctuation">(</span>X <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> Y <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+    <span class="token keyword">Return</span> X <span class="token operator">+</span> Y
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>A Function Name, could be used as the return statement</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Function</span> sealBarTypeValidation<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token keyword">Boolean</span>
+    <span class="token keyword">Dim</span> err <span class="token keyword">As</span> <span class="token keyword">Boolean</span> <span class="token operator">=</span> <span class="token boolean">False</span>
+
+    <span class="token keyword">If</span> rbSealBarType<span class="token punctuation">.</span>SelectedValue <span class="token operator">=</span> <span class="token string">&quot;&quot;</span> <span class="token keyword">Then</span>
+        err <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+
+    <span class="token keyword">Return</span> err
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>is just the same as</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Function</span> sealBarTypeValidation<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">as</span> <span class="token keyword">Boolean</span>
+    sealBarTypeValidation <span class="token operator">=</span> <span class="token boolean">False</span>        
+
+    <span class="token keyword">If</span> rbSealBarType<span class="token punctuation">.</span>SelectedValue <span class="token operator">=</span> <span class="token string">&quot;&quot;</span> <span class="token keyword">Then</span>
+        sealBarTypeValidation <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><h2 id="object-initializers"><a href="#object-initializers" class="header-anchor">#</a> Object Initializers</h2> <li>
+Named Types
+<div class="language-vb extra-class"><pre class="language-vb"><code> <span class="token keyword">Dim</span> someInstance <span class="token keyword">As</span> <span class="token keyword">New</span> SomeClass<span class="token punctuation">(</span>argument<span class="token punctuation">)</span> <span class="token keyword">With</span> <span class="token punctuation">{</span>
+     <span class="token punctuation">.</span>Member1 <span class="token operator">=</span> value1<span class="token punctuation">,</span>
+     <span class="token punctuation">.</span>Member2 <span class="token operator">=</span> value2
+     <span class="token comment">'...</span>
+ <span class="token punctuation">}</span>
+
+</code></pre></div><p>Is equivalent to</p> <div class="language-vb extra-class"><pre class="language-vb"><code> <span class="token keyword">Dim</span> someInstance <span class="token keyword">As</span> <span class="token keyword">New</span> SomeClass<span class="token punctuation">(</span>argument<span class="token punctuation">)</span>
+ someInstance<span class="token punctuation">.</span>Member1 <span class="token operator">=</span> value1
+ someInstance<span class="token punctuation">.</span>Member2 <span class="token operator">=</span> value2
+ <span class="token comment">'...</span>
+
+</code></pre></div></li> <li>
+Anonymous Types **(Option Infer must be On)**
+<div class="language-vb extra-class"><pre class="language-vb"><code>  <span class="token keyword">Dim</span> anonymousInstance <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">With</span> <span class="token punctuation">{</span>
+      <span class="token punctuation">.</span>Member1 <span class="token operator">=</span> value1<span class="token punctuation">,</span>
+      <span class="token punctuation">.</span>Member2 <span class="token operator">=</span> value2
+      <span class="token comment">'...</span>
+  <span class="token punctuation">}</span>
+
+</code></pre></div><p>Although similar <code>anonymousInstance</code> doesn't have same type as <code>someInstance</code>
+Member name must be unique in the anonymous type, and can be taken from a variable or another object member name</p> <div class="language-vb extra-class"><pre class="language-vb"><code>  <span class="token keyword">Dim</span> anonymousInstance <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">With</span> <span class="token punctuation">{</span>
+      value1<span class="token punctuation">,</span>
+      value2<span class="token punctuation">,</span>
+      foo<span class="token punctuation">.</span>value3
+      <span class="token comment">'...</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment">' usage : anonymousInstance.value1 or anonymousInstance.value3</span>
+
+</code></pre></div><p>Each member can be preceded by the <code>Key</code> keyword. Those members will be <code>ReadOnly</code> properties, those without will be read/write properties</p> <div class="language-vb extra-class"><pre class="language-vb"><code>  <span class="token keyword">Dim</span> anonymousInstance <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">With</span> <span class="token punctuation">{</span>
+      Key value1<span class="token punctuation">,</span>
+      <span class="token punctuation">.</span>Member2 <span class="token operator">=</span> value2<span class="token punctuation">,</span>
+      Key <span class="token punctuation">.</span>Member3 <span class="token operator">=</span> value3
+      <span class="token comment">'...</span>
+  <span class="token punctuation">}</span>
+
+</code></pre></div><p>Two anonymous instance defined with the same members (name, type, presence of <code>Key</code> and order) will have the same anonymous type.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>  <span class="token keyword">Dim</span> anon1 <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">With</span> <span class="token punctuation">{</span> Key <span class="token punctuation">.</span>Value <span class="token operator">=</span> <span class="token number">10</span> <span class="token punctuation">}</span>
+  <span class="token keyword">Dim</span> anon2 <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">With</span> <span class="token punctuation">{</span> Key <span class="token punctuation">.</span>Value <span class="token operator">=</span> <span class="token number">20</span> <span class="token punctuation">}</span>
+
+  anon1<span class="token punctuation">.</span><span class="token keyword">GetType</span> <span class="token keyword">Is</span> anon2<span class="token punctuation">.</span><span class="token keyword">GetType</span> <span class="token comment">' True</span>
+
+</code></pre></div><p>Anonymous types are structurally equatable. Two instance of the same anonymous types having at least one <code>Key</code> property with the same <code>Key</code> values will be equal. You have to use <code>Equals</code> method to test it, using <code>=</code> won't compile and <code>Is</code> will compare the object reference.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>  <span class="token keyword">Dim</span> anon1 <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">With</span> <span class="token punctuation">{</span> Key <span class="token punctuation">.</span>Name <span class="token operator">=</span> <span class="token string">&quot;Foo&quot;</span><span class="token punctuation">,</span> Key <span class="token punctuation">.</span>Age <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token punctuation">.</span>Salary <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+  <span class="token keyword">Dim</span> anon2 <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">With</span> <span class="token punctuation">{</span> Key <span class="token punctuation">.</span>Name <span class="token operator">=</span> <span class="token string">&quot;Bar&quot;</span><span class="token punctuation">,</span> Key <span class="token punctuation">.</span>Age <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">,</span> <span class="token punctuation">.</span>Salary <span class="token operator">=</span> <span class="token number">0</span> <span class="token punctuation">}</span>
+  <span class="token keyword">Dim</span> anon3 <span class="token operator">=</span> <span class="token keyword">New</span> <span class="token keyword">With</span> <span class="token punctuation">{</span> Key <span class="token punctuation">.</span>Name <span class="token operator">=</span> <span class="token string">&quot;Foo&quot;</span><span class="token punctuation">,</span> Key <span class="token punctuation">.</span>Age <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token punctuation">.</span>Salary <span class="token operator">=</span> <span class="token number">10000</span> <span class="token punctuation">}</span>
+
+  anon1<span class="token punctuation">.</span>Equals<span class="token punctuation">(</span>anon2<span class="token punctuation">)</span> <span class="token comment">' False</span>
+  anon1<span class="token punctuation">.</span>Equals<span class="token punctuation">(</span>anon3<span class="token punctuation">)</span> <span class="token comment">' True although non-Key Salary isn't the same</span>
+
+</code></pre></div></li> <p>Both Named and Anonymous types initializer can be nested and mixed</p> <div class="language- extra-class"><pre class="language-text"><code>
+   Dim anonymousInstance = New With {
+        value,
+        Key .someInstance = New SomeClass(argument) With {
+            .Member1 = value1,
+            .Member2 = value2
+            '...
+        }
+        '...
+    }
+
+</code></pre></div><h2 id="collection-initializer"><a href="#collection-initializer" class="header-anchor">#</a> Collection Initializer</h2> <li>
+Arrays
+<div class="language-vb extra-class"><pre class="language-vb"><code> <span class="token keyword">Dim</span> names <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">&quot;Foo&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Bar&quot;</span><span class="token punctuation">}</span> <span class="token comment">' Inferred as String()</span>
+ <span class="token keyword">Dim</span> numbers <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">}</span> <span class="token comment">' Inferred as Integer()</span>
+
+</code></pre></div></li> <li>
+Containers (`List(Of T)`, `Dictionary(Of TKey, TValue)`, etc.)
+<div class="language-vb extra-class"><pre class="language-vb"><code> <span class="token keyword">Dim</span> names <span class="token keyword">As</span> <span class="token keyword">New</span> List<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">String</span><span class="token punctuation">)</span> From <span class="token punctuation">{</span>
+     <span class="token string">&quot;Foo&quot;</span><span class="token punctuation">,</span>
+     <span class="token string">&quot;Bar&quot;</span>
+     <span class="token comment">'...</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">Dim</span> indexedDays <span class="token keyword">As</span> <span class="token keyword">New</span> Dictionary<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> <span class="token keyword">String</span><span class="token punctuation">)</span> From <span class="token punctuation">{</span>
+     <span class="token punctuation">{</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">&quot;Sun&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+     <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&quot;Mon&quot;</span><span class="token punctuation">}</span>
+     <span class="token comment">'...</span>
+ <span class="token punctuation">}</span>
+
+</code></pre></div><p>Is equivalent to</p> <div class="language-vb extra-class"><pre class="language-vb"><code> <span class="token keyword">Dim</span> indexedDays <span class="token keyword">As</span> <span class="token keyword">New</span> Dictionary<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+ indexedDays<span class="token punctuation">.</span>Add<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">&quot;Sun&quot;</span><span class="token punctuation">)</span>
+ indexedDays<span class="token punctuation">.</span>Add<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">&quot;Mon&quot;</span><span class="token punctuation">)</span>
+ <span class="token comment">'...</span>
+
+</code></pre></div><p>Items can be the result of a constructor, a method call, a property access. It can also be mixed with Object initializer.</p> <div class="language-vb extra-class"><pre class="language-vb"><code> <span class="token keyword">Dim</span> someList <span class="token keyword">As</span> <span class="token keyword">New</span> List<span class="token punctuation">(</span><span class="token keyword">Of</span> SomeClass<span class="token punctuation">)</span> From <span class="token punctuation">{</span>
+     <span class="token keyword">New</span> SomeClass<span class="token punctuation">(</span>argument<span class="token punctuation">)</span><span class="token punctuation">,</span>
+     <span class="token keyword">New</span> SomeClass <span class="token keyword">With</span> <span class="token punctuation">{</span> <span class="token punctuation">.</span>Member <span class="token operator">=</span> value <span class="token punctuation">}</span><span class="token punctuation">,</span>
+     otherClass<span class="token punctuation">.</span>PropertyReturningSomeClass<span class="token punctuation">,</span>
+     FunctionReturningSomeClass<span class="token punctuation">(</span>arguments<span class="token punctuation">)</span>
+     <span class="token comment">'...</span>
+ <span class="token punctuation">}</span>
+
+</code></pre></div><p>It is not possible to use Object initializer syntax <strong>AND</strong> collection initializer syntax for the same object at the same time. For example, these <strong>won't</strong> work</p> <div class="language-vb extra-class"><pre class="language-vb"><code> <span class="token keyword">Dim</span> numbers <span class="token keyword">As</span> <span class="token keyword">New</span> List<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span> <span class="token keyword">With</span> <span class="token punctuation">{</span><span class="token punctuation">.</span>Capacity <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">}</span> <span class="token operator">_</span>
+                                     From <span class="token punctuation">{</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">42</span> <span class="token punctuation">}</span>
+
+ <span class="token keyword">Dim</span> numbers <span class="token keyword">As</span> <span class="token keyword">New</span> List<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span> From <span class="token punctuation">{</span>
+     <span class="token punctuation">.</span>Capacity <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span>
+     <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">42</span>
+ <span class="token punctuation">}</span>
+
+ <span class="token keyword">Dim</span> numbers <span class="token keyword">As</span> <span class="token keyword">New</span> List<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span> <span class="token keyword">With</span> <span class="token punctuation">{</span>
+     <span class="token punctuation">.</span>Capacity <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span>
+     <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">42</span>
+ <span class="token punctuation">}</span>
+
+</code></pre></div></li> <li>
+Custom Type
+<p>We can also allow collection initializer syntax by providing for a custom type.<br>
+It must implement `IEnumerable` and have an accessible and compatible by overload rules `Add` method (instance, Shared or even extension method)</p>
+**Contrived example :**
+<div class="language-vb extra-class"><pre class="language-vb"><code> <span class="token keyword">Class</span> Person
+     <span class="token keyword">Implements</span> IEnumerable<span class="token punctuation">(</span><span class="token keyword">Of</span> Person<span class="token punctuation">)</span> <span class="token comment">' Inherits from IEnumerable</span>
+
+     <span class="token keyword">Private</span> <span class="token keyword">ReadOnly</span> relationships <span class="token keyword">As</span> List<span class="token punctuation">(</span><span class="token keyword">Of</span> Person<span class="token punctuation">)</span>
+
+     <span class="token keyword">Public</span> <span class="token keyword">Sub</span> <span class="token keyword">New</span><span class="token punctuation">(</span>name <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+         relationships <span class="token operator">=</span> <span class="token keyword">New</span> List<span class="token punctuation">(</span><span class="token keyword">Of</span> Person<span class="token punctuation">)</span>
+     <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+     <span class="token keyword">Public</span> <span class="token keyword">Sub</span> Add<span class="token punctuation">(</span>relationName <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+         relationships<span class="token punctuation">.</span>Add<span class="token punctuation">(</span><span class="token keyword">New</span> Person<span class="token punctuation">(</span>relationName<span class="token punctuation">)</span><span class="token punctuation">)</span>
+     <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+     <span class="token keyword">Public</span> Iterator <span class="token keyword">Function</span> GetEnumerator<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> IEnumerator<span class="token punctuation">(</span><span class="token keyword">Of</span> Person<span class="token punctuation">)</span> <span class="token operator">_</span>
+         <span class="token keyword">Implements</span> IEnumerable<span class="token punctuation">(</span><span class="token keyword">Of</span> Person<span class="token punctuation">)</span><span class="token punctuation">.</span>GetEnumerator
+
+         <span class="token keyword">For</span> <span class="token keyword">Each</span> relation <span class="token keyword">In</span> relationships
+             Yield relation
+         <span class="token keyword">Next</span>
+     <span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+     <span class="token keyword">Private</span> <span class="token keyword">Function</span> IEnumerable_GetEnumerator<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> IEnumerator <span class="token operator">_</span> 
+         <span class="token keyword">Implements</span> IEnumerable<span class="token punctuation">.</span>GetEnumerator
+
+         <span class="token keyword">Return</span> GetEnumerator<span class="token punctuation">(</span><span class="token punctuation">)</span>
+     <span class="token keyword">End</span> <span class="token keyword">Function</span>
+ <span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+ <span class="token comment">' Usage</span>
+ <span class="token keyword">Dim</span> somePerson <span class="token keyword">As</span> <span class="token keyword">New</span> Person<span class="token punctuation">(</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">)</span> From <span class="token punctuation">{</span>
+     <span class="token string">&quot;FriendName&quot;</span><span class="token punctuation">,</span>
+     <span class="token string">&quot;CoWorkerName&quot;</span>
+     <span class="token comment">'...</span>
+ <span class="token punctuation">}</span>
+
+</code></pre></div><p>If we wanted to add Person object to a <code>List(Of Person)</code> by just putting the name in the collection initializer (but we can't modify the List(Of Person) class) we can use an Extension method</p> <div class="language-vb extra-class"><pre class="language-vb"><code> <span class="token comment">' Inside a Module</span>
+ <span class="token operator">&lt;</span>Runtime<span class="token punctuation">.</span>CompilerServices<span class="token punctuation">.</span>Extension<span class="token operator">&gt;</span>
+ <span class="token keyword">Sub</span> Add<span class="token punctuation">(</span>target <span class="token keyword">As</span> List<span class="token punctuation">(</span><span class="token keyword">Of</span> Person<span class="token punctuation">)</span><span class="token punctuation">,</span> name <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+     target<span class="token punctuation">.</span>Add<span class="token punctuation">(</span><span class="token keyword">New</span> Person<span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+ <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+ <span class="token comment">' Usage</span>
+ <span class="token keyword">Dim</span> people <span class="token keyword">As</span> <span class="token keyword">New</span> List<span class="token punctuation">(</span><span class="token keyword">Of</span> Person<span class="token punctuation">)</span> From <span class="token punctuation">{</span>
+     <span class="token string">&quot;Name1&quot;</span><span class="token punctuation">,</span> <span class="token comment">' no need to create Person object here</span>
+     <span class="token string">&quot;Name2&quot;</span>
+ <span class="token punctuation">}</span>
+
+</code></pre></div></li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/introduction-to-syntax.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/declaring-variables.html" class="prev">
+        Declaring variables
+      </a></span> <span class="next"><a href="/vbnet/operators.html">
+        Operators
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3473.8e08a00b.js" defer></script>
+  </body>
+</html>

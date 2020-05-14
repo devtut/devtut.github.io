@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Excel VBA - Creating a drop-down menu in the Active Worksheet with a Combo Box</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Example 2: Options Not Included, Jimi Hendrix Menu">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Excel VBA - Creating a drop-down menu in the Active Worksheet with a Combo Box">
+    <meta property="og:description" content="Example 2: Options Not Included, Jimi Hendrix Menu">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Excel VBA - Creating a drop-down menu in the Active Worksheet with a Combo Box">
+    <meta name="twitter:description" content="Example 2: Options Not Included, Jimi Hendrix Menu">
+    <meta name="twitter:url" content="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1075.54f366db.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Excel VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/excelvba/" class="sidebar-link">Disclaimer</a></li><li><a href="/excelvba/getting-started-with-excel-vba.html" class="sidebar-link">Getting started with excel-vba</a></li><li><a href="/excelvba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/excelvba/conditional-statements.html" class="sidebar-link">Conditional statements</a></li><li><a href="/excelvba/ranges-and-cells.html" class="sidebar-link">Ranges and Cells</a></li><li><a href="/excelvba/named-ranges.html" class="sidebar-link">Named Ranges</a></li><li><a href="/excelvba/merged-cells-ranges.html" class="sidebar-link">Merged Cells / Ranges</a></li><li><a href="/excelvba/locating-duplicate-values-in-a-range.html" class="sidebar-link">Locating duplicate values in a range</a></li><li><a href="/excelvba/user-defined-functions-udfs.html" class="sidebar-link">User Defined Functions (UDFs)</a></li><li><a href="/excelvba/conditional-formatting-using-vba.html" class="sidebar-link">Conditional formatting using VBA</a></li><li><a href="/excelvba/workbooks.html" class="sidebar-link">Workbooks</a></li><li><a href="/excelvba/working-with-excel-tables-in-vba.html" class="sidebar-link">Working with Excel Tables in VBA</a></li><li><a href="/excelvba/loop-through-all-sheets-in-active-workbook.html" class="sidebar-link">Loop through all Sheets in Active Workbook</a></li><li><a href="/excelvba/use-worksheet-object-and-not-sheet-object.html" class="sidebar-link">Use Worksheet object and not Sheet object</a></li><li><a href="/excelvba/methods-for-finding-the-last-used-row-or-column-in-a-worksheet.html" class="sidebar-link">Methods for Finding the Last Used Row or Column in a Worksheet</a></li><li><a href="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html" class="active sidebar-link">Creating a drop-down menu in the Active Worksheet with a Combo Box</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html#example-2-options-not-included" class="sidebar-link">Example 2: Options Not Included</a></li><li class="sidebar-sub-header"><a href="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html#jimi-hendrix-menu" class="sidebar-link">Jimi Hendrix Menu</a></li></ul></li><li><a href="/excelvba/file-system-object.html" class="sidebar-link">File System Object</a></li><li><a href="/excelvba/pivot-tables.html" class="sidebar-link">Pivot Tables</a></li><li><a href="/excelvba/binding.html" class="sidebar-link">Binding</a></li><li><a href="/excelvba/autofilter-uses-and-best-practices.html" class="sidebar-link">autofilter ; Uses and best practices</a></li><li><a href="/excelvba/application-object.html" class="sidebar-link">Application object</a></li><li><a href="/excelvba/charts-and-charting.html" class="sidebar-link">Charts and Charting</a></li><li><a href="/excelvba/customdocumentproperties-in-practice.html" class="sidebar-link">CustomDocumentProperties in practice</a></li><li><a href="/excelvba/powerpoint-integration-through-vba.html" class="sidebar-link">PowerPoint Integration Through VBA</a></li><li><a href="/excelvba/how-to-record-a-macro.html" class="sidebar-link">How to record a Macro</a></li><li><a href="/excelvba/sql-in-excel-vba-best-practices.html" class="sidebar-link">SQL in Excel VBA - Best Practices</a></li><li><a href="/excelvba/excel-vba-optimization.html" class="sidebar-link">Excel-VBA Optimization</a></li><li><a href="/excelvba/vba-security.html" class="sidebar-link">VBA Security</a></li><li><a href="/excelvba/debugging-and-troubleshooting.html" class="sidebar-link">Debugging and Troubleshooting</a></li><li><a href="/excelvba/vba-best-practices.html" class="sidebar-link">VBA Best Practices</a></li><li><a href="/excelvba/excel-vba-tips-and-tricks.html" class="sidebar-link">Excel VBA Tips and Tricks</a></li><li><a href="/excelvba/common-mistakes.html" class="sidebar-link">Common Mistakes</a></li><li><a href="/excelvba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box"><a href="#creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box" class="header-anchor">#</a> Creating a drop-down menu in the Active Worksheet with a Combo Box</h1> <p>This is a simple example demonstrating how to create a drop down menu in the Active Sheet of your workbook by inserting a Combo Box Activex object in the sheet. You'll be able to insert one of five Jimi Hendrix songs in any activated cell of the sheet and be able to clear it, accordingly.</p> <h2 id="example-2-options-not-included"><a href="#example-2-options-not-included" class="header-anchor">#</a> Example 2: Options Not Included</h2> <p>This example is used in specifying options that might not be included in a database of available housing and its attendant amenities.</p> <p>It builds on the previous example, with some differences:</p> <ol><li>Two procedures are no longer necessary for a single combo box, done by combining the code into a single procedure.</li> <li>The use of the LinkedCell property to allow for the correct input of the user selection every time</li> <li>The inclusion of a backup feature for ensuring the active cell is in the correct column and an error prevention code, based on previous experience, where numeric values would formatted as strings when populated to the active cell.</li></ol> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Sub</span> cboNotIncl_Change<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">Dim</span> n <span class="token keyword">As</span> <span class="token keyword">Long</span>
+<span class="token keyword">Dim</span> notincl_array<span class="token punctuation">(</span><span class="token number">1</span> <span class="token keyword">To</span> <span class="token number">9</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+
+n <span class="token operator">=</span> myTarget<span class="token punctuation">.</span>Row
+            
+    <span class="token keyword">If</span> n <span class="token operator">&gt;</span><span class="token operator">=</span> <span class="token number">3</span> <span class="token keyword">And</span> n <span class="token operator">&lt;</span> <span class="token number">10000</span> <span class="token keyword">Then</span>
+             
+        <span class="token keyword">If</span> myTarget<span class="token punctuation">.</span>Address <span class="token operator">=</span> <span class="token string">&quot;$G$&quot;</span> <span class="token operator">&amp;</span> n <span class="token keyword">Then</span>
+                
+            <span class="token comment">'set up the array elements for the not included services</span>
+            notincl_array<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Central Air&quot;</span>
+            notincl_array<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Hot Water&quot;</span>
+            notincl_array<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Heater Rental&quot;</span>
+            notincl_array<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Utilities&quot;</span>
+            notincl_array<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Parking&quot;</span>
+            notincl_array<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Internet&quot;</span>
+            notincl_array<span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Hydro&quot;</span>
+            notincl_array<span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Hydro/Hot Water/Heater Rental&quot;</span>
+            notincl_array<span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Hydro and Utilities&quot;</span>
+            
+            cboNotIncl<span class="token punctuation">.</span>List <span class="token operator">=</span> notincl_array<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    
+        <span class="token keyword">Else</span>
+                
+            <span class="token keyword">Exit</span> <span class="token keyword">Sub</span>
+                
+        <span class="token keyword">End</span> <span class="token keyword">If</span>
+
+        <span class="token keyword">With</span> cboNotIncl
+                    
+            <span class="token comment">'make sure the combo box moves to the target cell</span>
+            <span class="token punctuation">.</span>Left <span class="token operator">=</span> myTarget<span class="token punctuation">.</span>Left
+            <span class="token punctuation">.</span>Top <span class="token operator">=</span> myTarget<span class="token punctuation">.</span>Top
+                    
+            <span class="token comment">'adjust the size of the cell to fit the combo box</span>
+            myTarget<span class="token punctuation">.</span>ColumnWidth <span class="token operator">=</span> <span class="token punctuation">.</span>Width <span class="token operator">*</span> <span class="token number">0.18</span>
+                    
+            <span class="token comment">'make it look nice by editing some of the font attributes</span>
+            <span class="token punctuation">.</span>Font<span class="token punctuation">.</span>Size <span class="token operator">=</span> <span class="token number">11</span>
+            <span class="token punctuation">.</span>Font<span class="token punctuation">.</span>Bold <span class="token operator">=</span> <span class="token boolean">False</span>
+                        
+            <span class="token comment">'populate the cell with the user choice, with a backup guarantee that it's in column G</span>
+                
+            <span class="token keyword">If</span> myTarget<span class="token punctuation">.</span>Address <span class="token operator">=</span> <span class="token string">&quot;$G$&quot;</span> <span class="token operator">&amp;</span> n <span class="token keyword">Then</span>
+                    
+                    <span class="token punctuation">.</span>LinkedCell <span class="token operator">=</span> myTarget<span class="token punctuation">.</span>Address
+                    
+                    <span class="token comment">'prevent an error where a numerical value is formatted as text</span>
+                    myTarget<span class="token punctuation">.</span>EntireColumn<span class="token punctuation">.</span>TextToColumns
+                    
+            <span class="token keyword">End</span> <span class="token keyword">If</span>
+                
+        <span class="token keyword">End</span> <span class="token keyword">With</span>
+                
+    <span class="token keyword">End</span> <span class="token keyword">If</span> <span class="token comment">'ensure that the active cell is only between rows 3 and 1000</span>
+            
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The above macro is initiated every time a cell is activated with the SelectionChange event in the worksheet module:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> myTarget <span class="token keyword">As</span> Range
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> Worksheet_SelectionChange<span class="token punctuation">(</span><span class="token keyword">ByVal</span> Target <span class="token keyword">As</span> Range<span class="token punctuation">)</span>
+
+    <span class="token keyword">Set</span> myTarget <span class="token operator">=</span> Target
+
+    <span class="token comment">'switch for Not Included</span>
+    <span class="token keyword">If</span> Target<span class="token punctuation">.</span>Column <span class="token operator">=</span> <span class="token number">7</span> <span class="token keyword">And</span> Target<span class="token punctuation">.</span>Cells<span class="token punctuation">.</span>Count <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">Then</span>
+
+        Application<span class="token punctuation">.</span>Run <span class="token string">&quot;Module1.cboNotIncl_Change&quot;</span>
+
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="jimi-hendrix-menu"><a href="#jimi-hendrix-menu" class="header-anchor">#</a> Jimi Hendrix Menu</h2> <p>In general, the code is placed in the module of a sheet.</p> <p>This is the Worksheet_SelectionChange event, which fires each time a different cell is selected in the active sheet. You can select &quot;Worksheet&quot; from the first drop-down menu above the code window, and &quot;Selection_Change&quot; from the drop down menu next to it. In this case, every time you activate a cell, the code is redirected to the Combo Box's code.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Sub</span> Worksheet_SelectionChange<span class="token punctuation">(</span><span class="token keyword">ByVal</span> Target <span class="token keyword">As</span> Range<span class="token punctuation">)</span>
+
+   ComboBox1_Change
+   
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Here, the routine dedicated to the ComboBox is coded to the Change event by default. In it, there is a fixed array, populated with all the options. Not the CLEAR option in the last position, which will be used to clear the contents of a cell. The array then is handed to to the Combo Box and passed to the routine that does the work.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Sub</span> ComboBox1_Change<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">Dim</span> myarray<span class="token punctuation">(</span><span class="token number">0</span> <span class="token keyword">To</span> <span class="token number">5</span><span class="token punctuation">)</span>
+    myarray<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Hey Joe&quot;</span>
+    myarray<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Little Wing&quot;</span>
+    myarray<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Voodoo Child&quot;</span>
+    myarray<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;Purple Haze&quot;</span>
+    myarray<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;The Wind Cries Mary&quot;</span>
+    myarray<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;CLEAR&quot;</span>
+    
+    <span class="token keyword">With</span> ComboBox1
+        <span class="token punctuation">.</span>List <span class="token operator">=</span> myarray<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">End</span> <span class="token keyword">With</span>
+
+    FillACell myarray<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The array is passed to the routine that fills the cells with the song name or null value to empty them. First, an integer variable is given the value of the position of the choice that the user makes. Then, the Combo Box is moved to the TOP LEFT corner of the cell the user activates and its dimensions adjusted to make the experience more fluid. The active cell is then assigned the value in the position in the integer variable, which tracks the user choice. In case the user selects CLEAR from the options, the cell is emptied.</p> <p>The entire routine repeats for each selected cell.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> FillACell<span class="token punctuation">(</span>MyArray <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">)</span>
+
+<span class="token keyword">Dim</span> n <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+
+n <span class="token operator">=</span> ComboBox1<span class="token punctuation">.</span>ListIndex
+
+ComboBox1<span class="token punctuation">.</span>Left <span class="token operator">=</span> ActiveCell<span class="token punctuation">.</span>Left
+ComboBox1<span class="token punctuation">.</span>Top <span class="token operator">=</span> ActiveCell<span class="token punctuation">.</span>Top
+Columns<span class="token punctuation">(</span>ActiveCell<span class="token punctuation">.</span>Column<span class="token punctuation">)</span><span class="token punctuation">.</span>ColumnWidth <span class="token operator">=</span> ComboBox1<span class="token punctuation">.</span>Width <span class="token operator">*</span> <span class="token number">0.18</span>
+
+ActiveCell <span class="token operator">=</span> MyArray<span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+
+<span class="token keyword">If</span> ComboBox1 <span class="token operator">=</span> <span class="token string">&quot;CLEAR&quot;</span> <span class="token keyword">Then</span>
+    Range<span class="token punctuation">(</span>ActiveCell<span class="token punctuation">.</span>Address<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">If</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/excelvba/methods-for-finding-the-last-used-row-or-column-in-a-worksheet.html" class="prev">
+        Methods for Finding the Last Used Row or Column in a Worksheet
+      </a></span> <span class="next"><a href="/excelvba/file-system-object.html">
+        File System Object
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1075.54f366db.js" defer></script>
+  </body>
+</html>

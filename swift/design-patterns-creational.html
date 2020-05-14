@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Swift - Design Patterns - Creational</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Singleton, Builder Pattern, Factory Method, Observer, Chain of responsibility, Iterator">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Swift - Design Patterns - Creational">
+    <meta property="og:description" content="Singleton, Builder Pattern, Factory Method, Observer, Chain of responsibility, Iterator">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/swift/design-patterns-creational.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Swift - Design Patterns - Creational">
+    <meta name="twitter:description" content="Singleton, Builder Pattern, Factory Method, Observer, Chain of responsibility, Iterator">
+    <meta name="twitter:url" content="/swift/design-patterns-creational.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3323.55e60966.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Swift</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/swift/" class="sidebar-link">Disclaimer</a></li><li><a href="/swift/getting-started-with-swift-language.html" class="sidebar-link">Getting started with Swift Language</a></li><li><a href="/swift/variables-properties.html" class="sidebar-link">Variables &amp; Properties</a></li><li><a href="/swift/numbers.html" class="sidebar-link">Numbers</a></li><li><a href="/swift/strings-and-characters.html" class="sidebar-link">Strings and Characters</a></li><li><a href="/swift/booleans.html" class="sidebar-link">Booleans</a></li><li><a href="/swift/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/swift/tuples.html" class="sidebar-link">Tuples</a></li><li><a href="/swift/enums.html" class="sidebar-link">Enums</a></li><li><a href="/swift/structs.html" class="sidebar-link">Structs</a></li><li><a href="/swift/sets.html" class="sidebar-link">Sets</a></li><li><a href="/swift/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/swift/switch.html" class="sidebar-link">Switch</a></li><li><a href="/swift/optionals.html" class="sidebar-link">Optionals</a></li><li><a href="/swift/conditionals.html" class="sidebar-link">Conditionals</a></li><li><a href="/swift/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/swift/loops.html" class="sidebar-link">Loops</a></li><li><a href="/swift/protocols.html" class="sidebar-link">Protocols</a></li><li><a href="/swift/functions.html" class="sidebar-link">Functions</a></li><li><a href="/swift/extensions.html" class="sidebar-link">Extensions</a></li><li><a href="/swift/classes.html" class="sidebar-link">Classes</a></li><li><a href="/swift/type-casting.html" class="sidebar-link">Type Casting</a></li><li><a href="/swift/generics.html" class="sidebar-link">Generics</a></li><li><a href="/swift/optionset.html" class="sidebar-link">OptionSet</a></li><li><a href="/swift/reading-writing-json.html" class="sidebar-link">Reading &amp; Writing JSON</a></li><li><a href="/swift/advanced-operators.html" class="sidebar-link">Advanced Operators</a></li><li><a href="/swift/method-swizzling.html" class="sidebar-link">Method Swizzling</a></li><li><a href="/swift/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/swift/access-control.html" class="sidebar-link">Access Control</a></li><li><a href="/swift/closures.html" class="sidebar-link">Closures</a></li><li><a href="/swift/initializers.html" class="sidebar-link">Initializers</a></li><li><a href="/swift/associated-objects.html" class="sidebar-link">Associated Objects</a></li><li><a href="/swift/concurrency.html" class="sidebar-link">Concurrency</a></li><li><a href="/swift/getting-started-with-protocol-oriented-programming.html" class="sidebar-link">Getting Started with Protocol Oriented Programming</a></li><li><a href="/swift/functional-programming-in-swift.html" class="sidebar-link">Functional Programming in Swift</a></li><li><a href="/swift/function-as-first-class-citizens-in-swift.html" class="sidebar-link">Function as first class citizens in Swift</a></li><li><a href="/swift/blocks.html" class="sidebar-link">Blocks</a></li><li><a href="/swift/the-defer-statement.html" class="sidebar-link">The Defer Statement</a></li><li><a href="/swift/style-conventions.html" class="sidebar-link">Style Conventions</a></li><li><a href="/swift/nsregularexpression-in-swift.html" class="sidebar-link">NSRegularExpression in Swift</a></li><li><a href="/swift/rxswift.html" class="sidebar-link">RxSwift</a></li><li><a href="/swift/swift-package-manager.html" class="sidebar-link">Swift Package Manager</a></li><li><a href="/swift/working-with-c-and-objective-c.html" class="sidebar-link">Working with C and Objective-C</a></li><li><a href="/swift/documentation-markup.html" class="sidebar-link">Documentation markup</a></li><li><a href="/swift/typealias.html" class="sidebar-link">Typealias</a></li><li><a href="/swift/dependency-injection.html" class="sidebar-link">Dependency Injection</a></li><li><a href="/swift/caching-on-disk-space.html" class="sidebar-link">Caching on disk space</a></li><li><a href="/swift/algorithms-with-swift.html" class="sidebar-link">Algorithms with Swift</a></li><li><a href="/swift/swift-advance-functions.html" class="sidebar-link">Swift Advance functions</a></li><li><a href="/swift/completion-handler.html" class="sidebar-link">Completion Handler</a></li><li><a href="/swift/swift-http-server-by-kitura.html" class="sidebar-link">Swift HTTP server by Kitura</a></li><li><a href="/swift/generate-uiimage-of-initials-from-string.html" class="sidebar-link">Generate UIImage of Initials from String</a></li><li><a href="/swift/design-patterns-creational.html" class="active sidebar-link">Design Patterns - Creational</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/swift/design-patterns-creational.html#singleton" class="sidebar-link">Singleton</a></li><li class="sidebar-sub-header"><a href="/swift/design-patterns-creational.html#builder-pattern" class="sidebar-link">Builder Pattern</a></li><li class="sidebar-sub-header"><a href="/swift/design-patterns-creational.html#factory-method" class="sidebar-link">Factory Method</a></li><li class="sidebar-sub-header"><a href="/swift/design-patterns-creational.html#observer" class="sidebar-link">Observer</a></li><li class="sidebar-sub-header"><a href="/swift/design-patterns-creational.html#chain-of-responsibility" class="sidebar-link">Chain of responsibility</a></li><li class="sidebar-sub-header"><a href="/swift/design-patterns-creational.html#iterator" class="sidebar-link">Iterator</a></li></ul></li><li><a href="/swift/design-patterns-structural.html" class="sidebar-link">Design Patterns - Structural</a></li><li><a href="/swift/unsafe-buffer-pointers.html" class="sidebar-link">(Unsafe) Buffer Pointers</a></li><li><a href="/swift/cryptographic-hashing.html" class="sidebar-link">Cryptographic Hashing</a></li><li><a href="/swift/aes-encryption.html" class="sidebar-link">AES encryption</a></li><li><a href="/swift/pbkdf2-key-derivation.html" class="sidebar-link">PBKDF2 Key Derivation</a></li><li><a href="/swift/logging-in-swift.html" class="sidebar-link">Logging in Swift</a></li><li><a href="/swift/memory-management.html" class="sidebar-link">Memory Management</a></li><li><a href="/swift/performance.html" class="sidebar-link">Performance</a></li><li><a href="/swift/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="design-patterns-creational"><a href="#design-patterns-creational" class="header-anchor">#</a> Design Patterns - Creational</h1> <p>Design patterns are general solutions to problems that frequently occur in software development. The following are templates of standardized best practices in structuring and designing code, as well as examples of common contexts in which these design patterns would be appropriate.</p> <p><strong>Creational design patterns</strong> abstract the instantiation of objects to make a system more independent of the process of creation, composition, and representation.</p> <h2 id="singleton"><a href="#singleton" class="header-anchor">#</a> Singleton</h2> <p>Singletons are a frequently used design pattern which consists of a single instance of a class that is shared throughout a program.</p> <p>In the following example, we create a <code>static</code> property that holds an instance of the <code>Foo</code> class. Remember that a <code>static</code> property is shared between all objects of a class and can't be overwritten by subclassing.</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Foo</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">let</span> shared <span class="token operator">=</span> <span class="token function">Foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    
+    <span class="token comment">// Used for preventing the class from being instantiated directly</span>
+    <span class="token keyword">private</span> <span class="token keyword">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    
+    <span class="token keyword">func</span> <span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;Do something&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Usage:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token builtin">Foo</span><span class="token punctuation">.</span>shared<span class="token punctuation">.</span><span class="token function">doSomething</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>Be sure to remember the <code>private</code> initializer:</p> <blockquote></blockquote> <p>This makes sure your singletons are truly unique and prevents outside objects from creating their own instances of your class through virtue of access control. Since all objects come with a default public initializer in Swift, you need to override your init and make it private. <a href="https://krakendev.io/blog/the-right-way-to-write-a-singleton" target="_blank" rel="noopener noreferrer">KrakenDev<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="builder-pattern"><a href="#builder-pattern" class="header-anchor">#</a> Builder Pattern</h2> <blockquote></blockquote> <p>The builder pattern is an **object creation software design pattern**.
+Unlike the abstract factory pattern and the factory method pattern
+whose intention is to enable polymorphism, the intention of the
+builder pattern is to find a solution to the telescoping constructor
+anti-pattern. The telescoping constructor anti-pattern occurs when the
+increase of object constructor parameter combination leads to an
+exponential list of constructors. Instead of using numerous
+constructors, the builder pattern uses another object, a builder, that
+receives each initialization parameter step by step and then returns
+the resulting constructed object at once.</p>
+[**-Wikipedia**](https://en.wikipedia.org/wiki/Builder_pattern)
+<p>The main goal of the builder pattern is to setup a default configuration for an object from its creation. It is an intermediary between the object will be built and all other objects related to building it.</p> <h3 id="example"><a href="#example" class="header-anchor">#</a> <strong>Example:</strong></h3> <p>To make it more clear, let's take a look at a <strong>Car Builder</strong> example.</p> <p>Consider that we have a <strong>Car</strong> class contains many options to create an object, such as:</p> <ul><li>Color.</li> <li>Number of seats.</li> <li>Number of wheels.</li> <li>Type.</li> <li>Gear type.</li> <li>Motor.</li> <li>Airbag availability.</li></ul> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">import</span> <span class="token builtin">UIKit</span>
+
+<span class="token keyword">enum</span> <span class="token builtin">CarType</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span>
+    
+    sportage<span class="token punctuation">,</span>
+    saloon
+<span class="token punctuation">}</span>
+
+<span class="token keyword">enum</span> <span class="token builtin">GearType</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span>
+    
+    manual<span class="token punctuation">,</span>
+    automatic
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> <span class="token builtin">Motor</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> id<span class="token punctuation">:</span> <span class="token builtin">String</span>
+    <span class="token keyword">var</span> name<span class="token punctuation">:</span> <span class="token builtin">String</span>
+    <span class="token keyword">var</span> model<span class="token punctuation">:</span> <span class="token builtin">String</span>
+    <span class="token keyword">var</span> numberOfCylinders<span class="token punctuation">:</span> <span class="token builtin">UInt8</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Car</span><span class="token punctuation">:</span> <span class="token builtin">CustomStringConvertible</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span>
+    <span class="token keyword">var</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span>
+    <span class="token keyword">var</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span>
+    <span class="token keyword">var</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span>
+    <span class="token keyword">var</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span>
+    <span class="token keyword">var</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span>
+    
+    <span class="token keyword">var</span> description<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;color: <span class="token interpolation"><span class="token delimiter variable">\(</span>color<span class="token delimiter variable">)</span></span>\nNumber of seats: <span class="token interpolation"><span class="token delimiter variable">\(</span>numberOfSeats<span class="token delimiter variable">)</span></span>\nNumber of Wheels: <span class="token interpolation"><span class="token delimiter variable">\(</span>numberOfWheels<span class="token delimiter variable">)</span></span>\n Type: <span class="token interpolation"><span class="token delimiter variable">\(</span>gearType<span class="token delimiter variable">)</span></span>\nMotor: <span class="token interpolation"><span class="token delimiter variable">\(</span>motor<span class="token delimiter variable">)</span></span>\nAirbag Availability: <span class="token interpolation"><span class="token delimiter variable">\(</span>shouldHasAirbags<span class="token delimiter variable">)</span></span>&quot;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">init</span><span class="token punctuation">(</span>color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span><span class="token punctuation">,</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span><span class="token punctuation">,</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span><span class="token punctuation">,</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span><span class="token punctuation">,</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span><span class="token punctuation">,</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span><span class="token punctuation">,</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        
+        <span class="token keyword">self</span><span class="token punctuation">.</span>color <span class="token operator">=</span> color
+        <span class="token keyword">self</span><span class="token punctuation">.</span>numberOfSeats <span class="token operator">=</span> numberOfSeats
+        <span class="token keyword">self</span><span class="token punctuation">.</span>numberOfWheels <span class="token operator">=</span> numberOfWheels
+        <span class="token keyword">self</span><span class="token punctuation">.</span>type <span class="token operator">=</span> type
+        <span class="token keyword">self</span><span class="token punctuation">.</span>gearType <span class="token operator">=</span> gearType
+        <span class="token keyword">self</span><span class="token punctuation">.</span>motor <span class="token operator">=</span> motor
+        <span class="token keyword">self</span><span class="token punctuation">.</span>shouldHasAirbags <span class="token operator">=</span> shouldHasAirbags
+        
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Creating a car object:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> aCar <span class="token operator">=</span> <span class="token function">Car</span><span class="token punctuation">(</span>color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span><span class="token punctuation">.</span>black<span class="token punctuation">,</span>
+               numberOfSeats<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+               numberOfWheels<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+               type<span class="token punctuation">:</span> <span class="token punctuation">.</span>saloon<span class="token punctuation">,</span>
+               gearType<span class="token punctuation">:</span> <span class="token punctuation">.</span>automatic<span class="token punctuation">,</span>
+               motor<span class="token punctuation">:</span> <span class="token function">Motor</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token string">&quot;101&quot;</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">&quot;Super Motor&quot;</span><span class="token punctuation">,</span>
+                            model<span class="token punctuation">:</span> <span class="token string">&quot;c4&quot;</span><span class="token punctuation">,</span> numberOfCylinders<span class="token punctuation">:</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+               shouldHasAirbags<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span>
+
+<span class="token function">print</span><span class="token punctuation">(</span>aCar<span class="token punctuation">)</span>
+
+<span class="token comment">/* Printing
+ color: UIExtendedGrayColorSpace 0 1
+ Number of seats: 4
+ Number of Wheels: 4
+ Type: automatic
+ Motor: Motor(id: &quot;101&quot;, name: &quot;Super Motor&quot;, model: &quot;c4&quot;, numberOfCylinders: 6)
+ Airbag Availability: true
+*/</span>
+
+</code></pre></div><p>The <strong>problem</strong> arises when creating a car object is that the car requires many configuration data to be created.</p> <p>For applying the Builder Pattern, the initializer parameters should have default values <strong>which are changeable if needed</strong>.</p> <p>CarBuilder class:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">class</span> <span class="token class-name">CarBuilder</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span> <span class="token operator">=</span> <span class="token builtin">UIColor</span><span class="token punctuation">.</span>black
+    <span class="token keyword">var</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token operator">=</span> <span class="token number">5</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token operator">=</span> <span class="token number">4</span>
+    <span class="token keyword">var</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span> <span class="token operator">=</span> <span class="token punctuation">.</span>saloon
+    <span class="token keyword">var</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span> <span class="token operator">=</span> <span class="token punctuation">.</span>automatic
+    <span class="token keyword">var</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span> <span class="token operator">=</span> <span class="token function">Motor</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token string">&quot;111&quot;</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">&quot;Default Motor&quot;</span><span class="token punctuation">,</span>
+                             model<span class="token punctuation">:</span> <span class="token string">&quot;T9&quot;</span><span class="token punctuation">,</span> numberOfCylinders<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span> <span class="token operator">=</span> <span class="token boolean">false</span>
+    
+    <span class="token keyword">func</span> <span class="token function">buildCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Car</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">Car</span><span class="token punctuation">(</span>color<span class="token punctuation">:</span> color<span class="token punctuation">,</span> numberOfSeats<span class="token punctuation">:</span> numberOfSeats<span class="token punctuation">,</span> numberOfWheels<span class="token punctuation">:</span> numberOfWheels<span class="token punctuation">,</span> type<span class="token punctuation">:</span> type<span class="token punctuation">,</span> gearType<span class="token punctuation">:</span> gearType<span class="token punctuation">,</span> motor<span class="token punctuation">:</span> motor<span class="token punctuation">,</span> shouldHasAirbags<span class="token punctuation">:</span> shouldHasAirbags<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The <code>CarBuilder</code> class defines properties that could be changed to to edit the values of the created car object.</p> <p>Let's build new cars by using the <code>CarBuilder</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">var</span> builder <span class="token operator">=</span> <span class="token function">CarBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">// currently, the builder creates cars with default configuration.</span>
+
+<span class="token keyword">let</span> defaultCar <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">buildCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">//print(defaultCar.description)</span>
+<span class="token comment">/* prints
+ color: UIExtendedGrayColorSpace 0 1
+ Number of seats: 5
+ Number of Wheels: 4
+ Type: automatic
+ Motor: Motor(id: &quot;111&quot;, name: &quot;Default Motor&quot;, model: &quot;T9&quot;, numberOfCylinders: 4)
+ Airbag Availability: false
+*/</span>
+
+builder<span class="token punctuation">.</span>shouldHasAirbags <span class="token operator">=</span> <span class="token boolean">true</span>
+<span class="token comment">// now, the builder creates cars with default configuration,</span>
+<span class="token comment">// but with a small edit on making the airbags available</span>
+
+<span class="token keyword">let</span> safeCar <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">buildCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>safeCar<span class="token punctuation">.</span>description<span class="token punctuation">)</span>
+<span class="token comment">/* prints
+ color: UIExtendedGrayColorSpace 0 1
+ Number of seats: 5
+ Number of Wheels: 4
+ Type: automatic
+ Motor: Motor(id: &quot;111&quot;, name: &quot;Default Motor&quot;, model: &quot;T9&quot;, numberOfCylinders: 4)
+ Airbag Availability: true
+ */</span>
+
+builder<span class="token punctuation">.</span>color <span class="token operator">=</span> <span class="token builtin">UIColor</span><span class="token punctuation">.</span>purple
+<span class="token comment">// now, the builder creates cars with default configuration</span>
+<span class="token comment">// with some extra features: the airbags are available and the color is purple</span>
+
+<span class="token keyword">let</span> femaleCar <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">buildCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>femaleCar<span class="token punctuation">)</span>
+<span class="token comment">/* prints
+ color: UIExtendedSRGBColorSpace 0.5 0 0.5 1
+ Number of seats: 5
+ Number of Wheels: 4
+ Type: automatic
+ Motor: Motor(id: &quot;111&quot;, name: &quot;Default Motor&quot;, model: &quot;T9&quot;, numberOfCylinders: 4)
+ Airbag Availability: true
+*/</span>
+
+</code></pre></div><p>The <strong>benefit</strong> of applying the Builder Pattern is the ease of creating objects that should contain much of configurations by setting default values, also, the ease of changing these default values.</p> <h3 id="take-it-further"><a href="#take-it-further" class="header-anchor">#</a> <strong>Take it Further:</strong></h3> <p>As a good practice, all properties that need default values should be in a <strong>separated protocol</strong>, which should be implemented by the class itself and its builder.</p> <p>Backing to our example, let's create a new protocol called <code>CarBluePrint</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">import</span> <span class="token builtin">UIKit</span>
+
+<span class="token keyword">enum</span> <span class="token builtin">CarType</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span>
+    
+    sportage<span class="token punctuation">,</span>
+    saloon
+<span class="token punctuation">}</span>
+
+<span class="token keyword">enum</span> <span class="token builtin">GearType</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span>
+    
+    manual<span class="token punctuation">,</span>
+    automatic
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> <span class="token builtin">Motor</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> id<span class="token punctuation">:</span> <span class="token builtin">String</span>
+    <span class="token keyword">var</span> name<span class="token punctuation">:</span> <span class="token builtin">String</span>
+    <span class="token keyword">var</span> model<span class="token punctuation">:</span> <span class="token builtin">String</span>
+    <span class="token keyword">var</span> numberOfCylinders<span class="token punctuation">:</span> <span class="token builtin">UInt8</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">protocol</span> <span class="token builtin">CarBluePrint</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Car</span><span class="token punctuation">:</span> <span class="token builtin">CustomStringConvertible</span><span class="token punctuation">,</span> <span class="token builtin">CarBluePrint</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span>
+    <span class="token keyword">var</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span>
+    <span class="token keyword">var</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span>
+    <span class="token keyword">var</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span>
+    <span class="token keyword">var</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span>
+    <span class="token keyword">var</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span>
+    
+    <span class="token keyword">var</span> description<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;color: <span class="token interpolation"><span class="token delimiter variable">\(</span>color<span class="token delimiter variable">)</span></span>\nNumber of seats: <span class="token interpolation"><span class="token delimiter variable">\(</span>numberOfSeats<span class="token delimiter variable">)</span></span>\nNumber of Wheels: <span class="token interpolation"><span class="token delimiter variable">\(</span>numberOfWheels<span class="token delimiter variable">)</span></span>\n Type: <span class="token interpolation"><span class="token delimiter variable">\(</span>gearType<span class="token delimiter variable">)</span></span>\nMotor: <span class="token interpolation"><span class="token delimiter variable">\(</span>motor<span class="token delimiter variable">)</span></span>\nAirbag Availability: <span class="token interpolation"><span class="token delimiter variable">\(</span>shouldHasAirbags<span class="token delimiter variable">)</span></span>&quot;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">init</span><span class="token punctuation">(</span>color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span><span class="token punctuation">,</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span><span class="token punctuation">,</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span><span class="token punctuation">,</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span><span class="token punctuation">,</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span><span class="token punctuation">,</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span><span class="token punctuation">,</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        
+        <span class="token keyword">self</span><span class="token punctuation">.</span>color <span class="token operator">=</span> color
+        <span class="token keyword">self</span><span class="token punctuation">.</span>numberOfSeats <span class="token operator">=</span> numberOfSeats
+        <span class="token keyword">self</span><span class="token punctuation">.</span>numberOfWheels <span class="token operator">=</span> numberOfWheels
+        <span class="token keyword">self</span><span class="token punctuation">.</span>type <span class="token operator">=</span> type
+        <span class="token keyword">self</span><span class="token punctuation">.</span>gearType <span class="token operator">=</span> gearType
+        <span class="token keyword">self</span><span class="token punctuation">.</span>motor <span class="token operator">=</span> motor
+        <span class="token keyword">self</span><span class="token punctuation">.</span>shouldHasAirbags <span class="token operator">=</span> shouldHasAirbags
+        
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">CarBuilder</span><span class="token punctuation">:</span> <span class="token builtin">CarBluePrint</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span> <span class="token operator">=</span> <span class="token builtin">UIColor</span><span class="token punctuation">.</span>black
+    <span class="token keyword">var</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token operator">=</span> <span class="token number">5</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token operator">=</span> <span class="token number">4</span>
+    <span class="token keyword">var</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span> <span class="token operator">=</span> <span class="token punctuation">.</span>saloon
+    <span class="token keyword">var</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span> <span class="token operator">=</span> <span class="token punctuation">.</span>automatic
+    <span class="token keyword">var</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span> <span class="token operator">=</span> <span class="token function">Motor</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token string">&quot;111&quot;</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">&quot;Default Motor&quot;</span><span class="token punctuation">,</span>
+                             model<span class="token punctuation">:</span> <span class="token string">&quot;T9&quot;</span><span class="token punctuation">,</span> numberOfCylinders<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span> <span class="token operator">=</span> <span class="token boolean">false</span>
+    
+    <span class="token keyword">func</span> <span class="token function">buildCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Car</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">Car</span><span class="token punctuation">(</span>color<span class="token punctuation">:</span> color<span class="token punctuation">,</span> numberOfSeats<span class="token punctuation">:</span> numberOfSeats<span class="token punctuation">,</span> numberOfWheels<span class="token punctuation">:</span> numberOfWheels<span class="token punctuation">,</span> type<span class="token punctuation">:</span> type<span class="token punctuation">,</span> gearType<span class="token punctuation">:</span> gearType<span class="token punctuation">,</span> motor<span class="token punctuation">:</span> motor<span class="token punctuation">,</span> shouldHasAirbags<span class="token punctuation">:</span> shouldHasAirbags<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The benefit of declaring the properties that need default value into a protocol is the forcing to implement any new added property; When a class conforms to a protocol, it has to declare all its properties/methods.</p> <p>Consider that there is a required new feature that should be added to the blueprint of creating a car called &quot;battery name&quot;:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">protocol</span> <span class="token builtin">CarBluePrint</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    <span class="token keyword">var</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+    
+    <span class="token comment">// adding the new property</span>
+    <span class="token keyword">var</span> batteryName<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>After adding the new property, note that two compile-time errors will arise, notifying that conforming to <code>CarBluePrint</code> protocol requires to declare 'batteryName' property. That guarantees that <code>CarBuilder</code> will declare and set a default value for <code>batteryName</code> property.</p> <p>After adding <code>batteryName</code> new property to <code>CarBluePrint</code> protocol, the implementation of both <code>Car</code> and <code>CarBuilder</code> classes should be:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">class</span> <span class="token class-name">Car</span><span class="token punctuation">:</span> <span class="token builtin">CustomStringConvertible</span><span class="token punctuation">,</span> <span class="token builtin">CarBluePrint</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span>
+    <span class="token keyword">var</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span>
+    <span class="token keyword">var</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span>
+    <span class="token keyword">var</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span>
+    <span class="token keyword">var</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span>
+    <span class="token keyword">var</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span>
+    <span class="token keyword">var</span> batteryName<span class="token punctuation">:</span> <span class="token builtin">String</span>
+    
+    <span class="token keyword">var</span> description<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;color: <span class="token interpolation"><span class="token delimiter variable">\(</span>color<span class="token delimiter variable">)</span></span>\nNumber of seats: <span class="token interpolation"><span class="token delimiter variable">\(</span>numberOfSeats<span class="token delimiter variable">)</span></span>\nNumber of Wheels: <span class="token interpolation"><span class="token delimiter variable">\(</span>numberOfWheels<span class="token delimiter variable">)</span></span>\nType: <span class="token interpolation"><span class="token delimiter variable">\(</span>gearType<span class="token delimiter variable">)</span></span>\nMotor: <span class="token interpolation"><span class="token delimiter variable">\(</span>motor<span class="token delimiter variable">)</span></span>\nAirbag Availability: <span class="token interpolation"><span class="token delimiter variable">\(</span>shouldHasAirbags<span class="token delimiter variable">)</span></span>\nBattery Name: <span class="token interpolation"><span class="token delimiter variable">\(</span>batteryName<span class="token delimiter variable">)</span></span>&quot;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">init</span><span class="token punctuation">(</span>color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span><span class="token punctuation">,</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span><span class="token punctuation">,</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span><span class="token punctuation">,</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span><span class="token punctuation">,</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span><span class="token punctuation">,</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span><span class="token punctuation">,</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span><span class="token punctuation">,</span> batteryName<span class="token punctuation">:</span> <span class="token builtin">String</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        
+        <span class="token keyword">self</span><span class="token punctuation">.</span>color <span class="token operator">=</span> color
+        <span class="token keyword">self</span><span class="token punctuation">.</span>numberOfSeats <span class="token operator">=</span> numberOfSeats
+        <span class="token keyword">self</span><span class="token punctuation">.</span>numberOfWheels <span class="token operator">=</span> numberOfWheels
+        <span class="token keyword">self</span><span class="token punctuation">.</span>type <span class="token operator">=</span> type
+        <span class="token keyword">self</span><span class="token punctuation">.</span>gearType <span class="token operator">=</span> gearType
+        <span class="token keyword">self</span><span class="token punctuation">.</span>motor <span class="token operator">=</span> motor
+        <span class="token keyword">self</span><span class="token punctuation">.</span>shouldHasAirbags <span class="token operator">=</span> shouldHasAirbags
+        <span class="token keyword">self</span><span class="token punctuation">.</span>batteryName <span class="token operator">=</span> batteryName
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">CarBuilder</span><span class="token punctuation">:</span> <span class="token builtin">CarBluePrint</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> color<span class="token punctuation">:</span> <span class="token builtin">UIColor</span> <span class="token operator">=</span> <span class="token builtin">UIColor</span><span class="token punctuation">.</span>red
+    <span class="token keyword">var</span> numberOfSeats<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token operator">=</span> <span class="token number">5</span>
+    <span class="token keyword">var</span> numberOfWheels<span class="token punctuation">:</span> <span class="token builtin">UInt8</span> <span class="token operator">=</span> <span class="token number">4</span>
+    <span class="token keyword">var</span> type<span class="token punctuation">:</span> <span class="token builtin">CarType</span> <span class="token operator">=</span> <span class="token punctuation">.</span>saloon
+    <span class="token keyword">var</span> gearType<span class="token punctuation">:</span> <span class="token builtin">GearType</span> <span class="token operator">=</span> <span class="token punctuation">.</span>automatic
+    <span class="token keyword">var</span> motor<span class="token punctuation">:</span> <span class="token builtin">Motor</span> <span class="token operator">=</span> <span class="token function">Motor</span><span class="token punctuation">(</span>id<span class="token punctuation">:</span> <span class="token string">&quot;111&quot;</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">&quot;Default Motor&quot;</span><span class="token punctuation">,</span>
+                             model<span class="token punctuation">:</span> <span class="token string">&quot;T9&quot;</span><span class="token punctuation">,</span> numberOfCylinders<span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> shouldHasAirbags<span class="token punctuation">:</span> <span class="token builtin">Bool</span> <span class="token operator">=</span> <span class="token boolean">false</span>
+    <span class="token keyword">var</span> batteryName<span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token operator">=</span> <span class="token string">&quot;Default Battery Name&quot;</span>
+    
+    <span class="token keyword">func</span> <span class="token function">buildCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Car</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">Car</span><span class="token punctuation">(</span>color<span class="token punctuation">:</span> color<span class="token punctuation">,</span> numberOfSeats<span class="token punctuation">:</span> numberOfSeats<span class="token punctuation">,</span> numberOfWheels<span class="token punctuation">:</span> numberOfWheels<span class="token punctuation">,</span> type<span class="token punctuation">:</span> type<span class="token punctuation">,</span> gearType<span class="token punctuation">:</span> gearType<span class="token punctuation">,</span> motor<span class="token punctuation">:</span> motor<span class="token punctuation">,</span> shouldHasAirbags<span class="token punctuation">:</span> shouldHasAirbags<span class="token punctuation">,</span> batteryName<span class="token punctuation">:</span> batteryName<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Again, let's build new cars by using the <code>CarBuilder</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">var</span> builder <span class="token operator">=</span> <span class="token function">CarBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">let</span> defaultCar <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">buildCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>defaultCar<span class="token punctuation">)</span>
+<span class="token comment">/* prints
+ color: UIExtendedSRGBColorSpace 1 0 0 1
+ Number of seats: 5
+ Number of Wheels: 4
+ Type: automatic
+ Motor: Motor(id: &quot;111&quot;, name: &quot;Default Motor&quot;, model: &quot;T9&quot;, numberOfCylinders: 4)
+ Airbag Availability: false
+ Battery Name: Default Battery Name
+*/</span>
+
+builder<span class="token punctuation">.</span>batteryName <span class="token operator">=</span> <span class="token string">&quot;New Battery Name&quot;</span>
+
+<span class="token keyword">let</span> editedBatteryCar <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">buildCar</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span>editedBatteryCar<span class="token punctuation">)</span>
+<span class="token comment">/*
+ color: UIExtendedSRGBColorSpace 1 0 0 1
+ Number of seats: 5
+ Number of Wheels: 4
+ Type: automatic
+ Motor: Motor(id: &quot;111&quot;, name: &quot;Default Motor&quot;, model: &quot;T9&quot;, numberOfCylinders: 4)
+ Airbag Availability: false
+ Battery Name: New Battery Name
+ */</span>
+
+</code></pre></div><h2 id="factory-method"><a href="#factory-method" class="header-anchor">#</a> Factory Method</h2> <blockquote></blockquote> <p>In class-based programming, the factory method pattern is a creational pattern that uses factory methods to deal with the problem of creating objects without having to specify the exact class of the object that will be created. <a href="https://en.wikipedia.org/wiki/Factory_method_pattern" target="_blank" rel="noopener noreferrer">Wikipedia reference<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">protocol</span> <span class="token builtin">SenderProtocol</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">func</span> <span class="token function">send</span><span class="token punctuation">(</span>package<span class="token punctuation">:</span> <span class="token builtin">AnyObject</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Fedex</span><span class="token punctuation">:</span> <span class="token builtin">SenderProtocol</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">func</span> <span class="token function">send</span><span class="token punctuation">(</span>package<span class="token punctuation">:</span> <span class="token builtin">AnyObject</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;Fedex deliver&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">RegularPriorityMail</span><span class="token punctuation">:</span> <span class="token builtin">SenderProtocol</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">func</span> <span class="token function">send</span><span class="token punctuation">(</span>package<span class="token punctuation">:</span> <span class="token builtin">AnyObject</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;Regular Priority Mail deliver&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// This is our Factory</span>
+<span class="token keyword">class</span> <span class="token class-name">DeliverFactory</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// It will be responsable for returning the proper instance that will handle the task</span>
+    <span class="token keyword">static</span> <span class="token keyword">func</span> <span class="token function">makeSender</span><span class="token punctuation">(</span>isLate isLate<span class="token punctuation">:</span> <span class="token builtin">Bool</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">SenderProtocol</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> isLate <span class="token operator">?</span> <span class="token function">Fedex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token function">RegularPriorityMail</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// Usage:</span>
+<span class="token keyword">let</span> package <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">&quot;Item 1&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Item 2&quot;</span><span class="token punctuation">]</span>
+
+<span class="token comment">// Fedex class will handle the delivery</span>
+<span class="token builtin">DeliverFactory</span><span class="token punctuation">.</span><span class="token function">makeSender</span><span class="token punctuation">(</span>isLate<span class="token punctuation">:</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>package<span class="token punctuation">)</span>
+
+<span class="token comment">// Regular Priority Mail class will handle the delivery</span>
+<span class="token builtin">DeliverFactory</span><span class="token punctuation">.</span><span class="token function">makeSender</span><span class="token punctuation">(</span>isLate<span class="token punctuation">:</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>package<span class="token punctuation">)</span>
+
+</code></pre></div><p>By doing that we don't depend on the real implementation of the class, making the <code>sender()</code> completely transparent to who is consuming it.</p> <p>In this case all we need to know is that a sender will handle the deliver and exposes a method called <code>send()</code>. There are several other advantages: reduce classes coupling, easier to test, easier to add new behaviours without having to change who is consuming it.</p> <blockquote></blockquote> <p>Within object-oriented design, interfaces provide layers of abstraction that facilitate conceptual explanation of the code and create a barrier preventing dependencies.<a href="https://en.wikipedia.org/wiki/Interface_segregation_principle" target="_blank" rel="noopener noreferrer">Wikipedia reference<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="observer"><a href="#observer" class="header-anchor">#</a> Observer</h2> <blockquote></blockquote> <p>The observer pattern is where an object, called the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods. It is mainly used to implement distributed event handling systems. The Observer pattern is also a key part in the familiar model–view–controller (MVC) architectural pattern.<a href="https://en.wikipedia.org/wiki/Observer_pattern" target="_blank" rel="noopener noreferrer">Wikipedia reference<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>Basically the observer pattern is used when you have an object which can notify observers of certain behaviors or state changes.</p> <p>First lets create a global reference (outside of a class) for the Notification Centre :</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> notifCentre <span class="token operator">=</span> <span class="token builtin">NotificationCenter</span><span class="token punctuation">.</span><span class="token keyword">default</span>
+
+</code></pre></div><p>Great now we can call this from anywhere. We would then want to register a class as an observer...</p> <div class="language-swift extra-class"><pre class="language-swift"><code>notifCentre<span class="token punctuation">.</span><span class="token function">addObserver</span><span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">,</span> selector<span class="token punctuation">:</span> #<span class="token function">selector</span><span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>myFunc<span class="token punctuation">)</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">&quot;myNotification&quot;</span><span class="token punctuation">,</span> object<span class="token punctuation">:</span> <span class="token constant">nil</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>This adds the class as an observer for &quot;readForMyFunc&quot;. It also indicates that the function myFunc should be called when that notification is received. This function should be written in the same class:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">func</span> <span class="token function">myFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;The notification has been received&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><blockquote></blockquote> <p>One of the advantages to this pattern is that you can add many classes
+as observers and thus perform many actions after one notification.</p> <p>The notification can now simply be sent(or posted if you prefer) from almost anywhere in the code with the line:</p> <div class="language-swift extra-class"><pre class="language-swift"><code>notifCentre<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">&quot;myNotification&quot;</span><span class="token punctuation">,</span> object<span class="token punctuation">:</span> <span class="token constant">nil</span><span class="token punctuation">)</span>
+
+</code></pre></div><blockquote></blockquote> <p>You can also pass information with the notification as a Dictionary</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> myInfo <span class="token operator">=</span> <span class="token string">&quot;pass this on&quot;</span>
+notifCentre<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">&quot;myNotification&quot;</span><span class="token punctuation">,</span> object<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">&quot;moreInfo&quot;</span><span class="token punctuation">:</span>myInfo<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>But then you need to add a notification to your function:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">func</span> <span class="token function">myFunc</span><span class="token punctuation">(</span><span class="token number">_</span> notification<span class="token punctuation">:</span> <span class="token builtin">Notification</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">let</span> userInfo <span class="token operator">=</span> <span class="token punctuation">(</span>notification <span class="token keyword">as</span> <span class="token builtin">NSNotification</span><span class="token punctuation">)</span><span class="token punctuation">.</span>userInfo <span class="token keyword">as</span><span class="token operator">!</span> <span class="token punctuation">[</span><span class="token builtin">String</span><span class="token punctuation">:</span> <span class="token builtin">AnyObject</span><span class="token punctuation">]</span>
+    <span class="token keyword">let</span> passedInfo <span class="token operator">=</span> userInfo<span class="token punctuation">[</span><span class="token string">&quot;moreInfo&quot;</span><span class="token punctuation">]</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;The notification <span class="token interpolation"><span class="token delimiter variable">\(</span>moreInfo<span class="token delimiter variable">)</span></span> has been received&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">//prints - The notification pass this on has been received</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="chain-of-responsibility"><a href="#chain-of-responsibility" class="header-anchor">#</a> Chain of responsibility</h2> <blockquote></blockquote> <p>In object-oriented design, the chain-of-responsibility pattern is a design pattern consisting of a source of <code>command</code> objects and a series of <code>processing</code> objects. Each <code>processing</code> object contains logic that defines the types of command objects that it can handle; the rest are passed to the next <code>processing</code> object in the chain. A mechanism also exists for adding new <code>processing</code> objects to the end of this chain. <a href="https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern/" target="_blank" rel="noopener noreferrer">Wikipedia<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>Setting up the classes that made up the chain of responsibility.</p> <p>First we create an interface for all the <code>processing</code> objects.</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">protocol</span> <span class="token builtin">PurchasePower</span> <span class="token punctuation">{</span>  
+<span class="token keyword">var</span> allowable <span class="token punctuation">:</span> <span class="token builtin">Float</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
+  <span class="token keyword">var</span> role <span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token punctuation">}</span>
+  <span class="token keyword">var</span> successor <span class="token punctuation">:</span> <span class="token builtin">PurchasePower</span><span class="token operator">?</span> <span class="token punctuation">{</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">extension</span> <span class="token builtin">PurchasePower</span> <span class="token punctuation">{</span>
+  <span class="token keyword">func</span> <span class="token function">process</span><span class="token punctuation">(</span>request <span class="token punctuation">:</span> <span class="token builtin">PurchaseRequest</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>amount <span class="token operator">&lt;</span> <span class="token keyword">self</span><span class="token punctuation">.</span>allowable <span class="token punctuation">{</span>
+      <span class="token function">print</span><span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>role <span class="token operator">+</span> <span class="token string">&quot; will approve $ <span class="token interpolation"><span class="token delimiter variable">\(</span>request<span class="token punctuation">.</span>amount<span class="token delimiter variable">)</span></span> for <span class="token interpolation"><span class="token delimiter variable">\(</span>request<span class="token punctuation">.</span>purpose<span class="token delimiter variable">)</span></span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> successor <span class="token operator">!=</span> <span class="token constant">nil</span> <span class="token punctuation">{</span>
+      successor<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">process</span><span class="token punctuation">(</span>request<span class="token punctuation">:</span> request<span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Then we create the <code>command</code> object.</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">struct</span> <span class="token builtin">PurchaseRequest</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> amount <span class="token punctuation">:</span> <span class="token builtin">Float</span>
+  <span class="token keyword">var</span> purpose <span class="token punctuation">:</span> <span class="token builtin">String</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Finally, creating objects that made up the chain of responsibility.</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">class</span> <span class="token class-name">ManagerPower</span> <span class="token punctuation">:</span> <span class="token builtin">PurchasePower</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> allowable<span class="token punctuation">:</span> <span class="token builtin">Float</span> <span class="token operator">=</span> <span class="token number">20</span>
+  <span class="token keyword">var</span> role <span class="token punctuation">:</span> <span class="token builtin">String</span> <span class="token operator">=</span> <span class="token string">&quot;Manager&quot;</span>
+  <span class="token keyword">var</span> successor<span class="token punctuation">:</span> <span class="token builtin">PurchasePower</span><span class="token operator">?</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">DirectorPower</span> <span class="token punctuation">:</span> <span class="token builtin">PurchasePower</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> allowable<span class="token punctuation">:</span> <span class="token builtin">Float</span> <span class="token operator">=</span> <span class="token number">100</span>
+  <span class="token keyword">var</span> role <span class="token operator">=</span> <span class="token string">&quot;Director&quot;</span>
+  <span class="token keyword">var</span> successor<span class="token punctuation">:</span> <span class="token builtin">PurchasePower</span><span class="token operator">?</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name">PresidentPower</span> <span class="token punctuation">:</span> <span class="token builtin">PurchasePower</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> allowable<span class="token punctuation">:</span> <span class="token builtin">Float</span> <span class="token operator">=</span> <span class="token number">5000</span>
+  <span class="token keyword">var</span> role <span class="token operator">=</span> <span class="token string">&quot;President&quot;</span>
+  <span class="token keyword">var</span> successor<span class="token punctuation">:</span> <span class="token builtin">PurchasePower</span><span class="token operator">?</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Initiate and chaining it together :</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> manager <span class="token operator">=</span> <span class="token function">ManagerPower</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> director <span class="token operator">=</span> <span class="token function">DirectorPower</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> president <span class="token operator">=</span> <span class="token function">PresidentPower</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+manager<span class="token punctuation">.</span>successor <span class="token operator">=</span> director
+director<span class="token punctuation">.</span>successor <span class="token operator">=</span> president
+
+</code></pre></div><blockquote></blockquote> <p>The mechanism for chaining up objects here is property access</p> <p>Creating request to run it :</p> <div class="language-swift extra-class"><pre class="language-swift"><code>manager<span class="token punctuation">.</span><span class="token function">process</span><span class="token punctuation">(</span>request<span class="token punctuation">:</span> <span class="token function">PurchaseRequest</span><span class="token punctuation">(</span>amount<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> purpose<span class="token punctuation">:</span> <span class="token string">&quot;buying a pen&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">// Manager will approve $ 2.0 for buying a pen</span>
+manager<span class="token punctuation">.</span><span class="token function">process</span><span class="token punctuation">(</span>request<span class="token punctuation">:</span> <span class="token function">PurchaseRequest</span><span class="token punctuation">(</span>amount<span class="token punctuation">:</span> <span class="token number">90</span><span class="token punctuation">,</span> purpose<span class="token punctuation">:</span> <span class="token string">&quot;buying a printer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// Director will approve $ 90.0 for buying a printer</span>
+
+manager<span class="token punctuation">.</span><span class="token function">process</span><span class="token punctuation">(</span>request<span class="token punctuation">:</span> <span class="token function">PurchaseRequest</span><span class="token punctuation">(</span>amount<span class="token punctuation">:</span> <span class="token number">2000</span><span class="token punctuation">,</span> purpose<span class="token punctuation">:</span> <span class="token string">&quot;invest in stock&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// President will approve $ 2000.0 for invest in stock</span>
+
+</code></pre></div><h2 id="iterator"><a href="#iterator" class="header-anchor">#</a> Iterator</h2> <blockquote></blockquote> <p>In computer programming an iterator is an object that enables a
+programmer to traverse a container, particularly lists. [Wikipedia](https://en.wikipedia.org/wiki/Iterator)</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">struct</span> <span class="token builtin">Turtle</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> name<span class="token punctuation">:</span> <span class="token builtin">String</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> <span class="token builtin">Turtles</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> turtles<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">Turtle</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> <span class="token builtin">TurtlesIterator</span><span class="token punctuation">:</span> <span class="token builtin">IteratorProtocol</span> <span class="token punctuation">{</span>
+  <span class="token keyword">private</span> <span class="token keyword">var</span> current <span class="token operator">=</span> <span class="token number">0</span>
+  <span class="token keyword">private</span> <span class="token keyword">let</span> turtles<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">Turtle</span><span class="token punctuation">]</span>
+
+  <span class="token keyword">init</span><span class="token punctuation">(</span>turtles<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token builtin">Turtle</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">self</span><span class="token punctuation">.</span>turtles <span class="token operator">=</span> turtles
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">mutating</span> <span class="token keyword">func</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">Turtle</span><span class="token operator">?</span> <span class="token punctuation">{</span>
+    <span class="token keyword">defer</span> <span class="token punctuation">{</span> current <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span> <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> turtles<span class="token punctuation">.</span><span class="token builtin">count</span> <span class="token operator">&gt;</span> current <span class="token operator">?</span> turtles<span class="token punctuation">[</span>current<span class="token punctuation">]</span> <span class="token punctuation">:</span> <span class="token constant">nil</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">extension</span> <span class="token builtin">Turtles</span><span class="token punctuation">:</span> <span class="token builtin">Sequence</span> <span class="token punctuation">{</span>
+  <span class="token keyword">func</span> <span class="token function">makeIterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token builtin">TurtlesIterator</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">TurtlesIterator</span><span class="token punctuation">(</span>turtles<span class="token punctuation">:</span> turtles<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>And usage example would be</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> ninjaTurtles <span class="token operator">=</span> <span class="token function">Turtles</span><span class="token punctuation">(</span>turtles<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token function">Turtle</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">&quot;Leo&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                     <span class="token function">Turtle</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">&quot;Mickey&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                     <span class="token function">Turtle</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">&quot;Raph&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+                                     <span class="token function">Turtle</span><span class="token punctuation">(</span>name<span class="token punctuation">:</span> <span class="token string">&quot;Doney&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;Splinter and&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> turtle <span class="token keyword">in</span> ninjaTurtles <span class="token punctuation">{</span>
+  <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">&quot;The great: <span class="token interpolation"><span class="token delimiter variable">\(</span>turtle<span class="token delimiter variable">)</span></span>&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/swift/design-patterns-creational.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/swift/generate-uiimage-of-initials-from-string.html" class="prev">
+        Generate UIImage of Initials from String
+      </a></span> <span class="next"><a href="/swift/design-patterns-structural.html">
+        Design Patterns - Structural
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3323.55e60966.js" defer></script>
+  </body>
+</html>

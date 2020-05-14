@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>jQuery - Prepend</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Prepending an element to a container, Prepend method">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="jQuery - Prepend">
+    <meta property="og:description" content="Prepending an element to a container, Prepend method">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/jquery/prepend.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="jQuery - Prepend">
+    <meta name="twitter:description" content="Prepending an element to a container, Prepend method">
+    <meta name="twitter:url" content="/jquery/prepend.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1822.b47f34b7.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>jQuery</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/jquery/" class="sidebar-link">Disclaimer</a></li><li><a href="/jquery/getting-started-with-jquery.html" class="sidebar-link">Getting started with jQuery</a></li><li><a href="/jquery/selectors.html" class="sidebar-link">Selectors</a></li><li><a href="/jquery/each-function.html" class="sidebar-link">Each function</a></li><li><a href="/jquery/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/jquery/document-ready-event.html" class="sidebar-link">document-ready event</a></li><li><a href="/jquery/events.html" class="sidebar-link">Events</a></li><li><a href="/jquery/dom-manipulation.html" class="sidebar-link">DOM Manipulation</a></li><li><a href="/jquery/dom-traversing.html" class="sidebar-link">DOM Traversing</a></li><li><a href="/jquery/css-manipulation.html" class="sidebar-link">CSS Manipulation</a></li><li><a href="/jquery/element-visibility.html" class="sidebar-link">Element Visibility</a></li><li><a href="/jquery/append.html" class="sidebar-link">Append</a></li><li><a href="/jquery/prepend.html" class="active sidebar-link">Prepend</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/jquery/prepend.html#prepending-an-element-to-a-container" class="sidebar-link">Prepending an element to a container</a></li><li class="sidebar-sub-header"><a href="/jquery/prepend.html#prepend-method" class="sidebar-link">Prepend method</a></li></ul></li><li><a href="/jquery/getting-and-setting-width-and-height-of-an-element.html" class="sidebar-link">Getting and setting width and height of an element</a></li><li><a href="/jquery/jquery-animate-method.html" class="sidebar-link">jQuery .animate() Method</a></li><li><a href="/jquery/jquery-deferred-objects-and-promises.html" class="sidebar-link">jQuery Deferred objects and Promises</a></li><li><a href="/jquery/ajax.html" class="sidebar-link">Ajax</a></li><li><a href="/jquery/checkbox-select-all-with-automatic-check-uncheck-on-other-checkbox-change.html" class="sidebar-link">Checkbox Select all with automatic check/uncheck on other checkbox change</a></li><li><a href="/jquery/plugins.html" class="sidebar-link">Plugins</a></li><li><a href="/jquery/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="prepend"><a href="#prepend" class="header-anchor">#</a> Prepend</h1> <h2 id="prepending-an-element-to-a-container"><a href="#prepending-an-element-to-a-container" class="header-anchor">#</a> Prepending an element to a container</h2> <p><strong>Solution 1:</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+$('#parent').prepend($('#child')); 
+
+</code></pre></div><p><strong>Solution 2:</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+$('#child').prependTo($('#parent'));
+
+</code></pre></div><p>Both solutions are prepending the element <code>#child</code> (adding at the beginning) to the element <code>#parent</code>.</p> <p>Before:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">&quot;parent&quot;</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>span<span class="token operator">&gt;</span>other content<span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">&quot;child&quot;</span><span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+
+</code></pre></div><p>After:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">&quot;parent&quot;</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">&quot;child&quot;</span><span class="token operator">&gt;</span>
+
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>span<span class="token operator">&gt;</span>other content<span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+
+</code></pre></div><h2 id="prepend-method"><a href="#prepend-method" class="header-anchor">#</a> Prepend method</h2> <p><a href="http://api.jquery.com/prepend/" target="_blank" rel="noopener noreferrer"><code>prepend()</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> - Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.</p> <p><strong>1.</strong> <a href="http://api.jquery.com/prepend/" target="_blank" rel="noopener noreferrer"><code>prepend( content [, content ] )</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// with html string</span>
+<span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token string">'#parent'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prepend</span><span class="token punctuation">(</span><span class="token string">'&lt;span&gt;child&lt;/span&gt;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// or you can use jQuery object</span>
+<span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token string">'#parent'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prepend</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#child'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// or you can use comma seperated multiple elements to prepend</span>
+<span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token string">'#parent'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prepend</span><span class="token punctuation">(</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#child1'</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#child2'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>2.</strong> <a href="http://api.jquery.com/prepend/" target="_blank" rel="noopener noreferrer"><code>prepend(function)</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>JQuery <strong><code>version: 1.4</code></strong>  onwards you can use callback function as the argument. Where you can  get arguments as index position of the element in the set and the old HTML value of the element. Within the function, <code>this</code> refers to the current element in the set.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">jQuery</span><span class="token punctuation">(</span><span class="token string">'#parent'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">prepend</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">i<span class="token punctuation">,</span>oldHTML</span><span class="token punctuation">)</span><span class="token punctuation">{</span>      
+     <span class="token comment">// return the value to be prepend</span>
+     <span class="token keyword">return</span>  <span class="token string">'&lt;span&gt;child&lt;/span&gt;'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/jquery/prepend.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/jquery/append.html" class="prev">
+        Append
+      </a></span> <span class="next"><a href="/jquery/getting-and-setting-width-and-height-of-an-element.html">
+        Getting and setting width and height of an element
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1822.b47f34b7.js" defer></script>
+  </body>
+</html>

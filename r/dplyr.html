@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>R - dplyr</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="dplyr's single table verbs, Aggregating with %>% (pipe) operator, Subset Observation (Rows), Examples of NSE and string variables in dpylr">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="R - dplyr">
+    <meta property="og:description" content="dplyr's single table verbs, Aggregating with %>% (pipe) operator, Subset Observation (Rows), Examples of NSE and string variables in dpylr">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/r/dplyr.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="R - dplyr">
+    <meta name="twitter:description" content="dplyr's single table verbs, Aggregating with %>% (pipe) operator, Subset Observation (Rows), Examples of NSE and string variables in dpylr">
+    <meta name="twitter:url" content="/r/dplyr.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2879.4e39a427.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>R</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/r/" class="sidebar-link">Disclaimer</a></li><li><a href="/r/getting-started-with-r-language.html" class="sidebar-link">Getting started with R Language</a></li><li><a href="/r/variables.html" class="sidebar-link">Variables</a></li><li><a href="/r/arithmetic-operators.html" class="sidebar-link">Arithmetic Operators</a></li><li><a href="/r/matrices.html" class="sidebar-link">Matrices</a></li><li><a href="/r/formula.html" class="sidebar-link">Formula</a></li><li><a href="/r/reading-and-writing-strings.html" class="sidebar-link">Reading and writing strings</a></li><li><a href="/r/string-manipulation-with-stringi-package.html" class="sidebar-link">String manipulation with stringi package</a></li><li><a href="/r/classes.html" class="sidebar-link">Classes</a></li><li><a href="/r/lists.html" class="sidebar-link">Lists</a></li><li><a href="/r/hashmaps.html" class="sidebar-link">Hashmaps</a></li><li><a href="/r/creating-vectors.html" class="sidebar-link">Creating vectors</a></li><li><a href="/r/date-and-time.html" class="sidebar-link">Date and Time</a></li><li><a href="/r/the-date-class.html" class="sidebar-link">The Date class</a></li><li><a href="/r/date-time-classes-posixct-and-posixlt.html" class="sidebar-link">Date-time classes (POSIXct and POSIXlt)</a></li><li><a href="/r/the-character-class.html" class="sidebar-link">The character class</a></li><li><a href="/r/numeric-classes-and-storage-modes.html" class="sidebar-link">Numeric classes and storage modes</a></li><li><a href="/r/the-logical-class.html" class="sidebar-link">The logical class</a></li><li><a href="/r/data-frames.html" class="sidebar-link">Data frames</a></li><li><a href="/r/split-function.html" class="sidebar-link">Split function</a></li><li><a href="/r/reading-and-writing-tabular-data-in-plain-text-files-csv-tsv-etc.html" class="sidebar-link">Reading and writing tabular data in plain-text files (CSV, TSV, etc.)</a></li><li><a href="/r/pipe-operators-and-others.html" class="sidebar-link">Pipe operators (%&gt;% and others)</a></li><li><a href="/r/linear-models-regression.html" class="sidebar-link">Linear Models (Regression)</a></li><li><a href="/r/data-table.html" class="sidebar-link">data.table</a></li><li><a href="/r/pivot-and-unpivot-with-data-table.html" class="sidebar-link">Pivot and unpivot with data.table</a></li><li><a href="/r/bar-chart.html" class="sidebar-link">Bar Chart</a></li><li><a href="/r/base-plotting.html" class="sidebar-link">Base Plotting</a></li><li><a href="/r/boxplot.html" class="sidebar-link">boxplot</a></li><li><a href="/r/ggplot2.html" class="sidebar-link">ggplot2</a></li><li><a href="/r/factors.html" class="sidebar-link">Factors</a></li><li><a href="/r/pattern-matching-and-replacement.html" class="sidebar-link">Pattern Matching and Replacement</a></li><li><a href="/r/run-length-encoding.html" class="sidebar-link">Run-length encoding</a></li><li><a href="/r/speeding-up-tough-to-vectorize-code.html" class="sidebar-link">Speeding up tough-to-vectorize code</a></li><li><a href="/r/introduction-to-geographical-maps.html" class="sidebar-link">Introduction to Geographical Maps</a></li><li><a href="/r/set-operations.html" class="sidebar-link">Set operations</a></li><li><a href="/r/tidyverse.html" class="sidebar-link">tidyverse</a></li><li><a href="/r/rcpp.html" class="sidebar-link">Rcpp</a></li><li><a href="/r/random-numbers-generator.html" class="sidebar-link">Random Numbers Generator</a></li><li><a href="/r/parallel-processing.html" class="sidebar-link">Parallel processing</a></li><li><a href="/r/subsetting.html" class="sidebar-link">Subsetting</a></li><li><a href="/r/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/r/installing-packages.html" class="sidebar-link">Installing packages</a></li><li><a href="/r/updating-r-and-the-package-library.html" class="sidebar-link">Updating R and the package library</a></li><li><a href="/r/inspecting-packages.html" class="sidebar-link">Inspecting packages</a></li><li><a href="/r/creating-packages-with-devtools.html" class="sidebar-link">Creating packages with devtools</a></li><li><a href="/r/using-pipe-assignment-in-your-own-package-how-to.html" class="sidebar-link">Using pipe assignment in your own package %%: How to ?</a></li><li><a href="/r/arima-models.html" class="sidebar-link">Arima Models</a></li><li><a href="/r/distribution-functions.html" class="sidebar-link">Distribution Functions</a></li><li><a href="/r/shiny.html" class="sidebar-link">Shiny</a></li><li><a href="/r/spatial-analysis.html" class="sidebar-link">spatial analysis</a></li><li><a href="/r/sqldf.html" class="sidebar-link">sqldf</a></li><li><a href="/r/code-profiling.html" class="sidebar-link">Code profiling</a></li><li><a href="/r/control-flow-structures.html" class="sidebar-link">Control flow structures</a></li><li><a href="/r/column-wise-operation.html" class="sidebar-link">Column wise operation</a></li><li><a href="/r/json.html" class="sidebar-link">JSON</a></li><li><a href="/r/rodbc.html" class="sidebar-link">RODBC</a></li><li><a href="/r/lubridate.html" class="sidebar-link">lubridate</a></li><li><a href="/r/time-series-and-forecasting.html" class="sidebar-link">Time Series and Forecasting</a></li><li><a href="/r/strsplit-function.html" class="sidebar-link">strsplit function</a></li><li><a href="/r/web-scraping-and-parsing.html" class="sidebar-link">Web scraping and parsing</a></li><li><a href="/r/generalized-linear-models.html" class="sidebar-link">Generalized linear models</a></li><li><a href="/r/reshaping-data-between-long-and-wide-forms.html" class="sidebar-link">Reshaping data between long and wide forms</a></li><li><a href="/r/rmarkdown-and-knitr-presentation.html" class="sidebar-link">RMarkdown and knitr presentation</a></li><li><a href="/r/scope-of-variables.html" class="sidebar-link">Scope of variables</a></li><li><a href="/r/performing-a-permutation-test.html" class="sidebar-link">Performing a Permutation Test</a></li><li><a href="/r/xgboost.html" class="sidebar-link">xgboost</a></li><li><a href="/r/r-code-vectorization-best-practices.html" class="sidebar-link">R code vectorization best practices</a></li><li><a href="/r/missing-values.html" class="sidebar-link">Missing values</a></li><li><a href="/r/hierarchical-linear-modeling.html" class="sidebar-link">Hierarchical Linear Modeling</a></li><li><a href="/r/apply-family-of-functions-functionals.html" class="sidebar-link">*apply family of functions (functionals)</a></li><li><a href="/r/text-mining.html" class="sidebar-link">Text mining</a></li><li><a href="/r/anova.html" class="sidebar-link">ANOVA</a></li><li><a href="/r/raster-and-image-analysis.html" class="sidebar-link">Raster and Image Analysis</a></li><li><a href="/r/survival-analysis.html" class="sidebar-link">Survival analysis</a></li><li><a href="/r/fault-tolerant-resilient-code.html" class="sidebar-link">Fault-tolerant/resilient code</a></li><li><a href="/r/reproducible-r.html" class="sidebar-link">Reproducible R</a></li><li><a href="/r/fourier-series-and-transformations.html" class="sidebar-link">Fourier Series and Transformations</a></li><li><a href="/r/rprofile.html" class="sidebar-link">.Rprofile</a></li><li><a href="/r/dplyr.html" class="active sidebar-link">dplyr</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/r/dplyr.html#dplyr-s-single-table-verbs" class="sidebar-link">dplyr's single table verbs</a></li><li class="sidebar-sub-header"><a href="/r/dplyr.html#aggregating-with-pipe-operator" class="sidebar-link">Aggregating with %&gt;% (pipe) operator</a></li><li class="sidebar-sub-header"><a href="/r/dplyr.html#subset-observation-rows" class="sidebar-link">Subset Observation (Rows)</a></li><li class="sidebar-sub-header"><a href="/r/dplyr.html#examples-of-nse-and-string-variables-in-dpylr" class="sidebar-link">Examples of NSE and string variables in dpylr</a></li></ul></li><li><a href="/r/caret.html" class="sidebar-link">caret</a></li><li><a href="/r/extracting-and-listing-files-in-compressed-archives.html" class="sidebar-link">Extracting and Listing Files in Compressed Archives</a></li><li><a href="/r/probability-distributions-with-r.html" class="sidebar-link">Probability Distributions with R</a></li><li><a href="/r/r-in-latex-with-knitr.html" class="sidebar-link">R in LaTeX with knitr</a></li><li><a href="/r/web-crawling-in-r.html" class="sidebar-link">Web Crawling in R</a></li><li><a href="/r/creating-reports-with-rmarkdown.html" class="sidebar-link">Creating reports with RMarkdown</a></li><li><a href="/r/gpu-accelerated-computing.html" class="sidebar-link">GPU-accelerated computing</a></li><li><a href="/r/heatmap-and-heatmap-2.html" class="sidebar-link">heatmap and heatmap.2</a></li><li><a href="/r/network-analysis-with-the-igraph-package.html" class="sidebar-link">Network analysis with the igraph package</a></li><li><a href="/r/functional-programming.html" class="sidebar-link">Functional programming</a></li><li><a href="/r/get-user-input.html" class="sidebar-link">Get user input</a></li><li><a href="/r/spark-api-sparkr.html" class="sidebar-link">Spark API (SparkR)</a></li><li><a href="/r/meta-documentation-guidelines.html" class="sidebar-link">Meta: Documentation Guidelines</a></li><li><a href="/r/input-and-output.html" class="sidebar-link">Input and output</a></li><li><a href="/r/i-o-for-foreign-tables-excel-sas-spss-stata.html" class="sidebar-link">I/O for foreign tables (Excel, SAS, SPSS, Stata)</a></li><li><a href="/r/i-o-for-database-tables.html" class="sidebar-link">I/O for database tables</a></li><li><a href="/r/i-o-for-geographic-data-shapefiles-etc.html" class="sidebar-link">I/O for geographic data (shapefiles, etc.)</a></li><li><a href="/r/i-o-for-raster-images.html" class="sidebar-link">I/O for raster images</a></li><li><a href="/r/i-o-for-r-s-binary-format.html" class="sidebar-link">I/O for R's binary format</a></li><li><a href="/r/recycling.html" class="sidebar-link">Recycling</a></li><li><a href="/r/expression-parse-eval.html" class="sidebar-link">Expression: parse + eval</a></li><li><a href="/r/regular-expression-syntax-in-r.html" class="sidebar-link">Regular Expression Syntax in R</a></li><li><a href="/r/regular-expressions-regex.html" class="sidebar-link">Regular Expressions (regex)</a></li><li><a href="/r/combinatorics.html" class="sidebar-link">Combinatorics</a></li><li><a href="/r/solving-odes-in-r.html" class="sidebar-link">Solving ODEs in R</a></li><li><a href="/r/feature-selection-in-r-removing-extraneous-features.html" class="sidebar-link">Feature Selection in R -- Removing Extraneous Features</a></li><li><a href="/r/bibliography-in-rmd.html" class="sidebar-link">Bibliography in RMD</a></li><li><a href="/r/writing-functions-in-r.html" class="sidebar-link">Writing functions in R</a></li><li><a href="/r/color-schemes-for-graphics.html" class="sidebar-link">Color schemes for graphics</a></li><li><a href="/r/hierarchical-clustering-with-hclust.html" class="sidebar-link">Hierarchical clustering with hclust</a></li><li><a href="/r/random-forest-algorithm.html" class="sidebar-link">Random Forest Algorithm</a></li><li><a href="/r/restful-r-services.html" class="sidebar-link">RESTful R Services</a></li><li><a href="/r/machine-learning.html" class="sidebar-link">Machine learning</a></li><li><a href="/r/using-texreg-to-export-models-in-a-paper-ready-way.html" class="sidebar-link">Using texreg to export models in a paper-ready way</a></li><li><a href="/r/publishing.html" class="sidebar-link">Publishing</a></li><li><a href="/r/implement-state-machine-pattern-using-s4-class.html" class="sidebar-link">Implement State Machine Pattern using S4 Class</a></li><li><a href="/r/reshape-using-tidyr.html" class="sidebar-link">Reshape using tidyr</a></li><li><a href="/r/modifying-strings-by-substitution.html" class="sidebar-link">Modifying strings by substitution</a></li><li><a href="/r/non-standard-evaluation-and-standard-evaluation.html" class="sidebar-link">Non-standard evaluation and standard evaluation</a></li><li><a href="/r/randomization.html" class="sidebar-link">Randomization</a></li><li><a href="/r/object-oriented-programming-in-r.html" class="sidebar-link">Object-Oriented Programming in R</a></li><li><a href="/r/coercion.html" class="sidebar-link">Coercion</a></li><li><a href="/r/standardize-analyses-by-writing-standalone-r-scripts.html" class="sidebar-link">Standardize analyses by writing standalone R scripts</a></li><li><a href="/r/analyze-tweets-with-r.html" class="sidebar-link">Analyze tweets with R</a></li><li><a href="/r/natural-language-processing.html" class="sidebar-link">Natural language processing</a></li><li><a href="/r/r-markdown-notebooks-from-rstudio.html" class="sidebar-link">R Markdown Notebooks (from RStudio)</a></li><li><a href="/r/aggregating-data-frames.html" class="sidebar-link">Aggregating data frames</a></li><li><a href="/r/data-acquisition.html" class="sidebar-link">Data acquisition</a></li><li><a href="/r/r-memento-by-examples.html" class="sidebar-link">R memento by examples</a></li><li><a href="/r/updating-r-version.html" class="sidebar-link">Updating R version</a></li><li><a href="/r/introspection.html" class="sidebar-link">Introspection</a></li><li><a href="/r/roxygen2.html" class="sidebar-link">roxygen2</a></li><li><a href="/r/cleaning-data.html" class="sidebar-link">Cleaning data</a></li><li><a href="/r/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="dplyr"><a href="#dplyr" class="header-anchor">#</a> dplyr</h1> <h2 id="dplyr-s-single-table-verbs"><a href="#dplyr-s-single-table-verbs" class="header-anchor">#</a> dplyr's single table verbs</h2> <p><a href="https://cran.r-project.org/web/packages/dplyr/index.html" target="_blank" rel="noopener noreferrer">dplyr<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> introduces a grammar of data manipulation in <code>R</code>. It provides a consistent interface to work with data no matter where it is stored: <a href="http://stackoverflow.com/documentation/r/438/data-frames#t=201607240327176696528" target="_blank" rel="noopener noreferrer">data.frame<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, <a href="http://stackoverflow.com/documentation/r/849/data-table#t=201607240321370924918" target="_blank" rel="noopener noreferrer">data.table<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, or a <code>database</code>. The key pieces of <code>dplyr</code> are written using <a href="http://stackoverflow.com/documentation/r/1404/rcpp#t=201607240328054860131" target="_blank" rel="noopener noreferrer">Rcpp<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, which makes it very fast for working with in-memory data.</p> <p><code>dplyr</code>'s philosophy is to have small functions that do one thing well. The five simple functions (<code>filter</code>, <code>arrange</code>, <code>select</code>, <code>mutate</code>, and <code>summarise</code>) can be used to reveal new ways to describe data. When combined with <code>group_by</code>, these functions can be used to calculate group wise summary statistics.</p> <h3 id="syntax-commonalities"><a href="#syntax-commonalities" class="header-anchor">#</a> Syntax commonalities</h3> <p>All these functions have a similar syntax:</p> <ul><li>The first argument to all these functions is always a data frame</li> <li>Columns can be referred directly using bare variable names (i.e., without using <code>$</code>)</li> <li>These functions do not modify the original data itself, i.e., they don't have side effects. Hence, the results should always be saved to an object.</li></ul> <p>We will use the built-in <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html" target="_blank" rel="noopener noreferrer">mtcars<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> dataset to explore <code>dplyr</code>'s single table verbs. Before converting the type of <code>mtcars</code> to <code>tbl_df</code> (since it makes printing cleaner), we add the <code>rownames</code> of the dataset as a column using <code>rownames_to_column</code> function from the <a href="https://cran.r-project.org/web/packages/tibble/index.html" target="_blank" rel="noopener noreferrer">tibble<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> package.</p> <div class="language-r extra-class"><pre class="language-r"><code>library<span class="token punctuation">(</span>dplyr<span class="token punctuation">)</span> <span class="token comment"># This documentation was written using version 0.5.0</span>
+
+mtcars_tbl <span class="token operator">&lt;-</span> as_data_frame<span class="token punctuation">(</span>tibble<span class="token operator">::</span>rownames_to_column<span class="token punctuation">(</span>mtcars<span class="token punctuation">,</span> <span class="token string">&quot;cars&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># examine the structure of data</span>
+head<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 6 x 12</span>
+<span class="token comment">#               cars   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="token comment">#              &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1         Mazda RX4  21.0     6   160   110  3.90 2.620 16.46     0     1     4     4</span>
+<span class="token comment">#2     Mazda RX4 Wag  21.0     6   160   110  3.90 2.875 17.02     0     1     4     4</span>
+<span class="token comment">#3        Datsun 710  22.8     4   108    93  3.85 2.320 18.61     1     1     4     1</span>
+<span class="token comment">#4    Hornet 4 Drive  21.4     6   258   110  3.08 3.215 19.44     1     0     3     1</span>
+<span class="token comment">#5 Hornet Sportabout  18.7     8   360   175  3.15 3.440 17.02     0     0     3     2</span>
+<span class="token comment">#6           Valiant  18.1     6   225   105  2.76 3.460 20.22     1     0     3     1</span>
+
+</code></pre></div><h3 id="filter"><a href="#filter" class="header-anchor">#</a> filter</h3> <p><code>filter</code> helps subset rows that match certain criteria. The first argument is the name of the <code>data.frame</code> and the second (and subsequent) arguments are the criteria that filter the data (these criteria should evaluate to either <code>TRUE</code> or <code>FALSE</code>)</p> <p>Subset all cars that have 4 <strong>cylinders</strong> - <code>cyl</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>filter<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> cyl <span class="token operator">==</span> <span class="token number">4</span><span class="token punctuation">)</span> 
+
+<span class="token comment"># A tibble: 11 x 12</span>
+<span class="token comment">#             cars   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="token comment">#            &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1      Datsun 710  22.8     4 108.0    93  3.85 2.320 18.61     1     1     4     1</span>
+<span class="token comment">#2       Merc 240D  24.4     4 146.7    62  3.69 3.190 20.00     1     0     4     2</span>
+<span class="token comment">#3        Merc 230  22.8     4 140.8    95  3.92 3.150 22.90     1     0     4     2</span>
+<span class="token comment">#4        Fiat 128  32.4     4  78.7    66  4.08 2.200 19.47     1     1     4     1</span>
+<span class="token comment">#5     Honda Civic  30.4     4  75.7    52  4.93 1.615 18.52     1     1     4     2</span>
+<span class="token comment"># ... with 6 more rows</span>
+
+</code></pre></div><p>We can pass multiple criteria separated by a comma. To subset the cars which have either 4 or 6 <strong>cylinders</strong> - <code>cyl</code> and have 5 <strong>gears</strong> - <code>gear</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>filter<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> cyl <span class="token operator">==</span> <span class="token number">4</span> <span class="token operator">|</span> cyl <span class="token operator">==</span> <span class="token number">6</span><span class="token punctuation">,</span> gear <span class="token operator">==</span> <span class="token number">5</span><span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 3 x 12</span>
+<span class="token comment">#           cars   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="token comment">#          &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1 Porsche 914-2  26.0     4 120.3    91  4.43 2.140  16.7     0     1     5     2</span>
+<span class="token comment">#2  Lotus Europa  30.4     4  95.1   113  3.77 1.513  16.9     1     1     5     2</span>
+<span class="token comment">#3  Ferrari Dino  19.7     6 145.0   175  3.62 2.770  15.5     0     1     5     6</span>
+
+</code></pre></div><p><code>filter</code> selects rows based on criteria, to select rows by position, use <code>slice</code>.
+<code>slice</code> takes only 2 arguments: the first one is a <code>data.frame</code> and the second is integer row values.</p> <p>To select rows 6 through 9:</p> <div class="language-r extra-class"><pre class="language-r"><code>slice<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> <span class="token number">6</span><span class="token operator">:</span><span class="token number">9</span><span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 4 x 12</span>
+<span class="token comment">#        cars   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="token comment">#       &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1    Valiant  18.1     6 225.0   105  2.76  3.46 20.22     1     0     3     1</span>
+<span class="token comment">#2 Duster 360  14.3     8 360.0   245  3.21  3.57 15.84     0     0     3     4</span>
+<span class="token comment">#3  Merc 240D  24.4     4 146.7    62  3.69  3.19 20.00     1     0     4     2</span>
+<span class="token comment">#4   Merc 230  22.8     4 140.8    95  3.92  3.15 22.90     1     0     4     2</span>
+
+</code></pre></div><p>Or:</p> <div class="language-r extra-class"><pre class="language-r"><code>slice<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> <span class="token operator">-</span>c<span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token operator">:</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> 
+
+</code></pre></div><p>This results in the same output as <code>slice(mtcars_tbl, 6:9)</code></p> <p><code>n()</code> represents the number of observations in the current group</p> <h3 id="arrange"><a href="#arrange" class="header-anchor">#</a> arrange</h3> <p><code>arrange</code> is used to sort the data by a specified variable(s). Just like the previous verb (and all other functions in <code>dplyr</code>), the first argument is a <code>data.frame</code>, and consequent arguments are used to sort the data. If more than one variable is passed, the data is first sorted by the first variable, and then by the second variable, and so on..</p> <p>To order the data by <strong>horsepower</strong> - <code>hp</code></p> <div class="language-r extra-class"><pre class="language-r"><code>arrange<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> hp<span class="token punctuation">)</span> 
+
+<span class="token comment"># A tibble: 32 x 12</span>
+<span class="token comment">#             cars   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="token comment">#            &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1     Honda Civic  30.4     4  75.7    52  4.93 1.615 18.52     1     1     4     2</span>
+<span class="token comment">#2       Merc 240D  24.4     4 146.7    62  3.69 3.190 20.00     1     0     4     2</span>
+<span class="token comment">#3  Toyota Corolla  33.9     4  71.1    65  4.22 1.835 19.90     1     1     4     1</span>
+<span class="token comment">#4        Fiat 128  32.4     4  78.7    66  4.08 2.200 19.47     1     1     4     1</span>
+<span class="token comment">#5       Fiat X1-9  27.3     4  79.0    66  4.08 1.935 18.90     1     1     4     1</span>
+<span class="token comment">#6   Porsche 914-2  26.0     4 120.3    91  4.43 2.140 16.70     0     1     5     2</span>
+<span class="token comment"># ... with 26 more rows</span>
+
+</code></pre></div><p>To <code>arrange</code> the data by <strong>miles per gallon</strong> - <code>mpg</code> in descending order, followed by <strong>number of cylinders</strong> - <code>cyl</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>arrange<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> desc<span class="token punctuation">(</span>mpg<span class="token punctuation">)</span><span class="token punctuation">,</span> cyl<span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 32 x 12</span>
+<span class="token comment">#             cars   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="token comment">#            &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1  Toyota Corolla  33.9     4  71.1    65  4.22 1.835 19.90     1     1     4     1</span>
+<span class="token comment">#2        Fiat 128  32.4     4  78.7    66  4.08 2.200 19.47     1     1     4     1</span>
+<span class="token comment">#3     Honda Civic  30.4     4  75.7    52  4.93 1.615 18.52     1     1     4     2</span>
+<span class="token comment">#4    Lotus Europa  30.4     4  95.1   113  3.77 1.513 16.90     1     1     5     2</span>
+<span class="token comment">#5       Fiat X1-9  27.3     4  79.0    66  4.08 1.935 18.90     1     1     4     1</span>
+<span class="token comment">#6   Porsche 914-2  26.0     4 120.3    91  4.43 2.140 16.70     0     1     5     2</span>
+<span class="token comment"># ... with 26 more rows</span>
+
+</code></pre></div><h3 id="select"><a href="#select" class="header-anchor">#</a> select</h3> <p><code>select</code> is used to select only a subset of variables. To select only <code>mpg</code>, <code>disp</code>, <code>wt</code>, <code>qsec</code>, and <code>vs</code> from <code>mtcars_tbl</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>select<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> mpg<span class="token punctuation">,</span> disp<span class="token punctuation">,</span> wt<span class="token punctuation">,</span> qsec<span class="token punctuation">,</span> vs<span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 32 x 5</span>
+<span class="token comment">#     mpg  disp    wt  qsec    vs</span>
+<span class="token comment">#   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1   21.0 160.0 2.620 16.46     0</span>
+<span class="token comment">#2   21.0 160.0 2.875 17.02     0</span>
+<span class="token comment">#3   22.8 108.0 2.320 18.61     1</span>
+<span class="token comment">#4   21.4 258.0 3.215 19.44     1</span>
+<span class="token comment">#5   18.7 360.0 3.440 17.02     0</span>
+<span class="token comment">#6   18.1 225.0 3.460 20.22     1</span>
+<span class="token comment"># ... with 26 more rows</span>
+
+</code></pre></div><p><code>:</code> notation can be used to select consecutive columns. To select columns from <code>cars</code> through <code>disp</code> and <code>vs</code> through <code>carb</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>select<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> cars<span class="token operator">:</span>disp<span class="token punctuation">,</span> vs<span class="token operator">:</span>carb<span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 32 x 8</span>
+<span class="token comment">#                cars   mpg   cyl  disp    vs    am  gear  carb</span>
+<span class="token comment">#               &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1          Mazda RX4  21.0     6 160.0     0     1     4     4</span>
+<span class="token comment">#2      Mazda RX4 Wag  21.0     6 160.0     0     1     4     4</span>
+<span class="token comment">#3         Datsun 710  22.8     4 108.0     1     1     4     1</span>
+<span class="token comment">#4     Hornet 4 Drive  21.4     6 258.0     1     0     3     1</span>
+<span class="token comment">#5  Hornet Sportabout  18.7     8 360.0     0     0     3     2</span>
+<span class="token comment">#6            Valiant  18.1     6 225.0     1     0     3     1</span>
+<span class="token comment"># ... with 26 more rows</span>
+
+</code></pre></div><p>or <code>select(mtcars_tbl, -(hp:qsec))</code></p> <p>For datasets that contain several columns, it can be tedious to select several columns by name. To make life easier, there are a number of helper functions (such as <code>starts_with()</code>, <code>ends_with()</code>, <code>contains()</code>, <code>matches()</code>, <code>num_range()</code>, <code>one_of()</code>, and <code>everything()</code>) that can be used in <code>select</code>. To learn more about how to use them, see <code>?select_helpers</code> and <code>?select</code>.</p> <p><strong><strong>Note</strong></strong>: While referring to columns directly in <code>select()</code>, we use bare column names, but quotes should be used while referring to columns in helper functions.</p> <p>To rename columns while selecting:</p> <div class="language-r extra-class"><pre class="language-r"><code>select<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> cylinders <span class="token operator">=</span> cyl<span class="token punctuation">,</span> displacement <span class="token operator">=</span> disp<span class="token punctuation">)</span> 
+
+<span class="token comment"># A tibble: 32 x 2</span>
+<span class="token comment">#   cylinders displacement</span>
+<span class="token comment">#       &lt;dbl&gt;        &lt;dbl&gt;</span>
+<span class="token comment">#1          6        160.0</span>
+<span class="token comment">#2          6        160.0</span>
+<span class="token comment">#3          4        108.0</span>
+<span class="token comment">#4          6        258.0</span>
+<span class="token comment">#5          8        360.0</span>
+<span class="token comment">#6          6        225.0</span>
+<span class="token comment"># ... with 26 more rows</span>
+
+</code></pre></div><p>As expected, this drops all other variables.</p> <p>To rename columns without dropping other variables, use <code>rename</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>rename<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> cylinders <span class="token operator">=</span> cyl<span class="token punctuation">,</span> displacement <span class="token operator">=</span> disp<span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 32 x 12</span>
+<span class="token comment">#                cars   mpg cylinders displacement    hp  drat    wt  qsec    vs</span>
+<span class="token comment">#               &lt;chr&gt; &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1          Mazda RX4  21.0         6        160.0   110  3.90 2.620 16.46     0</span>
+<span class="token comment">#2      Mazda RX4 Wag  21.0         6        160.0   110  3.90 2.875 17.02     0</span>
+<span class="token comment">#3         Datsun 710  22.8         4        108.0    93  3.85 2.320 18.61     1</span>
+<span class="token comment">#4     Hornet 4 Drive  21.4         6        258.0   110  3.08 3.215 19.44     1</span>
+<span class="token comment">#5  Hornet Sportabout  18.7         8        360.0   175  3.15 3.440 17.02     0</span>
+<span class="token comment">#6            Valiant  18.1         6        225.0   105  2.76 3.460 20.22     1</span>
+<span class="token comment"># ... with 26 more rows, and 3 more variables: am &lt;dbl&gt;, gear &lt;dbl&gt;, carb &lt;dbl&gt;</span>
+
+</code></pre></div><h3 id="mutate"><a href="#mutate" class="header-anchor">#</a> mutate</h3> <p><code>mutate</code> can be used to add new columns to the data. Like all other functions in <code>dplyr</code>, mutate doesn't add the newly created columns to the original data. Columns are added at the end of the <code>data.frame</code>.</p> <div class="language-r extra-class"><pre class="language-r"><code>mutate<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> weight_ton <span class="token operator">=</span> wt<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span> weight_pounds <span class="token operator">=</span> weight_ton <span class="token operator">*</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 32 x 14</span>
+<span class="token comment">#                cars   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb weight_ton weight_pounds</span>
+<span class="token comment">#               &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;</span>
+<span class="token comment">#1          Mazda RX4  21.0     6 160.0   110  3.90 2.620 16.46     0     1     4     4     1.3100          2620</span>
+<span class="token comment">#2      Mazda RX4 Wag  21.0     6 160.0   110  3.90 2.875 17.02     0     1     4     4     1.4375          2875</span>
+<span class="token comment">#3         Datsun 710  22.8     4 108.0    93  3.85 2.320 18.61     1     1     4     1     1.1600          2320</span>
+<span class="token comment">#4     Hornet 4 Drive  21.4     6 258.0   110  3.08 3.215 19.44     1     0     3     1     1.6075          3215</span>
+<span class="token comment">#5  Hornet Sportabout  18.7     8 360.0   175  3.15 3.440 17.02     0     0     3     2     1.7200          3440</span>
+<span class="token comment">#6            Valiant  18.1     6 225.0   105  2.76 3.460 20.22     1     0     3     1     1.7300          3460</span>
+<span class="token comment"># ... with 26 more rows</span>
+
+</code></pre></div><p><strong><strong>Note</strong></strong> the use of <code>weight_ton</code> while creating <code>weight_pounds</code>. Unlike base <code>R</code>, <code>mutate</code> allows us to refer to columns that we just created to be used for a subsequent operation.</p> <p>To retain only the newly created columns, use <code>transmute</code> instead of <code>mutate</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>transmute<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> weight_ton <span class="token operator">=</span> wt<span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span> weight_pounds <span class="token operator">=</span> weight_ton <span class="token operator">*</span> <span class="token number">2000</span><span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 32 x 2</span>
+<span class="token comment">#   weight_ton weight_pounds</span>
+<span class="token comment">#        &lt;dbl&gt;         &lt;dbl&gt;</span>
+<span class="token comment">#1      1.3100          2620</span>
+<span class="token comment">#2      1.4375          2875</span>
+<span class="token comment">#3      1.1600          2320</span>
+<span class="token comment">#4      1.6075          3215</span>
+<span class="token comment">#5      1.7200          3440</span>
+<span class="token comment">#6      1.7300          3460</span>
+<span class="token comment"># ... with 26 more rows</span>
+
+</code></pre></div><h3 id="summarise"><a href="#summarise" class="header-anchor">#</a> summarise</h3> <p><code>summarise</code> calculates summary statistics of variables by collapsing multiple values to a single value. It can calculate multiple statistics and we can name these summary columns in the same statement.</p> <p>To calculate the <strong>mean</strong> and <strong>standard deviation</strong> of <code>mpg</code> and <code>disp</code> of all cars in the dataset:</p> <div class="language-r extra-class"><pre class="language-r"><code>summarise<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> mean_mpg <span class="token operator">=</span> mean<span class="token punctuation">(</span>mpg<span class="token punctuation">)</span><span class="token punctuation">,</span> sd_mpg <span class="token operator">=</span> sd<span class="token punctuation">(</span>mpg<span class="token punctuation">)</span><span class="token punctuation">,</span> 
+          mean_disp <span class="token operator">=</span> mean<span class="token punctuation">(</span>disp<span class="token punctuation">)</span><span class="token punctuation">,</span> sd_disp <span class="token operator">=</span> sd<span class="token punctuation">(</span>disp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 1 x 4</span>
+<span class="token comment">#  mean_mpg   sd_mpg mean_disp  sd_disp</span>
+<span class="token comment">#     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="token comment">#1 20.09062 6.026948  230.7219 123.9387</span>
+
+</code></pre></div><h3 id="group-by"><a href="#group-by" class="header-anchor">#</a> group_by</h3> <p><code>group_by</code> can be used to perform group wise operations on data. When the verbs defined above are applied on this grouped data, they are automatically applied to each group separately.</p> <p>To find <strong><code>mean</code></strong> and <strong><code>sd</code></strong> of <strong><code>mpg</code></strong> by <strong><code>cyl</code></strong>:</p> <div class="language-r extra-class"><pre class="language-r"><code>by_cyl <span class="token operator">&lt;-</span> group_by<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> cyl<span class="token punctuation">)</span>
+summarise<span class="token punctuation">(</span>by_cyl<span class="token punctuation">,</span> mean_mpg <span class="token operator">=</span> mean<span class="token punctuation">(</span>mpg<span class="token punctuation">)</span><span class="token punctuation">,</span> sd_mpg <span class="token operator">=</span> sd<span class="token punctuation">(</span>mpg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token comment"># A tibble: 3 x 3</span>
+<span class="token comment">#    cyl mean_mpg   sd_mpg</span>
+<span class="token comment">#  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="token comment">#1     4 26.66364 4.509828</span>
+<span class="token comment">#2     6 19.74286 1.453567</span>
+<span class="token comment">#3     8 15.10000 2.560048</span>
+
+</code></pre></div><h3 id="putting-it-all-togther"><a href="#putting-it-all-togther" class="header-anchor">#</a> Putting it all togther</h3> <p>We select columns from <code>cars</code> through <code>hp</code> and <code>gear</code>, order the rows by <code>cyl</code> and from highest to lowest <code>mpg</code>, group the data by <code>gear</code>, and finally subset only those cars have <code>mpg</code> &gt; 20 and <code>hp</code> &gt; 75</p> <div class="language-r extra-class"><pre class="language-r"><code>selected <span class="token operator">&lt;-</span> select<span class="token punctuation">(</span>mtcars_tbl<span class="token punctuation">,</span> cars<span class="token operator">:</span>hp<span class="token punctuation">,</span> gear<span class="token punctuation">)</span>
+ordered <span class="token operator">&lt;-</span> arrange<span class="token punctuation">(</span>selected<span class="token punctuation">,</span> cyl<span class="token punctuation">,</span> desc<span class="token punctuation">(</span>mpg<span class="token punctuation">)</span><span class="token punctuation">)</span>
+by_cyl <span class="token operator">&lt;-</span> group_by<span class="token punctuation">(</span>ordered<span class="token punctuation">,</span> gear<span class="token punctuation">)</span>
+filter<span class="token punctuation">(</span>by_cyl<span class="token punctuation">,</span> mpg <span class="token operator">&gt;</span> <span class="token number">20</span><span class="token punctuation">,</span> hp <span class="token operator">&gt;</span> <span class="token number">75</span><span class="token punctuation">)</span>
+
+Source<span class="token operator">:</span> local data frame <span class="token punctuation">[</span><span class="token number">9</span> x <span class="token number">6</span><span class="token punctuation">]</span>
+Groups<span class="token operator">:</span> gear <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+<span class="token comment">#            cars   mpg   cyl  disp    hp  gear</span>
+<span class="token comment">#           &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment">#1   Lotus Europa  30.4     4  95.1   113     5</span>
+<span class="token comment">#2  Porsche 914-2  26.0     4 120.3    91     5</span>
+<span class="token comment">#3     Datsun 710  22.8     4 108.0    93     4</span>
+<span class="token comment">#4       Merc 230  22.8     4 140.8    95     4</span>
+<span class="token comment">#5  Toyota Corona  21.5     4 120.1    97     3</span>
+<span class="token comment"># ... with 4 more rows</span>
+
+</code></pre></div><p>Maybe we are not interested the intermediate results, we can achieve the same result as above by wrapping the function calls:</p> <div class="language-r extra-class"><pre class="language-r"><code>filter<span class="token punctuation">(</span>
+    group_by<span class="token punctuation">(</span>
+        arrange<span class="token punctuation">(</span>
+            select<span class="token punctuation">(</span>
+                mtcars_tbl<span class="token punctuation">,</span> cars<span class="token operator">:</span>hp
+            <span class="token punctuation">)</span><span class="token punctuation">,</span> cyl<span class="token punctuation">,</span> desc<span class="token punctuation">(</span>mpg<span class="token punctuation">)</span>
+        <span class="token punctuation">)</span><span class="token punctuation">,</span> cyl   
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>mpg <span class="token operator">&gt;</span> <span class="token number">20</span><span class="token punctuation">,</span> hp <span class="token operator">&gt;</span> <span class="token number">75</span> 
+<span class="token punctuation">)</span>
+
+</code></pre></div><p>This can be a little difficult to read. So, <code>dplyr</code> operations can be chained using the <a href="http://stackoverflow.com/documentation/r/652/pipe-operators-and-others#t=20160724145924035602" target="_blank" rel="noopener noreferrer">pipe<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> <code>%&gt;%</code> operator. The above code transalates to:</p> <div class="language-r extra-class"><pre class="language-r"><code>mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    select<span class="token punctuation">(</span>cars<span class="token operator">:</span>hp<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    arrange<span class="token punctuation">(</span>cyl<span class="token punctuation">,</span> desc<span class="token punctuation">(</span>mpg<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span>
+    group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    filter<span class="token punctuation">(</span>mpg <span class="token operator">&gt;</span> <span class="token number">20</span><span class="token punctuation">,</span> hp <span class="token operator">&gt;</span> <span class="token number">75</span><span class="token punctuation">)</span> 
+
+</code></pre></div><h3 id="summarise-multiple-columns"><a href="#summarise-multiple-columns" class="header-anchor">#</a> summarise multiple columns</h3> <p><code>dplyr</code> provides <code>summarise_all()</code> to apply functions to all (non-grouping) columns.</p> <p>To find the number of distinct values for each column:</p> <div class="language-r extra-class"><pre class="language-r"><code>mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    summarise_all<span class="token punctuation">(</span>n_distinct<span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 1 x 12</span>
+<span class="token comment">#   cars   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="token comment">#  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
+<span class="token comment">#1    32    25     3    27    22    22    29    30     2     2     3     6</span>
+
+</code></pre></div><p>To find the number of distinct values for each column by <code>cyl</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    summarise_all<span class="token punctuation">(</span>n_distinct<span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 3 x 12</span>
+<span class="token comment">#    cyl  cars   mpg  disp    hp  drat    wt  qsec    vs    am  gear  carb</span>
+<span class="token comment">#  &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;</span>
+<span class="token comment">#1     4    11     9    11    10    10    11    11     2     2     3     2</span>
+<span class="token comment">#2     6     7     6     5     4     5     6     7     2     2     3     3</span>
+<span class="token comment">#3     8    14    12    11     9    11    13    14     1     2     2     4</span>
+
+</code></pre></div><p>Note that we just had to add the <code>group_by</code> statement and the rest of the code is the same. The output now consists of three rows - one for each unique value of <code>cyl</code>.</p> <p>To <code>summarise</code> specific multiple columns, use <code>summarise_at</code></p> <div class="language-r extra-class"><pre class="language-r"><code>mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    summarise_at<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">&quot;mpg&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;disp&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;hp&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> mean<span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 3 x 4</span>
+<span class="token comment">#    cyl      mpg     disp        hp</span>
+<span class="token comment">#  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="token comment">#1     4 26.66364 105.1364  82.63636</span>
+<span class="token comment">#2     6 19.74286 183.3143 122.28571</span>
+<span class="token comment">#3     8 15.10000 353.1000 209.21429</span>
+
+</code></pre></div><p><code>helper</code> functions (<code>?select_helpers</code>) can be used in place of column names to select specific columns</p> <p>To apply multiple functions, either pass the function names as a character vector:</p> <div class="language-r extra-class"><pre class="language-r"><code>mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    summarise_at<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">&quot;mpg&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;disp&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;hp&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                 c<span class="token punctuation">(</span><span class="token string">&quot;mean&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;sd&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>or wrap them inside <code>funs</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    summarise_at<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">&quot;mpg&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;disp&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;hp&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                 funs<span class="token punctuation">(</span>mean<span class="token punctuation">,</span> sd<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 3 x 7</span>
+<span class="token comment">#    cyl mpg_mean disp_mean   hp_mean   mpg_sd  disp_sd    hp_sd</span>
+<span class="token comment">#  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="token comment">#1     4 26.66364  105.1364  82.63636 4.509828 26.87159 20.93453</span>
+<span class="token comment">#2     6 19.74286  183.3143 122.28571 1.453567 41.56246 24.26049</span>
+<span class="token comment">#3     8 15.10000  353.1000 209.21429 2.560048 67.77132 50.97689</span>
+
+</code></pre></div><p>Column names are now be appended with function names to keep them distinct. In order to change this, pass the name to be appended with the function:</p> <div class="language-r extra-class"><pre class="language-r"><code>mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    summarise_at<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">&quot;mpg&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;disp&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;hp&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                 c<span class="token punctuation">(</span>Mean <span class="token operator">=</span> <span class="token string">&quot;mean&quot;</span><span class="token punctuation">,</span> SD <span class="token operator">=</span> <span class="token string">&quot;sd&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    summarise_at<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">&quot;mpg&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;disp&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;hp&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+                 funs<span class="token punctuation">(</span>Mean <span class="token operator">=</span> mean<span class="token punctuation">,</span> SD <span class="token operator">=</span> sd<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token comment"># A tibble: 3 x 7</span>
+<span class="token comment">#    cyl mpg_Mean disp_Mean   hp_Mean   mpg_SD  disp_SD    hp_SD</span>
+<span class="token comment">#  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="token comment">#1     4 26.66364  105.1364  82.63636 4.509828 26.87159 20.93453</span>
+<span class="token comment">#2     6 19.74286  183.3143 122.28571 1.453567 41.56246 24.26049</span>
+<span class="token comment">#3     8 15.10000  353.1000 209.21429 2.560048 67.77132 50.97689</span>
+
+</code></pre></div><p>To select columns conditionally, use <code>summarise_if</code>:</p> <p>Take the <code>mean</code> of all columns that are <code>numeric</code> grouped by <code>cyl</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    summarise_if<span class="token punctuation">(</span>is.numeric<span class="token punctuation">,</span> mean<span class="token punctuation">)</span> 
+
+<span class="token comment"># A tibble: 3 x 11</span>
+<span class="token comment">#    cyl      mpg     disp        hp     drat       wt     qsec</span>
+<span class="token comment">#  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="token comment">#1     4 26.66364 105.1364  82.63636 4.070909 2.285727 19.13727</span>
+<span class="token comment">#2     6 19.74286 183.3143 122.28571 3.585714 3.117143 17.97714</span>
+<span class="token comment">#3     8 15.10000 353.1000 209.21429 3.229286 3.999214 16.77214</span>
+<span class="token comment"># ... with 4 more variables: vs &lt;dbl&gt;, am &lt;dbl&gt;, gear &lt;dbl&gt;,</span>
+<span class="token comment">#   carb &lt;dbl&gt;</span>
+
+</code></pre></div><p>However, some variables are discrete, and <code>mean</code> of these variables doesn't make sense.</p> <p>To take the <code>mean</code> of only continuous variables by <code>cyl</code>:</p> <div class="language-r extra-class"><pre class="language-r"><code>mtcars_tbl <span class="token percent-operator operator">%&gt;%</span> 
+    group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span> 
+    summarise_if<span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> is.numeric<span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">&amp;</span> n_distinct<span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">6</span><span class="token punctuation">,</span> mean<span class="token punctuation">)</span>
+
+<span class="token comment"># A tibble: 3 x 7</span>
+<span class="token comment">#    cyl      mpg     disp        hp     drat       wt     qsec</span>
+<span class="token comment">#  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;</span>
+<span class="token comment">#1     4 26.66364 105.1364  82.63636 4.070909 2.285727 19.13727</span>
+<span class="token comment">#2     6 19.74286 183.3143 122.28571 3.585714 3.117143 17.97714</span>
+<span class="token comment">#3     8 15.10000 353.1000 209.21429 3.229286 3.999214 16.77214</span>
+
+</code></pre></div><h2 id="aggregating-with-pipe-operator"><a href="#aggregating-with-pipe-operator" class="header-anchor">#</a> Aggregating with %&gt;% (pipe) operator</h2> <p>The pipe (%&gt;%) <a href="http://stackoverflow.com/documentation/r/652/pipe-operators-and-others" target="_blank" rel="noopener noreferrer">operator<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> could be used in combination with <code>dplyr</code> functions. In this example we use the <code>mtcars</code> dataset (see <code>help(&quot;mtcars&quot;)</code> for more information) to show how to sumarize a data frame, and to add variables to the data with the result of the application of a function.</p> <div class="language-r extra-class"><pre class="language-r"><code>library<span class="token punctuation">(</span>dplyr<span class="token punctuation">)</span>
+library<span class="token punctuation">(</span>magrittr<span class="token punctuation">)</span>
+df <span class="token operator">&lt;-</span> mtcars
+df<span class="token operator">$</span>cars <span class="token operator">&lt;-</span> rownames<span class="token punctuation">(</span>df<span class="token punctuation">)</span> <span class="token comment">#just add the cars names to the df</span>
+df <span class="token operator">&lt;-</span> df<span class="token punctuation">[</span><span class="token punctuation">,</span>c<span class="token punctuation">(</span>ncol<span class="token punctuation">(</span>df<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">:</span><span class="token punctuation">(</span>ncol<span class="token punctuation">(</span>df<span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token comment"># and place the names in the first column</span>
+
+</code></pre></div><p><strong>1. Sumarize the data</strong></p> <p>To compute statistics we use <code>summarize</code> and the appropriate functions. In this case <code>n()</code> is used for counting the number of cases.</p> <div class="language- extra-class"><pre class="language-text"><code>
+df %&gt;%
+  summarize(count=n(),mean_mpg = mean(mpg, na.rm = TRUE),
+            min_weight = min(wt),max_weight = max(wt))
+
+#  count mean_mpg min_weight max_weight
+#1    32 20.09062      1.513      5.424
+
+</code></pre></div><p><strong>2. Compute statistics by group</strong></p> <p>It is possible to compute the statistics by groups of the data. In this case by <strong>Number of cylinders</strong> and <strong>Number of forward gears</strong></p> <div class="language-r extra-class"><pre class="language-r"><code>df <span class="token percent-operator operator">%&gt;%</span>
+  group_by<span class="token punctuation">(</span>cyl<span class="token punctuation">,</span> gear<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span>
+  summarize<span class="token punctuation">(</span>count<span class="token operator">=</span>n<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>mean_mpg <span class="token operator">=</span> mean<span class="token punctuation">(</span>mpg<span class="token punctuation">,</span> na.rm <span class="token operator">=</span> <span class="token boolean">TRUE</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            min_weight <span class="token operator">=</span> min<span class="token punctuation">(</span>wt<span class="token punctuation">)</span><span class="token punctuation">,</span>max_weight <span class="token operator">=</span> max<span class="token punctuation">(</span>wt<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Source: local data frame [8 x 6]</span>
+<span class="token comment"># Groups: cyl [?]</span>
+<span class="token comment">#</span>
+<span class="token comment">#    cyl  gear count mean_mpg min_weight max_weight</span>
+<span class="token comment">#  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="token comment">#1     4     3     1   21.500      2.465      2.465</span>
+<span class="token comment">#2     4     4     8   26.925      1.615      3.190</span>
+<span class="token comment">#3     4     5     2   28.200      1.513      2.140</span>
+<span class="token comment">#4     6     3     2   19.750      3.215      3.460</span>
+<span class="token comment">#5     6     4     4   19.750      2.620      3.440</span>
+<span class="token comment">#6     6     5     1   19.700      2.770      2.770</span>
+<span class="token comment">#7     8     3    12   15.050      3.435      5.424</span>
+<span class="token comment">#8     8     5     2   15.400      3.170      3.570</span>
+
+</code></pre></div><h2 id="subset-observation-rows"><a href="#subset-observation-rows" class="header-anchor">#</a> Subset Observation (Rows)</h2> <h3 id="dplyr-filter-select-a-subset-of-rows-in-a-data-frame-that-meet-a-logical-criteria"><a href="#dplyr-filter-select-a-subset-of-rows-in-a-data-frame-that-meet-a-logical-criteria" class="header-anchor">#</a> <code>dplyr::filter()</code> - Select a subset of rows in a data frame that meet a logical criteria:</h3> <div class="language-r extra-class"><pre class="language-r"><code>dplyr<span class="token operator">::</span>filter<span class="token punctuation">(</span>iris<span class="token punctuation">,</span>Sepal.Length<span class="token operator">&gt;</span><span class="token number">7</span><span class="token punctuation">)</span>
+<span class="token comment">#       Sepal.Length Sepal.Width Petal.Length Petal.Width   Species</span>
+<span class="token comment">#    1           7.1         3.0          5.9         2.1 virginica</span>
+<span class="token comment">#    2           7.6         3.0          6.6         2.1 virginica</span>
+<span class="token comment">#    3           7.3         2.9          6.3         1.8 virginica</span>
+<span class="token comment">#    4           7.2         3.6          6.1         2.5 virginica</span>
+<span class="token comment">#    5           7.7         3.8          6.7         2.2 virginica</span>
+<span class="token comment">#    6           7.7         2.6          6.9         2.3 virginica</span>
+<span class="token comment">#    7           7.7         2.8          6.7         2.0 virginica</span>
+<span class="token comment">#    8           7.2         3.2          6.0         1.8 virginica</span>
+<span class="token comment">#    9           7.2         3.0          5.8         1.6 virginica</span>
+<span class="token comment">#    10          7.4         2.8          6.1         1.9 virginica</span>
+<span class="token comment">#    11          7.9         3.8          6.4         2.0 virginica</span>
+<span class="token comment">#    12          7.7         3.0          6.1         2.3 virginica</span>
+
+</code></pre></div><h3 id="dplyr-distinct-remove-duplicate-rows"><a href="#dplyr-distinct-remove-duplicate-rows" class="header-anchor">#</a> <code>dplyr::distinct()</code> - Remove duplicate rows:</h3> <div class="language-r extra-class"><pre class="language-r"><code>distinct<span class="token punctuation">(</span>iris<span class="token punctuation">,</span> Sepal.Length<span class="token punctuation">,</span> .keep_all <span class="token operator">=</span> <span class="token boolean">TRUE</span><span class="token punctuation">)</span>
+<span class="token comment">#       Sepal.Length Sepal.Width Petal.Length Petal.Width    Species</span>
+<span class="token comment">#    1           5.1         3.5          1.4         0.2     setosa</span>
+<span class="token comment">#    2           4.9         3.0          1.4         0.2     setosa</span>
+<span class="token comment">#    3           4.7         3.2          1.3         0.2     setosa</span>
+<span class="token comment">#    4           4.6         3.1          1.5         0.2     setosa</span>
+<span class="token comment">#    5           5.0         3.6          1.4         0.2     setosa</span>
+<span class="token comment">#    6           5.4         3.9          1.7         0.4     setosa</span>
+<span class="token comment">#    7           4.4         2.9          1.4         0.2     setosa</span>
+<span class="token comment">#    8           4.8         3.4          1.6         0.2     setosa</span>
+<span class="token comment">#    9           4.3         3.0          1.1         0.1     setosa</span>
+<span class="token comment">#   10          5.8         4.0          1.2         0.2     setosa</span>
+<span class="token comment">#   11          5.7         4.4          1.5         0.4     setosa</span>
+<span class="token comment">#   12          5.2         3.5          1.5         0.2     setosa</span>
+<span class="token comment">#   13          5.5         4.2          1.4         0.2     setosa</span>
+<span class="token comment">#   14          4.5         2.3          1.3         0.3     setosa</span>
+<span class="token comment">#   15          5.3         3.7          1.5         0.2     setosa</span>
+<span class="token comment">#   16          7.0         3.2          4.7         1.4 versicolor</span>
+<span class="token comment">#   17          6.4         3.2          4.5         1.5 versicolor</span>
+<span class="token comment">#   18          6.9         3.1          4.9         1.5 versicolor</span>
+<span class="token comment">#   19          6.5         2.8          4.6         1.5 versicolor</span>
+<span class="token comment">#   20          6.3         3.3          4.7         1.6 versicolor</span>
+<span class="token comment">#   21          6.6         2.9          4.6         1.3 versicolor</span>
+<span class="token comment">#   22          5.9         3.0          4.2         1.5 versicolor</span>
+<span class="token comment">#   23          6.0         2.2          4.0         1.0 versicolor</span>
+<span class="token comment">#   24          6.1         2.9          4.7         1.4 versicolor</span>
+<span class="token comment">#   25          5.6         2.9          3.6         1.3 versicolor</span>
+<span class="token comment">#   26          6.7         3.1          4.4         1.4 versicolor</span>
+<span class="token comment">#   27          6.2         2.2          4.5         1.5 versicolor</span>
+<span class="token comment">#   28          6.8         2.8          4.8         1.4 versicolor</span>
+<span class="token comment">#   29          7.1         3.0          5.9         2.1  virginica</span>
+<span class="token comment">#   30          7.6         3.0          6.6         2.1  virginica</span>
+<span class="token comment">#   31          7.3         2.9          6.3         1.8  virginica</span>
+<span class="token comment">#   32          7.2         3.6          6.1         2.5  virginica</span>
+<span class="token comment">#   33          7.7         3.8          6.7         2.2  virginica</span>
+<span class="token comment">#   34          7.4         2.8          6.1         1.9  virginica</span>
+<span class="token comment">#   35          7.9         3.8          6.4         2.0  virginica</span>
+
+</code></pre></div><h2 id="examples-of-nse-and-string-variables-in-dpylr"><a href="#examples-of-nse-and-string-variables-in-dpylr" class="header-anchor">#</a> Examples of NSE and string variables in dpylr</h2> <p><code>dplyr</code> uses Non-Standard Evaluation(NSE), which is why we normally can use the variable names without quotes. However, sometimes during the data pipeline, we need to get our variable names from other sources such as a Shiny selection box. In case of functions like <code>select</code>, we can just use <code>select_</code> to use a string variable to select</p> <div class="language-r extra-class"><pre class="language-r"><code>variable1 <span class="token operator">&lt;-</span> <span class="token string">&quot;Sepal.Length&quot;</span>
+variable2 <span class="token operator">&lt;-</span> <span class="token string">&quot;Sepal.Width&quot;</span>
+iris <span class="token percent-operator operator">%&gt;%</span>
+select_<span class="token punctuation">(</span>variable1<span class="token punctuation">,</span> variable2<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span>
+head<span class="token punctuation">(</span>n<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span>
+<span class="token comment">#  Sepal.Length Sepal.Width</span>
+<span class="token comment">#  1          5.1         3.5</span>
+<span class="token comment">#  2          4.9         3.0</span>
+<span class="token comment">#  3          4.7         3.2</span>
+<span class="token comment">#  4          4.6         3.1</span>
+<span class="token comment">#  5          5.0         3.6</span>
+
+</code></pre></div><p>But if we want to use other features such as summarize or filter we need to use <code>interp</code> function from <code>lazyeval</code> package</p> <div class="language-r extra-class"><pre class="language-r"><code>variable1 <span class="token operator">&lt;-</span> <span class="token string">&quot;Sepal.Length&quot;</span>
+variable2 <span class="token operator">&lt;-</span> <span class="token string">&quot;Sepal.Width&quot;</span>
+variable3 <span class="token operator">&lt;-</span> <span class="token string">&quot;Species&quot;</span>
+iris <span class="token percent-operator operator">%&gt;%</span>
+select_<span class="token punctuation">(</span>variable1<span class="token punctuation">,</span> variable2<span class="token punctuation">,</span> variable3<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span>
+group_by_<span class="token punctuation">(</span>variable3<span class="token punctuation">)</span> <span class="token percent-operator operator">%&gt;%</span>
+summarize_<span class="token punctuation">(</span>mean1 <span class="token operator">=</span> lazyeval<span class="token operator">::</span>interp<span class="token punctuation">(</span><span class="token operator">~</span>mean<span class="token punctuation">(</span>var<span class="token punctuation">)</span><span class="token punctuation">,</span> var <span class="token operator">=</span> as.name<span class="token punctuation">(</span>variable1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> mean2 <span class="token operator">=</span> lazyeval<span class="token operator">::</span>interp<span class="token punctuation">(</span><span class="token operator">~</span>mean<span class="token punctuation">(</span>var<span class="token punctuation">)</span><span class="token punctuation">,</span> var <span class="token operator">=</span> as.name<span class="token punctuation">(</span>variable2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">#      Species mean1 mean2</span>
+<span class="token comment">#       &lt;fctr&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="token comment"># 1     setosa 5.006 3.428</span>
+<span class="token comment"># 2 versicolor 5.936 2.770</span>
+<span class="token comment"># 3  virginica 6.588 2.974</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>dplyr is an iteration of plyr that provides a flexible &quot;verb&quot; based functions to manipulate data in R. The latest version of dplyr can be downloaded from CRAN using</p> <p><code>install.package(&quot;dplyr&quot;)</code></p> <p>The key object in dplyr is a tbl, a representation of a tabular data structure. Currently  dplyr (version 0.5.0)  supports:</p> <ul><li>data frames</li> <li>data tables</li> <li>SQLite</li> <li>PostgreSQL/Redshift</li> <li>MySQL/MariaDB</li> <li>Bigquery</li> <li>MonetDB</li> <li>data cubes with arrays (partial implementation)</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/r/dplyr.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/r/rprofile.html" class="prev">
+        .Rprofile
+      </a></span> <span class="next"><a href="/r/caret.html">
+        caret
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2879.4e39a427.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - Looping</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="For...Next, For Each...Next loop for looping through collection of items, Short Circuiting, While loop to iterate while some condition is true, Do...Loop, Nested Loop">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - Looping">
+    <meta property="og:description" content="For...Next, For Each...Next loop for looping through collection of items, Short Circuiting, While loop to iterate while some condition is true, Do...Loop, Nested Loop">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/looping.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - Looping">
+    <meta name="twitter:description" content="For...Next, For Each...Next loop for looping through collection of items, Short Circuiting, While loop to iterate while some condition is true, Do...Loop, Nested Loop">
+    <meta name="twitter:url" content="/vbnet/looping.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3476.b2bf9a47.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="sidebar-link">Introduction to Syntax</a></li><li><a href="/vbnet/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="active sidebar-link">Looping</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/looping.html#for-next" class="sidebar-link">For...Next</a></li><li class="sidebar-sub-header"><a href="/vbnet/looping.html#for-each-next-loop-for-looping-through-collection-of-items" class="sidebar-link">For Each...Next loop for looping through collection of items</a></li><li class="sidebar-sub-header"><a href="/vbnet/looping.html#short-circuiting" class="sidebar-link">Short Circuiting</a></li><li class="sidebar-sub-header"><a href="/vbnet/looping.html#while-loop-to-iterate-while-some-condition-is-true" class="sidebar-link">While loop to iterate while some condition is true</a></li><li class="sidebar-sub-header"><a href="/vbnet/looping.html#do-loop" class="sidebar-link">Do...Loop</a></li><li class="sidebar-sub-header"><a href="/vbnet/looping.html#nested-loop" class="sidebar-link">Nested Loop</a></li></ul></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="sidebar-link">ByVal and ByRef keywords</a></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="sidebar-link">Extension methods</a></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="sidebar-link">Visual Basic 14.0 Features</a></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="sidebar-link">Google Maps in a Windows Form</a></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="sidebar-link">WinForms SpellCheckBox</a></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="sidebar-link">Task-based asynchronous pattern</a></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="looping"><a href="#looping" class="header-anchor">#</a> Looping</h1> <h2 id="for-next"><a href="#for-next" class="header-anchor">#</a> For...Next</h2> <p><code>For</code>...<code>Next</code> loop is used for repeating the same action for a finite number of times. The statements inside the following loop will be executed 11 times. The first time, <code>i</code> will have the value 0, the second time it will have the value 1, the last time it will have the value 10.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">For</span> i <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">To</span> <span class="token number">10</span>
+    <span class="token comment">'Execute the action</span>
+    Console<span class="token punctuation">.</span>Writeline<span class="token punctuation">(</span>i<span class="token punctuation">.</span>ToString<span class="token punctuation">)</span>
+<span class="token keyword">Next</span>
+
+</code></pre></div><p>Any integer expression can be used to parameterize the loop. It is permitted, but not required, for the control variable (in this case <code>i</code>) to also be stated after the <code>Next</code>. It is permitted for the control variable to be declared in advance, rather than within the <code>For</code> statement.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> StartIndex <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">3</span>
+<span class="token keyword">Dim</span> EndIndex <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">7</span>
+<span class="token keyword">Dim</span> i <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+
+<span class="token keyword">For</span> i <span class="token operator">=</span> StartIndex <span class="token keyword">To</span> EndIndex <span class="token operator">-</span> <span class="token number">1</span>
+    <span class="token comment">'Execute the action</span>
+    Console<span class="token punctuation">.</span>Writeline<span class="token punctuation">(</span>i<span class="token punctuation">.</span>ToString<span class="token punctuation">)</span>
+<span class="token keyword">Next</span> i
+
+</code></pre></div><p>Being able to define the Start and End integers allows loops to be created that directly reference other objects, such as:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">For</span> i <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">to</span> DataGridView1<span class="token punctuation">.</span>Rows<span class="token punctuation">.</span>Count <span class="token operator">-</span> <span class="token number">1</span>
+    Console<span class="token punctuation">.</span>Writeline<span class="token punctuation">(</span>DataGridView1<span class="token punctuation">.</span>Rows<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span>Cells<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span>Value<span class="token punctuation">.</span>ToString<span class="token punctuation">)</span>
+<span class="token keyword">Next</span>
+
+</code></pre></div><p>This would then loop through every row in <code>DataGridView1</code> and perform the action of writing the value of Column 1 to the Console. <strong>(The -1 is because the first row of the counted rows would be 1, not 0)</strong></p> <p>It is also possible to define how the control variable must increment.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">For</span> i <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">1</span> <span class="token keyword">To</span> <span class="token number">10</span> <span class="token keyword">Step</span> <span class="token number">2</span>
+    Console<span class="token punctuation">.</span>Writeline<span class="token punctuation">(</span>i<span class="token punctuation">.</span>ToString<span class="token punctuation">)</span>
+<span class="token keyword">Next</span> 
+
+</code></pre></div><p>This outputs:</p> <blockquote></blockquote> <p>1 3 5 7 9</p> <p>It is also possible to decrement the control variable (count down).</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">For</span> i <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">To</span> <span class="token number">1</span> <span class="token keyword">Step</span> <span class="token operator">-</span><span class="token number">1</span>
+    Console<span class="token punctuation">.</span>Writeline<span class="token punctuation">(</span>i<span class="token punctuation">.</span>ToString<span class="token punctuation">)</span>
+<span class="token keyword">Next</span>
+
+</code></pre></div><p>This outputs:</p> <blockquote></blockquote> <p>10 9 8 7 6 5 4 3 2 1</p> <p>You should not attempt to use (read or update) the control variable outside the loop.</p> <h2 id="for-each-next-loop-for-looping-through-collection-of-items"><a href="#for-each-next-loop-for-looping-through-collection-of-items" class="header-anchor">#</a> For Each...Next loop for looping through collection of items</h2> <p>You can use a <code>For Each...Next</code> loop to iterate through any <code>IEnumerable</code> type. This includes arrays, lists, and anything else that may be of type IEnumerable or returns an IEnumerable.</p> <p>An example of looping through a DataTable's Rows property would look like this:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">For</span> <span class="token keyword">Each</span> row <span class="token keyword">As</span> DataRow <span class="token keyword">In</span> DataTable1<span class="token punctuation">.</span>Rows
+    <span class="token comment">'Each time this loops, row will be the next item out of Rows</span>
+    <span class="token comment">'Here we print the first column's value from the row variable.</span>
+    Debug<span class="token punctuation">.</span>Print<span class="token punctuation">(</span>Row<span class="token punctuation">.</span>Item<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">Next</span> 
+
+</code></pre></div><p>An important thing to note is that the collection must not be modified while in a <code>For Each</code> loop. Doing so will cause a <code>System.InvalidOperationException</code> with the message:</p> <blockquote></blockquote> <p>Collection was modified; enumeration operation may not execute.</p> <h2 id="short-circuiting"><a href="#short-circuiting" class="header-anchor">#</a> Short Circuiting</h2> <p>Any loop may be terminated or continued early at any point by using the <code>Exit</code> or <code>Continue</code> statements.</p> <p><strong>Exiting</strong></p> <p>You can stop any loop by exiting early. To do this, you can use the keyword <code>Exit</code> along with the name of the loop.</p> <table><thead><tr><th>Loop</th> <th>Exit Statement</th></tr></thead> <tbody><tr><td>For</td> <td><code>Exit For</code></td></tr> <tr><td>For Each</td> <td><code>Exit For</code></td></tr> <tr><td>Do While</td> <td><code>Exit Do</code></td></tr> <tr><td>While</td> <td><code>Exit While</code></td></tr></tbody></table> <p>Exiting a loop early is a great way to boost performance by only looping the necessary number of times to satisfy the application's needs. Below is example where the loop will exit once it finds the number <code>2</code>.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> Numbers <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span>
+<span class="token keyword">Dim</span> SoughtValue <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">Dim</span> SoughtIndex
+<span class="token keyword">For</span> <span class="token keyword">Each</span> i <span class="token keyword">In</span> Numbers
+    <span class="token keyword">If</span> i <span class="token operator">=</span> <span class="token number">2</span> <span class="token keyword">Then</span> 
+        SoughtIndex <span class="token operator">=</span> i
+        <span class="token keyword">Exit</span> <span class="token keyword">For</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">Next</span>
+Debug<span class="token punctuation">.</span>Print<span class="token punctuation">(</span>SoughtIndex<span class="token punctuation">)</span>
+
+</code></pre></div><p><strong>Continuing</strong></p> <p>Along with exiting early, you can also decide that you need to just move on to the next loop iteration. This is easily done by using the <code>Continue</code> statement. Just like <code>Exit</code>, it is proceeded by the loop name.</p> <table><thead><tr><th>Loop</th> <th>Continue Statement</th></tr></thead> <tbody><tr><td>For</td> <td><code>Continue For</code></td></tr> <tr><td>For Each</td> <td><code>Continue For</code></td></tr> <tr><td>Do While</td> <td><code>Continue Do</code></td></tr> <tr><td>While</td> <td><code>Continue While</code></td></tr></tbody></table> <p>Here's an example of preventing even numbers from being added to the sum.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> Numbers <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span>
+<span class="token keyword">Dim</span> SumOdd <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">For</span> <span class="token keyword">Each</span> i <span class="token keyword">In</span> Numbers
+    <span class="token keyword">If</span> Numbers<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">\</span> <span class="token number">2</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">Then</span> <span class="token keyword">Continue</span> <span class="token keyword">For</span>
+    SumOdd <span class="token operator">+</span><span class="token operator">=</span> Numbers<span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+<span class="token keyword">Next</span>
+
+</code></pre></div><p><strong>Usage Advice</strong></p> <p>There are two alternative techniques that can be used instead of using <code>Exit</code> or <code>Continue</code>.</p> <p>You can declare a new Boolean variable, initializing it to one value and conditionally setting it to the other value inside the loop; you then use a conditional statement (e.g. <code>If</code>) based on that variable to avoid execution of the statements inside the loop in subsequent iterations.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> Found <span class="token keyword">As</span> <span class="token keyword">Boolean</span> <span class="token operator">=</span> <span class="token boolean">False</span>
+<span class="token keyword">Dim</span> FoundIndex <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+<span class="token keyword">For</span> i <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">To</span> N <span class="token operator">-</span> <span class="token number">1</span>
+    <span class="token keyword">If</span> <span class="token keyword">Not</span> Found <span class="token keyword">AndAlso</span> A<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">=</span> SoughtValue <span class="token keyword">Then</span>
+        FoundIndex <span class="token operator">=</span> i
+        Found <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">Next</span>
+
+</code></pre></div><p>One of the objections to this technique is that it may be inefficient. For example, if in the above example <code>N</code> is 1000000 and the first element of the array <code>A</code> is equal to <code>SoughtValue</code>, the loop will iterate a further 999999 times without doing anything useful. However, this technique can have the advantage of greater clarity in some cases.</p> <p>You can use the <code>GoTo</code> statement to jump out of the loop. Note that you cannot use <code>GoTo</code> to jump <strong>into</strong> a loop.</p> <div class="language- extra-class"><pre class="language-text"><code>
+   Dim FoundIndex As Integer
+    For i As Integer = 0 To N - 1
+        If A(i) = SoughtValue Then
+            FoundIndex = i
+            GoTo Found
+        End If
+    Next
+    Debug.Print(&quot;Not found&quot;)
+Found:
+    Debug.Print(FoundIndex)
+
+</code></pre></div><p>This technique can sometimes be the neatest way to jump out of the loop and avoid one or more statements that are executed just after the natural end of the loop.</p> <p>You should consider all of the alternatives, and use whichever one best fits your requirements, considering such things as efficiency, speed of writing the code, and readability (thus maintainability).</p> <p>Do not be put off using <code>GoTo</code> on those occasions when it is the best alternative.</p> <h2 id="while-loop-to-iterate-while-some-condition-is-true"><a href="#while-loop-to-iterate-while-some-condition-is-true" class="header-anchor">#</a> While loop to iterate while some condition is true</h2> <p>A <code>While</code> loop starts by evaluating a condition. If it is true, the body of the loop is executed. After the body of the loop is executed, the <code>While</code> condition is evaluated again to determine whether to re-execute the body.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> iteration <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">While</span> iteration <span class="token operator">&lt;</span><span class="token operator">=</span> <span class="token number">10</span>
+  Console<span class="token punctuation">.</span>Writeline<span class="token punctuation">(</span>iteration<span class="token punctuation">.</span>ToString<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
+
+  iteration <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">End</span> <span class="token keyword">While</span>
+
+</code></pre></div><p>This outputs:</p> <blockquote></blockquote> <p>1 2 3 4 5 6 7 8 9 10</p> <p><strong>Warning:</strong> A <code>While</code> loop can lead to an <strong>infinite loop</strong>. Consider what would happen if the line of code that increments <code>iteration</code> were removed. In such a case the condition would never be True and the loop would continue indefinitely.</p> <h2 id="do-loop"><a href="#do-loop" class="header-anchor">#</a> Do...Loop</h2> <p>Use <code>Do...Loop</code> to repeat a block of statements <code>While</code> or <code>Until</code> a condition is true, checking the condition either at the beginning or at the end of the loop.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> x <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">Do</span>
+    Console<span class="token punctuation">.</span>Write<span class="token punctuation">(</span>x <span class="token operator">&amp;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
+    x <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">Loop</span> <span class="token keyword">While</span> x <span class="token operator">&lt;</span> <span class="token number">10</span>
+
+</code></pre></div><p>or</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> x <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">Do</span> <span class="token keyword">While</span> x <span class="token operator">&lt;</span> <span class="token number">10</span>
+    Console<span class="token punctuation">.</span>Write<span class="token punctuation">(</span>x <span class="token operator">&amp;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
+    x <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">Loop</span>
+
+</code></pre></div><blockquote></blockquote> <p>0 1 2 3 4 5 6 7 8 9</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> x <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">Do</span>
+    Console<span class="token punctuation">.</span>Write<span class="token punctuation">(</span>x <span class="token operator">&amp;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
+    x <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">Loop</span> Until x <span class="token operator">=</span> <span class="token number">10</span>
+
+</code></pre></div><p>or</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> x <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">Do</span> Until x <span class="token operator">=</span> <span class="token number">10</span>
+    Console<span class="token punctuation">.</span>Write<span class="token punctuation">(</span>x <span class="token operator">&amp;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
+    x <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">Loop</span>
+
+</code></pre></div><blockquote></blockquote> <p>0 1 2 3 4 5 6 7 8 9</p> <p><code>Continue Do</code> can be used to skip to the next iteration of the loop:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> x <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">Do</span> <span class="token keyword">While</span> x <span class="token operator">&lt;</span> <span class="token number">10</span>
+    x <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">If</span> x <span class="token keyword">Mod</span> <span class="token number">2</span> <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">Then</span>
+        <span class="token keyword">Continue</span> <span class="token keyword">Do</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+    Console<span class="token punctuation">.</span>Write<span class="token punctuation">(</span>x <span class="token operator">&amp;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">Loop</span>
+
+</code></pre></div><blockquote></blockquote> <p>1 3 5 7 9</p> <p>You can terminate the loop with <code>Exit Do</code> - note that in this example, the lack of any condition would otherwise cause an infinite loop:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> x <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">Do</span>
+    Console<span class="token punctuation">.</span>Write<span class="token punctuation">(</span>x <span class="token operator">&amp;</span> <span class="token string">&quot; &quot;</span><span class="token punctuation">)</span>
+    x <span class="token operator">+</span><span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">If</span> x <span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">Then</span>
+        <span class="token keyword">Exit</span> <span class="token keyword">Do</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">Loop</span>
+
+</code></pre></div><blockquote></blockquote> <p>0 1 2 3 4 5 6 7 8 9</p> <h2 id="nested-loop"><a href="#nested-loop" class="header-anchor">#</a> Nested Loop</h2> <div class="language-vb extra-class"><pre class="language-vb"><code>A nested <span class="token keyword">loop</span> <span class="token keyword">is</span> a <span class="token keyword">loop</span> within a <span class="token keyword">loop</span><span class="token punctuation">,</span> an inner <span class="token keyword">loop</span> within the body <span class="token keyword">of</span> an outer one<span class="token punctuation">.</span> How this works <span class="token keyword">is</span> that the first pass <span class="token keyword">of</span> the outer <span class="token keyword">loop</span> triggers the inner <span class="token keyword">loop</span><span class="token punctuation">,</span> which executes <span class="token keyword">to</span> completion<span class="token punctuation">.</span> <span class="token keyword">Then</span> the second pass <span class="token keyword">of</span> the outer <span class="token keyword">loop</span> triggers the inner <span class="token keyword">loop</span> again<span class="token punctuation">.</span> This repeats until the outer <span class="token keyword">loop</span> finishes<span class="token punctuation">.</span> a break within either the inner <span class="token keyword">or</span> outer <span class="token keyword">loop</span> would interrupt this process<span class="token punctuation">.</span>
+
+</code></pre></div><p>The Structure of a For Next nested loop is :</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">For</span> counter1<span class="token operator">=</span>startNumber <span class="token keyword">to</span> endNumber <span class="token punctuation">(</span><span class="token keyword">Step</span> increment<span class="token punctuation">)</span>
+
+    <span class="token keyword">For</span> counter2<span class="token operator">=</span>startNumber <span class="token keyword">to</span> endNumber <span class="token punctuation">(</span><span class="token keyword">Step</span> increment<span class="token punctuation">)</span>
+
+        One <span class="token keyword">or</span> more VB statements
+
+    <span class="token keyword">Next</span> counter2
+
+<span class="token keyword">Next</span>  counter1
+
+</code></pre></div><p>Example :</p> <div class="language- extra-class"><pre class="language-text"><code>
+   For  firstCounter = 1 to 5
+
+      Print “First Loop of ” + firstCounter
+
+    For   secondCounter= 1 to 4
+
+      Print “Second Loop of ” + secondCounter
+
+    Next secondCounter
+
+  Next firstCounter
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/looping.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/dictionaries.html" class="prev">
+        Dictionaries
+      </a></span> <span class="next"><a href="/vbnet/file-handling.html">
+        File Handling
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3476.b2bf9a47.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Angular 2 - Configuring ASP.net Core application to work with Angular 2 and TypeScript</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Asp.Net Core + Angular2 + Gulp, [Seed] Asp.Net Core + Angular2 + Gulp on Visual Studio 2017, MVC <-> Angular 2">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Angular 2 - Configuring ASP.net Core application to work with Angular 2 and TypeScript">
+    <meta property="og:description" content="Asp.Net Core + Angular2 + Gulp, [Seed] Asp.Net Core + Angular2 + Gulp on Visual Studio 2017, MVC <-> Angular 2">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Angular 2 - Configuring ASP.net Core application to work with Angular 2 and TypeScript">
+    <meta name="twitter:description" content="Asp.Net Core + Angular2 + Gulp, [Seed] Asp.Net Core + Angular2 + Gulp on Visual Studio 2017, MVC <-> Angular 2">
+    <meta name="twitter:url" content="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/374.28db7efb.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Angular 2</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/angular2/" class="sidebar-link">Disclaimer</a></li><li><a href="/angular2/getting-started-with-angular-2.html" class="sidebar-link">Getting started with Angular 2</a></li><li><a href="/angular2/components.html" class="sidebar-link">Components</a></li><li><a href="/angular2/component-interactions.html" class="sidebar-link">Component interactions</a></li><li><a href="/angular2/directives.html" class="sidebar-link">Directives</a></li><li><a href="/angular2/page-title.html" class="sidebar-link">Page title</a></li><li><a href="/angular2/templates.html" class="sidebar-link">Templates</a></li><li><a href="/angular2/commonly-built-in-directives-and-services.html" class="sidebar-link">Commonly built-in directives and services</a></li><li><a href="/angular2/directives-components-input-output.html" class="sidebar-link">Directives &amp; components : @Input @Output</a></li><li><a href="/angular2/attribute-directives-to-affect-the-value-of-properties-on-the-host-node-by-using-the-hostbinding-decorator.html" class="sidebar-link">Attribute directives to affect the value of properties on the host node by using the @HostBinding decorator.</a></li><li><a href="/angular2/how-to-use-ngif.html" class="sidebar-link">How to Use ngif</a></li><li><a href="/angular2/how-to-use-ngfor.html" class="sidebar-link">How to use ngfor</a></li><li><a href="/angular2/angular-forloop.html" class="sidebar-link">Angular - ForLoop</a></li><li><a href="/angular2/modules.html" class="sidebar-link">Modules</a></li><li><a href="/angular2/pipes.html" class="sidebar-link">Pipes</a></li><li><a href="/angular2/orderby-pipe.html" class="sidebar-link">OrderBy Pipe</a></li><li><a href="/angular2/angular2-custom-validations.html" class="sidebar-link">Angular2 Custom Validations</a></li><li><a href="/angular2/routing.html" class="sidebar-link">Routing</a></li><li><a href="/angular2/routing-3-0-0.html" class="sidebar-link">Routing (3.0.0+)</a></li><li><a href="/angular2/dynamically-add-components-using-viewcontainerref-createcomponent.html" class="sidebar-link">Dynamically add components using ViewContainerRef.createComponent</a></li><li><a href="/angular2/installing-3rd-party-plugins-with-angular-cli-1-0-0-beta-10.html" class="sidebar-link">Installing 3rd party plugins with angular-cli@1.0.0-beta.10</a></li><li><a href="/angular2/lifecycle-hooks.html" class="sidebar-link">Lifecycle Hooks</a></li><li><a href="/angular2/angular-rxjs-subjects-and-observables-with-api-requests.html" class="sidebar-link">Angular RXJS Subjects and Observables with API requests</a></li><li><a href="/angular2/services-and-dependency-injection.html" class="sidebar-link">Services and Dependency Injection</a></li><li><a href="/angular2/service-worker.html" class="sidebar-link">Service Worker</a></li><li><a href="/angular2/eventemitter-service.html" class="sidebar-link">EventEmitter Service</a></li><li><a href="/angular2/optimizing-rendering-using-changedetectionstrategy.html" class="sidebar-link">Optimizing rendering using ChangeDetectionStrategy</a></li><li><a href="/angular2/angular-2-forms-update.html" class="sidebar-link">Angular 2 Forms Update</a></li><li><a href="/angular2/detecting-resize-events.html" class="sidebar-link">Detecting resize events</a></li><li><a href="/angular2/testing-ngmodel.html" class="sidebar-link">Testing ngModel</a></li><li><a href="/angular2/feature-modules.html" class="sidebar-link">Feature Modules</a></li><li><a href="/angular2/bootstrap-empty-module-in-angular-2.html" class="sidebar-link">Bootstrap Empty module in angular 2</a></li><li><a href="/angular2/lazy-loading-a-module.html" class="sidebar-link">Lazy loading a module</a></li><li><a href="/angular2/advanced-component-examples.html" class="sidebar-link">Advanced Component Examples</a></li><li><a href="/angular2/bypassing-sanitizing-for-trusted-values.html" class="sidebar-link">Bypassing Sanitizing for trusted values</a></li><li><a href="/angular2/angular-2-data-driven-forms.html" class="sidebar-link">Angular 2 Data Driven Forms</a></li><li><a href="/angular2/angular2-in-memory-web-api.html" class="sidebar-link">Angular2 In Memory Web API</a></li><li><a href="/angular2/ahead-of-time-aot-compilation-with-angular-2.html" class="sidebar-link">Ahead-of-time (AOT) compilation with Angular 2</a></li><li><a href="/angular2/crud-in-angular2-with-restful-api.html" class="sidebar-link">CRUD in Angular2 with Restful API</a></li><li><a href="/angular2/use-native-webcomponents-in-angular-2.html" class="sidebar-link">Use native webcomponents in Angular 2</a></li><li><a href="/angular2/update-typings.html" class="sidebar-link">Update typings</a></li><li><a href="/angular2/mocking-ngrx-store.html" class="sidebar-link">Mocking @ngrx/Store</a></li><li><a href="/angular2/ngrx.html" class="sidebar-link">ngrx</a></li><li><a href="/angular2/http-interceptor.html" class="sidebar-link">Http Interceptor</a></li><li><a href="/angular2/animation.html" class="sidebar-link">Animation</a></li><li><a href="/angular2/zone-js.html" class="sidebar-link">Zone.js</a></li><li><a href="/angular2/angular2-animations.html" class="sidebar-link">Angular2 Animations</a></li><li><a href="/angular2/create-an-angular-2-npm-package.html" class="sidebar-link">Create an Angular 2+ NPM package</a></li><li><a href="/angular2/angular2-canactivate.html" class="sidebar-link">Angular2 CanActivate</a></li><li><a href="/angular2/angular-2-protractor.html" class="sidebar-link">Angular  2 - Protractor</a></li><li><a href="/angular2/example-for-routes-such-as-route-subroute-for-static-urls.html" class="sidebar-link">Example for routes such as /route/subroute for static urls</a></li><li><a href="/angular2/angular2-input-output.html" class="sidebar-link">Angular2 Input() output()</a></li><li><a href="/angular2/angular-cli.html" class="sidebar-link">Angular-cli</a></li><li><a href="/angular2/angular-2-change-detection-and-manual-triggering.html" class="sidebar-link">Angular 2 Change detection and manual triggering</a></li><li><a href="/angular2/angular2-databinding.html" class="sidebar-link">Angular2 Databinding</a></li><li><a href="/angular2/brute-force-upgrading.html" class="sidebar-link">Brute Force Upgrading</a></li><li><a href="/angular2/angular2-provide-external-data-to-app-before-bootstrap.html" class="sidebar-link">Angular2 provide external data to App before bootstrap</a></li><li><a href="/angular2/custom-ngx-bootstrap-datepicker-input.html" class="sidebar-link">custom ngx-bootstrap datepicker + input</a></li><li><a href="/angular2/using-third-party-libraries-like-jquery-in-angular-2.html" class="sidebar-link">Using third party libraries like jQuery in Angular 2</a></li><li><a href="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html" class="active sidebar-link">Configuring ASP.net Core application to work with Angular 2 and TypeScript</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html#asp-net-core-angular2-gulp" class="sidebar-link">Asp.Net Core + Angular2 + Gulp</a></li><li class="sidebar-sub-header"><a href="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html#seed-asp-net-core-angular2-gulp-on-visual-studio-2017" class="sidebar-link">[Seed] Asp.Net Core + Angular2 + Gulp on Visual Studio 2017</a></li><li class="sidebar-sub-header"><a href="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html#mvc-angular-2" class="sidebar-link">MVC  Angular 2</a></li></ul></li><li><a href="/angular2/angular2-using-webpack.html" class="sidebar-link">Angular2 using webpack</a></li><li><a href="/angular2/angular-material-design.html" class="sidebar-link">Angular material design</a></li><li><a href="/angular2/dropzone-in-angular2.html" class="sidebar-link">Dropzone in Angular2</a></li><li><a href="/angular2/angular-redux.html" class="sidebar-link">angular redux</a></li><li><a href="/angular2/creating-an-angular-npm-library.html" class="sidebar-link">Creating an Angular npm library</a></li><li><a href="/angular2/barrel.html" class="sidebar-link">Barrel</a></li><li><a href="/angular2/testing-an-angular-2-app.html" class="sidebar-link">Testing an Angular 2 App</a></li><li><a href="/angular2/angular-cli-test-coverage.html" class="sidebar-link">angular-cli test coverage</a></li><li><a href="/angular2/debugging-angular2-typescript-application-using-visual-studio-code.html" class="sidebar-link">Debugging Angular2 typescript application using Visual Studio Code</a></li><li><a href="/angular2/unit-testing.html" class="sidebar-link">unit testing</a></li><li><a href="/angular2/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="configuring-asp-net-core-application-to-work-with-angular-2-and-typescript"><a href="#configuring-asp-net-core-application-to-work-with-angular-2-and-typescript" class="header-anchor">#</a> Configuring ASP.net Core application to work with Angular 2 and TypeScript</h1> <p>SCENARIO:
+ASP.NET Core background
+Angular 2 Front-End
+Angular 2 Components using Asp.net Core Controllers</p> <p>It way can implement Angular 2 over Asp.Net Core app. It let us call MVC Controllers from Angular 2 components too with the MVC result View supporting Angular 2.</p> <h2 id="asp-net-core-angular2-gulp"><a href="#asp-net-core-angular2-gulp" class="header-anchor">#</a> Asp.Net Core + Angular2 + Gulp</h2> <p>Startup.cs</p> <div class="language-js extra-class"><pre class="language-js"><code>using System<span class="token punctuation">;</span>
+using System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic<span class="token punctuation">;</span>
+using System<span class="token punctuation">.</span>Linq<span class="token punctuation">;</span>
+using System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Tasks<span class="token punctuation">;</span>
+using Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Builder<span class="token punctuation">;</span>
+using Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Hosting<span class="token punctuation">;</span>
+using Microsoft<span class="token punctuation">.</span>AspNetCore<span class="token punctuation">.</span>Identity<span class="token punctuation">.</span>EntityFrameworkCore<span class="token punctuation">;</span>
+using Microsoft<span class="token punctuation">.</span>EntityFrameworkCore<span class="token punctuation">;</span>
+using Microsoft<span class="token punctuation">.</span>Extensions<span class="token punctuation">.</span>Configuration<span class="token punctuation">;</span>
+using Microsoft<span class="token punctuation">.</span>Extensions<span class="token punctuation">.</span>DependencyInjection<span class="token punctuation">;</span>
+using Microsoft<span class="token punctuation">.</span>Extensions<span class="token punctuation">.</span>Logging<span class="token punctuation">;</span>
+using CoreAngular000<span class="token punctuation">.</span>Data<span class="token punctuation">;</span>
+using CoreAngular000<span class="token punctuation">.</span>Models<span class="token punctuation">;</span>
+using CoreAngular000<span class="token punctuation">.</span>Services<span class="token punctuation">;</span>
+using Microsoft<span class="token punctuation">.</span>Extensions<span class="token punctuation">.</span>FileProviders<span class="token punctuation">;</span>
+using System<span class="token punctuation">.</span><span class="token constant">IO</span><span class="token punctuation">;</span>
+
+namespace CoreAngular000
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Startup</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token function">Startup</span><span class="token punctuation">(</span><span class="token parameter">IHostingEnvironment env</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> builder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ConfigurationBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">SetBasePath</span><span class="token punctuation">(</span>env<span class="token punctuation">.</span>ContentRootPath<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">AddJsonFile</span><span class="token punctuation">(</span><span class="token string">&quot;appsettings.json&quot;</span><span class="token punctuation">,</span> optional<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> reloadOnChange<span class="token operator">:</span> 
+<span class="token boolean">true</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">AddJsonFile</span><span class="token punctuation">(</span>$<span class="token string">&quot;appsettings.{env.EnvironmentName}.json&quot;</span><span class="token punctuation">,</span> optional<span class="token operator">:</span> 
+<span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>env<span class="token punctuation">.</span><span class="token function">IsDevelopment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            
+            builder<span class="token punctuation">.</span>AddUserSecrets<span class="token operator">&lt;</span>Startup<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        builder<span class="token punctuation">.</span><span class="token function">AddEnvironmentVariables</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Configuration <span class="token operator">=</span> builder<span class="token punctuation">.</span><span class="token function">Build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> IConfigurationRoot Configuration <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+   
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">ConfigureServices</span><span class="token punctuation">(</span><span class="token parameter">IServiceCollection services</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Add framework services.</span>
+        services<span class="token punctuation">.</span>AddDbContext<span class="token operator">&lt;</span>ApplicationDbContext<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token parameter">options</span> <span class="token operator">=&gt;</span>
+            options<span class="token punctuation">.</span><span class="token function">UseSqlServer</span><span class="token punctuation">(</span>Configuration<span class="token punctuation">.</span><span class="token function">GetConnectionString</span><span class="token punctuation">(</span><span class="token string">&quot;DefaultConnection&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        services<span class="token punctuation">.</span>AddIdentity<span class="token operator">&lt;</span>ApplicationUser<span class="token punctuation">,</span> IdentityRole<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span>AddEntityFrameworkStores<span class="token operator">&lt;</span>ApplicationDbContext<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">AddDefaultTokenProviders</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        services<span class="token punctuation">.</span><span class="token function">AddMvc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// Add application services.</span>
+        services<span class="token punctuation">.</span>AddTransient<span class="token operator">&lt;</span>IEmailSender<span class="token punctuation">,</span> AuthMessageSender<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        services<span class="token punctuation">.</span>AddTransient<span class="token operator">&lt;</span>ISmsSender<span class="token punctuation">,</span> AuthMessageSender<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Configure</span><span class="token punctuation">(</span><span class="token parameter">IApplicationBuilder app<span class="token punctuation">,</span> IHostingEnvironment env<span class="token punctuation">,</span> 
+ILoggerFactory loggerFactory</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        loggerFactory<span class="token punctuation">.</span><span class="token function">AddConsole</span><span class="token punctuation">(</span>Configuration<span class="token punctuation">.</span><span class="token function">GetSection</span><span class="token punctuation">(</span><span class="token string">&quot;Logging&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        loggerFactory<span class="token punctuation">.</span><span class="token function">AddDebug</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>env<span class="token punctuation">.</span><span class="token function">IsDevelopment</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            app<span class="token punctuation">.</span><span class="token function">UseDeveloperExceptionPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            app<span class="token punctuation">.</span><span class="token function">UseDatabaseErrorPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            app<span class="token punctuation">.</span><span class="token function">UseBrowserLink</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span>
+        <span class="token punctuation">{</span>
+            app<span class="token punctuation">.</span><span class="token function">UseExceptionHandler</span><span class="token punctuation">(</span><span class="token string">&quot;/Home/Error&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        app<span class="token punctuation">.</span><span class="token function">UseDefaultFiles</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        app<span class="token punctuation">.</span><span class="token function">UseStaticFiles</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        app<span class="token punctuation">.</span><span class="token function">UseStaticFiles</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">StaticFileOptions</span>
+        <span class="token punctuation">{</span>
+            FileProvider <span class="token operator">=</span> <span class="token keyword">new</span>   
+<span class="token class-name">PhysicalFileProvider</span><span class="token punctuation">(</span>Path<span class="token punctuation">.</span><span class="token function">Combine</span><span class="token punctuation">(</span>env<span class="token punctuation">.</span>ContentRootPath<span class="token punctuation">,</span> <span class="token string">&quot;node_modules&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            RequestPath <span class="token operator">=</span> <span class="token string">&quot;/node_modules&quot;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        app<span class="token punctuation">.</span><span class="token function">UseMvc</span><span class="token punctuation">(</span><span class="token parameter">routes</span> <span class="token operator">=&gt;</span>
+        <span class="token punctuation">{</span>
+            routes<span class="token punctuation">.</span><span class="token function">MapRoute</span><span class="token punctuation">(</span>
+                name<span class="token operator">:</span> <span class="token string">&quot;default&quot;</span><span class="token punctuation">,</span>
+                template<span class="token operator">:</span> <span class="token string">&quot;{controller=Home}/{action=Index}/{id?}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>tsConfig.json</p> <div class="language- extra-class"><pre class="language-text"><code>
+   {
+  &quot;compilerOptions&quot;: {
+    &quot;diagnostics&quot;: true,
+    &quot;emitDecoratorMetadata&quot;: true,
+    &quot;experimentalDecorators&quot;: true,
+    &quot;lib&quot;: [ &quot;es2015&quot;, &quot;dom&quot; ],
+    &quot;listFiles&quot;: true,
+    &quot;module&quot;: &quot;commonjs&quot;,
+    &quot;moduleResolution&quot;: &quot;node&quot;,
+    &quot;noImplicitAny&quot;: true,
+    &quot;outDir&quot;: &quot;wwwroot&quot;,
+    &quot;removeComments&quot;: false,
+   &quot;rootDir&quot;: &quot;wwwroot&quot;,
+    &quot;sourceMap&quot;: true,
+    &quot;suppressImplicitAnyIndexErrors&quot;: true,
+    &quot;target&quot;: &quot;es5&quot;
+  },
+  &quot;exclude&quot;: [
+    &quot;node_modules&quot;,
+    &quot;wwwroot/lib/&quot;
+  ]
+}
+
+</code></pre></div><p>Package.json</p> <div class="language- extra-class"><pre class="language-text"><code>
+  {
+ &quot;name&quot;: &quot;angular dependencies and web dev package&quot;,
+ &quot;version&quot;: &quot;1.0.0&quot;,
+ &quot;description&quot;: &quot;Angular 2 MVC. Samuel Maícas Template&quot;,
+ &quot;scripts&quot;: {},
+ &quot;dependencies&quot;: {
+   &quot;@angular/common&quot;: &quot;~2.4.0&quot;,
+   &quot;@angular/compiler&quot;: &quot;~2.4.0&quot;,
+   &quot;@angular/core&quot;: &quot;~2.4.0&quot;,
+   &quot;@angular/forms&quot;: &quot;~2.4.0&quot;,
+   &quot;@angular/http&quot;: &quot;~2.4.0&quot;,
+   &quot;@angular/platform-browser&quot;: &quot;~2.4.0&quot;,
+   &quot;@angular/platform-browser-dynamic&quot;: &quot;~2.4.0&quot;,
+   &quot;@angular/router&quot;: &quot;~3.4.0&quot;,
+  &quot;angular-in-memory-web-api&quot;: &quot;~0.2.4&quot;,
+   &quot;systemjs&quot;: &quot;0.19.40&quot;,
+   &quot;core-js&quot;: &quot;^2.4.1&quot;,
+   &quot;rxjs&quot;: &quot;5.0.1&quot;,
+   &quot;zone.js&quot;: &quot;^0.7.4&quot;
+ },
+ &quot;devDependencies&quot;: {
+   &quot;del&quot;: &quot;^2.2.2&quot;,
+   &quot;gulp&quot;: &quot;^3.9.1&quot;,
+   &quot;gulp-concat&quot;: &quot;^2.6.1&quot;,
+   &quot;gulp-cssmin&quot;: &quot;^0.1.7&quot;,
+   &quot;gulp-htmlmin&quot;: &quot;^3.0.0&quot;,
+   &quot;gulp-uglify&quot;: &quot;^2.1.2&quot;,
+   &quot;merge-stream&quot;: &quot;^1.0.1&quot;,
+   &quot;tslint&quot;: &quot;^3.15.1&quot;,
+   &quot;typescript&quot;: &quot;~2.0.10&quot;
+  },
+  &quot;repository&quot;: {}
+}
+
+</code></pre></div><p>bundleconfig.json</p> <div class="language- extra-class"><pre class="language-text"><code>
+   [
+  {
+    &quot;outputFileName&quot;: &quot;wwwroot/css/site.min.css&quot;,
+     &quot;inputFiles&quot;: [
+      &quot;wwwroot/css/site.css&quot;
+    ]
+  },
+  {
+    &quot;outputFileName&quot;: &quot;wwwroot/js/site.min.js&quot;,
+    &quot;inputFiles&quot;: [
+      &quot;wwwroot/js/site.js&quot;
+    ],
+    &quot;minify&quot;: {
+      &quot;enabled&quot;: true,
+      &quot;renameLocals&quot;: true
+    },
+    &quot;sourceMap&quot;: false
+  }
+]
+
+</code></pre></div><p>Convert bundleconfig.json to gulpfile (RightClick bundleconfig.json on solution explorer, Bundler&amp;Minifier &gt; Convert to Gulp</p> <p>Views/Home/Index.cshtml</p> <div class="language- extra-class"><pre class="language-text"><code>
+   @{
+    ViewData[&quot;Title&quot;] = &quot;Home Page&quot;;
+}
+&lt;div&gt;{{ nombre }}&lt;/div&gt;
+
+</code></pre></div><p>For wwwroot folder use <a href="https://github.com/angular/quickstart" target="_blank" rel="noopener noreferrer">https://github.com/angular/quickstart<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> seed. You need: <strong>index.html</strong> <strong>main.ts, systemjs-angular-loader.js, systemjs.config.js, tsconfig.json</strong>
+And the <strong>app folder</strong></p> <p>wwwroot/Index.html</p> <div class="language- extra-class"><pre class="language-text"><code>
+   &lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;SMTemplate Angular2 &amp; ASP.NET Core&lt;/title&gt;
+    &lt;base href=&quot;/&quot;&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+
+
+    &lt;script src=&quot;node_modules/core-js/client/shim.min.js&quot;&gt;&lt;/script&gt;
+
+    &lt;script src=&quot;node_modules/zone.js/dist/zone.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;node_modules/systemjs/dist/system.src.js&quot;&gt;&lt;/script&gt;
+
+    &lt;script src=&quot;systemjs.config.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+      System.import('main.js').catch(function(err){ console.error(err); });
+    &lt;/script&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;my-app&gt;Loading AppComponent here ...&lt;/my-app&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre></div><p>You can call as it to Controllers from templateUrl.
+wwwroot/app/app.component.ts</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token operator">:</span> <span class="token string">'my-app'</span><span class="token punctuation">,</span>
+  templateUrl<span class="token operator">:</span> <span class="token string">'/home/index'</span><span class="token punctuation">,</span>
+ <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppComponent</span>  <span class="token punctuation">{</span> nombre <span class="token operator">=</span> <span class="token string">'Samuel Maícas'</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="seed-asp-net-core-angular2-gulp-on-visual-studio-2017"><a href="#seed-asp-net-core-angular2-gulp-on-visual-studio-2017" class="header-anchor">#</a> [Seed] Asp.Net Core + Angular2 + Gulp on Visual Studio 2017</h2> <ol><li>Download seed</li> <li>Run dotnet restore</li> <li>Run npm install</li></ol> <p>Always. Enjoy.</p> <p><a href="https://github.com/SamML/CoreAngular000" target="_blank" rel="noopener noreferrer">https://github.com/SamML/CoreAngular000<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="mvc-angular-2"><a href="#mvc-angular-2" class="header-anchor">#</a> MVC &lt;-&gt; Angular 2</h2> <p>How to: CALL ANGULAR 2 HTML/JS COMPONENT FROM ASP.NET Core CONTROLLER:</p> <p>We call the HTML instead return View()</p> <div class="language- extra-class"><pre class="language-text"><code>
+return File(&quot;~/html/About.html&quot;, &quot;text/html&quot;);
+
+</code></pre></div><p>And load angular component in the html. Here we can decide if we want to work with same or diferent module. Depends on situation.</p> <p>wwwroot/html/About.html</p> <div class="language- extra-class"><pre class="language-text"><code>
+   &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;About Page&lt;/title&gt;
+    &lt;base href=&quot;/&quot;&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+      &lt;link href=&quot;../css/site.min.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;/&gt;
+
+    &lt;script src=&quot;../node_modules/core-js/client/shim.min.js&quot;&gt;&lt;/script&gt;
+
+    &lt;script src=&quot;../node_modules/zone.js/dist/zone.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../node_modules/systemjs/dist/system.src.js&quot;&gt;&lt;/script&gt;
+
+    &lt;script src=&quot;../systemjs.config.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+      System.import('../main.js').catch(function(err){ console.error(err); });
+    &lt;/script&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;aboutpage&gt;Loading AppComponent here ...&lt;/aboutpage&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre></div><p>(*)Already this seed needs to load the entire list of resources</p> <p>How to: CALL ASP.NET Core Controller to show a MVC View with Angular2 support:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token operator">:</span> <span class="token string">'aboutpage'</span><span class="token punctuation">,</span>
+  templateUrl<span class="token operator">:</span> <span class="token string">'/home/about'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AboutComponent</span>  <span class="token punctuation">{</span>
+    
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/angular2/using-third-party-libraries-like-jquery-in-angular-2.html" class="prev">
+        Using third party libraries like jQuery in Angular 2
+      </a></span> <span class="next"><a href="/angular2/angular2-using-webpack.html">
+        Angular2 using webpack
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/374.28db7efb.js" defer></script>
+  </body>
+</html>

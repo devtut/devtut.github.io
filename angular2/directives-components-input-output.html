@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Angular 2 - Directives &amp; components : @Input @Output</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Angular2 @Input and @Output in a nested component, Input example, Angular2 @Input with asynchronous data">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Angular 2 - Directives & components : @Input @Output">
+    <meta property="og:description" content="Angular2 @Input and @Output in a nested component, Input example, Angular2 @Input with asynchronous data">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/angular2/directives-components-input-output.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Angular 2 - Directives & components : @Input @Output">
+    <meta name="twitter:description" content="Angular2 @Input and @Output in a nested component, Input example, Angular2 @Input with asynchronous data">
+    <meta name="twitter:url" content="/angular2/directives-components-input-output.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/382.ee9723cb.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Angular 2</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/angular2/" class="sidebar-link">Disclaimer</a></li><li><a href="/angular2/getting-started-with-angular-2.html" class="sidebar-link">Getting started with Angular 2</a></li><li><a href="/angular2/components.html" class="sidebar-link">Components</a></li><li><a href="/angular2/component-interactions.html" class="sidebar-link">Component interactions</a></li><li><a href="/angular2/directives.html" class="sidebar-link">Directives</a></li><li><a href="/angular2/page-title.html" class="sidebar-link">Page title</a></li><li><a href="/angular2/templates.html" class="sidebar-link">Templates</a></li><li><a href="/angular2/commonly-built-in-directives-and-services.html" class="sidebar-link">Commonly built-in directives and services</a></li><li><a href="/angular2/directives-components-input-output.html" class="active sidebar-link">Directives &amp; components : @Input @Output</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/angular2/directives-components-input-output.html#angular2-input-and-output-in-a-nested-component" class="sidebar-link">Angular2 @Input and @Output in a nested component</a></li><li class="sidebar-sub-header"><a href="/angular2/directives-components-input-output.html#input-example" class="sidebar-link">Input example</a></li><li class="sidebar-sub-header"><a href="/angular2/directives-components-input-output.html#angular2-input-with-asynchronous-data" class="sidebar-link">Angular2 @Input with asynchronous data</a></li></ul></li><li><a href="/angular2/attribute-directives-to-affect-the-value-of-properties-on-the-host-node-by-using-the-hostbinding-decorator.html" class="sidebar-link">Attribute directives to affect the value of properties on the host node by using the @HostBinding decorator.</a></li><li><a href="/angular2/how-to-use-ngif.html" class="sidebar-link">How to Use ngif</a></li><li><a href="/angular2/how-to-use-ngfor.html" class="sidebar-link">How to use ngfor</a></li><li><a href="/angular2/angular-forloop.html" class="sidebar-link">Angular - ForLoop</a></li><li><a href="/angular2/modules.html" class="sidebar-link">Modules</a></li><li><a href="/angular2/pipes.html" class="sidebar-link">Pipes</a></li><li><a href="/angular2/orderby-pipe.html" class="sidebar-link">OrderBy Pipe</a></li><li><a href="/angular2/angular2-custom-validations.html" class="sidebar-link">Angular2 Custom Validations</a></li><li><a href="/angular2/routing.html" class="sidebar-link">Routing</a></li><li><a href="/angular2/routing-3-0-0.html" class="sidebar-link">Routing (3.0.0+)</a></li><li><a href="/angular2/dynamically-add-components-using-viewcontainerref-createcomponent.html" class="sidebar-link">Dynamically add components using ViewContainerRef.createComponent</a></li><li><a href="/angular2/installing-3rd-party-plugins-with-angular-cli-1-0-0-beta-10.html" class="sidebar-link">Installing 3rd party plugins with angular-cli@1.0.0-beta.10</a></li><li><a href="/angular2/lifecycle-hooks.html" class="sidebar-link">Lifecycle Hooks</a></li><li><a href="/angular2/angular-rxjs-subjects-and-observables-with-api-requests.html" class="sidebar-link">Angular RXJS Subjects and Observables with API requests</a></li><li><a href="/angular2/services-and-dependency-injection.html" class="sidebar-link">Services and Dependency Injection</a></li><li><a href="/angular2/service-worker.html" class="sidebar-link">Service Worker</a></li><li><a href="/angular2/eventemitter-service.html" class="sidebar-link">EventEmitter Service</a></li><li><a href="/angular2/optimizing-rendering-using-changedetectionstrategy.html" class="sidebar-link">Optimizing rendering using ChangeDetectionStrategy</a></li><li><a href="/angular2/angular-2-forms-update.html" class="sidebar-link">Angular 2 Forms Update</a></li><li><a href="/angular2/detecting-resize-events.html" class="sidebar-link">Detecting resize events</a></li><li><a href="/angular2/testing-ngmodel.html" class="sidebar-link">Testing ngModel</a></li><li><a href="/angular2/feature-modules.html" class="sidebar-link">Feature Modules</a></li><li><a href="/angular2/bootstrap-empty-module-in-angular-2.html" class="sidebar-link">Bootstrap Empty module in angular 2</a></li><li><a href="/angular2/lazy-loading-a-module.html" class="sidebar-link">Lazy loading a module</a></li><li><a href="/angular2/advanced-component-examples.html" class="sidebar-link">Advanced Component Examples</a></li><li><a href="/angular2/bypassing-sanitizing-for-trusted-values.html" class="sidebar-link">Bypassing Sanitizing for trusted values</a></li><li><a href="/angular2/angular-2-data-driven-forms.html" class="sidebar-link">Angular 2 Data Driven Forms</a></li><li><a href="/angular2/angular2-in-memory-web-api.html" class="sidebar-link">Angular2 In Memory Web API</a></li><li><a href="/angular2/ahead-of-time-aot-compilation-with-angular-2.html" class="sidebar-link">Ahead-of-time (AOT) compilation with Angular 2</a></li><li><a href="/angular2/crud-in-angular2-with-restful-api.html" class="sidebar-link">CRUD in Angular2 with Restful API</a></li><li><a href="/angular2/use-native-webcomponents-in-angular-2.html" class="sidebar-link">Use native webcomponents in Angular 2</a></li><li><a href="/angular2/update-typings.html" class="sidebar-link">Update typings</a></li><li><a href="/angular2/mocking-ngrx-store.html" class="sidebar-link">Mocking @ngrx/Store</a></li><li><a href="/angular2/ngrx.html" class="sidebar-link">ngrx</a></li><li><a href="/angular2/http-interceptor.html" class="sidebar-link">Http Interceptor</a></li><li><a href="/angular2/animation.html" class="sidebar-link">Animation</a></li><li><a href="/angular2/zone-js.html" class="sidebar-link">Zone.js</a></li><li><a href="/angular2/angular2-animations.html" class="sidebar-link">Angular2 Animations</a></li><li><a href="/angular2/create-an-angular-2-npm-package.html" class="sidebar-link">Create an Angular 2+ NPM package</a></li><li><a href="/angular2/angular2-canactivate.html" class="sidebar-link">Angular2 CanActivate</a></li><li><a href="/angular2/angular-2-protractor.html" class="sidebar-link">Angular  2 - Protractor</a></li><li><a href="/angular2/example-for-routes-such-as-route-subroute-for-static-urls.html" class="sidebar-link">Example for routes such as /route/subroute for static urls</a></li><li><a href="/angular2/angular2-input-output.html" class="sidebar-link">Angular2 Input() output()</a></li><li><a href="/angular2/angular-cli.html" class="sidebar-link">Angular-cli</a></li><li><a href="/angular2/angular-2-change-detection-and-manual-triggering.html" class="sidebar-link">Angular 2 Change detection and manual triggering</a></li><li><a href="/angular2/angular2-databinding.html" class="sidebar-link">Angular2 Databinding</a></li><li><a href="/angular2/brute-force-upgrading.html" class="sidebar-link">Brute Force Upgrading</a></li><li><a href="/angular2/angular2-provide-external-data-to-app-before-bootstrap.html" class="sidebar-link">Angular2 provide external data to App before bootstrap</a></li><li><a href="/angular2/custom-ngx-bootstrap-datepicker-input.html" class="sidebar-link">custom ngx-bootstrap datepicker + input</a></li><li><a href="/angular2/using-third-party-libraries-like-jquery-in-angular-2.html" class="sidebar-link">Using third party libraries like jQuery in Angular 2</a></li><li><a href="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html" class="sidebar-link">Configuring ASP.net Core application to work with Angular 2 and TypeScript</a></li><li><a href="/angular2/angular2-using-webpack.html" class="sidebar-link">Angular2 using webpack</a></li><li><a href="/angular2/angular-material-design.html" class="sidebar-link">Angular material design</a></li><li><a href="/angular2/dropzone-in-angular2.html" class="sidebar-link">Dropzone in Angular2</a></li><li><a href="/angular2/angular-redux.html" class="sidebar-link">angular redux</a></li><li><a href="/angular2/creating-an-angular-npm-library.html" class="sidebar-link">Creating an Angular npm library</a></li><li><a href="/angular2/barrel.html" class="sidebar-link">Barrel</a></li><li><a href="/angular2/testing-an-angular-2-app.html" class="sidebar-link">Testing an Angular 2 App</a></li><li><a href="/angular2/angular-cli-test-coverage.html" class="sidebar-link">angular-cli test coverage</a></li><li><a href="/angular2/debugging-angular2-typescript-application-using-visual-studio-code.html" class="sidebar-link">Debugging Angular2 typescript application using Visual Studio Code</a></li><li><a href="/angular2/unit-testing.html" class="sidebar-link">unit testing</a></li><li><a href="/angular2/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="directives-components-input-output"><a href="#directives-components-input-output" class="header-anchor">#</a> Directives &amp; components : @Input @Output</h1> <h2 id="angular2-input-and-output-in-a-nested-component"><a href="#angular2-input-and-output-in-a-nested-component" class="header-anchor">#</a> Angular2 @Input and @Output in a nested component</h2> <p>A Button directive which accepts an <code>@Input()</code> to specify a click limit until the button gets disabled. The parent component can listen to an event which will be emitted when the click limit is reached via <code>@Output</code>:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> Input<span class="token punctuation">,</span> Output<span class="token punctuation">,</span> EventEmitter <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    selector<span class="token operator">:</span> <span class="token string">'limited-button'</span><span class="token punctuation">,</span>
+    template<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;button (click)=&quot;onClick()&quot; 
+                       [disabled]=&quot;disabled&quot;&gt;
+                   &lt;ng-content&gt;&lt;/ng-content&gt;
+               &lt;/button&gt;</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+    directives<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">LimitedButton</span> <span class="token punctuation">{</span>
+    @<span class="token function">Input</span><span class="token punctuation">(</span><span class="token punctuation">)</span> clickLimit<span class="token operator">:</span> number<span class="token punctuation">;</span>
+    @<span class="token function">Output</span><span class="token punctuation">(</span><span class="token punctuation">)</span> limitReached<span class="token operator">:</span> EventEmitter<span class="token operator">&lt;</span>number<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">EventEmitter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    disabled<span class="token operator">:</span> boolean <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> clickCount<span class="token operator">:</span> number <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+    <span class="token function">onClick</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>clickCount<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>clickCount <span class="token operator">===</span> <span class="token keyword">this</span><span class="token punctuation">.</span>clickLimit<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>disabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>limitReached<span class="token punctuation">.</span><span class="token function">emit</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>clickCount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Parent component which uses the Button directive and alerts a message when the click limit is reached:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> LimitedButton <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./limited-button.component'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    selector<span class="token operator">:</span> <span class="token string">'my-parent-component'</span><span class="token punctuation">,</span>
+    template<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">&lt;limited-button [clickLimit]=&quot;2&quot;
+                               (limitReached)=&quot;onLimitReached($event)&quot;&gt;
+                   You can only click me twice
+               &lt;/limited-button&gt;</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+    directives<span class="token operator">:</span> <span class="token punctuation">[</span>LimitedButton<span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">MyParentComponent</span> <span class="token punctuation">{</span>
+    <span class="token function">onLimitReached</span><span class="token punctuation">(</span><span class="token parameter">clickCount<span class="token operator">:</span> number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'Button disabled after '</span> <span class="token operator">+</span> clickCount <span class="token operator">+</span> <span class="token string">' clicks.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="input-example"><a href="#input-example" class="header-anchor">#</a> Input example</h2> <p>@input is useful to bind data between components</p> <p>First, import it in your component</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Input <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Then, add the input as a property of your component class</p> <div class="language-js extra-class"><pre class="language-js"><code>@<span class="token function">Input</span><span class="token punctuation">(</span><span class="token punctuation">)</span> car<span class="token operator">:</span> any<span class="token punctuation">;</span>
+
+</code></pre></div><p>Let's say that the selector of your component is 'car-component', when you call the component, add the attribute 'car'</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>car<span class="token operator">-</span>component <span class="token punctuation">[</span>car<span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">&quot;car&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>car<span class="token operator">-</span>component<span class="token operator">&gt;</span>
+
+</code></pre></div><p>Now your car is accessible as an attribute in your object (this.car)</p> <p>Full Example :</p> <ol><li>car.entity.ts</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+   export class CarEntity {
+       constructor(public brand : string, public color : string) {
+       }  
+    }
+
+</code></pre></div><ol><li>car.component.ts</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+   import { Component, Input } from '@angular/core';
+    import {CarEntity} from &quot;./car.entity&quot;;
+    
+    @Component({
+        selector: 'car-component',
+        template: require('./templates/car.html'),
+    })
+    
+    export class CarComponent {
+        @Input() car: CarEntity;
+    
+        constructor() {
+            console.log('gros');
+        }
+    }
+
+</code></pre></div><ol><li>garage.component.ts</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+   import { Component } from '@angular/core';
+    import {CarEntity} from &quot;./car.entity&quot;;
+    import {CarComponent} from &quot;./car.component&quot;;
+    
+    @Component({
+        selector: 'garage',
+        template: require('./templates/garage.html'),
+        directives: [CarComponent]
+    })
+    
+    export class GarageComponent {
+        public cars : Array&lt;CarEntity&gt;;
+    
+        constructor() {
+            var carOne : CarEntity = new CarEntity('renault', 'blue');
+            var carTwo : CarEntity = new CarEntity('fiat', 'green');
+            var carThree : CarEntity = new CarEntity('citroen', 'yellow');
+            this.cars = [carOne, carTwo, carThree];
+        }
+    }
+
+</code></pre></div><ol><li>garage.html</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+   &lt;div *ngFor=&quot;let car of cars&quot;&gt;
+    &lt;car-component [car]=&quot;car&quot;&gt;&lt;/car-component&gt;
+    &lt;/div&gt;
+
+</code></pre></div><ol><li>car.html</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+   &lt;div&gt;
+        &lt;span&gt;{{ car.brand }}&lt;/span&gt; |
+        &lt;span&gt;{{ car.color }}&lt;/span&gt;
+    &lt;/div&gt;
+
+</code></pre></div><h2 id="angular2-input-with-asynchronous-data"><a href="#angular2-input-with-asynchronous-data" class="header-anchor">#</a> Angular2 @Input with asynchronous data</h2> <p>Sometimes you need to fetch data asynchronously before passing it to a child component to use. If the child component tries to use the data before it has been received, it will throw an error. You can use <code>ngOnChanges</code> to detect changes in a components' <code>@Input</code>s and wait until they are defined before acting upon them.</p> <h3 id="parent-component-with-async-call-to-an-endpoint"><a href="#parent-component-with-async-call-to-an-endpoint" class="header-anchor">#</a> Parent component with async call to an endpoint</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> OnChanges<span class="token punctuation">,</span> OnInit <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Http<span class="token punctuation">,</span> Response <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/http'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ChildComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./child.component'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    selector <span class="token operator">:</span> <span class="token string">'parent-component'</span><span class="token punctuation">,</span>
+    template <span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;child-component [data]=&quot;asyncData&quot;&gt;&lt;/child-component&gt;
+    </span><span class="token template-punctuation string">`</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ParentComponent</span> <span class="token punctuation">{</span>
+    
+    asyncData <span class="token operator">:</span> any<span class="token punctuation">;</span>
+
+    <span class="token function">constructor</span><span class="token punctuation">(</span>
+        <span class="token parameter"><span class="token keyword">private</span> _http <span class="token operator">:</span> Http</span>
+    <span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token function">ngOnInit</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>_http<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'some.url'</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>extractData<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>handleData<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>handleError<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">extractData</span> <span class="token punctuation">(</span><span class="token parameter">res<span class="token operator">:</span>Response</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">let</span> body <span class="token operator">=</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> body<span class="token punctuation">.</span>data <span class="token operator">||</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">handleData</span> <span class="token punctuation">(</span><span class="token parameter">data<span class="token operator">:</span>any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>asyncData <span class="token operator">=</span> data<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">handleError</span> <span class="token punctuation">(</span><span class="token parameter">error<span class="token operator">:</span>any</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="child-component-which-has-async-data-as-input"><a href="#child-component-which-has-async-data-as-input" class="header-anchor">#</a> Child component which has async data as input</h3> <p>This child component takes the async data as input. Therefore it must wait for the data to exist before Using it. We use ngOnChanges which fires whenever a component's input changes, check if the data exists and use it if it does. Notice that the template for the child  will not show if a property that relies on the data being passed in is not true.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Component<span class="token punctuation">,</span> OnChanges<span class="token punctuation">,</span> Input <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    selector <span class="token operator">:</span> <span class="token string">'child-component'</span><span class="token punctuation">,</span>
+    template <span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+        &lt;p *ngIf=&quot;doesDataExist&quot;&gt;Hello child&lt;/p&gt;
+    </span><span class="token template-punctuation string">`</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ChildComponent</span> <span class="token punctuation">{</span>
+    
+    doesDataExist<span class="token operator">:</span> boolean <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+    @<span class="token function">Input</span><span class="token punctuation">(</span><span class="token string">'data'</span><span class="token punctuation">)</span> data <span class="token operator">:</span> any<span class="token punctuation">;</span>
+
+    <span class="token comment">// Runs whenever component @Inputs change</span>
+    <span class="token function">ngOnChanges</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Check if the data exists before using it</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">useData</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// contrived example to assign data to reliesOnData    </span>
+    <span class="token function">useData</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>doesDataExist <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ol><li>One way binding from parent component to nested component: [propertyName]</li> <li>One way binding from nested component to parent component: (propertyName)</li> <li>Two-way binding (a.k.a banana box notation) : [(propertyName)]</li></ol></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/angular2/directives-components-input-output.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/angular2/commonly-built-in-directives-and-services.html" class="prev">
+        Commonly built-in directives and services
+      </a></span> <span class="next"><a href="/angular2/attribute-directives-to-affect-the-value-of-properties-on-the-host-node-by-using-the-hostbinding-decorator.html">
+        Attribute directives to affect the value of properties on the host node by using the @HostBinding decorator.
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/382.ee9723cb.js" defer></script>
+  </body>
+</html>

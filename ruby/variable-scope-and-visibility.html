@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ruby - Variable Scope and Visibility</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Class Variables, Local Variables, Global Variables, Instance Variables">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Ruby - Variable Scope and Visibility">
+    <meta property="og:description" content="Class Variables, Local Variables, Global Variables, Instance Variables">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/ruby/variable-scope-and-visibility.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Ruby - Variable Scope and Visibility">
+    <meta name="twitter:description" content="Class Variables, Local Variables, Global Variables, Instance Variables">
+    <meta name="twitter:url" content="/ruby/variable-scope-and-visibility.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3118.61cbe4c0.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Ruby</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/ruby/" class="sidebar-link">Disclaimer</a></li><li><a href="/ruby/installation.html" class="sidebar-link">Installation</a></li><li><a href="/ruby/getting-started-with-ruby-language.html" class="sidebar-link">Getting started with Ruby Language</a></li><li><a href="/ruby/casting-type-conversion.html" class="sidebar-link">Casting (type conversion)</a></li><li><a href="/ruby/operators.html" class="sidebar-link">Operators</a></li><li><a href="/ruby/variable-scope-and-visibility.html" class="active sidebar-link">Variable Scope and Visibility</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/ruby/variable-scope-and-visibility.html#class-variables" class="sidebar-link">Class Variables</a></li><li class="sidebar-sub-header"><a href="/ruby/variable-scope-and-visibility.html#local-variables" class="sidebar-link">Local Variables</a></li><li class="sidebar-sub-header"><a href="/ruby/variable-scope-and-visibility.html#global-variables" class="sidebar-link">Global Variables</a></li><li class="sidebar-sub-header"><a href="/ruby/variable-scope-and-visibility.html#instance-variables" class="sidebar-link">Instance Variables</a></li></ul></li><li><a href="/ruby/environment-variables.html" class="sidebar-link">Environment Variables</a></li><li><a href="/ruby/constants.html" class="sidebar-link">Constants</a></li><li><a href="/ruby/special-constants-in-ruby.html" class="sidebar-link">Special Constants in Ruby</a></li><li><a href="/ruby/comments.html" class="sidebar-link">Comments</a></li><li><a href="/ruby/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/ruby/multidimensional-arrays.html" class="sidebar-link">Multidimensional Arrays</a></li><li><a href="/ruby/strings.html" class="sidebar-link">Strings</a></li><li><a href="/ruby/datetime.html" class="sidebar-link">DateTime</a></li><li><a href="/ruby/time.html" class="sidebar-link">Time</a></li><li><a href="/ruby/numbers.html" class="sidebar-link">Numbers</a></li><li><a href="/ruby/symbols.html" class="sidebar-link">Symbols</a></li><li><a href="/ruby/comparable.html" class="sidebar-link">Comparable</a></li><li><a href="/ruby/control-flow.html" class="sidebar-link">Control Flow</a></li><li><a href="/ruby/methods.html" class="sidebar-link">Methods</a></li><li><a href="/ruby/hashes.html" class="sidebar-link">Hashes</a></li><li><a href="/ruby/blocks-and-procs-and-lambdas.html" class="sidebar-link">Blocks and Procs and Lambdas</a></li><li><a href="/ruby/iteration.html" class="sidebar-link">Iteration</a></li><li><a href="/ruby/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/ruby/enumerators.html" class="sidebar-link">Enumerators</a></li><li><a href="/ruby/enumerable-in-ruby.html" class="sidebar-link">Enumerable in Ruby</a></li><li><a href="/ruby/classes.html" class="sidebar-link">Classes</a></li><li><a href="/ruby/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/ruby/method-missing.html" class="sidebar-link">method_missing</a></li><li><a href="/ruby/regular-expressions-and-regex-based-operations.html" class="sidebar-link">Regular Expressions and Regex Based Operations</a></li><li><a href="/ruby/file-and-i-o-operations.html" class="sidebar-link">File and I/O Operations</a></li><li><a href="/ruby/ruby-access-modifiers.html" class="sidebar-link">Ruby Access Modifiers</a></li><li><a href="/ruby/design-patterns-and-idioms-in-ruby.html" class="sidebar-link">Design Patterns and Idioms in Ruby</a></li><li><a href="/ruby/loading-source-files.html" class="sidebar-link">Loading Source Files</a></li><li><a href="/ruby/thread.html" class="sidebar-link">Thread</a></li><li><a href="/ruby/range.html" class="sidebar-link">Range</a></li><li><a href="/ruby/modules.html" class="sidebar-link">Modules</a></li><li><a href="/ruby/introspection-in-ruby.html" class="sidebar-link">Introspection in Ruby</a></li><li><a href="/ruby/monkey-patching-in-ruby.html" class="sidebar-link">Monkey Patching in Ruby</a></li><li><a href="/ruby/recursion-in-ruby.html" class="sidebar-link">Recursion in Ruby</a></li><li><a href="/ruby/splat-operator.html" class="sidebar-link">Splat operator (*)</a></li><li><a href="/ruby/json-with-ruby.html" class="sidebar-link">JSON with Ruby</a></li><li><a href="/ruby/pure-rspec-json-api-testing.html" class="sidebar-link">Pure RSpec JSON API testing</a></li><li><a href="/ruby/gem-creation-management.html" class="sidebar-link">Gem Creation/Management</a></li><li><a href="/ruby/rbenv.html" class="sidebar-link">rbenv</a></li><li><a href="/ruby/gem-usage.html" class="sidebar-link">Gem Usage</a></li><li><a href="/ruby/singleton-class.html" class="sidebar-link">Singleton Class</a></li><li><a href="/ruby/queue.html" class="sidebar-link">Queue</a></li><li><a href="/ruby/destructuring.html" class="sidebar-link">Destructuring</a></li><li><a href="/ruby/struct.html" class="sidebar-link">Struct</a></li><li><a href="/ruby/metaprogramming.html" class="sidebar-link">Metaprogramming</a></li><li><a href="/ruby/dynamic-evaluation.html" class="sidebar-link">Dynamic Evaluation</a></li><li><a href="/ruby/instance-eval.html" class="sidebar-link">instance_eval</a></li><li><a href="/ruby/message-passing.html" class="sidebar-link">Message Passing</a></li><li><a href="/ruby/keyword-arguments.html" class="sidebar-link">Keyword Arguments</a></li><li><a href="/ruby/truthiness.html" class="sidebar-link">Truthiness</a></li><li><a href="/ruby/implicit-receivers-and-understanding-self.html" class="sidebar-link">Implicit Receivers and Understanding Self</a></li><li><a href="/ruby/introspection.html" class="sidebar-link">Introspection</a></li><li><a href="/ruby/refinements.html" class="sidebar-link">Refinements</a></li><li><a href="/ruby/catching-exceptions-with-begin-rescue.html" class="sidebar-link">Catching Exceptions with Begin / Rescue</a></li><li><a href="/ruby/command-line-apps.html" class="sidebar-link">Command Line Apps</a></li><li><a href="/ruby/irb.html" class="sidebar-link">IRB</a></li><li><a href="/ruby/erb.html" class="sidebar-link">ERB</a></li><li><a href="/ruby/generate-a-random-number.html" class="sidebar-link">Generate a random number</a></li><li><a href="/ruby/getting-started-with-hanami.html" class="sidebar-link">Getting started with Hanami</a></li><li><a href="/ruby/optionparser.html" class="sidebar-link">OptionParser</a></li><li><a href="/ruby/operating-system-or-shell-commands.html" class="sidebar-link">Operating System or Shell commands</a></li><li><a href="/ruby/c-extensions.html" class="sidebar-link">C Extensions</a></li><li><a href="/ruby/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/ruby/ruby-version-manager.html" class="sidebar-link">Ruby Version Manager</a></li><li><a href="/ruby/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="variable-scope-and-visibility"><a href="#variable-scope-and-visibility" class="header-anchor">#</a> Variable Scope and Visibility</h1> <h2 id="class-variables"><a href="#class-variables" class="header-anchor">#</a> Class Variables</h2> <p>Class variables have a class wide scope, they can be declared anywhere in the class. A variable will be considered a class variable when prefixed with <code>@@</code></p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Dinosaur</span>
+    <span class="token variable">@@classification</span> <span class="token operator">=</span> <span class="token string">&quot;Like a Reptile, but like a bird&quot;</span>
+    
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">classification</span></span>
+        <span class="token variable">@@classification</span>
+    <span class="token keyword">end</span>
+
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">classification</span></span>
+        <span class="token variable">@@classification</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+dino <span class="token operator">=</span> <span class="token constant">Dinosaur</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+dino<span class="token punctuation">.</span>classification
+<span class="token comment"># =&gt; &quot;Like a Reptile, but like a bird&quot;</span>
+  
+<span class="token constant">Dinosaur</span><span class="token punctuation">.</span>classification
+<span class="token comment"># =&gt; &quot;Like a Reptile, but like a bird&quot;</span>
+
+</code></pre></div><p>Class variables are shared between related classes and can be overwritten from a child class</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">TRex</span> <span class="token operator">&lt;</span> <span class="token constant">Dinosaur</span>
+    <span class="token variable">@@classification</span> <span class="token operator">=</span> <span class="token string">&quot;Big teeth bird!&quot;</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">TRex</span><span class="token punctuation">.</span>classification
+<span class="token comment"># =&gt; &quot;Big teeth bird!&quot;</span>
+
+<span class="token constant">Dinosaur</span><span class="token punctuation">.</span>classification
+<span class="token comment"># =&gt; &quot;Big teeth bird!&quot;</span>
+
+</code></pre></div><p>This behaviour is unwanted most of the time and can be circumvented by using class-level instance variables.</p> <p>Class variables defined inside a module will not overwrite their including classes class variables:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">module</span> <span class="token constant">SomethingStrange</span>
+    <span class="token variable">@@classification</span> <span class="token operator">=</span> <span class="token string">&quot;Something Strange&quot;</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">DuckDinosaur</span> <span class="token operator">&lt;</span> <span class="token constant">Dinosaur</span>
+    <span class="token keyword">include</span> <span class="token constant">SomethingStrange</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">DuckDinosaur</span><span class="token punctuation">.</span>class_variables
+<span class="token comment"># =&gt; [:@@classification]</span>
+<span class="token constant">SomethingStrange</span><span class="token punctuation">.</span>class_variables
+<span class="token comment"># =&gt; [:@@classification]</span>
+
+<span class="token constant">DuckDinosaur</span><span class="token punctuation">.</span>classification
+<span class="token comment"># =&gt; &quot;Big teeth bird!&quot;</span>
+
+</code></pre></div><h2 id="local-variables"><a href="#local-variables" class="header-anchor">#</a> Local Variables</h2> <p>Local variables (unlike the other variable classes) do not have any prefix</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>local_variable <span class="token operator">=</span> <span class="token string">&quot;local&quot;</span>
+p local_variable
+<span class="token comment"># =&gt; local</span>
+
+</code></pre></div><p>Its scope is dependent on where it has been declared, it can not be used outside the &quot;declaration containers&quot; scope. For example, if a local variable is declared in a method, it can only be used inside that method.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">def</span> <span class="token method-definition"><span class="token function">some_method</span></span>
+    method_scope_var <span class="token operator">=</span> <span class="token string">&quot;hi there&quot;</span>
+    p method_scope_var
+<span class="token keyword">end</span>
+
+some_method
+<span class="token comment"># hi there</span>
+<span class="token comment"># =&gt; hi there</span>
+
+method_scope_var
+<span class="token comment"># NameError: undefined local variable or method `method_scope_var'</span>
+
+</code></pre></div><p>Of course, local variables are not limited to methods, as a rule of thumb you could say that, as soon as you declare a variable inside a <code>do ... end</code> block or wrapped in curly braces <code>{}</code> it will be local and scoped to the block it has been declared in.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token number">2.</span>times <span class="token keyword">do</span> <span class="token operator">|</span>n<span class="token operator">|</span>
+    local_var <span class="token operator">=</span> n <span class="token operator">+</span> <span class="token number">1</span>
+    p local_var
+<span class="token keyword">end</span>
+<span class="token comment"># 1</span>
+<span class="token comment"># 2</span>
+<span class="token comment"># =&gt; 2</span>
+
+local_var
+<span class="token comment"># NameError: undefined local variable or method `local_var'</span>
+
+</code></pre></div><p>However, local variables declared in <code>if</code> or <code>case</code> blocks can be used in the parent-scope:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">if</span> <span class="token boolean">true</span>
+    usable <span class="token operator">=</span> <span class="token string">&quot;yay&quot;</span>
+<span class="token keyword">end</span>
+
+p usable
+<span class="token comment"># yay</span>
+<span class="token comment"># =&gt; &quot;yay&quot;</span>
+
+</code></pre></div><p>While local variables can not be used outside of its block of declaration, it will be passed down to blocks:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>my_variable <span class="token operator">=</span> <span class="token string">&quot;foo&quot;</span>
+
+my_variable<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>each_with_index <span class="token keyword">do</span> <span class="token operator">|</span>char<span class="token punctuation">,</span> i<span class="token operator">|</span>
+    puts <span class="token string">&quot;The character in string '<span class="token interpolation"><span class="token delimiter tag">#{</span>my_variable<span class="token delimiter tag">}</span></span>' at index <span class="token interpolation"><span class="token delimiter tag">#{</span>i<span class="token delimiter tag">}</span></span> is <span class="token interpolation"><span class="token delimiter tag">#{</span>char<span class="token delimiter tag">}</span></span>&quot;</span>
+<span class="token keyword">end</span>
+<span class="token comment"># The character in string 'foo' at index 0 is f</span>
+<span class="token comment"># The character in string 'foo' at index 1 is o</span>
+<span class="token comment"># The character in string 'foo' at index 2 is o</span>
+<span class="token comment"># =&gt; [&quot;f&quot;, &quot;o&quot;, &quot;o&quot;]</span>
+
+</code></pre></div><p>But not to method / class / module definitions</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>my_variable <span class="token operator">=</span> <span class="token string">&quot;foo&quot;</span>
+
+<span class="token keyword">def</span> <span class="token method-definition"><span class="token function">some_method</span></span>
+    puts <span class="token string">&quot;you can't use the local variable in here, see? <span class="token interpolation"><span class="token delimiter tag">#{</span>my_variable<span class="token delimiter tag">}</span></span>&quot;</span>
+<span class="token keyword">end</span>
+
+some_method
+<span class="token comment"># NameError: undefined local variable or method `my_variable'</span>
+
+</code></pre></div><p>The variables used for block arguments are (of course) local to the block, but will overshadow previously defined variables, without overwriting them.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>overshadowed <span class="token operator">=</span> <span class="token string">&quot;sunlight&quot;</span>
+
+<span class="token punctuation">[</span><span class="token string">&quot;darkness&quot;</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token keyword">each</span> <span class="token keyword">do</span> <span class="token operator">|</span>overshadowed<span class="token operator">|</span>
+    p overshadowed
+<span class="token keyword">end</span>
+<span class="token comment"># darkness</span>
+<span class="token comment"># =&gt; [&quot;darkness&quot;]</span>
+
+p overshadowed
+<span class="token comment"># &quot;sunlight&quot;</span>
+<span class="token comment"># =&gt; &quot;sunlight&quot;</span>
+
+</code></pre></div><h2 id="global-variables"><a href="#global-variables" class="header-anchor">#</a> Global Variables</h2> <p>Global variables have a global scope and hence, can be used everywhere. Their scope is not dependent on where they are defined. A variable will be considered global, when prefixed with a <code>$</code> sign.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token variable">$i_am_global</span> <span class="token operator">=</span> <span class="token string">&quot;omg&quot;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Dinosaur</span>
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">instance_method</span></span>
+       p <span class="token string">&quot;global vars can be used everywhere. See? <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">$i_am_global</span><span class="token delimiter tag">}</span></span>, <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">$another_global_var</span><span class="token delimiter tag">}</span></span>&quot;</span> 
+    <span class="token keyword">end</span>
+
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">class_method</span></span>
+       <span class="token variable">$another_global_var</span> <span class="token operator">=</span> <span class="token string">&quot;srsly?&quot;</span>
+       p <span class="token string">&quot;global vars can be used everywhere. See? <span class="token interpolation"><span class="token delimiter tag">#{</span><span class="token variable">$i_am_global</span><span class="token delimiter tag">}</span></span>&quot;</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">Dinosaur</span><span class="token punctuation">.</span>class_method
+<span class="token comment"># &quot;global vars can be used everywhere. See? omg&quot;</span>
+<span class="token comment"># =&gt; &quot;global vars can be used everywhere. See? omg&quot;</span>
+
+dinosaur <span class="token operator">=</span> <span class="token constant">Dinosaur</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+dinosaur<span class="token punctuation">.</span>instance_method
+<span class="token comment"># &quot;global vars can be used everywhere. See? omg, srsly?&quot;</span>
+<span class="token comment"># =&gt; &quot;global vars can be used everywhere. See? omg, srsly?&quot;</span>
+
+</code></pre></div><p>Since a global variable can be defined everywhere and will be visible everywhere, calling an &quot;undefined&quot; global variable will return nil instead of raising an error.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>p <span class="token variable">$undefined_var</span>
+<span class="token comment"># nil</span>
+<span class="token comment"># =&gt; nil</span>
+
+</code></pre></div><p>Although global variables are easy to use its usage is strongly discouraged in favour of constants.</p> <h2 id="instance-variables"><a href="#instance-variables" class="header-anchor">#</a> Instance Variables</h2> <p>Instance variables have an object wide scope, they can be declared anywhere in the object, however an instance variable declared on class level, will only be visible in the class object. A variable will be considered an instance variable when prefixed with <code>@</code>. Instance variables are used to set and get an objects attributes and will return nil if not defined.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">Dinosaur</span>
+    <span class="token variable">@base_sound</span> <span class="token operator">=</span> <span class="token string">&quot;rawrr&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">initialize</span></span><span class="token punctuation">(</span>sound <span class="token operator">=</span> <span class="token keyword">nil</span><span class="token punctuation">)</span>
+        <span class="token variable">@sound</span> <span class="token operator">=</span> sound <span class="token operator">||</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">.</span>base_sound
+    <span class="token keyword">end</span>
+
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">speak</span></span>
+        <span class="token variable">@sound</span>
+    <span class="token keyword">end</span>
+
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">try_to_speak</span></span>
+        <span class="token variable">@base_sound</span>
+    <span class="token keyword">end</span>
+
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">count_and_store_sound_length</span></span>
+        <span class="token variable">@sound</span><span class="token punctuation">.</span>chars<span class="token punctuation">.</span>each_with_index <span class="token keyword">do</span> <span class="token operator">|</span>char<span class="token punctuation">,</span> i<span class="token operator">|</span>
+            <span class="token variable">@sound_length</span> <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span>
+            p <span class="token string">&quot;<span class="token interpolation"><span class="token delimiter tag">#{</span>char<span class="token delimiter tag">}</span></span>: <span class="token interpolation"><span class="token delimiter tag">#{</span>sound_length<span class="token delimiter tag">}</span></span>&quot;</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+    
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token function">sound_length</span></span>
+        <span class="token variable">@sound_length</span>
+    <span class="token keyword">end</span>
+
+    <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">base_sound</span></span>
+        <span class="token variable">@base_sound</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+dino_1 <span class="token operator">=</span> <span class="token constant">Dinosaur</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+dino_2 <span class="token operator">=</span> <span class="token constant">Dinosaur</span><span class="token punctuation">.</span><span class="token keyword">new</span> <span class="token string">&quot;grrr&quot;</span>
+
+<span class="token constant">Dinosaur</span><span class="token punctuation">.</span>base_sound
+<span class="token comment"># =&gt; &quot;rawrr&quot;</span>
+dino_2<span class="token punctuation">.</span>speak
+<span class="token comment"># =&gt; &quot;grrr&quot;</span>
+
+</code></pre></div><p>The instance variable declared on class level can not be accessed on object level:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>dino_1<span class="token punctuation">.</span>try_to_speak
+<span class="token comment"># =&gt; nil</span>
+
+</code></pre></div><p>However, we used the instance variable <code>@base_sound</code> to instantiate the sound when no sound is passed to the new method:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>dino_1<span class="token punctuation">.</span>speak
+<span class="token comment"># =&gt; &quot;rawwr&quot;</span>
+
+</code></pre></div><p>Instance variables can be declared anywhere in the object, even inside a block:</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>dino_1<span class="token punctuation">.</span>count_and_store_sound_length
+<span class="token comment"># &quot;r: 1&quot;</span>
+<span class="token comment"># &quot;a: 2&quot;</span>
+<span class="token comment"># &quot;w: 3&quot;</span>
+<span class="token comment"># &quot;r: 4&quot;</span>
+<span class="token comment"># &quot;r: 5&quot;</span>
+<span class="token comment"># =&gt; [&quot;r&quot;, &quot;a&quot;, &quot;w&quot;, &quot;r&quot;, &quot;r&quot;]</span>
+
+dino_1<span class="token punctuation">.</span>sound_length
+<span class="token comment"># =&gt; 5</span>
+
+</code></pre></div><p>Instance variables are <strong>not</strong> shared between instances of the same class</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code>dino_2<span class="token punctuation">.</span>sound_length
+<span class="token comment"># =&gt; nil</span>
+
+</code></pre></div><p>This can be used to create class level variables, that will not be overwritten by a child-class, since classes are also objects in Ruby.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">DuckDuckDinosaur</span> <span class="token operator">&lt;</span> <span class="token constant">Dinosaur</span>
+    <span class="token variable">@base_sound</span> <span class="token operator">=</span> <span class="token string">&quot;quack quack&quot;</span>
+<span class="token keyword">end</span>
+
+duck_dino <span class="token operator">=</span> <span class="token constant">DuckDuckDinosaur</span><span class="token punctuation">.</span><span class="token keyword">new</span>
+duck_dino<span class="token punctuation">.</span>speak
+<span class="token comment"># =&gt; &quot;quack quack&quot;</span>
+<span class="token constant">DuckDuckDinosaur</span><span class="token punctuation">.</span>base_sound
+<span class="token comment"># =&gt; &quot;quack quack&quot;</span>
+<span class="token constant">Dinosaur</span><span class="token punctuation">.</span>base_sound
+<span class="token comment"># =&gt; &quot;rawrr&quot;</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>$global_variable</li> <li>@@class_variable</li> <li>@instance_variable</li> <li>local_variable</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Class variables are shared in the class hierarchy. This can result in surprising behavior.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">A</span>
+  <span class="token variable">@@variable</span> <span class="token operator">=</span> <span class="token symbol">:x</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">variable</span></span>
+    <span class="token variable">@@variable</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">B</span> <span class="token operator">&lt;</span> <span class="token constant">A</span>
+  <span class="token variable">@@variable</span> <span class="token operator">=</span> <span class="token symbol">:y</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">A</span><span class="token punctuation">.</span>variable  <span class="token comment"># :y</span>
+
+</code></pre></div><p>Classes are objects, so instance variables can be used to provide state that is specific to each class.</p> <div class="language-ruby extra-class"><pre class="language-ruby"><code><span class="token keyword">class</span> <span class="token class-name">A</span>
+  <span class="token variable">@variable</span> <span class="token operator">=</span> <span class="token symbol">:x</span>
+
+  <span class="token keyword">def</span> <span class="token method-definition"><span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">variable</span></span>
+    <span class="token variable">@variable</span>
+  <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+<span class="token keyword">class</span> <span class="token class-name">B</span> <span class="token operator">&lt;</span> <span class="token constant">A</span>
+  <span class="token variable">@variable</span> <span class="token operator">=</span> <span class="token symbol">:y</span>
+<span class="token keyword">end</span>
+
+<span class="token constant">A</span><span class="token punctuation">.</span>variable  <span class="token comment"># :x</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/ruby/variable-scope-and-visibility.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/ruby/operators.html" class="prev">
+        Operators
+      </a></span> <span class="next"><a href="/ruby/environment-variables.html">
+        Environment Variables
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3118.61cbe4c0.js" defer></script>
+  </body>
+</html>

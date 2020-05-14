@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MongoDB - Mongo as a Replica Set</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Check MongoDB Replica Set states">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="MongoDB - Mongo as a Replica Set">
+    <meta property="og:description" content="Check MongoDB Replica Set states">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/mongodb/mongo-as-a-replica-set.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="MongoDB - Mongo as a Replica Set">
+    <meta name="twitter:description" content="Check MongoDB Replica Set states">
+    <meta name="twitter:url" content="/mongodb/mongo-as-a-replica-set.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1957.96caccd1.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>MongoDB</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/mongodb/" class="sidebar-link">Disclaimer</a></li><li><a href="/mongodb/getting-started-with-mongodb.html" class="sidebar-link">Getting started with MongoDB</a></li><li><a href="/mongodb/crud-operation.html" class="sidebar-link">CRUD Operation</a></li><li><a href="/mongodb/getting-database-information.html" class="sidebar-link">Getting database information</a></li><li><a href="/mongodb/querying-for-data-getting-started.html" class="sidebar-link">Querying for Data ( Getting Started )</a></li><li><a href="/mongodb/update-operators.html" class="sidebar-link">Update Operators</a></li><li><a href="/mongodb/upserts-and-inserts.html" class="sidebar-link">Upserts and Inserts</a></li><li><a href="/mongodb/collections.html" class="sidebar-link">Collections</a></li><li><a href="/mongodb/mongodb-aggregation.html" class="sidebar-link">MongoDB Aggregation</a></li><li><a href="/mongodb/aggregation.html" class="sidebar-link">Aggregation</a></li><li><a href="/mongodb/indexes.html" class="sidebar-link">Indexes</a></li><li><a href="/mongodb/bulk-operations.html" class="sidebar-link">Bulk Operations</a></li><li><a href="/mongodb/2dsphere-index.html" class="sidebar-link">2dsphere Index</a></li><li><a href="/mongodb/pluggable-storage-engines.html" class="sidebar-link">Pluggable Storage Engines</a></li><li><a href="/mongodb/java-driver.html" class="sidebar-link">Java Driver</a></li><li><a href="/mongodb/python-driver.html" class="sidebar-link">Python Driver</a></li><li><a href="/mongodb/mongo-as-shards.html" class="sidebar-link">Mongo as Shards</a></li><li><a href="/mongodb/replication.html" class="sidebar-link">Replication</a></li><li><a href="/mongodb/mongo-as-a-replica-set.html" class="active sidebar-link">Mongo as a Replica Set</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/mongodb/mongo-as-a-replica-set.html#check-mongodb-replica-set-states" class="sidebar-link">Check MongoDB Replica Set states</a></li></ul></li><li><a href="/mongodb/mongodb-configure-a-replicaset-to-support-tls-ssl.html" class="sidebar-link">MongoDB - Configure a ReplicaSet to support TLS/SSL</a></li><li><a href="/mongodb/authentication-mechanisms-in-mongodb.html" class="sidebar-link">Authentication Mechanisms in MongoDB</a></li><li><a href="/mongodb/mongodb-authorization-model.html" class="sidebar-link">MongoDB Authorization Model</a></li><li><a href="/mongodb/configuration.html" class="sidebar-link">Configuration</a></li><li><a href="/mongodb/backing-up-and-restoring-data.html" class="sidebar-link">Backing up and Restoring Data</a></li><li><a href="/mongodb/upgrading-mongodb-version.html" class="sidebar-link">Upgrading MongoDB version</a></li><li><a href="/mongodb/backing-up-and-restoring-data.html" class="sidebar-link">Backing up and Restoring Data</a></li><li><a href="/mongodb/mongo-as-a-replica-set.html" class="active sidebar-link">Mongo as a Replica Set</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/mongodb/mongo-as-a-replica-set.html#check-mongodb-replica-set-states" class="sidebar-link">Check MongoDB Replica Set states</a></li></ul></li><li><a href="/mongodb/managing-mongodb.html" class="sidebar-link">Managing MongoDB</a></li><li><a href="/mongodb/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="mongo-as-a-replica-set"><a href="#mongo-as-a-replica-set" class="header-anchor">#</a> Mongo as a Replica Set</h1> <h2 id="check-mongodb-replica-set-states"><a href="#check-mongodb-replica-set-states" class="header-anchor">#</a> Check MongoDB Replica Set states</h2> <p>Use the below command to check the replica set status.</p> <p><strong>Command</strong> : rs.status()</p> <p>Connect any one of replica member and fire this command it will give the full state of the replica set</p> <p>Example :</p> <div class="language- extra-class"><pre class="language-text"><code>
+  {
+    &quot;set&quot; : &quot;ReplicaName&quot;,
+    &quot;date&quot; : ISODate(&quot;2016-09-26T07:36:04.935Z&quot;),
+    &quot;myState&quot; : 1,
+    &quot;term&quot; : NumberLong(-1),
+    &quot;heartbeatIntervalMillis&quot; : NumberLong(2000),
+    &quot;members&quot; : [
+            {
+                    &quot;_id&quot; : 0,
+                    &quot;name&quot; : &quot;&lt;IP&gt;:&lt;PORT&gt;,
+                    &quot;health&quot; : 1,
+                    &quot;state&quot; : 1,
+                    &quot;stateStr&quot; : &quot;PRIMARY&quot;,
+                    &quot;uptime&quot; : 5953744,
+                    &quot;optime&quot; : Timestamp(1474875364, 36),
+                    &quot;optimeDate&quot; : ISODate(&quot;2016-09-26T07:36:04Z&quot;),
+                    &quot;electionTime&quot; : Timestamp(1468921646, 1),
+                    &quot;electionDate&quot; : ISODate(&quot;2016-07-19T09:47:26Z&quot;),
+                    &quot;configVersion&quot; : 6,
+                    &quot;self&quot; : true
+            },
+            {
+                    &quot;_id&quot; : 1,
+                    &quot;name&quot; : &quot;&lt;IP&gt;:&lt;PORT&gt;&quot;,
+                    &quot;health&quot; : 1,
+                    &quot;state&quot; : 2,
+                    &quot;stateStr&quot; : &quot;SECONDARY&quot;,
+                    &quot;uptime&quot; : 5953720,
+                    &quot;optime&quot; : Timestamp(1474875364, 13),
+                    &quot;optimeDate&quot; : ISODate(&quot;2016-09-26T07:36:04Z&quot;),
+                    &quot;lastHeartbeat&quot; : ISODate(&quot;2016-09-26T07:36:04.244Z&quot;),
+                    &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2016-09-26T07:36:03.871Z&quot;),
+                    &quot;pingMs&quot; : NumberLong(0),
+                    &quot;syncingTo&quot; : &quot;10.9.52.55:10050&quot;,
+                    &quot;configVersion&quot; : 6
+            },
+            {
+                    &quot;_id&quot; : 2,
+                    &quot;name&quot; : &quot;&lt;IP&gt;:&lt;PORT&gt;&quot;,
+                    &quot;health&quot; : 1,
+                    &quot;state&quot; : 7,
+                    &quot;stateStr&quot; : &quot;ARBITER&quot;,
+                    &quot;uptime&quot; : 5953696,
+                    &quot;lastHeartbeat&quot; : ISODate(&quot;2016-09-26T07:36:03.183Z&quot;),
+                    &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2016-09-26T07:36:03.715Z&quot;),
+                    &quot;pingMs&quot; : NumberLong(0),
+                    &quot;configVersion&quot; : 6
+            },
+            {
+                    &quot;_id&quot; : 3,
+                    &quot;name&quot; : &quot;&lt;IP&gt;:&lt;PORT&gt;&quot;,
+                    &quot;health&quot; : 1,
+                    &quot;state&quot; : 2,
+                    &quot;stateStr&quot; : &quot;SECONDARY&quot;,
+                    &quot;uptime&quot; : 1984305,
+                    &quot;optime&quot; : Timestamp(1474875361, 16),
+                    &quot;optimeDate&quot; : ISODate(&quot;2016-09-26T07:36:01Z&quot;),
+                    &quot;lastHeartbeat&quot; : ISODate(&quot;2016-09-26T07:36:02.921Z&quot;),
+                    &quot;lastHeartbeatRecv&quot; : ISODate(&quot;2016-09-26T07:36:03.793Z&quot;),
+                    &quot;pingMs&quot; : NumberLong(22),
+                    &quot;lastHeartbeatMessage&quot; : &quot;syncing from: 10.9.52.56:10050&quot;,
+                    &quot;syncingTo&quot; : &quot;10.9.52.56:10050&quot;,
+                    &quot;configVersion&quot; : 6
+            }
+    ],
+    &quot;ok&quot; : 1
+    }
+
+</code></pre></div><p>From the above we can know the entire replica set status</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/mongodb/mongo-as-a-replica-set.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/mongodb/replication.html" class="prev">
+        Replication
+      </a></span> <span class="next"><a href="/mongodb/mongodb-configure-a-replicaset-to-support-tls-ssl.html">
+        MongoDB - Configure a ReplicaSet to support TLS/SSL
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1957.96caccd1.js" defer></script>
+  </body>
+</html>

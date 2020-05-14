@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Oracle Database - Object Types</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Accessing stored objects, BASE_TYPE, MID_TYPE, LEAF_TYPE">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Oracle Database - Object Types">
+    <meta property="og:description" content="Accessing stored objects, BASE_TYPE, MID_TYPE, LEAF_TYPE">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/oracle/object-types.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Oracle Database - Object Types">
+    <meta name="twitter:description" content="Accessing stored objects, BASE_TYPE, MID_TYPE, LEAF_TYPE">
+    <meta name="twitter:url" content="/oracle/object-types.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2357.227876ff.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Oracle Database</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/oracle/" class="sidebar-link">Disclaimer</a></li><li><a href="/oracle/getting-started-with-oracle-database.html" class="sidebar-link">Getting started with Oracle Database</a></li><li><a href="/oracle/anonymous-pl-sql-block.html" class="sidebar-link">Anonymous PL/SQL Block</a></li><li><a href="/oracle/data-dictionary.html" class="sidebar-link">Data Dictionary</a></li><li><a href="/oracle/dates.html" class="sidebar-link">Dates</a></li><li><a href="/oracle/working-with-dates.html" class="sidebar-link">Working with Dates</a></li><li><a href="/oracle/dual-table.html" class="sidebar-link">DUAL table</a></li><li><a href="/oracle/joins.html" class="sidebar-link">JOINS</a></li><li><a href="/oracle/handling-null-values.html" class="sidebar-link">Handling NULL values</a></li><li><a href="/oracle/string-manipulation.html" class="sidebar-link">String Manipulation</a></li><li><a href="/oracle/limiting-the-rows-returned-by-a-query-pagination.html" class="sidebar-link">Limiting the rows returned by a query (Pagination)</a></li><li><a href="/oracle/recursive-sub-query-factoring-using-the-with-clause-a-k-a-common-table-expressions.html" class="sidebar-link">Recursive Sub-Query Factoring using the WITH Clause (A.K.A. Common Table Expressions)</a></li><li><a href="/oracle/different-ways-to-update-records.html" class="sidebar-link">Different ways to update records</a></li><li><a href="/oracle/update-with-joins.html" class="sidebar-link">Update with Joins</a></li><li><a href="/oracle/statistical-functions.html" class="sidebar-link">Statistical functions</a></li><li><a href="/oracle/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/oracle/creating-a-context.html" class="sidebar-link">Creating a Context</a></li><li><a href="/oracle/splitting-delimited-strings.html" class="sidebar-link">Splitting Delimited Strings</a></li><li><a href="/oracle/sequences.html" class="sidebar-link">Sequences</a></li><li><a href="/oracle/indexes.html" class="sidebar-link">Indexes</a></li><li><a href="/oracle/hints.html" class="sidebar-link">Hints</a></li><li><a href="/oracle/error-logging.html" class="sidebar-link">Error logging</a></li><li><a href="/oracle/database-links.html" class="sidebar-link">Database Links</a></li><li><a href="/oracle/table-partitioning.html" class="sidebar-link">Table partitioning</a></li><li><a href="/oracle/oracle-advanced-queuing-aq.html" class="sidebar-link">Oracle Advanced Queuing (AQ)</a></li><li><a href="/oracle/constraints.html" class="sidebar-link">constraints</a></li><li><a href="/oracle/autonomous-transactions.html" class="sidebar-link">Autonomous Transactions</a></li><li><a href="/oracle/oracle-maf.html" class="sidebar-link">Oracle MAF</a></li><li><a href="/oracle/level-query.html" class="sidebar-link">level query</a></li><li><a href="/oracle/hierarchical-retrieval-with-oracle-database-12c.html" class="sidebar-link">Hierarchical Retrieval With Oracle Database 12C</a></li><li><a href="/oracle/data-pump.html" class="sidebar-link">Data Pump</a></li><li><a href="/oracle/real-application-security.html" class="sidebar-link">Real Application Security</a></li><li><a href="/oracle/dynamic-sql.html" class="sidebar-link">Dynamic SQL</a></li><li><a href="/oracle/delimiting-keywords-or-special-characters.html" class="sidebar-link">Delimiting keywords or special characters</a></li><li><a href="/oracle/getting-started-with-plsql.html" class="sidebar-link">Getting started with plsql</a></li><li><a href="/oracle/plsql-procedure.html" class="sidebar-link">PLSQL procedure</a></li><li><a href="/oracle/if-then-else-statement.html" class="sidebar-link">IF-THEN-ELSE Statement</a></li><li><a href="/oracle/functions.html" class="sidebar-link">Functions</a></li><li><a href="/oracle/collections-and-records.html" class="sidebar-link">Collections and Records</a></li><li><a href="/oracle/object-types.html" class="active sidebar-link">Object Types</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/oracle/object-types.html#accessing-stored-objects" class="sidebar-link">Accessing stored objects</a></li><li class="sidebar-sub-header"><a href="/oracle/object-types.html#base-type" class="sidebar-link">BASE_TYPE</a></li><li class="sidebar-sub-header"><a href="/oracle/object-types.html#mid-type" class="sidebar-link">MID_TYPE</a></li><li class="sidebar-sub-header"><a href="/oracle/object-types.html#leaf-type" class="sidebar-link">LEAF_TYPE</a></li></ul></li><li><a href="/oracle/loop.html" class="sidebar-link">Loop</a></li><li><a href="/oracle/cursors.html" class="sidebar-link">Cursors</a></li><li><a href="/oracle/packages.html" class="sidebar-link">Packages</a></li><li><a href="/oracle/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/oracle/bulk-collect.html" class="sidebar-link">Bulk collect</a></li><li><a href="/oracle/assignments-model-and-language.html" class="sidebar-link">Assignments model and language</a></li><li><a href="/oracle/triggers.html" class="sidebar-link">Triggers</a></li><li><a href="/oracle/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/oracle/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="object-types"><a href="#object-types" class="header-anchor">#</a> Object Types</h1> <h2 id="accessing-stored-objects"><a href="#accessing-stored-objects" class="header-anchor">#</a> Accessing stored objects</h2> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> SEQUENCE test_seq <span class="token keyword">START</span> <span class="token keyword">WITH</span> <span class="token number">1001</span><span class="token punctuation">;</span>
+
+<span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> test_tab
+<span class="token punctuation">(</span>
+   test_id  <span class="token keyword">INTEGER</span><span class="token punctuation">,</span>
+   test_obj base_type<span class="token punctuation">,</span>
+   <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span> <span class="token punctuation">(</span>test_id<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> test_tab <span class="token punctuation">(</span>test_id<span class="token punctuation">,</span> test_obj<span class="token punctuation">)</span>
+<span class="token keyword">VALUES</span> <span class="token punctuation">(</span>test_seq<span class="token punctuation">.</span>nextval<span class="token punctuation">,</span> base_type<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'BASE_TYPE'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> test_tab <span class="token punctuation">(</span>test_id<span class="token punctuation">,</span> test_obj<span class="token punctuation">)</span>
+<span class="token keyword">VALUES</span> <span class="token punctuation">(</span>test_seq<span class="token punctuation">.</span>nextval<span class="token punctuation">,</span> base_type<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'BASE_TYPE'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> test_tab <span class="token punctuation">(</span>test_id<span class="token punctuation">,</span> test_obj<span class="token punctuation">)</span>
+<span class="token keyword">VALUES</span> <span class="token punctuation">(</span>test_seq<span class="token punctuation">.</span>nextval<span class="token punctuation">,</span> mid_type<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'MID_TYPE'</span><span class="token punctuation">,</span>SYSDATE <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> test_tab <span class="token punctuation">(</span>test_id<span class="token punctuation">,</span> test_obj<span class="token punctuation">)</span>
+<span class="token keyword">VALUES</span> <span class="token punctuation">(</span>test_seq<span class="token punctuation">.</span>nextval<span class="token punctuation">,</span> mid_type<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'MID_TYPE'</span><span class="token punctuation">,</span>SYSDATE <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> test_tab <span class="token punctuation">(</span>test_id<span class="token punctuation">,</span> test_obj<span class="token punctuation">)</span>
+<span class="token keyword">VALUES</span> <span class="token punctuation">(</span>test_seq<span class="token punctuation">.</span>nextval<span class="token punctuation">,</span> leaf_type<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'LEAF_TYPE'</span><span class="token punctuation">,</span>SYSDATE <span class="token operator">-</span> <span class="token number">20</span><span class="token punctuation">,</span><span class="token string">'Maple'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> test_tab <span class="token punctuation">(</span>test_id<span class="token punctuation">,</span> test_obj<span class="token punctuation">)</span>
+<span class="token keyword">VALUES</span> <span class="token punctuation">(</span>test_seq<span class="token punctuation">.</span>nextval<span class="token punctuation">,</span> leaf_type<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token string">'LEAF_TYPE'</span><span class="token punctuation">,</span>SYSDATE <span class="token operator">+</span> <span class="token number">20</span><span class="token punctuation">,</span><span class="token string">'Oak'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Returns object reference:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> test_id
+      <span class="token punctuation">,</span>test_obj
+  <span class="token keyword">FROM</span> test_tab<span class="token punctuation">;</span>
+
+</code></pre></div><p>Returns object reference, pushing all to subtype</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> test_id
+      <span class="token punctuation">,</span>TREAT<span class="token punctuation">(</span>test_obj <span class="token keyword">AS</span> mid_type<span class="token punctuation">)</span> <span class="token keyword">AS</span> obj
+  <span class="token keyword">FROM</span> test_tab<span class="token punctuation">;</span>
+
+</code></pre></div><p>Returns a string descriptor of each object, by type</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> test_id
+      <span class="token punctuation">,</span>TREAT<span class="token punctuation">(</span>test_obj <span class="token keyword">AS</span> base_type<span class="token punctuation">)</span><span class="token punctuation">.</span>to_string<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> to_string <span class="token comment">-- Parenthesis are needed after the function name, or Oracle will look for an attribute of this name.</span>
+  <span class="token keyword">FROM</span> test_tab<span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="base-type"><a href="#base-type" class="header-anchor">#</a> BASE_TYPE</h2> <p>Type declaration:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">TYPE</span> base_type <span class="token keyword">AS</span> OBJECT
+<span class="token punctuation">(</span>
+   base_id     <span class="token keyword">INTEGER</span><span class="token punctuation">,</span>
+   base_attr   VARCHAR2<span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+   null_attr   <span class="token keyword">INTEGER</span><span class="token punctuation">,</span> <span class="token comment">-- Present only to demonstrate non-default constructors</span>
+   CONSTRUCTOR <span class="token keyword">FUNCTION</span> base_type
+   <span class="token punctuation">(</span>
+      i_base_id <span class="token keyword">INTEGER</span><span class="token punctuation">,</span>
+      i_base_attr VARCHAR2
+   <span class="token punctuation">)</span> <span class="token keyword">RETURN</span> SELF <span class="token keyword">AS</span> RESULT<span class="token punctuation">,</span>
+   MEMBER <span class="token keyword">FUNCTION</span> get_base_id <span class="token keyword">RETURN</span> <span class="token keyword">INTEGER</span><span class="token punctuation">,</span>
+   MEMBER <span class="token keyword">FUNCTION</span> get_base_attr <span class="token keyword">RETURN</span> VARCHAR2<span class="token punctuation">,</span>
+   MEMBER <span class="token keyword">PROCEDURE</span> set_base_id<span class="token punctuation">(</span>i_base_id <span class="token keyword">INTEGER</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+   MEMBER <span class="token keyword">PROCEDURE</span> set_base_attr<span class="token punctuation">(</span>i_base_attr VARCHAR2<span class="token punctuation">)</span><span class="token punctuation">,</span>
+   MEMBER <span class="token keyword">FUNCTION</span> to_string <span class="token keyword">RETURN</span> VARCHAR2
+<span class="token punctuation">)</span> INSTANTIABLE <span class="token operator">NOT</span> FINAL
+
+</code></pre></div><p>Type body:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">TYPE</span> BODY base_type <span class="token keyword">AS</span>
+   CONSTRUCTOR <span class="token keyword">FUNCTION</span> base_type
+   <span class="token punctuation">(</span>
+      i_base_id <span class="token keyword">INTEGER</span><span class="token punctuation">,</span>
+      i_base_attr VARCHAR2
+   <span class="token punctuation">)</span> <span class="token keyword">RETURN</span> SELF <span class="token keyword">AS</span> RESULT
+   <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      self<span class="token punctuation">.</span>base_id :<span class="token operator">=</span> i_base_id<span class="token punctuation">;</span>
+      self<span class="token punctuation">.</span>base_attr :<span class="token operator">=</span> i_base_attr<span class="token punctuation">;</span>
+      <span class="token keyword">RETURN</span><span class="token punctuation">;</span>
+   <span class="token keyword">END</span> base_type<span class="token punctuation">;</span>
+
+   MEMBER <span class="token keyword">FUNCTION</span> get_base_id <span class="token keyword">RETURN</span> <span class="token keyword">INTEGER</span> <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      <span class="token keyword">RETURN</span> self<span class="token punctuation">.</span>base_id<span class="token punctuation">;</span>
+   <span class="token keyword">END</span> get_base_id<span class="token punctuation">;</span>
+
+   MEMBER <span class="token keyword">FUNCTION</span> get_base_attr <span class="token keyword">RETURN</span> VARCHAR2 <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      <span class="token keyword">RETURN</span> self<span class="token punctuation">.</span>base_attr<span class="token punctuation">;</span>
+   <span class="token keyword">END</span> get_base_attr<span class="token punctuation">;</span>
+
+   MEMBER <span class="token keyword">PROCEDURE</span> set_base_id<span class="token punctuation">(</span>i_base_id <span class="token keyword">INTEGER</span><span class="token punctuation">)</span> <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      self<span class="token punctuation">.</span>base_id :<span class="token operator">=</span> i_base_id<span class="token punctuation">;</span>
+   <span class="token keyword">END</span> set_base_id<span class="token punctuation">;</span>
+
+   MEMBER <span class="token keyword">PROCEDURE</span> set_base_attr<span class="token punctuation">(</span>i_base_attr VARCHAR2<span class="token punctuation">)</span> <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      self<span class="token punctuation">.</span>base_attr :<span class="token operator">=</span> i_base_attr<span class="token punctuation">;</span>
+   <span class="token keyword">END</span> set_base_attr<span class="token punctuation">;</span>
+
+   MEMBER <span class="token keyword">FUNCTION</span> to_string <span class="token keyword">RETURN</span> VARCHAR2 <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      <span class="token keyword">RETURN</span> <span class="token string">'BASE_ID ['</span><span class="token operator">||</span>self<span class="token punctuation">.</span>base_id<span class="token operator">||</span><span class="token string">']; BASE_ATTR ['</span><span class="token operator">||</span>self<span class="token punctuation">.</span>base_attr<span class="token operator">||</span><span class="token string">']'</span><span class="token punctuation">;</span>
+   <span class="token keyword">END</span> to_string<span class="token punctuation">;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="mid-type"><a href="#mid-type" class="header-anchor">#</a> MID_TYPE</h2> <p>Type declaration:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">TYPE</span> mid_type UNDER base_type
+<span class="token punctuation">(</span>
+   mid_attr <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+   CONSTRUCTOR <span class="token keyword">FUNCTION</span> mid_type
+   <span class="token punctuation">(</span>
+      i_base_id   <span class="token keyword">INTEGER</span><span class="token punctuation">,</span>
+      i_base_attr VARCHAR2<span class="token punctuation">,</span>
+      i_mid_attr  <span class="token keyword">DATE</span>
+   <span class="token punctuation">)</span> <span class="token keyword">RETURN</span> SELF <span class="token keyword">AS</span> RESULT<span class="token punctuation">,</span>
+   MEMBER <span class="token keyword">FUNCTION</span> get_mid_attr <span class="token keyword">RETURN</span> <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+   MEMBER <span class="token keyword">PROCEDURE</span> set_mid_attr<span class="token punctuation">(</span>i_mid_attr <span class="token keyword">DATE</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+   OVERRIDING MEMBER <span class="token keyword">FUNCTION</span> to_string <span class="token keyword">RETURN</span> VARCHAR2
+<span class="token punctuation">)</span> INSTANTIABLE <span class="token operator">NOT</span> FINAL
+
+</code></pre></div><p>Type body:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">TYPE</span> BODY mid_type <span class="token keyword">AS</span>
+   CONSTRUCTOR <span class="token keyword">FUNCTION</span> mid_type
+   <span class="token punctuation">(</span>
+      i_base_id   <span class="token keyword">INTEGER</span><span class="token punctuation">,</span>
+      i_base_attr VARCHAR2<span class="token punctuation">,</span>
+      i_mid_attr  <span class="token keyword">DATE</span>
+   <span class="token punctuation">)</span> <span class="token keyword">RETURN</span> SELF <span class="token keyword">AS</span> RESULT
+   <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      self<span class="token punctuation">.</span>base_id :<span class="token operator">=</span> i_base_id<span class="token punctuation">;</span>
+      self<span class="token punctuation">.</span>base_attr :<span class="token operator">=</span> i_base_attr<span class="token punctuation">;</span>
+      self<span class="token punctuation">.</span>mid_attr :<span class="token operator">=</span> i_mid_attr<span class="token punctuation">;</span>
+      <span class="token keyword">RETURN</span><span class="token punctuation">;</span>
+   <span class="token keyword">END</span> mid_type<span class="token punctuation">;</span>
+
+   MEMBER <span class="token keyword">FUNCTION</span> get_mid_attr <span class="token keyword">RETURN</span> <span class="token keyword">DATE</span> <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      <span class="token keyword">RETURN</span> self<span class="token punctuation">.</span>mid_attr<span class="token punctuation">;</span>
+   <span class="token keyword">END</span> get_mid_attr<span class="token punctuation">;</span>
+
+   MEMBER <span class="token keyword">PROCEDURE</span> set_mid_attr<span class="token punctuation">(</span>i_mid_attr <span class="token keyword">DATE</span><span class="token punctuation">)</span> <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      self<span class="token punctuation">.</span>mid_attr :<span class="token operator">=</span> i_mid_attr<span class="token punctuation">;</span>
+   <span class="token keyword">END</span> set_mid_attr<span class="token punctuation">;</span>
+
+   OVERRIDING MEMBER <span class="token keyword">FUNCTION</span> to_string <span class="token keyword">RETURN</span> VARCHAR2
+   <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      <span class="token keyword">RETURN</span> <span class="token punctuation">(</span>SELF <span class="token keyword">AS</span> base_type<span class="token punctuation">)</span><span class="token punctuation">.</span>to_string <span class="token operator">||</span> <span class="token string">'; MID_ATTR ['</span> <span class="token operator">||</span> self<span class="token punctuation">.</span>mid_attr <span class="token operator">||</span> <span class="token string">']'</span><span class="token punctuation">;</span>
+   <span class="token keyword">END</span> to_string<span class="token punctuation">;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="leaf-type"><a href="#leaf-type" class="header-anchor">#</a> LEAF_TYPE</h2> <p>Type declaration:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">TYPE</span> leaf_type UNDER mid_type
+<span class="token punctuation">(</span>
+   leaf_attr VARCHAR2<span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+   CONSTRUCTOR <span class="token keyword">FUNCTION</span> leaf_type
+   <span class="token punctuation">(</span>
+      i_base_id   <span class="token keyword">INTEGER</span><span class="token punctuation">,</span>
+      i_base_attr VARCHAR2<span class="token punctuation">,</span>
+      i_mid_attr  <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+      i_leaf_attr VARCHAR2
+   <span class="token punctuation">)</span> <span class="token keyword">RETURN</span> SELF <span class="token keyword">AS</span> RESULT<span class="token punctuation">,</span>
+   MEMBER <span class="token keyword">FUNCTION</span> get_leaf_attr <span class="token keyword">RETURN</span> VARCHAR2<span class="token punctuation">,</span>
+   MEMBER <span class="token keyword">PROCEDURE</span> set_leaf_attr<span class="token punctuation">(</span>i_leaf_attr VARCHAR2<span class="token punctuation">)</span><span class="token punctuation">,</span>
+   OVERRIDING MEMBER <span class="token keyword">FUNCTION</span> to_string <span class="token keyword">RETURN</span> VARCHAR2
+<span class="token punctuation">)</span> INSTANTIABLE FINAL
+
+</code></pre></div><p>Type Body:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">CREATE</span> <span class="token operator">OR</span> <span class="token keyword">REPLACE</span> <span class="token keyword">TYPE</span> BODY leaf_type <span class="token keyword">AS</span>
+   CONSTRUCTOR <span class="token keyword">FUNCTION</span> leaf_type
+   <span class="token punctuation">(</span>
+      i_base_id   <span class="token keyword">INTEGER</span><span class="token punctuation">,</span>
+      i_base_attr VARCHAR2<span class="token punctuation">,</span>
+      i_mid_attr  <span class="token keyword">DATE</span><span class="token punctuation">,</span>
+      i_leaf_attr VARCHAR2
+   <span class="token punctuation">)</span> <span class="token keyword">RETURN</span> SELF <span class="token keyword">AS</span> RESULT
+   <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      self<span class="token punctuation">.</span>base_id :<span class="token operator">=</span> i_base_id<span class="token punctuation">;</span>
+      self<span class="token punctuation">.</span>base_attr :<span class="token operator">=</span> i_base_attr<span class="token punctuation">;</span>
+      self<span class="token punctuation">.</span>mid_attr :<span class="token operator">=</span> i_mid_attr<span class="token punctuation">;</span>
+      self<span class="token punctuation">.</span>leaf_attr :<span class="token operator">=</span> i_leaf_attr<span class="token punctuation">;</span>
+      <span class="token keyword">RETURN</span><span class="token punctuation">;</span>
+   <span class="token keyword">END</span> leaf_type<span class="token punctuation">;</span>
+
+   MEMBER <span class="token keyword">FUNCTION</span> get_leaf_attr <span class="token keyword">RETURN</span> VARCHAR2 <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      <span class="token keyword">RETURN</span> self<span class="token punctuation">.</span>leaf_attr<span class="token punctuation">;</span>
+   <span class="token keyword">END</span> get_leaf_attr<span class="token punctuation">;</span>
+
+   MEMBER <span class="token keyword">PROCEDURE</span> set_leaf_attr<span class="token punctuation">(</span>i_leaf_attr VARCHAR2<span class="token punctuation">)</span> <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      self<span class="token punctuation">.</span>leaf_attr :<span class="token operator">=</span> i_leaf_attr<span class="token punctuation">;</span>
+   <span class="token keyword">END</span> set_leaf_attr<span class="token punctuation">;</span>
+
+   OVERRIDING MEMBER <span class="token keyword">FUNCTION</span> to_string <span class="token keyword">RETURN</span> VARCHAR2 <span class="token operator">IS</span>
+   <span class="token keyword">BEGIN</span>
+      <span class="token keyword">RETURN</span> <span class="token punctuation">(</span>SELF <span class="token keyword">AS</span> mid_type<span class="token punctuation">)</span><span class="token punctuation">.</span>to_string <span class="token operator">||</span> <span class="token string">'; LEAF_ATTR ['</span> <span class="token operator">||</span> self<span class="token punctuation">.</span>leaf_attr <span class="token operator">||</span> <span class="token string">']'</span><span class="token punctuation">;</span>
+   <span class="token keyword">END</span> to_string<span class="token punctuation">;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>It is important to note that an object body may not always be necessary. If the default constructor is sufficient, and no other functionality needs to be implemented then it should not be created.</p> <p>A default constructor is the Oracle supplied constructor, which consists of all attributes listed in order of declaration. For example, an instance of BASE_TYPE could be constructed by the following call, even though we do not explicitly declare it.</p> <div class="language-sql extra-class"><pre class="language-sql"><code>l_obj :<span class="token operator">=</span> BASE_TYPE<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'Default'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/oracle/object-types.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/oracle/collections-and-records.html" class="prev">
+        Collections and Records
+      </a></span> <span class="next"><a href="/oracle/loop.html">
+        Loop
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2357.227876ff.js" defer></script>
+  </body>
+</html>

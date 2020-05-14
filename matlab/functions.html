@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MATLAB - Functions</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="nargin, nargout, Base example, Multiple outputs">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="MATLAB - Functions">
+    <meta property="og:description" content="nargin, nargout, Base example, Multiple outputs">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/matlab/functions.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="MATLAB - Functions">
+    <meta name="twitter:description" content="nargin, nargout, Base example, Multiple outputs">
+    <meta name="twitter:url" content="/matlab/functions.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1917.f3e93b0e.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>MATLAB</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matlab/" class="sidebar-link">Disclaimer</a></li><li><a href="/matlab/getting-started-with-matlab-language.html" class="sidebar-link">Getting started with MATLAB Language</a></li><li><a href="/matlab/initializing-matrices-or-arrays.html" class="sidebar-link">Initializing Matrices or arrays</a></li><li><a href="/matlab/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/matlab/functions.html" class="active sidebar-link">Functions</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/matlab/functions.html#nargin-nargout" class="sidebar-link">nargin, nargout</a></li><li class="sidebar-sub-header"><a href="/matlab/functions.html#base-example" class="sidebar-link">Base example</a></li><li class="sidebar-sub-header"><a href="/matlab/functions.html#multiple-outputs" class="sidebar-link">Multiple outputs</a></li></ul></li><li><a href="/matlab/set-operations.html" class="sidebar-link">Set operations</a></li><li><a href="/matlab/documenting-functions.html" class="sidebar-link">Documenting functions</a></li><li><a href="/matlab/using-functions-with-logical-output.html" class="sidebar-link">Using functions with logical output</a></li><li><a href="/matlab/for-loops.html" class="sidebar-link">For loops</a></li><li><a href="/matlab/object-oriented-programming.html" class="sidebar-link">Object-Oriented Programming</a></li><li><a href="/matlab/vectorization.html" class="sidebar-link">Vectorization</a></li><li><a href="/matlab/matrix-decompositions.html" class="sidebar-link">Matrix decompositions</a></li><li><a href="/matlab/graphics-2d-line-plots.html" class="sidebar-link">Graphics: 2D Line Plots</a></li><li><a href="/matlab/graphics-2d-and-3d-transformations.html" class="sidebar-link">Graphics: 2D and 3D Transformations</a></li><li><a href="/matlab/controlling-subplot-coloring-in-matlab.html" class="sidebar-link">Controlling Subplot coloring in Matlab</a></li><li><a href="/matlab/image-processing.html" class="sidebar-link">Image processing</a></li><li><a href="/matlab/drawing.html" class="sidebar-link">Drawing</a></li><li><a href="/matlab/financial-applications.html" class="sidebar-link">Financial Applications</a></li><li><a href="/matlab/fourier-transforms-and-inverse-fourier-transforms.html" class="sidebar-link">Fourier Transforms and Inverse Fourier Transforms</a></li><li><a href="/matlab/ordinary-differential-equations-ode-solvers.html" class="sidebar-link">Ordinary Differential Equations (ODE) Solvers</a></li><li><a href="/matlab/interpolation-with-matlab.html" class="sidebar-link">Interpolation with MATLAB</a></li><li><a href="/matlab/integration.html" class="sidebar-link">Integration</a></li><li><a href="/matlab/reading-large-files.html" class="sidebar-link">Reading large files</a></li><li><a href="/matlab/usage-of-accumarray-function.html" class="sidebar-link">Usage of accumarray() Function</a></li><li><a href="/matlab/introduction-to-mex-api.html" class="sidebar-link">Introduction to MEX API</a></li><li><a href="/matlab/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/matlab/performance-and-benchmarking.html" class="sidebar-link">Performance and Benchmarking</a></li><li><a href="/matlab/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/matlab/using-serial-ports.html" class="sidebar-link">Using serial ports</a></li><li><a href="/matlab/undocumented-features.html" class="sidebar-link">Undocumented Features</a></li><li><a href="/matlab/matlab-best-practices.html" class="sidebar-link">MATLAB Best Practices</a></li><li><a href="/matlab/matlab-user-interfaces.html" class="sidebar-link">MATLAB User Interfaces</a></li><li><a href="/matlab/useful-tricks.html" class="sidebar-link">Useful tricks</a></li><li><a href="/matlab/common-mistakes-and-errors.html" class="sidebar-link">Common mistakes and errors</a></li><li><a href="/matlab/programming-utilities.html" class="sidebar-link">Programming Utilities</a></li><li><a href="/matlab/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="functions"><a href="#functions" class="header-anchor">#</a> Functions</h1> <h2 id="nargin-nargout"><a href="#nargin-nargout" class="header-anchor">#</a> nargin, nargout</h2> <p>In the body of a function <code>nargin</code> and <code>nargout</code> indicate respectively the actual number of input and output supplied in the call.</p> <p>We can for example control the execution of a function based on the number of provided input.</p> <p><strong>myVector.m</strong>:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token keyword">function</span> <span class="token punctuation">[</span>res<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">myVector</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">)</span>
+    <span class="token comment">% Roughly emulates the colon operator</span>
+
+    <span class="token keyword">switch</span> nargin
+        <span class="token keyword">case</span> <span class="token number">1</span>
+            res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">:</span>a<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">2</span>
+            res <span class="token operator">=</span> <span class="token punctuation">[</span>a<span class="token operator">:</span>b<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token number">3</span>
+            res <span class="token operator">=</span> <span class="token punctuation">[</span>a<span class="token operator">:</span>b<span class="token operator">:</span>c<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">otherwise</span>
+            <span class="token function">error</span><span class="token punctuation">(</span><span class="token string">'Wrong number of params'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p><strong>terminal:</strong></p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token operator">&gt;</span><span class="token operator">&gt;</span> <span class="token function">myVector</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+
+ans <span class="token operator">=</span>
+
+    <span class="token number">0</span>    <span class="token number">1</span>    <span class="token number">2</span>    <span class="token number">3</span>    <span class="token number">4</span>    <span class="token number">5</span>    <span class="token number">6</span>    <span class="token number">7</span>    <span class="token number">8</span>    <span class="token number">9</span>   <span class="token number">10</span>
+
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> <span class="token function">myVector</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span>
+
+ans <span class="token operator">=</span>
+
+   <span class="token number">10</span>   <span class="token number">11</span>   <span class="token number">12</span>   <span class="token number">13</span>   <span class="token number">14</span>   <span class="token number">15</span>   <span class="token number">16</span>   <span class="token number">17</span>   <span class="token number">18</span>   <span class="token number">19</span>   <span class="token number">20</span>
+
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> <span class="token function">myVector</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span>
+
+ans <span class="token operator">=</span>
+
+   <span class="token number">10</span>   <span class="token number">12</span>   <span class="token number">14</span>   <span class="token number">16</span>   <span class="token number">18</span>   <span class="token number">20</span>
+
+</code></pre></div><p>In a similar way we can control the execution of a function based on the number of output parameters.</p> <p><strong>myIntegerDivision</strong>:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token keyword">function</span> <span class="token punctuation">[</span>qt<span class="token punctuation">,</span> rm<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">myIntegerDivision</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span>
+    qt <span class="token operator">=</span> <span class="token function">floor</span><span class="token punctuation">(</span>a <span class="token operator">/</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span> nargout <span class="token operator">==</span> <span class="token number">2</span>
+        rm <span class="token operator">=</span> <span class="token function">rem</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p><strong>terminal</strong>:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token operator">&gt;</span><span class="token operator">&gt;</span> q <span class="token operator">=</span> <span class="token function">myIntegerDivision</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span>
+
+q <span class="token operator">=</span> <span class="token number">1</span>
+
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> <span class="token punctuation">[</span>q<span class="token punctuation">,</span> r<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">myIntegerDivision</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span>
+
+q <span class="token operator">=</span> <span class="token number">1</span>
+r <span class="token operator">=</span> <span class="token number">3</span>
+
+</code></pre></div><h2 id="base-example"><a href="#base-example" class="header-anchor">#</a> Base example</h2> <p>The following MATLAB script shows how to define and call a basic function:</p> <p><strong>myFun.m</strong>:</p> <div class="language- extra-class"><pre class="language-text"><code>
+   function [out1] = myFun(arg0, arg1)
+        out1 = arg0 + arg1;
+    end
+
+</code></pre></div><p><strong>terminal</strong>:</p> <div class="language- extra-class"><pre class="language-text"><code>
+   &gt;&gt; res = myFun(10, 20)
+
+    res =
+
+        30
+
+</code></pre></div><h2 id="multiple-outputs"><a href="#multiple-outputs" class="header-anchor">#</a> Multiple outputs</h2> <p>The following MATLAB script shows how to return multiple outputs in a single function:</p> <p><strong>myFun.m</strong>:</p> <div class="language- extra-class"><pre class="language-text"><code>
+   function [out1, out2, out3] = myFun(arg0, arg1)
+        out1 = arg0 + arg1;
+        out2 = arg0 * arg1;
+        out3 = arg0 - arg1;
+    end
+
+</code></pre></div><p><strong>terminal</strong>:</p> <div class="language- extra-class"><pre class="language-text"><code>
+   &gt;&gt; [res1, res2, res3] = myFun(10, 20)
+
+    res1 =
+
+            30
+
+    res2 =
+
+            200
+
+    res3 =
+            -10
+
+</code></pre></div><p>However MATLAB will return only the first value when assigned to a single variable</p> <div class="language- extra-class"><pre class="language-text"><code>
+   &gt;&gt; res = myFun(10, 20)
+
+    res =
+
+            30
+
+</code></pre></div><p>The following example shows how to get a specific output</p> <div class="language- extra-class"><pre class="language-text"><code>
+   &gt;&gt; [~, res] = myFun(10, 20)
+
+    res =
+
+            200
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/matlab/functions.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matlab/conditions.html" class="prev">
+        Conditions
+      </a></span> <span class="next"><a href="/matlab/set-operations.html">
+        Set operations
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1917.f3e93b0e.js" defer></script>
+  </body>
+</html>

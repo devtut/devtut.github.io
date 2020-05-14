@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - WinForms SpellCheckBox</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="ElementHost WPF TextBox">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - WinForms SpellCheckBox">
+    <meta property="og:description" content="ElementHost WPF TextBox">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/winforms-spellcheckbox.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - WinForms SpellCheckBox">
+    <meta name="twitter:description" content="ElementHost WPF TextBox">
+    <meta name="twitter:url" content="/vbnet/winforms-spellcheckbox.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3497.3fb1d9b5.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="sidebar-link">Introduction to Syntax</a></li><li><a href="/vbnet/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="sidebar-link">Looping</a></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="sidebar-link">ByVal and ByRef keywords</a></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="sidebar-link">Extension methods</a></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="sidebar-link">Visual Basic 14.0 Features</a></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="sidebar-link">Google Maps in a Windows Form</a></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="active sidebar-link">WinForms SpellCheckBox</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/winforms-spellcheckbox.html#elementhost-wpf-textbox" class="sidebar-link">ElementHost WPF TextBox</a></li></ul></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="sidebar-link">Task-based asynchronous pattern</a></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="winforms-spellcheckbox"><a href="#winforms-spellcheckbox" class="header-anchor">#</a> WinForms SpellCheckBox</h1> <p>Example on how to add a spell check box to a WindowsForms application.  This example DOES NOT require Word to be installed nor does it use Word in any way.</p> <p>It uses WPF Interop using the ElementHost control to create a WPF UserControl from a WPF TextBox.  WPF TextBox has a built in function for spell check.  We are going to leverage this built in function rather than relying on an external program.</p> <h2 id="elementhost-wpf-textbox"><a href="#elementhost-wpf-textbox" class="header-anchor">#</a> ElementHost WPF TextBox</h2> <p>This example is was modeled after an example that I found on the internet.  I can't find the link or I would give the author credit.  I took the sample that I found and modified it to work for my application.</p> <ol><li>Add the following references:</li></ol> <blockquote></blockquote> <p>System.Xaml, PresentationCore, PresentationFramework, WindowsBase, and WindowsFormsIntegration</p> <li>
+Create a new Class and past this code
+<div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Imports</span> System
+<span class="token keyword">Imports</span> System<span class="token punctuation">.</span>ComponentModel
+<span class="token keyword">Imports</span> System<span class="token punctuation">.</span>ComponentModel<span class="token punctuation">.</span>Design<span class="token punctuation">.</span>Serialization
+<span class="token keyword">Imports</span> System<span class="token punctuation">.</span>Windows
+<span class="token keyword">Imports</span> System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>Controls
+<span class="token keyword">Imports</span> System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>Forms<span class="token punctuation">.</span>Integration    
+<span class="token keyword">Imports</span> System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>Forms<span class="token punctuation">.</span>Design
+
+<span class="token operator">&lt;</span>Designer<span class="token punctuation">(</span><span class="token keyword">GetType</span><span class="token punctuation">(</span>ControlDesigner<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">&gt;</span> <span class="token operator">_</span>
+<span class="token keyword">Class</span> SpellCheckBox
+<span class="token keyword">Inherits</span> ElementHost
+
+<span class="token keyword">Private</span> box <span class="token keyword">As</span> TextBox
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> <span class="token keyword">New</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    box <span class="token operator">=</span> <span class="token keyword">New</span> TextBox<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">MyBase</span><span class="token punctuation">.</span>Child <span class="token operator">=</span> box
+    <span class="token keyword">AddHandler</span> box<span class="token punctuation">.</span>TextChanged<span class="token punctuation">,</span> <span class="token keyword">AddressOf</span> box_TextChanged
+    box<span class="token punctuation">.</span>SpellCheck<span class="token punctuation">.</span>IsEnabled <span class="token operator">=</span> <span class="token boolean">True</span>
+    box<span class="token punctuation">.</span>VerticalScrollBarVisibility <span class="token operator">=</span> ScrollBarVisibility<span class="token punctuation">.</span>Auto
+    <span class="token keyword">Me</span><span class="token punctuation">.</span>Size <span class="token operator">=</span> <span class="token keyword">New</span> System<span class="token punctuation">.</span>Drawing<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> box_TextChanged<span class="token punctuation">(</span><span class="token keyword">ByVal</span> sender <span class="token keyword">As</span> <span class="token keyword">Object</span><span class="token punctuation">,</span> <span class="token keyword">ByVal</span> e <span class="token keyword">As</span> EventArgs<span class="token punctuation">)</span>
+    OnTextChanged<span class="token punctuation">(</span>EventArgs<span class="token punctuation">.</span>Empty<span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token operator">&lt;</span>DefaultValue<span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token operator">&gt;</span> <span class="token operator">_</span>
+<span class="token keyword">Public</span> <span class="token keyword">Overrides</span> <span class="token keyword">Property</span> Text<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Get</span>
+        <span class="token keyword">Return</span> box<span class="token punctuation">.</span>Text
+    <span class="token keyword">End</span> <span class="token keyword">Get</span>
+    <span class="token keyword">Set</span><span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+        box<span class="token punctuation">.</span>Text <span class="token operator">=</span> value
+    <span class="token keyword">End</span> <span class="token keyword">Set</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token operator">&lt;</span>DefaultValue<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token operator">&gt;</span> <span class="token operator">_</span>
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> MultiLine<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    <span class="token keyword">Get</span>
+        <span class="token keyword">Return</span> box<span class="token punctuation">.</span>AcceptsReturn
+    <span class="token keyword">End</span> <span class="token keyword">Get</span>
+    <span class="token keyword">Set</span><span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+        box<span class="token punctuation">.</span>AcceptsReturn <span class="token operator">=</span> value
+    <span class="token keyword">End</span> <span class="token keyword">Set</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token operator">&lt;</span>DefaultValue<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token operator">&gt;</span> <span class="token operator">_</span>
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> WordWrap<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    <span class="token keyword">Get</span>
+        <span class="token keyword">Return</span> box<span class="token punctuation">.</span>TextWrapping <span class="token operator">&lt;</span><span class="token operator">&gt;</span> TextWrapping<span class="token punctuation">.</span>Wrap
+    <span class="token keyword">End</span> <span class="token keyword">Get</span>
+    <span class="token keyword">Set</span><span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+        <span class="token keyword">If</span> value <span class="token keyword">Then</span>
+            box<span class="token punctuation">.</span>TextWrapping <span class="token operator">=</span> TextWrapping<span class="token punctuation">.</span>Wrap
+        <span class="token keyword">Else</span>
+            box<span class="token punctuation">.</span>TextWrapping <span class="token operator">=</span> TextWrapping<span class="token punctuation">.</span>NoWrap
+        <span class="token keyword">End</span> <span class="token keyword">If</span>
+    <span class="token keyword">End</span> <span class="token keyword">Set</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token operator">&lt;</span>DesignerSerializationVisibility<span class="token punctuation">(</span>DesignerSerializationVisibility<span class="token punctuation">.</span>Hidden<span class="token punctuation">)</span><span class="token operator">&gt;</span> <span class="token operator">_</span>
+<span class="token keyword">Public</span> <span class="token keyword">Shadows</span> <span class="token keyword">Property</span> Child<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>UIElement
+    <span class="token keyword">Get</span>
+        <span class="token keyword">Return</span> <span class="token keyword">MyBase</span><span class="token punctuation">.</span>Child
+    <span class="token keyword">End</span> <span class="token keyword">Get</span>
+    <span class="token keyword">Set</span><span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> System<span class="token punctuation">.</span>Windows<span class="token punctuation">.</span>UIElement<span class="token punctuation">)</span>
+        <span class="token comment">'' Do nothing to solve a problem with the serializer !!</span>
+    <span class="token keyword">End</span> <span class="token keyword">Set</span>
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+</code></pre></div></li> <li>
+Rebuild the solution.
+</li> <li>
+Add a new form.
+</li> <li>
+Search the toolbox for your Class name.  This example is &quot;SpellCheck&quot;.  It should be listed under 'YourSoulutionName' Components.
+</li> <li>
+Drag the new control to your form
+</li> <li>
+Set any of the mapped properties in the forms load event
+</li> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Sub</span> form1_Load<span class="token punctuation">(</span>sender <span class="token keyword">As</span> <span class="token keyword">Object</span><span class="token punctuation">,</span> e <span class="token keyword">As</span> EventArgs<span class="token punctuation">)</span> <span class="token keyword">Handles</span> <span class="token keyword">Me</span><span class="token punctuation">.</span>Load
+    spellcheckbox<span class="token punctuation">.</span>WordWrap <span class="token operator">=</span> <span class="token boolean">True</span>
+    spellcheckbox<span class="token punctuation">.</span>MultiLin <span class="token operator">=</span> <span class="token boolean">True</span>
+    <span class="token comment">'Add any other property modifiers here...</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><ol><li>The last thing that you need to do is to change the DPI Awareness of your application.  This is because you are using WinForms application.  By default all WinForms applications are DPI UNAWARE.  Once you execute a control that has an element host (WPF Interop), the application will now become DPI AWARE.  This may or may not mess with your UI Elements.  The solution to this is to FORCE the application to become DPI UNAWARE.  There are 2 ways to do this.  The first is through the manifest file and the second is to hard code it in to your program.  If you are using OneClick to deploy your application, you must hard code it, not use the manifest file or errors will be inevitable.</li></ol> <p>Both of the following examples can be found at the following: <a href="http://www.telerik.com/blogs/winforms-scaling-at-large-dpi-settings-is-it-even-possible-" target="_blank" rel="noopener noreferrer">WinForms Scaling at Large DPI Settings - Is It Even Possible?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>  Thanks to Telerik.com for the great explanation on DPI.</p> <blockquote></blockquote> <p>Hard coded DPI Aware code example.  This MUST be executed before the first form is initialized.  I always place this in the ApplicationEvents.vb file.  You can get to this file by right clicking on your project name in the solution explorer and choosing &quot;Open&quot;.  Then choose the application tab on the left and then click on &quot;View Application Events&quot; on the lower right next to the splash screen drop down.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Namespace</span> My
+
+    <span class="token comment">' The following events are available for MyApplication:</span>
+    <span class="token comment">' </span>
+    <span class="token comment">' Startup: Raised when the application starts, before the startup form is created.</span>
+    <span class="token comment">' Shutdown: Raised after all application forms are closed.  This event is not raised if the application terminates abnormally.</span>
+    <span class="token comment">' UnhandledException: Raised if the application encounters an unhandled exception.</span>
+    <span class="token comment">' StartupNextInstance: Raised when launching a single-instance application and the application is already active. </span>
+    <span class="token comment">' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.</span>
+    <span class="token keyword">Partial</span> <span class="token keyword">Friend</span> <span class="token keyword">Class</span> MyApplication
+    
+    <span class="token keyword">Private</span> <span class="token keyword">Enum</span> PROCESS_DPI_AWARENESS
+        Process_DPI_Unaware <span class="token operator">=</span> <span class="token number">0</span>
+        Process_System_DPI_Aware <span class="token operator">=</span> <span class="token number">1</span>
+        Process_Per_Monitor_DPI_Aware <span class="token operator">=</span> <span class="token number">2</span>
+    <span class="token keyword">End</span> <span class="token keyword">Enum</span>
+
+    <span class="token keyword">Private</span> <span class="token keyword">Declare</span> <span class="token keyword">Function</span> SetProcessDpiAwareness <span class="token keyword">Lib</span> <span class="token string">&quot;shcore.dll&quot;</span> <span class="token punctuation">(</span><span class="token keyword">ByVal</span> Value <span class="token keyword">As</span> PROCESS_DPI_AWARENESS<span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+    <span class="token keyword">Private</span> <span class="token keyword">Sub</span> SetDPI<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">'Results from SetProcessDPIAwareness</span>
+        <span class="token comment">'Const S_OK = &amp;H0&amp;</span>
+        <span class="token comment">'Const E_INVALIDARG = &amp;H80070057</span>
+        <span class="token comment">'Const E_ACCESSDENIED = &amp;H80070005</span>
+
+        <span class="token keyword">Dim</span> lngResult <span class="token keyword">As</span> <span class="token keyword">Long</span>
+
+        lngResult <span class="token operator">=</span> SetProcessDpiAwareness<span class="token punctuation">(</span>PROCESS_DPI_AWARENESS<span class="token punctuation">.</span>Process_DPI_Unaware<span class="token punctuation">)</span>
+
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+    <span class="token keyword">Private</span> <span class="token keyword">Sub</span> MyApplication_Startup<span class="token punctuation">(</span>sender <span class="token keyword">As</span> <span class="token keyword">Object</span><span class="token punctuation">,</span> e <span class="token keyword">As</span> ApplicationServices<span class="token punctuation">.</span>StartupEventArgs<span class="token punctuation">)</span> <span class="token keyword">Handles</span> <span class="token keyword">Me</span><span class="token punctuation">.</span>Startup
+        SetDPI<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Namespace</span>
+
+</code></pre></div><blockquote></blockquote> <p>Manifest Example</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token operator">&lt;</span>assembly xmlns<span class="token operator">=</span><span class="token string">&quot;urn:schemas-microsoft-com:asm.v1&quot;</span> manifestVersion<span class="token operator">=</span><span class="token string">&quot;1.0&quot;</span> xmlns<span class="token punctuation">:</span>asmv3<span class="token operator">=</span><span class="token string">&quot;urn:schemas-microsoft-com:asm.v3&quot;</span> <span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span>asmv3<span class="token punctuation">:</span>application<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>asmv3<span class="token punctuation">:</span>windowsSettings xmlns<span class="token operator">=</span><span class="token string">&quot;http://schemas.microsoft.com/SMI/2005/WindowsSettings&quot;</span><span class="token operator">&gt;</span>
+             <span class="token operator">&lt;</span>dpiAware<span class="token operator">&gt;</span><span class="token boolean">true</span><span class="token operator">&lt;</span><span class="token operator">/</span>dpiAware<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>asmv3<span class="token punctuation">:</span>windowsSettings<span class="token operator">&gt;</span>
+   <span class="token operator">&lt;</span><span class="token operator">/</span>asmv3<span class="token punctuation">:</span>application<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>assembly<span class="token operator">&gt;</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/winforms-spellcheckbox.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/gdi.html" class="prev">
+        GDI+
+      </a></span> <span class="next"><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html">
+        Using axWindowsMediaPlayer in VB.Net
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3497.3fb1d9b5.js" defer></script>
+  </body>
+</html>

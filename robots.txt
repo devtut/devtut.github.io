@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Sitemap: https://devtut.github.io/sitemap.xml
+Host: https://devtut.github.io

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Xamarin - Working with local databases</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Using SQLite.NET in a Shared Project, Working with local databases using xamarin.forms in visual studio 2015">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Xamarin - Working with local databases">
+    <meta property="og:description" content="Using SQLite.NET in a Shared Project, Working with local databases using xamarin.forms in visual studio 2015">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/xamarin/working-with-local-databases.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Xamarin - Working with local databases">
+    <meta name="twitter:description" content="Using SQLite.NET in a Shared Project, Working with local databases using xamarin.forms in visual studio 2015">
+    <meta name="twitter:url" content="/xamarin/working-with-local-databases.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3560.a988d2f9.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Xamarin</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/xamarin/" class="sidebar-link">Disclaimer</a></li><li><a href="/xamarin/getting-started-with-xamarin-forms.html" class="sidebar-link">Getting started with Xamarin.Forms</a></li><li><a href="/xamarin/why-xamarin-forms-and-when-to-use-xamarin-forms.html" class="sidebar-link">Why Xamarin Forms and When to use Xamarin Forms</a></li><li><a href="/xamarin/xamarin-forms-layouts.html" class="sidebar-link">Xamarin Forms Layouts</a></li><li><a href="/xamarin/xamarin-relative-layout.html" class="sidebar-link">Xamarin Relative Layout</a></li><li><a href="/xamarin/navigation-in-xamarin-forms.html" class="sidebar-link">Navigation in Xamarin.Forms</a></li><li><a href="/xamarin/xamarin-forms-page.html" class="sidebar-link">Xamarin.Forms Page</a></li><li><a href="/xamarin/xamarin-forms-cells.html" class="sidebar-link">Xamarin.Forms Cells</a></li><li><a href="/xamarin/xamarin-forms-views.html" class="sidebar-link">Xamarin.Forms Views</a></li><li><a href="/xamarin/using-listviews.html" class="sidebar-link">Using ListViews</a></li><li><a href="/xamarin/display-alert.html" class="sidebar-link">Display Alert</a></li><li><a href="/xamarin/accessing-native-features-with-dependencyservice.html" class="sidebar-link">Accessing native features with DependencyService</a></li><li><a href="/xamarin/dependencyservice.html" class="sidebar-link">DependencyService</a></li><li><a href="/xamarin/custom-renderers.html" class="sidebar-link">Custom Renderers</a></li><li><a href="/xamarin/caching.html" class="sidebar-link">Caching</a></li><li><a href="/xamarin/gestures.html" class="sidebar-link">Gestures</a></li><li><a href="/xamarin/data-binding.html" class="sidebar-link">Data Binding</a></li><li><a href="/xamarin/working-with-maps.html" class="sidebar-link">Working with Maps</a></li><li><a href="/xamarin/custom-fonts-in-styles.html" class="sidebar-link">Custom Fonts in Styles</a></li><li><a href="/xamarin/push-notifications.html" class="sidebar-link">Push Notifications</a></li><li><a href="/xamarin/effects.html" class="sidebar-link">Effects</a></li><li><a href="/xamarin/triggers-behaviours.html" class="sidebar-link">Triggers &amp; Behaviours</a></li><li><a href="/xamarin/appsettings-reader-in-xamarin-forms.html" class="sidebar-link">AppSettings Reader in Xamarin.Forms</a></li><li><a href="/xamarin/creating-custom-controls.html" class="sidebar-link">Creating custom controls</a></li><li><a href="/xamarin/working-with-local-databases.html" class="active sidebar-link">Working with local databases</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/xamarin/working-with-local-databases.html#using-sqlite-net-in-a-shared-project" class="sidebar-link">Using SQLite.NET in a Shared Project</a></li><li class="sidebar-sub-header"><a href="/xamarin/working-with-local-databases.html#working-with-local-databases-using-xamarin-forms-in-visual-studio-2015" class="sidebar-link">Working with local databases using xamarin.forms in visual studio 2015</a></li></ul></li><li><a href="/xamarin/carouselview-pre-release-version.html" class="sidebar-link">CarouselView - Pre-release version</a></li><li><a href="/xamarin/exception-handling.html" class="sidebar-link">Exception handling</a></li><li><a href="/xamarin/sql-database-and-api-in-xamarin-forms.html" class="sidebar-link">SQL Database and API in Xamarin Forms.</a></li><li><a href="/xamarin/contact-picker-xamarin-forms-android-and-ios.html" class="sidebar-link">Contact Picker - Xamarin Forms (Android and iOS)</a></li><li><a href="/xamarin/xamarin-plugin.html" class="sidebar-link">Xamarin Plugin</a></li><li><a href="/xamarin/oauth2.html" class="sidebar-link">OAuth2</a></li><li><a href="/xamarin/messagingcenter.html" class="sidebar-link">MessagingCenter</a></li><li><a href="/xamarin/generic-xamarin-forms-app-lifecycle-platform-dependant.html" class="sidebar-link">Generic Xamarin.Forms app lifecycle? Platform-dependant!</a></li><li><a href="/xamarin/platform-specific-behaviour.html" class="sidebar-link">Platform-specific behaviour</a></li><li><a href="/xamarin/platform-specific-visual-adjustments.html" class="sidebar-link">Platform specific visual adjustments</a></li><li><a href="/xamarin/dependency-services.html" class="sidebar-link">Dependency Services</a></li><li><a href="/xamarin/unit-testing.html" class="sidebar-link">Unit Testing</a></li><li><a href="/xamarin/bdd-unit-testing-in-xamarin-forms.html" class="sidebar-link">BDD Unit Testing in Xamarin.Forms</a></li><li><a href="/xamarin/getting-started-with-xamarin-ios.html" class="sidebar-link">Getting started with Xamarin.iOS</a></li><li><a href="/xamarin/alerts.html" class="sidebar-link">Alerts</a></li><li><a href="/xamarin/touch-id.html" class="sidebar-link">Touch ID</a></li><li><a href="/xamarin/auto-layout-in-xamarin-ios.html" class="sidebar-link">Auto Layout in Xamarin.iOS</a></li><li><a href="/xamarin/add-search-bar-to-uitableview.html" class="sidebar-link">Add Search Bar to UITableView</a></li><li><a href="/xamarin/adding-uirefreshcontrol-to-a-table-view.html" class="sidebar-link">Adding UIRefreshControl to a table view</a></li><li><a href="/xamarin/add-pulltorefresh-to-uitableview.html" class="sidebar-link">Add PullToRefresh to UITableView</a></li><li><a href="/xamarin/uiimageview-zoom-in-combination-with-uiscrollview.html" class="sidebar-link">UIImageView zoom in combination with UIScrollView</a></li><li><a href="/xamarin/xamarin-ios-navigation-drawer.html" class="sidebar-link">Xamarin.iOS Navigation Drawer</a></li><li><a href="/xamarin/using-asset-catalogs.html" class="sidebar-link">Using Asset Catalogs</a></li><li><a href="/xamarin/how-to-use-asset-asset-catalogs.html" class="sidebar-link">How to use asset Asset Catalogs</a></li><li><a href="/xamarin/using-ios-asset-catalogs-to-manage-images.html" class="sidebar-link">Using iOS Asset Catalogs to Manage Images</a></li><li><a href="/xamarin/create-and-use-custom-prototype-table-cells-in-xamarin-ios-using-storyboard.html" class="sidebar-link">Create and use custom prototype table cells in xamarin.iOS using storyboard</a></li><li><a href="/xamarin/binding-swift-libraries.html" class="sidebar-link">Binding Swift Libraries</a></li><li><a href="/xamarin/connecting-with-microsoft-cognitive-services.html" class="sidebar-link">Connecting with Microsoft Cognitive Services</a></li><li><a href="/xamarin/concurrent-programming-in-xamarin-ios.html" class="sidebar-link">Concurrent Programming in Xamarin.iOS</a></li><li><a href="/xamarin/working-with-xib-and-storyboards-in-xamarin-ios.html" class="sidebar-link">Working with Xib and Storyboards in Xamarin.iOS</a></li><li><a href="/xamarin/best-practices-for-migrating-from-uilocalnotification-to-user-notifications-framework.html" class="sidebar-link">Best practices for migrating from UILocalNotification to User Notifications framework</a></li><li><a href="/xamarin/calculating-variable-row-height-in-getheightforrow.html" class="sidebar-link">Calculating variable row height in GetHeightForRow</a></li><li><a href="/xamarin/resizing-methods-for-uiimage.html" class="sidebar-link">Resizing Methods for UIImage</a></li><li><a href="/xamarin/controlling-the-screenshot-in-the-ios-multitasking-switcher.html" class="sidebar-link">Controlling the Screenshot in the iOS Multitasking Switcher</a></li><li><a href="/xamarin/xamarin-ios-google-places-autocomplete.html" class="sidebar-link">Xamarin iOS Google Places Autocomplete</a></li><li><a href="/xamarin/getting-started-with-xamarin-android.html" class="sidebar-link">Getting started with Xamarin.Android</a></li><li><a href="/xamarin/app-lifecycle-xamarin-andorid.html" class="sidebar-link">App lifecycle - Xamarin.Andorid</a></li><li><a href="/xamarin/bindings.html" class="sidebar-link">Bindings</a></li><li><a href="/xamarin/dialogs.html" class="sidebar-link">Dialogs</a></li><li><a href="/xamarin/toasts.html" class="sidebar-link">Toasts</a></li><li><a href="/xamarin/dialogs.html" class="sidebar-link">Dialogs</a></li><li><a href="/xamarin/custom-listview.html" class="sidebar-link">Custom ListView</a></li><li><a href="/xamarin/recyclerview.html" class="sidebar-link">RecyclerView</a></li><li><a href="/xamarin/xamarin-android-how-to-create-a-toolbar.html" class="sidebar-link">Xamarin.Android - How to create a toolbar</a></li><li><a href="/xamarin/xamarin-android-bluetooth-communication.html" class="sidebar-link">Xamarin.Android - Bluetooth communication</a></li><li><a href="/xamarin/how-to-correct-the-orientation-of-a-picture-captured-from-android-device.html" class="sidebar-link">How to correct the orientation of a picture captured from Android device</a></li><li><a href="/xamarin/barcode-scanning-using-zxing-library-in-xamarin-applications.html" class="sidebar-link">Barcode scanning using ZXing library in Xamarin Applications</a></li><li><a href="/xamarin/publishing-your-xamarin-android-apk.html" class="sidebar-link">Publishing your Xamarin.Android APK</a></li><li><a href="/xamarin/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="working-with-local-databases"><a href="#working-with-local-databases" class="header-anchor">#</a> Working with local databases</h1> <h2 id="using-sqlite-net-in-a-shared-project"><a href="#using-sqlite-net-in-a-shared-project" class="header-anchor">#</a> Using SQLite.NET in a Shared Project</h2> <p><a href="https://github.com/praeclarum/sqlite-net" target="_blank" rel="noopener noreferrer">SQLite.NET<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> is an open source library which makes it possible to add local-databases support using <code>SQLite</code> version 3 in a <code>Xamarin.Forms</code> project.</p> <p>The steps below demonstrate how to include this component in a <code>Xamarin.Forms</code> Shared Project:</p> <li><p>Download the latest version of the [SQLite.cs](https://github.com/praeclarum/sqlite-net/blob/master/src/SQLite.cs) class and add it
+to the Shared Project.</p></li> <li>
+Every table that will be included in the database needs to be modeled as a class in the Shared Project. A table is defined by adding at least two attributes in the class: `Table` (for the class) and `PrimaryKey` (for a property).
+</li> <p>For this example, a new class named <code>Song</code> is added to the Shared Project, defined as follows:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">SQLite</span><span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> <span class="token namespace">SongsApp</span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Table</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;Song&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Song</span>
+    <span class="token punctuation">{</span>
+        <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">PrimaryKey</span></span><span class="token punctuation">]</span>
+        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> ID <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> SongName <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> SingerName <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><ol><li>Next, add a new class called <code>Database</code>, which inherits from the <code>SQLiteConnection</code> class (included in SQLite.cs). In this new class, the code for database access, tables creation and CRUD operations for each table is defined. Sample code is shown below:</li></ol> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Linq</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic</span><span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token namespace">SQLite</span><span class="token punctuation">;</span>
+
+<span class="token keyword">namespace</span> <span class="token namespace">SongsApp</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BaseDatos</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">SQLiteConnection</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token function">BaseDatos</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> path<span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Initialize</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token generic-method"><span class="token function">CreateTable</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Song<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token return-type class-name">List<span class="token punctuation">&lt;</span>Song<span class="token punctuation">&gt;</span></span> <span class="token function">GetSongs</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token generic-method"><span class="token function">Table</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Song<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token return-type class-name">Song</span> <span class="token function">GetSong</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> id<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token generic-method"><span class="token function">Table</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Song<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">Where</span><span class="token punctuation">(</span>t <span class="token operator">=&gt;</span> t<span class="token punctuation">.</span>ID <span class="token operator">==</span> id<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">First</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">bool</span></span> <span class="token function">AddSong</span><span class="token punctuation">(</span><span class="token class-name">Song</span> song<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">Insert</span><span class="token punctuation">(</span>song<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">bool</span></span> <span class="token function">UpdateSong</span><span class="token punctuation">(</span><span class="token class-name">Song</span> song<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">Update</span><span class="token punctuation">(</span>song<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">DeleteSong</span><span class="token punctuation">(</span><span class="token class-name">Song</span> song<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">Delete</span><span class="token punctuation">(</span>song<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><ol><li>As you could see in the previous step, the constructor of our <code>Database</code> class includes a <code>path</code> parameter, which represents the location of the file that stores the SQLite database file. A static <code>Database</code> object can be declared in <code>App.cs</code>. The <code>path</code> is platform-specific:</li></ol> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Application</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">Database</span> DB<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> App <span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">string</span></span> dbFile <span class="token operator">=</span> <span class="token string">&quot;SongsDB.db3&quot;</span><span class="token punctuation">;</span>
+
+<span class="token preprocessor property">#<span class="token directive keyword">if</span> __ANDROID__</span>
+        <span class="token class-name"><span class="token keyword">string</span></span> docPath <span class="token operator">=</span> Environment<span class="token punctuation">.</span><span class="token function">GetFolderPath</span><span class="token punctuation">(</span>Environment<span class="token punctuation">.</span>SpecialFolder<span class="token punctuation">.</span>Personal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> dbPath <span class="token operator">=</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>Path<span class="token punctuation">.</span><span class="token function">Combine</span><span class="token punctuation">(</span>docPath<span class="token punctuation">,</span> dbFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">else</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">if</span> __IOS__</span>
+        <span class="token class-name"><span class="token keyword">string</span></span> docPath <span class="token operator">=</span> Environment<span class="token punctuation">.</span><span class="token function">GetFolderPath</span><span class="token punctuation">(</span>Environment<span class="token punctuation">.</span>SpecialFolder<span class="token punctuation">.</span>Personal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name"><span class="token keyword">string</span></span> libPath <span class="token operator">=</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>Path<span class="token punctuation">.</span><span class="token function">Combine</span><span class="token punctuation">(</span>docPath<span class="token punctuation">,</span> <span class="token string">&quot;..&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Library&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> dbPath <span class="token operator">=</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>Path<span class="token punctuation">.</span><span class="token function">Combine</span><span class="token punctuation">(</span>libPath<span class="token punctuation">,</span> dbFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">else</span></span>
+        <span class="token class-name"><span class="token keyword">var</span></span> dbPath <span class="token operator">=</span> System<span class="token punctuation">.</span>IO<span class="token punctuation">.</span>Path<span class="token punctuation">.</span><span class="token function">Combine</span><span class="token punctuation">(</span>ApplicationData<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>LocalFolder<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> dbFile<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token preprocessor property">#<span class="token directive keyword">endif</span></span>
+<span class="token preprocessor property">#<span class="token directive keyword">endif</span></span>
+
+        DB <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Database</span><span class="token punctuation">(</span>dbPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// The root page of your application</span>
+        MainPage <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SongsPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><ol><li>Now simply call the <code>DB</code> object through the <code>App</code> class anytime you need to perform a CRUD operation to the <code>Songs</code> table. For example, to insert a new <code>Song</code> after the user has clicked a button, you can use the following code:</li></ol> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">AddNewSongButton_Click</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> a<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name">Song</span> s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Song</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s<span class="token punctuation">.</span>ID <span class="token operator">=</span> Guid<span class="token punctuation">.</span><span class="token function">NewGuid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    s<span class="token punctuation">.</span>SongName <span class="token operator">=</span> songNameEntry<span class="token punctuation">.</span>Text<span class="token punctuation">;</span>
+    s<span class="token punctuation">.</span>SingerName <span class="token operator">=</span> singerNameEntry<span class="token punctuation">.</span>Text<span class="token punctuation">;</span>
+
+    App<span class="token punctuation">.</span>DB<span class="token punctuation">.</span><span class="token function">AddSong</span><span class="token punctuation">(</span>song<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="working-with-local-databases-using-xamarin-forms-in-visual-studio-2015"><a href="#working-with-local-databases-using-xamarin-forms-in-visual-studio-2015" class="header-anchor">#</a> Working with local databases using xamarin.forms in visual studio 2015</h2> <p><strong>SQlite example Step by step Explanation</strong></p> <li><p>The steps below demonstrate how to include this component in a Xamarin.Forms Shared Project:
+to add packages in (pcl,Andriod,Windows,Ios)
+Add References Click on **Manage Nuget packages** -&gt;click on Browse
+to install **SQLite.Net.Core-PCL** , **SQLite Net Extensions** after installation is completed check it once in references then</p></li> <li>
+To add Class **Employee.cs** below code
+<div class="language-cs extra-class"><pre class="language-cs"><code> <span class="token keyword">using</span> <span class="token namespace">SQLite<span class="token punctuation">.</span>Net<span class="token punctuation">.</span>Attributes</span><span class="token punctuation">;</span>
+
+     <span class="token keyword">namespace</span> <span class="token namespace">DatabaseEmployeeCreation<span class="token punctuation">.</span>SqlLite</span>
+     <span class="token punctuation">{</span>
+         <span class="token keyword">public</span>   <span class="token keyword">class</span> <span class="token class-name">Employee</span>
+         <span class="token punctuation">{</span>
+             <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">PrimaryKey</span><span class="token punctuation">,</span><span class="token class-name">AutoIncrement</span></span><span class="token punctuation">]</span>
+             <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> Eid <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+             <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> Ename <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+             <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> Address <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+             <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> phonenumber <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+             <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> email <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> 
+         <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+
+</code></pre></div></li> <li>
+To add one interface ISQLite
+</li> <div class="language- extra-class"><pre class="language-text"><code>
+using SQLite.Net;  
+            //using SQLite.Net;
+            namespace DatabaseEmployeeCreation.SqlLite.ViewModel
+            {
+                public interface ISQLite
+                {
+                    SQLiteConnection GetConnection();
+                }
+            }
+
+</code></pre></div><ol><li>Create a one class for database logics and methods below code is follow .</li></ol> <p>using SQLite.Net;
+using System.Collections.Generic;
+using System.Linq;
+using Xamarin.Forms;
+namespace DatabaseEmployeeCreation.SqlLite.ViewModel
+{
+public  class DatabaseLogic
+{
+static object locker = new object();
+SQLiteConnection database;</p> <div class="language- extra-class"><pre class="language-text"><code>
+   public DatabaseLogic()
+    {
+        database = DependencyService.Get&lt;ISQLite&gt;().GetConnection();
+        // create the tables
+        database.CreateTable&lt;Employee&gt;();
+    }
+
+    public IEnumerable&lt;Employee&gt; GetItems()
+    {
+        lock (locker)
+        {
+            return (from i in database.Table&lt;Employee&gt;() select i).ToList();
+        }
+    }
+
+    public IEnumerable&lt;Employee&gt; GetItemsNotDone()
+    {
+        lock (locker)
+        {
+            return database.Query&lt;Employee&gt;(&quot;SELECT * FROM [Employee]&quot;);
+        }
+    }
+
+    public Employee GetItem(int id)
+    {
+        lock (locker)
+        {
+            return database.Table&lt;Employee&gt;().FirstOrDefault(x =&gt; x.Eid == id);
+        }
+    }
+
+    public int SaveItem(Employee item)
+    {
+        lock (locker)
+        {
+            if (item.Eid != 0)
+            {
+                database.Update(item);
+                return item.Eid;
+            }
+            else
+            {
+                return database.Insert(item);
+            }
+        }
+    }
+
+    public int DeleteItem(int Eid)
+    {
+        lock (locker)
+        {
+            return database.Delete&lt;Employee&gt;(Eid);
+        }
+    }
+}
+
+</code></pre></div><p>}</p> <ol><li>to Create a xaml.forms EmployeeRegistration.xaml</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+   &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+    &lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+                 xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+                 x:Class=&quot;DatabaseEmployeeCreation.SqlLite.EmployeeRegistration&quot;
+      Title=&quot;{Binding Name}&quot; &gt;
+      &lt;StackLayout VerticalOptions=&quot;StartAndExpand&quot; Padding=&quot;20&quot;&gt;
+    
+        &lt;Label Text=&quot;Ename&quot; /&gt;
+        &lt;Entry x:Name=&quot;nameEntry&quot; Text=&quot;{Binding Ename}&quot;/&gt;
+        &lt;Label Text=&quot;Address&quot; /&gt;
+        &lt;Editor x:Name=&quot;AddressEntry&quot; Text=&quot;{Binding Address}&quot;/&gt;
+        &lt;Label Text=&quot;phonenumber&quot; /&gt;
+        &lt;Entry x:Name=&quot;phonenumberEntry&quot; Text=&quot;{Binding phonenumber}&quot;/&gt;
+        &lt;Label Text=&quot;email&quot; /&gt;
+        &lt;Entry x:Name=&quot;emailEntry&quot; Text=&quot;{Binding email}&quot;/&gt;
+    
+        &lt;Button Text=&quot;Add&quot; Clicked=&quot;addClicked&quot;/&gt;
+    
+       &lt;!-- &lt;Button Text=&quot;Delete&quot; Clicked=&quot;deleteClicked&quot;/&gt;--&gt;
+    
+        &lt;Button Text=&quot;Details&quot; Clicked=&quot;DetailsClicked&quot;/&gt;
+    
+        &lt;!--  &lt;Button Text=&quot;Edit&quot; Clicked=&quot;speakClicked&quot;/&gt;--&gt;
+    
+      &lt;/StackLayout&gt;
+    &lt;/ContentPage&gt;
+
+</code></pre></div><p><strong>EmployeeRegistration.cs</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+   using DatabaseEmployeeCreation.SqlLite.ViewModel;
+    using DatabaseEmployeeCreation.SqlLite.Views;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    
+    using Xamarin.Forms;
+    
+    namespace DatabaseEmployeeCreation.SqlLite
+    {
+        public partial class EmployeeRegistration : ContentPage
+        {
+            private int empid;
+            private Employee obj;
+    
+            public EmployeeRegistration()
+            {
+                InitializeComponent();
+    
+            }
+    
+            public EmployeeRegistration(Employee obj)
+            {
+                this.obj = obj;
+                var eid = obj.Eid;
+                Navigation.PushModalAsync(new EmployeeRegistration());
+                var Address = obj.Address;
+                var email = obj.email;
+                var Ename = obj.Ename;
+                var phonenumber = obj.phonenumber;
+                AddressEntry. = Address;
+                emailEntry.Text = email;
+                nameEntry.Text = Ename;
+    
+                //AddressEntry.Text = obj.Address;
+                //emailEntry.Text = obj.email;
+                //nameEntry.Text = obj.Ename;
+                //phonenumberEntry.Text = obj.phonenumber;
+    
+                Employee empupdate = new Employee(); //updateing Values 
+                empupdate.Address = AddressEntry.Text;
+                empupdate.Ename = nameEntry.Text; 
+                empupdate.email = emailEntry.Text;
+                empupdate.Eid = obj.Eid;
+                App.Database.SaveItem(empupdate);
+                Navigation.PushModalAsync(new EmployeeRegistration());
+              
+            }
+    
+            public EmployeeRegistration(int empid)
+            {
+                this.empid = empid;
+                Employee lst = App.Database.GetItem(empid);
+                //var Address = lst.Address;
+                //var email = lst.email;
+                //var Ename = lst.Ename;
+                //var phonenumber = lst.phonenumber;
+                //AddressEntry.Text = Address;
+                //emailEntry.Text = email;
+                //nameEntry.Text = Ename;
+                //phonenumberEntry.Text = phonenumber;
+    
+                // to retriva values based on id to 
+                AddressEntry.Text = lst.Address;
+                emailEntry.Text = lst.email;
+                nameEntry.Text = lst.Ename;
+                phonenumberEntry.Text = lst.phonenumber;
+                
+                Employee empupdate = new Employee(); //updateing Values 
+                empupdate.Address = AddressEntry.Text;
+                empupdate.email = emailEntry.Text;
+                App.Database.SaveItem(empupdate);
+                Navigation.PushModalAsync(new EmployeeRegistration());
+            }
+    
+            void addClicked(object sender, EventArgs e)
+            {
+                //var createEmp = (Employee)BindingContext;
+                Employee emp = new Employee();
+                emp.Address = AddressEntry.Text;
+                emp.email = emailEntry.Text;
+                emp.Ename = nameEntry.Text;
+                emp.phonenumber = phonenumberEntry.Text;
+                App.Database.SaveItem(emp);
+                this.Navigation.PushAsync(new EmployeeDetails());
+    
+            }
+            //void deleteClicked(object sender, EventArgs e)
+            //{
+            //    var emp = (Employee)BindingContext;
+            //    App.Database.DeleteItem(emp.Eid);
+            //    this.Navigation.PopAsync();
+            //}
+            void DetailsClicked(object sender, EventArgs e)
+            {
+                var empcancel = (Employee)BindingContext;
+                this.Navigation.PushAsync(new EmployeeDetails());
+            }
+            //    void speakClicked(object sender, EventArgs e)
+            //    {
+            //        var empspek = (Employee)BindingContext;
+            //        //DependencyService.Get&lt;ITextSpeak&gt;().Speak(empspek.Address + &quot; &quot; + empspek.Ename);
+            //    }
+        }
+    }
+
+</code></pre></div><li>
+to display EmployeeDetails below code behind
+<div class="language-cs extra-class"><pre class="language-cs"><code> <span class="token keyword">using</span> <span class="token namespace">DatabaseEmployeeCreation</span><span class="token punctuation">;</span>
+ <span class="token keyword">using</span> <span class="token namespace">DatabaseEmployeeCreation<span class="token punctuation">.</span>SqlLite</span><span class="token punctuation">;</span>
+ <span class="token keyword">using</span> <span class="token namespace">System</span><span class="token punctuation">;</span>
+ <span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>Generic</span><span class="token punctuation">;</span>
+ <span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Linq</span><span class="token punctuation">;</span>
+ <span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Text</span><span class="token punctuation">;</span>
+ <span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Threading<span class="token punctuation">.</span>Tasks</span><span class="token punctuation">;</span>
+ 
+ <span class="token keyword">using</span> <span class="token namespace">Xamarin<span class="token punctuation">.</span>Forms</span><span class="token punctuation">;</span>
+ 
+ <span class="token keyword">namespace</span> <span class="token namespace">DatabaseEmployeeCreation<span class="token punctuation">.</span>SqlLite<span class="token punctuation">.</span>Views</span>
+ <span class="token punctuation">{</span>
+     <span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> <span class="token class-name">EmployeeDetails</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">ContentPage</span></span>
+     <span class="token punctuation">{</span>
+         <span class="token class-name">ListView</span> lv <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">ListView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token class-name">IEnumerable<span class="token punctuation">&lt;</span>Employee<span class="token punctuation">&gt;</span></span> lst<span class="token punctuation">;</span>
+         <span class="token keyword">public</span> <span class="token function">EmployeeDetails</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+         <span class="token punctuation">{</span>
+             <span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token function">displayemployee</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+ 
+         <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">displayemployee</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+         <span class="token punctuation">{</span>
+             <span class="token class-name">Button</span> btn <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Button</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+             <span class="token punctuation">{</span>
+ 
+                 Text <span class="token operator">=</span> <span class="token string">&quot;Details&quot;</span><span class="token punctuation">,</span>
+                 BackgroundColor <span class="token operator">=</span> Color<span class="token punctuation">.</span>Blue<span class="token punctuation">,</span>
+             <span class="token punctuation">}</span><span class="token punctuation">;</span>
+             btn<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> Btn_Clicked<span class="token punctuation">;</span>
+             <span class="token comment">//IEnumerable&lt;Employee&gt; lst = App.Database.GetItems();</span>
+             <span class="token comment">//IEnumerable&lt;Employee&gt; lst1 = App.Database.GetItemsNotDone();</span>
+             <span class="token comment">//IEnumerable&lt;Employee&gt; lst2 = App.Database.GetItemsNotDone();</span>
+             Content <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">StackLayout</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+             <span class="token punctuation">{</span>
+                 Children <span class="token operator">=</span> <span class="token punctuation">{</span> btn <span class="token punctuation">}</span><span class="token punctuation">,</span>
+             <span class="token punctuation">}</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+ 
+         <span class="token keyword">private</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Btn_Clicked</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+         <span class="token punctuation">{</span>
+             lst <span class="token operator">=</span> App<span class="token punctuation">.</span>Database<span class="token punctuation">.</span><span class="token function">GetItems</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+             lv<span class="token punctuation">.</span>ItemsSource <span class="token operator">=</span> lst<span class="token punctuation">;</span>
+             lv<span class="token punctuation">.</span>HasUnevenRows <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+             lv<span class="token punctuation">.</span>ItemTemplate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">DataTemplate</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span><span class="token type-expression class-name">OptionsViewCell</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+             Content <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">StackLayout</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+             <span class="token punctuation">{</span>
+                 Children <span class="token operator">=</span> <span class="token punctuation">{</span> lv <span class="token punctuation">}</span><span class="token punctuation">,</span>
+             <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ 
+         <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+
+</code></pre></div></li> <div class="language- extra-class"><pre class="language-text"><code>
+       public class OptionsViewCell : ViewCell
+        {
+    
+            int empid;
+            Button btnEdit;
+            public OptionsViewCell()
+            {
+            }
+            protected override void OnBindingContextChanged()
+            {
+                base.OnBindingContextChanged();
+    
+                if (this.BindingContext == null)
+                    return;
+    
+                dynamic obj = BindingContext;
+                empid = Convert.ToInt32(obj.Eid);
+                var lblname = new Label
+                {
+                    BackgroundColor = Color.Lime,
+                    Text = obj.Ename,
+                };
+    
+                var lblAddress = new Label
+                {
+                    BackgroundColor = Color.Yellow,
+                    Text = obj.Address,
+                };
+    
+                var lblphonenumber = new Label
+                {
+                    BackgroundColor = Color.Pink,
+                    Text = obj.phonenumber,
+                };
+    
+                var lblemail = new Label
+                {
+                    BackgroundColor = Color.Purple,
+                    Text = obj.email,
+                };
+    
+                var lbleid = new Label
+                {
+                    BackgroundColor = Color.Silver,
+                    Text = (empid).ToString(),
+                };
+    
+                //var lblname = new Label
+                //{
+                //    BackgroundColor = Color.Lime,
+                //    // HorizontalOptions = LayoutOptions.Start
+                //};
+                //lblname.SetBinding(Label.TextProperty, &quot;Ename&quot;);
+    
+                //var lblAddress = new Label
+                //{
+                //    BackgroundColor = Color.Yellow,
+                //    //HorizontalOptions = LayoutOptions.Center,
+                //};
+                //lblAddress.SetBinding(Label.TextProperty, &quot;Address&quot;);
+    
+                //var lblphonenumber = new Label
+                //{
+                //    BackgroundColor = Color.Pink,
+                //    //HorizontalOptions = LayoutOptions.CenterAndExpand,
+                //};
+                //lblphonenumber.SetBinding(Label.TextProperty, &quot;phonenumber&quot;);
+    
+                //var lblemail = new Label
+                //{
+                //    BackgroundColor = Color.Purple,
+                //    // HorizontalOptions = LayoutOptions.CenterAndExpand
+                //};
+                //lblemail.SetBinding(Label.TextProperty, &quot;email&quot;);
+                //var lbleid = new Label
+                //{
+                //    BackgroundColor = Color.Silver,
+                //    // HorizontalOptions = LayoutOptions.CenterAndExpand
+                //};
+                //lbleid.SetBinding(Label.TextProperty, &quot;Eid&quot;);
+                Button btnDelete = new Button
+                {
+                    BackgroundColor = Color.Gray,
+    
+                    Text = &quot;Delete&quot;,
+                    //WidthRequest = 15,
+                    //HeightRequest = 20,
+                    TextColor = Color.Red,
+                    HorizontalOptions = LayoutOptions.EndAndExpand,
+                };
+                btnDelete.Clicked += BtnDelete_Clicked;
+                //btnDelete.PropertyChanged += BtnDelete_PropertyChanged;  
+    
+                btnEdit = new Button
+                {
+                    BackgroundColor = Color.Gray,
+                    Text = &quot;Edit&quot;,
+                    TextColor = Color.Green,
+                };
+                // lbleid.SetBinding(Label.TextProperty, &quot;Eid&quot;);
+                btnEdit.Clicked += BtnEdit_Clicked1; ;
+                //btnEdit.Clicked += async (s, e) =&gt;{
+                //    await App.Current.MainPage.Navigation.PushModalAsync(new EmployeeRegistration());
+                //};
+    
+                View = new StackLayout()
+                {
+                    Orientation = StackOrientation.Horizontal,
+                    BackgroundColor = Color.White,
+                    Children = { lbleid, lblname, lblAddress, lblemail, lblphonenumber, btnDelete, btnEdit },
+                };
+    
+                //View = new StackLayout()
+                //{ HorizontalOptions = LayoutOptions.Center, WidthRequest = 10, BackgroundColor = Color.Yellow, Children = { lblAddress } };
+    
+                //View = new StackLayout()
+                //{ HorizontalOptions = LayoutOptions.End, WidthRequest = 30, BackgroundColor = Color.Yellow, Children = { lblemail } };
+    
+                //View = new StackLayout()
+                //{ HorizontalOptions = LayoutOptions.End, BackgroundColor = Color.Green, Children = { lblphonenumber } };
+    
+    
+    
+    
+                //string Empid =c.eid ;
+    
+            }
+    
+            private async void BtnEdit_Clicked1(object sender, EventArgs e)
+            {
+               Employee obj= App.Database.GetItem(empid);
+                if (empid &gt; 0)
+                {
+                    await App.Current.MainPage.Navigation.PushModalAsync(new EmployeeRegistration(obj));
+                }
+                else {
+                await App.Current.MainPage.Navigation.PushModalAsync(new EmployeeRegistration(empid));
+                }
+            }
+    
+    
+    
+            private void BtnDelete_Clicked(object sender, EventArgs e)
+            {
+                // var eid = Convert.ToInt32(empid);
+                // var item = (Xamarin.Forms.Button)sender;
+                int eid = empid;
+                App.Database.DeleteItem(eid);
+            }
+            //private void BtnDelete_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+            //{
+            // var ename=  e.PropertyName;
+            //}
+        }
+    
+        //private void BtnDelete_Clicked(object sender, EventArgs e)
+        //{
+        //    var eid = 8;
+        //    var item = (Xamarin.Forms.Button)sender;
+    
+        //    App.Database.DeleteItem(eid);
+        //}
+    }
+
+</code></pre></div><ol><li>To implement method in Android and ios  GetConnection() method</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+   using System;
+    using Xamarin.Forms;
+    using System.IO;
+    using DatabaseEmployeeCreation.Droid;
+    using DatabaseEmployeeCreation.SqlLite.ViewModel;
+    using SQLite;
+    using SQLite.Net;
+    
+    [assembly: Dependency(typeof(SQLiteEmployee_Andriod))]
+    namespace DatabaseEmployeeCreation.Droid
+    {
+        public class SQLiteEmployee_Andriod : ISQLite
+        {
+            public SQLiteEmployee_Andriod()
+            {
+            }
+    
+            #region ISQLite implementation
+            public SQLiteConnection GetConnection()
+            {
+                //var sqliteFilename = &quot;EmployeeSQLite.db3&quot;;
+                //string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // Documents folder
+                //var path = Path.Combine(documentsPath, sqliteFilename);
+    
+                //// This is where we copy in the prepopulated database
+                //Console.WriteLine(path);
+                //if (!File.Exists(path))
+                //{
+                //    var s = Forms.Context.Resources.OpenRawResource(Resource.Raw.EmployeeSQLite);  // RESOURCE NAME ###
+    
+                //    // create a write stream
+                //    FileStream writeStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+                //    // write to the stream
+                //    ReadWriteStream(s, writeStream);
+                //}
+    
+                //var conn = new SQLiteConnection(path);
+    
+                //// Return the database connection 
+                //return conn;
+                var filename = &quot;DatabaseEmployeeCreationSQLite.db3&quot;;
+                var documentspath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var path = Path.Combine(documentspath, filename);
+                var platform = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
+                var connection = new SQLite.Net.SQLiteConnection(platform, path);
+                return connection;
+            }
+    
+            //public  SQLiteConnection GetConnection()
+            //{
+            //    var filename = &quot;EmployeeSQLite.db3&quot;;
+            //    var documentspath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            //    var path = Path.Combine(documentspath, filename);
+    
+            //    var platform = new SQLite.Net.Platform.XamarinAndroid.SQLitePlatformAndroid();
+            //    var connection = new SQLite.Net.SQLiteConnection(platform, path);
+            //    return connection;
+            //}
+            #endregion
+    
+            /// &lt;summary&gt;
+            /// helper method to get the database out of /raw/ and into the user filesystem
+            /// &lt;/summary&gt;
+            void ReadWriteStream(Stream readStream, Stream writeStream)
+            {
+                int Length = 256;
+                Byte[] buffer = new Byte[Length];
+                int bytesRead = readStream.Read(buffer, 0, Length);
+                // write the required bytes
+                while (bytesRead &gt; 0)
+                {
+                    writeStream.Write(buffer, 0, bytesRead);
+                    bytesRead = readStream.Read(buffer, 0, Length);
+                }
+                readStream.Close();
+                writeStream.Close();
+            }
+        }
+    }
+
+</code></pre></div><p>I hope this above example is very easy way i explained</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/xamarin/working-with-local-databases.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/xamarin/creating-custom-controls.html" class="prev">
+        Creating custom controls
+      </a></span> <span class="next"><a href="/xamarin/carouselview-pre-release-version.html">
+        CarouselView - Pre-release version
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3560.a988d2f9.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - Task-based asynchronous pattern</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Basic usage of Async/Await, Using TAP with LINQ">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - Task-based asynchronous pattern">
+    <meta property="og:description" content="Basic usage of Async/Await, Using TAP with LINQ">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/task-based-asynchronous-pattern.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - Task-based asynchronous pattern">
+    <meta name="twitter:description" content="Basic usage of Async/Await, Using TAP with LINQ">
+    <meta name="twitter:url" content="/vbnet/task-based-asynchronous-pattern.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3489.2f3ecf88.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="sidebar-link">Introduction to Syntax</a></li><li><a href="/vbnet/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="sidebar-link">Looping</a></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="sidebar-link">ByVal and ByRef keywords</a></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="sidebar-link">Extension methods</a></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="sidebar-link">Visual Basic 14.0 Features</a></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="sidebar-link">Google Maps in a Windows Form</a></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="sidebar-link">WinForms SpellCheckBox</a></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="active sidebar-link">Task-based asynchronous pattern</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/task-based-asynchronous-pattern.html#basic-usage-of-async-await" class="sidebar-link">Basic usage of Async/Await</a></li><li class="sidebar-sub-header"><a href="/vbnet/task-based-asynchronous-pattern.html#using-tap-with-linq" class="sidebar-link">Using TAP with LINQ</a></li></ul></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="task-based-asynchronous-pattern"><a href="#task-based-asynchronous-pattern" class="header-anchor">#</a> Task-based asynchronous pattern</h1> <h2 id="basic-usage-of-async-await"><a href="#basic-usage-of-async-await" class="header-anchor">#</a> Basic usage of Async/Await</h2> <p>You can start some slow process in parallel and then collect the results when they are done:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> results <span class="token operator">=</span> Task<span class="token punctuation">.</span>WhenAll<span class="token punctuation">(</span>SlowCalculation<span class="token punctuation">,</span> AnotherSlowCalculation<span class="token punctuation">)</span><span class="token punctuation">.</span>Result
+    
+    <span class="token keyword">For</span> <span class="token keyword">Each</span> result <span class="token keyword">In</span> results
+        Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+    <span class="token keyword">Next</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+Async <span class="token keyword">Function</span> SlowCalculation<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> Task<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span>
+     Await Task<span class="token punctuation">.</span>Delay<span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span>
+
+     <span class="token keyword">Return</span> <span class="token number">40</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+Async <span class="token keyword">Function</span> AnotherSlowCalculation<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> Task<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span>
+    Await Task<span class="token punctuation">.</span>Delay<span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">Return</span> <span class="token number">60</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>After two seconds both the results will be available.</p> <h2 id="using-tap-with-linq"><a href="#using-tap-with-linq" class="header-anchor">#</a> Using TAP with LINQ</h2> <p>You can create an <code>IEnumerable</code> of <code>Task</code> by passing <code>AddressOf AsyncMethod</code> to the <strong>LINQ</strong> <code>Select</code> method and then start and wait all the results with <code>Task.WhenAll</code></p> <p>If your method has parameters matching the previous <strong>LINQ</strong> chain call, they will be automatically mapped.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> tasks <span class="token operator">=</span> Enumerable<span class="token punctuation">.</span>Range<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">Select</span><span class="token punctuation">(</span><span class="token keyword">AddressOf</span> TurnSlowlyIntegerIntoString<span class="token punctuation">)</span>
+        
+    <span class="token keyword">Dim</span> resultingStrings <span class="token operator">=</span> Task<span class="token punctuation">.</span>WhenAll<span class="token punctuation">(</span>tasks<span class="token punctuation">)</span><span class="token punctuation">.</span>Result
+    
+    <span class="token keyword">For</span> <span class="token keyword">Each</span> value <span class="token keyword">In</span> resultingStrings
+        Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span>value<span class="token punctuation">)</span>
+    <span class="token keyword">Next</span> 
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+Async <span class="token keyword">Function</span> TurnSlowlyIntegerIntoString<span class="token punctuation">(</span>input <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span> <span class="token keyword">As</span> Task<span class="token punctuation">(</span><span class="token keyword">Of</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    Await Task<span class="token punctuation">.</span>Delay<span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span>
+    
+    <span class="token keyword">Return</span> input<span class="token punctuation">.</span>ToString<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+</code></pre></div><p>To map different arguments you can replace <code>AddressOf Method</code> with a lambda:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Function</span><span class="token punctuation">(</span>linqData <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span> MyNonMatchingMethod<span class="token punctuation">(</span>linqData<span class="token punctuation">,</span> <span class="token string">&quot;Other parameter&quot;</span><span class="token punctuation">)</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/task-based-asynchronous-pattern.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/using-backgroundworker.html" class="prev">
+        Using BackgroundWorker
+      </a></span> <span class="next"><a href="/vbnet/debugging-your-application.html">
+        Debugging your application
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3489.2f3ecf88.js" defer></script>
+  </body>
+</html>

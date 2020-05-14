@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - Operators</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Math, String Concatenation, Assignment, Comparison, Widening and Narrowing, Operator Overloading, Bitwise">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - Operators">
+    <meta property="og:description" content="Math, String Concatenation, Assignment, Comparison, Widening and Narrowing, Operator Overloading, Bitwise">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/operators.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - Operators">
+    <meta name="twitter:description" content="Math, String Concatenation, Assignment, Comparison, Widening and Narrowing, Operator Overloading, Bitwise">
+    <meta name="twitter:url" content="/vbnet/operators.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3480.8b68cadc.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="sidebar-link">Introduction to Syntax</a></li><li><a href="/vbnet/operators.html" class="active sidebar-link">Operators</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/operators.html#math" class="sidebar-link">Math</a></li><li class="sidebar-sub-header"><a href="/vbnet/operators.html#string-concatenation" class="sidebar-link">String Concatenation</a></li><li class="sidebar-sub-header"><a href="/vbnet/operators.html#assignment" class="sidebar-link">Assignment</a></li><li class="sidebar-sub-header"><a href="/vbnet/operators.html#comparison" class="sidebar-link">Comparison</a></li><li class="sidebar-sub-header"><a href="/vbnet/operators.html#widening-and-narrowing" class="sidebar-link">Widening and Narrowing</a></li><li class="sidebar-sub-header"><a href="/vbnet/operators.html#operator-overloading" class="sidebar-link">Operator Overloading</a></li><li class="sidebar-sub-header"><a href="/vbnet/operators.html#bitwise" class="sidebar-link">Bitwise</a></li></ul></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="sidebar-link">Looping</a></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="sidebar-link">ByVal and ByRef keywords</a></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="sidebar-link">Extension methods</a></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="sidebar-link">Visual Basic 14.0 Features</a></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="sidebar-link">Google Maps in a Windows Form</a></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="sidebar-link">WinForms SpellCheckBox</a></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="sidebar-link">Task-based asynchronous pattern</a></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="operators"><a href="#operators" class="header-anchor">#</a> Operators</h1> <h2 id="math"><a href="#math" class="header-anchor">#</a> Math</h2> <p>If you have the following variables</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> leftValue <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">5</span>
+<span class="token keyword">Dim</span> rightValue <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token keyword">Dim</span> value <span class="token keyword">As</span> <span class="token keyword">Integer</span> <span class="token operator">=</span> <span class="token number">0</span>
+
+</code></pre></div><p><strong>Addition</strong>
+Performed by the plus sign <kbd>+</kbd>.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>value  <span class="token operator">=</span> leftValue <span class="token operator">+</span> rightValue
+
+<span class="token comment">'Output the following:</span>
+<span class="token comment">'7</span>
+
+</code></pre></div><p><strong>Subtraction</strong>
+Performed by the minus sign <kbd>-</kbd>.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>value <span class="token operator">=</span> leftValue <span class="token operator">-</span> rightValue
+
+<span class="token comment">'Output the following:</span>
+<span class="token comment">'3</span>
+
+</code></pre></div><p><strong>Multiplication</strong>
+Performed by the star symbol <kbd>*</kbd>.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>value <span class="token operator">=</span> leftValue <span class="token operator">*</span> rightValue
+
+<span class="token comment">'Output the following:</span>
+<span class="token comment">'10</span>
+
+</code></pre></div><p><strong>Division</strong>
+Performed by the forward slash symbol <kbd>/</kbd>.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>value <span class="token operator">=</span> leftValue <span class="token operator">/</span> rightValue
+
+<span class="token comment">'Output the following:</span>
+<span class="token comment">'2.5</span>
+
+</code></pre></div><p><strong>Integer Division</strong>
+Performed by the backslash symbol <kbd>&lt;/kbd&gt;.</kbd></p> <div class="language-vb extra-class"><pre class="language-vb"><code>value <span class="token operator">=</span> leftValue <span class="token operator">\</span> rightValue
+
+<span class="token comment">'Output the following:</span>
+<span class="token comment">'2</span>
+
+</code></pre></div><p><strong>Modulus</strong>
+Performed by the <kbd>Mod</kbd> keyword.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>value <span class="token operator">=</span> leftValue <span class="token keyword">Mod</span> rightValue
+
+<span class="token comment">'Output the following:</span>
+<span class="token comment">'1</span>
+
+</code></pre></div><p><strong>Raise to a Power of</strong>
+Performed by the <kbd>^</kbd> symbol.</p> <div class="language-vb extra-class"><pre class="language-vb"><code>value <span class="token operator">=</span> leftValue <span class="token operator">^</span> rightValue
+
+<span class="token comment">'Output the following:</span>
+<span class="token comment">'25</span>
+
+</code></pre></div><h2 id="string-concatenation"><a href="#string-concatenation" class="header-anchor">#</a> String Concatenation</h2> <p>String concatenation is when you combine two or more strings into a single string variable.</p> <p>String concatenation is performed with the <strong><kbd>&amp;</kbd></strong> symbol.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> one <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;Hello &quot;</span>
+<span class="token keyword">Dim</span> two <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;there&quot;</span>
+<span class="token keyword">Dim</span> result <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> one <span class="token operator">&amp;</span> two
+
+</code></pre></div><p>Non-string values will be converted to string when using <strong><kbd>&amp;</kbd></strong>.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> result <span class="token keyword">as</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;2&quot;</span> <span class="token operator">&amp;</span> <span class="token number">10</span> <span class="token comment">' result  = &quot;210&quot;</span>
+
+</code></pre></div><p><strong>Always use <strong><kbd>&amp;</kbd></strong> (ampersand) to perform string concatenation.</strong></p> <p><strong>DON'T DO THIS</strong><br>
+While it is possible, in the <strong>simplest</strong> of cases, to use the <kbd>+</kbd> symbol to do string concatenation, you should never do this.  If one side of the plus symbol is not a string, when Option strict is off, the behavior becomes non-intuitive, when Option strict is on it will produce a compiler error.  Consider:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> value <span class="token operator">=</span> <span class="token string">&quot;2&quot;</span> <span class="token operator">+</span> <span class="token number">10</span>    <span class="token comment">' result = 12  (data type Double)</span>
+<span class="token keyword">Dim</span> value <span class="token operator">=</span> <span class="token string">&quot;2&quot;</span> <span class="token operator">+</span> <span class="token string">&quot;10&quot;</span>  <span class="token comment">' result = &quot;210&quot;  (data type String)</span>
+<span class="token keyword">Dim</span> value <span class="token operator">=</span> <span class="token string">&quot;2g&quot;</span> <span class="token operator">+</span> <span class="token number">10</span>   <span class="token comment">' runtime error</span>
+
+</code></pre></div><p>The problem here is that if the <code>+</code> operator sees any operand that is a numeric type, it will presume that the programmer wanted to perform an arithmetic operation and attempt to cast the other operand to the equivalent numeric type. In cases where the other operand is a string that contains a number (for example, &quot;10&quot;), the string is <strong>converted to a number</strong> and then <strong>arithmetically</strong> added to the other operand. If the other operand cannot be converted to a number (for example, &quot;2g&quot;), the operation will crash due to a data conversion error. The <code>+</code> operator will only perform string concatenation if <strong>both</strong> operands are of <code>String</code> type.</p> <p>The <code>&amp;</code> operator, however, is designed for string concatenation and will cast non-string types to strings.</p> <h2 id="assignment"><a href="#assignment" class="header-anchor">#</a> Assignment</h2> <p>There is a single assignment operator in VB.</p> <li>The equal sign <kbd>=</kbd> is used both for equality comparison and assignment.<br>
+`Dim value = 5`</li> <p><strong>Notes</strong><br>
+Watch out for assignment vs. equality comparison.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> result <span class="token operator">=</span> leftValue <span class="token operator">=</span> rightValue  
+
+</code></pre></div><p>In this example you can see the equal sign being used as both a comparison operator and an assignment operator, unlike other languages.  In this case, <code>result</code> will be of type <code>Boolean</code> and will contain the value of the equality comparison between <code>leftValue</code> and <code>rightValue</code>.</p> <p>Related: <a href="http://stackoverflow.com/documentation/vb.net/4022/option-strict#t=20160728074421670268" target="_blank" rel="noopener noreferrer">Using Option Strict On to declare variables properly<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="comparison"><a href="#comparison" class="header-anchor">#</a> Comparison</h2> <p>Comparison operators compare two values and return to you a boolean (<code>True</code> or <code>False</code>) as the result.</p> <p><strong>Equality</strong></p> <li>The equal sign <kbd>=</kbd> is used both for equality comparison and assignment.<br>
+`If leftValue = rightValue Then` ...</li> <p><strong>Inequality</strong></p> <li>The left angle bracket nest to the right angle bracket <kbd>&lt;&gt;</kbd> performs an unequal comparison.<br>
+`If leftValue &lt;&gt; rightValue Then` ...</li> <p><strong>Greater Than</strong></p> <li>The left angle bracket <kbd>&lt;</kbd> performs a greater than comparison.<br>
+`If leftValue &lt; rightValue Then` ...</li> <p><strong>Greater Than Or Equal</strong></p> <li>The equal sign nest to the left angle bracket <kbd>=&gt;</kbd> performs a greater than or equals comparison.<br>
+`If leftValue =&lt; rightValue Then` ...</li> <p><strong>Less Than</strong></p> <li>The right angle bracket <kbd>&gt;</kbd> performs a less than comparison.<br>
+`If leftValue &gt; rightValue Then` ...</li> <p><strong>Less Than Or Equal</strong></p> <li>The equal sign nest to the right angle bracket <kbd>=&gt;</kbd> performs a greater than or equals comparison.<br>
+`If leftValue =&gt; rightValue Then` ...</li> <p><strong>Like</strong></p> <ul><li>The <kbd>Like</kbd> operator tests the equality of a string and a search pattern.</li> <li>The <kbd>Like</kbd> operator relies on the <a href="https://msdn.microsoft.com/en-us/library/8t3khw5f.aspx" target="_blank" rel="noopener noreferrer">Option Compare Statement<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>The following table lists the available patterns. Source: <a href="https://msdn.microsoft.com/en-us/library/swf8kaxw.aspx" target="_blank" rel="noopener noreferrer">https://msdn.microsoft.com/en-us/library/swf8kaxw.aspx<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> (Remarks section)</li></ul> <table><thead><tr><th>Characters in the <strong>Pattern</strong></th> <th>Matches in the <strong>String</strong></th></tr></thead> <tbody><tr><td>?</td> <td>Any single character</td></tr> <tr><td>*</td> <td>Zero or more characters</td></tr> <tr><td>#</td> <td>Any single digit (0 - 9)</td></tr> <tr><td>[charlist]</td> <td>Any single character in <strong>charlist</strong></td></tr> <tr><td>[!charlist]</td> <td>Any single character not in <strong>charlist</strong></td></tr></tbody></table> <li>See further info on [MSDN](https://msdn.microsoft.com/en-us/library/swf8kaxw.aspx) in the remarks section.<br>
+`If string Like pattern Then ...`</li> <h2 id="widening-and-narrowing"><a href="#widening-and-narrowing" class="header-anchor">#</a> Widening and Narrowing</h2> <p><strong>Needs editing.</strong></p> <h2 id="operator-overloading"><a href="#operator-overloading" class="header-anchor">#</a> Operator Overloading</h2> <p><strong>Needs editing.</strong></p> <h2 id="bitwise"><a href="#bitwise" class="header-anchor">#</a> Bitwise</h2> <p>These are the bitwise operators in VB.NET : And, Or, Xor, Not</p> <p>Example of And bitwise operation</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> a <span class="token keyword">as</span> <span class="token keyword">Integer</span>
+a <span class="token operator">=</span> <span class="token number">3</span> <span class="token keyword">And</span> <span class="token number">5</span>
+
+</code></pre></div><p>The value of a will be 1. The result is obtained after comparing 3 and 5 in binary for. 3 in binary form is 011 and 5 in binary form is 101. The And operator places 1 if both bits are 1. If any of the bits are 0 then the value will be 0</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token number">3</span> <span class="token keyword">And</span> <span class="token number">5</span> will be  <span class="token number">011</span>
+                 <span class="token number">101</span>
+                 <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
+                 <span class="token number">001</span>
+
+</code></pre></div><p>So the binary result is 001 and when that is converted to decimal, the answer will be 1.</p> <p>Or operator places 1 if both or one bit is 1</p> <div class="language- extra-class"><pre class="language-text"><code>
+  3 Or 5 will be 011
+                  101
+                  ---
+                  111
+
+</code></pre></div><p>Xor operator places 1 if only one of the bit is 1 (not both)</p> <div class="language- extra-class"><pre class="language-text"><code>
+  3 Xor 5 will be  011
+                    101
+                    ---
+                    110
+
+</code></pre></div><p>Not operator reverts the bits including sign</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Not</span> <span class="token number">5</span> will be <span class="token operator">-</span> <span class="token number">010</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Operators are used to assign or compare values.  They consist of a single symbol or keyword and are usually sandwiched between a left and a right value.  For example:  <code>right = left</code>.</p> <p>Operators are intrinsic to the language (such as <code>=</code>), and not functions such as those provided by System.Math.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/operators.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/introduction-to-syntax.html" class="prev">
+        Introduction to Syntax
+      </a></span> <span class="next"><a href="/vbnet/conditions.html">
+        Conditions
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3480.8b68cadc.js" defer></script>
+  </body>
+</html>

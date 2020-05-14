@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring Boot - Controllers</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Spring boot rest controller.">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Spring Boot - Controllers">
+    <meta property="og:description" content="Spring boot rest controller.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/spring/controllers.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Spring Boot - Controllers">
+    <meta name="twitter:description" content="Spring boot rest controller.">
+    <meta name="twitter:url" content="/spring/controllers.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3200.405957b5.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Spring Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/spring/" class="sidebar-link">Disclaimer</a></li><li><a href="/spring/getting-started-with-spring.html" class="sidebar-link">Getting started with spring</a></li><li><a href="/spring/spring-core.html" class="sidebar-link">Spring Core</a></li><li><a href="/spring/spring-expression-language-spel.html" class="sidebar-link">Spring Expression Language (SpEL)</a></li><li><a href="/spring/obtaining-a-sqlrowset-from-simplejdbccall.html" class="sidebar-link">Obtaining a SqlRowSet from SimpleJdbcCall</a></li><li><a href="/spring/creating-and-using-beans.html" class="sidebar-link">Creating and using beans</a></li><li><a href="/spring/bean-scopes.html" class="sidebar-link">Bean scopes</a></li><li><a href="/spring/conditional-bean-registration-in-spring.html" class="sidebar-link">Conditional bean registration in Spring</a></li><li><a href="/spring/spring-jsr-303-bean-validation.html" class="sidebar-link">Spring JSR 303 Bean Validation</a></li><li><a href="/spring/applicationcontext-configuration.html" class="sidebar-link">ApplicationContext Configuration</a></li><li><a href="/spring/resttemplate.html" class="sidebar-link">RestTemplate</a></li><li><a href="/spring/task-execution-and-scheduling.html" class="sidebar-link">Task Execution and Scheduling</a></li><li><a href="/spring/spring-lazy-initialization.html" class="sidebar-link">Spring Lazy Initialization</a></li><li><a href="/spring/property-source.html" class="sidebar-link">Property Source</a></li><li><a href="/spring/dependency-injection-di-and-inversion-of-control-ioc.html" class="sidebar-link">Dependency Injection (DI) and Inversion of Control (IoC)</a></li><li><a href="/spring/jdbctemplate.html" class="sidebar-link">JdbcTemplate</a></li><li><a href="/spring/soap-ws-consumption.html" class="sidebar-link">SOAP WS Consumption</a></li><li><a href="/spring/spring-profile.html" class="sidebar-link">Spring profile</a></li><li><a href="/spring/understanding-the-dispatcher-servlet-xml.html" class="sidebar-link">Understanding the dispatcher-servlet.xml</a></li><li><a href="/spring/getting-started-with-spring-mvc.html" class="sidebar-link">Getting started with spring-mvc</a></li><li><a href="/spring/spring-mvc-with-annotations.html" class="sidebar-link">Spring-MVC with annotations</a></li><li><a href="/spring/spring-mvc-validation.html" class="sidebar-link">Spring MVC Validation</a></li><li><a href="/spring/file-upload.html" class="sidebar-link">File Upload</a></li><li><a href="/spring/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/spring/global-exception-handling.html" class="sidebar-link">Global Exception Handling</a></li><li><a href="/spring/getting-started-with-spring-boot.html" class="sidebar-link">Getting started with spring-boot</a></li><li><a href="/spring/installing-the-spring-boot-cli.html" class="sidebar-link">Installing the Spring Boot CLI</a></li><li><a href="/spring/controllers.html" class="active sidebar-link">Controllers</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/spring/controllers.html#spring-boot-rest-controller" class="sidebar-link">Spring boot rest controller.</a></li></ul></li><li><a href="/spring/package-scanning.html" class="sidebar-link">Package scanning</a></li><li><a href="/spring/rest-services.html" class="sidebar-link">REST Services</a></li><li><a href="/spring/create-and-use-of-multiple-application-properties-files.html" class="sidebar-link">Create and Use of multiple application.properties files</a></li><li><a href="/spring/threadpooltaskexecutor-configuration-and-usage.html" class="sidebar-link">ThreadPoolTaskExecutor: configuration and usage</a></li><li><a href="/spring/fully-responsive-spring-boot-web-application-with-jhipster.html" class="sidebar-link">Fully-Responsive Spring Boot Web Application with JHipster</a></li><li><a href="/spring/connecting-a-spring-boot-application-to-mysql.html" class="sidebar-link">Connecting a spring-boot application to MySQL</a></li><li><a href="/spring/caching-with-redis-using-spring-boot-for-mongodb.html" class="sidebar-link">Caching with Redis Using Spring Boot for MongoDB</a></li><li><a href="/spring/deploying-sample-application-using-spring-boot-on-amazon-elastic-beanstalk.html" class="sidebar-link">Deploying Sample application using Spring-boot on Amazon Elastic Beanstalk</a></li><li><a href="/spring/testing-in-spring-boot.html" class="sidebar-link">Testing in Spring Boot</a></li><li><a href="/spring/spring-boot-hibernate-web-ui-thymeleaf.html" class="sidebar-link">Spring boot + Hibernate + Web UI (Thymeleaf)</a></li><li><a href="/spring/spring-boot-hibernate-rest-integration.html" class="sidebar-link">Spring Boot- Hibernate-REST Integration</a></li><li><a href="/spring/spring-boot-microservice-with-jpa.html" class="sidebar-link">Spring-Boot Microservice with JPA</a></li><li><a href="/spring/spring-boot-jpa-rest.html" class="sidebar-link">Spring Boot + JPA + REST</a></li><li><a href="/spring/spring-boot-jdbc.html" class="sidebar-link">Spring-Boot + JDBC</a></li><li><a href="/spring/spring-boot-jpa-mongodb.html" class="sidebar-link">Spring boot + JPA + mongoDB</a></li><li><a href="/spring/spring-boot-spring-data-elasticsearch.html" class="sidebar-link">Spring Boot + Spring Data Elasticsearch</a></li><li><a href="/spring/spring-boot-spring-data-jpa.html" class="sidebar-link">Spring boot + Spring Data JPA</a></li><li><a href="/spring/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="controllers"><a href="#controllers" class="header-anchor">#</a> Controllers</h1> <p>In this section i will add an example for the Spring boot rest controller with Get and post request.</p> <h2 id="spring-boot-rest-controller"><a href="#spring-boot-rest-controller" class="header-anchor">#</a> Spring boot rest controller.</h2> <blockquote></blockquote> <p>In this example i will show how to formulate an rest controller to get
+and post data to the database using JPA with the most ease and least
+code.</p> <p>In this example we will refer to the data table named buyerRequirement .</p> <p><strong>BuyingRequirement.java</strong></p> <p>@Entity
+@Table(name = &quot;BUYINGREQUIREMENTS&quot;)
+@NamedQueries({
+@NamedQuery(name = &quot;BuyingRequirement.findAll&quot;, query = &quot;SELECT b FROM BuyingRequirement b&quot;)})
+public class BuyingRequirement extends Domain implements Serializable {
+private static final long serialVersionUID = 1L;</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;PRODUCT_NAME&quot;</span><span class="token punctuation">,</span> nullable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">private</span> <span class="token class-name">String</span> productname<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;NAME&quot;</span><span class="token punctuation">,</span> nullable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;MOBILE&quot;</span><span class="token punctuation">,</span> nullable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">private</span> <span class="token class-name">String</span> mobile<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;EMAIL&quot;</span><span class="token punctuation">,</span> nullable <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">)</span>
+<span class="token keyword">private</span> <span class="token class-name">String</span> email<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Column</span><span class="token punctuation">(</span>name <span class="token operator">=</span> <span class="token string">&quot;CITY&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">private</span> <span class="token class-name">String</span> city<span class="token punctuation">;</span>
+
+
+<span class="token keyword">public</span> <span class="token class-name">BuyingRequirement</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getProductname</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> productname<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setProductname</span><span class="token punctuation">(</span><span class="token class-name">String</span> productname<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>productname <span class="token operator">=</span> productname<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span><span class="token class-name">String</span> name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getMobile</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> mobile<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setMobile</span><span class="token punctuation">(</span><span class="token class-name">String</span> mobile<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>mobile <span class="token operator">=</span> mobile<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getEmail</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> email<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setEmail</span><span class="token punctuation">(</span><span class="token class-name">String</span> email<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>email <span class="token operator">=</span> email<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getCity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> city<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setCity</span><span class="token punctuation">(</span><span class="token class-name">String</span> city<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>city <span class="token operator">=</span> city<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>}</p> <p>This is the entity class which includes the parameter referring to columns in byuingRequirement table and their getters and setters.</p> <p><strong>IBuyingRequirementsRepository.java(JPA interface)</strong></p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Repository</span>
+<span class="token annotation punctuation">@RepositoryRestResource</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IBuyingRequirementsRepository</span> <span class="token keyword">extends</span> <span class="token class-name">JpaRepository</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">BuyingRequirement</span><span class="token punctuation">,</span> UUID<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+   <span class="token comment">// Page&lt;BuyingRequirement&gt; findAllByOrderByCreatedDesc(Pageable pageable);</span>
+    <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">BuyingRequirement</span><span class="token punctuation">&gt;</span></span> <span class="token function">findAllByOrderByCreatedDesc</span><span class="token punctuation">(</span><span class="token class-name">Pageable</span> pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">BuyingRequirement</span><span class="token punctuation">&gt;</span></span> <span class="token function">findByNameContainingIgnoreCase</span><span class="token punctuation">(</span><span class="token annotation punctuation">@Param</span><span class="token punctuation">(</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">)</span> <span class="token class-name">String</span> name<span class="token punctuation">,</span> <span class="token class-name">Pageable</span> pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>BuyingRequirementController.java</strong></p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@RestController</span>
+<span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">&quot;/api/v1&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BuyingRequirementController</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token class-name">IBuyingRequirementsRepository</span> iBuyingRequirementsRepository<span class="token punctuation">;</span>
+    <span class="token class-name">Email</span> email <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Email</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token class-name">BuyerRequirementTemplate</span> buyerRequirementTemplate <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BuyerRequirementTemplate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">String</span> <span class="token class-name">To</span> <span class="token operator">=</span> <span class="token string">&quot;support@pharmerz.com&quot;</span><span class="token punctuation">;</span>
+    <span class="token comment">// private String To = &quot;amigujarathi@gmail.com&quot;;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> <span class="token class-name">Subject</span> <span class="token operator">=</span> <span class="token string">&quot;Buyer Request From Pharmerz &quot;</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@PostMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">&quot;/buyingRequirement&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">ResponseEntity</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">BuyingRequirement</span><span class="token punctuation">&gt;</span></span> <span class="token class-name">CreateBuyingRequirement</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestBody</span> <span class="token class-name">BuyingRequirement</span> buyingRequirements<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token class-name">String</span> productname <span class="token operator">=</span> buyingRequirements<span class="token punctuation">.</span><span class="token function">getProductname</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> name <span class="token operator">=</span> buyingRequirements<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> mobile <span class="token operator">=</span> buyingRequirements<span class="token punctuation">.</span><span class="token function">getMobile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> emails <span class="token operator">=</span> buyingRequirements<span class="token punctuation">.</span><span class="token function">getEmail</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> city <span class="token operator">=</span> buyingRequirements<span class="token punctuation">.</span><span class="token function">getCity</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>city <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            city <span class="token operator">=</span> <span class="token string">&quot;-&quot;</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token class-name">String</span> HTMLBODY <span class="token operator">=</span> buyerRequirementTemplate<span class="token punctuation">.</span><span class="token function">template</span><span class="token punctuation">(</span>productname<span class="token punctuation">,</span> name<span class="token punctuation">,</span> emails<span class="token punctuation">,</span> mobile<span class="token punctuation">,</span> city<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        email<span class="token punctuation">.</span><span class="token class-name">SendMail</span><span class="token punctuation">(</span><span class="token class-name">To</span><span class="token punctuation">,</span> <span class="token class-name">Subject</span><span class="token punctuation">,</span> HTMLBODY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        iBuyingRequirementsRepository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>buyingRequirements<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ResponseEntity</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">BuyingRequirement</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span>buyingRequirements<span class="token punctuation">,</span> <span class="token class-name">HttpStatus</span><span class="token punctuation">.</span>CREATED<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">&quot;/buyingRequirements&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">BuyingRequirement</span><span class="token punctuation">&gt;</span></span> <span class="token function">getAllBuyingRequirements</span><span class="token punctuation">(</span><span class="token class-name">Pageable</span> pageable<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token class-name">Page</span> requirements <span class="token operator">=</span> iBuyingRequirementsRepository<span class="token punctuation">.</span><span class="token function">findAllByOrderByCreatedDesc</span><span class="token punctuation">(</span>pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> requirements<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@GetMapping</span><span class="token punctuation">(</span>value <span class="token operator">=</span> <span class="token string">&quot;/buyingRequirmentByName/{name}&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">Page</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">BuyingRequirement</span><span class="token punctuation">&gt;</span></span> <span class="token function">getByName</span><span class="token punctuation">(</span><span class="token annotation punctuation">@PathVariable</span> <span class="token class-name">String</span> name<span class="token punctuation">,</span><span class="token class-name">Pageable</span> pageable<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">Page</span> buyersByName <span class="token operator">=</span> iBuyingRequirementsRepository<span class="token punctuation">.</span><span class="token function">findByNameContainingIgnoreCase</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span>pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> buyersByName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>It includes there method</p> <ol><li>Post method which post data to the database .</li> <li>Get method which fetch all records from buyingRequirement table.</li> <li>This is also a get method which will find the buying requirement by the person's name.</li></ol></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/spring/controllers.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/spring/installing-the-spring-boot-cli.html" class="prev">
+        Installing the Spring Boot CLI
+      </a></span> <span class="next"><a href="/spring/package-scanning.html">
+        Package scanning
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3200.405957b5.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PowerShell - Working with XML Files</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Accessing an XML File, Creating an XML Document using XmlWriter(), Adding snippits of XML to current XMLDocument">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="PowerShell - Working with XML Files">
+    <meta property="og:description" content="Accessing an XML File, Creating an XML Document using XmlWriter(), Adding snippits of XML to current XMLDocument">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/powershell/working-with-xml-files.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="PowerShell - Working with XML Files">
+    <meta name="twitter:description" content="Accessing an XML File, Creating an XML Document using XmlWriter(), Adding snippits of XML to current XMLDocument">
+    <meta name="twitter:url" content="/powershell/working-with-xml-files.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2641.c106acca.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>PowerShell</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/powershell/" class="sidebar-link">Disclaimer</a></li><li><a href="/powershell/getting-started-with-powershell.html" class="sidebar-link">Getting started with PowerShell</a></li><li><a href="/powershell/variables-in-powershell.html" class="sidebar-link">Variables in PowerShell</a></li><li><a href="/powershell/operators.html" class="sidebar-link">Operators</a></li><li><a href="/powershell/special-operators.html" class="sidebar-link">Special Operators</a></li><li><a href="/powershell/basic-set-operations.html" class="sidebar-link">Basic Set Operations</a></li><li><a href="/powershell/conditional-logic.html" class="sidebar-link">Conditional logic</a></li><li><a href="/powershell/loops.html" class="sidebar-link">Loops</a></li><li><a href="/powershell/switch-statement.html" class="sidebar-link">Switch statement</a></li><li><a href="/powershell/strings.html" class="sidebar-link">Strings</a></li><li><a href="/powershell/hashtables.html" class="sidebar-link">HashTables</a></li><li><a href="/powershell/working-with-objects.html" class="sidebar-link">Working with Objects</a></li><li><a href="/powershell/powershell-functions.html" class="sidebar-link">PowerShell Functions</a></li><li><a href="/powershell/powershell-classes.html" class="sidebar-link">PowerShell Classes</a></li><li><a href="/powershell/powershell-modules.html" class="sidebar-link">Powershell Modules</a></li><li><a href="/powershell/powershell-profiles.html" class="sidebar-link">Powershell profiles</a></li><li><a href="/powershell/calculated-properties.html" class="sidebar-link">Calculated Properties</a></li><li><a href="/powershell/using-existing-static-classes.html" class="sidebar-link">Using existing static classes</a></li><li><a href="/powershell/built-in-variables.html" class="sidebar-link">Built-in variables</a></li><li><a href="/powershell/automatic-variables.html" class="sidebar-link">Automatic Variables</a></li><li><a href="/powershell/automatic-variables-part-2.html" class="sidebar-link">Automatic Variables - part 2</a></li><li><a href="/powershell/environment-variables.html" class="sidebar-link">Environment Variables</a></li><li><a href="/powershell/splatting.html" class="sidebar-link">Splatting</a></li><li><a href="/powershell/powershell-streams-debug-verbose-warning-error-output-and-information.html" class="sidebar-link">PowerShell &quot;Streams&quot;; Debug, Verbose, Warning, Error, Output and Information</a></li><li><a href="/powershell/sending-email.html" class="sidebar-link">Sending Email</a></li><li><a href="/powershell/powershell-remoting.html" class="sidebar-link">Powershell Remoting</a></li><li><a href="/powershell/working-with-the-powershell-pipeline.html" class="sidebar-link">Working with the PowerShell pipeline</a></li><li><a href="/powershell/powershell-background-jobs.html" class="sidebar-link">PowerShell Background Jobs</a></li><li><a href="/powershell/return-behavior-in-powershell.html" class="sidebar-link">Return behavior in PowerShell</a></li><li><a href="/powershell/csv-parsing.html" class="sidebar-link">CSV parsing</a></li><li><a href="/powershell/working-with-xml-files.html" class="active sidebar-link">Working with XML Files</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/powershell/working-with-xml-files.html#accessing-an-xml-file" class="sidebar-link">Accessing an XML File</a></li><li class="sidebar-sub-header"><a href="/powershell/working-with-xml-files.html#creating-an-xml-document-using-xmlwriter" class="sidebar-link">Creating an XML Document using XmlWriter()</a></li><li class="sidebar-sub-header"><a href="/powershell/working-with-xml-files.html#adding-snippits-of-xml-to-current-xmldocument" class="sidebar-link">Adding snippits of XML to current XMLDocument</a></li></ul></li><li><a href="/powershell/communicating-with-restful-apis.html" class="sidebar-link">Communicating with RESTful APIs</a></li><li><a href="/powershell/powershell-sql-queries.html" class="sidebar-link">powershell sql queries</a></li><li><a href="/powershell/regular-expressions.html" class="sidebar-link">Regular Expressions</a></li><li><a href="/powershell/aliases.html" class="sidebar-link">Aliases</a></li><li><a href="/powershell/using-the-progress-bar.html" class="sidebar-link">Using the progress bar</a></li><li><a href="/powershell/powershell-exe-command-line.html" class="sidebar-link">PowerShell.exe Command-Line</a></li><li><a href="/powershell/cmdlet-naming.html" class="sidebar-link">Cmdlet Naming</a></li><li><a href="/powershell/running-executables.html" class="sidebar-link">Running Executables</a></li><li><a href="/powershell/enforcing-script-prerequisites.html" class="sidebar-link">Enforcing script prerequisites</a></li><li><a href="/powershell/using-the-help-system.html" class="sidebar-link">Using the Help System</a></li><li><a href="/powershell/modules-scripts-and-functions.html" class="sidebar-link">Modules, Scripts and Functions</a></li><li><a href="/powershell/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/powershell/common-parameters.html" class="sidebar-link">Common parameters</a></li><li><a href="/powershell/parameter-sets.html" class="sidebar-link">Parameter sets</a></li><li><a href="/powershell/powershell-dynamic-parameters.html" class="sidebar-link">PowerShell Dynamic Parameters</a></li><li><a href="/powershell/gui-in-powershell.html" class="sidebar-link">GUI in Powershell</a></li><li><a href="/powershell/url-encode-decode.html" class="sidebar-link">URL Encode/Decode</a></li><li><a href="/powershell/error-handling.html" class="sidebar-link">Error handling</a></li><li><a href="/powershell/package-management.html" class="sidebar-link">Package management</a></li><li><a href="/powershell/tcp-communication-with-powershell.html" class="sidebar-link">TCP Communication with PowerShell</a></li><li><a href="/powershell/powershell-workflows.html" class="sidebar-link">PowerShell Workflows</a></li><li><a href="/powershell/embedding-managed-code-c-vb.html" class="sidebar-link">Embedding Managed Code (C# | VB)</a></li><li><a href="/powershell/how-to-download-latest-artifact-from-artifactory-using-powershell-script-v2-0-or-below.html" class="sidebar-link">How to download latest artifact from Artifactory using Powershell script (v2.0 or below)?</a></li><li><a href="/powershell/comment-based-help.html" class="sidebar-link">Comment-based help</a></li><li><a href="/powershell/archive-module.html" class="sidebar-link">Archive Module</a></li><li><a href="/powershell/infrastructure-automation.html" class="sidebar-link">Infrastructure Automation</a></li><li><a href="/powershell/psscriptanalyzer-powershell-script-analyzer.html" class="sidebar-link">PSScriptAnalyzer - PowerShell Script Analyzer</a></li><li><a href="/powershell/desired-state-configuration.html" class="sidebar-link">Desired State Configuration</a></li><li><a href="/powershell/using-shouldprocess.html" class="sidebar-link">Using ShouldProcess</a></li><li><a href="/powershell/scheduled-tasks-module.html" class="sidebar-link">Scheduled tasks module</a></li><li><a href="/powershell/ise-module.html" class="sidebar-link">ISE module</a></li><li><a href="/powershell/creating-dsc-class-based-resources.html" class="sidebar-link">Creating DSC Class-Based Resources</a></li><li><a href="/powershell/wmi-and-cim.html" class="sidebar-link">WMI and CIM</a></li><li><a href="/powershell/activedirectory-module.html" class="sidebar-link">ActiveDirectory module</a></li><li><a href="/powershell/sharepoint-module.html" class="sidebar-link">SharePoint Module</a></li><li><a href="/powershell/introduction-to-psake.html" class="sidebar-link">Introduction to Psake</a></li><li><a href="/powershell/introduction-to-pester.html" class="sidebar-link">Introduction to Pester</a></li><li><a href="/powershell/handling-secrets-and-credentials.html" class="sidebar-link">Handling Secrets and Credentials</a></li><li><a href="/powershell/security-and-cryptography.html" class="sidebar-link">Security and Cryptography</a></li><li><a href="/powershell/signing-scripts.html" class="sidebar-link">Signing Scripts</a></li><li><a href="/powershell/anonymize-ip-v4-and-v6-in-text-file-with-powershell.html" class="sidebar-link">Anonymize IP (v4 and v6) in text file with Powershell</a></li><li><a href="/powershell/amazon-web-services-aws-rekognition.html" class="sidebar-link">Amazon Web Services (AWS) Rekognition</a></li><li><a href="/powershell/amazon-web-services-aws-simple-storage-service-s3.html" class="sidebar-link">Amazon Web Services (AWS) Simple Storage Service (S3)</a></li><li><a href="/powershell/mongodb.html" class="sidebar-link">MongoDB</a></li><li><a href="/powershell/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="working-with-xml-files"><a href="#working-with-xml-files" class="header-anchor">#</a> Working with XML Files</h1> <h2 id="accessing-an-xml-file"><a href="#accessing-an-xml-file" class="header-anchor">#</a> Accessing an XML File</h2> <div class="language-powershell extra-class"><pre class="language-powershell"><code>&lt;<span class="token operator">!</span>-<span class="token operator">-</span> file<span class="token punctuation">.</span>xml <span class="token operator">--</span>&gt;
+&lt;people&gt;
+    &lt;person id=<span class="token string">&quot;101&quot;</span>&gt;
+        &lt;name&gt;Jon Lajoie&lt;<span class="token operator">/</span>name&gt;
+        &lt;age&gt;22&lt;<span class="token operator">/</span>age&gt;
+    &lt;<span class="token operator">/</span>person&gt;
+    &lt;person id=<span class="token string">&quot;102&quot;</span>&gt;
+        &lt;name&gt;Lord Gaben&lt;<span class="token operator">/</span>name&gt;
+        &lt;age&gt;65&lt;<span class="token operator">/</span>age&gt;
+    &lt;<span class="token operator">/</span>person&gt;
+    &lt;person id=<span class="token string">&quot;103&quot;</span>&gt;
+        &lt;name&gt;Gordon Freeman&lt;<span class="token operator">/</span>name&gt;
+        &lt;age&gt;29&lt;<span class="token operator">/</span>age&gt;
+    &lt;<span class="token operator">/</span>person&gt;
+&lt;<span class="token operator">/</span>people&gt;
+
+</code></pre></div><p><strong><strong>Loading an XML File</strong></strong></p> <p>To load an XML file, you can use any of these:</p> <div class="language-powershell extra-class"><pre class="language-powershell"><code><span class="token comment"># First Method</span>
+<span class="token variable">$xdoc</span> = <span class="token function">New-Object</span> System<span class="token punctuation">.</span>Xml<span class="token punctuation">.</span>XmlDocument
+<span class="token variable">$file</span> = <span class="token function">Resolve-Path</span><span class="token punctuation">(</span><span class="token string">&quot;.\file.xml&quot;</span><span class="token punctuation">)</span>
+<span class="token variable">$xdoc</span><span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token variable">$file</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Second Method</span>
+<span class="token namespace">[xml]</span> <span class="token variable">$xdoc</span> = <span class="token function">Get-Content</span> <span class="token string">&quot;.\file.xml&quot;</span>
+
+<span class="token comment"># Third Method</span>
+<span class="token variable">$xdoc</span> = <span class="token namespace">[xml]</span> <span class="token punctuation">(</span><span class="token function">Get-Content</span> <span class="token string">&quot;.\file.xml&quot;</span><span class="token punctuation">)</span>
+
+</code></pre></div><p><strong><strong>Accessing XML as Objects</strong></strong></p> <div class="language-powershell extra-class"><pre class="language-powershell"><code><span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span> = <span class="token namespace">[xml]</span><span class="token punctuation">(</span><span class="token function">Get-Content</span> file<span class="token punctuation">.</span>xml<span class="token punctuation">)</span>
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span>
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>people
+
+person
+<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>
+<span class="token punctuation">{</span>Jon Lajoie<span class="token punctuation">,</span> Lord Gaben<span class="token punctuation">,</span> Gordon Freeman<span class="token punctuation">}</span>
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>people<span class="token punctuation">.</span>person
+
+id                                      name                                    age
+<span class="token operator">--</span>                                      <span class="token operator">--</span>-<span class="token operator">-</span>                                    <span class="token operator">--</span><span class="token operator">-</span>
+101                                     Jon Lajoie                              22
+102                                     Lord Gaben                              65
+103                                     Gordon Freeman                          29
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>people<span class="token punctuation">.</span>person<span class="token punctuation">[</span>0<span class="token punctuation">]</span><span class="token punctuation">.</span>name
+Jon Lajoie
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>people<span class="token punctuation">.</span>person<span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">.</span>age
+65
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>people<span class="token punctuation">.</span>person<span class="token punctuation">[</span>2<span class="token punctuation">]</span><span class="token punctuation">.</span>id
+103
+
+</code></pre></div><p><strong><strong>Accessing XML with XPath</strong></strong></p> <div class="language-powershell extra-class"><pre class="language-powershell"><code><span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span> = <span class="token namespace">[xml]</span><span class="token punctuation">(</span><span class="token function">Get-Content</span> file<span class="token punctuation">.</span>xml<span class="token punctuation">)</span>
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span>
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>SelectNodes<span class="token punctuation">(</span><span class="token string">&quot;//people&quot;</span><span class="token punctuation">)</span>
+
+person
+<span class="token operator">--</span>-<span class="token operator">--</span>-<span class="token operator">--</span>
+<span class="token punctuation">{</span>Jon Lajoie<span class="token punctuation">,</span> Lord Gaben<span class="token punctuation">,</span> Gordon Freeman<span class="token punctuation">}</span>
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>SelectNodes<span class="token punctuation">(</span><span class="token string">&quot;//people//person&quot;</span><span class="token punctuation">)</span>
+
+id                                      name                                    age
+<span class="token operator">--</span>                                      <span class="token operator">--</span>-<span class="token operator">-</span>                                    <span class="token operator">--</span><span class="token operator">-</span>
+101                                     Jon Lajoie                              22
+102                                     Lord Gaben                              65
+103                                     Gordon Freeman                          29
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>SelectSingleNode<span class="token punctuation">(</span><span class="token string">&quot;people//person[1]//name&quot;</span><span class="token punctuation">)</span>
+Jon Lajoie
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>SelectSingleNode<span class="token punctuation">(</span><span class="token string">&quot;people//person[2]//age&quot;</span><span class="token punctuation">)</span>
+65
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>SelectSingleNode<span class="token punctuation">(</span><span class="token string">&quot;people//person[3]//@id&quot;</span><span class="token punctuation">)</span>
+103
+
+</code></pre></div><p><strong><strong>Accessing XML containing namespaces with XPath</strong></strong></p> <div class="language-powershell extra-class"><pre class="language-powershell"><code><span class="token function">PS</span> C:\&gt; <span class="token namespace">[xml]</span><span class="token variable">$xml</span> = @<span class="token string">&quot;
+&lt;ns:people xmlns:ns=&quot;</span>http:<span class="token operator">/</span><span class="token operator">/</span>schemas<span class="token punctuation">.</span>xmlsoap<span class="token punctuation">.</span>org<span class="token operator">/</span>soap<span class="token operator">/</span>envelope<span class="token operator">/</span><span class="token string">&quot;&gt;
+    &lt;ns:person id=&quot;</span>101<span class="token string">&quot;&gt;
+        &lt;ns:name&gt;Jon Lajoie&lt;/ns:name&gt;
+    &lt;/ns:person&gt;
+    &lt;ns:person id=&quot;</span>102<span class="token string">&quot;&gt;
+        &lt;ns:name&gt;Lord Gaben&lt;/ns:name&gt;
+    &lt;/ns:person&gt;
+    &lt;ns:person id=&quot;</span>103<span class="token string">&quot;&gt;
+        &lt;ns:name&gt;Gordon Freeman&lt;/ns:name&gt;
+    &lt;/ns:person&gt;
+&lt;/ns:people&gt;
+&quot;</span>@
+
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$ns</span> = <span class="token function">new-object</span> Xml<span class="token punctuation">.</span>XmlNamespaceManager <span class="token variable">$xml</span><span class="token punctuation">.</span>NameTable
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$ns</span><span class="token punctuation">.</span>AddNamespace<span class="token punctuation">(</span><span class="token string">&quot;ns&quot;</span><span class="token punctuation">,</span> <span class="token variable">$xml</span><span class="token punctuation">.</span>DocumentElement<span class="token punctuation">.</span>NamespaceURI<span class="token punctuation">)</span>
+<span class="token function">PS</span> C:\&gt; <span class="token variable">$xml</span><span class="token punctuation">.</span>SelectNodes<span class="token punctuation">(</span><span class="token string">&quot;//ns:people/ns:person&quot;</span><span class="token punctuation">,</span> <span class="token variable">$ns</span><span class="token punctuation">)</span>
+
+id                                      name
+<span class="token operator">--</span>                                      <span class="token operator">--</span>-<span class="token operator">-</span>
+101                                     Jon Lajoie
+102                                     Lord Gaben
+103                                     Gordon Freeman
+
+</code></pre></div><h2 id="creating-an-xml-document-using-xmlwriter"><a href="#creating-an-xml-document-using-xmlwriter" class="header-anchor">#</a> Creating an XML Document using XmlWriter()</h2> <div class="language-powershell extra-class"><pre class="language-powershell"><code><span class="token comment"># Set The Formatting</span>
+<span class="token variable">$xmlsettings</span> = <span class="token function">New-Object</span> System<span class="token punctuation">.</span>Xml<span class="token punctuation">.</span>XmlWriterSettings
+<span class="token variable">$xmlsettings</span><span class="token punctuation">.</span>Indent = <span class="token boolean">$true</span>
+<span class="token variable">$xmlsettings</span><span class="token punctuation">.</span>IndentChars = <span class="token string">&quot;    &quot;</span>
+
+<span class="token comment"># Set the File Name Create The Document</span>
+<span class="token variable">$XmlWriter</span> = <span class="token namespace">[System.XML.XmlWriter]</span>::Create<span class="token punctuation">(</span><span class="token string">&quot;C:\YourXML.xml&quot;</span><span class="token punctuation">,</span> <span class="token variable">$xmlsettings</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Write the XML Decleration and set the XSL</span>
+<span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteStartDocument<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteProcessingInstruction<span class="token punctuation">(</span><span class="token string">&quot;xml-stylesheet&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;type='text/xsl' href='style.xsl'&quot;</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Start the Root Element</span>
+<span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteStartElement<span class="token punctuation">(</span><span class="token string">&quot;Root&quot;</span><span class="token punctuation">)</span>
+  
+    <span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteStartElement<span class="token punctuation">(</span><span class="token string">&quot;Object&quot;</span><span class="token punctuation">)</span> <span class="token comment"># &lt;-- Start &lt;Object&gt;</span>
+
+        <span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteElementString<span class="token punctuation">(</span><span class="token string">&quot;Property1&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Value 1&quot;</span><span class="token punctuation">)</span>
+        <span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteElementString<span class="token punctuation">(</span><span class="token string">&quot;Property2&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Value 2&quot;</span><span class="token punctuation">)</span>
+
+        <span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteStartElement<span class="token punctuation">(</span><span class="token string">&quot;SubObject&quot;</span><span class="token punctuation">)</span> <span class="token comment"># &lt;-- Start &lt;SubObject&gt; </span>
+            <span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteElementString<span class="token punctuation">(</span><span class="token string">&quot;Property3&quot;</span><span class="token punctuation">,</span><span class="token string">&quot;Value 3&quot;</span><span class="token punctuation">)</span>
+        <span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteEndElement<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># &lt;-- End &lt;SubObject&gt;</span>
+
+    <span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteEndElement<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># &lt;-- End &lt;Object&gt;</span>
+
+<span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteEndElement<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># &lt;-- End &lt;Root&gt; </span>
+
+<span class="token comment"># End, Finalize and close the XML Document</span>
+<span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>WriteEndDocument<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>Flush<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token variable">$xmlWriter</span><span class="token punctuation">.</span>Close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><p><strong>Output XML File</strong></p> <div class="language-powershell extra-class"><pre class="language-powershell"><code>&lt;?xml version=<span class="token string">&quot;1.0&quot;</span> encoding=<span class="token string">&quot;utf-8&quot;</span>?&gt;
+&lt;?xml<span class="token operator">-</span>stylesheet <span class="token function">type</span>=<span class="token string">'text/xsl'</span> href=<span class="token string">'style.xsl'</span>?&gt;
+&lt;Root&gt;
+    &lt;Object&gt;
+        &lt;Property1&gt;Value 1&lt;<span class="token operator">/</span>Property1&gt;
+        &lt;Property2&gt;Value 2&lt;<span class="token operator">/</span>Property2&gt;
+        &lt;SubObject&gt;
+            &lt;Property3&gt;Value 3&lt;<span class="token operator">/</span>Property3&gt;
+        &lt;<span class="token operator">/</span>SubObject&gt;
+    &lt;<span class="token operator">/</span>Object&gt;
+&lt;<span class="token operator">/</span>Root&gt;
+
+</code></pre></div><h2 id="adding-snippits-of-xml-to-current-xmldocument"><a href="#adding-snippits-of-xml-to-current-xmldocument" class="header-anchor">#</a> Adding snippits of XML to current XMLDocument</h2> <h3 id="sample-data"><a href="#sample-data" class="header-anchor">#</a> Sample Data</h3> <h3 id="xml-document"><a href="#xml-document" class="header-anchor">#</a> XML Document</h3> <p>First, let's define a sample XML document named &quot;<strong>books.xml</strong>&quot; in our current directory:</p> <h3 id="new-data"><a href="#new-data" class="header-anchor">#</a> New Data</h3> <p>What we want to do is add a few new books to this document, let's say <strong>Patriot Games</strong> by Tom Clancy (yes, I'm a fan of Clancy's works ^__^) and a Sci-Fi favourite: <strong>The Hitchhiker's Guide to the Galaxy</strong> by Douglas Adams mainly because Zaphod Beeblebrox is just fun to read.</p> <p>Somehow we've acquired the data for the new books and saved them as a list of PSCustomObjects:</p> <h3 id="templates"><a href="#templates" class="header-anchor">#</a> Templates</h3> <p>Now we need to define a few skeleton XML structures for our new data to go into.  Basically, you want to create a skeleton/template for each list of data.  In our example, that means we need a template for the book, characters, and publishers.  We can also use this to define a few default values, such as the value for the <code>film</code> tag.</p> <p>We're done with set-up.</p> <h3 id="adding-the-new-data"><a href="#adding-the-new-data" class="header-anchor">#</a> Adding the new data</h3> <p>Now that we're all set-up with our sample data, let's add the custom objects to the XML Document Object.</p> <p>We can now write our XML to disk, or screen, or web, or wherever!</p> <h3 id="profit"><a href="#profit" class="header-anchor">#</a> Profit</h3> <p>While this may not be the procedure for everyone I found it to help avoid a whole bunch of <code>[void]$xml.SelectSingleNode(&quot;/complicated/xpath/goes[here]&quot;).AppendChild($xml.CreateElement(&quot;newElementName&quot;)</code> followed by <code>$xml.SelectSingleNode(&quot;/complicated/xpath/goes/here/newElementName&quot;) = $textValue</code></p> <p>I think the method detailed in the example is cleaner and easier to parse for normal humans.</p> <h3 id="improvements"><a href="#improvements" class="header-anchor">#</a> Improvements</h3> <p>It may be possible to change the template to include elements with children instead of breaking out each section as a separate template.  You just have to take care to clone the previous element when you loop through the list.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/powershell/working-with-xml-files.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/powershell/csv-parsing.html" class="prev">
+        CSV parsing
+      </a></span> <span class="next"><a href="/powershell/communicating-with-restful-apis.html">
+        Communicating with RESTful APIs
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2641.c106acca.js" defer></script>
+  </body>
+</html>

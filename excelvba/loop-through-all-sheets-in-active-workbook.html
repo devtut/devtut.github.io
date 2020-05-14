@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Excel VBA - Loop through all Sheets in Active Workbook</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Retrieve all Worksheets Names in Active Workbook, Loop Through all Sheets in all Files in a Folder">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Excel VBA - Loop through all Sheets in Active Workbook">
+    <meta property="og:description" content="Retrieve all Worksheets Names in Active Workbook, Loop Through all Sheets in all Files in a Folder">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/excelvba/loop-through-all-sheets-in-active-workbook.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Excel VBA - Loop through all Sheets in Active Workbook">
+    <meta name="twitter:description" content="Retrieve all Worksheets Names in Active Workbook, Loop Through all Sheets in all Files in a Folder">
+    <meta name="twitter:url" content="/excelvba/loop-through-all-sheets-in-active-workbook.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1084.8edeb8e4.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Excel VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/excelvba/" class="sidebar-link">Disclaimer</a></li><li><a href="/excelvba/getting-started-with-excel-vba.html" class="sidebar-link">Getting started with excel-vba</a></li><li><a href="/excelvba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/excelvba/conditional-statements.html" class="sidebar-link">Conditional statements</a></li><li><a href="/excelvba/ranges-and-cells.html" class="sidebar-link">Ranges and Cells</a></li><li><a href="/excelvba/named-ranges.html" class="sidebar-link">Named Ranges</a></li><li><a href="/excelvba/merged-cells-ranges.html" class="sidebar-link">Merged Cells / Ranges</a></li><li><a href="/excelvba/locating-duplicate-values-in-a-range.html" class="sidebar-link">Locating duplicate values in a range</a></li><li><a href="/excelvba/user-defined-functions-udfs.html" class="sidebar-link">User Defined Functions (UDFs)</a></li><li><a href="/excelvba/conditional-formatting-using-vba.html" class="sidebar-link">Conditional formatting using VBA</a></li><li><a href="/excelvba/workbooks.html" class="sidebar-link">Workbooks</a></li><li><a href="/excelvba/working-with-excel-tables-in-vba.html" class="sidebar-link">Working with Excel Tables in VBA</a></li><li><a href="/excelvba/loop-through-all-sheets-in-active-workbook.html" class="active sidebar-link">Loop through all Sheets in Active Workbook</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/excelvba/loop-through-all-sheets-in-active-workbook.html#retrieve-all-worksheets-names-in-active-workbook" class="sidebar-link">Retrieve all Worksheets Names in Active Workbook</a></li><li class="sidebar-sub-header"><a href="/excelvba/loop-through-all-sheets-in-active-workbook.html#loop-through-all-sheets-in-all-files-in-a-folder" class="sidebar-link">Loop Through all Sheets in all Files in a Folder</a></li></ul></li><li><a href="/excelvba/use-worksheet-object-and-not-sheet-object.html" class="sidebar-link">Use Worksheet object and not Sheet object</a></li><li><a href="/excelvba/methods-for-finding-the-last-used-row-or-column-in-a-worksheet.html" class="sidebar-link">Methods for Finding the Last Used Row or Column in a Worksheet</a></li><li><a href="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html" class="sidebar-link">Creating a drop-down menu in the Active Worksheet with a Combo Box</a></li><li><a href="/excelvba/file-system-object.html" class="sidebar-link">File System Object</a></li><li><a href="/excelvba/pivot-tables.html" class="sidebar-link">Pivot Tables</a></li><li><a href="/excelvba/binding.html" class="sidebar-link">Binding</a></li><li><a href="/excelvba/autofilter-uses-and-best-practices.html" class="sidebar-link">autofilter ; Uses and best practices</a></li><li><a href="/excelvba/application-object.html" class="sidebar-link">Application object</a></li><li><a href="/excelvba/charts-and-charting.html" class="sidebar-link">Charts and Charting</a></li><li><a href="/excelvba/customdocumentproperties-in-practice.html" class="sidebar-link">CustomDocumentProperties in practice</a></li><li><a href="/excelvba/powerpoint-integration-through-vba.html" class="sidebar-link">PowerPoint Integration Through VBA</a></li><li><a href="/excelvba/how-to-record-a-macro.html" class="sidebar-link">How to record a Macro</a></li><li><a href="/excelvba/sql-in-excel-vba-best-practices.html" class="sidebar-link">SQL in Excel VBA - Best Practices</a></li><li><a href="/excelvba/excel-vba-optimization.html" class="sidebar-link">Excel-VBA Optimization</a></li><li><a href="/excelvba/vba-security.html" class="sidebar-link">VBA Security</a></li><li><a href="/excelvba/debugging-and-troubleshooting.html" class="sidebar-link">Debugging and Troubleshooting</a></li><li><a href="/excelvba/vba-best-practices.html" class="sidebar-link">VBA Best Practices</a></li><li><a href="/excelvba/excel-vba-tips-and-tricks.html" class="sidebar-link">Excel VBA Tips and Tricks</a></li><li><a href="/excelvba/common-mistakes.html" class="sidebar-link">Common Mistakes</a></li><li><a href="/excelvba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="loop-through-all-sheets-in-active-workbook"><a href="#loop-through-all-sheets-in-active-workbook" class="header-anchor">#</a> Loop through all Sheets in Active Workbook</h1> <h2 id="retrieve-all-worksheets-names-in-active-workbook"><a href="#retrieve-all-worksheets-names-in-active-workbook" class="header-anchor">#</a> Retrieve all Worksheets Names in Active Workbook</h2> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Option</span> Explicit
+
+<span class="token keyword">Sub</span> LoopAllSheets<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">Dim</span> sht <span class="token keyword">As</span> Excel<span class="token punctuation">.</span>Worksheet
+<span class="token comment">' declare an array of type String without committing to maximum number of members</span>
+<span class="token keyword">Dim</span> sht_Name<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+<span class="token keyword">Dim</span> i <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+
+<span class="token comment">' get the number of worksheets in Active  Workbook , and put it as the maximum number of members in the array</span>
+<span class="token keyword">ReDim</span> sht_Name<span class="token punctuation">(</span><span class="token number">1</span> <span class="token keyword">To</span> ActiveWorkbook<span class="token punctuation">.</span>Worksheets<span class="token punctuation">.</span>count<span class="token punctuation">)</span>
+
+i <span class="token operator">=</span> <span class="token number">1</span>
+
+<span class="token comment">' loop through all worksheets in Active Workbook</span>
+<span class="token keyword">For</span> <span class="token keyword">Each</span> sht <span class="token keyword">In</span> ActiveWorkbook<span class="token punctuation">.</span>Worksheets
+    sht_Name<span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">=</span> sht<span class="token punctuation">.</span>Name <span class="token comment">' get the name of each worksheet and save it in the array</span>
+    i <span class="token operator">=</span> i <span class="token operator">+</span> <span class="token number">1</span>
+<span class="token keyword">Next</span> sht
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="loop-through-all-sheets-in-all-files-in-a-folder"><a href="#loop-through-all-sheets-in-all-files-in-a-folder" class="header-anchor">#</a> Loop Through all Sheets in all Files in a Folder</h2> <div class="language- extra-class"><pre class="language-text"><code>
+Sub Theloopofloops()
+
+ Dim wbk As Workbook
+ Dim Filename As String
+ Dim path As String
+ Dim rCell As Range
+ Dim rRng As Range
+ Dim wsO As Worksheet
+ Dim sheet As Worksheet
+ 
+
+ path = &quot;pathtofile(s)&quot; &amp; &quot;\&quot;
+ Filename = Dir(path &amp; &quot;*.xl??&quot;)
+ Set wsO = ThisWorkbook.Sheets(&quot;Sheet1&quot;) 'included in case you need to differentiate_
+              between workbooks i.e currently opened workbook vs workbook containing code
+
+ Do While Len(Filename) &gt; 0
+     DoEvents
+     Set wbk = Workbooks.Open(path &amp; Filename, True, True)
+         For Each sheet In ActiveWorkbook.Worksheets  'this needs to be adjusted for specifiying sheets. Repeat loop for each sheet so thats on a per sheet basis
+                Set rRng = sheet.Range(&quot;a1:a1000&quot;) 'OBV needs to be changed
+                For Each rCell In rRng.Cells
+                If rCell &lt;&gt; &quot;&quot; And rCell.Value &lt;&gt; vbNullString And rCell.Value &lt;&gt; 0 Then
+
+                   'code that does stuff
+
+                End If
+                Next rCell
+         Next sheet
+     wbk.Close False
+     Filename = Dir
+ Loop
+ End Sub
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/excelvba/loop-through-all-sheets-in-active-workbook.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/excelvba/working-with-excel-tables-in-vba.html" class="prev">
+        Working with Excel Tables in VBA
+      </a></span> <span class="next"><a href="/excelvba/use-worksheet-object-and-not-sheet-object.html">
+        Use Worksheet object and not Sheet object
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1084.8edeb8e4.js" defer></script>
+  </body>
+</html>

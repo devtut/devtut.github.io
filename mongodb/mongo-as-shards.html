@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MongoDB - Mongo as Shards</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Sharding Environment Setup">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="MongoDB - Mongo as Shards">
+    <meta property="og:description" content="Sharding Environment Setup">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/mongodb/mongo-as-shards.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="MongoDB - Mongo as Shards">
+    <meta name="twitter:description" content="Sharding Environment Setup">
+    <meta name="twitter:url" content="/mongodb/mongo-as-shards.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1958.5d7d655f.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>MongoDB</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/mongodb/" class="sidebar-link">Disclaimer</a></li><li><a href="/mongodb/getting-started-with-mongodb.html" class="sidebar-link">Getting started with MongoDB</a></li><li><a href="/mongodb/crud-operation.html" class="sidebar-link">CRUD Operation</a></li><li><a href="/mongodb/getting-database-information.html" class="sidebar-link">Getting database information</a></li><li><a href="/mongodb/querying-for-data-getting-started.html" class="sidebar-link">Querying for Data ( Getting Started )</a></li><li><a href="/mongodb/update-operators.html" class="sidebar-link">Update Operators</a></li><li><a href="/mongodb/upserts-and-inserts.html" class="sidebar-link">Upserts and Inserts</a></li><li><a href="/mongodb/collections.html" class="sidebar-link">Collections</a></li><li><a href="/mongodb/mongodb-aggregation.html" class="sidebar-link">MongoDB Aggregation</a></li><li><a href="/mongodb/aggregation.html" class="sidebar-link">Aggregation</a></li><li><a href="/mongodb/indexes.html" class="sidebar-link">Indexes</a></li><li><a href="/mongodb/bulk-operations.html" class="sidebar-link">Bulk Operations</a></li><li><a href="/mongodb/2dsphere-index.html" class="sidebar-link">2dsphere Index</a></li><li><a href="/mongodb/pluggable-storage-engines.html" class="sidebar-link">Pluggable Storage Engines</a></li><li><a href="/mongodb/java-driver.html" class="sidebar-link">Java Driver</a></li><li><a href="/mongodb/python-driver.html" class="sidebar-link">Python Driver</a></li><li><a href="/mongodb/mongo-as-shards.html" class="active sidebar-link">Mongo as Shards</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/mongodb/mongo-as-shards.html#sharding-environment-setup" class="sidebar-link">Sharding Environment Setup</a></li></ul></li><li><a href="/mongodb/replication.html" class="sidebar-link">Replication</a></li><li><a href="/mongodb/mongo-as-a-replica-set.html" class="sidebar-link">Mongo as a Replica Set</a></li><li><a href="/mongodb/mongodb-configure-a-replicaset-to-support-tls-ssl.html" class="sidebar-link">MongoDB - Configure a ReplicaSet to support TLS/SSL</a></li><li><a href="/mongodb/authentication-mechanisms-in-mongodb.html" class="sidebar-link">Authentication Mechanisms in MongoDB</a></li><li><a href="/mongodb/mongodb-authorization-model.html" class="sidebar-link">MongoDB Authorization Model</a></li><li><a href="/mongodb/configuration.html" class="sidebar-link">Configuration</a></li><li><a href="/mongodb/backing-up-and-restoring-data.html" class="sidebar-link">Backing up and Restoring Data</a></li><li><a href="/mongodb/upgrading-mongodb-version.html" class="sidebar-link">Upgrading MongoDB version</a></li><li><a href="/mongodb/backing-up-and-restoring-data.html" class="sidebar-link">Backing up and Restoring Data</a></li><li><a href="/mongodb/mongo-as-a-replica-set.html" class="sidebar-link">Mongo as a Replica Set</a></li><li><a href="/mongodb/managing-mongodb.html" class="sidebar-link">Managing MongoDB</a></li><li><a href="/mongodb/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="mongo-as-shards"><a href="#mongo-as-shards" class="header-anchor">#</a> Mongo as Shards</h1> <h2 id="sharding-environment-setup"><a href="#sharding-environment-setup" class="header-anchor">#</a> Sharding Environment Setup</h2> <p>Sharding Group Members :</p> <p>For sharding there are three players.</p> <li>
+Config Server
+</li> <li>
+Replica Sets
+</li> <li>
+Mongos
+For a mongo shard we need to setup the above three servers.
+</li> <p>Config Server Setup :
+add the following to mongod conf file</p> <div class="language-js extra-class"><pre class="language-js"><code>sharding<span class="token operator">:</span>
+  clusterRole<span class="token operator">:</span> configsvr
+replication<span class="token operator">:</span>
+  replSetName<span class="token operator">:</span> <span class="token operator">&lt;</span>setname<span class="token operator">&gt;</span>  
+
+</code></pre></div><p><strong>run :</strong> mongod --config</p> <p><strong>we can choose config server as replica set or may be a standalone server. Based on our requirement we can choose the best. If config need to run in replica set we need to follow the replica set setup</strong></p> <p><strong>Replica Setup :</strong>
+Create replica set
+// Please refer the replica setup</p> <p><strong>MongoS Setup :</strong>
+Mongos is main setup in shard. Its is query router to access all replica sets</p> <p>Add the following in mongos conf file</p> <div class="language- extra-class"><pre class="language-text"><code>
+   sharding:
+      configDB: &lt;configReplSetName&gt;/cfg1.example.net:27017;
+
+</code></pre></div><p>Configure Shared :</p> <p>Connect the mongos via shell (mongo --host  --port )</p> <ol><li>sh.addShard( &quot;/s1-mongo1.example.net:27017&quot;)</li> <li>sh.enableSharding(&quot;&quot;)</li> <li>sh.shardCollection(&quot;&lt; database &gt;.&lt; collection &gt;&quot;, { &lt; key &gt; : &lt; direction &gt; } )</li> <li>sh.status() // To ensure the sharding</li></ol></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/mongodb/mongo-as-shards.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/mongodb/python-driver.html" class="prev">
+        Python Driver
+      </a></span> <span class="next"><a href="/mongodb/replication.html">
+        Replication
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1958.5d7d655f.js" defer></script>
+  </body>
+</html>

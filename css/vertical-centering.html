@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CSS - Vertical Centering</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Centering with display: table, Centering with Transform, Centering with Flexbox, Centering Text with Line Height, Centering with Position: absolute, Centering with pseudo element">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="CSS - Vertical Centering">
+    <meta property="og:description" content="Centering with display: table, Centering with Transform, Centering with Flexbox, Centering Text with Line Height, Centering with Position: absolute, Centering with pseudo element">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/css/vertical-centering.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="CSS - Vertical Centering">
+    <meta name="twitter:description" content="Centering with display: table, Centering with Transform, Centering with Flexbox, Centering Text with Line Height, Centering with Position: absolute, Centering with pseudo element">
+    <meta name="twitter:url" content="/css/vertical-centering.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/979.b5cb73a4.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>CSS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/css/" class="sidebar-link">Disclaimer</a></li><li><a href="/css/getting-started-with-css.html" class="sidebar-link">Getting started with CSS</a></li><li><a href="/css/structure-and-formatting-of-a-css-rule.html" class="sidebar-link">Structure and Formatting of a CSS Rule</a></li><li><a href="/css/comments.html" class="sidebar-link">Comments</a></li><li><a href="/css/selectors.html" class="sidebar-link">Selectors</a></li><li><a href="/css/backgrounds.html" class="sidebar-link">Backgrounds</a></li><li><a href="/css/centering.html" class="sidebar-link">Centering</a></li><li><a href="/css/the-box-model.html" class="sidebar-link">The Box Model</a></li><li><a href="/css/margins.html" class="sidebar-link">Margins</a></li><li><a href="/css/padding.html" class="sidebar-link">Padding</a></li><li><a href="/css/border.html" class="sidebar-link">Border</a></li><li><a href="/css/outlines.html" class="sidebar-link">Outlines</a></li><li><a href="/css/overflow.html" class="sidebar-link">Overflow</a></li><li><a href="/css/media-queries.html" class="sidebar-link">Media Queries</a></li><li><a href="/css/floats.html" class="sidebar-link">Floats</a></li><li><a href="/css/typography.html" class="sidebar-link">Typography</a></li><li><a href="/css/flexible-box-layout-flexbox.html" class="sidebar-link">Flexible Box Layout (Flexbox)</a></li><li><a href="/css/cascading-and-specificity.html" class="sidebar-link">Cascading and Specificity</a></li><li><a href="/css/colors.html" class="sidebar-link">Colors</a></li><li><a href="/css/opacity.html" class="sidebar-link">Opacity</a></li><li><a href="/css/length-units.html" class="sidebar-link">Length Units</a></li><li><a href="/css/pseudo-elements.html" class="sidebar-link">Pseudo-Elements</a></li><li><a href="/css/positioning.html" class="sidebar-link">Positioning</a></li><li><a href="/css/layout-control.html" class="sidebar-link">Layout Control</a></li><li><a href="/css/grid.html" class="sidebar-link">Grid</a></li><li><a href="/css/tables.html" class="sidebar-link">Tables</a></li><li><a href="/css/transitions.html" class="sidebar-link">Transitions</a></li><li><a href="/css/animations.html" class="sidebar-link">Animations</a></li><li><a href="/css/2d-transforms.html" class="sidebar-link">2D Transforms</a></li><li><a href="/css/3d-transforms.html" class="sidebar-link">3D Transforms</a></li><li><a href="/css/filter-property.html" class="sidebar-link">Filter Property</a></li><li><a href="/css/cursor-styling.html" class="sidebar-link">Cursor Styling</a></li><li><a href="/css/box-shadow.html" class="sidebar-link">box-shadow</a></li><li><a href="/css/shapes-for-floats.html" class="sidebar-link">Shapes for Floats</a></li><li><a href="/css/list-styles.html" class="sidebar-link">List Styles</a></li><li><a href="/css/counters.html" class="sidebar-link">Counters</a></li><li><a href="/css/functions.html" class="sidebar-link">Functions</a></li><li><a href="/css/custom-properties-variables.html" class="sidebar-link">Custom Properties (Variables)</a></li><li><a href="/css/single-element-shapes.html" class="sidebar-link">Single Element Shapes</a></li><li><a href="/css/columns.html" class="sidebar-link">Columns</a></li><li><a href="/css/multiple-columns.html" class="sidebar-link">Multiple columns</a></li><li><a href="/css/inline-block-layout.html" class="sidebar-link">Inline-Block Layout</a></li><li><a href="/css/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/css/css-image-sprites.html" class="sidebar-link">CSS Image Sprites</a></li><li><a href="/css/clipping-and-masking.html" class="sidebar-link">Clipping and Masking</a></li><li><a href="/css/fragmentation.html" class="sidebar-link">Fragmentation</a></li><li><a href="/css/css-object-model-cssom.html" class="sidebar-link">CSS Object Model (CSSOM)</a></li><li><a href="/css/feature-queries.html" class="sidebar-link">Feature Queries</a></li><li><a href="/css/stacking-context.html" class="sidebar-link">Stacking Context</a></li><li><a href="/css/block-formatting-contexts.html" class="sidebar-link">Block Formatting Contexts</a></li><li><a href="/css/vertical-centering.html" class="active sidebar-link">Vertical Centering</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/css/vertical-centering.html#centering-with-display-table" class="sidebar-link">Centering with display: table</a></li><li class="sidebar-sub-header"><a href="/css/vertical-centering.html#centering-with-transform" class="sidebar-link">Centering with Transform</a></li><li class="sidebar-sub-header"><a href="/css/vertical-centering.html#centering-with-flexbox" class="sidebar-link">Centering with Flexbox</a></li><li class="sidebar-sub-header"><a href="/css/vertical-centering.html#centering-text-with-line-height" class="sidebar-link">Centering Text with Line Height</a></li><li class="sidebar-sub-header"><a href="/css/vertical-centering.html#centering-with-position-absolute" class="sidebar-link">Centering with Position: absolute</a></li><li class="sidebar-sub-header"><a href="/css/vertical-centering.html#centering-with-pseudo-element" class="sidebar-link">Centering with pseudo element</a></li></ul></li><li><a href="/css/object-fit-and-placement.html" class="sidebar-link">Object Fit and Placement</a></li><li><a href="/css/css-design-patterns.html" class="sidebar-link">CSS design patterns</a></li><li><a href="/css/browser-support-prefixes.html" class="sidebar-link">Browser Support &amp; Prefixes</a></li><li><a href="/css/normalizing-browser-styles.html" class="sidebar-link">Normalizing Browser Styles</a></li><li><a href="/css/internet-explorer-hacks.html" class="sidebar-link">Internet Explorer Hacks</a></li><li><a href="/css/performance.html" class="sidebar-link">Performance</a></li><li><a href="/css/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vertical-centering"><a href="#vertical-centering" class="header-anchor">#</a> Vertical Centering</h1> <h2 id="centering-with-display-table"><a href="#centering-with-display-table" class="header-anchor">#</a> Centering with display: table</h2> <p>HTML:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>wrapper<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>outer<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>inner<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            centered
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><p>CSS:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.wrapper</span> <span class="token punctuation">{</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 600px<span class="token punctuation">;</span>
+  <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.outer</span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> table<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.outer .inner</span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> table-cell<span class="token punctuation">;</span>
+  <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token property">vertical-align</span><span class="token punctuation">:</span> middle<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="centering-with-transform"><a href="#centering-with-transform" class="header-anchor">#</a> Centering with Transform</h2> <p>HTML:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>wrapper<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>centered<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        centered
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><p>CSS:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.wrapper</span> <span class="token punctuation">{</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 600px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.centered</span> <span class="token punctuation">{</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+  <span class="token property">z-index</span><span class="token punctuation">:</span> 999<span class="token punctuation">;</span>
+  <span class="token property">transform</span><span class="token punctuation">:</span> <span class="token function">translate</span><span class="token punctuation">(</span>-50%<span class="token punctuation">,</span> -50%<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+  <span class="token property">left</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="centering-with-flexbox"><a href="#centering-with-flexbox" class="header-anchor">#</a> Centering with Flexbox</h2> <p>HTML:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>container<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>child<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><p>CSS:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.container</span> <span class="token punctuation">{</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>              // Use Flexbox
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>        // This centers children vertically in the parent.
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>    // This centers children horizontally.
+  <span class="token property">background</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.child</span> <span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>              
+  <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="centering-text-with-line-height"><a href="#centering-text-with-line-height" class="header-anchor">#</a> Centering Text with Line Height</h2> <p>HTML:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>container<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>vertically centered<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><p>CSS:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.container</span><span class="token punctuation">{</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>           <span class="token comment">/* set height */</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>      <span class="token comment">/* set line-height equal to the height */</span>
+    <span class="token property">vertical-align</span><span class="token punctuation">:</span> middle<span class="token punctuation">;</span> <span class="token comment">/* works without this rule, but it is good having it explicitly set */</span> 
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Note:</strong> This method will only vertically center a <strong>single line of text</strong>. It will not center block elements correctly and if the text breaks onto a new line, you will have two very tall lines of text.</p> <h2 id="centering-with-position-absolute"><a href="#centering-with-position-absolute" class="header-anchor">#</a> Centering with Position: absolute</h2> <p>HTML:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>wrapper<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>http://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-icon.png?v=c78bd457575a<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><p>CSS:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.wrapper</span><span class="token punctuation">{</span>
+   <span class="token property">position</span><span class="token punctuation">:</span>relative<span class="token punctuation">;</span>
+   <span class="token property">height</span><span class="token punctuation">:</span> 600px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.wrapper img</span> <span class="token punctuation">{</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">right</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">bottom</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>If you want to center other then images, then you must give height and width to that element.</p> <p>HTML:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>wrapper<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>child<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+     make me center
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><p>CSS:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.wrapper</span><span class="token punctuation">{</span>
+   <span class="token property">position</span><span class="token punctuation">:</span>relative<span class="token punctuation">;</span>
+   <span class="token property">height</span><span class="token punctuation">:</span> 600px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.wrapper .child</span> <span class="token punctuation">{</span>
+  <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
+  <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">right</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">bottom</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+  <span class="token property">margin</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #f00<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="centering-with-pseudo-element"><a href="#centering-with-pseudo-element" class="header-anchor">#</a> Centering with pseudo element</h2> <p>HTML:</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>wrapper<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">&quot;</span>content<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div><p>CSS:</p> <div class="language-css extra-class"><pre class="language-css"><code><span class="token selector">.wrapper</span><span class="token punctuation">{</span>
+   <span class="token property">min-height</span><span class="token punctuation">:</span> 600px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.wrapper:before</span><span class="token punctuation">{</span>
+  <span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+  <span class="token property">vertical-align</span><span class="token punctuation">:</span> middle<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.content</span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
+  <span class="token property">vertical-align</span><span class="token punctuation">:</span> middle<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This method is best used in cases where you have a varied-height <code>.content</code> centered inside <code>.wrapper</code>; and you want <code>.wrapper</code>'s height to expand when <code>.content</code>'s height exceed <code>.wrapper</code>'s min-height.</p> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>This is used when the element's dimensions (<code>width</code> and <code>height</code>) are not known or dynamic.</p> <p>Prefer to use <strong>Flexbox</strong> over all other options as it is optimized for user interface design.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/css/vertical-centering.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/css/block-formatting-contexts.html" class="prev">
+        Block Formatting Contexts
+      </a></span> <span class="next"><a href="/css/object-fit-and-placement.html">
+        Object Fit and Placement
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/979.b5cb73a4.js" defer></script>
+  </body>
+</html>

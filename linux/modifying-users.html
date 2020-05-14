@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux - Modifying Users</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Setting your own password, Setting another user's password, Adding a user, Removing a user, Removing a user and its home folder, Listing groups the current user is in, Listing groups a user is in">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Linux - Modifying Users">
+    <meta property="og:description" content="Setting your own password, Setting another user's password, Adding a user, Removing a user, Removing a user and its home folder, Listing groups the current user is in, Listing groups a user is in">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/linux/modifying-users.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Linux - Modifying Users">
+    <meta name="twitter:description" content="Setting your own password, Setting another user's password, Adding a user, Removing a user, Removing a user and its home folder, Listing groups the current user is in, Listing groups a user is in">
+    <meta name="twitter:url" content="/linux/modifying-users.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1898.2f5c0f7b.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/linux/" class="sidebar-link">Disclaimer</a></li><li><a href="/linux/getting-started-with-gnu-linux.html" class="sidebar-link">Getting started with GNU/Linux</a></li><li><a href="/linux/detecting-linux-distribution-name-and-version.html" class="sidebar-link">Detecting Linux distribution name and version</a></li><li><a href="/linux/getting-information-on-a-running-linux-kernel.html" class="sidebar-link">Getting information on a running Linux kernel</a></li><li><a href="/linux/shell.html" class="sidebar-link">Shell</a></li><li><a href="/linux/check-disk-space.html" class="sidebar-link">Check Disk Space</a></li><li><a href="/linux/getting-system-information.html" class="sidebar-link">Getting System Information</a></li><li><a href="/linux/ls-command.html" class="sidebar-link">ls command</a></li><li><a href="/linux/file-compression-with-tar-command.html" class="sidebar-link">File Compression with 'tar' command</a></li><li><a href="/linux/services.html" class="sidebar-link">Services</a></li><li><a href="/linux/managing-services.html" class="sidebar-link">Managing Services</a></li><li><a href="/linux/modifying-users.html" class="active sidebar-link">Modifying Users</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/linux/modifying-users.html#setting-your-own-password" class="sidebar-link">Setting your own password</a></li><li class="sidebar-sub-header"><a href="/linux/modifying-users.html#setting-another-user-s-password" class="sidebar-link">Setting another user's password</a></li><li class="sidebar-sub-header"><a href="/linux/modifying-users.html#adding-a-user" class="sidebar-link">Adding a user</a></li><li class="sidebar-sub-header"><a href="/linux/modifying-users.html#removing-a-user" class="sidebar-link">Removing a user</a></li><li class="sidebar-sub-header"><a href="/linux/modifying-users.html#removing-a-user-and-its-home-folder" class="sidebar-link">Removing a user and its home folder</a></li><li class="sidebar-sub-header"><a href="/linux/modifying-users.html#listing-groups-the-current-user-is-in" class="sidebar-link">Listing groups the current user is in</a></li><li class="sidebar-sub-header"><a href="/linux/modifying-users.html#listing-groups-a-user-is-in" class="sidebar-link">Listing groups a user is in</a></li></ul></li><li><a href="/linux/lamp-stack.html" class="sidebar-link">LAMP Stack</a></li><li><a href="/linux/tee-command.html" class="sidebar-link">tee command</a></li><li><a href="/linux/secure-shell-ssh.html" class="sidebar-link">Secure Shell (SSH)</a></li><li><a href="/linux/scp.html" class="sidebar-link">SCP</a></li><li><a href="/linux/gnupg-gpg.html" class="sidebar-link">GnuPG (GPG)</a></li><li><a href="/linux/network-configuration.html" class="sidebar-link">Network Configuration</a></li><li><a href="/linux/midnight-commander.html" class="sidebar-link">Midnight Commander</a></li><li><a href="/linux/change-root-chroot.html" class="sidebar-link">Change root (chroot)</a></li><li><a href="/linux/package-managers.html" class="sidebar-link">Package Managers</a></li><li><a href="/linux/compiling-the-linux-kernel.html" class="sidebar-link">Compiling the Linux kernel</a></li><li><a href="/linux/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="modifying-users"><a href="#modifying-users" class="header-anchor">#</a> Modifying Users</h1> <h2 id="setting-your-own-password"><a href="#setting-your-own-password" class="header-anchor">#</a> Setting your own password</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">passwd</span>
+
+</code></pre></div><h2 id="setting-another-user-s-password"><a href="#setting-another-user-s-password" class="header-anchor">#</a> Setting another user's password</h2> <p>Run the following as root:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">passwd</span> username
+
+</code></pre></div><h2 id="adding-a-user"><a href="#adding-a-user" class="header-anchor">#</a> Adding a user</h2> <p>Run the following as root:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">useradd</span> username
+
+</code></pre></div><h2 id="removing-a-user"><a href="#removing-a-user" class="header-anchor">#</a> Removing a user</h2> <p>Run the following as root:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">userdel</span> username
+
+</code></pre></div><h2 id="removing-a-user-and-its-home-folder"><a href="#removing-a-user-and-its-home-folder" class="header-anchor">#</a> Removing a user and its home folder</h2> <p>Run the following as root:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">userdel</span> -r username
+
+</code></pre></div><h2 id="listing-groups-the-current-user-is-in"><a href="#listing-groups-the-current-user-is-in" class="header-anchor">#</a> Listing groups the current user is in</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">groups</span>
+
+</code></pre></div><p>More detailed information about user and group numerical IDs can be found with the <code>id</code> command.</p> <h2 id="listing-groups-a-user-is-in"><a href="#listing-groups-a-user-is-in" class="header-anchor">#</a> Listing groups a user is in</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">groups</span> username
+
+</code></pre></div><p>More detailed information about user and group numerical IDs can be found with <code>id username</code>.</p> <h4 id="parameters"><a href="#parameters" class="header-anchor">#</a> Parameters</h4> <table><thead><tr><th>Parameter</th> <th>Details</th></tr></thead> <tbody><tr><td>username</td> <td>The name of the user. Do not use capital letters, do not use dots, do not end it in dash, it must not include colons, no special characters. Cannot start with a number.</td></tr></tbody></table> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <ul><li>You cannot remove a logged in user</li> <li>To modify any user but your own, you need root privileges</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/linux/modifying-users.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/linux/managing-services.html" class="prev">
+        Managing Services
+      </a></span> <span class="next"><a href="/linux/lamp-stack.html">
+        LAMP Stack
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1898.2f5c0f7b.js" defer></script>
+  </body>
+</html>

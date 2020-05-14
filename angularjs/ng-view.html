@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AngularJS - ng-view</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="ng-view, Registration navigation">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="AngularJS - ng-view">
+    <meta property="og:description" content="ng-view, Registration navigation">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/angularjs/ng-view.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="AngularJS - ng-view">
+    <meta name="twitter:description" content="ng-view, Registration navigation">
+    <meta name="twitter:url" content="/angularjs/ng-view.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/453.d9bcf48b.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>AngularJS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/angularjs/" class="sidebar-link">Disclaimer</a></li><li><a href="/angularjs/getting-started-with-angularjs.html" class="sidebar-link">Getting started with AngularJS</a></li><li><a href="/angularjs/modules.html" class="sidebar-link">Modules</a></li><li><a href="/angularjs/components.html" class="sidebar-link">Components</a></li><li><a href="/angularjs/built-in-directives.html" class="sidebar-link">Built-in directives</a></li><li><a href="/angularjs/use-of-in-built-directives.html" class="sidebar-link">Use of in-built directives</a></li><li><a href="/angularjs/custom-directives.html" class="sidebar-link">Custom Directives</a></li><li><a href="/angularjs/how-data-binding-works.html" class="sidebar-link">How data binding works</a></li><li><a href="/angularjs/angular-project-directory-structure.html" class="sidebar-link">Angular Project - Directory Structure</a></li><li><a href="/angularjs/filters.html" class="sidebar-link">Filters</a></li><li><a href="/angularjs/custom-filters.html" class="sidebar-link">Custom filters</a></li><li><a href="/angularjs/constants.html" class="sidebar-link">Constants</a></li><li><a href="/angularjs/custom-filters-with-es6.html" class="sidebar-link">Custom filters with ES6</a></li><li><a href="/angularjs/directives-using-ngmodelcontroller.html" class="sidebar-link">Directives using ngModelController</a></li><li><a href="/angularjs/controllers.html" class="sidebar-link">Controllers</a></li><li><a href="/angularjs/controllers-with-es6.html" class="sidebar-link">Controllers with ES6</a></li><li><a href="/angularjs/the-self-or-this-variable-in-a-controller.html" class="sidebar-link">The Self Or This Variable In A Controller</a></li><li><a href="/angularjs/services.html" class="sidebar-link">Services</a></li><li><a href="/angularjs/distinguishing-service-vs-factory.html" class="sidebar-link">Distinguishing Service vs Factory</a></li><li><a href="/angularjs/angular-promises-with-q-service.html" class="sidebar-link">Angular promises with $q service</a></li><li><a href="/angularjs/dependency-injection.html" class="sidebar-link">Dependency Injection</a></li><li><a href="/angularjs/events.html" class="sidebar-link">Events</a></li><li><a href="/angularjs/sharing-data.html" class="sidebar-link">Sharing Data</a></li><li><a href="/angularjs/form-validation.html" class="sidebar-link">Form Validation</a></li><li><a href="/angularjs/routing-using-ngroute.html" class="sidebar-link">Routing using ngRoute</a></li><li><a href="/angularjs/ng-class-directive.html" class="sidebar-link">ng-class directive</a></li><li><a href="/angularjs/ng-repeat.html" class="sidebar-link">ng-repeat</a></li><li><a href="/angularjs/ng-style.html" class="sidebar-link">ng-style</a></li><li><a href="/angularjs/ng-view.html" class="active sidebar-link">ng-view</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/angularjs/ng-view.html#ng-view-2" class="sidebar-link">ng-view</a></li><li class="sidebar-sub-header"><a href="/angularjs/ng-view.html#registration-navigation" class="sidebar-link">Registration navigation</a></li></ul></li><li><a href="/angularjs/angularjs-bindings-options-etc.html" class="sidebar-link">AngularJS bindings options (=, @, &amp; etc.)</a></li><li><a href="/angularjs/providers.html" class="sidebar-link">Providers</a></li><li><a href="/angularjs/decorators.html" class="sidebar-link">Decorators</a></li><li><a href="/angularjs/print.html" class="sidebar-link">Print</a></li><li><a href="/angularjs/ui-router.html" class="sidebar-link">ui-router</a></li><li><a href="/angularjs/built-in-helper-functions.html" class="sidebar-link">Built-in helper Functions</a></li><li><a href="/angularjs/digest-loop-walkthrough.html" class="sidebar-link">digest loop walkthrough</a></li><li><a href="/angularjs/angular-scopes.html" class="sidebar-link">Angular $scopes</a></li><li><a href="/angularjs/using-angularjs-with-typescript.html" class="sidebar-link">Using AngularJS with TypeScript</a></li><li><a href="/angularjs/http-request.html" class="sidebar-link">$http request</a></li><li><a href="/angularjs/prepare-for-production-grunt.html" class="sidebar-link">Prepare for Production - Grunt</a></li><li><a href="/angularjs/grunt-tasks.html" class="sidebar-link">Grunt tasks</a></li><li><a href="/angularjs/lazy-loading.html" class="sidebar-link">Lazy loading</a></li><li><a href="/angularjs/http-interceptor.html" class="sidebar-link">HTTP Interceptor</a></li><li><a href="/angularjs/session-storage.html" class="sidebar-link">Session storage</a></li><li><a href="/angularjs/angular-mvc.html" class="sidebar-link">Angular MVC</a></li><li><a href="/angularjs/signalr-with-angularjs.html" class="sidebar-link">SignalR with AngularJs</a></li><li><a href="/angularjs/migration-to-angular-2.html" class="sidebar-link">Migration to Angular 2+</a></li><li><a href="/angularjs/angularjs-with-data-filter-pagination-etc.html" class="sidebar-link">angularjs with data filter, pagination etc</a></li><li><a href="/angularjs/profiling-and-performance.html" class="sidebar-link">Profiling and Performance</a></li><li><a href="/angularjs/performance-profiling.html" class="sidebar-link">Performance Profiling</a></li><li><a href="/angularjs/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/angularjs/unit-tests.html" class="sidebar-link">Unit tests</a></li><li><a href="/angularjs/angularjs-gotchas-and-traps.html" class="sidebar-link">AngularJS gotchas and traps</a></li><li><a href="/angularjs/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="ng-view"><a href="#ng-view" class="header-anchor">#</a> ng-view</h1> <p>ng-view is one of in-build directive that angular uses as a container to switch between views. {info} ngRoute is no longer a part of the base angular.js file, so you'll need to include the angular-route.js file after your the base angular javascript file.
+We can configure a route by using the “when” function of the $routeProvider. We need to first specify the route, then in a second parameter provide an object with a templateUrl property and a controller property.</p> <h2 id="ng-view-2"><a href="#ng-view-2" class="header-anchor">#</a> ng-view</h2> <p><code>ng-view</code> is a directive used with <code>$route</code> to render a partial view in the main page layout. Here in this example, Index.html is our main file and when user lands on &quot;/&quot; route the templateURL home.html will be rendered in Index.html where <code>ng-view</code> is mentioned.</p> <div class="language-js extra-class"><pre class="language-js"><code>angular<span class="token punctuation">.</span><span class="token function">module</span><span class="token punctuation">(</span><span class="token string">'ngApp'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'ngRoute'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">.</span><span class="token function">config</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">$routeProvider</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  $routeProvider<span class="token punctuation">.</span><span class="token function">when</span><span class="token punctuation">(</span><span class="token string">&quot;/&quot;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      templateUrl<span class="token operator">:</span> <span class="token string">&quot;home.html&quot;</span><span class="token punctuation">,</span>
+      controller<span class="token operator">:</span> <span class="token string">&quot;homeCtrl&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+angular<span class="token punctuation">.</span><span class="token function">module</span><span class="token punctuation">(</span><span class="token string">'ngApp'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">controller</span><span class="token punctuation">(</span><span class="token string">'homeCtrl'</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token string">'$scope'</span><span class="token punctuation">,</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">$scope</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  $scope<span class="token punctuation">.</span>welcome<span class="token operator">=</span> <span class="token string">&quot;Welcome to stackoverflow!&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//Index.html</span>
+<span class="token operator">&lt;</span>body ng<span class="token operator">-</span>app<span class="token operator">=</span><span class="token string">&quot;ngApp&quot;</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>div ng<span class="token operator">-</span>view<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span>
+
+<span class="token comment">//Home Template URL or home.html</span>
+<span class="token operator">&lt;</span>div<span class="token operator">&gt;</span><span class="token operator">&lt;</span>h2<span class="token operator">&gt;</span><span class="token punctuation">{</span> <span class="token punctuation">{</span>welcome<span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h2<span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+
+</code></pre></div><h2 id="registration-navigation"><a href="#registration-navigation" class="header-anchor">#</a> Registration navigation</h2> <ol><li>We injecting the module in the application</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+ var Registration=angular.module(&quot;myApp&quot;,[&quot;ngRoute&quot;]);
+
+</code></pre></div><ol><li>now we use $routeProvider from &quot;ngRoute&quot;</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+   Registration.config(function($routeProvider) {
+
+});
+
+</code></pre></div><ol><li>finally we integrating the route, we define  &quot;/add&quot; routing to the application in case application get &quot;/add&quot; it divert to regi.htm</li></ol> <div class="language- extra-class"><pre class="language-text"><code>
+Registration.config(function($routeProvider) {
+    $routeProvider
+    .when(&quot;/add&quot;, {
+        templateUrl : &quot;regi.htm&quot;
+    })
+});
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/angularjs/ng-view.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/angularjs/ng-style.html" class="prev">
+        ng-style
+      </a></span> <span class="next"><a href="/angularjs/angularjs-bindings-options-etc.html">
+        AngularJS bindings options (=, @, &amp; etc.)
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/453.d9bcf48b.js" defer></script>
+  </body>
+</html>

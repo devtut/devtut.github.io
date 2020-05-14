@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Perl - Pack and unpack</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Manually Converting C Structs to Pack Syntax, Constructing an IPv4 header">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Perl - Pack and unpack">
+    <meta property="og:description" content="Manually Converting C Structs to Pack Syntax, Constructing an IPv4 header">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/perl/pack-and-unpack.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Perl - Pack and unpack">
+    <meta name="twitter:description" content="Manually Converting C Structs to Pack Syntax, Constructing an IPv4 header">
+    <meta name="twitter:url" content="/perl/pack-and-unpack.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2394.2b775a6c.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Perl</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/perl/" class="sidebar-link">Disclaimer</a></li><li><a href="/perl/getting-started-with-perl-language.html" class="sidebar-link">Getting started with Perl Language</a></li><li><a href="/perl/comments.html" class="sidebar-link">Comments</a></li><li><a href="/perl/variables.html" class="sidebar-link">Variables</a></li><li><a href="/perl/interpolation-in-perl.html" class="sidebar-link">Interpolation in Perl</a></li><li><a href="/perl/true-and-false.html" class="sidebar-link">True and false</a></li><li><a href="/perl/dates-and-time.html" class="sidebar-link">Dates and Time</a></li><li><a href="/perl/control-statements.html" class="sidebar-link">Control Statements</a></li><li><a href="/perl/subroutines.html" class="sidebar-link">Subroutines</a></li><li><a href="/perl/debug-output.html" class="sidebar-link">Debug Output</a></li><li><a href="/perl/lists.html" class="sidebar-link">Lists</a></li><li><a href="/perl/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/perl/file-i-o-reading-and-writing-files.html" class="sidebar-link">File I/O (reading and writing files)</a></li><li><a href="/perl/reading-a-file-s-content-into-a-variable.html" class="sidebar-link">Reading a file's content into a variable</a></li><li><a href="/perl/strings-and-quoting-methods.html" class="sidebar-link">Strings and quoting methods</a></li><li><a href="/perl/split-a-string-on-unquoted-separators.html" class="sidebar-link">Split a string on unquoted separators</a></li><li><a href="/perl/object-oriented-perl.html" class="sidebar-link">Object-oriented Perl</a></li><li><a href="/perl/exception-handling.html" class="sidebar-link">Exception handling</a></li><li><a href="/perl/regular-expressions.html" class="sidebar-link">Regular Expressions</a></li><li><a href="/perl/xml-parsing.html" class="sidebar-link">XML Parsing</a></li><li><a href="/perl/unicode.html" class="sidebar-link">Unicode</a></li><li><a href="/perl/perl-one-liners.html" class="sidebar-link">Perl one-liners</a></li><li><a href="/perl/randomness.html" class="sidebar-link">Randomness</a></li><li><a href="/perl/special-variables.html" class="sidebar-link">Special variables</a></li><li><a href="/perl/dates-and-time.html" class="sidebar-link">Dates and Time</a></li><li><a href="/perl/packages-and-modules.html" class="sidebar-link">Packages and modules</a></li><li><a href="/perl/install-perl-modules-via-cpan.html" class="sidebar-link">Install Perl modules via CPAN</a></li><li><a href="/perl/easy-way-to-check-installed-modules-on-mac-and-ubuntu.html" class="sidebar-link">Easy way to check installed modules on Mac and Ubuntu</a></li><li><a href="/perl/pack-and-unpack.html" class="active sidebar-link">Pack and unpack</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/perl/pack-and-unpack.html#manually-converting-c-structs-to-pack-syntax" class="sidebar-link">Manually Converting C Structs to Pack Syntax</a></li></ul></li><li><a href="/perl/perl-commands-for-windows-excel-with-win32-ole-module.html" class="sidebar-link">Perl commands for Windows Excel with Win32::OLE module</a></li><li><a href="/perl/simple-interaction-with-database-via-dbi-module.html" class="sidebar-link">Simple interaction with database via DBI module</a></li><li><a href="/perl/perl-testing.html" class="sidebar-link">Perl Testing</a></li><li><a href="/perl/dancer.html" class="sidebar-link">Dancer</a></li><li><a href="/perl/attributed-text.html" class="sidebar-link">Attributed Text</a></li><li><a href="/perl/gui-applications-in-perl.html" class="sidebar-link">GUI Applications in Perl</a></li><li><a href="/perl/memory-usage-optimization.html" class="sidebar-link">Memory usage optimization</a></li><li><a href="/perl/perl-script-debugging.html" class="sidebar-link">Perl script debugging</a></li><li><a href="/perl/perlbrew.html" class="sidebar-link">Perlbrew</a></li><li><a href="/perl/installation-of-perl.html" class="sidebar-link">Installation of Perl</a></li><li><a href="/perl/compile-perl-cpan-module-sapnwrfc-from-source-code.html" class="sidebar-link">Compile Perl cpan module sapnwrfc from source code</a></li><li><a href="/perl/best-practices.html" class="sidebar-link">Best Practices</a></li><li><a href="/perl/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="pack-and-unpack"><a href="#pack-and-unpack" class="header-anchor">#</a> Pack and unpack</h1> <h2 id="manually-converting-c-structs-to-pack-syntax"><a href="#manually-converting-c-structs-to-pack-syntax" class="header-anchor">#</a> Manually Converting C Structs to Pack Syntax</h2> <p>If you're ever dealing with C Binary API's from Perl Code, via the <code>syscall</code>, <code>ioctl</code>, or <code>fcntl</code> functions, you need to know how to construct memory in a C Compatible way.</p> <p>For instance, if you were ever dealing with some function that expected a <code>timespec</code>, you'd look into <code>/usr/include/time.h</code> and find:</p> <div class="language-perl extra-class"><pre class="language-perl"><code>struct timespec
+<span class="token punctuation">{</span>
+    __time_t tv_sec<span class="token punctuation">;</span>            <span class="token regex">/* Seconds.  */</span>
+    __syscall_slong_t tv_nsec<span class="token punctuation">;</span>  <span class="token regex">/* Nanoseconds.  */</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>You do a dance with <code>cpp</code> to find what that really means:</p> <div class="language-perl extra-class"><pre class="language-perl"><code>cpp <span class="token operator">-</span>E <span class="token operator">/</span>usr<span class="token operator">/</span>include<span class="token operator">/</span>time<span class="token operator">.</span>h <span class="token operator">-o</span> <span class="token operator">/</span>dev<span class="token operator">/</span>stdout <span class="token operator">|</span> grep __time_t
+<span class="token comment"># typedef long int __time_t;</span>
+cpp <span class="token operator">-</span>E <span class="token operator">/</span>usr<span class="token operator">/</span>include<span class="token operator">/</span>time<span class="token operator">.</span>h <span class="token operator">-o</span> <span class="token operator">/</span>dev<span class="token operator">/</span>stdout <span class="token operator">|</span> grep __syscall_slong_t
+<span class="token comment"># typedef long int __syscall_slong_t</span>
+
+</code></pre></div><p>So its a (signed) int</p> <div class="language-perl extra-class"><pre class="language-perl"><code>echo <span class="token string">'void main(){ printf(&quot;%#lx\n&quot;, sizeof(__syscall_slong_t)); }'</span> <span class="token operator">|</span> 
+  gcc <span class="token operator">-x</span> c <span class="token operator">-</span>include stdio<span class="token operator">.</span>h <span class="token operator">-</span>include time<span class="token operator">.</span>h <span class="token operator">-</span> <span class="token operator">-o</span> <span class="token regex">/tmp/a</span><span class="token operator">.</span>out <span class="token operator">&amp;&amp;</span> <span class="token regex">/tmp/a</span><span class="token operator">.</span>out
+<span class="token comment"># 0x8</span>
+
+</code></pre></div><p>And it takes 8 bytes. So 64bit signed int. And I'm on a 64Bit Processor. =)</p> <p>Perldoc <code>pack</code> says</p> <blockquote></blockquote> <pre class="lang-none prettyprint-override"><code>            q  A signed quad (64-bit) value.
+
+```
+
+
+
+
+So to pack a timespec:
+
+```perl
+sub packtime {
+    my ( $config ) = @_; 
+    return pack 'qq', @{$config}{qw( tv_sec tv_nsec )};
+}
+
+```
+
+And to unpack a timespec:
+
+```perl
+sub unpacktime {
+   my ( $buf ) = @_;
+   my $out = {};
+   @{$out}{qw( tv_sec tv_nsec )} = unpack 'qq', $buf;
+   return $out;
+}
+
+```
+
+Now you can just use those functions instead.
+
+```perl
+my $timespec = packtime({ tv_sec =&gt; 0, tv_nsec =&gt; 0 });
+syscall(  ..., $timespec ); # some syscall that reads timespec
+
+later ...
+syscall( ..., $timespec ); # some syscall that writes timespec
+print Dumper( unpacktime( $timespec ));
+
+```
+
+
+
+## Constructing an IPv4 header
+
+
+Sometimes you have to deal with structures defined in terms of C data types from Perl. One such application is the creation of raw network packets, in case you want to do something fancier than what the regular socket API has to offer. This is just what `pack()` (and `unpack()` of course) is there for.
+
+[The obligatory part of an IP header](https://en.wikipedia.org/wiki/IPv4#Header) is 20 octets (AKA &quot;bytes&quot;) long. As you can see behind this link, source and destination IP address make up the last two 32-bit values in the header. Among the other fields are some with 16 bits, some with 8 bits, and a few smaller chunks between 2 and 13 bits.
+
+Assuming we have the following variables to stuff into our header:
+
+```perl
+my ($dscp, $ecn, $length,
+    $id, $flags, $frag_off,
+    $ttl, $proto,
+    $src_ip,
+    $dst_ip);
+
+```
+
+Note that three fields from the header are missing:
+
+- The version is always 4 (it's IPv4 after all)
+- IHL is 5 in our example as we don't have an **options** field; length is specified in units of 4 octets so 20 octets gives a length of 5.
+- The checksum can be left at 0. Actually we'd have to calculate it but the code to do this doesn't concern us here.
+
+We could try and use bit operations to construct e.g. the first 32 bits:
+
+```perl
+my $hdr = 4 &lt;&lt; 28 | 5 &lt;&lt; 24 | $dscp &lt;&lt; 18 | $ecn &lt;&lt; 16 | $length;
+
+```
+
+This approach only works up to the size of an integer though, which is usually 64 bits but can be as low as 32. Worse, it depends on the CPU's [endianness](https://en.wikipedia.org/wiki/Endianness) so it will work on some CPUs and fail on others. Let's try `pack()`:
+
+```perl
+my $hdr = pack('H2B8n', '45', sprintf(&quot;%06b%02b&quot;, $dscp, $ecn), $length);
+
+```
+
+The template first specifies `H2`, a **2-character hex string, high nybble first**. The corresponding argument to pack is &quot;45&quot;—version 4, length 5. The next template is `B8`, an **8-bit bit string, descending bit order inside each byte**. We need to use bit strings to control layout down to chunks smaller than a nybble (4 bits), so the `sprintf()` is used to construct such a bit string from 6 bits from `$dscp` and 2 from `$ecn`. The last one is `n`, an **unsigned 16-bit value in Network Byte Order**, i.e. always big-endian no matter what your CPU's native integer format is, and it is filled from `$length`.
+
+That's the first 32 bits of the header. The rest can be built similarly:
+
+|Template|Argument|Remarks
+|---|---|---|---|---|---|---|---|---|---
+|`n`|`$id`|
+|`B16`|`sprintf(&quot;%03b%013b&quot;, $flags, $frag_off)`|Same as DSCP/ECN
+|`C2`|`$ttl, $proto`|Two consecutive unsigned octets
+|`n`|`0` / `$checksum`|`x` could be used to insert a null byte but `n` lets us specify an argument should we choose to calculate a checksum
+|`N2`|`$src_ip, $dst_ip`|use `a4a4` to pack the result of two `gethostbyname()` calls as it is in Network Byte Order already!
+
+So the complete call to pack an IPv4 header would be:
+
+```perl
+my $hdr = pack('H2B8n2B16C2nN2',
+    '45', sprintf(&quot;%06b%02b&quot;, $dscp, $ecn), $length,
+    $id, sprintf(&quot;%03b%013b&quot;, $flags, $frag_off),
+    $ttl, $proto, 0,
+    $src_ip, $dst_ip
+);
+
+```
+
+</code></pre></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/perl/pack-and-unpack.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/perl/easy-way-to-check-installed-modules-on-mac-and-ubuntu.html" class="prev">
+        Easy way to check installed modules on Mac and Ubuntu
+      </a></span> <span class="next"><a href="/perl/perl-commands-for-windows-excel-with-win32-ole-module.html">
+        Perl commands for Windows Excel with Win32::OLE module
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2394.2b775a6c.js" defer></script>
+  </body>
+</html>

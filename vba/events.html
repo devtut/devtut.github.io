@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VBA - Events</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Sources and Handlers, Passing data back to the event source">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="VBA - Events">
+    <meta property="og:description" content="Sources and Handlers, Passing data back to the event source">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vba/events.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="VBA - Events">
+    <meta name="twitter:description" content="Sources and Handlers, Passing data back to the event source">
+    <meta name="twitter:url" content="/vba/events.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3421.2f952bb4.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vba/" class="sidebar-link">Disclaimer</a></li><li><a href="/vba/getting-started-with-vba.html" class="sidebar-link">Getting started with VBA</a></li><li><a href="/vba/comments.html" class="sidebar-link">Comments</a></li><li><a href="/vba/string-literals-escaping-non-printable-characters-and-line-continuations.html" class="sidebar-link">String Literals - Escaping, non-printable characters and line-continuations</a></li><li><a href="/vba/vba-option-keyword.html" class="sidebar-link">VBA Option Keyword</a></li><li><a href="/vba/declaring-variables.html" class="sidebar-link">Declaring Variables</a></li><li><a href="/vba/declaring-and-assigning-strings.html" class="sidebar-link">Declaring and assigning strings</a></li><li><a href="/vba/concatenating-strings.html" class="sidebar-link">Concatenating strings</a></li><li><a href="/vba/frequently-used-string-manipulation.html" class="sidebar-link">Frequently used string manipulation</a></li><li><a href="/vba/substrings.html" class="sidebar-link">Substrings</a></li><li><a href="/vba/searching-within-strings-for-the-presence-of-substrings.html" class="sidebar-link">Searching within strings for the presence of substrings</a></li><li><a href="/vba/assigning-strings-with-repeated-characters.html" class="sidebar-link">Assigning strings with repeated characters</a></li><li><a href="/vba/measuring-the-length-of-strings.html" class="sidebar-link">Measuring the length of strings</a></li><li><a href="/vba/converting-other-types-to-strings.html" class="sidebar-link">Converting other types to strings</a></li><li><a href="/vba/date-time-manipulation.html" class="sidebar-link">Date Time Manipulation</a></li><li><a href="/vba/data-types-and-limits.html" class="sidebar-link">Data Types and Limits</a></li><li><a href="/vba/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/vba/data-structures.html" class="sidebar-link">Data Structures</a></li><li><a href="/vba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/vba/copying-returning-and-passing-arrays.html" class="sidebar-link">Copying, returning and passing arrays</a></li><li><a href="/vba/collections.html" class="sidebar-link">Collections</a></li><li><a href="/vba/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vba/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/vba/flow-control-structures.html" class="sidebar-link">Flow control structures</a></li><li><a href="/vba/passing-arguments-byref-or-byval.html" class="sidebar-link">Passing Arguments ByRef or ByVal</a></li><li><a href="/vba/scripting-filesystemobject.html" class="sidebar-link">Scripting.FileSystemObject</a></li><li><a href="/vba/working-with-files-and-directories-without-using-filesystemobject.html" class="sidebar-link">Working With Files and Directories Without Using FileSystemObject</a></li><li><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html" class="sidebar-link">Reading 2GB+ files in binary in VBA and File Hashes</a></li><li><a href="/vba/creating-a-procedure.html" class="sidebar-link">Creating a procedure</a></li><li><a href="/vba/procedure-calls.html" class="sidebar-link">Procedure Calls</a></li><li><a href="/vba/conditional-compilation.html" class="sidebar-link">Conditional Compilation</a></li><li><a href="/vba/object-oriented-vba.html" class="sidebar-link">Object-Oriented VBA</a></li><li><a href="/vba/creating-a-custom-class.html" class="sidebar-link">Creating a Custom Class</a></li><li><a href="/vba/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/vba/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vba/events.html" class="active sidebar-link">Events</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vba/events.html#sources-and-handlers" class="sidebar-link">Sources and Handlers</a></li><li class="sidebar-sub-header"><a href="/vba/events.html#passing-data-back-to-the-event-source" class="sidebar-link">Passing data back to the event source</a></li></ul></li><li><a href="/vba/scripting-dictionary-object.html" class="sidebar-link">Scripting.Dictionary object</a></li><li><a href="/vba/working-with-ado.html" class="sidebar-link">Working with ADO</a></li><li><a href="/vba/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/vba/user-forms.html" class="sidebar-link">User Forms</a></li><li><a href="/vba/createobject-vs-getobject.html" class="sidebar-link">CreateObject vs. GetObject</a></li><li><a href="/vba/non-latin-characters.html" class="sidebar-link">Non-Latin Characters</a></li><li><a href="/vba/api-calls.html" class="sidebar-link">API Calls</a></li><li><a href="/vba/automation-or-using-other-applications-libraries.html" class="sidebar-link">Automation or Using other applications Libraries</a></li><li><a href="/vba/macro-security-and-signing-of-vba-projects-modules.html" class="sidebar-link">Macro security and signing of VBA-projects/-modules</a></li><li><a href="/vba/vba-run-time-errors.html" class="sidebar-link">VBA Run-Time Errors</a></li><li><a href="/vba/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="events"><a href="#events" class="header-anchor">#</a> Events</h1> <h2 id="sources-and-handlers"><a href="#sources-and-handlers" class="header-anchor">#</a> Sources and Handlers</h2> <h3 id="what-are-events"><a href="#what-are-events" class="header-anchor">#</a> What are events?</h3> <p>VBA is <strong>event-driven</strong>: VBA code runs in response to events raised by the host application or the host document - understanding events is fundamental to understanding VBA.</p> <p>APIs often expose objects that raise a number of <strong>events</strong> in response to various states. For example an <code>Excel.Application</code> object raises an event whenever a new workbook is created, opened, activated, or closed. Or whenever a worksheet gets calculated. Or just before a file is saved. Or immediately after. A button on a form raises a <code>Click</code> event when the user clicks it, the user form itself raises an event just after it's activated, and another just before it's closed.</p> <p>From an API perspective, events are <strong>extension points</strong>: the client code can chose to implement code that <strong>handles</strong> these events, and execute custom code whenever these events are fired: that's how you can execute your custom code automatically every time the selection changes on any worksheet - by handling the event that gets fired when the selection changes on any worksheet.</p> <p>An object that exposes events is an <strong>event source</strong>. A method that handles an event is a <strong>handler</strong>.</p> <h3 id="handlers"><a href="#handlers" class="header-anchor">#</a> Handlers</h3> <p>VBA document modules (e.g. <code>ThisDocument</code>, <code>ThisWorkbook</code>, <code>Sheet1</code>, etc.) and <code>UserForm</code> modules are <strong>class modules</strong> that <strong>implement</strong> special interfaces that expose a number of <strong>events</strong>. You can browse these interfaces in the left-side dropdown at the top of the code pane:</p> <img src="http://i.stack.imgur.com/6dSac.png" alt="ThisWorkbook module implements Workbook events"> <p>The right-side dropdown lists the members of the interface selected in the left-side dropdown:</p> <img src="http://i.stack.imgur.com/Zbkh9.png" alt="Worksheet modules can handle Worksheet events"> <p>The VBE automatically generates an event handler stub when an item is selected on the right-side list, or navigates there if the handler exists.</p> <p>You can define a module-scoped <code>WithEvents</code> variable in any module:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">WithEvents</span> Foo <span class="token keyword">As</span> Workbook
+<span class="token keyword">Private</span> <span class="token keyword">WithEvents</span> Bar <span class="token keyword">As</span> Worksheet
+
+</code></pre></div><p>Each <code>WithEvents</code> declaration becomes available to select from the left-side dropdown. When an event is selected in the right-side dropdown, the VBE generates an event handler stub named after the <code>WithEvents</code> object and the name of the event, joined with an underscore:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">WithEvents</span> Foo <span class="token keyword">As</span> Workbook
+<span class="token keyword">Private</span> <span class="token keyword">WithEvents</span> Bar <span class="token keyword">As</span> Worksheet
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> Foo_Open<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> Bar_SelectionChange<span class="token punctuation">(</span><span class="token keyword">ByVal</span> Target <span class="token keyword">As</span> Range<span class="token punctuation">)</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Only types that expose at least one event can be used with <code>WithEvents</code>, and <code>WithEvents</code> declarations cannot be assigned a reference on-the-spot with the <code>New</code> keyword. This code is illegal:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">WithEvents</span> Foo <span class="token keyword">As</span> <span class="token keyword">New</span> Workbook <span class="token comment">'illegal</span>
+
+</code></pre></div><p>The object reference must be <code>Set</code> explicitly; in a class module, a good place to do that is often in the <code>Class_Initialize</code> handler, because then the class handles that object's events for as long as its instance exists.</p> <h3 id="sources"><a href="#sources" class="header-anchor">#</a> Sources</h3> <p>Any class module (or document module, or user form) can be an event source. Use the <code>Event</code> keyword to define the <strong>signature</strong> for the event, in the <strong>declarations section</strong> of the module:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Event</span> SomethingHappened<span class="token punctuation">(</span><span class="token keyword">ByVal</span> something <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>The signature of the event determines how the event is raised, and what the event handlers will look like.</p> <p>Events can only be <strong>raised</strong> within the class they're defined in - client code can only <strong>handle</strong> them. Events are raised with the <code>RaiseEvent</code> keyword; the event's arguments are provided at that point:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">RaiseEvent</span> SomethingHappened<span class="token punctuation">(</span><span class="token string">&quot;hello&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Without code that handles the <code>SomethingHappened</code> event, running the <code>DoSomething</code> procedure will still raise the event, but nothing will happen. Assuming the event source is the above code in a class named <code>Something</code>, this code in <code>ThisWorkbook</code> would show a message box saying &quot;hello&quot; whenever <code>test.DoSomething</code> gets called:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">WithEvents</span> test <span class="token keyword">As</span> Something
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> Workbook_Open<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Set</span> test <span class="token operator">=</span> <span class="token keyword">New</span> Something
+    test<span class="token punctuation">.</span>DoSomething
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> test_SomethingHappened<span class="token punctuation">(</span><span class="token keyword">ByVal</span> bar <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+<span class="token comment">'this procedure runs whenever 'test' raises the 'SomethingHappened' event</span>
+    MsgBox bar
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="passing-data-back-to-the-event-source"><a href="#passing-data-back-to-the-event-source" class="header-anchor">#</a> Passing data back to the event source</h2> <h3 id="using-parameters-passed-by-reference"><a href="#using-parameters-passed-by-reference" class="header-anchor">#</a> Using parameters passed by reference</h3> <p>An event may define a <code>ByRef</code> parameter meant to be returned to the caller:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Event</span> BeforeSomething<span class="token punctuation">(</span><span class="token keyword">ByRef</span> cancel <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+<span class="token keyword">Public</span> <span class="token keyword">Event</span> AfterSomething<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> cancel <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+    <span class="token keyword">RaiseEvent</span> BeforeSomething<span class="token punctuation">(</span>cancel<span class="token punctuation">)</span>
+    <span class="token keyword">If</span> cancel <span class="token keyword">Then</span> <span class="token keyword">Exit</span> <span class="token keyword">Sub</span>
+
+    <span class="token comment">'todo: actually do something</span>
+
+    <span class="token keyword">RaiseEvent</span> AfterSomething
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>If the <code>BeforeSomething</code> event has a handler that sets its <code>cancel</code> parameter to <code>True</code>, then when execution returns from the handler, <code>cancel</code> will be <code>True</code> and <code>AfterSomething</code> will never be raised.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">WithEvents</span> foo <span class="token keyword">As</span> Something
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> foo_BeforeSomething<span class="token punctuation">(</span><span class="token keyword">ByRef</span> cancel <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+    cancel <span class="token operator">=</span> MsgBox<span class="token punctuation">(</span><span class="token string">&quot;Cancel?&quot;</span><span class="token punctuation">,</span> vbYesNo<span class="token punctuation">)</span> <span class="token operator">=</span> vbYes
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> foo_AfterSomething<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    MsgBox <span class="token string">&quot;Didn't cancel!&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Assuming the <code>foo</code> object reference is assigned somewhere, when <code>foo.DoSomething</code> runs, a message box prompts whether to cancel, and a second message box says &quot;didn't cancel&quot; only when <kbd>No</kbd> was selected.</p> <h3 id="using-mutable-objects"><a href="#using-mutable-objects" class="header-anchor">#</a> Using mutable objects</h3> <p>You could also pass a copy of a mutable object <code>ByVal</code>, and let handlers modify that object's properties; the caller can then read the modified property values and act accordingly.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token comment">'class module ReturnBoolean</span>
+<span class="token keyword">Option</span> Explicit
+<span class="token keyword">Private</span> encapsulated <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Get</span> ReturnValue<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+<span class="token comment">'Attribute ReturnValue.VB_UserMemId = 0</span>
+    ReturnValue <span class="token operator">=</span> encapsulated
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Property</span> <span class="token keyword">Let</span> ReturnValue<span class="token punctuation">(</span><span class="token keyword">ByVal</span> value <span class="token keyword">As</span> <span class="token keyword">Boolean</span><span class="token punctuation">)</span>
+    encapsulated <span class="token operator">=</span> value
+<span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+</code></pre></div><p>Combined with the <code>Variant</code> type, this can be used to create rather non-obvious ways to return a value to the caller:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Event</span> SomeEvent<span class="token punctuation">(</span><span class="token keyword">ByVal</span> foo <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">)</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> result <span class="token keyword">As</span> ReturnBoolean
+    result <span class="token operator">=</span> <span class="token keyword">New</span> ReturnBoolean
+
+    <span class="token keyword">RaiseEvent</span> SomeEvent<span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+
+    <span class="token keyword">If</span> result <span class="token keyword">Then</span> <span class="token comment">' If result.ReturnValue Then</span>
+        <span class="token comment">'handler changed the value to True</span>
+    <span class="token keyword">Else</span>
+        <span class="token comment">'handler didn't modify the value</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The handler would look like this:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Sub</span> source_SomeEvent<span class="token punctuation">(</span><span class="token keyword">ByVal</span> foo <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">)</span> <span class="token comment">'foo is actually a ReturnBoolean object</span>
+    foo <span class="token operator">=</span> <span class="token boolean">True</span> <span class="token comment">'True is actually assigned to foo.ReturnValue, the class' default member</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <li>
+**Source Module**: `[Public] Event [identifier]([argument_list])`
+</li> <li>
+**Handler Module**: `Dim|Private|Public WithEvents [identifier] As [type]`
+</li> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <li>
+An event can only be `Public`. The modifier is optional because class module members (including events) are implicitly `Public` by default.
+</li> <li>
+A `WithEvents` variable can be `Private` or `Public`, but not `Friend`. The modifier is mandatory because `WithEvents` isn't a keyword that declares a variable, but a modifier keyword part of the variable declaration syntax. Hence the `Dim` keyword must be used if an access modifier isn't present.
+</li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vba/events.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vba/recursion.html" class="prev">
+        Recursion
+      </a></span> <span class="next"><a href="/vba/scripting-dictionary-object.html">
+        Scripting.Dictionary object
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3421.2f952bb4.js" defer></script>
+  </body>
+</html>

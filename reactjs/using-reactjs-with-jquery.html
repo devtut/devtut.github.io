@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ReactJS - Using ReactJS with jQuery</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="ReactJS with jQuery">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="ReactJS - Using ReactJS with jQuery">
+    <meta property="og:description" content="ReactJS with jQuery">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/reactjs/using-reactjs-with-jquery.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="ReactJS - Using ReactJS with jQuery">
+    <meta name="twitter:description" content="ReactJS with jQuery">
+    <meta name="twitter:url" content="/reactjs/using-reactjs-with-jquery.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3012.c96eccf0.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>ReactJS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/reactjs/" class="sidebar-link">Disclaimer</a></li><li><a href="/reactjs/getting-started-with-react.html" class="sidebar-link">Getting started with React</a></li><li><a href="/reactjs/components.html" class="sidebar-link">Components</a></li><li><a href="/reactjs/using-reactjs-with-typescript.html" class="sidebar-link">Using ReactJS with Typescript</a></li><li><a href="/reactjs/state-in-react.html" class="sidebar-link">State in React</a></li><li><a href="/reactjs/props-in-react.html" class="sidebar-link">Props in React</a></li><li><a href="/reactjs/react-component-lifecycle.html" class="sidebar-link">React Component Lifecycle</a></li><li><a href="/reactjs/forms-and-user-input.html" class="sidebar-link">Forms and User Input</a></li><li><a href="/reactjs/react-boilerplate-react-babel-webpack.html" class="sidebar-link">React Boilerplate [React + Babel + Webpack]</a></li><li><a href="/reactjs/using-reactjs-with-jquery.html" class="active sidebar-link">Using ReactJS with jQuery</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/reactjs/using-reactjs-with-jquery.html#reactjs-with-jquery" class="sidebar-link">ReactJS with jQuery</a></li></ul></li><li><a href="/reactjs/react-routing.html" class="sidebar-link">React Routing</a></li><li><a href="/reactjs/communicate-between-components.html" class="sidebar-link">Communicate Between Components</a></li><li><a href="/reactjs/how-to-setup-a-basic-webpack-react-and-babel-environment.html" class="sidebar-link">How to setup a basic webpack, react and babel environment</a></li><li><a href="/reactjs/react-createclass-vs-extends-react-component.html" class="sidebar-link">React.createClass vs extends React.Component</a></li><li><a href="/reactjs/react-ajax-call.html" class="sidebar-link">React AJAX call</a></li><li><a href="/reactjs/communication-between-components.html" class="sidebar-link">Communication Between Components</a></li><li><a href="/reactjs/stateless-functional-components.html" class="sidebar-link">Stateless Functional Components</a></li><li><a href="/reactjs/performance.html" class="sidebar-link">Performance</a></li><li><a href="/reactjs/introduction-to-server-side-rendering.html" class="sidebar-link">Introduction to Server-Side Rendering</a></li><li><a href="/reactjs/setting-up-react-environment.html" class="sidebar-link">Setting Up React Environment</a></li><li><a href="/reactjs/using-react-with-flow.html" class="sidebar-link">Using React with Flow</a></li><li><a href="/reactjs/jsx.html" class="sidebar-link">JSX</a></li><li><a href="/reactjs/react-forms.html" class="sidebar-link">React Forms</a></li><li><a href="/reactjs/user-interface-solutions.html" class="sidebar-link">User interface solutions</a></li><li><a href="/reactjs/using-reactjs-in-flux-way.html" class="sidebar-link">Using ReactJS in Flux way</a></li><li><a href="/reactjs/react-webpack-typescript-installation.html" class="sidebar-link">React, Webpack &amp; Typescript installation</a></li><li><a href="/reactjs/how-and-why-to-use-keys-in-react.html" class="sidebar-link">How and why to use keys in React</a></li><li><a href="/reactjs/keys-in-react.html" class="sidebar-link">Keys in react</a></li><li><a href="/reactjs/higher-order-components.html" class="sidebar-link">Higher Order Components</a></li><li><a href="/reactjs/react-with-redux.html" class="sidebar-link">React with Redux</a></li><li><a href="/reactjs/installation.html" class="sidebar-link">Installation</a></li><li><a href="/reactjs/react-tools.html" class="sidebar-link">React Tools</a></li><li><a href="/reactjs/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="using-reactjs-with-jquery"><a href="#using-reactjs-with-jquery" class="header-anchor">#</a> Using ReactJS with jQuery</h1> <h2 id="reactjs-with-jquery"><a href="#reactjs-with-jquery" class="header-anchor">#</a> ReactJS with jQuery</h2> <p>Firstly, you have to import jquery library . We also need to import findDOmNode as we’re going to manipulate the dom. And obviously we are importing React as well.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> findDOMNode <span class="token punctuation">}</span> <span class="token keyword">from</span> ‘react<span class="token operator">-</span>dom’<span class="token punctuation">;</span>
+<span class="token keyword">import</span> $ <span class="token keyword">from</span> ‘jquery’<span class="token punctuation">;</span>
+
+</code></pre></div><p>We are setting an arrow function ‘handleToggle’ that will fire when an icon will be clicked. We’re just showing and hiding a div with a reference naming ‘toggle’ onClick over an icon.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function-variable function">handleToggle</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> el <span class="token operator">=</span> <span class="token function">findDOMNode</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>refs<span class="token punctuation">.</span>toggle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">$</span><span class="token punctuation">(</span>el<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">slideToggle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Let’s now set the reference naming ‘toggle’</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span>ul className<span class="token operator">=</span>”profile<span class="token operator">-</span>info additional<span class="token operator">-</span>profile<span class="token operator">-</span>info<span class="token operator">-</span>list” ref<span class="token operator">=</span>”toggle”<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>span className<span class="token operator">=</span>”info<span class="token operator">-</span>email”<span class="token operator">&gt;</span>Office Email<span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span>   me@shuvohabib<span class="token punctuation">.</span>com
+  <span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">&gt;</span>
+
+</code></pre></div><p>The div element where we will fire the ‘handleToggle’ on onClick.</p> <div class="language- extra-class"><pre class="language-text"><code>
+&lt;div className=”ellipsis-click” onClick={this.handleToggle}&gt;
+   &lt;i className=”fa-ellipsis-h”/&gt;
+ &lt;/div&gt;
+
+</code></pre></div><p>Let review the full code below, how it looks like .</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> ‘react’<span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> findDOMNode <span class="token punctuation">}</span> <span class="token keyword">from</span> ‘react<span class="token operator">-</span>dom’<span class="token punctuation">;</span>
+<span class="token keyword">import</span> $ <span class="token keyword">from</span> ‘jquery’<span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">FullDesc</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function-variable function">handleToggle</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> el <span class="token operator">=</span> <span class="token function">findDOMNode</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>refs<span class="token punctuation">.</span>toggle<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">$</span><span class="token punctuation">(</span>el<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">slideToggle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>
+            <span class="token operator">&lt;</span>div className<span class="token operator">=</span>”long<span class="token operator">-</span>desc”<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span>ul className<span class="token operator">=</span>”profile<span class="token operator">-</span>info”<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span>span className<span class="token operator">=</span>”info<span class="token operator">-</span>title”<span class="token operator">&gt;</span>User Name <span class="token operator">:</span> <span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span> Shuvo Habib
+                    <span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">&gt;</span>
+
+                <span class="token operator">&lt;</span>ul className<span class="token operator">=</span>”profile<span class="token operator">-</span>info additional<span class="token operator">-</span>profile<span class="token operator">-</span>info<span class="token operator">-</span>list” ref<span class="token operator">=</span>”toggle”<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span>span className<span class="token operator">=</span>”info<span class="token operator">-</span>email”<span class="token operator">&gt;</span>Office Email<span class="token operator">&lt;</span><span class="token operator">/</span>span<span class="token operator">&gt;</span> me@shuvohabib<span class="token punctuation">.</span>com
+                    <span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>ul<span class="token operator">&gt;</span>
+                
+                <span class="token operator">&lt;</span>div className<span class="token operator">=</span>”ellipsis<span class="token operator">-</span>click” onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>handleToggle<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span>i className<span class="token operator">=</span>”fa<span class="token operator">-</span>ellipsis<span class="token operator">-</span>h”<span class="token operator">/</span><span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>We are done! This is the way, how we can use <strong>jQuery in React</strong> component.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/reactjs/using-reactjs-with-jquery.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/reactjs/react-boilerplate-react-babel-webpack.html" class="prev">
+        React Boilerplate [React + Babel + Webpack]
+      </a></span> <span class="next"><a href="/reactjs/react-routing.html">
+        React Routing
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3012.c96eccf0.js" defer></script>
+  </body>
+</html>

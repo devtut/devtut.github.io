@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Perl - Object-oriented Perl</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Defining classes in modern Perl, Creating Objects, Defining Classes, Inheritance and methods resolution, Class and Object Methods, Roles">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Perl - Object-oriented Perl">
+    <meta property="og:description" content="Defining classes in modern Perl, Creating Objects, Defining Classes, Inheritance and methods resolution, Class and Object Methods, Roles">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/perl/object-oriented-perl.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Perl - Object-oriented Perl">
+    <meta name="twitter:description" content="Defining classes in modern Perl, Creating Objects, Defining Classes, Inheritance and methods resolution, Class and Object Methods, Roles">
+    <meta name="twitter:url" content="/perl/object-oriented-perl.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2393.a922c560.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Perl</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/perl/" class="sidebar-link">Disclaimer</a></li><li><a href="/perl/getting-started-with-perl-language.html" class="sidebar-link">Getting started with Perl Language</a></li><li><a href="/perl/comments.html" class="sidebar-link">Comments</a></li><li><a href="/perl/variables.html" class="sidebar-link">Variables</a></li><li><a href="/perl/interpolation-in-perl.html" class="sidebar-link">Interpolation in Perl</a></li><li><a href="/perl/true-and-false.html" class="sidebar-link">True and false</a></li><li><a href="/perl/dates-and-time.html" class="sidebar-link">Dates and Time</a></li><li><a href="/perl/control-statements.html" class="sidebar-link">Control Statements</a></li><li><a href="/perl/subroutines.html" class="sidebar-link">Subroutines</a></li><li><a href="/perl/debug-output.html" class="sidebar-link">Debug Output</a></li><li><a href="/perl/lists.html" class="sidebar-link">Lists</a></li><li><a href="/perl/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/perl/file-i-o-reading-and-writing-files.html" class="sidebar-link">File I/O (reading and writing files)</a></li><li><a href="/perl/reading-a-file-s-content-into-a-variable.html" class="sidebar-link">Reading a file's content into a variable</a></li><li><a href="/perl/strings-and-quoting-methods.html" class="sidebar-link">Strings and quoting methods</a></li><li><a href="/perl/split-a-string-on-unquoted-separators.html" class="sidebar-link">Split a string on unquoted separators</a></li><li><a href="/perl/object-oriented-perl.html" class="active sidebar-link">Object-oriented Perl</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/perl/object-oriented-perl.html#defining-classes-in-modern-perl" class="sidebar-link">Defining classes in modern Perl</a></li><li class="sidebar-sub-header"><a href="/perl/object-oriented-perl.html#creating-objects" class="sidebar-link">Creating Objects</a></li><li class="sidebar-sub-header"><a href="/perl/object-oriented-perl.html#defining-classes" class="sidebar-link">Defining Classes</a></li><li class="sidebar-sub-header"><a href="/perl/object-oriented-perl.html#inheritance-and-methods-resolution" class="sidebar-link">Inheritance and methods resolution</a></li><li class="sidebar-sub-header"><a href="/perl/object-oriented-perl.html#class-and-object-methods" class="sidebar-link">Class and Object Methods</a></li><li class="sidebar-sub-header"><a href="/perl/object-oriented-perl.html#roles" class="sidebar-link">Roles</a></li></ul></li><li><a href="/perl/exception-handling.html" class="sidebar-link">Exception handling</a></li><li><a href="/perl/regular-expressions.html" class="sidebar-link">Regular Expressions</a></li><li><a href="/perl/xml-parsing.html" class="sidebar-link">XML Parsing</a></li><li><a href="/perl/unicode.html" class="sidebar-link">Unicode</a></li><li><a href="/perl/perl-one-liners.html" class="sidebar-link">Perl one-liners</a></li><li><a href="/perl/randomness.html" class="sidebar-link">Randomness</a></li><li><a href="/perl/special-variables.html" class="sidebar-link">Special variables</a></li><li><a href="/perl/dates-and-time.html" class="sidebar-link">Dates and Time</a></li><li><a href="/perl/packages-and-modules.html" class="sidebar-link">Packages and modules</a></li><li><a href="/perl/install-perl-modules-via-cpan.html" class="sidebar-link">Install Perl modules via CPAN</a></li><li><a href="/perl/easy-way-to-check-installed-modules-on-mac-and-ubuntu.html" class="sidebar-link">Easy way to check installed modules on Mac and Ubuntu</a></li><li><a href="/perl/pack-and-unpack.html" class="sidebar-link">Pack and unpack</a></li><li><a href="/perl/perl-commands-for-windows-excel-with-win32-ole-module.html" class="sidebar-link">Perl commands for Windows Excel with Win32::OLE module</a></li><li><a href="/perl/simple-interaction-with-database-via-dbi-module.html" class="sidebar-link">Simple interaction with database via DBI module</a></li><li><a href="/perl/perl-testing.html" class="sidebar-link">Perl Testing</a></li><li><a href="/perl/dancer.html" class="sidebar-link">Dancer</a></li><li><a href="/perl/attributed-text.html" class="sidebar-link">Attributed Text</a></li><li><a href="/perl/gui-applications-in-perl.html" class="sidebar-link">GUI Applications in Perl</a></li><li><a href="/perl/memory-usage-optimization.html" class="sidebar-link">Memory usage optimization</a></li><li><a href="/perl/perl-script-debugging.html" class="sidebar-link">Perl script debugging</a></li><li><a href="/perl/perlbrew.html" class="sidebar-link">Perlbrew</a></li><li><a href="/perl/installation-of-perl.html" class="sidebar-link">Installation of Perl</a></li><li><a href="/perl/compile-perl-cpan-module-sapnwrfc-from-source-code.html" class="sidebar-link">Compile Perl cpan module sapnwrfc from source code</a></li><li><a href="/perl/best-practices.html" class="sidebar-link">Best Practices</a></li><li><a href="/perl/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="object-oriented-perl"><a href="#object-oriented-perl" class="header-anchor">#</a> Object-oriented Perl</h1> <h2 id="defining-classes-in-modern-perl"><a href="#defining-classes-in-modern-perl" class="header-anchor">#</a> Defining classes in modern Perl</h2> <p>Although available, defining a class <a href="http://stackoverflow.com/documentation/perl/2920/object-oriented-perl/9897/defining-classes#t=20160725015859866803" target="_blank" rel="noopener noreferrer">from scratch<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> is not recommended in modern Perl. Use one of helper OO systems which provide more features and convenience. Among these systems are:</p> <li>
+[`Moose`](http://search.cpan.org/perldoc?Moose) - inspired by Perl 6 OO design
+</li> <li>
+[`Class::Accessor`](http://search.cpan.org/perldoc?Class%3A%3AAccessor) - a lightweight alternative to Moose
+</li> <li>
+[`Class::Tiny`](http://search.cpan.org/perldoc?Class%3A%3ATiny) - truly minimal class builder
+</li> <p><strong>Moose</strong></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Foo<span class="token punctuation">;</span>
+<span class="token keyword">use</span> Moose<span class="token punctuation">;</span>
+
+has bar <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>is <span class="token operator">=&gt;</span> <span class="token string">'ro'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment"># a read-only property</span>
+has baz <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>is <span class="token operator">=&gt;</span> <span class="token string">'rw'</span><span class="token punctuation">,</span> isa <span class="token operator">=&gt;</span> <span class="token string">'Bool'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment"># a read-write boolean property</span>
+
+<span class="token function"><span class="token keyword">sub</span> qux</span> <span class="token punctuation">{</span>
+    <span class="token keyword">my</span> <span class="token variable">$self</span> <span class="token operator">=</span> shift<span class="token punctuation">;</span>
+    <span class="token keyword">my</span> <span class="token variable">$barIsBaz</span> <span class="token operator">=</span> <span class="token variable">$self</span><span class="token operator">-&gt;</span>bar <span class="token operator">eq</span> <span class="token string">'baz'</span><span class="token punctuation">;</span>  <span class="token comment"># property getter</span>
+    <span class="token variable">$self</span><span class="token operator">-&gt;</span>baz<span class="token punctuation">(</span><span class="token variable">$barIsBaz</span><span class="token punctuation">)</span><span class="token punctuation">;</span>               <span class="token comment"># property setter</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Class::Accessor (Moose syntax)</strong></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Foo<span class="token punctuation">;</span>
+<span class="token keyword">use</span> Class<span class="token punctuation">:</span><span class="token punctuation">:</span>Accessor <span class="token string">'antlers'</span><span class="token punctuation">;</span>
+
+has bar <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>is <span class="token operator">=&gt;</span> <span class="token string">'ro'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                 <span class="token comment"># a read-only property</span>
+has baz <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>is <span class="token operator">=&gt;</span> <span class="token string">'rw'</span><span class="token punctuation">,</span> isa <span class="token operator">=&gt;</span> <span class="token string">'Bool'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment"># a read-write property (only 'is' supported, the type is ignored)</span>
+
+</code></pre></div><p><strong>Class::Accessor (native syntax)</strong></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Foo<span class="token punctuation">;</span>
+<span class="token keyword">use</span> base <span class="token string">qw(Class::Accessor)</span><span class="token punctuation">;</span>
+
+Foo<span class="token operator">-&gt;</span>mk_accessors<span class="token punctuation">(</span><span class="token string">qw(bar baz)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment"># some read-write properties</span>
+Foo<span class="token operator">-&gt;</span>mk_accessors<span class="token punctuation">(</span><span class="token string">qw(qux)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment"># a read-only property</span>
+
+</code></pre></div><p><strong>Class::Tiny</strong></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Foo<span class="token punctuation">;</span>
+<span class="token keyword">use</span> Class<span class="token punctuation">:</span><span class="token punctuation">:</span>Tiny <span class="token string">qw(bar baz)</span><span class="token punctuation">;</span>  <span class="token comment"># just props</span>
+
+</code></pre></div><h2 id="creating-objects"><a href="#creating-objects" class="header-anchor">#</a> Creating Objects</h2> <p>Unlike many other languages, Perl does not have constructors that allocate memory for your objects. Instead, one should write a class method that both create a data structure and populate it with data (you may know it as the Factory Method design pattern).</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Point<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> new</span> <span class="token punctuation">{</span>
+    <span class="token keyword">my</span> <span class="token punctuation">(</span><span class="token variable">$class</span><span class="token punctuation">,</span> <span class="token variable">$x</span><span class="token punctuation">,</span> <span class="token variable">$y</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token variable">@_</span><span class="token punctuation">;</span>
+    <span class="token keyword">my</span> <span class="token variable">$self</span> <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">x</span> <span class="token operator">=&gt;</span> <span class="token variable">$x</span><span class="token punctuation">,</span> y <span class="token operator">=&gt;</span> <span class="token variable">$y</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment"># store object data in a hash</span>
+    bless <span class="token variable">$self</span><span class="token punctuation">,</span> <span class="token variable">$class</span><span class="token punctuation">;</span>             <span class="token comment"># bind the hash to the class</span>
+    <span class="token keyword">return</span> <span class="token variable">$self</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>This method can be used as follows:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$point</span> <span class="token operator">=</span> Point<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Whenever the arrow operator <code>-&gt;</code> is used with methods, its left operand is prepended to the given argument list. So, <code>@_</code> in <code>new</code> will contain values <code>('Point', 1, 2.5)</code>.</p> <p>There is nothing special in the name <code>new</code>. You can call the factory methods as you prefer.</p> <p>There is nothing special in hashes. You could do the same in the following way:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Point<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> new</span> <span class="token punctuation">{</span>
+    <span class="token keyword">my</span> <span class="token punctuation">(</span><span class="token variable">$class</span><span class="token punctuation">,</span> <span class="token variable">@coord</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token variable">@_</span><span class="token punctuation">;</span>
+    <span class="token keyword">my</span> <span class="token variable">$self</span> <span class="token operator">=</span> <span class="token operator">\</span><span class="token variable">@coord</span><span class="token punctuation">;</span>
+    bless <span class="token variable">$self</span><span class="token punctuation">,</span> <span class="token variable">$class</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token variable">$self</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>In general, any reference may be an object, even a scalar reference. But most often, hashes are the most convenient way to represent object data.</p> <h2 id="defining-classes"><a href="#defining-classes" class="header-anchor">#</a> Defining Classes</h2> <p>In general, classes in Perl are just packages. They can contain data and methods, as usual packages.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Point<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+
+<span class="token keyword">my</span> <span class="token variable">$CANVAS_SIZE</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1000</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> new</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+
+<span class="token function"><span class="token keyword">sub</span> polar_coordinates</span> <span class="token punctuation">{</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>It is important to note that the variables declared in a package are class variables, not object (instance) variables. Changing of a package-level variable affects all objects of the class. How to store object-specific data, see in &quot;Creating Objects&quot;.</p> <p>What makes class packages specific, is the arrow operator <code>-&gt;</code>. It may be used after a bare word:</p> <div class="language-perl extra-class"><pre class="language-perl"><code>Point<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>or after a scalar variable (usually holding a reference):</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">@polar</span> <span class="token operator">=</span> <span class="token variable">$point</span><span class="token operator">-&gt;</span>polar_coordinates<span class="token punctuation">;</span>
+
+</code></pre></div><p>What is to the left of the arrow is prepended to the given argument list of the method. For example, after call</p> <div class="language-perl extra-class"><pre class="language-perl"><code>Point<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>array <code>@_</code> in <code>new</code> will contain three arguments: <code>('Point', 1, 2)</code>.</p> <p>Packages representing classes should take this convention into account and expect that all their methods will have one extra argument.</p> <h2 id="inheritance-and-methods-resolution"><a href="#inheritance-and-methods-resolution" class="header-anchor">#</a> Inheritance and methods resolution</h2> <p>To make a class a subclass of another class, use <code>parent</code> pragma:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Point<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token operator">...</span>
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">package</span> Point2D<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> parent <span class="token string">qw(Point)</span><span class="token punctuation">;</span>
+<span class="token operator">...</span>
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">package</span> Point3D<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> parent <span class="token string">qw(Point)</span><span class="token punctuation">;</span>
+<span class="token operator">...</span>
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Perl allows for multiple inheritance:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Point2D<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> parent <span class="token string">qw(Point PlanarObject)</span><span class="token punctuation">;</span>
+<span class="token operator">...</span>
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Inheritance is all about resolution which method is to be called in a particular situation. Since pure Perl does not prescribe any rules about the data structure used to store object data, inheritance has nothing to do with that.</p> <p>Consider the following class hierarchy:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> GeometryObject<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> transpose</span> <span class="token punctuation">{</span> <span class="token operator">...</span><span class="token punctuation">}</span>
+
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">package</span> Point<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> parent <span class="token string">qw(GeometryObject)</span><span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> new</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">package</span> PlanarObject<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> parent <span class="token string">qw(GeometryObject)</span><span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> transpose</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
+
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+<span class="token keyword">package</span> Point2D<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> parent <span class="token string">qw(Point PlanarObject)</span><span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> new</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
+
+<span class="token function"><span class="token keyword">sub</span> polar_coordinates</span> <span class="token punctuation">{</span> <span class="token operator">...</span> <span class="token punctuation">}</span>
+
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The method resolution works as follows:</p> <li>
+The starting point is defined by the left operand of the arrow operator.
+<ul><li>
+If it is a bare word:
+<div class="language-perl extra-class"><pre class="language-perl"><code>Point2D<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>...or a scalar variable holding a string:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$class</span> <span class="token operator">=</span> <span class="token string">'Point2D'</span><span class="token punctuation">;</span>
+<span class="token variable">$class</span><span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>...then the starting point is the package with the corresponding name (<code>Point2D</code> in both examples).
+</p></li> <li>
+If the left operand is a scalar variable holding a <strong>blessed</strong> reference:<p></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$point</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+bless <span class="token variable">$point</span><span class="token punctuation">,</span> <span class="token string">'Point2D'</span><span class="token punctuation">;</span> <span class="token comment"># typically, it is encapsulated into class methods</span>
+<span class="token keyword">my</span> <span class="token variable">@coord</span> <span class="token operator">=</span> <span class="token variable">$point</span><span class="token operator">-&gt;</span>polar_coordinates<span class="token punctuation">;</span>
+
+</code></pre></div><p>then the starting point is the class of the reference (again, <code>Point2D</code>). The arrow operator cannot be used to call methods for <strong>unblessed</strong> references.
+</p></li></ul></li> <li>
+If the starting point contains the required method, it is simply called.
+Thus, since <code>Point2D::new</code> exists,<p></p> <div class="language-perl extra-class"><pre class="language-perl"><code>Point2D<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>will simply call it.
+</p></li> <li>
+If the starting point does not contain the required method, depth-first search in the <code>parent</code> classes is performed. In the example above, the search order will be as follows:
+<ul><p></p> <ol><li><code>Point2D</code></li> <li><code>Point</code> (first parent of <code>Point2D</code>)</li> <li><code>GeometryObject</code> (parent of <code>Point</code>)</li> <li><code>PlanarObject</code> (second parent of <code>Point2D</code>)
+</li></ol></ul>
+For example, in the following code:</li> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$point</span> <span class="token operator">=</span> Point2D<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$point</span><span class="token operator">-&gt;</span>transpose<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>the method that will be called is <code>GeometryObject::transpose</code>, even though it would be overridden in <code>PlanarObject::transpose</code>.
+</p><li>
+You can set the starting point explicitly.
+In the previous example, you can explicitly call <code>PlanarObject::transpose</code> like so:<p></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$point</span> <span class="token operator">=</span> Point2D<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token variable">$point</span><span class="token operator">-&gt;</span>PlanarObject<span class="token punctuation">:</span><span class="token punctuation">:</span>transpose<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div></li> <li>
+In a similar manner, `SUPER::` performs method search in parent classes of the current class.
+For example,
+<div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Point2D<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> parent <span class="token string">qw(Point PlanarObject)</span><span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> new</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">(</span><span class="token keyword">my</span> <span class="token variable">$class</span><span class="token punctuation">,</span> <span class="token variable">$x</span><span class="token punctuation">,</span> <span class="token variable">$y</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token variable">@_</span><span class="token punctuation">;</span>
+    <span class="token keyword">my</span> <span class="token variable">$self</span> <span class="token operator">=</span> <span class="token variable">$class</span><span class="token operator">-&gt;</span>SUPER<span class="token punctuation">:</span><span class="token punctuation">:</span>new<span class="token punctuation">;</span>
+    <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>will call <code>Point::new</code> in the course of the <code>Point2D::new</code> execution.
+</p></li><p></p> <ul><li><code>Point2D</code></li> <li><code>Point</code> (first parent of <code>Point2D</code>)</li> <li><code>GeometryObject</code> (parent of <code>Point</code>)</li> <li><code>PlanarObject</code> (second parent of <code>Point2D</code>)</li></ul> <h2 id="class-and-object-methods"><a href="#class-and-object-methods" class="header-anchor">#</a> Class and Object Methods</h2> <p>In Perl, the difference between class (static) and object (instance) methods is not so strong as in some other languages, but it still exists.</p> <p>The left operand of the arrow operator <code>-&gt;</code> becomes the first argument of the method to be called. It may be either a string:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token comment"># the first argument of new is string 'Point' in both cases</span>
+Point<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">my</span> <span class="token variable">$class</span> <span class="token operator">=</span> <span class="token string">'Point'</span><span class="token punctuation">;</span>
+<span class="token variable">$class</span><span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>or an object reference:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token comment"># reference contained in $point is the first argument of polar_coordinates</span>
+<span class="token keyword">my</span> <span class="token variable">$point</span> <span class="token operator">=</span> Point<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">my</span> <span class="token variable">@coord</span> <span class="token operator">=</span> <span class="token variable">$point</span><span class="token operator">-&gt;</span>polar_coordinates<span class="token punctuation">;</span>
+
+</code></pre></div><p>Class methods are just the ones that expect their first argument to be a string, and object methods are the ones that expect their first argument to be an object reference.</p> <p>Class methods typically do not do anything with their first argument, which is just a name of the class. Generally, it is only used by Perl itself for method resolution. Therefore, a typical class method can be called for an object as well:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">my</span> <span class="token variable">$width</span> <span class="token operator">=</span> Point<span class="token operator">-&gt;</span>canvas_width<span class="token punctuation">;</span>
+
+<span class="token keyword">my</span> <span class="token variable">$point</span> <span class="token operator">=</span> Point<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">my</span> <span class="token variable">$width</span> <span class="token operator">=</span> <span class="token variable">$point</span><span class="token operator">-&gt;</span>canvas_width<span class="token punctuation">;</span>
+
+</code></pre></div><p>Although this syntax is allowed, it is often misleading, so it is better to avoid it.</p> <p>Object methods receive an object reference as the first argument, so they can address the object data (unlike class methods):</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Point<span class="token punctuation">;</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> polar_coordinates</span> <span class="token punctuation">{</span>
+    <span class="token keyword">my</span> <span class="token punctuation">(</span><span class="token variable">$point</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token variable">@_</span><span class="token punctuation">;</span>
+    <span class="token keyword">my</span> <span class="token variable">$x</span> <span class="token operator">=</span> <span class="token variable">$point</span><span class="token operator">-&gt;</span><span class="token punctuation">{</span><span class="token operator">x</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">my</span> <span class="token variable">$y</span> <span class="token operator">=</span> <span class="token variable">$point</span><span class="token operator">-&gt;</span><span class="token punctuation">{</span>y<span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>sqrt<span class="token punctuation">(</span><span class="token variable">$x</span> <span class="token operator">*</span> <span class="token variable">$x</span> <span class="token operator">+</span> <span class="token variable">$y</span> <span class="token operator">*</span> $<span class="token regex">y), atan2($y, $x))</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token number">1</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The same method can track both cases: when it is called as a class or an object method:</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token function"><span class="token keyword">sub</span> universal_method</span> <span class="token punctuation">{</span>
+    <span class="token keyword">my</span> <span class="token variable">$self</span> <span class="token operator">=</span> shift<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ref <span class="token variable">$self</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment"># object logic</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        <span class="token comment"># class logic</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="roles"><a href="#roles" class="header-anchor">#</a> Roles</h2> <p>A role in Perl is essentially</p> <ul><li>a set of methods and attributes which</li> <li>injected into a class directly.</li></ul> <p>A role provides a piece of functionality which can be <strong>composed</strong> into (or <strong>applied</strong> to) any class (which is said to <strong>consume</strong> the role).
+A role cannot be inherited but may be consumed by another role.</p> <p>A role may also <strong>require</strong> consuming classes to implement some methods instead of implementing the methods itself (just like interfaces in Java or C#).</p> <p>Perl does not have built-in support for roles but there are CPAN classes which provide such support.</p> <p><strong><a href="https://metacpan.org/pod/Moose::Role" target="_blank" rel="noopener noreferrer">Moose::Role<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></strong></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Chatty<span class="token punctuation">;</span>
+<span class="token keyword">use</span> Moose<span class="token punctuation">:</span><span class="token punctuation">:</span>Role<span class="token punctuation">;</span>
+
+requires <span class="token string">'introduce'</span><span class="token punctuation">;</span>  <span class="token comment"># a method consuming classes must implement</span>
+
+<span class="token function"><span class="token keyword">sub</span> greet</span> <span class="token punctuation">{</span>            <span class="token comment"># a method already implemented in the role</span>
+    <span class="token keyword">print</span> <span class="token string">&quot;Hi!\n&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">package</span> Parrot<span class="token punctuation">;</span>
+<span class="token keyword">use</span> Moose<span class="token punctuation">;</span>
+
+with <span class="token string">'Chatty'</span><span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> introduce</span> <span class="token punctuation">{</span>
+    <span class="token keyword">print</span> <span class="token string">&quot;I'm Buddy.\n&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong><a href="https://metacpan.org/pod/Role::Tiny" target="_blank" rel="noopener noreferrer">Role::Tiny<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></strong></p> <p>Use if your OO system does not provide support for roles (e.g. <code>Class::Accessor</code> or <code>Class::Tiny</code>).
+Does not support attributes.</p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Chatty<span class="token punctuation">;</span>
+<span class="token keyword">use</span> Role<span class="token punctuation">:</span><span class="token punctuation">:</span>Tiny<span class="token punctuation">;</span>
+
+requires <span class="token string">'introduce'</span><span class="token punctuation">;</span>  <span class="token comment"># a method consuming classes must implement</span>
+
+<span class="token function"><span class="token keyword">sub</span> greet</span> <span class="token punctuation">{</span>            <span class="token comment"># a method already implemented in the role</span>
+    <span class="token keyword">print</span> <span class="token string">&quot;Hi!\n&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">package</span> Parrot<span class="token punctuation">;</span>
+<span class="token keyword">use</span> Class<span class="token punctuation">:</span><span class="token punctuation">:</span>Tiny<span class="token punctuation">;</span>
+<span class="token keyword">use</span> Role<span class="token punctuation">:</span><span class="token punctuation">:</span>Tiny<span class="token punctuation">:</span><span class="token punctuation">:</span>With<span class="token punctuation">;</span>
+
+with <span class="token string">'Chatty'</span><span class="token punctuation">;</span>
+
+<span class="token function"><span class="token keyword">sub</span> introduce</span> <span class="token punctuation">{</span>
+    <span class="token keyword">print</span> <span class="token string">&quot;I'm Buddy.\n&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/perl/object-oriented-perl.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/perl/split-a-string-on-unquoted-separators.html" class="prev">
+        Split a string on unquoted separators
+      </a></span> <span class="next"><a href="/perl/exception-handling.html">
+        Exception handling
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2393.a922c560.js" defer></script>
+  </body>
+</html>

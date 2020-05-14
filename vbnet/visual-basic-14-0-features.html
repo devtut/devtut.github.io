@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Visual Basic .NET - Visual Basic 14.0 Features</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Null conditional operator, String interpolation, Read-Only Auto-Properties, NameOf operator, Multiline string literals, Partial Modules and Interfaces, Comments after implicit line continuation, #Region directive improvements, Exception handling">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Visual Basic .NET - Visual Basic 14.0 Features">
+    <meta property="og:description" content="Null conditional operator, String interpolation, Read-Only Auto-Properties, NameOf operator, Multiline string literals, Partial Modules and Interfaces, Comments after implicit line continuation, #Region directive improvements, Exception handling">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vbnet/visual-basic-14-0-features.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Visual Basic .NET - Visual Basic 14.0 Features">
+    <meta name="twitter:description" content="Null conditional operator, String interpolation, Read-Only Auto-Properties, NameOf operator, Multiline string literals, Partial Modules and Interfaces, Comments after implicit line continuation, #Region directive improvements, Exception handling">
+    <meta name="twitter:url" content="/vbnet/visual-basic-14-0-features.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3496.62615766.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Visual Basic .NET</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vbnet/" class="sidebar-link">Disclaimer</a></li><li><a href="/vbnet/getting-started-with-visual-basic-net-language.html" class="sidebar-link">Getting started with Visual Basic .NET Language</a></li><li><a href="/vbnet/declaring-variables.html" class="sidebar-link">Declaring variables</a></li><li><a href="/vbnet/introduction-to-syntax.html" class="sidebar-link">Introduction to Syntax</a></li><li><a href="/vbnet/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vbnet/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/vbnet/short-circuiting-operators-andalso-orelse.html" class="sidebar-link">Short-Circuiting Operators (AndAlso - OrElse)</a></li><li><a href="/vbnet/date.html" class="sidebar-link">Date</a></li><li><a href="/vbnet/array.html" class="sidebar-link">Array</a></li><li><a href="/vbnet/lists.html" class="sidebar-link">Lists</a></li><li><a href="/vbnet/enum.html" class="sidebar-link">Enum</a></li><li><a href="/vbnet/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/vbnet/looping.html" class="sidebar-link">Looping</a></li><li><a href="/vbnet/file-handling.html" class="sidebar-link">File Handling</a></li><li><a href="/vbnet/file-folder-compression.html" class="sidebar-link">File/Folder Compression</a></li><li><a href="/vbnet/connection-handling.html" class="sidebar-link">Connection Handling</a></li><li><a href="/vbnet/data-access.html" class="sidebar-link">Data Access</a></li><li><a href="/vbnet/type-conversion.html" class="sidebar-link">Type conversion</a></li><li><a href="/vbnet/byval-and-byref-keywords.html" class="sidebar-link">ByVal and ByRef keywords</a></li><li><a href="/vbnet/console.html" class="sidebar-link">Console</a></li><li><a href="/vbnet/functions.html" class="sidebar-link">Functions</a></li><li><a href="/vbnet/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vbnet/random.html" class="sidebar-link">Random</a></li><li><a href="/vbnet/classes.html" class="sidebar-link">Classes</a></li><li><a href="/vbnet/generics.html" class="sidebar-link">Generics</a></li><li><a href="/vbnet/disposable-objects.html" class="sidebar-link">Disposable objects</a></li><li><a href="/vbnet/nullreferenceexception.html" class="sidebar-link">NullReferenceException</a></li><li><a href="/vbnet/using-statement.html" class="sidebar-link">Using Statement</a></li><li><a href="/vbnet/option-strict.html" class="sidebar-link">Option Strict</a></li><li><a href="/vbnet/option-explicit.html" class="sidebar-link">Option Explicit</a></li><li><a href="/vbnet/option-infer.html" class="sidebar-link">Option Infer</a></li><li><a href="/vbnet/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vbnet/oop-keywords.html" class="sidebar-link">OOP Keywords</a></li><li><a href="/vbnet/extension-methods.html" class="sidebar-link">Extension methods</a></li><li><a href="/vbnet/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/vbnet/visual-basic-14-0-features.html" class="active sidebar-link">Visual Basic 14.0 Features</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vbnet/visual-basic-14-0-features.html#null-conditional-operator" class="sidebar-link">Null conditional operator</a></li><li class="sidebar-sub-header"><a href="/vbnet/visual-basic-14-0-features.html#string-interpolation" class="sidebar-link">String interpolation</a></li><li class="sidebar-sub-header"><a href="/vbnet/visual-basic-14-0-features.html#read-only-auto-properties" class="sidebar-link">Read-Only Auto-Properties</a></li><li class="sidebar-sub-header"><a href="/vbnet/visual-basic-14-0-features.html#nameof-operator" class="sidebar-link">NameOf operator</a></li><li class="sidebar-sub-header"><a href="/vbnet/visual-basic-14-0-features.html#multiline-string-literals" class="sidebar-link">Multiline string literals</a></li><li class="sidebar-sub-header"><a href="/vbnet/visual-basic-14-0-features.html#partial-modules-and-interfaces" class="sidebar-link">Partial Modules and Interfaces</a></li><li class="sidebar-sub-header"><a href="/vbnet/visual-basic-14-0-features.html#comments-after-implicit-line-continuation" class="sidebar-link">Comments after implicit line continuation</a></li><li class="sidebar-sub-header"><a href="/vbnet/visual-basic-14-0-features.html#region-directive-improvements" class="sidebar-link">#Region directive improvements</a></li><li class="sidebar-sub-header"><a href="/vbnet/visual-basic-14-0-features.html#exception-handling" class="sidebar-link">Exception handling</a></li></ul></li><li><a href="/vbnet/linq.html" class="sidebar-link">LINQ</a></li><li><a href="/vbnet/ftp-server.html" class="sidebar-link">FTP server</a></li><li><a href="/vbnet/working-with-windows-forms.html" class="sidebar-link">Working with Windows Forms</a></li><li><a href="/vbnet/google-maps-in-a-windows-form.html" class="sidebar-link">Google Maps in a Windows Form</a></li><li><a href="/vbnet/gdi.html" class="sidebar-link">GDI+</a></li><li><a href="/vbnet/winforms-spellcheckbox.html" class="sidebar-link">WinForms SpellCheckBox</a></li><li><a href="/vbnet/using-axwindowsmediaplayer-in-vb-net.html" class="sidebar-link">Using axWindowsMediaPlayer in VB.Net</a></li><li><a href="/vbnet/wpf-xaml-data-binding.html" class="sidebar-link">WPF XAML Data Binding</a></li><li><a href="/vbnet/reading-compressed-textfile-on-the-fly.html" class="sidebar-link">Reading compressed textfile on-the-fly</a></li><li><a href="/vbnet/threading.html" class="sidebar-link">Threading</a></li><li><a href="/vbnet/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/vbnet/backgroundworker.html" class="sidebar-link">BackgroundWorker</a></li><li><a href="/vbnet/using-backgroundworker.html" class="sidebar-link">Using BackgroundWorker</a></li><li><a href="/vbnet/task-based-asynchronous-pattern.html" class="sidebar-link">Task-based asynchronous pattern</a></li><li><a href="/vbnet/debugging-your-application.html" class="sidebar-link">Debugging your application</a></li><li><a href="/vbnet/unit-testing-in-vb-net.html" class="sidebar-link">Unit Testing in VB.NET</a></li><li><a href="/vbnet/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="visual-basic-14-0-features"><a href="#visual-basic-14-0-features" class="header-anchor">#</a> Visual Basic 14.0 Features</h1> <p>Visual Basic 14 is the version of Visual Basic that was shipped as part of Visual Studio 2015.</p> <p>This version was rewritten from scratch in about 1.3 million lines of VB. Many features were added to remove common irritations and to make common coding patterns cleaner.</p> <p>The version number of Visual Basic went straight from 12 to 14, skipping 13. This was done to keep VB in line with the version numbering of Visual Studio itself.</p> <h2 id="null-conditional-operator"><a href="#null-conditional-operator" class="header-anchor">#</a> Null conditional operator</h2> <p>To avoid verbose null checking, the <strong><code>?.</code></strong> operator has been introduced in the language.</p> <p>The old verbose syntax:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">If</span> myObject <span class="token keyword">IsNot</span> <span class="token boolean">Nothing</span> <span class="token keyword">AndAlso</span> myObject<span class="token punctuation">.</span>Value <span class="token operator">&gt;</span><span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">Then</span>
+
+</code></pre></div><p>Can be now replaced by the concise:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">If</span> myObject<span class="token punctuation">?</span><span class="token punctuation">.</span>Value <span class="token operator">&gt;</span><span class="token operator">=</span> <span class="token number">10</span> <span class="token keyword">Then</span>
+
+</code></pre></div><p>The <code>?</code> operator is particularly powerful when you have a chain of properties. Consider the following:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> fooInstance <span class="token keyword">As</span> Foo <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+<span class="token keyword">Dim</span> s <span class="token keyword">As</span> <span class="token keyword">String</span>
+
+</code></pre></div><p>Normally you would have to write something like this:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">If</span> fooInstance <span class="token keyword">IsNot</span> <span class="token boolean">Nothing</span> <span class="token keyword">AndAlso</span> fooInstance<span class="token punctuation">.</span>BarInstance <span class="token keyword">IsNot</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span>
+    s <span class="token operator">=</span> fooInstance<span class="token punctuation">.</span>BarInstance<span class="token punctuation">.</span>Baz
+<span class="token keyword">Else</span>
+    s <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+<span class="token keyword">End</span> <span class="token keyword">If</span>
+
+</code></pre></div><p>But with the <code>?</code> operator this can be replaced with just:</p> <div class="language-vb extra-class"><pre class="language-vb"><code>s <span class="token operator">=</span> fooInstance<span class="token punctuation">?</span><span class="token punctuation">.</span>BarInstance<span class="token punctuation">?</span><span class="token punctuation">.</span>Baz
+
+</code></pre></div><h2 id="string-interpolation"><a href="#string-interpolation" class="header-anchor">#</a> String interpolation</h2> <p>This new feature makes the string concatenation more readable. This syntax will be compiled to its equivalent <code>String.Format</code> call.</p> <p>Without string interpolation:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">String</span><span class="token punctuation">.</span>Format<span class="token punctuation">(</span><span class="token string">&quot;Hello, {0}&quot;</span><span class="token punctuation">,</span> name<span class="token punctuation">)</span>
+
+</code></pre></div><p>With string interpolation:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token string">$&quot;Hello, {name}&quot;</span>
+
+</code></pre></div><p>The two lines are equivalent and both get compiled to a call to <code>String.Format</code>.</p> <p>As in <code>String.Format</code>, the brackets can contain any single expression (call to a method, property, a null coalescing operator et cetera).</p> <p>String Interpolation is the preferred method over <code>String.Format</code> because it prevents some runtime errors from occurring. Consider the following <code>String.Format</code> line:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">String</span><span class="token punctuation">.</span>Format<span class="token punctuation">(</span><span class="token string">&quot;The number of people is {0}/{1}&quot;</span><span class="token punctuation">,</span> numPeople<span class="token punctuation">)</span>
+
+</code></pre></div><p>This will compile, but will cause a runtime error as the compiler does not check that the number of arguments match the placeholders.</p> <h2 id="read-only-auto-properties"><a href="#read-only-auto-properties" class="header-anchor">#</a> Read-Only Auto-Properties</h2> <p>Read-only properties were always possible in VB.NET in this format:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Class</span> Foo
+
+  <span class="token keyword">Private</span> _MyProperty <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;Bar&quot;</span>
+
+  <span class="token keyword">Public</span> <span class="token keyword">ReadOnly</span> <span class="token keyword">Property</span> MyProperty <span class="token keyword">As</span> <span class="token keyword">String</span>
+    <span class="token keyword">Get</span>
+      <span class="token keyword">Return</span> _MyProperty
+    <span class="token keyword">End</span> <span class="token keyword">Get</span>
+  <span class="token keyword">End</span> <span class="token keyword">Property</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+</code></pre></div><p>The new version of Visual Basic allows a short hand for the property declaration like so:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Class</span> Foo
+
+  <span class="token keyword">Public</span> <span class="token keyword">ReadOnly</span> <span class="token keyword">Property</span> MyProperty <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;Bar&quot;</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+</code></pre></div><p>The actual implementation that is generated by the compiler is exactly the same for both examples. The new method to write it is just a short hand. The compiler will still generate a private field with the format: <code>_&lt;PropertyName&gt;</code> to back the read-only property.</p> <h2 id="nameof-operator"><a href="#nameof-operator" class="header-anchor">#</a> NameOf operator</h2> <p>The <code>NameOf</code> operator resolves namespaces, types, variables and member names at compile time and replaces them with the string equivalent.</p> <p>One of the use cases:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> MySub<span class="token punctuation">(</span>variable <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> variable <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span> <span class="token keyword">Throw</span> <span class="token keyword">New</span> ArgumentNullException<span class="token punctuation">(</span><span class="token string">&quot;variable&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The old syntax will expose the risk of renaming the variable and leaving the hard-coded string to the wrong value.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> MySub<span class="token punctuation">(</span>variable <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> variable <span class="token keyword">Is</span> <span class="token boolean">Nothing</span> <span class="token keyword">Then</span> <span class="token keyword">Throw</span> <span class="token keyword">New</span> ArgumentNullException<span class="token punctuation">(</span>NameOf<span class="token punctuation">(</span>variable<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>With <code>NameOf</code>, renaming the variable only will raise a compiler error. This will also allow the renaming tool to rename both with a single effort.</p> <p>The <code>NameOf</code> operator only uses the last component of the reference in the brackets. This is important when handling something like namespaces in the <code>NameOf</code> operator.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Imports</span> System
+
+<span class="token keyword">Module</span> Module1
+    <span class="token keyword">Sub</span> WriteIO<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span>NameOf<span class="token punctuation">(</span>IO<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">'displays &quot;IO&quot;</span>
+        Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span>NameOf<span class="token punctuation">(</span>System<span class="token punctuation">.</span>IO<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">'displays &quot;IO&quot;</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+</code></pre></div><p>The operator also uses the name of the reference that is typed in without resolving any name changing imports. For example:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Imports</span> OldList <span class="token operator">=</span> System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>ArrayList
+
+<span class="token keyword">Module</span> Module1
+    <span class="token keyword">Sub</span> WriteList<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span>NameOf<span class="token punctuation">(</span>OldList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">'displays &quot;OldList&quot;</span>
+        Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span>NameOf<span class="token punctuation">(</span>System<span class="token punctuation">.</span>Collections<span class="token punctuation">.</span>ArrayList<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">'displays &quot;ArrayList&quot;</span>
+    <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+</code></pre></div><h2 id="multiline-string-literals"><a href="#multiline-string-literals" class="header-anchor">#</a> Multiline string literals</h2> <p>VB now allows string literals that split over multiple lines.</p> <p>Old syntax:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> text <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;Line1&quot;</span> <span class="token operator">&amp;</span> Environment<span class="token punctuation">.</span>NewLine <span class="token operator">&amp;</span> <span class="token string">&quot;Line2&quot;</span>
+
+</code></pre></div><p>New syntax:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> text <span class="token keyword">As</span> <span class="token keyword">String</span> <span class="token operator">=</span> <span class="token string">&quot;Line 1
+Line 2&quot;</span>
+
+</code></pre></div><h2 id="partial-modules-and-interfaces"><a href="#partial-modules-and-interfaces" class="header-anchor">#</a> Partial Modules and Interfaces</h2> <p>Similar to partial classes the new version of Visual Basic is now able to handle partial modules and partial interfaces. The syntax and behaviour is exactly the same as it would be for partial classes.</p> <p>A partial module example:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Partial</span> <span class="token keyword">Module</span> Module1
+  <span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    Console<span class="token punctuation">.</span>Write<span class="token punctuation">(</span><span class="token string">&quot;Ping -&gt; &quot;</span><span class="token punctuation">)</span>
+    TestFunktion<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+<span class="token keyword">Partial</span> <span class="token keyword">Module</span> Module1
+  <span class="token keyword">Private</span> <span class="token keyword">Sub</span> TestFunktion<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    Console<span class="token punctuation">.</span>WriteLine<span class="token punctuation">(</span><span class="token string">&quot;Pong&quot;</span><span class="token punctuation">)</span>
+  <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+</code></pre></div><p>And a partial interface:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Partial</span> <span class="token keyword">Interface</span> Interface1
+  <span class="token keyword">Sub</span> Methode1<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Interface</span>
+
+<span class="token keyword">Partial</span> <span class="token keyword">Interface</span> Interface1
+  <span class="token keyword">Sub</span> Methode2<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Interface</span>
+
+<span class="token keyword">Public</span> <span class="token keyword">Class</span> Class1
+  <span class="token keyword">Implements</span> Interface1
+  <span class="token keyword">Public</span> <span class="token keyword">Sub</span> Methode1<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">Implements</span> Interface1<span class="token punctuation">.</span>Methode1
+    <span class="token keyword">Throw</span> <span class="token keyword">New</span> NotImplementedException<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+  <span class="token keyword">Public</span> <span class="token keyword">Sub</span> Methode2<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">Implements</span> Interface1<span class="token punctuation">.</span>Methode2
+    <span class="token keyword">Throw</span> <span class="token keyword">New</span> NotImplementedException<span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token keyword">End</span> <span class="token keyword">Sub</span>
+<span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+</code></pre></div><p>Just like for partial classes the definitions for the partial modules and interfaces have to be located in the same namespace and the same assembly. This is because the partial parts of the modules and interfaces are merged during the compilation and the compiled assembly does not contain any indication that the original definition of the module or interface was split.</p> <h2 id="comments-after-implicit-line-continuation"><a href="#comments-after-implicit-line-continuation" class="header-anchor">#</a> Comments after implicit line continuation</h2> <p>VB 14.0 introduces the ability to add comments after implicit line continuation.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Dim</span> number <span class="token operator">=</span>
+    From c <span class="token keyword">As</span> <span class="token keyword">Char</span> <span class="token comment">'Comment</span>
+    <span class="token keyword">In</span> <span class="token string">&quot;dj58kwd92n4&quot;</span> <span class="token comment">'Comment</span>
+    Where <span class="token keyword">Char</span><span class="token punctuation">.</span>IsNumber<span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token comment">'Comment</span>
+    <span class="token keyword">Select</span> c <span class="token comment">'Comment</span>
+
+</code></pre></div><h2 id="region-directive-improvements"><a href="#region-directive-improvements" class="header-anchor">#</a> #Region directive improvements</h2> <p>#Region directive can now be placed inside methods and can even span over methods, classes and modules.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token directive comment">#Region &quot;A Region Spanning A Class and Ending Inside Of A Method In A Module&quot;</span>
+   <span class="token keyword">Public</span> <span class="token keyword">Class</span> FakeClass
+    <span class="token comment">'Nothing to see here, just a fake class.</span>
+   <span class="token keyword">End</span> <span class="token keyword">Class</span>
+
+   <span class="token keyword">Module</span> Extensions
+
+    <span class="token comment">''' &lt;summary&gt;</span>
+    <span class="token comment">''' Checks the path of files or directories and returns [TRUE] if it exists.</span>
+    <span class="token comment">''' &lt;/summary&gt;</span>
+    <span class="token comment">''' &lt;param name=&quot;Path&quot;&gt;[Sting] Path of file or directory to check.&lt;/param&gt;</span>
+    <span class="token comment">''' &lt;returns&gt;[Boolean]&lt;/returns&gt;</span>
+    <span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+    <span class="token keyword">Public</span> <span class="token keyword">Function</span> PathExists<span class="token punctuation">(</span><span class="token keyword">ByVal</span> Path <span class="token keyword">As</span> <span class="token keyword">String</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Boolean</span>
+        <span class="token keyword">If</span> My<span class="token punctuation">.</span>Computer<span class="token punctuation">.</span>FileSystem<span class="token punctuation">.</span>FileExists<span class="token punctuation">(</span>Path<span class="token punctuation">)</span> <span class="token keyword">Then</span> <span class="token keyword">Return</span> <span class="token boolean">True</span>
+        <span class="token keyword">If</span> My<span class="token punctuation">.</span>Computer<span class="token punctuation">.</span>FileSystem<span class="token punctuation">.</span>DirectoryExists<span class="token punctuation">(</span>Path<span class="token punctuation">)</span> <span class="token keyword">Then</span> <span class="token keyword">Return</span> <span class="token boolean">True</span>
+        <span class="token keyword">Return</span> <span class="token boolean">False</span>
+    <span class="token keyword">End</span> <span class="token keyword">Function</span>
+
+    <span class="token comment">''' &lt;summary&gt;</span>
+    <span class="token comment">''' Returns the version number from the specified assembly using the assembly's strong name.</span>
+    <span class="token comment">''' &lt;/summary&gt;</span>
+    <span class="token comment">''' &lt;param name=&quot;Assy&quot;&gt;[Assembly] Assembly to get the version info from.&lt;/param&gt;</span>
+    <span class="token comment">''' &lt;returns&gt;[String]&lt;/returns&gt;</span>
+    <span class="token operator">&lt;</span>Extension<span class="token operator">&gt;</span>
+    <span class="token keyword">Friend</span> <span class="token keyword">Function</span> GetVersionFromAssembly<span class="token punctuation">(</span><span class="token keyword">ByVal</span> Assy <span class="token keyword">As</span> Assembly<span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">String</span>
+<span class="token directive comment">#End Region</span>
+        <span class="token keyword">Return</span> Split<span class="token punctuation">(</span>Split<span class="token punctuation">(</span>Assy<span class="token punctuation">.</span>FullName<span class="token punctuation">,</span> <span class="token string">&quot;,&quot;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;=&quot;</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+    <span class="token keyword">End</span> <span class="token keyword">Function</span>
+<span class="token keyword">End</span> <span class="token keyword">Module</span>
+
+</code></pre></div><h2 id="exception-handling"><a href="#exception-handling" class="header-anchor">#</a> Exception handling</h2> <p>During coding, unexpected errors do arise frequently enough, which requires debugging and testing. But sometimes the errors are indeed expected and to bypass it, there is the <code>Try..Catch..Throw..Finally..End Try</code> block.</p> <p>To manage an error correctly, the code is put into a <code>Try..Catch</code> block, whereby the <code>Catch</code>, as the name states, will catch all the exceptions that arise in this block.</p> <p>And in case of exception, we have the possibility to <code>Throw</code> the error, that is return it to notify the user or manage it internally in the code itself.</p> <p>The <code>Finally</code> part is the final code that, whatever the outcome be, if there is an exception or not, the code will run before going out of the block.</p> <p>In case we need to pop-out of the clock, there is the <code>Exit Try</code> statement that can be used. But here also, the code in the <code>Finally</code> section will be executed before ending.</p> <p>The syntax is simple;</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Try</span>
+    [ tryStatements ]
+    [ <span class="token keyword">Exit</span> <span class="token keyword">Try</span> ]
+[ <span class="token keyword">Catch</span> [ exception [ <span class="token keyword">As</span> type ] ] [ <span class="token keyword">When</span> expression ]
+    [ catchStatements ]
+    [ <span class="token keyword">Exit</span> <span class="token keyword">Try</span> ] ]
+[ <span class="token keyword">Catch</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> ]
+[ <span class="token keyword">Finally</span>
+    [ finallyStatements ] ]
+<span class="token keyword">End</span> <span class="token keyword">Try</span>
+
+</code></pre></div><p>where only the <code>Try</code> and <code>End Try</code> is compulsory. The rest can be ignored but as a good practice, do include the <code>Finally</code> part, even if it would be left blank.</p> <p>Coming to the exception, there are different type of exception that can be caught. They are ready made exceptions available from the .Net Framework, as below;</p> <table><thead><tr><th>Exception Class</th> <th>Brief Description</th></tr></thead> <tbody><tr><td>System.IO.IOException</td> <td>Handles I/O errors</td></tr> <tr><td>System.IndexOutOfRangeException</td> <td>Refers to an array index out of range</td></tr> <tr><td>System.ArrayTypeMismatchException</td> <td>When type is mismatched with the array type</td></tr> <tr><td>System.NullReferenceException</td> <td>Handles errors generated from referencing a null object.</td></tr> <tr><td>System.DivideByZeroException</td> <td>Handles errors generated from dividing a dividend with zero.</td></tr> <tr><td>System.InvalidCastException</td> <td>Handles errors generated during typecasting.</td></tr> <tr><td>System.OutOfMemoryException</td> <td>Handles errors generated from insufficient free memory.</td></tr> <tr><td>System.StackOverflowException</td> <td>Handles errors generated from stack overflow.</td></tr> <tr><td>---</td> <td>---</td></tr></tbody></table></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vbnet/visual-basic-14-0-features.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vbnet/reflection.html" class="prev">
+        Reflection
+      </a></span> <span class="next"><a href="/vbnet/linq.html">
+        LINQ
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3496.62615766.js" defer></script>
+  </body>
+</html>

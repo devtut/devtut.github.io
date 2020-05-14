@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Angular 2 - Mocking @ngrx/Store</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Unit Test For Component With Mock Store, Observer Mock, Angular 2 - Mock Observable ( service + component ), Unit Test For Component Spying On Store, Simple Store">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Angular 2 - Mocking @ngrx/Store">
+    <meta property="og:description" content="Unit Test For Component With Mock Store, Observer Mock, Angular 2 - Mock Observable ( service + component ), Unit Test For Component Spying On Store, Simple Store">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/angular2/mocking-ngrx-store.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Angular 2 - Mocking @ngrx/Store">
+    <meta name="twitter:description" content="Unit Test For Component With Mock Store, Observer Mock, Angular 2 - Mock Observable ( service + component ), Unit Test For Component Spying On Store, Simple Store">
+    <meta name="twitter:url" content="/angular2/mocking-ngrx-store.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/396.65b0d71f.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Angular 2</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/angular2/" class="sidebar-link">Disclaimer</a></li><li><a href="/angular2/getting-started-with-angular-2.html" class="sidebar-link">Getting started with Angular 2</a></li><li><a href="/angular2/components.html" class="sidebar-link">Components</a></li><li><a href="/angular2/component-interactions.html" class="sidebar-link">Component interactions</a></li><li><a href="/angular2/directives.html" class="sidebar-link">Directives</a></li><li><a href="/angular2/page-title.html" class="sidebar-link">Page title</a></li><li><a href="/angular2/templates.html" class="sidebar-link">Templates</a></li><li><a href="/angular2/commonly-built-in-directives-and-services.html" class="sidebar-link">Commonly built-in directives and services</a></li><li><a href="/angular2/directives-components-input-output.html" class="sidebar-link">Directives &amp; components : @Input @Output</a></li><li><a href="/angular2/attribute-directives-to-affect-the-value-of-properties-on-the-host-node-by-using-the-hostbinding-decorator.html" class="sidebar-link">Attribute directives to affect the value of properties on the host node by using the @HostBinding decorator.</a></li><li><a href="/angular2/how-to-use-ngif.html" class="sidebar-link">How to Use ngif</a></li><li><a href="/angular2/how-to-use-ngfor.html" class="sidebar-link">How to use ngfor</a></li><li><a href="/angular2/angular-forloop.html" class="sidebar-link">Angular - ForLoop</a></li><li><a href="/angular2/modules.html" class="sidebar-link">Modules</a></li><li><a href="/angular2/pipes.html" class="sidebar-link">Pipes</a></li><li><a href="/angular2/orderby-pipe.html" class="sidebar-link">OrderBy Pipe</a></li><li><a href="/angular2/angular2-custom-validations.html" class="sidebar-link">Angular2 Custom Validations</a></li><li><a href="/angular2/routing.html" class="sidebar-link">Routing</a></li><li><a href="/angular2/routing-3-0-0.html" class="sidebar-link">Routing (3.0.0+)</a></li><li><a href="/angular2/dynamically-add-components-using-viewcontainerref-createcomponent.html" class="sidebar-link">Dynamically add components using ViewContainerRef.createComponent</a></li><li><a href="/angular2/installing-3rd-party-plugins-with-angular-cli-1-0-0-beta-10.html" class="sidebar-link">Installing 3rd party plugins with angular-cli@1.0.0-beta.10</a></li><li><a href="/angular2/lifecycle-hooks.html" class="sidebar-link">Lifecycle Hooks</a></li><li><a href="/angular2/angular-rxjs-subjects-and-observables-with-api-requests.html" class="sidebar-link">Angular RXJS Subjects and Observables with API requests</a></li><li><a href="/angular2/services-and-dependency-injection.html" class="sidebar-link">Services and Dependency Injection</a></li><li><a href="/angular2/service-worker.html" class="sidebar-link">Service Worker</a></li><li><a href="/angular2/eventemitter-service.html" class="sidebar-link">EventEmitter Service</a></li><li><a href="/angular2/optimizing-rendering-using-changedetectionstrategy.html" class="sidebar-link">Optimizing rendering using ChangeDetectionStrategy</a></li><li><a href="/angular2/angular-2-forms-update.html" class="sidebar-link">Angular 2 Forms Update</a></li><li><a href="/angular2/detecting-resize-events.html" class="sidebar-link">Detecting resize events</a></li><li><a href="/angular2/testing-ngmodel.html" class="sidebar-link">Testing ngModel</a></li><li><a href="/angular2/feature-modules.html" class="sidebar-link">Feature Modules</a></li><li><a href="/angular2/bootstrap-empty-module-in-angular-2.html" class="sidebar-link">Bootstrap Empty module in angular 2</a></li><li><a href="/angular2/lazy-loading-a-module.html" class="sidebar-link">Lazy loading a module</a></li><li><a href="/angular2/advanced-component-examples.html" class="sidebar-link">Advanced Component Examples</a></li><li><a href="/angular2/bypassing-sanitizing-for-trusted-values.html" class="sidebar-link">Bypassing Sanitizing for trusted values</a></li><li><a href="/angular2/angular-2-data-driven-forms.html" class="sidebar-link">Angular 2 Data Driven Forms</a></li><li><a href="/angular2/angular2-in-memory-web-api.html" class="sidebar-link">Angular2 In Memory Web API</a></li><li><a href="/angular2/ahead-of-time-aot-compilation-with-angular-2.html" class="sidebar-link">Ahead-of-time (AOT) compilation with Angular 2</a></li><li><a href="/angular2/crud-in-angular2-with-restful-api.html" class="sidebar-link">CRUD in Angular2 with Restful API</a></li><li><a href="/angular2/use-native-webcomponents-in-angular-2.html" class="sidebar-link">Use native webcomponents in Angular 2</a></li><li><a href="/angular2/update-typings.html" class="sidebar-link">Update typings</a></li><li><a href="/angular2/mocking-ngrx-store.html" class="active sidebar-link">Mocking @ngrx/Store</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/angular2/mocking-ngrx-store.html#unit-test-for-component-with-mock-store" class="sidebar-link">Unit Test For Component With Mock Store</a></li><li class="sidebar-sub-header"><a href="/angular2/mocking-ngrx-store.html#observer-mock" class="sidebar-link">Observer Mock</a></li><li class="sidebar-sub-header"><a href="/angular2/mocking-ngrx-store.html#angular-2-mock-observable-service-component" class="sidebar-link">Angular 2 - Mock Observable ( service + component )</a></li><li class="sidebar-sub-header"><a href="/angular2/mocking-ngrx-store.html#unit-test-for-component-spying-on-store" class="sidebar-link">Unit Test For Component Spying On Store</a></li><li class="sidebar-sub-header"><a href="/angular2/mocking-ngrx-store.html#simple-store" class="sidebar-link">Simple Store</a></li></ul></li><li><a href="/angular2/ngrx.html" class="sidebar-link">ngrx</a></li><li><a href="/angular2/http-interceptor.html" class="sidebar-link">Http Interceptor</a></li><li><a href="/angular2/animation.html" class="sidebar-link">Animation</a></li><li><a href="/angular2/zone-js.html" class="sidebar-link">Zone.js</a></li><li><a href="/angular2/angular2-animations.html" class="sidebar-link">Angular2 Animations</a></li><li><a href="/angular2/create-an-angular-2-npm-package.html" class="sidebar-link">Create an Angular 2+ NPM package</a></li><li><a href="/angular2/angular2-canactivate.html" class="sidebar-link">Angular2 CanActivate</a></li><li><a href="/angular2/angular-2-protractor.html" class="sidebar-link">Angular  2 - Protractor</a></li><li><a href="/angular2/example-for-routes-such-as-route-subroute-for-static-urls.html" class="sidebar-link">Example for routes such as /route/subroute for static urls</a></li><li><a href="/angular2/angular2-input-output.html" class="sidebar-link">Angular2 Input() output()</a></li><li><a href="/angular2/angular-cli.html" class="sidebar-link">Angular-cli</a></li><li><a href="/angular2/angular-2-change-detection-and-manual-triggering.html" class="sidebar-link">Angular 2 Change detection and manual triggering</a></li><li><a href="/angular2/angular2-databinding.html" class="sidebar-link">Angular2 Databinding</a></li><li><a href="/angular2/brute-force-upgrading.html" class="sidebar-link">Brute Force Upgrading</a></li><li><a href="/angular2/angular2-provide-external-data-to-app-before-bootstrap.html" class="sidebar-link">Angular2 provide external data to App before bootstrap</a></li><li><a href="/angular2/custom-ngx-bootstrap-datepicker-input.html" class="sidebar-link">custom ngx-bootstrap datepicker + input</a></li><li><a href="/angular2/using-third-party-libraries-like-jquery-in-angular-2.html" class="sidebar-link">Using third party libraries like jQuery in Angular 2</a></li><li><a href="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html" class="sidebar-link">Configuring ASP.net Core application to work with Angular 2 and TypeScript</a></li><li><a href="/angular2/angular2-using-webpack.html" class="sidebar-link">Angular2 using webpack</a></li><li><a href="/angular2/angular-material-design.html" class="sidebar-link">Angular material design</a></li><li><a href="/angular2/dropzone-in-angular2.html" class="sidebar-link">Dropzone in Angular2</a></li><li><a href="/angular2/angular-redux.html" class="sidebar-link">angular redux</a></li><li><a href="/angular2/creating-an-angular-npm-library.html" class="sidebar-link">Creating an Angular npm library</a></li><li><a href="/angular2/barrel.html" class="sidebar-link">Barrel</a></li><li><a href="/angular2/testing-an-angular-2-app.html" class="sidebar-link">Testing an Angular 2 App</a></li><li><a href="/angular2/angular-cli-test-coverage.html" class="sidebar-link">angular-cli test coverage</a></li><li><a href="/angular2/debugging-angular2-typescript-application-using-visual-studio-code.html" class="sidebar-link">Debugging Angular2 typescript application using Visual Studio Code</a></li><li><a href="/angular2/unit-testing.html" class="sidebar-link">unit testing</a></li><li><a href="/angular2/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="mocking-ngrx-store"><a href="#mocking-ngrx-store" class="header-anchor">#</a> Mocking @ngrx/Store</h1> <h2 id="unit-test-for-component-with-mock-store"><a href="#unit-test-for-component-with-mock-store" class="header-anchor">#</a> Unit Test For Component With Mock Store</h2> <p>This is a unit test of a component that has <strong>Store</strong> as a dependency. Here, we are creating a new class called <strong>MockStore</strong> that is injected into our component instead of the usual Store.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Injectable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> TestBed<span class="token punctuation">,</span> async<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core/testing'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> AppComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./app.component'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>DumbComponentComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./dumb-component/dumb-component.component&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>SmartComponentComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./smart-component/smart-component.component&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>mainReducer<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./state-management/reducers/main-reducer&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> StoreModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@ngrx/store&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Store <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@ngrx/store&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>Observable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;rxjs&quot;</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">MockStore</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'dispatching from the mock store!'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">public</span> <span class="token function">select</span><span class="token punctuation">(</span><span class="token parameter">obj</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'selecting from the mock store!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> Observable<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'AppComponent'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    TestBed<span class="token punctuation">.</span><span class="token function">configureTestingModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      declarations<span class="token operator">:</span> <span class="token punctuation">[</span>
+        AppComponent<span class="token punctuation">,</span>
+        SmartComponentComponent<span class="token punctuation">,</span>
+        DumbComponentComponent<span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      imports<span class="token operator">:</span> <span class="token punctuation">[</span>
+        StoreModule<span class="token punctuation">.</span><span class="token function">provideStore</span><span class="token punctuation">(</span><span class="token punctuation">{</span>mainReducer<span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      providers<span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>provide<span class="token operator">:</span> Store<span class="token punctuation">,</span> useClass<span class="token operator">:</span> MockStore<span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should create the app'</span><span class="token punctuation">,</span> <span class="token keyword">async</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">let</span> fixture <span class="token operator">=</span> TestBed<span class="token punctuation">.</span><span class="token function">createComponent</span><span class="token punctuation">(</span>AppComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> app <span class="token operator">=</span> fixture<span class="token punctuation">.</span>debugElement<span class="token punctuation">.</span>componentInstance<span class="token punctuation">;</span>
+    <span class="token function">expect</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBeTruthy</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="observer-mock"><a href="#observer-mock" class="header-anchor">#</a> Observer Mock</h2> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">class</span> <span class="token class-name">ObserverMock</span> <span class="token keyword">implements</span> <span class="token class-name">Observer</span><span class="token operator">&lt;</span>any<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  closed<span class="token operator">?</span><span class="token operator">:</span> boolean <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">// inherited from Observer</span>
+  nextVal<span class="token operator">:</span> any <span class="token operator">=</span> <span class="token string">''</span><span class="token punctuation">;</span> <span class="token comment">// variable I made up</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+  next <span class="token operator">=</span> <span class="token punctuation">(</span>value<span class="token operator">:</span> any<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter"><span class="token keyword">void</span></span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token keyword">this</span><span class="token punctuation">.</span>nextVal <span class="token operator">=</span> value<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  error <span class="token operator">=</span> <span class="token punctuation">(</span>err<span class="token operator">:</span> any<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter"><span class="token keyword">void</span></span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> console<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+  complete <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter"><span class="token keyword">void</span></span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span> <span class="token keyword">this</span><span class="token punctuation">.</span>closed <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> actionReducer$<span class="token operator">:</span> ObserverMock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ObserverMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> action$<span class="token operator">:</span> ObserverMock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ObserverMock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> obs$<span class="token operator">:</span> Observable<span class="token operator">&lt;</span>any<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Observable</span><span class="token operator">&lt;</span>any<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">StoreMock</span> <span class="token keyword">extends</span> <span class="token class-name">Store</span><span class="token operator">&lt;</span>any<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>action$<span class="token punctuation">,</span> actionReducer$<span class="token punctuation">,</span> obs$<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'Component:Typeahead'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        TestBed<span class="token punctuation">.</span><span class="token function">configureTestingModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+            imports<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            declarations<span class="token operator">:</span> <span class="token punctuation">[</span>Typeahead<span class="token punctuation">]</span><span class="token punctuation">,</span>
+            providers<span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>provide<span class="token operator">:</span> Store<span class="token punctuation">,</span> useClass<span class="token operator">:</span> StoreMock<span class="token punctuation">}</span> <span class="token comment">// NOTICE useClass instead of useValue</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">compileComponents</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="angular-2-mock-observable-service-component"><a href="#angular-2-mock-observable-service-component" class="header-anchor">#</a> Angular 2 - Mock Observable ( service + component )</h2> <p><strong>service</strong></p> <ul><li>I created post service with postRequest method.</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>Injectable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>Http<span class="token punctuation">,</span> Headers<span class="token punctuation">,</span> Response<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@angular/http&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>PostModel<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./PostModel&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">'rxjs/add/operator/map'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>Observable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;rxjs&quot;</span><span class="token punctuation">;</span>
+
+@<span class="token function">Injectable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">PostService</span> <span class="token punctuation">{</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">private</span> _http<span class="token operator">:</span> Http</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">postRequest</span><span class="token punctuation">(</span>postModel<span class="token operator">:</span> PostModel<span class="token punctuation">)</span> <span class="token operator">:</span> Observable<span class="token operator">&lt;</span>Response<span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">let</span> headers <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Headers</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      headers<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">'Content-Type'</span><span class="token punctuation">,</span> <span class="token string">'application/json'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_http<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">&quot;/postUrl&quot;</span><span class="token punctuation">,</span> postModel<span class="token punctuation">,</span> <span class="token punctuation">{</span>headers<span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=&gt;</span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Component</strong></p> <ul><li>I created component with result parameter and postExample function that call to postService.</li> <li>when the post resquest successed than result parameter should be 'Success' else 'Fail'</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>Component<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>PostService<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./PostService&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>PostModel<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./PostModel&quot;</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token operator">:</span> <span class="token string">'app-post'</span><span class="token punctuation">,</span>
+  templateUrl<span class="token operator">:</span> <span class="token string">'./post.component.html'</span><span class="token punctuation">,</span>
+  styleUrls<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'./post.component.scss'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  providers <span class="token operator">:</span> <span class="token punctuation">[</span>PostService<span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">PostComponent</span><span class="token punctuation">{</span>
+
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">private</span> _postService <span class="token operator">:</span> PostService</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    
+  <span class="token keyword">let</span> postModel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PostModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  result <span class="token operator">:</span> string <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+  <span class="token function">postExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>_postService<span class="token punctuation">.</span><span class="token function">postRequest</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>postModel<span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span>
+        <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>  <span class="token punctuation">{</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>result <span class="token operator">=</span> <span class="token string">'Success'</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token parameter">err</span> <span class="token operator">=&gt;</span>  <span class="token keyword">this</span><span class="token punctuation">.</span>result <span class="token operator">=</span> <span class="token string">'Fail'</span>
+      <span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>test service</strong></p> <ul><li>when you want to test service that using http you should use mockBackend. and inject it to it.</li> <li>you need also to inject postService.</li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'Test PostService'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    TestBed<span class="token punctuation">.</span><span class="token function">configureTestingModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      imports<span class="token operator">:</span> <span class="token punctuation">[</span>HttpModule<span class="token punctuation">]</span><span class="token punctuation">,</span>
+      providers<span class="token operator">:</span> <span class="token punctuation">[</span>
+        PostService<span class="token punctuation">,</span>
+        MockBackend<span class="token punctuation">,</span>
+        BaseRequestOptions<span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          provide<span class="token operator">:</span> Http<span class="token punctuation">,</span>
+          deps<span class="token operator">:</span> <span class="token punctuation">[</span>MockBackend<span class="token punctuation">,</span> BaseRequestOptions<span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token function-variable function">useFactory</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">backend<span class="token operator">:</span> XHRBackend<span class="token punctuation">,</span> defaultOptions<span class="token operator">:</span> BaseRequestOptions</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Http</span><span class="token punctuation">(</span>backend<span class="token punctuation">,</span> defaultOptions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'sendPostRequest function return Observable'</span><span class="token punctuation">,</span> <span class="token function">inject</span><span class="token punctuation">(</span><span class="token punctuation">[</span>PostService<span class="token punctuation">,</span> MockBackend<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">service<span class="token operator">:</span> PostService<span class="token punctuation">,</span> mockBackend<span class="token operator">:</span> MockBackend</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> mockPostModel <span class="token operator">=</span> <span class="token function">PostModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    mockBackend<span class="token punctuation">.</span>connections<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">connection<span class="token operator">:</span> MockConnection</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token function">expect</span><span class="token punctuation">(</span>connection<span class="token punctuation">.</span>request<span class="token punctuation">.</span>method<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toEqual</span><span class="token punctuation">(</span>RequestMethod<span class="token punctuation">.</span>Post<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">expect</span><span class="token punctuation">(</span>connection<span class="token punctuation">.</span>request<span class="token punctuation">.</span>url<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">'postUrl'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span>not<span class="token punctuation">.</span><span class="token function">toEqual</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">expect</span><span class="token punctuation">(</span>connection<span class="token punctuation">.</span>request<span class="token punctuation">.</span>headers<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'Content-Type'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toEqual</span><span class="token punctuation">(</span><span class="token string">'application/json'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    service
+      <span class="token punctuation">.</span><span class="token function">postRequest</span><span class="token punctuation">(</span>PostModel<span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">response</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBeDefined</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>test component</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'testing post component'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> component<span class="token operator">:</span> PostComponent<span class="token punctuation">;</span>
+  <span class="token keyword">let</span> fixture<span class="token operator">:</span> ComponentFixture<span class="token operator">&lt;</span>postComponent<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+
+
+  <span class="token keyword">let</span> mockRouter <span class="token operator">=</span> <span class="token punctuation">{</span>
+    navigate<span class="token operator">:</span> jasmine<span class="token punctuation">.</span><span class="token function">createSpy</span><span class="token punctuation">(</span><span class="token string">'navigate'</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token keyword">async</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    TestBed<span class="token punctuation">.</span><span class="token function">configureTestingModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      declarations<span class="token operator">:</span> <span class="token punctuation">[</span>PostComponent<span class="token punctuation">]</span><span class="token punctuation">,</span>
+      imports<span class="token operator">:</span> <span class="token punctuation">[</span>RouterTestingModule<span class="token punctuation">.</span><span class="token function">withRoutes</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>ModalModule<span class="token punctuation">.</span><span class="token function">forRoot</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      providers<span class="token operator">:</span> <span class="token punctuation">[</span>PostService <span class="token punctuation">,</span>MockBackend<span class="token punctuation">,</span>BaseRequestOptions<span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>provide<span class="token operator">:</span> Http<span class="token punctuation">,</span> deps<span class="token operator">:</span> <span class="token punctuation">[</span>MockBackend<span class="token punctuation">,</span> BaseRequestOptions<span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token function-variable function">useFactory</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">backend<span class="token operator">:</span> XHRBackend<span class="token punctuation">,</span> defaultOptions<span class="token operator">:</span> BaseRequestOptions</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Http</span><span class="token punctuation">(</span>backend<span class="token punctuation">,</span> defaultOptions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>provide<span class="token operator">:</span> Router<span class="token punctuation">,</span> useValue<span class="token operator">:</span> mockRouter<span class="token punctuation">}</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      schemas<span class="token operator">:</span> <span class="token punctuation">[</span> <span class="token constant">CUSTOM_ELEMENTS_SCHEMA</span> <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">compileComponents</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    fixture <span class="token operator">=</span> TestBed<span class="token punctuation">.</span><span class="token function">createComponent</span><span class="token punctuation">(</span>PostComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    component <span class="token operator">=</span> fixture<span class="token punctuation">.</span>componentInstance<span class="token punctuation">;</span>
+    fixture<span class="token punctuation">.</span><span class="token function">detectChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+  
+
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'test postRequest success'</span><span class="token punctuation">,</span> <span class="token function">inject</span><span class="token punctuation">(</span><span class="token punctuation">[</span>PostService<span class="token punctuation">,</span> MockBackend<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">service<span class="token operator">:</span> PostService<span class="token punctuation">,</span> mockBackend<span class="token operator">:</span> MockBackend</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    fixturePostComponent <span class="token operator">=</span> TestBed<span class="token punctuation">.</span><span class="token function">createComponent</span><span class="token punctuation">(</span>PostComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    componentPostComponent <span class="token operator">=</span> fixturePostComponent<span class="token punctuation">.</span>componentInstance<span class="token punctuation">;</span>
+    fixturePostComponent<span class="token punctuation">.</span><span class="token function">detectChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    component<span class="token punctuation">.</span><span class="token function">postExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> postModel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PostModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> response <span class="token operator">=</span> <span class="token punctuation">{</span>
+      <span class="token string">'message'</span> <span class="token operator">:</span> <span class="token string">'message'</span><span class="token punctuation">,</span>
+      <span class="token string">'ok'</span>      <span class="token operator">:</span> <span class="token boolean">true</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    mockBackend<span class="token punctuation">.</span>connections<span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">connection<span class="token operator">:</span> MockConnection</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      postComponent<span class="token punctuation">.</span>result <span class="token operator">=</span> <span class="token string">'Success'</span>
+      connection<span class="token punctuation">.</span><span class="token function">mockRespond</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Response</span><span class="token punctuation">(</span>
+        <span class="token keyword">new</span> <span class="token class-name">ResponseOptions</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+          body<span class="token operator">:</span> response
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    service<span class="token punctuation">.</span><span class="token function">postRequest</span><span class="token punctuation">(</span>postModel<span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>component<span class="token punctuation">.</span>result<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toBeDefined</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>PostComponent<span class="token punctuation">.</span>result<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toEqual</span><span class="token punctuation">(</span><span class="token string">'Success'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">expect</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toEqual</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="unit-test-for-component-spying-on-store"><a href="#unit-test-for-component-spying-on-store" class="header-anchor">#</a> Unit Test For Component Spying On Store</h2> <p>This is a unit test of a component that has <strong>Store</strong> as a dependency. Here, we are able to use a store with the default &quot;initial state&quot; while preventing it from actually dispatching actions when <strong>store.dispatch()</strong> is called.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span>TestBed<span class="token punctuation">,</span> async<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core/testing'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>AppComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./app.component'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>DumbComponentComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./dumb-component/dumb-component.component&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>SmartComponentComponent<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./smart-component/smart-component.component&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>mainReducer<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./state-management/reducers/main-reducer&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>StoreModule<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@ngrx/store&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>Store<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;@ngrx/store&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>Observable<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;rxjs&quot;</span><span class="token punctuation">;</span>
+
+<span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">'AppComponent'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">beforeEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    TestBed<span class="token punctuation">.</span><span class="token function">configureTestingModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      declarations<span class="token operator">:</span> <span class="token punctuation">[</span>
+        AppComponent<span class="token punctuation">,</span>
+        SmartComponentComponent<span class="token punctuation">,</span>
+        DumbComponentComponent<span class="token punctuation">,</span>
+      <span class="token punctuation">]</span><span class="token punctuation">,</span>
+      imports<span class="token operator">:</span> <span class="token punctuation">[</span>
+        StoreModule<span class="token punctuation">.</span><span class="token function">provideStore</span><span class="token punctuation">(</span><span class="token punctuation">{</span>mainReducer<span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+  <span class="token function">it</span><span class="token punctuation">(</span><span class="token string">'should create the app'</span><span class="token punctuation">,</span> <span class="token keyword">async</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> fixture <span class="token operator">=</span> TestBed<span class="token punctuation">.</span><span class="token function">createComponent</span><span class="token punctuation">(</span>AppComponent<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> app <span class="token operator">=</span> fixture<span class="token punctuation">.</span>debugElement<span class="token punctuation">.</span>componentInstance<span class="token punctuation">;</span>
+
+  <span class="token keyword">var</span> mockStore <span class="token operator">=</span> fixture<span class="token punctuation">.</span>debugElement<span class="token punctuation">.</span>injector<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>Store<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> storeSpy <span class="token operator">=</span> <span class="token function">spyOn</span><span class="token punctuation">(</span>mockStore<span class="token punctuation">,</span> <span class="token string">'dispatch'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>and<span class="token punctuation">.</span><span class="token function">callFake</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'dispatching from the spy!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="simple-store"><a href="#simple-store" class="header-anchor">#</a> Simple Store</h2> <p>simple.action.ts</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Action <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">enum</span> simpleActionTpye <span class="token punctuation">{</span>
+    add <span class="token operator">=</span> <span class="token string">&quot;simpleAction_Add&quot;</span><span class="token punctuation">,</span>
+    add_Success <span class="token operator">=</span> <span class="token string">&quot;simpleAction_Add_Success&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">simpleAction</span> <span class="token punctuation">{</span>
+    type<span class="token operator">:</span> simpleActionTpye
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">public</span> payload<span class="token operator">:</span> number</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>simple.efficts.ts</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Effect<span class="token punctuation">,</span> Actions <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/effects'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Injectable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Action <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'rxjs'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> simpleAction<span class="token punctuation">,</span> simpleActionTpye <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./simple.action'</span><span class="token punctuation">;</span>
+
+
+@<span class="token function">Injectable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">simpleEffects</span> <span class="token punctuation">{</span>
+
+    @<span class="token function">Effect</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    addAction$<span class="token operator">:</span> Observable<span class="token operator">&lt;</span>simpleAction<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>actions$
+        <span class="token punctuation">.</span><span class="token function">ofType</span><span class="token punctuation">(</span>simpleActionTpye<span class="token punctuation">.</span>add<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">switchMap</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">action<span class="token operator">:</span> simpleAction</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">return</span> Observable<span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> simpleActionTpye<span class="token punctuation">.</span>add_Success<span class="token punctuation">,</span> payload<span class="token operator">:</span> action<span class="token punctuation">.</span>payload <span class="token punctuation">}</span><span class="token punctuation">)</span>
+            <span class="token comment">//   if you have an api use this code</span>
+            <span class="token comment">// return this.http.post(url).catch().map(res=&gt;{ type: simpleAction.add_Success, payload:res})</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">private</span> actions$<span class="token operator">:</span> Actions</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>simple.reducer.ts</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Action<span class="token punctuation">,</span> ActionReducer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> simpleAction<span class="token punctuation">,</span> simpleActionTpye <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./simple.action'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> simpleReducer<span class="token operator">:</span> ActionReducer<span class="token operator">&lt;</span>number<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span>state<span class="token operator">:</span> number <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> action<span class="token operator">:</span> simpleAction<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token parameter">number</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">case</span> simpleActionTpye<span class="token punctuation">.</span>add_Success<span class="token operator">:</span>
+            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>action<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> state <span class="token operator">+</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">;</span>
+        <span class="token keyword">default</span><span class="token operator">:</span>
+            <span class="token keyword">return</span> state<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>store/index.ts</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> combineReducers<span class="token punctuation">,</span> ActionReducer<span class="token punctuation">,</span> Action<span class="token punctuation">,</span> StoreModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> EffectsModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/effects'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ModuleWithProviders <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> compose <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/core'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> simpleReducer <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./simple/simple.reducer&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> simpleEffects <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./simple/simple.efficts&quot;</span><span class="token punctuation">;</span>
+
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">IAppState</span> <span class="token punctuation">{</span>
+    sum<span class="token operator">:</span> number<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// all new reducers should be define here</span>
+<span class="token keyword">const</span> reducers <span class="token operator">=</span> <span class="token punctuation">{</span>
+    sum<span class="token operator">:</span> simpleReducer
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> store<span class="token operator">:</span> ModuleWithProviders <span class="token operator">=</span> StoreModule<span class="token punctuation">.</span><span class="token function">forRoot</span><span class="token punctuation">(</span>reducers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> effects<span class="token operator">:</span> ModuleWithProviders<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>
+    EffectsModule<span class="token punctuation">.</span><span class="token function">forRoot</span><span class="token punctuation">(</span><span class="token punctuation">[</span>simpleEffects<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>app.module.ts</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> BrowserModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/platform-browser'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> NgModule <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> effects<span class="token punctuation">,</span> store <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&quot;./Store/index&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> AppComponent <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./app.component'</span><span class="token punctuation">;</span>
+
+@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  declarations<span class="token operator">:</span> <span class="token punctuation">[</span>
+    AppComponent
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  imports<span class="token operator">:</span> <span class="token punctuation">[</span>
+    BrowserModule<span class="token punctuation">,</span>
+    <span class="token comment">// store</span>
+    store<span class="token punctuation">,</span>
+    effects
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  providers<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  bootstrap<span class="token operator">:</span> <span class="token punctuation">[</span>AppComponent<span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppModule</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+</code></pre></div><p>app.component.ts</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@angular/core'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Store <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@ngrx/store'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Observable <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'rxjs'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token punctuation">{</span> IAppState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./Store/index'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> simpleActionTpye <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./Store/simple/simple.action'</span><span class="token punctuation">;</span>
+
+@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token operator">:</span> <span class="token string">'app-root'</span><span class="token punctuation">,</span>
+  templateUrl<span class="token operator">:</span> <span class="token string">'./app.component.html'</span><span class="token punctuation">,</span>
+  styleUrls<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'./app.component.css'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">AppComponent</span> <span class="token punctuation">{</span>
+  title <span class="token operator">=</span> <span class="token string">'app'</span><span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">private</span> store<span class="token operator">:</span> Store<span class="token operator">&lt;</span>IAppState<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    store<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token parameter">s</span> <span class="token operator">=&gt;</span> s<span class="token punctuation">.</span>sum<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">res</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      type<span class="token operator">:</span> simpleActionTpye<span class="token punctuation">.</span>add<span class="token punctuation">,</span>
+      payload<span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      type<span class="token operator">:</span> simpleActionTpye<span class="token punctuation">.</span>add<span class="token punctuation">,</span>
+      payload<span class="token operator">:</span> <span class="token number">2</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>store<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      type<span class="token operator">:</span> simpleActionTpye<span class="token punctuation">.</span>add<span class="token punctuation">,</span>
+      payload<span class="token operator">:</span> <span class="token number">3</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>result
+0
+1
+3
+6</strong></p> <h4 id="parameters"><a href="#parameters" class="header-anchor">#</a> Parameters</h4> <table><thead><tr><th>name</th> <th>description</th></tr></thead> <tbody><tr><td>value</td> <td>next value to be observed</td></tr> <tr><td>error</td> <td>description</td></tr> <tr><td>err</td> <td>error to be thrown</td></tr> <tr><td>super</td> <td>description</td></tr> <tr><td>action$</td> <td>mock Observer that does nothing unless defined to do so in the mock class</td></tr> <tr><td>actionReducer$</td> <td>mock Observer that does nothing unless defined to do so in the mock class</td></tr> <tr><td>obs$</td> <td>mock Observable</td></tr></tbody></table> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Observer is a generic, but must be of type <code>any</code> to avoid unit testing complexity.  The reason for this complexity, is that Store's constructor expects Observer arguments with different generic types.  Using <code>any</code> avoids this complication.</p> <p>It's possible to pass null values into StoreMock's super constructor, but this restricts the number of assertions that can be used to test the class further down the road.</p> <p>The Component being used in this example is just being used as context for how one would go about injecting Store as a provide in the test setup.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/angular2/mocking-ngrx-store.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/angular2/update-typings.html" class="prev">
+        Update typings
+      </a></span> <span class="next"><a href="/angular2/ngrx.html">
+        ngrx
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/396.65b0d71f.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Excel VBA - File System Object</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="File, folder, drive exists, Basic file operations, Basic folder operations, Other operations">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Excel VBA - File System Object">
+    <meta property="og:description" content="File, folder, drive exists, Basic file operations, Basic folder operations, Other operations">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/excelvba/file-system-object.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Excel VBA - File System Object">
+    <meta name="twitter:description" content="File, folder, drive exists, Basic file operations, Basic folder operations, Other operations">
+    <meta name="twitter:url" content="/excelvba/file-system-object.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1080.caf9771a.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Excel VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/excelvba/" class="sidebar-link">Disclaimer</a></li><li><a href="/excelvba/getting-started-with-excel-vba.html" class="sidebar-link">Getting started with excel-vba</a></li><li><a href="/excelvba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/excelvba/conditional-statements.html" class="sidebar-link">Conditional statements</a></li><li><a href="/excelvba/ranges-and-cells.html" class="sidebar-link">Ranges and Cells</a></li><li><a href="/excelvba/named-ranges.html" class="sidebar-link">Named Ranges</a></li><li><a href="/excelvba/merged-cells-ranges.html" class="sidebar-link">Merged Cells / Ranges</a></li><li><a href="/excelvba/locating-duplicate-values-in-a-range.html" class="sidebar-link">Locating duplicate values in a range</a></li><li><a href="/excelvba/user-defined-functions-udfs.html" class="sidebar-link">User Defined Functions (UDFs)</a></li><li><a href="/excelvba/conditional-formatting-using-vba.html" class="sidebar-link">Conditional formatting using VBA</a></li><li><a href="/excelvba/workbooks.html" class="sidebar-link">Workbooks</a></li><li><a href="/excelvba/working-with-excel-tables-in-vba.html" class="sidebar-link">Working with Excel Tables in VBA</a></li><li><a href="/excelvba/loop-through-all-sheets-in-active-workbook.html" class="sidebar-link">Loop through all Sheets in Active Workbook</a></li><li><a href="/excelvba/use-worksheet-object-and-not-sheet-object.html" class="sidebar-link">Use Worksheet object and not Sheet object</a></li><li><a href="/excelvba/methods-for-finding-the-last-used-row-or-column-in-a-worksheet.html" class="sidebar-link">Methods for Finding the Last Used Row or Column in a Worksheet</a></li><li><a href="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html" class="sidebar-link">Creating a drop-down menu in the Active Worksheet with a Combo Box</a></li><li><a href="/excelvba/file-system-object.html" class="active sidebar-link">File System Object</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/excelvba/file-system-object.html#file-folder-drive-exists" class="sidebar-link">File, folder, drive exists</a></li><li class="sidebar-sub-header"><a href="/excelvba/file-system-object.html#basic-file-operations" class="sidebar-link">Basic file operations</a></li><li class="sidebar-sub-header"><a href="/excelvba/file-system-object.html#basic-folder-operations" class="sidebar-link">Basic folder operations</a></li><li class="sidebar-sub-header"><a href="/excelvba/file-system-object.html#other-operations" class="sidebar-link">Other operations</a></li></ul></li><li><a href="/excelvba/pivot-tables.html" class="sidebar-link">Pivot Tables</a></li><li><a href="/excelvba/binding.html" class="sidebar-link">Binding</a></li><li><a href="/excelvba/autofilter-uses-and-best-practices.html" class="sidebar-link">autofilter ; Uses and best practices</a></li><li><a href="/excelvba/application-object.html" class="sidebar-link">Application object</a></li><li><a href="/excelvba/charts-and-charting.html" class="sidebar-link">Charts and Charting</a></li><li><a href="/excelvba/customdocumentproperties-in-practice.html" class="sidebar-link">CustomDocumentProperties in practice</a></li><li><a href="/excelvba/powerpoint-integration-through-vba.html" class="sidebar-link">PowerPoint Integration Through VBA</a></li><li><a href="/excelvba/how-to-record-a-macro.html" class="sidebar-link">How to record a Macro</a></li><li><a href="/excelvba/sql-in-excel-vba-best-practices.html" class="sidebar-link">SQL in Excel VBA - Best Practices</a></li><li><a href="/excelvba/excel-vba-optimization.html" class="sidebar-link">Excel-VBA Optimization</a></li><li><a href="/excelvba/vba-security.html" class="sidebar-link">VBA Security</a></li><li><a href="/excelvba/debugging-and-troubleshooting.html" class="sidebar-link">Debugging and Troubleshooting</a></li><li><a href="/excelvba/vba-best-practices.html" class="sidebar-link">VBA Best Practices</a></li><li><a href="/excelvba/excel-vba-tips-and-tricks.html" class="sidebar-link">Excel VBA Tips and Tricks</a></li><li><a href="/excelvba/common-mistakes.html" class="sidebar-link">Common Mistakes</a></li><li><a href="/excelvba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="file-system-object"><a href="#file-system-object" class="header-anchor">#</a> File System Object</h1> <h2 id="file-folder-drive-exists"><a href="#file-folder-drive-exists" class="header-anchor">#</a> File, folder, drive exists</h2> <h3 id="file-exists"><a href="#file-exists" class="header-anchor">#</a> File exists:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> FileExists<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> fso<span class="token punctuation">.</span>FileExists<span class="token punctuation">(</span><span class="token string">&quot;D:\test.txt&quot;</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token boolean">True</span> <span class="token keyword">Then</span>
+       MsgBox <span class="token string">&quot;The file is exists.&quot;</span>
+    <span class="token keyword">Else</span>
+       MsgBox <span class="token string">&quot;The file isn't exists.&quot;</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="folder-exists"><a href="#folder-exists" class="header-anchor">#</a> Folder exists:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> FolderExists<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> fso<span class="token punctuation">.</span>FolderExists<span class="token punctuation">(</span><span class="token string">&quot;D:\testFolder&quot;</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token boolean">True</span> <span class="token keyword">Then</span>
+       MsgBox <span class="token string">&quot;The folder is exists.&quot;</span>
+    <span class="token keyword">Else</span>
+       MsgBox <span class="token string">&quot;The folder isn't exists.&quot;</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="drive-exists"><a href="#drive-exists" class="header-anchor">#</a> Drive exists:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> DriveExists<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">If</span> fso<span class="token punctuation">.</span>DriveExists<span class="token punctuation">(</span><span class="token string">&quot;D:\&quot;</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token boolean">True</span> <span class="token keyword">Then</span>
+       MsgBox <span class="token string">&quot;The drive is exists.&quot;</span>
+    <span class="token keyword">Else</span>
+       MsgBox <span class="token string">&quot;The drive isn't exists.&quot;</span>
+    <span class="token keyword">End</span> <span class="token keyword">If</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="basic-file-operations"><a href="#basic-file-operations" class="header-anchor">#</a> Basic file operations</h2> <h3 id="copy"><a href="#copy" class="header-anchor">#</a> Copy:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> CopyFile<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    fso<span class="token punctuation">.</span>CopyFile <span class="token string">&quot;c:\Documents and Settings\Makro.txt&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c:\Documents and Settings\Macros\&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="move"><a href="#move" class="header-anchor">#</a> Move:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> MoveFile<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    fso<span class="token punctuation">.</span>MoveFile <span class="token string">&quot;c:\*.txt&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;c:\Documents and Settings\&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="delete"><a href="#delete" class="header-anchor">#</a> Delete:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> DeleteFile<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    fso<span class="token punctuation">.</span>DeleteFile <span class="token string">&quot;c:\Documents and Settings\Macros\Makro.txt&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="basic-folder-operations"><a href="#basic-folder-operations" class="header-anchor">#</a> Basic folder operations</h2> <h3 id="create"><a href="#create" class="header-anchor">#</a> Create:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> CreateFolder<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    fso<span class="token punctuation">.</span>CreateFolder <span class="token string">&quot;c:\Documents and Settings\NewFolder&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="copy-2"><a href="#copy-2" class="header-anchor">#</a> Copy:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> CopyFolder<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    fso<span class="token punctuation">.</span>CopyFolder <span class="token string">&quot;C:\Documents and Settings\NewFolder&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;C:\&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="move-2"><a href="#move-2" class="header-anchor">#</a> Move:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> MoveFolder<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    fso<span class="token punctuation">.</span>MoveFolder <span class="token string">&quot;C:\Documents and Settings\NewFolder&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;C:\&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h3 id="delete-2"><a href="#delete-2" class="header-anchor">#</a> Delete:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> DeleteFolder<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    fso<span class="token punctuation">.</span>DeleteFolder <span class="token string">&quot;C:\Documents and Settings\NewFolder&quot;</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="other-operations"><a href="#other-operations" class="header-anchor">#</a> Other operations</h2> <h3 id="get-file-name"><a href="#get-file-name" class="header-anchor">#</a> Get file name:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> GetFileName<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    MsgBox fso<span class="token punctuation">.</span>GetFileName<span class="token punctuation">(</span><span class="token string">&quot;c:\Documents and Settings\Makro.txt&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p><strong><strong>Result:</strong> Makro.txt</strong></p> <h3 id="get-base-name"><a href="#get-base-name" class="header-anchor">#</a> Get base name:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> GetBaseName<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    MsgBox fso<span class="token punctuation">.</span>GetBaseName<span class="token punctuation">(</span><span class="token string">&quot;c:\Documents and Settings\Makro.txt&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p><strong><strong>Result:</strong> Makro</strong></p> <h3 id="get-extension-name"><a href="#get-extension-name" class="header-anchor">#</a> Get extension name:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> GetExtensionName<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    MsgBox fso<span class="token punctuation">.</span>GetExtensionName<span class="token punctuation">(</span><span class="token string">&quot;c:\Documents and Settings\Makro.txt&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p><strong><strong>Result:</strong> txt</strong></p> <h3 id="get-drive-name"><a href="#get-drive-name" class="header-anchor">#</a> Get drive name:</h3> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> GetDriveName<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> fso <span class="token keyword">as</span> Scripting<span class="token punctuation">.</span>FileSystemObject
+    <span class="token keyword">Set</span> fso <span class="token operator">=</span> CreateObject<span class="token punctuation">(</span><span class="token string">&quot;Scripting.FileSystemObject&quot;</span><span class="token punctuation">)</span>
+    MsgBox fso<span class="token punctuation">.</span>GetDriveName<span class="token punctuation">(</span><span class="token string">&quot;c:\Documents and Settings\Makro.txt&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p><strong><strong>Result:</strong> c:</strong></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/excelvba/file-system-object.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/excelvba/creating-a-drop-down-menu-in-the-active-worksheet-with-a-combo-box.html" class="prev">
+        Creating a drop-down menu in the Active Worksheet with a Combo Box
+      </a></span> <span class="next"><a href="/excelvba/pivot-tables.html">
+        Pivot Tables
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1080.caf9771a.js" defer></script>
+  </body>
+</html>

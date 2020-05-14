@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Oracle Database - Exception Handling</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Define custom exception, raise it and see where it comes from, Handling connexion error exceptions">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Oracle Database - Exception Handling">
+    <meta property="og:description" content="Define custom exception, raise it and see where it comes from, Handling connexion error exceptions">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/oracle/exception-handling.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Oracle Database - Exception Handling">
+    <meta name="twitter:description" content="Define custom exception, raise it and see where it comes from, Handling connexion error exceptions">
+    <meta name="twitter:url" content="/oracle/exception-handling.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2344.26c25f00.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Oracle Database</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/oracle/" class="sidebar-link">Disclaimer</a></li><li><a href="/oracle/getting-started-with-oracle-database.html" class="sidebar-link">Getting started with Oracle Database</a></li><li><a href="/oracle/anonymous-pl-sql-block.html" class="sidebar-link">Anonymous PL/SQL Block</a></li><li><a href="/oracle/data-dictionary.html" class="sidebar-link">Data Dictionary</a></li><li><a href="/oracle/dates.html" class="sidebar-link">Dates</a></li><li><a href="/oracle/working-with-dates.html" class="sidebar-link">Working with Dates</a></li><li><a href="/oracle/dual-table.html" class="sidebar-link">DUAL table</a></li><li><a href="/oracle/joins.html" class="sidebar-link">JOINS</a></li><li><a href="/oracle/handling-null-values.html" class="sidebar-link">Handling NULL values</a></li><li><a href="/oracle/string-manipulation.html" class="sidebar-link">String Manipulation</a></li><li><a href="/oracle/limiting-the-rows-returned-by-a-query-pagination.html" class="sidebar-link">Limiting the rows returned by a query (Pagination)</a></li><li><a href="/oracle/recursive-sub-query-factoring-using-the-with-clause-a-k-a-common-table-expressions.html" class="sidebar-link">Recursive Sub-Query Factoring using the WITH Clause (A.K.A. Common Table Expressions)</a></li><li><a href="/oracle/different-ways-to-update-records.html" class="sidebar-link">Different ways to update records</a></li><li><a href="/oracle/update-with-joins.html" class="sidebar-link">Update with Joins</a></li><li><a href="/oracle/statistical-functions.html" class="sidebar-link">Statistical functions</a></li><li><a href="/oracle/window-functions.html" class="sidebar-link">Window Functions</a></li><li><a href="/oracle/creating-a-context.html" class="sidebar-link">Creating a Context</a></li><li><a href="/oracle/splitting-delimited-strings.html" class="sidebar-link">Splitting Delimited Strings</a></li><li><a href="/oracle/sequences.html" class="sidebar-link">Sequences</a></li><li><a href="/oracle/indexes.html" class="sidebar-link">Indexes</a></li><li><a href="/oracle/hints.html" class="sidebar-link">Hints</a></li><li><a href="/oracle/error-logging.html" class="sidebar-link">Error logging</a></li><li><a href="/oracle/database-links.html" class="sidebar-link">Database Links</a></li><li><a href="/oracle/table-partitioning.html" class="sidebar-link">Table partitioning</a></li><li><a href="/oracle/oracle-advanced-queuing-aq.html" class="sidebar-link">Oracle Advanced Queuing (AQ)</a></li><li><a href="/oracle/constraints.html" class="sidebar-link">constraints</a></li><li><a href="/oracle/autonomous-transactions.html" class="sidebar-link">Autonomous Transactions</a></li><li><a href="/oracle/oracle-maf.html" class="sidebar-link">Oracle MAF</a></li><li><a href="/oracle/level-query.html" class="sidebar-link">level query</a></li><li><a href="/oracle/hierarchical-retrieval-with-oracle-database-12c.html" class="sidebar-link">Hierarchical Retrieval With Oracle Database 12C</a></li><li><a href="/oracle/data-pump.html" class="sidebar-link">Data Pump</a></li><li><a href="/oracle/real-application-security.html" class="sidebar-link">Real Application Security</a></li><li><a href="/oracle/dynamic-sql.html" class="sidebar-link">Dynamic SQL</a></li><li><a href="/oracle/delimiting-keywords-or-special-characters.html" class="sidebar-link">Delimiting keywords or special characters</a></li><li><a href="/oracle/getting-started-with-plsql.html" class="sidebar-link">Getting started with plsql</a></li><li><a href="/oracle/plsql-procedure.html" class="sidebar-link">PLSQL procedure</a></li><li><a href="/oracle/if-then-else-statement.html" class="sidebar-link">IF-THEN-ELSE Statement</a></li><li><a href="/oracle/functions.html" class="sidebar-link">Functions</a></li><li><a href="/oracle/collections-and-records.html" class="sidebar-link">Collections and Records</a></li><li><a href="/oracle/object-types.html" class="sidebar-link">Object Types</a></li><li><a href="/oracle/loop.html" class="sidebar-link">Loop</a></li><li><a href="/oracle/cursors.html" class="sidebar-link">Cursors</a></li><li><a href="/oracle/packages.html" class="sidebar-link">Packages</a></li><li><a href="/oracle/exception-handling.html" class="active sidebar-link">Exception Handling</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/oracle/exception-handling.html#define-custom-exception-raise-it-and-see-where-it-comes-from" class="sidebar-link">Define custom exception, raise it and see where it comes from</a></li><li class="sidebar-sub-header"><a href="/oracle/exception-handling.html#handling-connexion-error-exceptions" class="sidebar-link">Handling connexion error exceptions</a></li></ul></li><li><a href="/oracle/bulk-collect.html" class="sidebar-link">Bulk collect</a></li><li><a href="/oracle/assignments-model-and-language.html" class="sidebar-link">Assignments model and language</a></li><li><a href="/oracle/triggers.html" class="sidebar-link">Triggers</a></li><li><a href="/oracle/exception-handling.html" class="active sidebar-link">Exception Handling</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/oracle/exception-handling.html#define-custom-exception-raise-it-and-see-where-it-comes-from" class="sidebar-link">Define custom exception, raise it and see where it comes from</a></li><li class="sidebar-sub-header"><a href="/oracle/exception-handling.html#handling-connexion-error-exceptions" class="sidebar-link">Handling connexion error exceptions</a></li></ul></li><li><a href="/oracle/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="exception-handling"><a href="#exception-handling" class="header-anchor">#</a> Exception Handling</h1> <p>Oracle produces a variety of exceptions. You may be surprised how tedious it can be to have your code stop with some unclear message. To improve your PL/SQL code's ability to get fixed easily it is necessary to handle exceptions at the lowest level. Never hide an exception &quot;under the carpet&quot;, unless you're here to keep your piece of code for you only and for no one else to maintain.</p> <p>The <a href="https://docs.oracle.com/database/122/LNPLS/plsql-error-handling.htm#LNPLS00703" target="_blank" rel="noopener noreferrer">predefined errors<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <h2 id="define-custom-exception-raise-it-and-see-where-it-comes-from"><a href="#define-custom-exception-raise-it-and-see-where-it-comes-from" class="header-anchor">#</a> Define custom exception, raise it and see where it comes from</h2> <p>To illustrate this, here is a function that has 3 different &quot;wrong&quot; behaviors</p> <ul><li>parameter is completely stupid: we use a user-defined expression</li> <li>parameter has a typo: we use Oracle standard <code>NO_DATA_FOUND</code> error</li> <li>another, but not handled case</li></ul> <p>Feel free to adapt it to your standards:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">DECLARE</span>
+  this_is_not_acceptable EXCEPTION<span class="token punctuation">;</span>
+  PRAGMA EXCEPTION_INIT<span class="token punctuation">(</span>this_is_not_acceptable<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">20077</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  g_err varchar2 <span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span> :<span class="token operator">=</span> <span class="token string">'to-be-defined'</span><span class="token punctuation">;</span>
+  w_schema all_tables<span class="token punctuation">.</span>OWNER<span class="token operator">%</span><span class="token keyword">Type</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">PROCEDURE</span> get_schema<span class="token punctuation">(</span> p_table <span class="token operator">in</span> Varchar2<span class="token punctuation">,</span> p_schema <span class="token keyword">out</span> Varchar2<span class="token punctuation">)</span>
+  <span class="token operator">Is</span> 
+    w_err varchar2 <span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span> :<span class="token operator">=</span> <span class="token string">'to-be-defined'</span><span class="token punctuation">;</span>
+  <span class="token keyword">BEGIN</span>
+    w_err :<span class="token operator">=</span> <span class="token string">'get_schema-step-1:'</span><span class="token punctuation">;</span>
+    <span class="token keyword">If</span> <span class="token punctuation">(</span>p_table <span class="token operator">=</span> <span class="token string">'Delivery-Manager-Is-Silly'</span><span class="token punctuation">)</span> <span class="token keyword">Then</span>
+      raise this_is_not_acceptable<span class="token punctuation">;</span>
+    <span class="token keyword">end</span> <span class="token keyword">if</span><span class="token punctuation">;</span>
+    w_err :<span class="token operator">=</span> <span class="token string">'get_schema-step-2:'</span><span class="token punctuation">;</span>
+    <span class="token keyword">Select</span> owner <span class="token keyword">Into</span> p_schema 
+      <span class="token keyword">From</span> all_tables
+     <span class="token keyword">where</span> table_name <span class="token operator">like</span><span class="token punctuation">(</span>p_table<span class="token operator">||</span><span class="token string">'%'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  EXCEPTION
+  <span class="token keyword">WHEN</span> NO_DATA_FOUND <span class="token keyword">THEN</span>
+    <span class="token comment">-- handle Oracle-defined exception</span>
+     dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'[WARN]'</span><span class="token operator">||</span>w_err<span class="token operator">||</span><span class="token string">'This can happen. Check the table name you entered.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">WHEN</span> this_is_not_acceptable <span class="token keyword">THEN</span>
+    <span class="token comment">-- handle your custom error</span>
+     dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'[WARN]'</span><span class="token operator">||</span>w_err<span class="token operator">||</span><span class="token string">'Please don''t make fun of the delivery manager.'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">When</span> others <span class="token keyword">then</span>
+     dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'[ERR]'</span><span class="token operator">||</span>w_err<span class="token operator">||</span><span class="token string">'unhandled exception:'</span><span class="token operator">||</span>sqlerrm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     raise<span class="token punctuation">;</span>    
+  <span class="token keyword">END</span> Get_schema<span class="token punctuation">;</span>  
+
+<span class="token keyword">BEGIN</span>
+  g_err :<span class="token operator">=</span> <span class="token string">'Global; first call:'</span><span class="token punctuation">;</span>
+  get_schema<span class="token punctuation">(</span><span class="token string">'Delivery-Manager-Is-Silly'</span><span class="token punctuation">,</span> w_schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  g_err :<span class="token operator">=</span> <span class="token string">'Global; second call:'</span><span class="token punctuation">;</span>
+  get_schema<span class="token punctuation">(</span><span class="token string">'AAA'</span><span class="token punctuation">,</span> w_schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  g_err :<span class="token operator">=</span> <span class="token string">'Global; third call:'</span><span class="token punctuation">;</span>
+  get_schema<span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> w_schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  g_err :<span class="token operator">=</span> <span class="token string">'Global; 4th call:'</span><span class="token punctuation">;</span>
+  get_schema<span class="token punctuation">(</span><span class="token string">'Can''t reach this point due to previous error.'</span><span class="token punctuation">,</span> w_schema<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+EXCEPTION
+  <span class="token keyword">When</span> others <span class="token keyword">then</span>
+     dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'[ERR]'</span><span class="token operator">||</span>g_err<span class="token operator">||</span><span class="token string">'unhandled exception:'</span><span class="token operator">||</span>sqlerrm<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">-- you may raise this again to the caller if error log isn't enough.</span>
+<span class="token comment">--  raise;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+
+</code></pre></div><p>Giving on a regular database:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token punctuation">[</span>WARN<span class="token punctuation">]</span>get_schema<span class="token operator">-</span>step<span class="token operator">-</span><span class="token number">1</span>:Please don't make fun <span class="token keyword">of</span> the delivery manager<span class="token punctuation">.</span>
+<span class="token punctuation">[</span>WARN<span class="token punctuation">]</span>get_schema<span class="token operator">-</span>step<span class="token operator">-</span><span class="token number">2</span>:This can happen<span class="token punctuation">.</span> <span class="token keyword">Check</span> the <span class="token keyword">table</span> name you entered<span class="token punctuation">.</span>
+<span class="token punctuation">[</span>ERR<span class="token punctuation">]</span>get_schema<span class="token operator">-</span>step<span class="token operator">-</span><span class="token number">2</span>:unhandled exception:ORA<span class="token operator">-</span><span class="token number">01422</span>: exact <span class="token keyword">fetch</span> <span class="token keyword">returns</span> more than requested number <span class="token keyword">of</span> <span class="token keyword">rows</span>
+<span class="token punctuation">[</span>ERR<span class="token punctuation">]</span><span class="token keyword">Global</span><span class="token punctuation">;</span> third <span class="token keyword">call</span>:unhandled exception:ORA<span class="token operator">-</span><span class="token number">01422</span>: exact <span class="token keyword">fetch</span> <span class="token keyword">returns</span> more than requested number <span class="token keyword">of</span> <span class="token keyword">rows</span>
+
+</code></pre></div><p>Remember that exception are here to handle <strong>rare</strong> cases. I saw applications who raised an exception at every access, just to ask for user password, saying &quot;not connected&quot;... so much computation waste.</p> <h2 id="handling-connexion-error-exceptions"><a href="#handling-connexion-error-exceptions" class="header-anchor">#</a> Handling connexion error exceptions</h2> <p>Each standard Oracle error is associated with an error number. Its important to anticipate what could go wrong in your code. Here for a connection to another database it can be:</p> <ul><li><code>-28000</code> account is locked</li> <li><code>-28001</code> password expired</li> <li><code>-28002</code> grace period</li> <li><code>-1017</code> wrong user / password</li></ul> <p>Here is a way to test what goes wrong with the user used by the database link:</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">declare</span>
+  v_dummy number<span class="token punctuation">;</span>
+<span class="token keyword">begin</span>
+  <span class="token comment">-- testing db link</span>
+  <span class="token keyword">execute</span> immediate <span class="token string">'select COUNT(1) from dba_users@pass.world'</span> <span class="token keyword">into</span> v_dummy <span class="token punctuation">;</span>
+  <span class="token comment">-- if we get here, exception wasn't raised: display COUNT's result</span>
+  dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span>v_dummy<span class="token operator">||</span><span class="token string">' users on PASS db'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+EXCEPTION
+  <span class="token comment">-- exception can be referred by their name in the predefined Oracle's list</span>
+    <span class="token keyword">When</span> LOGIN_DENIED 
+    <span class="token keyword">then</span>  
+        dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'ORA-1017 / USERNAME OR PASSWORD INVALID, TRY AGAIN'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">When</span> Others 
+    <span class="token keyword">then</span> 
+  <span class="token comment">-- or referred by their number: stored automatically in reserved variable SQLCODE    </span>
+        <span class="token keyword">If</span>  SQLCODE <span class="token operator">=</span> <span class="token string">'-2019'</span>
+        <span class="token keyword">Then</span>    
+          dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'ORA-2019 / Invalid db_link name'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Elsif SQLCODE <span class="token operator">=</span> <span class="token string">'-1035'</span>
+        <span class="token keyword">Then</span>
+          dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'ORA-1035 / DATABASE IS ON RESTRICTED SESSION, CONTACT YOUR DBA'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        
+        Elsif SQLCODE <span class="token operator">=</span> <span class="token string">'-28000'</span>
+        <span class="token keyword">Then</span>
+          dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'ORA-28000 / ACCOUNT IS LOCKED. CONTACT YOUR DBA'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Elsif SQLCODE <span class="token operator">=</span> <span class="token string">'-28001'</span>
+        <span class="token keyword">Then</span>
+          dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'ORA-28001 / PASSWORD EXPIRED. CONTACT YOUR DBA FOR CHANGE'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Elsif SQLCODE  <span class="token operator">=</span> <span class="token string">'-28002'</span>
+        <span class="token keyword">Then</span>
+          dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'ORA-28002 / PASSWORD IS EXPIRED, CHANGED IT'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">Else</span>
+   <span class="token comment">-- and if it's not one of the exception you expected</span>
+          dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'Exception not specifically handled'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          dbms_output<span class="token punctuation">.</span>put_line<span class="token punctuation">(</span><span class="token string">'Oracle Said'</span><span class="token operator">||</span>SQLCODE<span class="token operator">||</span><span class="token string">':'</span><span class="token operator">||</span>SQLERRM<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">End</span> <span class="token keyword">if</span><span class="token punctuation">;</span>
+<span class="token keyword">END</span><span class="token punctuation">;</span>
+<span class="token operator">/</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/oracle/exception-handling.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/oracle/packages.html" class="prev">
+        Packages
+      </a></span> <span class="next"><a href="/oracle/bulk-collect.html">
+        Bulk collect
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2344.26c25f00.js" defer></script>
+  </body>
+</html>

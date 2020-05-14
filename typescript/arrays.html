@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>TypeScript - Arrays</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Finding Object in Array">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="TypeScript - Arrays">
+    <meta property="og:description" content="Finding Object in Array">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/typescript/arrays.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="TypeScript - Arrays">
+    <meta name="twitter:description" content="Finding Object in Array">
+    <meta name="twitter:url" content="/typescript/arrays.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3368.6b687e11.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>TypeScript</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/typescript/" class="sidebar-link">Disclaimer</a></li><li><a href="/typescript/getting-started-with-typescript.html" class="sidebar-link">Getting started with TypeScript</a></li><li><a href="/typescript/why-and-when-to-use-typescript.html" class="sidebar-link">Why and when to use TypeScript</a></li><li><a href="/typescript/typescript-core-types.html" class="sidebar-link">TypeScript Core Types</a></li><li><a href="/typescript/arrays.html" class="active sidebar-link">Arrays</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/typescript/arrays.html#finding-object-in-array" class="sidebar-link">Finding Object in Array</a></li></ul></li><li><a href="/typescript/enums.html" class="sidebar-link">Enums</a></li><li><a href="/typescript/functions.html" class="sidebar-link">Functions</a></li><li><a href="/typescript/classes.html" class="sidebar-link">Classes</a></li><li><a href="/typescript/class-decorator.html" class="sidebar-link">Class Decorator</a></li><li><a href="/typescript/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/typescript/generics.html" class="sidebar-link">Generics</a></li><li><a href="/typescript/strict-null-checks.html" class="sidebar-link">Strict null checks</a></li><li><a href="/typescript/user-defined-type-guards.html" class="sidebar-link">User-defined Type Guards</a></li><li><a href="/typescript/typescript-basic-examples.html" class="sidebar-link">Typescript basic examples</a></li><li><a href="/typescript/importing-external-libraries.html" class="sidebar-link">Importing external libraries</a></li><li><a href="/typescript/modules-exporting-and-importing.html" class="sidebar-link">Modules - exporting and importing</a></li><li><a href="/typescript/publish-typescript-definition-files.html" class="sidebar-link">Publish TypeScript definition files</a></li><li><a href="/typescript/using-typescript-with-webpack.html" class="sidebar-link">Using TypeScript with webpack</a></li><li><a href="/typescript/mixins.html" class="sidebar-link">Mixins</a></li><li><a href="/typescript/how-to-use-a-javascript-library-without-a-type-definition-file.html" class="sidebar-link">How to use a javascript library without a type definition file</a></li><li><a href="/typescript/typescript-installing-typescript-and-running-the-typescript-compiler-tsc.html" class="sidebar-link">Typescript-installing-typescript-and-running-the-typescript-compiler-tsc</a></li><li><a href="/typescript/configure-typescript-project-to-compile-all-files-in-typescript.html" class="sidebar-link">Configure typescript project to compile all files in typescript.</a></li><li><a href="/typescript/integrating-with-build-tools.html" class="sidebar-link">Integrating with Build Tools</a></li><li><a href="/typescript/using-typescript-with-requirejs.html" class="sidebar-link">Using Typescript with RequireJS</a></li><li><a href="/typescript/typescript-with-angularjs.html" class="sidebar-link">TypeScript with AngularJS</a></li><li><a href="/typescript/typescript-with-systemjs.html" class="sidebar-link">TypeScript with SystemJS</a></li><li><a href="/typescript/using-typescript-with-react-js-native.html" class="sidebar-link">Using Typescript with React (JS &amp; native)</a></li><li><a href="/typescript/tslint-assuring-code-quality-and-consistency.html" class="sidebar-link">TSLint - assuring code quality and consistency</a></li><li><a href="/typescript/tsconfig-json.html" class="sidebar-link">tsconfig.json</a></li><li><a href="/typescript/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/typescript/unit-testing.html" class="sidebar-link">Unit Testing</a></li><li><a href="/typescript/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="arrays"><a href="#arrays" class="header-anchor">#</a> Arrays</h1> <h2 id="finding-object-in-array"><a href="#finding-object-in-array" class="header-anchor">#</a> Finding Object in Array</h2> <h3 id="using-find"><a href="#using-find" class="header-anchor">#</a> Using find()</h3> <div class="language-ts extra-class"><pre class="language-ts"><code><span class="token keyword">const</span> inventory <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token string">'apples'</span><span class="token punctuation">,</span> quantity<span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token string">'bananas'</span><span class="token punctuation">,</span> quantity<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token string">'cherries'</span><span class="token punctuation">,</span> quantity<span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">}</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">findCherries</span><span class="token punctuation">(</span><span class="token parameter">fruit</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    <span class="token keyword">return</span> fruit<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">'cherries'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+inventory<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>findCherries<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// { name: 'cherries', quantity: 5 }</span>
+
+<span class="token comment">/* OR */</span>
+
+inventory<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token parameter">e</span> <span class="token operator">=&gt;</span> e<span class="token punctuation">.</span>name <span class="token operator">===</span> <span class="token string">'apples'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// { name: 'apples', quantity: 2 }    </span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/typescript/arrays.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/typescript/typescript-core-types.html" class="prev">
+        TypeScript Core Types
+      </a></span> <span class="next"><a href="/typescript/enums.html">
+        Enums
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3368.6b687e11.js" defer></script>
+  </body>
+</html>

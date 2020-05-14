@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C++ | Namespaces</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="What are namespaces?, Argument Dependent Lookup, Extending namespaces, Using directive, Making namespaces, Unnamed/anonymous namespaces, Compact nested namespaces, Inline namespace, Namespace alias, Aliasing a long namespace, Alias Declaration scope">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C++ | Namespaces">
+    <meta property="og:description" content="What are namespaces?, Argument Dependent Lookup, Extending namespaces, Using directive, Making namespaces, Unnamed/anonymous namespaces, Compact nested namespaces, Inline namespace, Namespace alias, Aliasing a long namespace, Alias Declaration scope">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/cpp/namespaces.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C++ | Namespaces">
+    <meta name="twitter:description" content="What are namespaces?, Argument Dependent Lookup, Extending namespaces, Using directive, Making namespaces, Unnamed/anonymous namespaces, Compact nested namespaces, Inline namespace, Namespace alias, Aliasing a long namespace, Alias Declaration scope">
+    <meta name="twitter:url" content="/cpp/namespaces.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/678.f2fae12b.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C++</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/cpp/" class="sidebar-link">Disclaimer</a></li><li><a href="/cpp/getting-started-with-cpp.html" class="sidebar-link">Getting started with C++</a></li><li><a href="/cpp/literals.html" class="sidebar-link">Literals</a></li><li><a href="/cpp/operator-precedence.html" class="sidebar-link">operator precedence</a></li><li><a href="/cpp/floating-point-arithmetic.html" class="sidebar-link">Floating Point Arithmetic</a></li><li><a href="/cpp/bit-operators.html" class="sidebar-link">Bit Operators</a></li><li><a href="/cpp/bit-manipulation.html" class="sidebar-link">Bit Manipulation</a></li><li><a href="/cpp/bit-fields.html" class="sidebar-link">Bit fields</a></li><li><a href="/cpp/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/cpp/iterators.html" class="sidebar-link">Iterators</a></li><li><a href="/cpp/basic-input-output-in-c.html" class="sidebar-link">Basic input/output in c++</a></li><li><a href="/cpp/loops.html" class="sidebar-link">Loops</a></li><li><a href="/cpp/file-i-o.html" class="sidebar-link">File I/O</a></li><li><a href="/cpp/cpp-streams.html" class="sidebar-link">C++ Streams</a></li><li><a href="/cpp/stream-manipulators.html" class="sidebar-link">Stream manipulators</a></li><li><a href="/cpp/flow-control.html" class="sidebar-link">Flow Control</a></li><li><a href="/cpp/metaprogramming.html" class="sidebar-link">Metaprogramming</a></li><li><a href="/cpp/const-keyword.html" class="sidebar-link">const keyword</a></li><li><a href="/cpp/mutable-keyword.html" class="sidebar-link">mutable keyword</a></li><li><a href="/cpp/friend-keyword.html" class="sidebar-link">Friend keyword</a></li><li><a href="/cpp/type-keywords.html" class="sidebar-link">Type Keywords</a></li><li><a href="/cpp/basic-type-keywords.html" class="sidebar-link">Basic Type Keywords</a></li><li><a href="/cpp/variable-declaration-keywords.html" class="sidebar-link">Variable Declaration Keywords</a></li><li><a href="/cpp/keywords.html" class="sidebar-link">Keywords</a></li><li><a href="/cpp/returning-several-values-from-a-function.html" class="sidebar-link">Returning several values from a function</a></li><li><a href="/cpp/polymorphism.html" class="sidebar-link">Polymorphism</a></li><li><a href="/cpp/references.html" class="sidebar-link">References</a></li><li><a href="/cpp/value-and-reference-semantics.html" class="sidebar-link">Value and Reference Semantics</a></li><li><a href="/cpp/c-function-call-by-value-vs-call-by-reference.html" class="sidebar-link">C++ function &quot;call by value&quot; vs. &quot;call by reference&quot;</a></li><li><a href="/cpp/copying-vs-assignment.html" class="sidebar-link">Copying vs Assignment</a></li><li><a href="/cpp/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/cpp/pointers-to-members.html" class="sidebar-link">Pointers to members</a></li><li><a href="/cpp/the-this-pointer.html" class="sidebar-link">The This Pointer</a></li><li><a href="/cpp/smart-pointers.html" class="sidebar-link">Smart Pointers</a></li><li><a href="/cpp/classes-structures.html" class="sidebar-link">Classes/Structures</a></li><li><a href="/cpp/function-overloading.html" class="sidebar-link">Function Overloading</a></li><li><a href="/cpp/operator-overloading.html" class="sidebar-link">Operator Overloading</a></li><li><a href="/cpp/function-template-overloading.html" class="sidebar-link">Function Template Overloading</a></li><li><a href="/cpp/virtual-member-functions.html" class="sidebar-link">Virtual Member Functions</a></li><li><a href="/cpp/inline-functions.html" class="sidebar-link">Inline functions</a></li><li><a href="/cpp/special-member-functions.html" class="sidebar-link">Special Member Functions</a></li><li><a href="/cpp/non-static-member-functions.html" class="sidebar-link">Non-Static Member Functions</a></li><li><a href="/cpp/constant-class-member-functions.html" class="sidebar-link">Constant class member functions</a></li><li><a href="/cpp/c-containers.html" class="sidebar-link">C++ Containers</a></li><li><a href="/cpp/namespaces.html" class="active sidebar-link">Namespaces</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#what-are-namespaces" class="sidebar-link">What are namespaces?</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#argument-dependent-lookup" class="sidebar-link">Argument Dependent Lookup</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#extending-namespaces" class="sidebar-link">Extending namespaces</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#using-directive" class="sidebar-link">Using directive</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#making-namespaces" class="sidebar-link">Making namespaces</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#unnamed-anonymous-namespaces" class="sidebar-link">Unnamed/anonymous namespaces</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#compact-nested-namespaces" class="sidebar-link">Compact nested namespaces</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#inline-namespace" class="sidebar-link">Inline namespace</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#namespace-alias" class="sidebar-link">Namespace alias</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#aliasing-a-long-namespace" class="sidebar-link">Aliasing a long namespace</a></li><li class="sidebar-sub-header"><a href="/cpp/namespaces.html#alias-declaration-scope" class="sidebar-link">Alias Declaration scope</a></li></ul></li><li><a href="/cpp/header-files.html" class="sidebar-link">Header Files</a></li><li><a href="/cpp/using-declaration.html" class="sidebar-link">Using declaration</a></li><li><a href="/cpp/std-string.html" class="sidebar-link">std::string</a></li><li><a href="/cpp/std-array.html" class="sidebar-link">std::array</a></li><li><a href="/cpp/std-vector.html" class="sidebar-link">std::vector</a></li><li><a href="/cpp/std-map.html" class="sidebar-link">std::map</a></li><li><a href="/cpp/std-optional.html" class="sidebar-link">std::optional</a></li><li><a href="/cpp/std-function-to-wrap-any-element-that-is-callable.html" class="sidebar-link">std::function: To wrap any element that is callable</a></li><li><a href="/cpp/std-forward-list.html" class="sidebar-link">std::forward_list</a></li><li><a href="/cpp/std-pair.html" class="sidebar-link">std::pair</a></li><li><a href="/cpp/std-atomics.html" class="sidebar-link">std::atomics</a></li><li><a href="/cpp/std-variant.html" class="sidebar-link">std::variant</a></li><li><a href="/cpp/std-iomanip.html" class="sidebar-link">std::iomanip</a></li><li><a href="/cpp/std-any.html" class="sidebar-link">std::any</a></li><li><a href="/cpp/std-set-and-std-multiset.html" class="sidebar-link">std::set and std::multiset</a></li><li><a href="/cpp/std-integer-sequence.html" class="sidebar-link">std::integer_sequence</a></li><li><a href="/cpp/using-std-unordered-map.html" class="sidebar-link">Using std::unordered_map</a></li><li><a href="/cpp/standard-library-algorithms.html" class="sidebar-link">Standard Library Algorithms</a></li><li><a href="/cpp/the-iso-c-standard.html" class="sidebar-link">The ISO C++ Standard</a></li><li><a href="/cpp/inline-variables.html" class="sidebar-link">Inline variables</a></li><li><a href="/cpp/random-number-generation.html" class="sidebar-link">Random number generation</a></li><li><a href="/cpp/date-and-time-using-chrono-header.html" class="sidebar-link">Date and time using  header</a></li><li><a href="/cpp/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/cpp/enumeration.html" class="sidebar-link">Enumeration</a></li><li><a href="/cpp/iteration.html" class="sidebar-link">Iteration</a></li><li><a href="/cpp/regular-expressions.html" class="sidebar-link">Regular expressions</a></li><li><a href="/cpp/implementation-defined-behavior.html" class="sidebar-link">Implementation-defined behavior</a></li><li><a href="/cpp/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/cpp/lambdas.html" class="sidebar-link">Lambdas</a></li><li><a href="/cpp/value-categories.html" class="sidebar-link">Value Categories</a></li><li><a href="/cpp/preprocessor.html" class="sidebar-link">Preprocessor</a></li><li><a href="/cpp/data-structures-in-c.html" class="sidebar-link">Data Structures in C++</a></li><li><a href="/cpp/templates.html" class="sidebar-link">Templates</a></li><li><a href="/cpp/expression-templates.html" class="sidebar-link">Expression templates</a></li><li><a href="/cpp/curiously-recurring-template-pattern-crtp.html" class="sidebar-link">Curiously Recurring Template Pattern (CRTP)</a></li><li><a href="/cpp/threading.html" class="sidebar-link">Threading</a></li><li><a href="/cpp/thread-synchronization-structures.html" class="sidebar-link">Thread synchronization structures</a></li><li><a href="/cpp/the-rule-of-three-five-and-zero.html" class="sidebar-link">The Rule of Three, Five, And Zero</a></li><li><a href="/cpp/raii-resource-acquisition-is-initialization.html" class="sidebar-link">RAII: Resource Acquisition Is Initialization</a></li><li><a href="/cpp/rtti-run-time-type-information.html" class="sidebar-link">RTTI: Run-Time Type Information</a></li><li><a href="/cpp/mutexes.html" class="sidebar-link">Mutexes</a></li><li><a href="/cpp/recursive-mutex.html" class="sidebar-link">Recursive Mutex</a></li><li><a href="/cpp/semaphore.html" class="sidebar-link">Semaphore</a></li><li><a href="/cpp/futures-and-promises.html" class="sidebar-link">Futures and Promises</a></li><li><a href="/cpp/atomic-types.html" class="sidebar-link">Atomic Types</a></li><li><a href="/cpp/type-erasure.html" class="sidebar-link">Type Erasure</a></li><li><a href="/cpp/explicit-type-conversions.html" class="sidebar-link">Explicit type conversions</a></li><li><a href="/cpp/unnamed-types.html" class="sidebar-link">Unnamed types</a></li><li><a href="/cpp/type-traits.html" class="sidebar-link">Type Traits</a></li><li><a href="/cpp/return-type-covariance.html" class="sidebar-link">Return Type Covariance</a></li><li><a href="/cpp/layout-of-object-types.html" class="sidebar-link">Layout of object types</a></li><li><a href="/cpp/type-inference.html" class="sidebar-link">Type Inference</a></li><li><a href="/cpp/typedef-and-type-aliases.html" class="sidebar-link">Typedef and type aliases</a></li><li><a href="/cpp/type-deduction.html" class="sidebar-link">type deduction</a></li><li><a href="/cpp/trailing-return-type.html" class="sidebar-link">Trailing return type</a></li><li><a href="/cpp/alignment.html" class="sidebar-link">Alignment</a></li><li><a href="/cpp/perfect-forwarding.html" class="sidebar-link">Perfect Forwarding</a></li><li><a href="/cpp/decltype.html" class="sidebar-link">decltype</a></li><li><a href="/cpp/sfinae-substitution-failure-is-not-an-error.html" class="sidebar-link">SFINAE (Substitution Failure Is Not An Error)</a></li><li><a href="/cpp/undefined-behavior.html" class="sidebar-link">Undefined Behavior</a></li><li><a href="/cpp/overload-resolution.html" class="sidebar-link">Overload resolution</a></li><li><a href="/cpp/move-semantics.html" class="sidebar-link">Move Semantics</a></li><li><a href="/cpp/pimpl-idiom.html" class="sidebar-link">Pimpl Idiom</a></li><li><a href="/cpp/auto.html" class="sidebar-link">auto</a></li><li><a href="/cpp/copy-elision.html" class="sidebar-link">Copy Elision</a></li><li><a href="/cpp/fold-expressions.html" class="sidebar-link">Fold Expressions</a></li><li><a href="/cpp/unions.html" class="sidebar-link">Unions</a></li><li><a href="/cpp/design-pattern-implementation-in-c.html" class="sidebar-link">Design pattern implementation in C++</a></li><li><a href="/cpp/singleton-design-pattern.html" class="sidebar-link">Singleton Design Pattern</a></li><li><a href="/cpp/user-defined-literals.html" class="sidebar-link">User-Defined Literals</a></li><li><a href="/cpp/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/cpp/c-11-memory-model.html" class="sidebar-link">C++11 Memory Model</a></li><li><a href="/cpp/scopes.html" class="sidebar-link">Scopes</a></li><li><a href="/cpp/static-assert.html" class="sidebar-link">static_assert</a></li><li><a href="/cpp/constexpr.html" class="sidebar-link">constexpr</a></li><li><a href="/cpp/one-definition-rule-odr.html" class="sidebar-link">One Definition Rule (ODR)</a></li><li><a href="/cpp/unspecified-behavior.html" class="sidebar-link">Unspecified behavior</a></li><li><a href="/cpp/argument-dependent-name-lookup.html" class="sidebar-link">Argument Dependent Name Lookup</a></li><li><a href="/cpp/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/cpp/recursion-in-c.html" class="sidebar-link">Recursion in C++</a></li><li><a href="/cpp/arithmitic-metaprogramming.html" class="sidebar-link">Arithmitic Metaprogramming</a></li><li><a href="/cpp/callable-objects.html" class="sidebar-link">Callable Objects</a></li><li><a href="/cpp/client-server-examples.html" class="sidebar-link">Client server examples</a></li><li><a href="/cpp/const-correctness.html" class="sidebar-link">Const Correctness</a></li><li><a href="/cpp/parameter-packs.html" class="sidebar-link">Parameter packs</a></li><li><a href="/cpp/build-systems.html" class="sidebar-link">Build Systems</a></li><li><a href="/cpp/concurrency-with-openmp.html" class="sidebar-link">Concurrency With OpenMP</a></li><li><a href="/cpp/resource-management.html" class="sidebar-link">Resource Management</a></li><li><a href="/cpp/storage-class-specifiers.html" class="sidebar-link">Storage class specifiers</a></li><li><a href="/cpp/linkage-specifications.html" class="sidebar-link">Linkage specifications</a></li><li><a href="/cpp/digit-separators.html" class="sidebar-link">Digit separators</a></li><li><a href="/cpp/c-incompatibilities.html" class="sidebar-link">C incompatibilities</a></li><li><a href="/cpp/side-by-side-comparisons-of-classic-c-examples-solved-via-c-vs-c-11-vs-c-14-vs-c-17.html" class="sidebar-link">Side by Side Comparisons of classic C++ examples solved via C++ vs C++11 vs C++14 vs C++17</a></li><li><a href="/cpp/compiling-and-building.html" class="sidebar-link">Compiling and Building</a></li><li><a href="/cpp/common-compile-linker-errors-gcc.html" class="sidebar-link">Common compile/linker errors (GCC)</a></li><li><a href="/cpp/more-undefined-behaviors-in-c.html" class="sidebar-link">More undefined behaviors in C++</a></li><li><a href="/cpp/unit-testing-in-c.html" class="sidebar-link">Unit Testing in C++</a></li><li><a href="/cpp/c-debugging-and-debug-prevention-tools-techniques.html" class="sidebar-link">C++ Debugging and Debug-prevention Tools &amp; Techniques</a></li><li><a href="/cpp/optimization-in-c.html" class="sidebar-link">Optimization in C++</a></li><li><a href="/cpp/optimization.html" class="sidebar-link">Optimization</a></li><li><a href="/cpp/profiling.html" class="sidebar-link">Profiling</a></li><li><a href="/cpp/refactoring-techniques.html" class="sidebar-link">Refactoring Techniques</a></li><li><a href="/cpp/internationalization-in-c.html" class="sidebar-link">Internationalization in C++</a></li><li><a href="/cpp/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="namespaces"><a href="#namespaces" class="header-anchor">#</a> Namespaces</h1> <p>Used to prevent name collisions when using multiple libraries, a namespace is a declarative prefix for functions, classes, types, etc.</p> <h2 id="what-are-namespaces"><a href="#what-are-namespaces" class="header-anchor">#</a> What are namespaces?</h2> <p>A C++ namespace is a collection of C++ entities (functions, classes, variables), whose names are prefixed by the name of the namespace. When writing code within a namespace, named entities belonging to that namespace need not be prefixed with the namespace name, but entities outside of it must use the fully qualified name.  The fully qualified name has the format <code>&lt;namespace&gt;::&lt;entity&gt;</code>. Example:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> Example
+<span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token keyword">int</span> test <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">const</span> <span class="token keyword">int</span> test2 <span class="token operator">=</span> test <span class="token operator">+</span> <span class="token number">12</span><span class="token punctuation">;</span> <span class="token comment">//Works within `Example` namespace</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> test3 <span class="token operator">=</span> test <span class="token operator">+</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">//Fails; `test` not found outside of namespace.</span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> test3 <span class="token operator">=</span> Example<span class="token operator">::</span>test <span class="token operator">+</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token comment">//Works; fully qualified name used.</span>
+
+</code></pre></div><p>Namespaces are useful for grouping related definitions together. Take the analogy of a shopping mall.  Generally a shopping mall is split up into several stores, each store selling items from a specific category.  One store might sell electronics, while another store might sell shoes.  These logical separations in store types help the shoppers find the items they're looking for.  Namespaces help c++ programmers, like shoppers, find the functions, classes, and variables they're looking for by organizing them in a logical manner.  Example:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> Electronics
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> TotalStock<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> <span class="token class-name">Headphones</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Description of a Headphone (color, brand, model number, etc.)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">class</span> <span class="token class-name">Television</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Description of a Television (color, brand, model number, etc.)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">namespace</span> Shoes
+<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> TotalStock<span class="token punctuation">;</span>
+    <span class="token keyword">class</span> <span class="token class-name">Sandal</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Description of a Sandal (color, brand, model number, etc.)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">class</span> <span class="token class-name">Slipper</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Description of a Slipper (color, brand, model number, etc.)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>There is a single namespace predefined, which is the global namespace that has no name, but can be denoted by <code>::</code>. Example:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// defined in global namespace</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">namespace</span> foo <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// defined in namespace foo</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">barbar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">// calls foo::bar()</span>
+        <span class="token operator">::</span><span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// calls bar() defined in global namespace</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="argument-dependent-lookup"><a href="#argument-dependent-lookup" class="header-anchor">#</a> Argument Dependent Lookup</h2> <p>When calling a function without an explicit namespace qualifier, the compiler can choose to call a function within a namespace if one of the parameter types to that function is also in that namespace. This is called &quot;Argument Dependent Lookup&quot;, or ADL:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> Test
+<span class="token punctuation">{</span>
+  <span class="token keyword">int</span> <span class="token function">call</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">class</span> <span class="token class-name">SomeClass</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">int</span> <span class="token function">call_too</span><span class="token punctuation">(</span><span class="token keyword">const</span> SomeClass <span class="token operator">&amp;</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">call</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//Fails. Not a qualified function name.</span>
+
+Test<span class="token operator">::</span>SomeClass data<span class="token punctuation">;</span>
+
+<span class="token function">call_too</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//Succeeds</span>
+
+</code></pre></div><p><code>call</code> fails because none of its parameter types come from the <code>Test</code> namespace. <code>call_too</code> works because <code>SomeClass</code> is a member of <code>Test</code> and therefore it qualifies for ADL rules.</p> <h3 id="when-does-adl-not-occur"><a href="#when-does-adl-not-occur" class="header-anchor">#</a> When does ADL not occur</h3> <p>ADL does not occur if normal unqualified lookup finds a class member, a function that has been declared at block scope, or something that is not of function type. For example:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">namespace</span> N <span class="token punctuation">{</span>
+    <span class="token keyword">struct</span> <span class="token class-name">X</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span>X <span class="token punctuation">)</span> <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">'1'</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">qux</span><span class="token punctuation">(</span>X <span class="token punctuation">)</span> <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">'2'</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">C</span> <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">foo</span><span class="token punctuation">(</span>N<span class="token operator">::</span>X<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// error: ADL is disabled and C::foo() takes no arguments</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">extern</span> <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// redeclares ::foo</span>
+    <span class="token function">foo</span><span class="token punctuation">(</span>N<span class="token operator">::</span>X<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       <span class="token comment">// error: ADL is disabled and ::foo() doesn't take any arguments</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> qux<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">qux</span><span class="token punctuation">(</span>N<span class="token operator">::</span>X<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// error: variable declaration disables ADL for &quot;qux&quot;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="extending-namespaces"><a href="#extending-namespaces" class="header-anchor">#</a> Extending namespaces</h2> <p>A useful feature of <code>namespace</code>s is that you can expand them (add members to it).</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> Foo
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//some other stuff</span>
+
+<span class="token keyword">namespace</span> Foo
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">bar2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="using-directive"><a href="#using-directive" class="header-anchor">#</a> Using directive</h2> <p>The keyword <a href="http://stackoverflow.com/documentation/c%2B%2B/4891/keywords/19096/using#t=20160909070552352037" target="_blank" rel="noopener noreferrer">'using'<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> has three flavors. Combined with keyword 'namespace' you write a 'using directive':</p> <p>If you don't want to write <code>Foo::</code> in front of every stuff in the namespace <code>Foo</code>, you can use <code>using namespace Foo;</code> to import every single thing out of <code>Foo</code>.</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> Foo
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">void</span> <span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">//Have to use Foo::bar()</span>
+Foo<span class="token operator">::</span><span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//Import Foo</span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> Foo<span class="token punctuation">;</span>
+<span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//OK</span>
+<span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//OK</span>
+
+</code></pre></div><p>It is also possible to import selected entities in a namespace rather than the whole namespace:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">using</span> Foo<span class="token operator">::</span>bar<span class="token punctuation">;</span>
+<span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//OK, was specifically imported</span>
+<span class="token function">baz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Not OK, was not imported</span>
+
+</code></pre></div><p>A word of caution: <code>using namespace</code>s in header files is seen as bad style in most cases. If this is done, the namespace is imported in <strong>every</strong> file that includes the header. Since there is no way of &quot;un-<code>using</code>&quot; a namespace, this can lead to namespace pollution (more or unexpected symbols in the global namespace) or, worse, conflicts. See this example for an illustration of the problem:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">/***** foo.h *****/</span>
+<span class="token keyword">namespace</span> Foo
+<span class="token punctuation">{</span>
+    <span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/***** bar.h *****/</span>
+<span class="token keyword">namespace</span> Bar
+<span class="token punctuation">{</span>
+    <span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/***** baz.h *****/</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;foo.h&quot;</span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> Foo<span class="token punctuation">;</span>
+
+<span class="token comment">/***** main.cpp *****/</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;bar.h&quot;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;baz.h&quot;</span></span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> Bar<span class="token punctuation">;</span>
+C c<span class="token punctuation">;</span> <span class="token comment">// error: Ambiguity between Bar::C and Foo::C</span>
+
+</code></pre></div><p>A <strong>using-directive</strong> cannot occur at class scope.</p> <h2 id="making-namespaces"><a href="#making-namespaces" class="header-anchor">#</a> Making namespaces</h2> <p>Creating a namespace is really easy:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">//Creates namespace foo</span>
+<span class="token keyword">namespace</span> Foo
+<span class="token punctuation">{</span>
+    <span class="token comment">//Declares function bar in namespace foo</span>
+    <span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>To call <code>bar</code>, you have to specify the namespace first, followed by the scope resolution operator <code>::</code>:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>Foo<span class="token operator">::</span><span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>It is allowed to create one namespace in another, for example:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> A
+<span class="token punctuation">{</span>
+    <span class="token keyword">namespace</span> B
+    <span class="token punctuation">{</span>
+        <span class="token keyword">namespace</span> C
+        <span class="token punctuation">{</span>
+            <span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The above code could be simplified to the following:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> A<span class="token operator">::</span>B<span class="token operator">::</span>C
+<span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="unnamed-anonymous-namespaces"><a href="#unnamed-anonymous-namespaces" class="header-anchor">#</a> Unnamed/anonymous namespaces</h2> <p>An unnamed namespace can be used to ensure names have internal linkage (can only be referred to by the current translation unit). Such a namespace is defined in the same way as any other namespace, but without the name:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> foo <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><code>foo</code> is only visible in the translation unit in which it appears.</p> <p>It is recommended to never use unnamed namespaces in header files as this gives a version of the content for every translation unit it is included in. This is especially important if you define non-const globals.</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// foo.h</span>
+<span class="token keyword">namespace</span> <span class="token punctuation">{</span>
+    std<span class="token operator">::</span>string globalString<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 1.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;foo.h&quot;</span> </span><span class="token comment">//&lt; Generates unnamed_namespace{1.cpp}::globalString ...</span>
+
+globalString <span class="token operator">=</span> <span class="token string">&quot;Initialize&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 2.cpp</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&quot;foo.h&quot;</span> </span><span class="token comment">//&lt; Generates unnamed_namespace{2.cpp}::globalString ...</span>
+
+std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> globalString<span class="token punctuation">;</span> <span class="token comment">//&lt; Will always print the empty string</span>
+
+</code></pre></div><h2 id="compact-nested-namespaces"><a href="#compact-nested-namespaces" class="header-anchor">#</a> Compact nested namespaces</h2> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> a <span class="token punctuation">{</span>
+  <span class="token keyword">namespace</span> b <span class="token punctuation">{</span>
+    <span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token class-name">T</span><span class="token operator">&gt;</span>
+    <span class="token keyword">struct</span> <span class="token class-name">qualifies</span> <span class="token operator">:</span> std<span class="token operator">::</span>false_type <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">namespace</span> other <span class="token punctuation">{</span>
+  <span class="token keyword">struct</span> <span class="token class-name">bob</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">namespace</span> a<span class="token operator">::</span>b <span class="token punctuation">{</span>
+  <span class="token keyword">template</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span>
+  <span class="token keyword">struct</span> <span class="token class-name">qualifies</span><span class="token operator">&lt;</span><span class="token operator">::</span>other<span class="token operator">::</span>bob<span class="token operator">&gt;</span> <span class="token operator">:</span> std<span class="token operator">::</span>true_type <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You can enter both the <code>a</code> and <code>b</code> namespaces in one step with <code>namespace a::b</code> starting in C++17.</p> <h2 id="inline-namespace"><a href="#inline-namespace" class="header-anchor">#</a> Inline namespace</h2> <p><code>inline namespace</code> includes the content of the inlined namespace in the enclosing namespace, so</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> Outer
+<span class="token punctuation">{</span>
+    <span class="token keyword">inline</span> <span class="token keyword">namespace</span> Inner
+    <span class="token punctuation">{</span>
+        <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>is mostly equivalent to</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> Outer
+<span class="token punctuation">{</span>
+
+    <span class="token keyword">namespace</span> Inner
+    <span class="token punctuation">{</span>
+        <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">using</span> Inner<span class="token operator">::</span>foo<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>but element from <code>Outer::Inner::</code> and those associated into <code>Outer::</code> are identical.</p> <p>So following is equivalent</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>Outer<span class="token operator">::</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Outer<span class="token operator">::</span>Inner<span class="token operator">::</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The alternative <code>using namespace Inner;</code> would not be equivalent for some tricky parts as template specialization:</p> <p>For</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;outer.h&gt;</span> </span><span class="token comment">// See below</span>
+
+<span class="token keyword">class</span> <span class="token class-name">MyCustomType</span><span class="token punctuation">;</span>
+<span class="token keyword">namespace</span> Outer
+<span class="token punctuation">{</span>
+    <span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token operator">&gt;</span>
+    <span class="token keyword">void</span> foo<span class="token operator">&lt;</span>MyCustomType<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Specialization&quot;</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><li>
+The inline namespace allows the specialization of `Outer::foo`
+<div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// outer.h</span>
+<span class="token comment">// include guard omitted for simplification</span>
+
+<span class="token keyword">namespace</span> Outer
+<span class="token punctuation">{</span>
+    <span class="token keyword">inline</span> <span class="token keyword">namespace</span> Inner
+    <span class="token punctuation">{</span>
+        <span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> T<span class="token operator">&gt;</span>
+        <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Generic&quot;</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></li> <li>
+Whereas the `using namespace` doesn't allow the specialization of `Outer::foo`
+<div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">// outer.h</span>
+<span class="token comment">// include guard omitted for simplification</span>
+
+<span class="token keyword">namespace</span> Outer
+<span class="token punctuation">{</span>
+    <span class="token keyword">namespace</span> Inner
+    <span class="token punctuation">{</span>
+        <span class="token keyword">template</span> <span class="token operator">&lt;</span><span class="token keyword">typename</span> T<span class="token operator">&gt;</span>
+        <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> std<span class="token operator">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">&quot;Generic&quot;</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">using</span> <span class="token keyword">namespace</span> Inner<span class="token punctuation">;</span>
+    <span class="token comment">// Specialization of `Outer::foo` is not possible</span>
+    <span class="token comment">// it should be `Outer::Inner::foo`.</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></li> <p>Inline namespace is a way to allow several version to cohabit and defaulting to the <code>inline</code> one</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> MyNamespace
+<span class="token punctuation">{</span>
+    <span class="token comment">// Inline the last version</span>
+    <span class="token keyword">inline</span> <span class="token keyword">namespace</span> Version2
+    <span class="token punctuation">{</span>
+        <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// New version</span>
+        <span class="token keyword">void</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">namespace</span> Version1 <span class="token comment">// The old one</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>And with usage</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code>MyNamespace<span class="token operator">::</span>Version1<span class="token operator">::</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// old version</span>
+MyNamespace<span class="token operator">::</span>Version2<span class="token operator">::</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// new version</span>
+MyNamespace<span class="token operator">::</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">// default version : MyNamespace::Version1::foo();</span>
+
+</code></pre></div><h2 id="namespace-alias"><a href="#namespace-alias" class="header-anchor">#</a> Namespace alias</h2> <p>A namespace can be given an alias (<strong>i.e.,</strong> another name for the same namespace) using the <code>namespace</code> <strong>identifier</strong> <code>=</code> syntax.  Members of the aliased namespace can be accessed by qualifying them with the name of the alias. In the following example, the nested namespace <code>AReallyLongName::AnotherReallyLongName</code> is inconvenient to type, so the function <code>qux</code> locally declares an alias <code>N</code>. Members of that namespace can then be accessed simply using <code>N::</code>.</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> AReallyLongName <span class="token punctuation">{</span>
+    <span class="token keyword">namespace</span> AnotherReallyLongName <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> <span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">void</span> <span class="token function">baz</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span> <span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">void</span> <span class="token function">qux</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">namespace</span> N <span class="token operator">=</span> AReallyLongName<span class="token operator">::</span>AnotherReallyLongName<span class="token punctuation">;</span>
+    N<span class="token operator">::</span><span class="token function">baz</span><span class="token punctuation">(</span>N<span class="token operator">::</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> N<span class="token operator">::</span><span class="token function">bar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="aliasing-a-long-namespace"><a href="#aliasing-a-long-namespace" class="header-anchor">#</a> Aliasing a long namespace</h2> <p>This is usually used for renaming or shortening long namespace references such referring to components of a library.</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> boost
+<span class="token punctuation">{</span>
+    <span class="token keyword">namespace</span> multiprecision
+    <span class="token punctuation">{</span>
+        <span class="token keyword">class</span> <span class="token class-name">Number</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">namespace</span> Name1 <span class="token operator">=</span> boost<span class="token operator">::</span>multiprecision<span class="token punctuation">;</span>
+
+
+<span class="token comment">//    Both Type declarations are equivalent</span>
+boost<span class="token operator">::</span>multiprecision<span class="token operator">::</span>Number X   <span class="token comment">//    Writing the full namespace path, longer</span>
+Name1<span class="token operator">::</span>Number Y                   <span class="token comment">//    using the name alias, shorter</span>
+
+</code></pre></div><h2 id="alias-declaration-scope"><a href="#alias-declaration-scope" class="header-anchor">#</a> Alias Declaration scope</h2> <p>Alias Declaration are affected by preceding <strong>using</strong> statements</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> boost
+<span class="token punctuation">{</span>
+    <span class="token keyword">namespace</span> multiprecision
+    <span class="token punctuation">{</span>
+        <span class="token keyword">class</span> <span class="token class-name">Number</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> boost<span class="token punctuation">;</span>
+
+<span class="token comment">//   Both Namespace are equivalent </span>
+<span class="token keyword">namespace</span> Name1 <span class="token operator">=</span> boost<span class="token operator">::</span>multiprecision<span class="token punctuation">;</span>
+<span class="token keyword">namespace</span> Name2 <span class="token operator">=</span> multiprecision<span class="token punctuation">;</span>
+
+</code></pre></div><p>However, it is easier to get confused over which namespace you are aliasing when you have something like this:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token keyword">namespace</span> boost
+<span class="token punctuation">{</span>
+    <span class="token keyword">namespace</span> multiprecision
+    <span class="token punctuation">{</span>
+        <span class="token keyword">class</span> <span class="token class-name">Number</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">namespace</span> numeric
+<span class="token punctuation">{</span>
+    <span class="token keyword">namespace</span> multiprecision
+    <span class="token punctuation">{</span>
+        <span class="token keyword">class</span> <span class="token class-name">Number</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> numeric<span class="token punctuation">;</span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> boost<span class="token punctuation">;</span>
+
+<span class="token comment">//    Not recommended as </span>
+<span class="token comment">//    its not explicitly clear whether Name1 refers to</span>
+<span class="token comment">//    numeric::multiprecision or boost::multiprecision</span>
+<span class="token keyword">namespace</span> Name1 <span class="token operator">=</span> multiprecision<span class="token punctuation">;</span>
+
+<span class="token comment">//    For clarity, its recommended to use absolute paths</span>
+<span class="token comment">//    instead</span>
+<span class="token keyword">namespace</span> Name2 <span class="token operator">=</span> numeric<span class="token operator">::</span>multiprecision<span class="token punctuation">;</span>
+<span class="token keyword">namespace</span> Name3 <span class="token operator">=</span> boost<span class="token operator">::</span>multiprecision<span class="token punctuation">;</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>namespace <strong>identifier</strong>(<strong>opt</strong>) { <strong>declaration-seq</strong> }</li> <li>inline namespace <strong>identifier</strong>(<strong>opt</strong>) { <strong>declaration-seq</strong> } /* since C++11 */</li> <li>inline(<strong>opt</strong>) namespace <strong>attribute-specifier-seq</strong> <strong>identifier</strong>(<strong>opt</strong>) { <strong>declaration-seq</strong> } /* since C++17 */</li> <li>namespace <strong>enclosing-namespace-specifier</strong> :: <strong>identifier</strong> { <strong>declaration-seq</strong> } /* since C++17 */</li> <li>namespace <strong>identifier</strong> = <strong>qualified-namespace-specifier</strong>;</li> <li>using namespace <strong>nested-name-specifier</strong>(<strong>opt</strong>) <strong>namespace-name</strong>;</li> <li><strong>attribute-specifier-seq</strong> using namespace <strong>nested-name-specifier</strong>(<strong>opt</strong>) <strong>namespace-name</strong>; /* since C++11 */</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>The <a href="http://stackoverflow.com/documentation/c%2b%2b/4891/keywords" target="_blank" rel="noopener noreferrer">keyword<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> <code>namespace</code> has three different meanings depending on context:</p> <li>
+When followed by an optional name and a brace-enclosed sequence of declarations, it [defines a new namespace](http://stackoverflow.com/documentation/c%2b%2b/495/namespaces) or [extends an existing namespace](http://stackoverflow.com/documentation/c%2b%2b/495/namespaces/1623/extending-namespaces) with those declarations. If the name is omitted, the namespace is an [unnamed namespace](http://stackoverflow.com/documentation/c%2b%2b/495/namespaces/4851/unnamed-anonymous-namespaces).
+</li> <li>
+When followed by a name and an equal sign, it declares a [namespace alias](http://stackoverflow.com/documentation/c%2b%2b/495/namespaces/28691/namespace-alias).
+</li> <li>
+When preceded by `using` and followed by a namespace name, it forms a [**using directive**](http://stackoverflow.com/documentation/c%2b%2b/495/namespaces/1624/using-namespaces#t=201608060458446751916), which allows names in the given namespace to be found by unqualified name lookup (but does not redeclare those names in the current scope). A **using-directive** cannot occur at class scope.
+</li> <p><code>using namespace std;</code> is discouraged. Why? Because <code>namespace std</code> is huge! This means that there is a high chance that names will collide:</p> <div class="language-cpp extra-class"><pre class="language-cpp"><code><span class="token comment">//Really bad!</span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+
+<span class="token comment">//Calculates p^e and outputs it to std::cout</span>
+<span class="token keyword">void</span> <span class="token function">pow</span><span class="token punctuation">(</span><span class="token keyword">double</span> p<span class="token punctuation">,</span> <span class="token keyword">double</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">/*...*/</span> <span class="token punctuation">}</span>
+
+<span class="token comment">//Calls pow</span>
+<span class="token function">pow</span><span class="token punctuation">(</span><span class="token number">5.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//Error! There is already a pow function in namespace std with the same signature,</span>
+               <span class="token comment">//so the call is ambiguous</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/cpp/namespaces.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/cpp/c-containers.html" class="prev">
+        C++ Containers
+      </a></span> <span class="next"><a href="/cpp/header-files.html">
+        Header Files
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/678.f2fae12b.js" defer></script>
+  </body>
+</html>

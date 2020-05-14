@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Xamarin - Xamarin Plugin</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Media Plugin, Share Plugin, ExternalMaps, Geolocator Plugin, Messaging Plugin, Permissions Plugin">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Xamarin - Xamarin Plugin">
+    <meta property="og:description" content="Media Plugin, Share Plugin, ExternalMaps, Geolocator Plugin, Messaging Plugin, Permissions Plugin">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/xamarin/xamarin-plugin.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Xamarin - Xamarin Plugin">
+    <meta name="twitter:description" content="Media Plugin, Share Plugin, ExternalMaps, Geolocator Plugin, Messaging Plugin, Permissions Plugin">
+    <meta name="twitter:url" content="/xamarin/xamarin-plugin.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3572.f249812d.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Xamarin</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/xamarin/" class="sidebar-link">Disclaimer</a></li><li><a href="/xamarin/getting-started-with-xamarin-forms.html" class="sidebar-link">Getting started with Xamarin.Forms</a></li><li><a href="/xamarin/why-xamarin-forms-and-when-to-use-xamarin-forms.html" class="sidebar-link">Why Xamarin Forms and When to use Xamarin Forms</a></li><li><a href="/xamarin/xamarin-forms-layouts.html" class="sidebar-link">Xamarin Forms Layouts</a></li><li><a href="/xamarin/xamarin-relative-layout.html" class="sidebar-link">Xamarin Relative Layout</a></li><li><a href="/xamarin/navigation-in-xamarin-forms.html" class="sidebar-link">Navigation in Xamarin.Forms</a></li><li><a href="/xamarin/xamarin-forms-page.html" class="sidebar-link">Xamarin.Forms Page</a></li><li><a href="/xamarin/xamarin-forms-cells.html" class="sidebar-link">Xamarin.Forms Cells</a></li><li><a href="/xamarin/xamarin-forms-views.html" class="sidebar-link">Xamarin.Forms Views</a></li><li><a href="/xamarin/using-listviews.html" class="sidebar-link">Using ListViews</a></li><li><a href="/xamarin/display-alert.html" class="sidebar-link">Display Alert</a></li><li><a href="/xamarin/accessing-native-features-with-dependencyservice.html" class="sidebar-link">Accessing native features with DependencyService</a></li><li><a href="/xamarin/dependencyservice.html" class="sidebar-link">DependencyService</a></li><li><a href="/xamarin/custom-renderers.html" class="sidebar-link">Custom Renderers</a></li><li><a href="/xamarin/caching.html" class="sidebar-link">Caching</a></li><li><a href="/xamarin/gestures.html" class="sidebar-link">Gestures</a></li><li><a href="/xamarin/data-binding.html" class="sidebar-link">Data Binding</a></li><li><a href="/xamarin/working-with-maps.html" class="sidebar-link">Working with Maps</a></li><li><a href="/xamarin/custom-fonts-in-styles.html" class="sidebar-link">Custom Fonts in Styles</a></li><li><a href="/xamarin/push-notifications.html" class="sidebar-link">Push Notifications</a></li><li><a href="/xamarin/effects.html" class="sidebar-link">Effects</a></li><li><a href="/xamarin/triggers-behaviours.html" class="sidebar-link">Triggers &amp; Behaviours</a></li><li><a href="/xamarin/appsettings-reader-in-xamarin-forms.html" class="sidebar-link">AppSettings Reader in Xamarin.Forms</a></li><li><a href="/xamarin/creating-custom-controls.html" class="sidebar-link">Creating custom controls</a></li><li><a href="/xamarin/working-with-local-databases.html" class="sidebar-link">Working with local databases</a></li><li><a href="/xamarin/carouselview-pre-release-version.html" class="sidebar-link">CarouselView - Pre-release version</a></li><li><a href="/xamarin/exception-handling.html" class="sidebar-link">Exception handling</a></li><li><a href="/xamarin/sql-database-and-api-in-xamarin-forms.html" class="sidebar-link">SQL Database and API in Xamarin Forms.</a></li><li><a href="/xamarin/contact-picker-xamarin-forms-android-and-ios.html" class="sidebar-link">Contact Picker - Xamarin Forms (Android and iOS)</a></li><li><a href="/xamarin/xamarin-plugin.html" class="active sidebar-link">Xamarin Plugin</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/xamarin/xamarin-plugin.html#media-plugin" class="sidebar-link">Media Plugin</a></li><li class="sidebar-sub-header"><a href="/xamarin/xamarin-plugin.html#share-plugin" class="sidebar-link">Share Plugin</a></li><li class="sidebar-sub-header"><a href="/xamarin/xamarin-plugin.html#externalmaps" class="sidebar-link">ExternalMaps</a></li><li class="sidebar-sub-header"><a href="/xamarin/xamarin-plugin.html#geolocator-plugin" class="sidebar-link">Geolocator Plugin</a></li><li class="sidebar-sub-header"><a href="/xamarin/xamarin-plugin.html#messaging-plugin" class="sidebar-link">Messaging Plugin</a></li><li class="sidebar-sub-header"><a href="/xamarin/xamarin-plugin.html#permissions-plugin" class="sidebar-link">Permissions Plugin</a></li></ul></li><li><a href="/xamarin/oauth2.html" class="sidebar-link">OAuth2</a></li><li><a href="/xamarin/messagingcenter.html" class="sidebar-link">MessagingCenter</a></li><li><a href="/xamarin/generic-xamarin-forms-app-lifecycle-platform-dependant.html" class="sidebar-link">Generic Xamarin.Forms app lifecycle? Platform-dependant!</a></li><li><a href="/xamarin/platform-specific-behaviour.html" class="sidebar-link">Platform-specific behaviour</a></li><li><a href="/xamarin/platform-specific-visual-adjustments.html" class="sidebar-link">Platform specific visual adjustments</a></li><li><a href="/xamarin/dependency-services.html" class="sidebar-link">Dependency Services</a></li><li><a href="/xamarin/unit-testing.html" class="sidebar-link">Unit Testing</a></li><li><a href="/xamarin/bdd-unit-testing-in-xamarin-forms.html" class="sidebar-link">BDD Unit Testing in Xamarin.Forms</a></li><li><a href="/xamarin/getting-started-with-xamarin-ios.html" class="sidebar-link">Getting started with Xamarin.iOS</a></li><li><a href="/xamarin/alerts.html" class="sidebar-link">Alerts</a></li><li><a href="/xamarin/touch-id.html" class="sidebar-link">Touch ID</a></li><li><a href="/xamarin/auto-layout-in-xamarin-ios.html" class="sidebar-link">Auto Layout in Xamarin.iOS</a></li><li><a href="/xamarin/add-search-bar-to-uitableview.html" class="sidebar-link">Add Search Bar to UITableView</a></li><li><a href="/xamarin/adding-uirefreshcontrol-to-a-table-view.html" class="sidebar-link">Adding UIRefreshControl to a table view</a></li><li><a href="/xamarin/add-pulltorefresh-to-uitableview.html" class="sidebar-link">Add PullToRefresh to UITableView</a></li><li><a href="/xamarin/uiimageview-zoom-in-combination-with-uiscrollview.html" class="sidebar-link">UIImageView zoom in combination with UIScrollView</a></li><li><a href="/xamarin/xamarin-ios-navigation-drawer.html" class="sidebar-link">Xamarin.iOS Navigation Drawer</a></li><li><a href="/xamarin/using-asset-catalogs.html" class="sidebar-link">Using Asset Catalogs</a></li><li><a href="/xamarin/how-to-use-asset-asset-catalogs.html" class="sidebar-link">How to use asset Asset Catalogs</a></li><li><a href="/xamarin/using-ios-asset-catalogs-to-manage-images.html" class="sidebar-link">Using iOS Asset Catalogs to Manage Images</a></li><li><a href="/xamarin/create-and-use-custom-prototype-table-cells-in-xamarin-ios-using-storyboard.html" class="sidebar-link">Create and use custom prototype table cells in xamarin.iOS using storyboard</a></li><li><a href="/xamarin/binding-swift-libraries.html" class="sidebar-link">Binding Swift Libraries</a></li><li><a href="/xamarin/connecting-with-microsoft-cognitive-services.html" class="sidebar-link">Connecting with Microsoft Cognitive Services</a></li><li><a href="/xamarin/concurrent-programming-in-xamarin-ios.html" class="sidebar-link">Concurrent Programming in Xamarin.iOS</a></li><li><a href="/xamarin/working-with-xib-and-storyboards-in-xamarin-ios.html" class="sidebar-link">Working with Xib and Storyboards in Xamarin.iOS</a></li><li><a href="/xamarin/best-practices-for-migrating-from-uilocalnotification-to-user-notifications-framework.html" class="sidebar-link">Best practices for migrating from UILocalNotification to User Notifications framework</a></li><li><a href="/xamarin/calculating-variable-row-height-in-getheightforrow.html" class="sidebar-link">Calculating variable row height in GetHeightForRow</a></li><li><a href="/xamarin/resizing-methods-for-uiimage.html" class="sidebar-link">Resizing Methods for UIImage</a></li><li><a href="/xamarin/controlling-the-screenshot-in-the-ios-multitasking-switcher.html" class="sidebar-link">Controlling the Screenshot in the iOS Multitasking Switcher</a></li><li><a href="/xamarin/xamarin-ios-google-places-autocomplete.html" class="sidebar-link">Xamarin iOS Google Places Autocomplete</a></li><li><a href="/xamarin/getting-started-with-xamarin-android.html" class="sidebar-link">Getting started with Xamarin.Android</a></li><li><a href="/xamarin/app-lifecycle-xamarin-andorid.html" class="sidebar-link">App lifecycle - Xamarin.Andorid</a></li><li><a href="/xamarin/bindings.html" class="sidebar-link">Bindings</a></li><li><a href="/xamarin/dialogs.html" class="sidebar-link">Dialogs</a></li><li><a href="/xamarin/toasts.html" class="sidebar-link">Toasts</a></li><li><a href="/xamarin/dialogs.html" class="sidebar-link">Dialogs</a></li><li><a href="/xamarin/custom-listview.html" class="sidebar-link">Custom ListView</a></li><li><a href="/xamarin/recyclerview.html" class="sidebar-link">RecyclerView</a></li><li><a href="/xamarin/xamarin-android-how-to-create-a-toolbar.html" class="sidebar-link">Xamarin.Android - How to create a toolbar</a></li><li><a href="/xamarin/xamarin-android-bluetooth-communication.html" class="sidebar-link">Xamarin.Android - Bluetooth communication</a></li><li><a href="/xamarin/how-to-correct-the-orientation-of-a-picture-captured-from-android-device.html" class="sidebar-link">How to correct the orientation of a picture captured from Android device</a></li><li><a href="/xamarin/barcode-scanning-using-zxing-library-in-xamarin-applications.html" class="sidebar-link">Barcode scanning using ZXing library in Xamarin Applications</a></li><li><a href="/xamarin/publishing-your-xamarin-android-apk.html" class="sidebar-link">Publishing your Xamarin.Android APK</a></li><li><a href="/xamarin/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="xamarin-plugin"><a href="#xamarin-plugin" class="header-anchor">#</a> Xamarin Plugin</h1> <h2 id="media-plugin"><a href="#media-plugin" class="header-anchor">#</a> Media Plugin</h2> <p>Take or pick photos and videos from a cross platform API.</p> <p>Available Nuget : <a href="https://www.nuget.org/packages/Xam.Plugin.Media/%5D%5B1%5D" target="_blank" rel="noopener noreferrer">[https://www.nuget.org/packages/Xam.Plugin.Media/][1]<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>XAML</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token operator">&lt;</span><span class="token class-name">StackLayout</span> Spacing<span class="token operator">=</span><span class="token string">&quot;10&quot;</span> Padding<span class="token operator">=</span><span class="token string">&quot;10&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Button</span> x<span class="token punctuation">:</span>Name<span class="token operator">=</span><span class="token string">&quot;takePhoto&quot;</span> Text<span class="token operator">=</span><span class="token string">&quot;Take Photo&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Button</span> x<span class="token punctuation">:</span>Name<span class="token operator">=</span><span class="token string">&quot;pickPhoto&quot;</span> Text<span class="token operator">=</span><span class="token string">&quot;Pick Photo&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Button</span> x<span class="token punctuation">:</span>Name<span class="token operator">=</span><span class="token string">&quot;takeVideo&quot;</span> Text<span class="token operator">=</span><span class="token string">&quot;Take Video&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Button</span> x<span class="token punctuation">:</span>Name<span class="token operator">=</span><span class="token string">&quot;pickVideo&quot;</span> Text<span class="token operator">=</span><span class="token string">&quot;Pick Video&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Label</span> Text<span class="token operator">=</span><span class="token string">&quot;Save to Gallery&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Switch</span> x<span class="token punctuation">:</span>Name<span class="token operator">=</span><span class="token string">&quot;saveToGallery&quot;</span> IsToggled<span class="token operator">=</span><span class="token string">&quot;false&quot;</span> HorizontalOptions<span class="token operator">=</span><span class="token string">&quot;Center&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Label</span> Text<span class="token operator">=</span><span class="token string">&quot;Image will show here&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Image</span> x<span class="token punctuation">:</span>Name<span class="token operator">=</span><span class="token string">&quot;image&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Label</span> Text<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+     
+    <span class="token operator">&lt;</span><span class="token operator">/</span>StackLayout<span class="token operator">&gt;</span>
+
+</code></pre></div><p><strong>Code</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">namespace</span> <span class="token namespace">PluginDemo</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> <span class="token class-name">MediaPage</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">ContentPage</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token function">MediaPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            takePhoto<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>IsCameraAvailable <span class="token operator">||</span> <span class="token operator">!</span>CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>IsTakePhotoSupported<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;No Camera&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;:( No camera avaialble.&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">return</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+                    <span class="token class-name"><span class="token keyword">var</span></span> file <span class="token operator">=</span> <span class="token keyword">await</span> CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">TakePhotoAsync</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Plugin<span class="token punctuation">.</span>Media<span class="token punctuation">.</span>Abstractions<span class="token punctuation">.</span>StoreCameraMediaOptions</span>
+                    <span class="token punctuation">{</span>
+                        Directory <span class="token operator">=</span> <span class="token string">&quot;Sample&quot;</span><span class="token punctuation">,</span>
+                        Name <span class="token operator">=</span> <span class="token string">&quot;test.jpg&quot;</span><span class="token punctuation">,</span>
+                        SaveToAlbum <span class="token operator">=</span> saveToGallery<span class="token punctuation">.</span>IsToggled
+                    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>file <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+                        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;File Location&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>saveToGallery<span class="token punctuation">.</span>IsToggled <span class="token punctuation">?</span> file<span class="token punctuation">.</span>AlbumPath <span class="token punctuation">:</span> file<span class="token punctuation">.</span>Path<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    image<span class="token punctuation">.</span>Source <span class="token operator">=</span> ImageSource<span class="token punctuation">.</span><span class="token function">FromStream</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token class-name"><span class="token keyword">var</span></span> stream <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">GetStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        file<span class="token punctuation">.</span><span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        <span class="token keyword">return</span> stream<span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">catch</span> <span class="token comment">//(Exception ex)</span>
+                <span class="token punctuation">{</span>
+                   <span class="token comment">// Xamarin.Insights.Report(ex);</span>
+                   <span class="token comment">// await DisplayAlert(&quot;Uh oh&quot;, &quot;Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.&quot;, &quot;OK&quot;);</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+            pickPhoto<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>IsPickPhotoSupported<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Photos Not Supported&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;:( Permission not granted to photos.&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">return</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+                    <span class="token class-name">Stream</span> stream <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span>
+                    <span class="token class-name"><span class="token keyword">var</span></span> file <span class="token operator">=</span> <span class="token keyword">await</span> CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">PickPhotoAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ConfigureAwait</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>file <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+                        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+                    stream <span class="token operator">=</span> file<span class="token punctuation">.</span><span class="token function">GetStream</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    file<span class="token punctuation">.</span><span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    image<span class="token punctuation">.</span>Source <span class="token operator">=</span> ImageSource<span class="token punctuation">.</span><span class="token function">FromStream</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> stream<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">}</span>
+                <span class="token keyword">catch</span> <span class="token comment">//(Exception ex)</span>
+                <span class="token punctuation">{</span>
+                   <span class="token comment">// Xamarin.Insights.Report(ex);</span>
+                   <span class="token comment">// await DisplayAlert(&quot;Uh oh&quot;, &quot;Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.&quot;, &quot;OK&quot;);</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+            takeVideo<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>IsCameraAvailable <span class="token operator">||</span> <span class="token operator">!</span>CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>IsTakeVideoSupported<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;No Camera&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;:( No camera avaialble.&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">return</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+                    <span class="token class-name"><span class="token keyword">var</span></span> file <span class="token operator">=</span> <span class="token keyword">await</span> CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">TakeVideoAsync</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Plugin<span class="token punctuation">.</span>Media<span class="token punctuation">.</span>Abstractions<span class="token punctuation">.</span>StoreVideoOptions</span>
+                    <span class="token punctuation">{</span>
+                        Name <span class="token operator">=</span> <span class="token string">&quot;video.mp4&quot;</span><span class="token punctuation">,</span>
+                        Directory <span class="token operator">=</span> <span class="token string">&quot;DefaultVideos&quot;</span><span class="token punctuation">,</span>
+                        SaveToAlbum <span class="token operator">=</span> saveToGallery<span class="token punctuation">.</span>IsToggled
+                    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>file <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+                        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Video Recorded&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Location: &quot;</span> <span class="token operator">+</span> <span class="token punctuation">(</span>saveToGallery<span class="token punctuation">.</span>IsToggled <span class="token punctuation">?</span> file<span class="token punctuation">.</span>AlbumPath <span class="token punctuation">:</span> file<span class="token punctuation">.</span>Path<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    file<span class="token punctuation">.</span><span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">}</span>
+                <span class="token keyword">catch</span> <span class="token comment">//(Exception ex)</span>
+                <span class="token punctuation">{</span>
+                   <span class="token comment">// Xamarin.Insights.Report(ex);</span>
+                   <span class="token comment">// await DisplayAlert(&quot;Uh oh&quot;, &quot;Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.&quot;, &quot;OK&quot;);</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+            pickVideo<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>IsPickVideoSupported<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Videos Not Supported&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;:( Permission not granted to videos.&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">return</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+                    <span class="token class-name"><span class="token keyword">var</span></span> file <span class="token operator">=</span> <span class="token keyword">await</span> CrossMedia<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">PickVideoAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>file <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+                        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Video Selected&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Location: &quot;</span> <span class="token operator">+</span> file<span class="token punctuation">.</span>Path<span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    file<span class="token punctuation">.</span><span class="token function">Dispose</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">}</span>
+                <span class="token keyword">catch</span> <span class="token comment">//(Exception ex)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">//Xamarin.Insights.Report(ex);</span>
+                    <span class="token comment">//await DisplayAlert(&quot;Uh oh&quot;, &quot;Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.&quot;, &quot;OK&quot;);</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="share-plugin"><a href="#share-plugin" class="header-anchor">#</a> Share Plugin</h2> <p>Simple way to share a message or link, copy text to clipboard, or open a browser in any Xamarin or Windows app.</p> <p>Available on NuGet :
+<a href="https://www.nuget.org/packages/Plugin.Share/" target="_blank" rel="noopener noreferrer">https://www.nuget.org/packages/Plugin.Share/<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>XAML</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token operator">&lt;</span><span class="token class-name">StackLayout</span> Padding<span class="token operator">=</span><span class="token string">&quot;20&quot;</span> Spacing<span class="token operator">=</span><span class="token string">&quot;20&quot;</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Button</span> StyleId<span class="token operator">=</span><span class="token string">&quot;Text&quot;</span> Text<span class="token operator">=</span><span class="token string">&quot;Share Text&quot;</span> Clicked<span class="token operator">=</span><span class="token string">&quot;Button_OnClicked&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Button</span> StyleId<span class="token operator">=</span><span class="token string">&quot;Link&quot;</span> Text<span class="token operator">=</span><span class="token string">&quot;Share Link&quot;</span> Clicked<span class="token operator">=</span><span class="token string">&quot;Button_OnClicked&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Button</span> StyleId<span class="token operator">=</span><span class="token string">&quot;Browser&quot;</span> Text<span class="token operator">=</span><span class="token string">&quot;Open Browser&quot;</span> Clicked<span class="token operator">=</span><span class="token string">&quot;Button_OnClicked&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token class-name">Label</span> Text<span class="token operator">=</span><span class="token string">&quot;&quot;</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+   
+ <span class="token operator">&lt;</span><span class="token operator">/</span>StackLayout<span class="token operator">&gt;</span>
+
+</code></pre></div><p>C#</p> <div class="language- extra-class"><pre class="language-text"><code>
+async void Button_OnClicked(object sender, EventArgs e)
+        {
+            switch (((Button)sender).StyleId)
+            {
+                case &quot;Text&quot;:
+                    await CrossShare.Current.Share(&quot;Follow @JamesMontemagno on Twitter&quot;, &quot;Share&quot;);
+                    break;
+                case &quot;Link&quot;:
+                    await CrossShare.Current.ShareLink(&quot;http://motzcod.es&quot;, &quot;Checkout my blog&quot;, &quot;MotzCod.es&quot;);
+                    break;
+                case &quot;Browser&quot;:
+                    await CrossShare.Current.OpenBrowser(&quot;http://motzcod.es&quot;);
+                    break;
+            }
+        }
+
+</code></pre></div><h2 id="externalmaps"><a href="#externalmaps" class="header-anchor">#</a> ExternalMaps</h2> <p>External Maps Plugin
+Open external maps to navigate to a specific geolocation or address. Option to launch with navigation option on iOS as well.</p> <p>Available on NuGet :<a href="https://www.nuget.org/packages/Xam.Plugin.ExternalMaps/%5D%5B1%5D" target="_blank" rel="noopener noreferrer">[https://www.nuget.org/packages/Xam.Plugin.ExternalMaps/][1]<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>XAML</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+ &lt;StackLayout Spacing=&quot;10&quot; Padding=&quot;10&quot;&gt;
+      &lt;Button x:Name=&quot;navigateAddress&quot; Text=&quot;Navigate to Address&quot;/&gt;
+      &lt;Button x:Name=&quot;navigateLatLong&quot; Text=&quot;Navigate to Lat|Long&quot;/&gt;
+      &lt;Label Text=&quot;&quot;/&gt;
+     
+    &lt;/StackLayout&gt;
+
+</code></pre></div><p><strong>Code</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">namespace</span> <span class="token namespace">PluginDemo</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> <span class="token class-name">ExternalMaps</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">ContentPage</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token function">ExternalMaps</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            navigateLatLong<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                CrossExternalMaps<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">NavigateTo</span><span class="token punctuation">(</span><span class="token string">&quot;Space Needle&quot;</span><span class="token punctuation">,</span> <span class="token number">47.6204</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">122.3491</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+            navigateAddress<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                CrossExternalMaps<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">NavigateTo</span><span class="token punctuation">(</span><span class="token string">&quot;Xamarin&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;394 pacific ave.&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;San Francisco&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;CA&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;94111&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;USA&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;USA&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="geolocator-plugin"><a href="#geolocator-plugin" class="header-anchor">#</a> Geolocator Plugin</h2> <p>Easly access geolocation across Xamarin.iOS, Xamarin.Android and Windows.</p> <p>Available Nuget: <a href="https://www.nuget.org/packages/Xam.Plugin.Geolocator/%5D%5B1%5D" target="_blank" rel="noopener noreferrer">[https://www.nuget.org/packages/Xam.Plugin.Geolocator/][1]<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>XAML</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+&lt;StackLayout Spacing=&quot;10&quot; Padding=&quot;10&quot;&gt;
+      &lt;Button x:Name=&quot;buttonGetGPS&quot; Text=&quot;Get GPS&quot;/&gt;
+      &lt;Label x:Name=&quot;labelGPS&quot;/&gt;
+      &lt;Button x:Name=&quot;buttonTrack&quot; Text=&quot;Track Movements&quot;/&gt;
+      &lt;Label x:Name=&quot;labelGPSTrack&quot;/&gt;
+      &lt;Label Text=&quot;&quot;/&gt;
+     
+    &lt;/StackLayout&gt;
+
+</code></pre></div><p><strong>Code</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">namespace</span> <span class="token namespace">PluginDemo</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> <span class="token class-name">GeolocatorPage</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">ContentPage</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token function">GeolocatorPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            buttonGetGPS<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> args<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+                    <span class="token class-name"><span class="token keyword">var</span></span> locator <span class="token operator">=</span> CrossGeolocator<span class="token punctuation">.</span>Current<span class="token punctuation">;</span>
+                    locator<span class="token punctuation">.</span>DesiredAccuracy <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span>
+                    labelGPS<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;Getting gps&quot;</span><span class="token punctuation">;</span>
+
+                    <span class="token class-name"><span class="token keyword">var</span></span> position <span class="token operator">=</span> <span class="token keyword">await</span> locator<span class="token punctuation">.</span><span class="token function">GetPositionAsync</span><span class="token punctuation">(</span><span class="token named-parameter punctuation">timeoutMilliseconds</span><span class="token punctuation">:</span> <span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>position <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        labelGPS<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;null gps :(&quot;</span><span class="token punctuation">;</span>
+                        <span class="token keyword">return</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    labelGPS<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">&quot;Time: {0} \nLat: {1} \nLong: {2} \nAltitude: {3} \nAltitude Accuracy: {4} \nAccuracy: {5} \nHeading: {6} \nSpeed: {7}&quot;</span><span class="token punctuation">,</span>
+                        position<span class="token punctuation">.</span>Timestamp<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Latitude<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Longitude<span class="token punctuation">,</span>
+                        position<span class="token punctuation">.</span>Altitude<span class="token punctuation">,</span> position<span class="token punctuation">.</span>AltitudeAccuracy<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Accuracy<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Heading<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Speed<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token punctuation">}</span>
+                <span class="token keyword">catch</span> <span class="token comment">//(Exception ex)</span>
+                <span class="token punctuation">{</span>
+                   <span class="token comment">// Xamarin.Insights.Report(ex);</span>
+                   <span class="token comment">// await DisplayAlert(&quot;Uh oh&quot;, &quot;Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.&quot;, &quot;OK&quot;);</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+            buttonTrack<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>CrossGeolocator<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>IsListening<span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">await</span> CrossGeolocator<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">StopListeningAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                        labelGPSTrack<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;Stopped tracking&quot;</span><span class="token punctuation">;</span>
+                        buttonTrack<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;Stop Tracking&quot;</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+                    <span class="token keyword">else</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossGeolocator<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">StartListeningAsync</span><span class="token punctuation">(</span><span class="token number">30000</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                        <span class="token punctuation">{</span>
+                            labelGPSTrack<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;Started tracking&quot;</span><span class="token punctuation">;</span>
+                            buttonTrack<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;Track Movements&quot;</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">catch</span> <span class="token comment">//(Exception ex)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">//Xamarin.Insights.Report(ex);</span>
+                   <span class="token comment">// await DisplayAlert(&quot;Uh oh&quot;, &quot;Something went wrong, but don't worry we captured it in Xamarin Insights! Thanks.&quot;, &quot;OK&quot;);</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">OnAppearing</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">base</span><span class="token punctuation">.</span><span class="token function">OnAppearing</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span>
+            <span class="token punctuation">{</span>
+                CrossGeolocator<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>PositionChanged <span class="token operator">+=</span> CrossGeolocator_Current_PositionChanged<span class="token punctuation">;</span>
+                CrossGeolocator<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>PositionError <span class="token operator">+=</span> CrossGeolocator_Current_PositionError<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">catch</span>
+            <span class="token punctuation">{</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">CrossGeolocator_Current_PositionError</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">Plugin<span class="token punctuation">.</span>Geolocator<span class="token punctuation">.</span>Abstractions<span class="token punctuation">.</span>PositionErrorEventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+
+            labelGPSTrack<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;Location error: &quot;</span> <span class="token operator">+</span> e<span class="token punctuation">.</span>Error<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">CrossGeolocator_Current_PositionChanged</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">Plugin<span class="token punctuation">.</span>Geolocator<span class="token punctuation">.</span>Abstractions<span class="token punctuation">.</span>PositionEventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token class-name"><span class="token keyword">var</span></span> position <span class="token operator">=</span> e<span class="token punctuation">.</span>Position<span class="token punctuation">;</span>
+            labelGPSTrack<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token keyword">string</span><span class="token punctuation">.</span><span class="token function">Format</span><span class="token punctuation">(</span><span class="token string">&quot;Time: {0} \nLat: {1} \nLong: {2} \nAltitude: {3} \nAltitude Accuracy: {4} \nAccuracy: {5} \nHeading: {6} \nSpeed: {7}&quot;</span><span class="token punctuation">,</span>
+                position<span class="token punctuation">.</span>Timestamp<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Latitude<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Longitude<span class="token punctuation">,</span>
+                position<span class="token punctuation">.</span>Altitude<span class="token punctuation">,</span> position<span class="token punctuation">.</span>AltitudeAccuracy<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Accuracy<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Heading<span class="token punctuation">,</span> position<span class="token punctuation">.</span>Speed<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">OnDisappearing</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">base</span><span class="token punctuation">.</span><span class="token function">OnDisappearing</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span>
+            <span class="token punctuation">{</span>
+                CrossGeolocator<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>PositionChanged <span class="token operator">-=</span> CrossGeolocator_Current_PositionChanged<span class="token punctuation">;</span>
+                CrossGeolocator<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>PositionError <span class="token operator">-=</span> CrossGeolocator_Current_PositionError<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">catch</span>
+            <span class="token punctuation">{</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="messaging-plugin"><a href="#messaging-plugin" class="header-anchor">#</a> Messaging Plugin</h2> <p>Messaging plugin for Xamarin and Windows to make a phone call, send a sms or send an e-mail using the default messaging applications on the different mobile platforms.</p> <p>Available Nuget : <a href="https://www.nuget.org/packages/Xam.Plugins.Messaging/%5D%5B1%5D" target="_blank" rel="noopener noreferrer">[https://www.nuget.org/packages/Xam.Plugins.Messaging/][1]<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>XAML</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+&lt;StackLayout Spacing=&quot;10&quot; Padding=&quot;10&quot;&gt;
+      &lt;Entry Placeholder=&quot;Phone Number&quot; x:Name=&quot;phone&quot;/&gt;
+      &lt;Button x:Name=&quot;buttonSms&quot; Text=&quot;Send SMS&quot;/&gt;
+      &lt;Button x:Name=&quot;buttonCall&quot; Text=&quot;Call Phone Number&quot;/&gt;
+      &lt;Entry Placeholder=&quot;E-mail Address&quot; x:Name=&quot;email&quot;/&gt;
+      &lt;Button x:Name=&quot;buttonEmail&quot; Text=&quot;Send E-mail&quot;/&gt;
+      &lt;Label Text=&quot;&quot;/&gt;
+     
+    &lt;/StackLayout&gt;
+
+</code></pre></div><p><strong>Code</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">namespace</span> <span class="token namespace">PluginDemo</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">partial</span> <span class="token keyword">class</span> <span class="token class-name">MessagingPage</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">ContentPage</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">public</span> <span class="token function">MessagingPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token function">InitializeComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            buttonCall<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> e<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+                    <span class="token comment">// Make Phone Call</span>
+                    <span class="token class-name"><span class="token keyword">var</span></span> phoneCallTask <span class="token operator">=</span> MessagingPlugin<span class="token punctuation">.</span>PhoneDialer<span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>phoneCallTask<span class="token punctuation">.</span>CanMakePhoneCall<span class="token punctuation">)</span>
+                        phoneCallTask<span class="token punctuation">.</span><span class="token function">MakePhoneCall</span><span class="token punctuation">(</span>phone<span class="token punctuation">.</span>Text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">else</span>
+                        <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Error&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;This device can't place calls&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">catch</span>
+                <span class="token punctuation">{</span>
+                   <span class="token comment">// await DisplayAlert(&quot;Error&quot;, &quot;Unable to perform action&quot;, &quot;OK&quot;);</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+            buttonSms<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> e<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+
+                    <span class="token class-name"><span class="token keyword">var</span></span> smsTask <span class="token operator">=</span> MessagingPlugin<span class="token punctuation">.</span>SmsMessenger<span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>smsTask<span class="token punctuation">.</span>CanSendSms<span class="token punctuation">)</span>
+                        smsTask<span class="token punctuation">.</span><span class="token function">SendSms</span><span class="token punctuation">(</span>phone<span class="token punctuation">.</span>Text<span class="token punctuation">,</span> <span class="token string">&quot;Hello World&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">else</span>
+                        <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Error&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;This device can't send sms&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">catch</span>
+                <span class="token punctuation">{</span>
+                   <span class="token comment">// await DisplayAlert(&quot;Error&quot;, &quot;Unable to perform action&quot;, &quot;OK&quot;);</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+            buttonEmail<span class="token punctuation">.</span>Clicked <span class="token operator">+=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span>sender<span class="token punctuation">,</span> e<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">try</span>
+                <span class="token punctuation">{</span>
+                    <span class="token class-name"><span class="token keyword">var</span></span> emailTask <span class="token operator">=</span> MessagingPlugin<span class="token punctuation">.</span>EmailMessenger<span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>emailTask<span class="token punctuation">.</span>CanSendEmail<span class="token punctuation">)</span>
+                        emailTask<span class="token punctuation">.</span><span class="token function">SendEmail</span><span class="token punctuation">(</span>email<span class="token punctuation">.</span>Text<span class="token punctuation">,</span> <span class="token string">&quot;Hello there!&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;This was sent from the Xamrain Messaging Plugin from shared code!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">else</span>
+                        <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Error&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;This device can't send emails&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">catch</span>
+                <span class="token punctuation">{</span>
+<span class="token comment">//await DisplayAlert(&quot;Error&quot;, &quot;Unable to perform action&quot;, &quot;OK&quot;);</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="permissions-plugin"><a href="#permissions-plugin" class="header-anchor">#</a> Permissions Plugin</h2> <p>Check to see if your users have granted or denied permissions for common permission groups on iOS and Android.</p> <p>Additionally, you can request permissions with a simple cross-platform async/awaitified API.</p> <p>Available Nuget : <a href="https://www.nuget.org/packages/Plugin.Permissions" target="_blank" rel="noopener noreferrer">https://www.nuget.org/packages/Plugin.Permissions<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> <a href="https://www.nuget.org/packages/Plugin.Permissions" target="_blank" rel="noopener noreferrer">enter link description here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> <strong>XAML</strong></p> <p><strong>XAML</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+&lt;StackLayout Padding=&quot;30&quot; Spacing=&quot;10&quot;&gt;
+      &lt;Button Text=&quot;Get Location&quot; Clicked=&quot;Button_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Label x:Name=&quot;LabelGeolocation&quot;&gt;&lt;/Label&gt;
+      &lt;Button Text=&quot;Calendar&quot; StyleId=&quot;Calendar&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Button Text=&quot;Camera&quot; StyleId=&quot;Camera&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Button Text=&quot;Contacts&quot; StyleId=&quot;Contacts&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Button Text=&quot;Microphone&quot; StyleId=&quot;Microphone&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Button Text=&quot;Phone&quot; StyleId=&quot;Phone&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Button Text=&quot;Photos&quot; StyleId=&quot;Photos&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Button Text=&quot;Reminders&quot; StyleId=&quot;Reminders&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Button Text=&quot;Sensors&quot; StyleId=&quot;Sensors&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Button Text=&quot;Sms&quot; StyleId=&quot;Sms&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Button Text=&quot;Storage&quot; StyleId=&quot;Storage&quot; Clicked=&quot;ButtonPermission_OnClicked&quot;&gt;&lt;/Button&gt;
+      &lt;Label Text=&quot;&quot;/&gt;
+      
+    &lt;/StackLayout&gt;
+
+</code></pre></div><p><strong>Code</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token class-name"><span class="token keyword">bool</span></span> busy<span class="token punctuation">;</span>
+        <span class="token keyword">async</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">ButtonPermission_OnClicked</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>busy<span class="token punctuation">)</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+            busy <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>Button<span class="token punctuation">)</span>sender<span class="token punctuation">)</span><span class="token punctuation">.</span>IsEnabled <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+            <span class="token class-name"><span class="token keyword">var</span></span> status <span class="token operator">=</span> PermissionStatus<span class="token punctuation">.</span>Unknown<span class="token punctuation">;</span>
+            <span class="token keyword">switch</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>Button<span class="token punctuation">)</span>sender<span class="token punctuation">)</span><span class="token punctuation">.</span>StyleId<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Calendar&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Calendar<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Camera&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Camera<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Contacts&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Contacts<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Microphone&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Microphone<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Phone&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Phone<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Photos&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Photos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Reminders&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Reminders<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Sensors&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Sensors<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Sms&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Sms<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">&quot;Storage&quot;</span><span class="token punctuation">:</span>
+                    status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Storage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Results&quot;</span><span class="token punctuation">,</span> status<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">!=</span> PermissionStatus<span class="token punctuation">.</span>Granted<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+                <span class="token keyword">switch</span> <span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>Button<span class="token punctuation">)</span>sender<span class="token punctuation">)</span><span class="token punctuation">.</span>StyleId<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Calendar&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Calendar<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Calendar<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Camera&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Camera<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Camera<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Contacts&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Contacts<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Contacts<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Microphone&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Microphone<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Microphone<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Phone&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Phone<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Phone<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Photos&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Photos<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Photos<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Reminders&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Reminders<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Reminders<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Sensors&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Sensors<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Sensors<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Sms&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Sms<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Sms<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                    <span class="token keyword">case</span> <span class="token string">&quot;Storage&quot;</span><span class="token punctuation">:</span>
+                        status <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Storage<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Storage<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                        <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Results&quot;</span><span class="token punctuation">,</span> status<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token punctuation">}</span>
+
+            busy <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>Button<span class="token punctuation">)</span>sender<span class="token punctuation">)</span><span class="token punctuation">.</span>IsEnabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token keyword">async</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Button_OnClicked</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">object</span></span> sender<span class="token punctuation">,</span> <span class="token class-name">EventArgs</span> e<span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>busy<span class="token punctuation">)</span>
+                <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+            busy <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>Button<span class="token punctuation">)</span>sender<span class="token punctuation">)</span><span class="token punctuation">.</span>IsEnabled <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">try</span>
+            <span class="token punctuation">{</span>
+                <span class="token class-name"><span class="token keyword">var</span></span> status <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">CheckPermissionStatusAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Location<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">!=</span> PermissionStatus<span class="token punctuation">.</span>Granted<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">ShouldShowRequestPermissionRationaleAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Location<span class="token punctuation">)</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">{</span>
+                        <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Need location&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Gunna need that location&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">}</span>
+
+                    <span class="token class-name"><span class="token keyword">var</span></span> results <span class="token operator">=</span> <span class="token keyword">await</span> CrossPermissions<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">RequestPermissionsAsync</span><span class="token punctuation">(</span>Permission<span class="token punctuation">.</span>Location<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    status <span class="token operator">=</span> results<span class="token punctuation">[</span>Permission<span class="token punctuation">.</span>Location<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">==</span> PermissionStatus<span class="token punctuation">.</span>Granted<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token class-name"><span class="token keyword">var</span></span> results <span class="token operator">=</span> <span class="token keyword">await</span> CrossGeolocator<span class="token punctuation">.</span>Current<span class="token punctuation">.</span><span class="token function">GetPositionAsync</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    LabelGeolocation<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;Lat: &quot;</span> <span class="token operator">+</span> results<span class="token punctuation">.</span>Latitude <span class="token operator">+</span> <span class="token string">&quot; Long: &quot;</span> <span class="token operator">+</span> results<span class="token punctuation">.</span>Longitude<span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>status <span class="token operator">!=</span> PermissionStatus<span class="token punctuation">.</span>Unknown<span class="token punctuation">)</span>
+                <span class="token punctuation">{</span>
+                    <span class="token keyword">await</span> <span class="token function">DisplayAlert</span><span class="token punctuation">(</span><span class="token string">&quot;Location Denied&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Can not continue, try again.&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;OK&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> ex<span class="token punctuation">)</span>
+            <span class="token punctuation">{</span>
+
+                LabelGeolocation<span class="token punctuation">.</span>Text <span class="token operator">=</span> <span class="token string">&quot;Error: &quot;</span> <span class="token operator">+</span> ex<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+
+            <span class="token punctuation">(</span><span class="token punctuation">(</span>Button<span class="token punctuation">)</span>sender<span class="token punctuation">)</span><span class="token punctuation">.</span>IsEnabled <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            busy <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/xamarin/xamarin-plugin.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/xamarin/contact-picker-xamarin-forms-android-and-ios.html" class="prev">
+        Contact Picker - Xamarin Forms (Android and iOS)
+      </a></span> <span class="next"><a href="/xamarin/oauth2.html">
+        OAuth2
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3572.f249812d.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MySQL - Transaction</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Start Transaction, COMMIT , ROLLBACK and AUTOCOMMIT, Transaction using JDBC Driver">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="MySQL - Transaction">
+    <meta property="og:description" content="Start Transaction, COMMIT , ROLLBACK and AUTOCOMMIT, Transaction using JDBC Driver">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/mysql/transaction.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="MySQL - Transaction">
+    <meta name="twitter:description" content="Start Transaction, COMMIT , ROLLBACK and AUTOCOMMIT, Transaction using JDBC Driver">
+    <meta name="twitter:url" content="/mysql/transaction.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2153.58f0ddcb.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>MySQL</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/mysql/" class="sidebar-link">Disclaimer</a></li><li><a href="/mysql/getting-started-with-mysql.html" class="sidebar-link">Getting started with MySQL</a></li><li><a href="/mysql/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/mysql/select.html" class="sidebar-link">SELECT</a></li><li><a href="/mysql/backticks.html" class="sidebar-link">Backticks</a></li><li><a href="/mysql/null.html" class="sidebar-link">NULL</a></li><li><a href="/mysql/limit-and-offset.html" class="sidebar-link">Limit and Offset</a></li><li><a href="/mysql/creating-databases.html" class="sidebar-link">Creating databases</a></li><li><a href="/mysql/using-variables.html" class="sidebar-link">Using Variables</a></li><li><a href="/mysql/comment-mysql.html" class="sidebar-link">Comment Mysql</a></li><li><a href="/mysql/insert.html" class="sidebar-link">INSERT</a></li><li><a href="/mysql/delete.html" class="sidebar-link">DELETE</a></li><li><a href="/mysql/update.html" class="sidebar-link">UPDATE</a></li><li><a href="/mysql/order-by.html" class="sidebar-link">ORDER BY</a></li><li><a href="/mysql/group-by.html" class="sidebar-link">Group By</a></li><li><a href="/mysql/error-1055-only-full-group-by-something-is-not-in-group-by-clause.html" class="sidebar-link">Error 1055: ONLYFULLGROUP_BY: something  is not in GROUP BY clause ...</a></li><li><a href="/mysql/joins.html" class="sidebar-link">Joins</a></li><li><a href="/mysql/joins-join-3-table-with-the-same-name-of-id.html" class="sidebar-link">JOINS: Join 3 table with the same name of id.</a></li><li><a href="/mysql/union.html" class="sidebar-link">UNION</a></li><li><a href="/mysql/arithmetic.html" class="sidebar-link">Arithmetic</a></li><li><a href="/mysql/string-operations.html" class="sidebar-link">String operations</a></li><li><a href="/mysql/date-and-time-operations.html" class="sidebar-link">Date and Time Operations</a></li><li><a href="/mysql/handling-time-zones.html" class="sidebar-link">Handling Time Zones</a></li><li><a href="/mysql/regular-expressions.html" class="sidebar-link">Regular Expressions</a></li><li><a href="/mysql/view.html" class="sidebar-link">VIEW</a></li><li><a href="/mysql/table-creation.html" class="sidebar-link">Table Creation</a></li><li><a href="/mysql/alter-table.html" class="sidebar-link">ALTER TABLE</a></li><li><a href="/mysql/drop-table.html" class="sidebar-link">Drop Table</a></li><li><a href="/mysql/mysql-lock-table.html" class="sidebar-link">MySQL LOCK TABLE</a></li><li><a href="/mysql/error-codes.html" class="sidebar-link">Error codes</a></li><li><a href="/mysql/stored-routines-procedures-and-functions.html" class="sidebar-link">Stored routines (procedures and functions)</a></li><li><a href="/mysql/indexes-and-keys.html" class="sidebar-link">Indexes and Keys</a></li><li><a href="/mysql/full-text-search.html" class="sidebar-link">Full-Text search</a></li><li><a href="/mysql/prepare-statements.html" class="sidebar-link">PREPARE Statements</a></li><li><a href="/mysql/json.html" class="sidebar-link">JSON</a></li><li><a href="/mysql/extract-values-from-json-type.html" class="sidebar-link">Extract values from JSON type</a></li><li><a href="/mysql/mysql-admin.html" class="sidebar-link">MySQL Admin</a></li><li><a href="/mysql/triggers.html" class="sidebar-link">TRIGGERS</a></li><li><a href="/mysql/configuration-and-tuning.html" class="sidebar-link">Configuration and tuning</a></li><li><a href="/mysql/events.html" class="sidebar-link">Events</a></li><li><a href="/mysql/enum.html" class="sidebar-link">ENUM</a></li><li><a href="/mysql/install-mysql-container-with-docker-compose.html" class="sidebar-link">Install Mysql container with Docker-Compose</a></li><li><a href="/mysql/character-sets-and-collations.html" class="sidebar-link">Character Sets and Collations</a></li><li><a href="/mysql/myisam-engine.html" class="sidebar-link">MyISAM Engine</a></li><li><a href="/mysql/converting-from-myisam-to-innodb.html" class="sidebar-link">Converting from MyISAM to InnoDB</a></li><li><a href="/mysql/transaction.html" class="active sidebar-link">Transaction</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/mysql/transaction.html#start-transaction" class="sidebar-link">Start Transaction</a></li><li class="sidebar-sub-header"><a href="/mysql/transaction.html#commit-rollback-and-autocommit" class="sidebar-link">COMMIT , ROLLBACK and AUTOCOMMIT</a></li><li class="sidebar-sub-header"><a href="/mysql/transaction.html#transaction-using-jdbc-driver" class="sidebar-link">Transaction using JDBC Driver</a></li></ul></li><li><a href="/mysql/log-files.html" class="sidebar-link">Log files</a></li><li><a href="/mysql/clustering.html" class="sidebar-link">Clustering</a></li><li><a href="/mysql/partitioning.html" class="sidebar-link">Partitioning</a></li><li><a href="/mysql/replication.html" class="sidebar-link">Replication</a></li><li><a href="/mysql/backup-using-mysqldump.html" class="sidebar-link">Backup using mysqldump</a></li><li><a href="/mysql/mysqlimport.html" class="sidebar-link">mysqlimport</a></li><li><a href="/mysql/load-data-infile.html" class="sidebar-link">LOAD DATA INFILE</a></li><li><a href="/mysql/mysql-unions.html" class="sidebar-link">MySQL Unions</a></li><li><a href="/mysql/mysql-client.html" class="sidebar-link">MySQL client</a></li><li><a href="/mysql/temporary-tables.html" class="sidebar-link">Temporary Tables</a></li><li><a href="/mysql/customize-ps1.html" class="sidebar-link">Customize PS1</a></li><li><a href="/mysql/dealing-with-sparse-or-missing-data.html" class="sidebar-link">Dealing with sparse or missing data</a></li><li><a href="/mysql/connecting-with-utf-8-using-various-programming-language.html" class="sidebar-link">Connecting with UTF-8 Using Various Programming language.</a></li><li><a href="/mysql/time-with-subsecond-precision.html" class="sidebar-link">Time with subsecond precision</a></li><li><a href="/mysql/one-to-many.html" class="sidebar-link">One to Many</a></li><li><a href="/mysql/many-to-many-mapping-table.html" class="sidebar-link">Many-to-many Mapping table</a></li><li><a href="/mysql/pivot-queries.html" class="sidebar-link">Pivot queries</a></li><li><a href="/mysql/dynamic-un-pivot-table-using-prepared-statement.html" class="sidebar-link">Dynamic Un-Pivot Table using Prepared Statement</a></li><li><a href="/mysql/server-information.html" class="sidebar-link">Server Information</a></li><li><a href="/mysql/ssl-connection-setup.html" class="sidebar-link">SSL Connection Setup</a></li><li><a href="/mysql/create-new-user.html" class="sidebar-link">Create New User</a></li><li><a href="/mysql/security-via-grants.html" class="sidebar-link">Security via GRANTs</a></li><li><a href="/mysql/change-password.html" class="sidebar-link">Change Password</a></li><li><a href="/mysql/recover-and-reset-the-default-root-password-for-mysql-5-7.html" class="sidebar-link">Recover and reset the default root password for MySQL 5.7+</a></li><li><a href="/mysql/recover-from-lost-root-password.html" class="sidebar-link">Recover from lost root password</a></li><li><a href="/mysql/mysql-performance-tips.html" class="sidebar-link">Mysql Performance Tips</a></li><li><a href="/mysql/performance-tuning.html" class="sidebar-link">Performance Tuning</a></li><li><a href="/mysql/reserved-words.html" class="sidebar-link">Reserved Words</a></li><li><a href="/mysql/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="transaction"><a href="#transaction" class="header-anchor">#</a> Transaction</h1> <h2 id="start-transaction"><a href="#start-transaction" class="header-anchor">#</a> Start Transaction</h2> <p>A transaction is a sequential group of SQL statements such as select,insert,update or delete, which is performed as one single work unit.</p> <p>In other words, a transaction will never be complete unless each individual operation within the group is successful. If any operation within the transaction fails, the entire transaction will fail.</p> <p>Bank transaction will be best example for explaining this. Consider a transfer between two accounts. To achieve this you have to write SQL statements that do the following</p> <ol><li>Check the availability of requested amount in the first account</li> <li>Deduct requested amount from first account</li> <li>Deposit it in second account</li></ol> <p>If anyone these process fails, the whole should be reverted to their previous state.</p> <p><strong><strong>ACID : Properties of Transactions</strong></strong></p> <p>Transactions have the following four standard properties</p> <li>**Atomicity:** ensures that all operations within the work unit are
+completed successfully; otherwise, the transaction is aborted at the
+point of failure, and previous operations are rolled back to their
+former state.</li> <li>**Consistency:** ensures that the database properly changes states upon a
+successfully committed transaction.</li> <li>**Isolation:** enables transactions to operate independently of and
+transparent to each other.</li> <li>**Durability:** ensures that the result or effect of a committed
+transaction persists in case of a system failure.</li> <p>Transactions begin with the statement <code>START TRANSACTION</code> or <code>BEGIN WORK</code> and end with either a <code>COMMIT</code> or a <code>ROLLBACK</code> statement. The SQL commands between the beginning and ending statements form the bulk of the transaction.</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">START</span> <span class="token keyword">TRANSACTION</span><span class="token punctuation">;</span>
+<span class="token keyword">SET</span> <span class="token variable">@transAmt</span> <span class="token operator">=</span> <span class="token string">'500'</span><span class="token punctuation">;</span>
+<span class="token keyword">SELECT</span> <span class="token variable">@availableAmt</span>:<span class="token operator">=</span>ledgerAmt <span class="token keyword">FROM</span> accTable <span class="token keyword">WHERE</span> customerId<span class="token operator">=</span><span class="token number">1</span> <span class="token keyword">FOR</span> <span class="token keyword">UPDATE</span><span class="token punctuation">;</span>
+<span class="token keyword">UPDATE</span> accTable <span class="token keyword">SET</span> ledgerAmt<span class="token operator">=</span>ledgerAmt<span class="token operator">-</span><span class="token variable">@transAmt</span> <span class="token keyword">WHERE</span> customerId<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">UPDATE</span> accTable <span class="token keyword">SET</span> ledgerAmt<span class="token operator">=</span>ledgerAmt<span class="token operator">+</span><span class="token variable">@transAmt</span> <span class="token keyword">WHERE</span> customerId<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>
+<span class="token keyword">COMMIT</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>With <code>START TRANSACTION</code>, autocommit remains disabled until you end the transaction with <code>COMMIT</code> or <code>ROLLBACK</code>. The autocommit mode then reverts to its previous state.</p> <p>The <code>FOR UPDATE</code> indicates (and locks) the row(s) for the duration of the transaction.</p> <p>While the transaction remains uncommitted, this transaction will not be available for others users.</p> <p><strong>General Procedures involved in Transaction</strong></p> <ul><li>Begin transaction by issuing SQL command <code>BEGIN WORK</code> or <code>START TRANSACTION</code>.</li> <li>Run all your SQL statements.</li> <li>Check whether everything is executed according to your requirement.
+</li><li>If yes, then issue <code>COMMIT</code> command, otherwise issue a <code>ROLLBACK</code>
+command to revert everything to the previous state.</li> <li>Check for errors even after <code>COMMIT</code> if you are using, or might eventually use, Galera/PXC.</li></ul> <h2 id="commit-rollback-and-autocommit"><a href="#commit-rollback-and-autocommit" class="header-anchor">#</a> COMMIT , ROLLBACK and AUTOCOMMIT</h2> <p><strong>AUTOCOMMIT</strong></p> <p>MySQL automatically commits statements that are not part of a transaction. The results of any <code>UPDATE</code>,<code>DELETE</code> or <code>INSERT</code> statement not preceded with a <code>BEGIN</code> or <code>START TRANSACTION</code> will immediately be visible to all connections.</p> <p>The <code>AUTOCOMMIT</code> variable is set <strong>true</strong> by default. This can be changed in the following way,</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">---&gt;To make autcommit false</span>
+<span class="token keyword">SET</span> AUTOCOMMIT<span class="token operator">=</span><span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token comment">--or</span>
+<span class="token keyword">SET</span> AUTOCOMMIT<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token comment">---&gt;To make autcommit true</span>
+<span class="token keyword">SET</span> AUTOCOMMIT<span class="token operator">=</span><span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token comment">--or</span>
+<span class="token keyword">SET</span> AUTOCOMMIT<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>To view <code>AUTOCOMMIT</code> status</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token keyword">SELECT</span> @<span class="token variable">@autocommit</span><span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>COMMIT</strong></p> <p>If <code>AUTOCOMMIT</code> set to false and the transaction not committed, the changes will be visible only for the current connection.</p> <p>After <code>COMMIT</code> statement commits the changes to the table, the result will be visible for all connections.</p> <p>We consider two connections to explain this</p> <p><strong>Connection 1</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">---&gt;Before making autocommit false one row added in a new table</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> testTable <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">---&gt;Making autocommit = false</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SET</span> autocommit<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+
+mysql<span class="token operator">&gt;</span> <span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> testTable <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> testTable<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span> tId <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span>   <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">2</span> <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">3</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+
+</code></pre></div><p><strong>Connection 2</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> testTable<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span> tId <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span>   <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token comment">---&gt; Row inserted before autocommit=false only visible here</span>
+
+</code></pre></div><p><strong>Connection 1</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">COMMIT</span><span class="token punctuation">;</span>
+<span class="token comment">---&gt;Now COMMIT is executed in connection 1</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> testTable<span class="token punctuation">;</span>
+    <span class="token operator">+</span><span class="token comment">-----+</span>
+    <span class="token operator">|</span> tId <span class="token operator">|</span>
+    <span class="token operator">+</span><span class="token comment">-----+</span>
+    <span class="token operator">|</span>   <span class="token number">1</span> <span class="token operator">|</span>
+    <span class="token operator">|</span>   <span class="token number">2</span> <span class="token operator">|</span>
+    <span class="token operator">|</span>   <span class="token number">3</span> <span class="token operator">|</span>
+    <span class="token operator">+</span><span class="token comment">-----+</span>
+
+</code></pre></div><p><strong>Connection 2</strong></p> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> testTable<span class="token punctuation">;</span>
+    <span class="token operator">+</span><span class="token comment">-----+</span>
+    <span class="token operator">|</span> tId <span class="token operator">|</span>
+    <span class="token operator">+</span><span class="token comment">-----+</span>
+    <span class="token operator">|</span>   <span class="token number">1</span> <span class="token operator">|</span>
+    <span class="token operator">|</span>   <span class="token number">2</span> <span class="token operator">|</span>
+    <span class="token operator">|</span>   <span class="token number">3</span> <span class="token operator">|</span>
+    <span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token comment">---&gt;Now all the three rows are visible here</span>
+
+</code></pre></div><p><strong>ROLLBACK</strong></p> <p>If anything went wrong in your query execution, <code>ROLLBACK</code> in used to revert the changes. See the explanation below</p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">---&gt;Before making autocommit false one row added in a new table</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> testTable <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">---&gt;Making autocommit = false</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SET</span> autocommit<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+
+mysql<span class="token operator">&gt;</span> <span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> testTable <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> testTable<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span> tId <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span>   <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">2</span> <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">3</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+
+</code></pre></div><p>Now we are executing <code>ROLLBACK</code></p> <div class="language-sql extra-class"><pre class="language-sql"><code><span class="token comment">---&gt;Rollback executed now</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword">ROLLBACk</span><span class="token punctuation">;</span>
+
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> testTable<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span> tId <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span>   <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token comment">---&gt;Rollback removed all rows which all are not committed</span>
+
+</code></pre></div><p>Once <code>COMMIT</code> is executed, then <code>ROLLBACK</code> will not cause anything</p> <div class="language-sql extra-class"><pre class="language-sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> testTable <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> testTable<span class="token punctuation">;</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword">COMMIT</span><span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span> tId <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span>   <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">2</span> <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">3</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+
+<span class="token comment">---&gt;Rollback executed now</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword">ROLLBACk</span><span class="token punctuation">;</span>
+
+mysql<span class="token operator">&gt;</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> testTable<span class="token punctuation">;</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span> tId <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token operator">|</span>   <span class="token number">1</span> <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">2</span> <span class="token operator">|</span>
+<span class="token operator">|</span>   <span class="token number">3</span> <span class="token operator">|</span>
+<span class="token operator">+</span><span class="token comment">-----+</span>
+<span class="token comment">---&gt;Rollback not removed any rows</span>
+
+</code></pre></div><p>If <code>AUTOCOMMIT</code> is set <strong>true</strong>, then <code>COMMIT</code> and <code>ROLLBACK</code> is useless</p> <h2 id="transaction-using-jdbc-driver"><a href="#transaction-using-jdbc-driver" class="header-anchor">#</a> Transaction using JDBC Driver</h2> <p>Transaction using JDBC driver is used to control how and when a transaction should commit and rollback. Connection to MySQL server is created using JDBC driver</p> <p><a href="https://dev.mysql.com/downloads/connector/j/5.0.html" target="_blank" rel="noopener noreferrer">JDBC driver for MySQL<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> can be downloaded here</p> <p>Lets start with getting a connection to database using JDBC driver</p> <div class="language-sql extra-class"><pre class="language-sql"><code>Class<span class="token punctuation">.</span>forName<span class="token punctuation">(</span><span class="token string">&quot;com.mysql.jdbc.Driver&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+Connection con <span class="token operator">=</span> DriverManager<span class="token punctuation">.</span>getConnection<span class="token punctuation">(</span>DB_CONNECTION_URL<span class="token punctuation">,</span>DB_USER<span class="token punctuation">,</span>USER_PASSWORD<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">---&gt;Example for connection url &quot;jdbc:mysql://localhost:3306/testDB&quot;);</span>
+
+</code></pre></div><p><strong>Character Sets</strong> : This indicates what character set the client will use to send SQL statements to the server. It also specifies the character set that the server should use for sending results back to the client.</p> <p>This should be mentioned while creating connection to server. So the connection string should be like,</p> <div class="language-sql extra-class"><pre class="language-sql"><code>jdbc:mysql:<span class="token comment">//localhost:3306/testDB?useUnicode=true&amp;amp;characterEncoding=utf8</span>
+
+</code></pre></div><p>See this for more details about <a href="http://stackoverflow.com/documentation/mysql/4569/character-sets-and-collations#t=201609081237366802241" target="_blank" rel="noopener noreferrer">Character Sets and Collations<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>When you open connection, the <code>AUTOCOMMIT</code> mode is set to <strong>true</strong> by default, that should be changed <strong>false</strong> to start transaction.</p> <div class="language-sql extra-class"><pre class="language-sql"><code>con<span class="token punctuation">.</span>setAutoCommit<span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>You should always call <code>setAutoCommit()</code> method right after you open a connection.</p> <p>Otherwise use <code>START TRANSACTION</code> or <code>BEGIN WORK</code> to start a new transaction.
+By using <code>START TRANSACTION</code> or <code>BEGIN WORK</code>, no need to change <code>AUTOCOMMIT</code> <strong>false</strong>. That will be automatically disabled.</p> <p>Now you can start transaction. See a complete JDBC transaction example below.</p> <div class="language-sql extra-class"><pre class="language-sql"><code>package jdbcTest<span class="token punctuation">;</span>
+ 
+<span class="token keyword">import</span> java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>Connection<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>PreparedStatement<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span><span class="token keyword">sql</span><span class="token punctuation">.</span>SQLException<span class="token punctuation">;</span>
+
+
+<span class="token keyword">public</span> class accTrans {
+
+    <span class="token keyword">public</span> static void doTransfer<span class="token punctuation">(</span><span class="token keyword">double</span> transAmount<span class="token punctuation">,</span><span class="token keyword">int</span> customerIdFrom<span class="token punctuation">,</span><span class="token keyword">int</span> customerIdTo<span class="token punctuation">)</span> {
+
+        Connection con <span class="token operator">=</span> <span class="token boolean">null</span><span class="token punctuation">;</span>
+        PreparedStatement pstmt <span class="token operator">=</span> <span class="token boolean">null</span><span class="token punctuation">;</span>
+        ResultSet rs <span class="token operator">=</span> <span class="token boolean">null</span><span class="token punctuation">;</span>
+ 
+        try {
+            String DB_CONNECTION_URL <span class="token operator">=</span> <span class="token string">&quot;jdbc:mysql://localhost:3306/testDB?useUnicode=true&amp;amp;characterEncoding=utf8&quot;</span><span class="token punctuation">;</span>
+
+            Class<span class="token punctuation">.</span>forName<span class="token punctuation">(</span><span class="token string">&quot;com.mysql.jdbc.Driver&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+            con <span class="token operator">=</span> DriverManager<span class="token punctuation">.</span>getConnection<span class="token punctuation">(</span>DB_CONNECTION_URL<span class="token punctuation">,</span>DB_USER<span class="token punctuation">,</span>USER_PASSWORD<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token comment">---&gt;set auto commit to false</span>
+            con<span class="token punctuation">.</span>setAutoCommit<span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">---&gt; or use con.START TRANSACTION / con.BEGIN WORK</span>
+
+            <span class="token comment">---&gt;Start SQL Statements for transaction</span>
+            <span class="token comment">---&gt;Checking availability of amount</span>
+            <span class="token keyword">double</span> availableAmt    <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            pstmt <span class="token operator">=</span> con<span class="token punctuation">.</span>prepareStatement<span class="token punctuation">(</span><span class="token string">&quot;SELECT ledgerAmt FROM accTable WHERE customerId=? FOR UPDATE&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            pstmt<span class="token punctuation">.</span>setInt<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> customerIdFrom<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            rs <span class="token operator">=</span> pstmt<span class="token punctuation">.</span>executeQuery<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>rs<span class="token punctuation">.</span><span class="token keyword">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                availableAmt    <span class="token operator">=</span> rs<span class="token punctuation">.</span>getDouble<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+            <span class="token keyword">if</span><span class="token punctuation">(</span>availableAmt <span class="token operator">&gt;=</span> transAmount<span class="token punctuation">)</span>
+            {
+                <span class="token comment">---&gt; Do Transfer</span>
+                <span class="token comment">---&gt; taking amount from cutomerIdFrom</span>
+                pstmt <span class="token operator">=</span> con<span class="token punctuation">.</span>prepareStatement<span class="token punctuation">(</span><span class="token string">&quot;UPDATE accTable SET ledgerAmt=ledgerAmt-? WHERE customerId=?&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                        
+                pstmt<span class="token punctuation">.</span>setDouble<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> transAmount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                pstmt<span class="token punctuation">.</span>setInt<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> customerIdFrom<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                pstmt<span class="token punctuation">.</span>executeUpdate<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                <span class="token comment">---&gt; depositing amount in cutomerIdTo</span>
+                pstmt <span class="token operator">=</span> con<span class="token punctuation">.</span>prepareStatement<span class="token punctuation">(</span><span class="token string">&quot;UPDATE accTable SET ledgerAmt=ledgerAmt+? WHERE customerId=?&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                        
+                pstmt<span class="token punctuation">.</span>setDouble<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> transAmount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                pstmt<span class="token punctuation">.</span>setInt<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> customerIdTo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                pstmt<span class="token punctuation">.</span>executeUpdate<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                con<span class="token punctuation">.</span><span class="token keyword">commit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            }
+            <span class="token comment">---&gt;If you performed any insert,update or delete operations before </span>
+            <span class="token comment">----&gt; this availability check, then include this else part</span>
+            <span class="token comment">/*else { ---&gt;Rollback the transaction if availability is less than required
+                con.rollback();
+            }*/</span>
+
+        } catch <span class="token punctuation">(</span>SQLException ex<span class="token punctuation">)</span> {
+            <span class="token comment">---&gt; Rollback the transaction in case of any error</span>
+            con<span class="token punctuation">.</span><span class="token keyword">rollback</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        } finally {
+            try {
+                <span class="token keyword">if</span><span class="token punctuation">(</span>rs <span class="token operator">!=</span> <span class="token boolean">null</span><span class="token punctuation">)</span>  rs<span class="token punctuation">.</span><span class="token keyword">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>pstmt <span class="token operator">!=</span> <span class="token boolean">null</span><span class="token punctuation">)</span> pstmt<span class="token punctuation">.</span><span class="token keyword">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>con <span class="token operator">!=</span> <span class="token boolean">null</span><span class="token punctuation">)</span> con<span class="token punctuation">.</span><span class="token keyword">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            }
+        }
+    }
+ 
+    <span class="token keyword">public</span> static void main<span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> {
+        doTransfer<span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">,</span> <span class="token number">1020</span><span class="token punctuation">,</span> <span class="token number">1021</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">--&gt;doTransfer(transAmount, customerIdFrom, customerIdTo);</span>
+    }
+}
+
+</code></pre></div><p>JDBC transaction make sure of all SQL statements within a transaction block are executed successful, if either one of the SQL statement within transaction block is failed, abort and rollback everything within the transaction block.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/mysql/transaction.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/mysql/converting-from-myisam-to-innodb.html" class="prev">
+        Converting from MyISAM to InnoDB
+      </a></span> <span class="next"><a href="/mysql/log-files.html">
+        Log files
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2153.58f0ddcb.js" defer></script>
+  </body>
+</html>

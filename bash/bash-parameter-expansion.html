@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Bash - Bash Parameter Expansion</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Modifying the case of alphabetic characters, Length of parameter, Replace pattern in string, Substrings and subarrays, Delete a pattern from the beginning of a string, Parameter indirection, Default value substitution, Delete a pattern from the end of a string, Parameter expansion and filenames, Error if variable is empty or unset, Munging during expansion">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Bash - Bash Parameter Expansion">
+    <meta property="og:description" content="Modifying the case of alphabetic characters, Length of parameter, Replace pattern in string, Substrings and subarrays, Delete a pattern from the beginning of a string, Parameter indirection, Default value substitution, Delete a pattern from the end of a string, Parameter expansion and filenames, Error if variable is empty or unset, Munging during expansion">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/bash/bash-parameter-expansion.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Bash - Bash Parameter Expansion">
+    <meta name="twitter:description" content="Modifying the case of alphabetic characters, Length of parameter, Replace pattern in string, Substrings and subarrays, Delete a pattern from the beginning of a string, Parameter indirection, Default value substitution, Delete a pattern from the end of a string, Parameter expansion and filenames, Error if variable is empty or unset, Munging during expansion">
+    <meta name="twitter:url" content="/bash/bash-parameter-expansion.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/477.582714f4.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Bash</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/bash/" class="sidebar-link">Disclaimer</a></li><li><a href="/bash/getting-started-with-bash.html" class="sidebar-link">Getting started with Bash</a></li><li><a href="/bash/script-shebang.html" class="sidebar-link">Script shebang</a></li><li><a href="/bash/navigating-directories.html" class="sidebar-link">Navigating directories</a></li><li><a href="/bash/listing-files.html" class="sidebar-link">Listing Files</a></li><li><a href="/bash/using-cat.html" class="sidebar-link">Using cat</a></li><li><a href="/bash/grep.html" class="sidebar-link">Grep</a></li><li><a href="/bash/aliasing.html" class="sidebar-link">Aliasing</a></li><li><a href="/bash/jobs-and-processes.html" class="sidebar-link">Jobs and Processes</a></li><li><a href="/bash/redirection.html" class="sidebar-link">Redirection</a></li><li><a href="/bash/control-structures.html" class="sidebar-link">Control Structures</a></li><li><a href="/bash/true-false-and-commands.html" class="sidebar-link">true, false and : commands</a></li><li><a href="/bash/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/bash/associative-arrays.html" class="sidebar-link">Associative arrays</a></li><li><a href="/bash/functions.html" class="sidebar-link">Functions</a></li><li><a href="/bash/bash-parameter-expansion.html" class="active sidebar-link">Bash Parameter Expansion</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#modifying-the-case-of-alphabetic-characters" class="sidebar-link">Modifying the case of alphabetic characters</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#length-of-parameter" class="sidebar-link">Length of parameter</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#replace-pattern-in-string" class="sidebar-link">Replace pattern in string</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#substrings-and-subarrays" class="sidebar-link">Substrings and subarrays</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#delete-a-pattern-from-the-beginning-of-a-string" class="sidebar-link">Delete a pattern from the beginning of a string</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#parameter-indirection" class="sidebar-link">Parameter indirection</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#default-value-substitution" class="sidebar-link">Default value substitution</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#delete-a-pattern-from-the-end-of-a-string" class="sidebar-link">Delete a pattern from the end of a string</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#parameter-expansion-and-filenames" class="sidebar-link">Parameter expansion and filenames</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#error-if-variable-is-empty-or-unset" class="sidebar-link">Error if variable is empty or unset</a></li><li class="sidebar-sub-header"><a href="/bash/bash-parameter-expansion.html#munging-during-expansion" class="sidebar-link">Munging during expansion</a></li></ul></li><li><a href="/bash/copying-cp.html" class="sidebar-link">Copying (cp)</a></li><li><a href="/bash/find.html" class="sidebar-link">Find</a></li><li><a href="/bash/using-sort.html" class="sidebar-link">Using sort</a></li><li><a href="/bash/sourcing.html" class="sidebar-link">Sourcing</a></li><li><a href="/bash/here-documents-and-here-strings.html" class="sidebar-link">Here documents and here strings</a></li><li><a href="/bash/quoting.html" class="sidebar-link">Quoting</a></li><li><a href="/bash/conditional-expressions.html" class="sidebar-link">Conditional Expressions</a></li><li><a href="/bash/scripting-with-parameters.html" class="sidebar-link">Scripting with Parameters</a></li><li><a href="/bash/bash-history-substitutions.html" class="sidebar-link">Bash history substitutions</a></li><li><a href="/bash/math.html" class="sidebar-link">Math</a></li><li><a href="/bash/bash-arithmetic.html" class="sidebar-link">Bash Arithmetic</a></li><li><a href="/bash/scoping.html" class="sidebar-link">Scoping</a></li><li><a href="/bash/process-substitution.html" class="sidebar-link">Process substitution</a></li><li><a href="/bash/programmable-completion.html" class="sidebar-link">Programmable completion</a></li><li><a href="/bash/customizing-ps1.html" class="sidebar-link">Customizing PS1</a></li><li><a href="/bash/brace-expansion.html" class="sidebar-link">Brace Expansion</a></li><li><a href="/bash/getopts-smart-positional-parameter-parsing.html" class="sidebar-link">getopts : smart positional-parameter parsing</a></li><li><a href="/bash/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/bash/pattern-matching-and-regular-expressions.html" class="sidebar-link">Pattern matching and regular expressions</a></li><li><a href="/bash/change-shell.html" class="sidebar-link">Change shell</a></li><li><a href="/bash/internal-variables.html" class="sidebar-link">Internal variables</a></li><li><a href="/bash/job-control.html" class="sidebar-link">Job Control</a></li><li><a href="/bash/case-statement.html" class="sidebar-link">Case statement</a></li><li><a href="/bash/read-a-file-data-stream-variable-line-by-line-and-or-field-by-field.html" class="sidebar-link">Read a file (data stream, variable) line-by-line (and/or field-by-field)?</a></li><li><a href="/bash/file-execution-sequence.html" class="sidebar-link">File execution sequence</a></li><li><a href="/bash/splitting-files.html" class="sidebar-link">Splitting Files</a></li><li><a href="/bash/file-transfer-using-scp.html" class="sidebar-link">File Transfer using scp</a></li><li><a href="/bash/pipelines.html" class="sidebar-link">Pipelines</a></li><li><a href="/bash/managing-path-environment-variable.html" class="sidebar-link">Managing PATH environment variable</a></li><li><a href="/bash/word-splitting.html" class="sidebar-link">Word splitting</a></li><li><a href="/bash/avoiding-date-using-printf.html" class="sidebar-link">Avoiding date using printf</a></li><li><a href="/bash/using-trap-to-react-to-signals-and-system-events.html" class="sidebar-link">Using &quot;trap&quot; to react to signals and system events</a></li><li><a href="/bash/chain-of-commands-and-operations.html" class="sidebar-link">Chain of commands and operations</a></li><li><a href="/bash/type-of-shells.html" class="sidebar-link">Type of Shells</a></li><li><a href="/bash/color-script-output-cross-platform.html" class="sidebar-link">Color script output (cross-platform)</a></li><li><a href="/bash/co-processes.html" class="sidebar-link">co-processes</a></li><li><a href="/bash/typing-variables.html" class="sidebar-link">Typing variables</a></li><li><a href="/bash/jobs-at-specific-times.html" class="sidebar-link">Jobs at specific times</a></li><li><a href="/bash/handling-the-system-prompt.html" class="sidebar-link">Handling the system prompt</a></li><li><a href="/bash/the-cut-command.html" class="sidebar-link">The cut command</a></li><li><a href="/bash/bash-on-windows-10.html" class="sidebar-link">Bash on Windows 10</a></li><li><a href="/bash/cut-command.html" class="sidebar-link">Cut Command</a></li><li><a href="/bash/global-and-local-variables.html" class="sidebar-link">global and local variables</a></li><li><a href="/bash/cgi-scripts.html" class="sidebar-link">CGI Scripts</a></li><li><a href="/bash/select-keyword.html" class="sidebar-link">Select keyword</a></li><li><a href="/bash/when-to-use-eval.html" class="sidebar-link">When to use eval</a></li><li><a href="/bash/networking-with-bash.html" class="sidebar-link">Networking With Bash</a></li><li><a href="/bash/parallel.html" class="sidebar-link">Parallel</a></li><li><a href="/bash/decoding-url.html" class="sidebar-link">Decoding URL</a></li><li><a href="/bash/design-patterns.html" class="sidebar-link">Design Patterns</a></li><li><a href="/bash/namespace.html" class="sidebar-link">Namespace</a></li><li><a href="/bash/creating-directories.html" class="sidebar-link">Creating directories</a></li><li><a href="/bash/strace.html" class="sidebar-link">strace</a></li><li><a href="/bash/sleep-utility.html" class="sidebar-link">Sleep utility</a></li><li><a href="/bash/pitfalls.html" class="sidebar-link">Pitfalls</a></li><li><a href="/bash/keyboard-shortcuts.html" class="sidebar-link">Keyboard shortcuts</a></li><li><a href="/bash/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="bash-parameter-expansion"><a href="#bash-parameter-expansion" class="header-anchor">#</a> Bash Parameter Expansion</h1> <p>The <code>$</code> character introduces parameter expansion, command substitution, or arithmetic expansion. The parameter name or symbol to be expanded may be enclosed in braces, which are optional but serve to protect the variable to be expanded from characters immediately following it which could be interpreted as part of the name.</p> <p>Read more in the <a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html" target="_blank" rel="noopener noreferrer">Bash User Manual<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <h2 id="modifying-the-case-of-alphabetic-characters"><a href="#modifying-the-case-of-alphabetic-characters" class="header-anchor">#</a> Modifying the case of alphabetic characters</h2> <p>To uppercase</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">v</span><span class="token operator">=</span><span class="token string">&quot;hello&quot;</span>
+<span class="token comment"># Just the first character</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${v<span class="token operator">^</span>}</span>&quot;</span>
+Hello
+<span class="token comment"># All characters</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${v<span class="token operator">^^</span>}</span>&quot;</span>
+HELLO
+<span class="token comment"># Alternative</span>
+$ <span class="token assign-left variable">v</span><span class="token operator">=</span><span class="token string">&quot;hello world&quot;</span>
+$ <span class="token builtin class-name">declare</span> -u <span class="token assign-left variable">string</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$v</span>&quot;</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$string</span>&quot;</span>
+HELLO WORLD
+
+</code></pre></div><p>To lowercase</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">v</span><span class="token operator">=</span><span class="token string">&quot;BYE&quot;</span>
+<span class="token comment"># Just the first character</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${v<span class="token operator">,</span>}</span>&quot;</span>
+bYE
+<span class="token comment"># All characters</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${v<span class="token operator">,,</span>}</span>&quot;</span>
+bye
+<span class="token comment"># Alternative</span>
+$ <span class="token assign-left variable">v</span><span class="token operator">=</span><span class="token string">&quot;HELLO WORLD&quot;</span>
+$ <span class="token builtin class-name">declare</span> -l <span class="token assign-left variable">string</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$v</span>&quot;</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$string</span>&quot;</span>
+hello world
+
+</code></pre></div><p>Toggle Case</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">v</span><span class="token operator">=</span><span class="token string">&quot;Hello World&quot;</span>
+<span class="token comment"># All chars</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${v~~}</span>&quot;</span>
+hELLO wORLD
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${v~}</span>&quot;</span>
+<span class="token comment"># Just the first char</span>
+hello World
+
+</code></pre></div><h2 id="length-of-parameter"><a href="#length-of-parameter" class="header-anchor">#</a> Length of parameter</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Length of a string</span>
+$ <span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">'12345'</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${<span class="token operator">#</span>var}</span>&quot;</span>
+<span class="token number">5</span>
+
+</code></pre></div><p>Note that it's the length in number of <strong>characters</strong> which is not necessarily the same as the number of <strong>bytes</strong> (like in UTF-8 where most characters are encoded in more than one byte), nor the number of <strong>glyphs/graphemes</strong> (some of which are combinations of characters), nor is it necessarily the same as the display width.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Number of array elements</span>
+$ <span class="token assign-left variable">myarr</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">)</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${<span class="token operator">#</span>myarr<span class="token punctuation">[</span>@<span class="token punctuation">]</span>}</span>&quot;</span>
+<span class="token number">3</span>
+
+<span class="token comment"># Works for positional parameters as well</span>
+$ <span class="token builtin class-name">set</span> -- <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${<span class="token operator">#</span>@}</span>&quot;</span>
+<span class="token number">4</span>
+
+<span class="token comment"># But more commonly (and portably to other shells), one would use</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$#</span>&quot;</span>
+<span class="token number">4</span>
+
+</code></pre></div><h2 id="replace-pattern-in-string"><a href="#replace-pattern-in-string" class="header-anchor">#</a> Replace pattern in string</h2> <p>First match:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token string">'I am a string'</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${a<span class="token operator">/</span>a<span class="token operator">/</span>A}</span>&quot;</span>
+I Am a string
+
+</code></pre></div><p>All matches:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${a<span class="token operator">/</span><span class="token operator">/</span>a<span class="token operator">/</span>A}</span>&quot;</span>
+I Am A string
+
+</code></pre></div><p>Match at the beginning:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${a<span class="token operator">/</span><span class="token operator">#</span>I<span class="token operator">/</span>y}</span>&quot;</span>
+y am a string
+
+</code></pre></div><p>Match at the end:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${a<span class="token operator">/</span><span class="token operator">%</span>g<span class="token operator">/</span>N}</span>&quot;</span>
+I am a strinN
+
+</code></pre></div><p>Replace a pattern with nothing:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${a<span class="token operator">/</span>g<span class="token operator">/</span>}</span>&quot;</span>
+I am a strin
+
+</code></pre></div><p>Add prefix to array items:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">A</span><span class="token operator">=</span><span class="token punctuation">(</span>hello world<span class="token punctuation">)</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${A<span class="token punctuation">[</span>@<span class="token punctuation">]</span><span class="token operator">/</span><span class="token operator">#</span><span class="token operator">/</span>R}</span>&quot;</span>
+Rhello Rworld
+
+</code></pre></div><h2 id="substrings-and-subarrays"><a href="#substrings-and-subarrays" class="header-anchor">#</a> Substrings and subarrays</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">'0123456789abcdef'</span>
+
+<span class="token comment"># Define a zero-based offset</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:</span>3}</span>&quot;</span>
+3456789abcdef
+
+<span class="token comment"># Offset and length of substring</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:</span>3<span class="token operator">:</span>4}</span>&quot;</span>
+<span class="token number">3456</span>
+
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Negative length counts from the end of the string</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:</span>3<span class="token operator">:-</span>5}</span>&quot;</span>
+3456789a
+
+<span class="token comment"># Negative offset counts from the end</span>
+<span class="token comment"># Needs a space to avoid confusion with ${var:-6}</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:</span> -6}</span>&quot;</span>
+abcdef
+
+<span class="token comment"># Alternative: parentheses</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:</span>(-6)}</span>&quot;</span>
+abcdef
+
+<span class="token comment"># Negative offset and negative length</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:</span> -6<span class="token operator">:-</span>5}</span>&quot;</span>
+a
+
+</code></pre></div><p>The same expansions apply if the parameter is a <strong>positional parameter</strong> or the <strong>element of a subscripted array</strong>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Set positional parameter $1</span>
+<span class="token builtin class-name">set</span> -- 0123456789abcdef
+
+<span class="token comment"># Define offset</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${1<span class="token operator">:</span>5}</span>&quot;</span>
+56789abcdef
+
+<span class="token comment"># Assign to array element</span>
+myarr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token string">'0123456789abcdef'</span>
+
+<span class="token comment"># Define offset and length</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${myarr<span class="token punctuation">[</span>0<span class="token punctuation">]</span><span class="token operator">:</span>7<span class="token operator">:</span>3}</span>&quot;</span>
+<span class="token number">789</span>
+
+</code></pre></div><p>Analogous expansions apply to <strong>positional parameters</strong>, where offsets are one-based:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Set positional parameters $1, $2, ...</span>
+$ <span class="token builtin class-name">set</span> -- <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span> <span class="token number">8</span> <span class="token number">9</span> <span class="token number">0</span> a b c d e f
+
+<span class="token comment"># Define an offset (beware $0 (not a positional parameter)</span>
+<span class="token comment"># is being considered here as well)</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${@<span class="token operator">:</span>10}</span>&quot;</span>
+<span class="token number">0</span>
+a
+b 
+c
+d
+e
+f
+
+<span class="token comment"># Define an offset and a length</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${@<span class="token operator">:</span>10<span class="token operator">:</span>3}</span>&quot;</span>
+<span class="token number">0</span>
+a
+b
+
+<span class="token comment"># No negative lengths allowed for positional parameters</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${@<span class="token operator">:</span>10<span class="token operator">:-</span>2}</span>&quot;</span>
+bash: -2: substring expression <span class="token operator">&lt;</span> <span class="token number">0</span>
+
+<span class="token comment"># Negative offset counts from the end</span>
+<span class="token comment"># Needs a space to avoid confusion with ${@:-10:2}</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${@<span class="token operator">:</span> -10<span class="token operator">:</span>2}</span>&quot;</span>
+<span class="token number">7</span>
+<span class="token number">8</span>
+
+<span class="token comment"># ${@:0} is $0 which is not otherwise a positional parameters or part</span>
+<span class="token comment"># of $@</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${@<span class="token operator">:</span>0<span class="token operator">:</span>2}</span>&quot;</span>
+/usr/bin/bash
+<span class="token number">1</span>
+
+</code></pre></div><p>Substring expansion can be used with <strong>indexed arrays</strong>:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># Create array (zero-based indices)</span>
+$ <span class="token assign-left variable">myarr</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0</span> <span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span> <span class="token number">8</span> <span class="token number">9</span> a b c d e f<span class="token punctuation">)</span>
+
+<span class="token comment"># Elements with index 5 and higher</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${myarr<span class="token punctuation">[</span>@<span class="token punctuation">]</span><span class="token operator">:</span>12}</span>&quot;</span>
+c
+d
+e
+f
+
+<span class="token comment"># 3 elements, starting with index 5</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${myarr<span class="token punctuation">[</span>@<span class="token punctuation">]</span><span class="token operator">:</span>5<span class="token operator">:</span>3}</span>&quot;</span>
+<span class="token number">5</span>
+<span class="token number">6</span>
+<span class="token number">7</span>
+
+<span class="token comment"># The last element of the array</span>
+$ <span class="token builtin class-name">printf</span> <span class="token string">'%s<span class="token entity" title="\n">\n</span>'</span> <span class="token string">&quot;<span class="token variable">${myarr<span class="token punctuation">[</span>@<span class="token punctuation">]</span><span class="token operator">:</span> -1}</span>&quot;</span>
+f
+
+</code></pre></div><h2 id="delete-a-pattern-from-the-beginning-of-a-string"><a href="#delete-a-pattern-from-the-beginning-of-a-string" class="header-anchor">#</a> Delete a pattern from the beginning of a string</h2> <p>Shortest match:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token string">'I am a string'</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${a<span class="token operator">#</span>*a}</span>&quot;</span>
+m a string
+
+</code></pre></div><p>Longest match:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${a<span class="token operator">##</span>*a}</span>&quot;</span>
+ string
+
+</code></pre></div><h2 id="parameter-indirection"><a href="#parameter-indirection" class="header-anchor">#</a> Parameter indirection</h2> <p><code>Bash</code> indirection permits to get the value of a variable whose name is contained in another variable. Variables example:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">red</span><span class="token operator">=</span><span class="token string">&quot;the color red&quot;</span>
+$ <span class="token assign-left variable">green</span><span class="token operator">=</span><span class="token string">&quot;the color green&quot;</span>
+
+$ <span class="token assign-left variable">color</span><span class="token operator">=</span>red
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${<span class="token operator">!</span>color}</span>&quot;</span>
+the color red
+$ <span class="token assign-left variable">color</span><span class="token operator">=</span>green
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${<span class="token operator">!</span>color}</span>&quot;</span>
+the color green
+
+</code></pre></div><p>Some more examples that demonstrate the indirect expansion usage:</p> <div class="language- extra-class"><pre class="language-text"><code>
+$ foo=10
+ $ x=foo
+ $ echo ${x}      #Classic variable print  
+ foo  
+ 
+ $ foo=10
+ $ x=foo
+ $ echo ${!x}     #Indirect expansion
+ 10
+
+</code></pre></div><p>One more example:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function-name function">argtester</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">for</span> <span class="token variable"><span class="token punctuation">((</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;=</span>&quot;$#&quot;<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">))</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${i}</span>&quot;</span><span class="token punctuation">;</span><span class="token keyword">done</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> argtester -ab -cd -ef 
+<span class="token number">1</span>   <span class="token comment">#i expanded to 1 </span>
+<span class="token number">2</span>   <span class="token comment">#i expanded to 2</span>
+<span class="token number">3</span>   <span class="token comment">#i expanded to 3</span>
+
+$ <span class="token function-name function">argtester</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">for</span> <span class="token variable"><span class="token punctuation">((</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span> i<span class="token operator">&lt;=</span>&quot;$#&quot;<span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">))</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${<span class="token operator">!</span>i}</span>&quot;</span><span class="token punctuation">;</span><span class="token keyword">done</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> argtester -ab -cd -ef 
+-ab     <span class="token comment"># i=1 --&gt; expanded to $1 ---&gt; expanded to first argument sent to function</span>
+-cd     <span class="token comment"># i=2 --&gt; expanded to $2 ---&gt; expanded to second argument sent to function</span>
+-ef     <span class="token comment"># i=3 --&gt; expanded to $3 ---&gt; expanded to third argument sent to function</span>
+
+</code></pre></div><h2 id="default-value-substitution"><a href="#default-value-substitution" class="header-anchor">#</a> Default value substitution</h2> <blockquote></blockquote> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token variable">${parameter<span class="token operator">:-</span>word}</span>
+
+</code></pre></div><p>If parameter is unset or null, the expansion of word is substituted.
+Otherwise, the value of parameter is substituted.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">unset</span> var
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:-</span>XX}</span>&quot;</span>     <span class="token comment"># Parameter is unset -&gt; expansion XX occurs</span>
+XX
+$ <span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">&quot;&quot;</span>                <span class="token comment"># Parameter is null -&gt; expansion XX occurs</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:-</span>XX}</span>&quot;</span>
+XX
+$ <span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token number">23</span>                <span class="token comment"># Parameter is not null -&gt; original expansion occurs</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:-</span>XX}</span>&quot;</span>
+<span class="token number">23</span>
+
+</code></pre></div><blockquote></blockquote> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token variable">${parameter<span class="token operator">:=</span>word}</span>
+
+</code></pre></div><p>If parameter is unset or null, the expansion of word is assigned to
+parameter. The value of parameter is then substituted. Positional
+parameters and special parameters may not be assigned to in this way.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">unset</span> var
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:=</span>XX}</span>&quot;</span>     <span class="token comment"># Parameter is unset -&gt; word is assigned to XX</span>
+XX
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$var</span>&quot;</span>
+XX
+$ <span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">&quot;&quot;</span>                <span class="token comment"># Parameter is null -&gt; word is assigned to XX</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:=</span>XX}</span>&quot;</span>
+XX
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$var</span>&quot;</span>
+XX
+$ <span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token number">23</span>                <span class="token comment"># Parameter is not null -&gt; no assignment occurs</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${var<span class="token operator">:=</span>XX}</span>&quot;</span>
+<span class="token number">23</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$var</span>&quot;</span>
+<span class="token number">23</span>
+
+</code></pre></div><h2 id="delete-a-pattern-from-the-end-of-a-string"><a href="#delete-a-pattern-from-the-end-of-a-string" class="header-anchor">#</a> Delete a pattern from the end of a string</h2> <p>Shortest match:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token string">'I am a string'</span>
+$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${a<span class="token operator">%</span>a*}</span>&quot;</span>
+I am 
+
+</code></pre></div><p>Longest match:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${a<span class="token operator">%%</span>a*}</span>&quot;</span>
+I 
+
+</code></pre></div><h2 id="parameter-expansion-and-filenames"><a href="#parameter-expansion-and-filenames" class="header-anchor">#</a> Parameter expansion and filenames</h2> <p>You can use Bash Parameter Expansion to emulate common filename-processing operations like <code>basename</code> and <code>dirname</code>.</p> <p>We will use this as our example path:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token assign-left variable">FILENAME</span><span class="token operator">=</span><span class="token string">&quot;/tmp/example/myfile.txt&quot;</span>
+
+</code></pre></div><p>To emulate <code>dirname</code> and return the directory name of a file path:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${FILENAME<span class="token operator">%</span><span class="token operator">/</span>*}</span>&quot;</span>
+<span class="token comment">#Out: /tmp/example</span>
+
+</code></pre></div><p>To emulate <code>basename $FILENAME</code> and return the filename of a file path:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${FILENAME<span class="token operator">##</span>*<span class="token operator">/</span>}</span>&quot;</span>
+<span class="token comment">#Out: myfile.txt</span>
+
+</code></pre></div><p>To emulate <code>basename $FILENAME .txt</code> and return the filename without the <code>.txt.</code> extension:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token assign-left variable">BASENAME</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${FILENAME<span class="token operator">##</span>*<span class="token operator">/</span>}</span>&quot;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${BASENAME<span class="token operator">%%</span>.txt}</span>&quot;</span>
+<span class="token comment">#Out: myfile</span>
+
+</code></pre></div><h2 id="error-if-variable-is-empty-or-unset"><a href="#error-if-variable-is-empty-or-unset" class="header-anchor">#</a> Error if variable is empty or unset</h2> <p>The semantics for this are similar to that of default value substitution, but instead of substituting a default value, it errors out with the provided error message. The forms are <code>${VARNAME?ERRMSG}</code> and <code>${VARNAME:?ERRMSG}</code>. The form with <code>:</code> will error our if the variable is <strong>unset</strong> <strong>or</strong> <strong>empty</strong>, whereas the form without will only error out if the variable is <strong>unset</strong>. If an error is thrown, the <code>ERRMSG</code> is output and the exit code is set to <code>1</code>.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token shebang important">#!/bin/bash</span>
+<span class="token assign-left variable">FOO</span><span class="token operator">=</span>
+<span class="token comment"># ./script.sh: line 4: FOO: EMPTY</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;FOO is <span class="token variable">${FOO<span class="token operator">:?</span>EMPTY}</span>&quot;</span>
+<span class="token comment"># FOO is </span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;FOO is <span class="token variable">${FOO?UNSET}</span>&quot;</span>
+<span class="token comment"># ./script.sh: line 8: BAR: EMPTY</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;BAR is <span class="token variable">${BAR<span class="token operator">:?</span>EMPTY}</span>&quot;</span>
+<span class="token comment"># ./script.sh: line 10: BAR: UNSET</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;BAR is <span class="token variable">${BAR?UNSET}</span>&quot;</span>
+
+</code></pre></div><p>The run the full example above each of the erroring echo statements needs to be commented out to proceed.</p> <h2 id="munging-during-expansion"><a href="#munging-during-expansion" class="header-anchor">#</a> Munging during expansion</h2> <p>Variables don't necessarily have to expand to their values - substrings can be extracted during expansion, which can be useful for extracting file extensions or parts of paths. Globbing characters keep their usual meanings, so <code>.*</code> refers to a literal dot, followed by any sequence of characters; it's not a regular expression.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">v</span><span class="token operator">=</span>foo-bar-baz
+$ <span class="token builtin class-name">echo</span> <span class="token variable">${v<span class="token operator">%%</span>-*}</span>
+foo
+$ <span class="token builtin class-name">echo</span> <span class="token variable">${v<span class="token operator">%</span>-*}</span>
+foo-bar
+$ <span class="token builtin class-name">echo</span> <span class="token variable">${v<span class="token operator">##</span>*-}</span>
+baz
+$ <span class="token builtin class-name">echo</span> <span class="token variable">${v<span class="token operator">#</span>*-}</span>
+bar-baz
+
+</code></pre></div><p>It's also possible to expand a variable using a default value - say I want to invoke the user's editor, but if they've not set one I'd like to give them <code>vim</code>.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">EDITOR</span><span class="token operator">=</span>nano
+$ <span class="token variable">${EDITOR<span class="token operator">:-</span>vim}</span> /tmp/some_file
+<span class="token comment"># opens nano</span>
+$ <span class="token builtin class-name">unset</span> EDITOR
+$ $ <span class="token variable">${EDITOR<span class="token operator">:-</span>vim}</span> /tmp/some_file
+<span class="token comment"># opens vim</span>
+
+</code></pre></div><p>There are two different ways of performing this expansion, which differ in whether the relevant variable is empty or unset. Using <code>:-</code> will use the default if the variable is either unset or empty, whilst <code>-</code> only uses the default if the variable is unset, but will use the variable if it is set to the empty string:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token string">&quot;set&quot;</span>
+$ <span class="token assign-left variable">b</span><span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+$ <span class="token builtin class-name">unset</span> c
+$ <span class="token builtin class-name">echo</span> <span class="token variable">${a<span class="token operator">:-</span>default_a}</span> <span class="token variable">${b<span class="token operator">:-</span>default_b}</span> <span class="token variable">${c<span class="token operator">:-</span>default_c}</span>
+<span class="token builtin class-name">set</span> default_b default_c
+$ <span class="token builtin class-name">echo</span> <span class="token variable">${a-default_a}</span> <span class="token variable">${b-default_b}</span> <span class="token variable">${c-default_c}</span>
+<span class="token builtin class-name">set</span> default_c
+
+</code></pre></div><p>Similar to defaults, alternatives can be given; where a default is used if a particular variable isn't available, an alternative is used if the variable is available.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">a</span><span class="token operator">=</span><span class="token string">&quot;set&quot;</span>
+$ <span class="token assign-left variable">b</span><span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+$ <span class="token builtin class-name">echo</span> <span class="token variable">${a<span class="token operator">:+</span>alternative_a}</span> <span class="token variable">${b<span class="token operator">:+</span>alternative_b}</span>
+alternative_a
+
+</code></pre></div><p>Noting that these expansions can be nested, using alternatives becomes particularly useful when supplying arguments to command line flags;</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token assign-left variable">output_file</span><span class="token operator">=</span>/tmp/foo
+$ <span class="token function">wget</span> <span class="token variable">${output_file<span class="token operator">:+</span>&quot;-o ${output_file}</span>&quot;<span class="token punctuation">}</span> www.stackexchange.com
+<span class="token comment"># expands to wget -o /tmp/foo www.stackexchange.com</span>
+$ <span class="token builtin class-name">unset</span> output_file
+$ <span class="token function">wget</span> <span class="token variable">${output_file<span class="token operator">:+</span>&quot;-o ${output_file}</span>&quot;<span class="token punctuation">}</span> www.stackexchange.com
+<span class="token comment"># expands to wget  www.stackexchange.com </span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>${parameter:offset} # Substring starting at offset</li> <li>${parameter:offset:length} # Substring of length &quot;length&quot; starting at offset</li> <li>${#parameter} # Length of parameter</li> <li>${parameter/pattern/string} # Replace the first occurrence of pattern with string</li> <li>${parameter//pattern/string} # Replace all occurrences of pattern with string</li> <li>${parameter/#pattern/string} # Replace pattern with string if pattern is at the beginning</li> <li>${parameter/%pattern/string} # Replace pattern with string if pattern is at the ending</li> <li>${parameter#pattern} # Remove shortest match of pattern from beginning of parameter</li> <li>${parameter##pattern} # Remove longest match of pattern from beginning of  parameter</li> <li>${parameter%pattern} # Remove shortest match of pattern from end of parameter</li> <li>${parameter%%pattern} # Remove longest match of pattern from end of parameter</li> <li>${parameter:-word} # Expand to word if parameter unset/undefined</li> <li>${parameter:=word} # Expand to word if parameter unset/undefined and set parameter</li> <li>${parameter:+word} # Expand to word if parameter set/defined</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/bash/bash-parameter-expansion.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/bash/functions.html" class="prev">
+        Functions
+      </a></span> <span class="next"><a href="/bash/copying-cp.html">
+        Copying (cp)
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/477.582714f4.js" defer></script>
+  </body>
+</html>

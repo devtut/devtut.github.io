@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C - Signal handling</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Signal Handling with “signal()”">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C - Signal handling">
+    <meta property="og:description" content="Signal Handling with “signal()”">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/c/signal-handling.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C - Signal handling">
+    <meta name="twitter:description" content="Signal Handling with “signal()”">
+    <meta name="twitter:url" content="/c/signal-handling.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/592.a376d0a2.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/c/" class="sidebar-link">Disclaimer</a></li><li><a href="/c/getting-started-with-c-language.html" class="sidebar-link">Getting started with C Language</a></li><li><a href="/c/comments.html" class="sidebar-link">Comments</a></li><li><a href="/c/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/c/operators.html" class="sidebar-link">Operators</a></li><li><a href="/c/boolean.html" class="sidebar-link">Boolean</a></li><li><a href="/c/strings.html" class="sidebar-link">Strings</a></li><li><a href="/c/literals-for-numbers-characters-and-strings.html" class="sidebar-link">Literals for numbers, characters and strings</a></li><li><a href="/c/compound-literals.html" class="sidebar-link">Compound Literals</a></li><li><a href="/c/bit-fields.html" class="sidebar-link">Bit-fields</a></li><li><a href="/c/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/c/linked-lists.html" class="sidebar-link">Linked lists</a></li><li><a href="/c/enumerations.html" class="sidebar-link">Enumerations</a></li><li><a href="/c/structs.html" class="sidebar-link">Structs</a></li><li><a href="/c/standard-math.html" class="sidebar-link">Standard Math</a></li><li><a href="/c/iteration-statements-loops-for-while-do-while.html" class="sidebar-link">Iteration Statements/Loops: for, while, do-while</a></li><li><a href="/c/selection-statements.html" class="sidebar-link">Selection Statements</a></li><li><a href="/c/initialization.html" class="sidebar-link">Initialization</a></li><li><a href="/c/declaration-vs-definition.html" class="sidebar-link">Declaration vs Definition</a></li><li><a href="/c/files-and-i-o-streams.html" class="sidebar-link">Files and I/O streams</a></li><li><a href="/c/formatted-input-output.html" class="sidebar-link">Formatted Input/Output</a></li><li><a href="/c/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/c/sequence-points.html" class="sidebar-link">Sequence points</a></li><li><a href="/c/function-pointers.html" class="sidebar-link">Function Pointers</a></li><li><a href="/c/function-parameters.html" class="sidebar-link">Function Parameters</a></li><li><a href="/c/pass-2d-arrays-to-functions.html" class="sidebar-link">Pass 2D-arrays to functions</a></li><li><a href="/c/error-handling.html" class="sidebar-link">Error handling</a></li><li><a href="/c/undefined-behavior.html" class="sidebar-link">Undefined behavior</a></li><li><a href="/c/random-number-generation.html" class="sidebar-link">Random Number Generation</a></li><li><a href="/c/preprocessor-and-macros.html" class="sidebar-link">Preprocessor and Macros</a></li><li><a href="/c/signal-handling.html" class="active sidebar-link">Signal handling</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/c/signal-handling.html#signal-handling-with-signal" class="sidebar-link">Signal Handling with “signal()”</a></li></ul></li><li><a href="/c/variable-arguments.html" class="sidebar-link">Variable arguments</a></li><li><a href="/c/assertion.html" class="sidebar-link">Assertion</a></li><li><a href="/c/generic-selection.html" class="sidebar-link">Generic selection</a></li><li><a href="/c/x-macros.html" class="sidebar-link">X-macros</a></li><li><a href="/c/aliasing-and-effective-type.html" class="sidebar-link">Aliasing and effective type</a></li><li><a href="/c/compilation.html" class="sidebar-link">Compilation</a></li><li><a href="/c/identifier-scope.html" class="sidebar-link">Identifier Scope</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/implicit-and-explicit-conversions.html" class="sidebar-link">Implicit and Explicit Conversions</a></li><li><a href="/c/type-qualifiers.html" class="sidebar-link">Type Qualifiers</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/typedef.html" class="sidebar-link">Typedef</a></li><li><a href="/c/storage-classes.html" class="sidebar-link">Storage Classes</a></li><li><a href="/c/declarations.html" class="sidebar-link">Declarations</a></li><li><a href="/c/inline-assembly.html" class="sidebar-link">Inline assembly</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/structure-padding-and-packing.html" class="sidebar-link">Structure Padding and Packing</a></li><li><a href="/c/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/c/implementation-defined-behaviour.html" class="sidebar-link">Implementation-defined behaviour</a></li><li><a href="/c/atomics.html" class="sidebar-link">Atomics</a></li><li><a href="/c/jump-statements.html" class="sidebar-link">Jump Statements</a></li><li><a href="/c/create-and-include-header-files.html" class="sidebar-link">Create and include header files</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/ctype-h-character-classification-conversion.html" class="sidebar-link">— character classification &amp; conversion</a></li><li><a href="/c/side-effects.html" class="sidebar-link">Side Effects</a></li><li><a href="/c/multi-character-character-sequence.html" class="sidebar-link">Multi-Character Character Sequence</a></li><li><a href="/c/constraints.html" class="sidebar-link">Constraints</a></li><li><a href="/c/inlining.html" class="sidebar-link">Inlining</a></li><li><a href="/c/unions.html" class="sidebar-link">Unions</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/c/interprocess-communication-ipc.html" class="sidebar-link">Interprocess Communication (IPC)</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/common-c-programming-idioms-and-developer-practices.html" class="sidebar-link">Common C programming idioms and developer practices</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="signal-handling"><a href="#signal-handling" class="header-anchor">#</a> Signal handling</h1> <h2 id="signal-handling-with-signal"><a href="#signal-handling-with-signal" class="header-anchor">#</a> Signal Handling with “signal()”</h2> <p><a href="https://en.wikipedia.org/wiki/C_signal_handling#Standard_signals" target="_blank" rel="noopener noreferrer">Signal numbers<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> can be synchronous (like <code>SIGSEGV</code> – segmentation fault) when they are triggered by a malfunctioning of the program itself or asynchronous (like <code>SIGINT</code> - interactive attention) when they are initiated from outside the program, e.g by a keypress as <code>Cntrl-C</code>.</p> <p>The <code>signal()</code> function is part of the ISO C standard and can be used to assign a function to handle a specific signal</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span>  </span><span class="token comment">/* printf() */</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h&gt;</span> </span><span class="token comment">/* abort()  */</span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;signal.h&gt;</span> </span><span class="token comment">/* signal() */</span>
+
+<span class="token keyword">void</span> <span class="token function">handler_nonportable</span><span class="token punctuation">(</span><span class="token keyword">int</span> sig<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/* undefined behavior, maybe fine on specific platform */</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;Catched: %d\n&quot;</span><span class="token punctuation">,</span> sig<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment">/* abort is safe to call */</span>
+    <span class="token function">abort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+sig_atomic_t <span class="token keyword">volatile</span> finished <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">handler</span><span class="token punctuation">(</span><span class="token keyword">int</span> sig<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>sig<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">/* hardware interrupts should not return */</span>
+    <span class="token keyword">case</span> SIGSEGV<span class="token operator">:</span>
+    <span class="token keyword">case</span> SIGFPE<span class="token operator">:</span>
+    <span class="token keyword">case</span> SIGILL<span class="token operator">:</span>
+
+</code></pre></div><div class="language-c extra-class"><pre class="language-c"><code>      <span class="token comment">/* quick_exit is safe to call */</span>
+      <span class="token function">quick_exit</span><span class="token punctuation">(</span>EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><div class="language-c extra-class"><pre class="language-c"><code>      <span class="token comment">/* use _Exit in pre-C11 */</span>
+      <span class="token function">_Exit</span><span class="token punctuation">(</span>EXIT_FAILURE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><div class="language-c extra-class"><pre class="language-c"><code>    <span class="token keyword">default</span><span class="token operator">:</span>
+       <span class="token comment">/* Reset the signal to the default handler, 
+          so we will not be called again if things go
+          wrong on return. */</span>
+      <span class="token function">signal</span><span class="token punctuation">(</span>sig<span class="token punctuation">,</span> SIG_DFL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">/* let everybody know that we are finished */</span>
+      finished <span class="token operator">=</span> sig<span class="token punctuation">;</span>
+      <span class="token keyword">return</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+
+    <span class="token comment">/* Catch the SIGSEGV signal, raised on segmentation faults (i.e NULL ptr access */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">signal</span><span class="token punctuation">(</span>SIGSEGV<span class="token punctuation">,</span> <span class="token operator">&amp;</span>handler<span class="token punctuation">)</span> <span class="token operator">==</span> SIG_ERR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">&quot;could not establish handler for SIGSEGV&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* Catch the SIGTERM signal, termination request */</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">signal</span><span class="token punctuation">(</span>SIGTERM<span class="token punctuation">,</span> <span class="token operator">&amp;</span>handler<span class="token punctuation">)</span> <span class="token operator">==</span> SIG_ERR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">&quot;could not establish handler for SIGTERM&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* Ignore the SIGINT signal, by setting the handler to `SIG_IGN`. */</span>
+    <span class="token function">signal</span><span class="token punctuation">(</span>SIGINT<span class="token punctuation">,</span> SIG_IGN<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+    <span class="token comment">/* Do something that takes some time here, and leaves
+       the time to terminate the program from the keyboard. */</span>
+
+    <span class="token comment">/* Then: */</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>finished<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token constant">stderr</span><span class="token punctuation">,</span> <span class="token string">&quot;we have been terminated by signal %d\n&quot;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>finished<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> EXIT_FAILURE<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token comment">/* Try to force a segmentation fault, and raise a SIGSEGV */</span>
+    <span class="token punctuation">{</span>
+      <span class="token keyword">char</span><span class="token operator">*</span> ptr <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+      <span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/* This should never be executed */</span>
+    <span class="token keyword">return</span> EXIT_SUCCESS<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Using <code>signal()</code> imposes important limitations what you are allowed to do inside the signal handlers, see the remarks for further information.</p> <p><a href="http://stackoverflow.com/documentation/posix/4532/signals#t=201608081940432865722" target="_blank" rel="noopener noreferrer">POSIX<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> recommends the usage of <code>sigaction()</code> instead of <code>signal()</code>, due to its underspecified behavior and significant implementation variations. POSIX also defines <a href="https://en.wikipedia.org/wiki/Unix_signal#POSIX_signals" target="_blank" rel="noopener noreferrer">many more signals<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> than ISO C standard, including <code>SIGUSR1</code> and <code>SIGUSR2</code>, which can be used freely by the programmer for any purpose.</p> <h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>void (*signal(int sig, void (*func)(int)))(int);</li></ul> <h4 id="parameters"><a href="#parameters" class="header-anchor">#</a> Parameters</h4> <table><thead><tr><th>Parameter</th> <th>Details</th></tr></thead> <tbody><tr><td>sig</td> <td>The signal to set the signal handler to, one of <code>SIGABRT</code>, <code>SIGFPE</code>, <code>SIGILL</code>, <code>SIGTERM</code>, <code>SIGINT</code>, <code>SIGSEGV</code> or some implementation defined value</td></tr> <tr><td>func</td> <td>The signal handler, which is either of the following: <code>SIG_DFL</code>, for the default handler, <code>SIG_IGN</code> to ignore the signal, or a function pointer with the signature <code>void foo(int sig);</code>.</td></tr></tbody></table> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>The usage of signal handlers with only the guarantees from the C standard imposes various limitations what can, or can't be done in the user defined signal handler.</p> <li>
+If the user defined function returns while handling `SIGSEGV`, `SIGFPE`, `SIGILL` or any other implementation-defined hardware interrupt, the behavior is undefined by the C standard. This is because C's interface doesn't give means to change the faulty state (e.g after a division by `0`) and thus when returning the program is in exactly the same erroneous state than before the hardware interrupt occurred.
+</li> <li>
+If the user defined function was called as the result of a call to `abort`, or `raise`, the signal handler is not allowed to call `raise`, again.
+</li> <li>
+Signals can arrive in the middle of any operation, and therefore the indivisibility of operations can in generally not be guaranteed nor does signal handling work well with optimization. Therefore all modifications to data in a signal handler must be to variables
+<ul>
+- of type `sig_atomic_t` (all versions) or a lock-free atomic type (since C11, optional)
+- that are `volatile` qualified.
+<p>Other functions from the C standard library will usually not respect these restrictions, because they may change variables in the global state of the program. The C standard only makes guarantees for <code>abort</code>, <code>_Exit</code> (since C99), <code>quick_exit</code> (since C11), <code>signal</code> (for the same signal number), and some atomic operations (since C11).</p> <p>Behavior is undefined by the C standard if any of the rules above are violated. Platforms may have specific extensions, but these are generally not portable beyond that platform.</p> <li>
+Usually systems have their own list of functions that are **asynchronous signal safe**, that is of C library functions that can be used from a signal handler. E.g often `printf` is among these function.
+</li> <li>
+In particular the C standard doesn't define much about the interaction with its threads interface (since C11) or any platform specific thread libraries such as POSIX threads. Such platforms have to specify the interaction of such thread libraries with signals by themselves.
+</li></ul></li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/c/signal-handling.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/c/preprocessor-and-macros.html" class="prev">
+        Preprocessor and Macros
+      </a></span> <span class="next"><a href="/c/variable-arguments.html">
+        Variable arguments
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/592.a376d0a2.js" defer></script>
+  </body>
+</html>

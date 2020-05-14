@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Python - Classes</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Introduction to classes, Bound, unbound, and static methods, Basic inheritance, Monkey Patching, New-style vs. old-style classes, Class methods: alternate initializers, Multiple Inheritance, Properties, Class and instance variables, Default values for instance variables, Class composition, Listing All Class Members, Singleton class, Descriptors and Dotted Lookups">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Python - Classes">
+    <meta property="og:description" content="Introduction to classes, Bound, unbound, and static methods, Basic inheritance, Monkey Patching, New-style vs. old-style classes, Class methods: alternate initializers, Multiple Inheritance, Properties, Class and instance variables, Default values for instance variables, Class composition, Listing All Class Members, Singleton class, Descriptors and Dotted Lookups">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/python/classes.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Python - Classes">
+    <meta name="twitter:description" content="Introduction to classes, Bound, unbound, and static methods, Basic inheritance, Monkey Patching, New-style vs. old-style classes, Class methods: alternate initializers, Multiple Inheritance, Properties, Class and instance variables, Default values for instance variables, Class composition, Listing All Class Members, Singleton class, Descriptors and Dotted Lookups">
+    <meta name="twitter:url" content="/python/classes.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2662.6be16bad.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Python</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/python/" class="sidebar-link">Disclaimer</a></li><li><a href="/python/getting-started-with-python-language.html" class="sidebar-link">Getting started with Python Language</a></li><li><a href="/python/python-data-types.html" class="sidebar-link">Python Data Types</a></li><li><a href="/python/indentation.html" class="sidebar-link">Indentation</a></li><li><a href="/python/comments-and-documentation.html" class="sidebar-link">Comments and Documentation</a></li><li><a href="/python/date-and-time.html" class="sidebar-link">Date and Time</a></li><li><a href="/python/enum.html" class="sidebar-link">Enum</a></li><li><a href="/python/set.html" class="sidebar-link">Set</a></li><li><a href="/python/simple-mathematical-operators.html" class="sidebar-link">Simple Mathematical Operators</a></li><li><a href="/python/bitwise-operators.html" class="sidebar-link">Bitwise Operators</a></li><li><a href="/python/boolean-operators.html" class="sidebar-link">Boolean Operators</a></li><li><a href="/python/operator-precedence.html" class="sidebar-link">Operator Precedence</a></li><li><a href="/python/variable-scope-and-binding.html" class="sidebar-link">Variable Scope and Binding</a></li><li><a href="/python/conditionals.html" class="sidebar-link">Conditionals</a></li><li><a href="/python/comparisons.html" class="sidebar-link">Comparisons</a></li><li><a href="/python/loops.html" class="sidebar-link">Loops</a></li><li><a href="/python/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/python/multidimensional-arrays.html" class="sidebar-link">Multidimensional arrays</a></li><li><a href="/python/dictionary.html" class="sidebar-link">Dictionary</a></li><li><a href="/python/list.html" class="sidebar-link">List</a></li><li><a href="/python/list-comprehensions.html" class="sidebar-link">List Comprehensions</a></li><li><a href="/python/list-slicing-selecting-parts-of-lists.html" class="sidebar-link">List slicing (selecting parts of lists)</a></li><li><a href="/python/groupby.html" class="sidebar-link">groupby()</a></li><li><a href="/python/linked-lists.html" class="sidebar-link">Linked lists</a></li><li><a href="/python/linked-list-node.html" class="sidebar-link">Linked List Node</a></li><li><a href="/python/filter.html" class="sidebar-link">Filter</a></li><li><a href="/python/heapq.html" class="sidebar-link">Heapq</a></li><li><a href="/python/tuple.html" class="sidebar-link">Tuple</a></li><li><a href="/python/basic-input-and-output.html" class="sidebar-link">Basic Input and Output</a></li><li><a href="/python/files-folders-i-o.html" class="sidebar-link">Files &amp; Folders I/O</a></li><li><a href="/python/os-path.html" class="sidebar-link">os.path</a></li><li><a href="/python/iterables-and-iterators.html" class="sidebar-link">Iterables and Iterators</a></li><li><a href="/python/functions.html" class="sidebar-link">Functions</a></li><li><a href="/python/defining-functions-with-list-arguments.html" class="sidebar-link">Defining functions with list arguments</a></li><li><a href="/python/functional-programming-in-python.html" class="sidebar-link">Functional Programming in Python</a></li><li><a href="/python/partial-functions.html" class="sidebar-link">Partial functions</a></li><li><a href="/python/decorators.html" class="sidebar-link">Decorators</a></li><li><a href="/python/classes.html" class="active sidebar-link">Classes</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/python/classes.html#introduction-to-classes" class="sidebar-link">Introduction to classes</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#bound-unbound-and-static-methods" class="sidebar-link">Bound, unbound, and static methods</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#basic-inheritance" class="sidebar-link">Basic inheritance</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#monkey-patching" class="sidebar-link">Monkey Patching</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#new-style-vs-old-style-classes" class="sidebar-link">New-style vs. old-style classes</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#class-methods-alternate-initializers" class="sidebar-link">Class methods: alternate initializers</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#multiple-inheritance" class="sidebar-link">Multiple Inheritance</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#properties" class="sidebar-link">Properties</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#class-and-instance-variables" class="sidebar-link">Class and instance variables</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#default-values-for-instance-variables" class="sidebar-link">Default values for instance variables</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#class-composition" class="sidebar-link">Class composition</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#listing-all-class-members" class="sidebar-link">Listing All Class Members</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#singleton-class" class="sidebar-link">Singleton class</a></li><li class="sidebar-sub-header"><a href="/python/classes.html#descriptors-and-dotted-lookups" class="sidebar-link">Descriptors and Dotted Lookups</a></li></ul></li><li><a href="/python/metaclasses.html" class="sidebar-link">Metaclasses</a></li><li><a href="/python/string-formatting.html" class="sidebar-link">String Formatting</a></li><li><a href="/python/string-methods.html" class="sidebar-link">String Methods</a></li><li><a href="/python/using-loops-within-functions.html" class="sidebar-link">Using loops within functions</a></li><li><a href="/python/importing-modules.html" class="sidebar-link">Importing modules</a></li><li><a href="/python/difference-between-module-and-package.html" class="sidebar-link">Difference between Module and Package</a></li><li><a href="/python/math-module.html" class="sidebar-link">Math Module</a></li><li><a href="/python/complex-math.html" class="sidebar-link">Complex math</a></li><li><a href="/python/collections-module.html" class="sidebar-link">Collections module</a></li><li><a href="/python/operator-module.html" class="sidebar-link">Operator module</a></li><li><a href="/python/json-module.html" class="sidebar-link">JSON Module</a></li><li><a href="/python/sqlite3-module.html" class="sidebar-link">Sqlite3 Module</a></li><li><a href="/python/the-os-module.html" class="sidebar-link">The os Module</a></li><li><a href="/python/the-locale-module.html" class="sidebar-link">The locale Module</a></li><li><a href="/python/itertools-module.html" class="sidebar-link">Itertools Module</a></li><li><a href="/python/asyncio-module.html" class="sidebar-link">Asyncio Module</a></li><li><a href="/python/random-module.html" class="sidebar-link">Random module</a></li><li><a href="/python/functools-module.html" class="sidebar-link">Functools Module</a></li><li><a href="/python/the-dis-module.html" class="sidebar-link">The dis module</a></li><li><a href="/python/the-base64-module.html" class="sidebar-link">The base64 Module</a></li><li><a href="/python/queue-module.html" class="sidebar-link">Queue Module</a></li><li><a href="/python/deque-module.html" class="sidebar-link">Deque Module</a></li><li><a href="/python/webbrowser-module.html" class="sidebar-link">Webbrowser Module</a></li><li><a href="/python/tkinter.html" class="sidebar-link">tkinter</a></li><li><a href="/python/pyautogui-module.html" class="sidebar-link">pyautogui module</a></li><li><a href="/python/indexing-and-slicing.html" class="sidebar-link">Indexing and Slicing</a></li><li><a href="/python/plotting-with-matplotlib.html" class="sidebar-link">Plotting with Matplotlib</a></li><li><a href="/python/graph-tool.html" class="sidebar-link">graph-tool</a></li><li><a href="/python/generators.html" class="sidebar-link">Generators</a></li><li><a href="/python/reduce.html" class="sidebar-link">Reduce</a></li><li><a href="/python/map-function.html" class="sidebar-link">Map Function</a></li><li><a href="/python/exponentiation.html" class="sidebar-link">Exponentiation</a></li><li><a href="/python/searching.html" class="sidebar-link">Searching</a></li><li><a href="/python/sorting-minimum-and-maximum.html" class="sidebar-link">Sorting, Minimum and Maximum</a></li><li><a href="/python/counting.html" class="sidebar-link">Counting</a></li><li><a href="/python/the-print-function.html" class="sidebar-link">The Print Function</a></li><li><a href="/python/regular-expressions-regex.html" class="sidebar-link">Regular Expressions (Regex)</a></li><li><a href="/python/copying-data.html" class="sidebar-link">Copying data</a></li><li><a href="/python/context-managers-with-statement.html" class="sidebar-link">Context Managers (“with” Statement)</a></li><li><a href="/python/the-name-special-variable.html" class="sidebar-link">The _name_ special variable</a></li><li><a href="/python/checking-path-existence-and-permissions.html" class="sidebar-link">Checking Path Existence and Permissions</a></li><li><a href="/python/creating-python-packages.html" class="sidebar-link">Creating Python packages</a></li><li><a href="/python/usage-of-pip-module-pypi-package-manager.html" class="sidebar-link">Usage of &quot;pip&quot; module: PyPI Package Manager</a></li><li><a href="/python/pip-pypi-package-manager.html" class="sidebar-link">pip: PyPI Package Manager</a></li><li><a href="/python/parsing-command-line-arguments.html" class="sidebar-link">Parsing Command Line arguments</a></li><li><a href="/python/subprocess-library.html" class="sidebar-link">Subprocess Library</a></li><li><a href="/python/setup-py.html" class="sidebar-link">setup.py</a></li><li><a href="/python/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/python/type-hints.html" class="sidebar-link">Type Hints</a></li><li><a href="/python/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/python/raise-custom-errors-exceptions.html" class="sidebar-link">Raise Custom Errors / Exceptions</a></li><li><a href="/python/commonwealth-exceptions.html" class="sidebar-link">Commonwealth Exceptions</a></li><li><a href="/python/urllib.html" class="sidebar-link">urllib</a></li><li><a href="/python/web-scraping-with-python.html" class="sidebar-link">Web scraping with Python</a></li><li><a href="/python/html-parsing.html" class="sidebar-link">HTML Parsing</a></li><li><a href="/python/manipulating-xml.html" class="sidebar-link">Manipulating XML</a></li><li><a href="/python/python-requests-post.html" class="sidebar-link">Python Requests Post</a></li><li><a href="/python/distribution.html" class="sidebar-link">Distribution</a></li><li><a href="/python/property-objects.html" class="sidebar-link">Property Objects</a></li><li><a href="/python/overloading.html" class="sidebar-link">Overloading</a></li><li><a href="/python/polymorphism.html" class="sidebar-link">Polymorphism</a></li><li><a href="/python/method-overriding.html" class="sidebar-link">Method Overriding</a></li><li><a href="/python/user-defined-methods.html" class="sidebar-link">User-Defined Methods</a></li><li><a href="/python/string-representations-of-class-instances-str-and-repr-methods.html" class="sidebar-link">String representations of class instances: _str and repr_ methods</a></li><li><a href="/python/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/python/reading-and-writing-csv.html" class="sidebar-link">Reading and Writing CSV</a></li><li><a href="/python/writing-to-csv-from-string-or-list.html" class="sidebar-link">Writing to CSV from String or List</a></li><li><a href="/python/dynamic-code-execution-with-exec-and-eval.html" class="sidebar-link">Dynamic code execution with exec and eval</a></li><li><a href="/python/pyinstaller-distributing-python-code.html" class="sidebar-link">PyInstaller - Distributing Python Code</a></li><li><a href="/python/data-visualization-with-python.html" class="sidebar-link">Data Visualization with Python</a></li><li><a href="/python/the-interpreter-command-line-console.html" class="sidebar-link">The Interpreter (Command Line Console)</a></li><li><a href="/python/args-and-kwargs.html" class="sidebar-link">args and *kwargs</a></li><li><a href="/python/garbage-collection.html" class="sidebar-link">Garbage Collection</a></li><li><a href="/python/pickle-data-serialisation.html" class="sidebar-link">Pickle data serialisation</a></li><li><a href="/python/binary-data.html" class="sidebar-link">Binary Data</a></li><li><a href="/python/idioms.html" class="sidebar-link">Idioms</a></li><li><a href="/python/data-serialization.html" class="sidebar-link">Data Serialization</a></li><li><a href="/python/multiprocessing.html" class="sidebar-link">Multiprocessing</a></li><li><a href="/python/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/python/processes-and-threads.html" class="sidebar-link">Processes and Threads</a></li><li><a href="/python/python-concurrency.html" class="sidebar-link">Python concurrency</a></li><li><a href="/python/parallel-computation.html" class="sidebar-link">Parallel computation</a></li><li><a href="/python/sockets.html" class="sidebar-link">Sockets</a></li><li><a href="/python/websockets.html" class="sidebar-link">Websockets</a></li><li><a href="/python/sockets-and-message-encryption-decryption-between-client-and-server.html" class="sidebar-link">Sockets And Message Encryption/Decryption Between Client and Server</a></li><li><a href="/python/python-networking.html" class="sidebar-link">Python Networking</a></li><li><a href="/python/python-http-server.html" class="sidebar-link">Python HTTP Server</a></li><li><a href="/python/flask.html" class="sidebar-link">Flask</a></li><li><a href="/python/introduction-to-rabbitmq-using-amqpstorm.html" class="sidebar-link">Introduction to RabbitMQ using AMQPStorm</a></li><li><a href="/python/descriptor.html" class="sidebar-link">Descriptor</a></li><li><a href="/python/tempfile-namedtemporaryfile.html" class="sidebar-link">tempfile NamedTemporaryFile</a></li><li><a href="/python/input-subset-and-output-external-data-files-using-pandas.html" class="sidebar-link">Input, Subset and Output External Data Files using Pandas</a></li><li><a href="/python/unzipping-files.html" class="sidebar-link">Unzipping Files</a></li><li><a href="/python/working-with-zip-archives.html" class="sidebar-link">Working with ZIP archives</a></li><li><a href="/python/getting-start-with-gzip.html" class="sidebar-link">getting start with GZip</a></li><li><a href="/python/stack.html" class="sidebar-link">Stack</a></li><li><a href="/python/working-around-the-global-interpreter-lock-gil.html" class="sidebar-link">Working around the Global Interpreter Lock (GIL)</a></li><li><a href="/python/deployment.html" class="sidebar-link">Deployment</a></li><li><a href="/python/logging.html" class="sidebar-link">Logging</a></li><li><a href="/python/web-server-gateway-interface-wsgi.html" class="sidebar-link">Web Server Gateway Interface (WSGI)</a></li><li><a href="/python/python-server-sent-events.html" class="sidebar-link">Python Server Sent Events</a></li><li><a href="/python/alternatives-to-switch-statement-from-other-languages.html" class="sidebar-link">Alternatives to switch statement from other languages</a></li><li><a href="/python/list-destructuring-aka-packing-and-unpacking.html" class="sidebar-link">List destructuring (aka packing and unpacking)</a></li><li><a href="/python/accessing-python-source-code-and-bytecode.html" class="sidebar-link">Accessing Python source code and bytecode</a></li><li><a href="/python/mixins.html" class="sidebar-link">Mixins</a></li><li><a href="/python/attribute-access.html" class="sidebar-link">Attribute Access</a></li><li><a href="/python/arcpy.html" class="sidebar-link">ArcPy</a></li><li><a href="/python/abstract-base-classes-abc.html" class="sidebar-link">Abstract Base Classes (abc)</a></li><li><a href="/python/plugin-and-extension-classes.html" class="sidebar-link">Plugin and Extension Classes</a></li><li><a href="/python/immutable-datatypes-int-float-str-tuple-and-frozensets.html" class="sidebar-link">Immutable datatypes(int, float, str, tuple and frozensets)</a></li><li><a href="/python/incompatibilities-moving-from-python-2-to-python-3.html" class="sidebar-link">Incompatibilities moving from Python 2 to Python 3</a></li><li><a href="/python/2to3-tool.html" class="sidebar-link">2to3 tool</a></li><li><a href="/python/non-official-python-implementations.html" class="sidebar-link">Non-official Python implementations</a></li><li><a href="/python/abstract-syntax-tree.html" class="sidebar-link">Abstract syntax tree</a></li><li><a href="/python/unicode-and-bytes.html" class="sidebar-link">Unicode and bytes</a></li><li><a href="/python/python-serial-communication-pyserial.html" class="sidebar-link">Python Serial Communication (pyserial)</a></li><li><a href="/python/neo4j-and-cypher-using-py2neo.html" class="sidebar-link">Neo4j and Cypher using Py2Neo</a></li><li><a href="/python/basic-curses-with-python.html" class="sidebar-link">Basic Curses with Python</a></li><li><a href="/python/templates-in-python.html" class="sidebar-link">Templates in python</a></li><li><a href="/python/pillow.html" class="sidebar-link">Pillow</a></li><li><a href="/python/the-pass-statement.html" class="sidebar-link">The pass statement</a></li><li><a href="/python/cli-subcommands-with-precise-help-output.html" class="sidebar-link">CLI subcommands with precise help output</a></li><li><a href="/python/database-access.html" class="sidebar-link">Database Access</a></li><li><a href="/python/connecting-python-to-sql-server.html" class="sidebar-link">Connecting Python to SQL Server</a></li><li><a href="/python/postgresql.html" class="sidebar-link">PostgreSQL</a></li><li><a href="/python/python-and-excel.html" class="sidebar-link">Python and Excel</a></li><li><a href="/python/turtle-graphics.html" class="sidebar-link">Turtle Graphics</a></li><li><a href="/python/python-persistence.html" class="sidebar-link">Python Persistence</a></li><li><a href="/python/design-patterns.html" class="sidebar-link">Design Patterns</a></li><li><a href="/python/hashlib.html" class="sidebar-link">hashlib</a></li><li><a href="/python/creating-a-windows-service-using-python.html" class="sidebar-link">Creating a Windows service using Python</a></li><li><a href="/python/mutable-vs-immutable-and-hashable-in-python.html" class="sidebar-link">Mutable vs Immutable (and Hashable) in Python</a></li><li><a href="/python/configparser.html" class="sidebar-link">configparser</a></li><li><a href="/python/optical-character-recognition.html" class="sidebar-link">Optical Character Recognition</a></li><li><a href="/python/virtual-environments.html" class="sidebar-link">Virtual environments</a></li><li><a href="/python/python-virtual-environment-virtualenv.html" class="sidebar-link">Python Virtual Environment - virtualenv</a></li><li><a href="/python/virtual-environment-with-virtualenvwrapper.html" class="sidebar-link">virtual environment with virtualenvwrapper</a></li><li><a href="/python/create-virtual-environment-with-virtualenvwrapper-in-windows.html" class="sidebar-link">Create virtual environment with virtualenvwrapper in windows</a></li><li><a href="/python/sys.html" class="sidebar-link">sys</a></li><li><a href="/python/chempy-python-package.html" class="sidebar-link">ChemPy - python package</a></li><li><a href="/python/pygame.html" class="sidebar-link">pygame</a></li><li><a href="/python/pyglet.html" class="sidebar-link">Pyglet</a></li><li><a href="/python/audio.html" class="sidebar-link">Audio</a></li><li><a href="/python/pyaudio.html" class="sidebar-link">pyaudio</a></li><li><a href="/python/shelve.html" class="sidebar-link">shelve</a></li><li><a href="/python/iot-programming-with-python-and-raspberry-pi.html" class="sidebar-link">IoT Programming with Python and Raspberry PI</a></li><li><a href="/python/kivy-cross-platform-python-framework-for-nui-development.html" class="sidebar-link">kivy - Cross-platform Python Framework for NUI Development</a></li><li><a href="/python/pandas-transform-preform-operations-on-groups-and-concatenate-the-results.html" class="sidebar-link">Pandas Transform: Preform operations on groups and concatenate the results</a></li><li><a href="/python/similarities-in-syntax-differences-in-meaning-python-vs-javascript.html" class="sidebar-link">Similarities in syntax, Differences in meaning: Python vs. JavaScript</a></li><li><a href="/python/call-python-from-c.html" class="sidebar-link">Call Python from C#</a></li><li><a href="/python/ctypes.html" class="sidebar-link">ctypes</a></li><li><a href="/python/writing-extensions.html" class="sidebar-link">Writing extensions</a></li><li><a href="/python/python-lex-yacc.html" class="sidebar-link">Python Lex-Yacc</a></li><li><a href="/python/unit-testing.html" class="sidebar-link">Unit Testing</a></li><li><a href="/python/py-test.html" class="sidebar-link">py.test</a></li><li><a href="/python/profiling.html" class="sidebar-link">Profiling</a></li><li><a href="/python/python-speed-of-program.html" class="sidebar-link">Python speed of program</a></li><li><a href="/python/performance-optimization.html" class="sidebar-link">Performance optimization</a></li><li><a href="/python/security-and-cryptography.html" class="sidebar-link">Security and Cryptography</a></li><li><a href="/python/secure-shell-connection-in-python.html" class="sidebar-link">Secure Shell Connection in Python</a></li><li><a href="/python/python-anti-patterns.html" class="sidebar-link">Python Anti-Patterns</a></li><li><a href="/python/common-pitfalls.html" class="sidebar-link">Common Pitfalls</a></li><li><a href="/python/hidden-features.html" class="sidebar-link">Hidden Features</a></li><li><a href="/python/date-formatting.html" class="sidebar-link">Date Formatting</a></li><li><a href="/python/ijson.html" class="sidebar-link">ijson</a></li><li><a href="/python/django.html" class="sidebar-link">Django</a></li><li><a href="/python/code-blocks-execution-frames-and-namespaces.html" class="sidebar-link">Code blocks, execution frames, and namespaces</a></li><li><a href="/python/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="classes"><a href="#classes" class="header-anchor">#</a> Classes</h1> <p>Python offers itself not only as a popular scripting language, but also supports the object-oriented programming paradigm. Classes describe data and provide methods to manipulate that data, all encompassed under a single object. Furthermore, classes allow for abstraction by separating concrete implementation details from abstract representations of data.</p> <p>Code utilizing classes is generally easier to read, understand, and maintain.</p> <h2 id="introduction-to-classes"><a href="#introduction-to-classes" class="header-anchor">#</a> Introduction to classes</h2> <p>A class, functions as a template that defines the basic characteristics of a particular object. Here's an example:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+     <span class="token triple-quoted-string string">&quot;&quot;&quot;A simple class.&quot;&quot;&quot;</span>                            <span class="token comment"># docstring</span>
+     species <span class="token operator">=</span> <span class="token string">&quot;Homo Sapiens&quot;</span>                         <span class="token comment"># class attribute</span>
+
+     <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>                        <span class="token comment"># special method</span>
+         <span class="token triple-quoted-string string">&quot;&quot;&quot;This is the initializer. It's a special
+         method (see below).
+         &quot;&quot;&quot;</span>
+         self<span class="token punctuation">.</span>name <span class="token operator">=</span> name                             <span class="token comment"># instance attribute</span>
+
+     <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>                               <span class="token comment"># special method</span>
+         <span class="token triple-quoted-string string">&quot;&quot;&quot;This method is run when Python tries 
+         to cast the object to a string. Return 
+         this string when using print(), etc.
+         &quot;&quot;&quot;</span>
+         <span class="token keyword">return</span> self<span class="token punctuation">.</span>name
+
+     <span class="token keyword">def</span> <span class="token function">rename</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> renamed<span class="token punctuation">)</span><span class="token punctuation">:</span>                       <span class="token comment"># regular method</span>
+         <span class="token triple-quoted-string string">&quot;&quot;&quot;Reassign and print the name attribute.&quot;&quot;&quot;</span>
+         self<span class="token punctuation">.</span>name <span class="token operator">=</span> renamed
+         <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Now my name is {}&quot;</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>There are a few things to note when looking at the above example.</p> <ol><li>The class is made up of <strong>attributes</strong> (data) and <strong>methods</strong> (functions).</li> <li>Attributes and methods are simply defined as normal variables and functions.</li> <li>As noted in the corresponding docstring, the <code>__init__()</code> method is called the <strong>initializer</strong>. It's equivalent to the constructor in other object oriented languages, and is the method that is first run when you create a new object, or new instance of the class.</li> <li>Attributes that apply to the whole class are defined first, and are called <strong>class attributes</strong>.</li> <li>Attributes that apply to a specific instance of a class (an object) are called <strong>instance attributes</strong>. They are generally defined inside <code>__init__()</code>; this is not necessary, but it is recommended (since attributes defined outside of <code>__init__()</code> run the risk of being accessed before they are defined).</li> <li>Every method, included in the class definition passes the object in question as its first parameter. The word <code>self</code> is used for this parameter (usage of <code>self</code> is actually by convention, as the word <code>self</code> has no inherent meaning in Python, but this is one of Python's most respected conventions, and you should always follow it).</li> <li>Those used to object-oriented programming in other languages may be surprised by a few things. One is that Python has no real concept of <code>private</code> elements, so everything, by default, imitates the behavior of the C++/Java <code>public</code> keyword. For more information, see the &quot;Private Class Members&quot; example on this page.</li> <li>Some of the class's methods have the following form: <code>__functionname__(self, other_stuff)</code>. All such methods are called &quot;magic methods&quot; and are an important part of classes in Python. For instance, operator overloading in Python is implemented with magic methods. For more information, see <a href="http://stackoverflow.com/documentation/python/2063/overloading/1113/magic-dunder-methods#t=201608092225343955327" target="_blank" rel="noopener noreferrer">the relevant documentation<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</li></ol> <p>Now let's make a few instances of our <code>Person</code> class!</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token comment"># Instances</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> kelly <span class="token operator">=</span> Person<span class="token punctuation">(</span><span class="token string">&quot;Kelly&quot;</span><span class="token punctuation">)</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> joseph <span class="token operator">=</span> Person<span class="token punctuation">(</span><span class="token string">&quot;Joseph&quot;</span><span class="token punctuation">)</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> john_doe <span class="token operator">=</span> Person<span class="token punctuation">(</span><span class="token string">&quot;John Doe&quot;</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>We currently have three <code>Person</code> objects, <code>kelly</code>, <code>joseph</code>, and <code>john_doe</code>.</p> <p>We can access the attributes of the class from each instance using the dot operator <code>.</code> Note again the difference between class and instance attributes:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token comment"># Attributes</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> kelly<span class="token punctuation">.</span>species
+<span class="token string">'Homo Sapiens'</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> john_doe<span class="token punctuation">.</span>species
+<span class="token string">'Homo Sapiens'</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> joseph<span class="token punctuation">.</span>species
+<span class="token string">'Homo Sapiens'</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> kelly<span class="token punctuation">.</span>name
+<span class="token string">'Kelly'</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> joseph<span class="token punctuation">.</span>name
+<span class="token string">'Joseph'</span>
+
+</code></pre></div><p>We can execute the methods of the class using the same dot operator <code>.</code>:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token comment"># Methods</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> john_doe<span class="token punctuation">.</span>__str__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token string">'John Doe'</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span>  <span class="token keyword">print</span><span class="token punctuation">(</span>john_doe<span class="token punctuation">)</span>
+<span class="token string">'John Doe'</span>
+<span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span>  john_doe<span class="token punctuation">.</span>rename<span class="token punctuation">(</span><span class="token string">&quot;John&quot;</span><span class="token punctuation">)</span>
+<span class="token string">'Now my name is John'</span>
+
+</code></pre></div><h2 id="bound-unbound-and-static-methods"><a href="#bound-unbound-and-static-methods" class="header-anchor">#</a> Bound, unbound, and static methods</h2> <p>The idea of bound and unbound methods was <a href="https://python-history.blogspot.com/2009/02/first-class-everything.html" target="_blank" rel="noopener noreferrer">removed in Python 3<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. In Python 3 when you declare a method within a class, you are using a <code>def</code> keyword, thus creating a function object. This is a regular function, and the surrounding class works as its namespace. In the following example we declare method <code>f</code> within class <code>A</code>, and it becomes a function <code>A.f</code>:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> x
+A<span class="token punctuation">.</span>f
+<span class="token comment"># &lt;function A.f at ...&gt;  (in Python 3.x)</span>
+
+</code></pre></div><p>In Python 2 the behavior was different: function objects within the class were implicitly replaced with objects of type <code>instancemethod</code>, which were called <strong>unbound methods</strong> because they were not bound to any particular class instance. It was possible to access the underlying function using <code>.__func__</code> property.</p> <div class="language-py extra-class"><pre class="language-py"><code>A<span class="token punctuation">.</span>f
+<span class="token comment"># &lt;unbound method A.f&gt;   (in Python 2.x)</span>
+A<span class="token punctuation">.</span>f<span class="token punctuation">.</span>__class__
+<span class="token comment"># &lt;type 'instancemethod'&gt;</span>
+A<span class="token punctuation">.</span>f<span class="token punctuation">.</span>__func__
+<span class="token comment"># &lt;function f at ...&gt;</span>
+
+</code></pre></div><p>The latter behaviors are confirmed by inspection - methods are recognized as functions in Python 3, while the distinction is upheld in Python 2.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">import</span> inspect
+
+inspect<span class="token punctuation">.</span>isfunction<span class="token punctuation">(</span>A<span class="token punctuation">.</span>f<span class="token punctuation">)</span>
+<span class="token comment"># True</span>
+inspect<span class="token punctuation">.</span>ismethod<span class="token punctuation">(</span>A<span class="token punctuation">.</span>f<span class="token punctuation">)</span>
+<span class="token comment"># False</span>
+
+</code></pre></div><div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">import</span> inspect
+
+inspect<span class="token punctuation">.</span>isfunction<span class="token punctuation">(</span>A<span class="token punctuation">.</span>f<span class="token punctuation">)</span>
+<span class="token comment"># False</span>
+inspect<span class="token punctuation">.</span>ismethod<span class="token punctuation">(</span>A<span class="token punctuation">.</span>f<span class="token punctuation">)</span>
+<span class="token comment"># True</span>
+
+</code></pre></div><p>In both versions of Python function/method <code>A.f</code> can be called directly, provided that you pass an instance of class <code>A</code> as the first argument.</p> <div class="language-py extra-class"><pre class="language-py"><code>A<span class="token punctuation">.</span>f<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span>
+<span class="token comment"># Python 2: TypeError: unbound method f() must be called with</span>
+<span class="token comment">#                      A instance as first argument (got int instance instead) </span>
+<span class="token comment"># Python 3: 14   </span>
+a <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+A<span class="token punctuation">.</span>f<span class="token punctuation">(</span>a<span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span>
+<span class="token comment"># Python 2 &amp; 3: 40</span>
+
+</code></pre></div><p>Now suppose <code>a</code> is an instance of class <code>A</code>, what is <code>a.f</code> then? Well, intuitively this should be the same method <code>f</code> of class <code>A</code>, only it should somehow &quot;know&quot; that it was applied to the object <code>a</code> – in Python this is called method <strong>bound</strong> to <code>a</code>.</p> <p>The nitty-gritty details are as follows: writing <code>a.f</code> invokes the magic <code>__getattribute__</code> method of <code>a</code>, which first checks whether <code>a</code> has an attribute named <code>f</code> (it doesn't), then checks the class <code>A</code> whether it contains a method with such a name (it does), and creates a new object <code>m</code> of type <code>method</code> which has the reference to the original <code>A.f</code> in <code>m.__func__</code>, and a reference to the object <code>a</code> in <code>m.__self__</code>. When this object is called as a function, it simply does the following: <code>m(...) =&gt; m.__func__(m.__self__, ...)</code>. Thus this object is called a <strong>bound method</strong> because when invoked it knows to supply the object it was bound to as the first argument. (These things work same way in Python 2 and 3).</p> <div class="language-py extra-class"><pre class="language-py"><code>a <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token punctuation">)</span>
+a<span class="token punctuation">.</span>f
+<span class="token comment"># &lt;bound method A.f of &lt;__main__.A object at ...&gt;&gt;</span>
+a<span class="token punctuation">.</span>f<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token comment"># 4</span>
+
+<span class="token comment"># Note: the bound method object a.f is recreated *every time* you call it:</span>
+a<span class="token punctuation">.</span>f <span class="token keyword">is</span> a<span class="token punctuation">.</span>f  <span class="token comment"># False</span>
+<span class="token comment"># As a performance optimization you can store the bound method in the object's</span>
+<span class="token comment"># __dict__, in which case the method object will remain fixed:</span>
+a<span class="token punctuation">.</span>f <span class="token operator">=</span> a<span class="token punctuation">.</span>f
+a<span class="token punctuation">.</span>f <span class="token keyword">is</span> a<span class="token punctuation">.</span>f  <span class="token comment"># True</span>
+
+</code></pre></div><p>Finally, Python has <strong>class methods</strong> and <strong>static methods</strong> – special kinds of methods. Class methods work the same way as regular methods, except that when invoked on an object they bind to the <strong>class</strong> of the object instead of to the object. Thus <code>m.__self__ = type(a)</code>. When you call such bound method, it passes the class of <code>a</code> as the first argument. Static methods are even simpler: they don't bind anything at all, and simply return the underlying function without any transformations.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    multiplier <span class="token operator">=</span> <span class="token number">2</span>
+
+    <span class="token decorator annotation punctuation">@classmethod</span>
+    <span class="token keyword">def</span> <span class="token function">f</span><span class="token punctuation">(</span>cls<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> cls<span class="token punctuation">.</span>multiplier <span class="token operator">*</span> x
+
+    <span class="token decorator annotation punctuation">@staticmethod</span>
+    <span class="token keyword">def</span> <span class="token function">g</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Hello, %s&quot;</span> <span class="token operator">%</span> name<span class="token punctuation">)</span>
+
+D<span class="token punctuation">.</span>f
+<span class="token comment"># &lt;bound method type.f of &lt;class '__main__.D'&gt;&gt;</span>
+D<span class="token punctuation">.</span>f<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span>
+<span class="token comment"># 24</span>
+D<span class="token punctuation">.</span>g
+<span class="token comment"># &lt;function D.g at ...&gt;</span>
+D<span class="token punctuation">.</span>g<span class="token punctuation">(</span><span class="token string">&quot;world&quot;</span><span class="token punctuation">)</span>
+<span class="token comment"># Hello, world</span>
+
+</code></pre></div><p>Note that class methods are bound to the class even when accessed on the instance:</p> <div class="language-py extra-class"><pre class="language-py"><code>d <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token punctuation">)</span>
+d<span class="token punctuation">.</span>multiplier <span class="token operator">=</span> <span class="token number">1337</span>
+<span class="token punctuation">(</span>D<span class="token punctuation">.</span>multiplier<span class="token punctuation">,</span> d<span class="token punctuation">.</span>multiplier<span class="token punctuation">)</span>
+<span class="token comment"># (2, 1337)</span>
+d<span class="token punctuation">.</span>f
+<span class="token comment"># &lt;bound method D.f of &lt;class '__main__.D'&gt;&gt;</span>
+d<span class="token punctuation">.</span>f<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token comment"># 20</span>
+
+</code></pre></div><p>It is worth noting that at the lowest level, functions, methods, staticmethods, etc. are actually <a href="http://stackoverflow.com/documentation/python/3405/descriptor/11716/simple-descriptor#t=201612051953531019874" target="_blank" rel="noopener noreferrer">descriptors<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> that invoke <code>__get__</code>, <code>__set</code>__ and optionally <code>__del__</code> special methods.  For more details on classmethods and staticmethods:</p> <ul><li><a href="http://stackoverflow.com/questions/136097/what-is-the-difference-between-staticmethod-and-classmethod-in-python" target="_blank" rel="noopener noreferrer">What is the difference between @staticmethod and @classmethod in Python?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="http://stackoverflow.com/questions/12179271/python-classmethod-and-staticmethod-for-beginner" target="_blank" rel="noopener noreferrer">Meaning of @classmethod and @staticmethod for beginner?<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul> <h2 id="basic-inheritance"><a href="#basic-inheritance" class="header-anchor">#</a> Basic inheritance</h2> <p>Inheritance in Python is based on similar ideas used in other object oriented languages like Java, C++ etc.
+A new class can be derived from an existing class as follows.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">BaseClass</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+
+<span class="token keyword">class</span> <span class="token class-name">DerivedClass</span><span class="token punctuation">(</span>BaseClass<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+
+</code></pre></div><p>The <code>BaseClass</code> is the already existing (<strong>parent</strong>) class, and the <code>DerivedClass</code> is the new (<strong>child</strong>) class that inherits (or <strong>subclasses</strong>) attributes from <code>BaseClass</code>.  <strong>Note</strong>: As of Python 2.2, all <a href="https://docs.python.org/release/2.2.3/whatsnew/sect-rellinks.html" target="_blank" rel="noopener noreferrer">classes implicitly inherit from the <code>object</code> class<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, which is the base class for all built-in types.</p> <p>We define a parent <code>Rectangle</code> class in the example below, which implicitly inherits from <code>object</code>:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Rectangle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> w<span class="token punctuation">,</span> h<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>w <span class="token operator">=</span> w
+        self<span class="token punctuation">.</span>h <span class="token operator">=</span> h
+    
+    <span class="token keyword">def</span> <span class="token function">area</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>w <span class="token operator">*</span> self<span class="token punctuation">.</span>h
+        
+    <span class="token keyword">def</span> <span class="token function">perimeter</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token number">2</span> <span class="token operator">*</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>w <span class="token operator">+</span> self<span class="token punctuation">.</span>h<span class="token punctuation">)</span>
+
+</code></pre></div><p>The <code>Rectangle</code> class can be used as a base class for defining a <code>Square</code> class, as a square is a special case of rectangle.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Square</span><span class="token punctuation">(</span>Rectangle<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> s<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># call parent constructor, w and h are both s</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>Square<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span>s<span class="token punctuation">,</span> s<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>s <span class="token operator">=</span> s
+
+</code></pre></div><p>The <code>Square</code> class will automatically inherit all attributes of the <code>Rectangle</code> class as well as the object class. <code>super()</code> is used to call the <code>__init__()</code> method of <code>Rectangle</code> class, essentially calling any overridden method of the base class.  <strong>Note</strong>: in Python 3, <code>super()</code> does not require arguments.</p> <p>Derived class objects can access and modify the attributes of its base classes:</p> <div class="language-py extra-class"><pre class="language-py"><code>r<span class="token punctuation">.</span>area<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># Output: 12</span>
+r<span class="token punctuation">.</span>perimeter<span class="token punctuation">(</span><span class="token punctuation">)</span>  
+<span class="token comment"># Output: 14</span>
+
+s<span class="token punctuation">.</span>area<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># Output: 4</span>
+s<span class="token punctuation">.</span>perimeter<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># Output: 8</span>
+
+</code></pre></div><h3 id="built-in-functions-that-work-with-inheritance"><a href="#built-in-functions-that-work-with-inheritance" class="header-anchor">#</a> Built-in functions that work with inheritance</h3> <p><code>issubclass(DerivedClass, BaseClass)</code>: returns <code>True</code> if <code>DerivedClass</code> is a subclass of the <code>BaseClass</code></p> <p><code>isinstance(s, Class)</code>: returns <code>True</code> if s is an instance of <code>Class</code> or any of the derived classes of <code>Class</code></p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token comment"># subclass check        </span>
+<span class="token builtin">issubclass</span><span class="token punctuation">(</span>Square<span class="token punctuation">,</span> Rectangle<span class="token punctuation">)</span>
+<span class="token comment"># Output: True</span>
+
+<span class="token comment"># instantiate</span>
+r <span class="token operator">=</span> Rectangle<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+s <span class="token operator">=</span> Square<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+<span class="token builtin">isinstance</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> Rectangle<span class="token punctuation">)</span>  
+<span class="token comment"># Output: True</span>
+<span class="token builtin">isinstance</span><span class="token punctuation">(</span>r<span class="token punctuation">,</span> Square<span class="token punctuation">)</span>
+<span class="token comment"># Output: False</span>
+<span class="token comment"># A rectangle is not a square</span>
+
+<span class="token builtin">isinstance</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> Rectangle<span class="token punctuation">)</span>
+<span class="token comment"># Output: True</span>
+<span class="token comment"># A square is a rectangle</span>
+<span class="token builtin">isinstance</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> Square<span class="token punctuation">)</span>
+<span class="token comment"># Output: True</span>
+
+</code></pre></div><h2 id="monkey-patching"><a href="#monkey-patching" class="header-anchor">#</a> Monkey Patching</h2> <p>In this case, &quot;monkey patching&quot; means adding a new variable or method to a class after it's been defined. For instance, say we defined class <code>A</code> as</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>num <span class="token operator">=</span> num
+
+    <span class="token keyword">def</span> <span class="token function">__add__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> A<span class="token punctuation">(</span>self<span class="token punctuation">.</span>num <span class="token operator">+</span> other<span class="token punctuation">.</span>num<span class="token punctuation">)</span>
+
+</code></pre></div><p>But now we want to add another function later in the code. Suppose this function is as follows.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">def</span> <span class="token function">get_num</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> self<span class="token punctuation">.</span>num
+
+</code></pre></div><p>But how do we add this as a method in <code>A</code>? That's simple we just essentially place that function into <code>A</code> with an assignment statement.</p> <div class="language-py extra-class"><pre class="language-py"><code>A<span class="token punctuation">.</span>get_num <span class="token operator">=</span> get_num
+
+</code></pre></div><p>Why does this work? Because functions are objects just like any other object, and methods are functions that belong to the class.</p> <p>The function <code>get_num</code> shall be available to all existing (already created) as well to the new instances of <code>A</code></p> <p>These additions are available on all instances of that class (or its subclasses) automatically. For example:</p> <div class="language-py extra-class"><pre class="language-py"><code>foo <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">)</span>
+
+A<span class="token punctuation">.</span>get_num <span class="token operator">=</span> get_num
+
+bar <span class="token operator">=</span> A<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+foo<span class="token punctuation">.</span>get_num<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 42</span>
+
+bar<span class="token punctuation">.</span>get_num<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># 6</span>
+
+</code></pre></div><p>Note that, unlike some other languages, this technique does not work for certain built-in types, and it is not considered good style.</p> <h2 id="new-style-vs-old-style-classes"><a href="#new-style-vs-old-style-classes" class="header-anchor">#</a> New-style vs. old-style classes</h2> <p><strong>New-style</strong> classes were introduced in Python 2.2 to unify <strong>classes</strong> and <strong>types</strong>. They inherit from the top-level <code>object</code> type. <strong>A new-style class is a user-defined type</strong>, and is very similar to built-in types.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token comment"># new-style class</span>
+<span class="token keyword">class</span> <span class="token class-name">New</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+
+<span class="token comment"># new-style instance</span>
+new <span class="token operator">=</span> New<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+new<span class="token punctuation">.</span>__class__
+<span class="token comment"># &lt;class '__main__.New'&gt;</span>
+<span class="token builtin">type</span><span class="token punctuation">(</span>new<span class="token punctuation">)</span>
+<span class="token comment"># &lt;class '__main__.New'&gt;</span>
+<span class="token builtin">issubclass</span><span class="token punctuation">(</span>New<span class="token punctuation">,</span> <span class="token builtin">object</span><span class="token punctuation">)</span>
+<span class="token comment"># True</span>
+
+</code></pre></div><p><strong>Old-style</strong> classes do <strong>not</strong> inherit from <code>object</code>. Old-style instances are always implemented with a built-in <code>instance</code> type.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token comment"># old-style class</span>
+<span class="token keyword">class</span> <span class="token class-name">Old</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+
+<span class="token comment"># old-style instance</span>
+old <span class="token operator">=</span> Old<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+old<span class="token punctuation">.</span>__class__
+<span class="token comment"># &lt;class __main__.Old at ...&gt;</span>
+<span class="token builtin">type</span><span class="token punctuation">(</span>old<span class="token punctuation">)</span>
+<span class="token comment"># &lt;type 'instance'&gt;</span>
+<span class="token builtin">issubclass</span><span class="token punctuation">(</span>Old<span class="token punctuation">,</span> <span class="token builtin">object</span><span class="token punctuation">)</span>
+<span class="token comment"># False</span>
+
+</code></pre></div><p>In Python 3, old-style classes were removed.</p> <p>New-style classes in Python 3 implicitly inherit from <code>object</code>, so there is no need to specify <code>MyClass(object)</code> anymore.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">MyClass</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span>
+
+my_inst <span class="token operator">=</span> MyClass<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token builtin">type</span><span class="token punctuation">(</span>my_inst<span class="token punctuation">)</span>
+<span class="token comment"># &lt;class '__main__.MyClass'&gt;</span>
+my_inst<span class="token punctuation">.</span>__class__
+<span class="token comment"># &lt;class '__main__.MyClass'&gt;</span>
+<span class="token builtin">issubclass</span><span class="token punctuation">(</span>MyClass<span class="token punctuation">,</span> <span class="token builtin">object</span><span class="token punctuation">)</span>
+<span class="token comment"># True</span>
+
+</code></pre></div><h2 id="class-methods-alternate-initializers"><a href="#class-methods-alternate-initializers" class="header-anchor">#</a> Class methods: alternate initializers</h2> <p>Class methods present alternate ways to build instances of classes. To illustrate, let's look at an example.</p> <p>Let's suppose we have a relatively simple <code>Person</code> class:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> first_name<span class="token punctuation">,</span> last_name<span class="token punctuation">,</span> age<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>first_name <span class="token operator">=</span> first_name
+        self<span class="token punctuation">.</span>last_name <span class="token operator">=</span> last_name
+        self<span class="token punctuation">.</span>age <span class="token operator">=</span> age
+        self<span class="token punctuation">.</span>full_name <span class="token operator">=</span> first_name <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> last_name
+    
+    <span class="token keyword">def</span> <span class="token function">greet</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Hello, my name is &quot;</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>full_name <span class="token operator">+</span> <span class="token string">&quot;.&quot;</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>It might be handy to have a way to build instances of this class specifying a full name instead of first and last name separately. One way to do this would be to have <code>last_name</code> be an optional parameter, and assuming that if it isn't given, we passed the full name in:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> first_name<span class="token punctuation">,</span> age<span class="token punctuation">,</span> last_name<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> last_name <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>first_name<span class="token punctuation">,</span> self<span class="token punctuation">.</span>last_name <span class="token operator">=</span> first_name<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>first_name <span class="token operator">=</span> first_name
+            self<span class="token punctuation">.</span>last_name <span class="token operator">=</span> last_name
+        
+        self<span class="token punctuation">.</span>full_name <span class="token operator">=</span> self<span class="token punctuation">.</span>first_name <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>last_name
+        self<span class="token punctuation">.</span>age <span class="token operator">=</span> age
+
+    <span class="token keyword">def</span> <span class="token function">greet</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Hello, my name is &quot;</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>full_name <span class="token operator">+</span> <span class="token string">&quot;.&quot;</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>However, there are two main problems with this bit of code:</p> <li>
+The parameters `first_name` and `last_name` are now misleading, since you can enter a full name for `first_name`. Also, if there are more cases and/or more parameters that have this kind of flexibility, the if/elif/else branching can get annoying fast.
+</li> <li>
+Not quite as important, but still worth pointing out: what if `last_name` is `None`, but `first_name` doesn't split into two or more things via spaces? We have yet another layer of input validation and/or exception handling...
+</li> <p>Enter class methods. Rather than having a single initializer, we will create a separate initializer, called <code>from_full_name</code>, and decorate it with the (built-in) <code>classmethod</code> decorator.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> first_name<span class="token punctuation">,</span> last_name<span class="token punctuation">,</span> age<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>first_name <span class="token operator">=</span> first_name
+        self<span class="token punctuation">.</span>last_name <span class="token operator">=</span> last_name
+        self<span class="token punctuation">.</span>age <span class="token operator">=</span> age
+        self<span class="token punctuation">.</span>full_name <span class="token operator">=</span> first_name <span class="token operator">+</span> <span class="token string">&quot; &quot;</span> <span class="token operator">+</span> last_name
+    
+    <span class="token decorator annotation punctuation">@classmethod</span>
+    <span class="token keyword">def</span> <span class="token function">from_full_name</span><span class="token punctuation">(</span>cls<span class="token punctuation">,</span> name<span class="token punctuation">,</span> age<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token string">&quot; &quot;</span> <span class="token keyword">not</span> <span class="token keyword">in</span> name<span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> ValueError
+        first_name<span class="token punctuation">,</span> last_name <span class="token operator">=</span> name<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token string">&quot; &quot;</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> cls<span class="token punctuation">(</span>first_name<span class="token punctuation">,</span> last_name<span class="token punctuation">,</span> age<span class="token punctuation">)</span>
+    
+    <span class="token keyword">def</span> <span class="token function">greet</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Hello, my name is &quot;</span> <span class="token operator">+</span> self<span class="token punctuation">.</span>full_name <span class="token operator">+</span> <span class="token string">&quot;.&quot;</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>Notice <code>cls</code> instead of <code>self</code> as the first argument to <code>from_full_name</code>. Class methods are applied to the overall class, <strong>not</strong> an instance of a given class (which is what <code>self</code> usually denotes). So, if <code>cls</code> is our <code>Person</code> class, then the returned value from the <code>from_full_name</code> class method is <code>Person(first_name, last_name, age)</code>, which uses <code>Person</code>'s <code>__init__</code> to create an instance of the <code>Person</code> class. In particular, if we were to make a subclass <code>Employee</code> of <code>Person</code>, then <code>from_full_name</code> would work in the <code>Employee</code> class as well.</p> <p>To show that this works as expected, let's create instances of <code>Person</code> in more than one way without the branching in <code>__init__</code>:</p> <div class="language-py extra-class"><pre class="language-py"><code>In <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span> bob <span class="token operator">=</span> Person<span class="token punctuation">(</span><span class="token string">&quot;Bob&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Bobberson&quot;</span><span class="token punctuation">,</span> <span class="token number">42</span><span class="token punctuation">)</span>
+
+In <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">:</span> alice <span class="token operator">=</span> Person<span class="token punctuation">.</span>from_full_name<span class="token punctuation">(</span><span class="token string">&quot;Alice Henderson&quot;</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">)</span>
+
+In <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span> bob<span class="token punctuation">.</span>greet<span class="token punctuation">(</span><span class="token punctuation">)</span>
+Hello<span class="token punctuation">,</span> my name <span class="token keyword">is</span> Bob Bobberson<span class="token punctuation">.</span>
+
+In <span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">:</span> alice<span class="token punctuation">.</span>greet<span class="token punctuation">(</span><span class="token punctuation">)</span>
+Hello<span class="token punctuation">,</span> my name <span class="token keyword">is</span> Alice Henderson<span class="token punctuation">.</span>
+
+</code></pre></div><p>Other references:</p> <li>
+[Python @classmethod and @staticmethod for beginner?](http://stackoverflow.com/questions/12179271/python-classmethod-and-staticmethod-for-beginner)
+</li> <li>
+[https://docs.python.org/2/library/functions.html#classmethod](https://docs.python.org/2/library/functions.html#classmethod)
+</li> <li>
+[https://docs.python.org/3.5/library/functions.html#classmethod](https://docs.python.org/3.5/library/functions.html#classmethod)
+</li> <h2 id="multiple-inheritance"><a href="#multiple-inheritance" class="header-anchor">#</a> Multiple Inheritance</h2> <p>Python uses the <a href="https://en.wikipedia.org/wiki/C3_linearization" target="_blank" rel="noopener noreferrer">C3 linearization<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> algorithm to determine the order in which to resolve class attributes, including methods. This is known as the Method Resolution Order (MRO).</p> <p>Here's a simple example:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    foo <span class="token operator">=</span> <span class="token string">'attr foo of Foo'</span>
+    
+
+<span class="token keyword">class</span> <span class="token class-name">Bar</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    foo <span class="token operator">=</span> <span class="token string">'attr foo of Bar'</span> <span class="token comment"># we won't see this.</span>
+    bar <span class="token operator">=</span> <span class="token string">'attr bar of Bar'</span>
+
+<span class="token keyword">class</span> <span class="token class-name">FooBar</span><span class="token punctuation">(</span>Foo<span class="token punctuation">,</span> Bar<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    foobar <span class="token operator">=</span> <span class="token string">'attr foobar of FooBar'</span>
+
+</code></pre></div><p>Now if we instantiate FooBar, if we look up the foo attribute, we see that Foo's attribute is found first</p> <div class="language-py extra-class"><pre class="language-py"><code>fb <span class="token operator">=</span> FooBar<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>and</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> fb<span class="token punctuation">.</span>foo
+<span class="token string">'attr foo of Foo'</span>
+
+</code></pre></div><p>Here's the MRO of FooBar:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> FooBar<span class="token punctuation">.</span>mro<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'__main__.FooBar'</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'__main__.Foo'</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token keyword">class</span> <span class="token string">'__main__.Bar'</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">&lt;</span><span class="token builtin">type</span> <span class="token string">'object'</span><span class="token operator">&gt;</span><span class="token punctuation">]</span>
+
+</code></pre></div><p>It can be simply stated that Python's MRO algorithm is</p> <ol><li>Depth first (e.g. <code>FooBar</code> then <code>Foo</code>) unless</li> <li>a shared parent (<code>object</code>) is blocked by a child (<code>Bar</code>) and</li> <li>no circular relationships allowed.</li></ol> <p>That is, for example, Bar cannot inherit from FooBar while FooBar inherits from Bar.</p> <p>For a comprehensive example in Python, see the <a href="https://en.wikipedia.org/wiki/C3_linearization" target="_blank" rel="noopener noreferrer">wikipedia entry<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <p>Another powerful feature in inheritance is <code>super</code>. super can fetch parent classes features.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Foo</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">foo_method</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">&quot;foo Method&quot;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Bar</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">bar_method</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">&quot;bar Method&quot;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">FooBar</span><span class="token punctuation">(</span>Foo<span class="token punctuation">,</span> Bar<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">foo_method</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>FooBar<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>foo_method<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>Multiple inheritance with init method of class, when every class has own init method then we try for multiple ineritance then only init method get called of class which is inherit first.</p> <p>for below example  only Foo class <strong>init</strong> method getting called <strong>Bar</strong> class init not getting called</p> <div class="language- extra-class"><pre class="language-text"><code>
+   class Foo(object):
+        def __init__(self):
+            print &quot;foo init&quot;
+
+    class Bar(object):
+        def __init__(self):
+            print &quot;bar init&quot;
+
+    class FooBar(Foo, Bar):
+        def __init__(self):
+            print &quot;foobar init&quot;
+            super(FooBar, self).__init__()
+
+    a = FooBar()
+
+</code></pre></div><p><strong>Output:</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+   foobar init
+    foo init
+
+</code></pre></div><p>But it doesn't mean that <strong>Bar</strong> class is not inherit. Instance of final  <strong>FooBar</strong> class is also instance of <strong>Bar</strong> class and <strong>Foo</strong> class.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">print</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>FooBar<span class="token punctuation">)</span>
+<span class="token keyword">print</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>Foo<span class="token punctuation">)</span>
+<span class="token keyword">print</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span>Bar<span class="token punctuation">)</span> 
+
+</code></pre></div><p><strong>Output:</strong></p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token boolean">True</span>
+<span class="token boolean">True</span>
+<span class="token boolean">True</span>
+
+</code></pre></div><h2 id="properties"><a href="#properties" class="header-anchor">#</a> Properties</h2> <p>Python classes support <strong>properties</strong>, which look like regular object variables, but with the possibility of attaching custom behavior and documentation.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">MyClass</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       self<span class="token punctuation">.</span>_my_string <span class="token operator">=</span> <span class="token string">&quot;&quot;</span>
+    
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">string</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;A profoundly important string.&quot;&quot;&quot;</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_my_string
+
+    <span class="token decorator annotation punctuation">@string<span class="token punctuation">.</span>setter</span>
+    <span class="token keyword">def</span> <span class="token function">string</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> new_value<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">assert</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>new_value<span class="token punctuation">,</span> <span class="token builtin">str</span><span class="token punctuation">)</span><span class="token punctuation">,</span> \
+               <span class="token string">&quot;Give me a string, not a %r!&quot;</span> <span class="token operator">%</span> <span class="token builtin">type</span><span class="token punctuation">(</span>new_value<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>_my_string <span class="token operator">=</span> new_value
+
+    <span class="token decorator annotation punctuation">@string<span class="token punctuation">.</span>deleter</span>
+    <span class="token keyword">def</span> <span class="token function">x</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>_my_string <span class="token operator">=</span> <span class="token boolean">None</span>
+
+</code></pre></div><p>The object's of class <code>MyClass</code> will <strong>appear</strong> to have have a property <code>.string</code>, however it's behavior is now tightly controlled:</p> <div class="language-py extra-class"><pre class="language-py"><code>mc <span class="token operator">=</span> MyClass<span class="token punctuation">(</span><span class="token punctuation">)</span>
+mc<span class="token punctuation">.</span>string <span class="token operator">=</span> <span class="token string">&quot;String!&quot;</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>mc<span class="token punctuation">.</span>string<span class="token punctuation">)</span>
+<span class="token keyword">del</span> mc<span class="token punctuation">.</span>string
+
+</code></pre></div><p>As well as the useful syntax as above, the property syntax allows for validation, or other augmentations to be added to those attributes. This could be especially useful with public APIs - where a level of help should be given to the user.</p> <p>Another common use of properties is to enable the class to present 'virtual attributes' - attributes which aren't actually stored but are computed only when requested.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Character</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> max_hp<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>_name <span class="token operator">=</span> name
+        self<span class="token punctuation">.</span>_hp <span class="token operator">=</span> max_hp
+        self<span class="token punctuation">.</span>_max_hp <span class="token operator">=</span> max_hp
+
+    <span class="token comment"># Make hp read only by not providing a set method</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">hp</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_hp
+
+    <span class="token comment"># Make name read only by not providing a set method</span>
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">name</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>name
+
+    <span class="token keyword">def</span> <span class="token function">take_damage</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> damage<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>hp <span class="token operator">-=</span> damage
+        self<span class="token punctuation">.</span>hp <span class="token operator">=</span> <span class="token number">0</span> <span class="token keyword">if</span> self<span class="token punctuation">.</span>hp <span class="token operator">&lt;</span><span class="token number">0</span> <span class="token keyword">else</span> self<span class="token punctuation">.</span>hp
+
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">is_alive</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>hp <span class="token operator">!=</span> <span class="token number">0</span>
+
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">is_wounded</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>hp <span class="token operator">&lt;</span> self<span class="token punctuation">.</span>max_hp <span class="token keyword">if</span> self<span class="token punctuation">.</span>hp <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">else</span> <span class="token boolean">False</span>
+
+    <span class="token decorator annotation punctuation">@property</span>
+    <span class="token keyword">def</span> <span class="token function">is_dead</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token keyword">not</span> self<span class="token punctuation">.</span>is_alive
+
+bilbo <span class="token operator">=</span> Character<span class="token punctuation">(</span><span class="token string">'Bilbo Baggins'</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+bilbo<span class="token punctuation">.</span>hp
+<span class="token comment"># out : 100</span>
+bilbo<span class="token punctuation">.</span>hp <span class="token operator">=</span> <span class="token number">200</span>        
+<span class="token comment"># out : AttributeError: can't set attribute</span>
+<span class="token comment"># hp attribute is read only.</span>
+
+bilbo<span class="token punctuation">.</span>is_alive
+<span class="token comment"># out : True</span>
+bilbo<span class="token punctuation">.</span>is_wounded
+<span class="token comment"># out : False</span>
+bilbo<span class="token punctuation">.</span>is_dead
+<span class="token comment"># out : False</span>
+
+bilbo<span class="token punctuation">.</span>take_damage<span class="token punctuation">(</span> <span class="token number">50</span> <span class="token punctuation">)</span>
+
+bilbo<span class="token punctuation">.</span>hp
+<span class="token comment"># out : 50</span>
+
+bilbo<span class="token punctuation">.</span>is_alive
+<span class="token comment"># out : True</span>
+bilbo<span class="token punctuation">.</span>is_wounded
+<span class="token comment"># out : True</span>
+bilbo<span class="token punctuation">.</span>is_dead
+<span class="token comment"># out : False</span>
+
+bilbo<span class="token punctuation">.</span>take_damage<span class="token punctuation">(</span> <span class="token number">50</span> <span class="token punctuation">)</span>
+bilbo<span class="token punctuation">.</span>hp
+<span class="token comment"># out : 0</span>
+
+bilbo<span class="token punctuation">.</span>is_alive
+<span class="token comment"># out : False</span>
+bilbo<span class="token punctuation">.</span>is_wounded
+<span class="token comment"># out : False</span>
+bilbo<span class="token punctuation">.</span>is_dead
+<span class="token comment"># out : True</span>
+
+</code></pre></div><h2 id="class-and-instance-variables"><a href="#class-and-instance-variables" class="header-anchor">#</a> Class and instance variables</h2> <p>Instance variables are unique for each instance, while class variables are shared by all instances.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> <span class="token number">2</span>  <span class="token comment"># class variable</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>y <span class="token operator">=</span> y  <span class="token comment"># instance variable</span>
+
+C<span class="token punctuation">.</span>x
+<span class="token comment"># 2</span>
+C<span class="token punctuation">.</span>y
+<span class="token comment"># AttributeError: type object 'C' has no attribute 'y'</span>
+
+c1 <span class="token operator">=</span> C<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span>
+c1<span class="token punctuation">.</span>x
+<span class="token comment"># 2</span>
+c1<span class="token punctuation">.</span>y
+<span class="token comment"># 3</span>
+
+c2 <span class="token operator">=</span> C<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+c2<span class="token punctuation">.</span>x
+<span class="token comment"># 2</span>
+c2<span class="token punctuation">.</span>y
+<span class="token comment"># 4</span>
+
+</code></pre></div><p>Class variables can be accessed on instances of this class, but assigning to the class attribute will create an instance variable which shadows the class variable</p> <div class="language-py extra-class"><pre class="language-py"><code>c2<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">4</span>
+c2<span class="token punctuation">.</span>x
+<span class="token comment"># 4</span>
+C<span class="token punctuation">.</span>x
+<span class="token comment"># 2</span>
+
+</code></pre></div><p>Note that <strong>mutating</strong> class variables from instances can lead to some unexpected consequences.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">D</span><span class="token punctuation">:</span>
+    x <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>x<span class="token punctuation">.</span>append<span class="token punctuation">(</span>item<span class="token punctuation">)</span>  <span class="token comment"># note that this is not an assigment!</span>
+
+d1 <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+d2 <span class="token operator">=</span> D<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+d1<span class="token punctuation">.</span>x
+<span class="token comment"># [1, 2]</span>
+d2<span class="token punctuation">.</span>x
+<span class="token comment"># [1, 2]</span>
+D<span class="token punctuation">.</span>x
+<span class="token comment"># [1, 2]</span>
+
+</code></pre></div><h2 id="default-values-for-instance-variables"><a href="#default-values-for-instance-variables" class="header-anchor">#</a> Default values for instance variables</h2> <p>If the variable contains a value of an immutable type (e.g. a string) then it is okay to assign a default value like this</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Rectangle</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'blue'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>width <span class="token operator">=</span> width
+        self<span class="token punctuation">.</span>height <span class="token operator">=</span> height
+        self<span class="token punctuation">.</span>color <span class="token operator">=</span> color
+    
+    <span class="token keyword">def</span> <span class="token function">area</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>width  <span class="token operator">*</span> self<span class="token punctuation">.</span>height 
+
+<span class="token comment"># Create some instances of the class</span>
+default_rectangle <span class="token operator">=</span> Rectangle<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>default_rectangle<span class="token punctuation">.</span>color<span class="token punctuation">)</span> <span class="token comment"># blue</span>
+
+red_rectangle <span class="token operator">=</span> Rectangle<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'red'</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>red_rectangle<span class="token punctuation">.</span>color<span class="token punctuation">)</span> <span class="token comment"># red</span>
+
+</code></pre></div><p>One needs to be careful when initializing mutable objects such as lists in the constructor.
+Consider the following example:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Rectangle2D</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">,</span> pos<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'blue'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        self<span class="token punctuation">.</span>width <span class="token operator">=</span> width
+        self<span class="token punctuation">.</span>height <span class="token operator">=</span> height
+        self<span class="token punctuation">.</span>pos <span class="token operator">=</span> pos
+        self<span class="token punctuation">.</span>color <span class="token operator">=</span> color
+
+r1 <span class="token operator">=</span> Rectangle2D<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+r2 <span class="token operator">=</span> Rectangle2D<span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span>
+r1<span class="token punctuation">.</span>pos<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>
+r1<span class="token punctuation">.</span>pos <span class="token comment"># [4, 0]</span>
+r2<span class="token punctuation">.</span>pos <span class="token comment"># [4, 0] r2's pos has changed as well</span>
+
+</code></pre></div><p>This behavior is caused by the fact that in Python default parameters are bound at function execution and not at function declaration. To get a default instance variable that's not shared among instances, one should use a construct like this:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Rectangle2D</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> width<span class="token punctuation">,</span> height<span class="token punctuation">,</span> pos<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> color<span class="token operator">=</span><span class="token string">'blue'</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
+        self<span class="token punctuation">.</span>width <span class="token operator">=</span> width
+        self<span class="token punctuation">.</span>height <span class="token operator">=</span> height
+        self<span class="token punctuation">.</span>pos <span class="token operator">=</span> pos <span class="token keyword">or</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">]</span> <span class="token comment"># default value is [0, 0]</span>
+        self<span class="token punctuation">.</span>color <span class="token operator">=</span> color
+
+r1 <span class="token operator">=</span> Rectangle2D<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+r2 <span class="token operator">=</span> Rectangle2D<span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">)</span>
+r1<span class="token punctuation">.</span>pos<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">4</span>
+r1<span class="token punctuation">.</span>pos <span class="token comment"># [4, 0]</span>
+r2<span class="token punctuation">.</span>pos <span class="token comment"># [0, 0] r2's pos hasn't changed </span>
+
+</code></pre></div><p>See also <a href="http://docs.python-guide.org/en/latest/writing/gotchas/#mutable-default-arguments" target="_blank" rel="noopener noreferrer">Mutable Default Arguments<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> and <a href="http://stackoverflow.com/questions/1132941/least-astonishment-and-the-mutable-default-argument" target="_blank" rel="noopener noreferrer">“Least Astonishment” and the Mutable Default Argument<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <h2 id="class-composition"><a href="#class-composition" class="header-anchor">#</a> Class composition</h2> <p>Class composition allows explicit relations between objects. In this example, people live in cities that belong to countries. Composition allows people to access the number of all people living in their country:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Country</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>cities<span class="token operator">=</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
+        
+    <span class="token keyword">def</span> <span class="token function">addCity</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>city<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>cities<span class="token punctuation">.</span>append<span class="token punctuation">(</span>city<span class="token punctuation">)</span>
+        
+
+<span class="token keyword">class</span> <span class="token class-name">City</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> numPeople<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>people <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        self<span class="token punctuation">.</span>numPeople <span class="token operator">=</span> numPeople
+        
+        
+    <span class="token keyword">def</span> <span class="token function">addPerson</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> person<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>people<span class="token punctuation">.</span>append<span class="token punctuation">(</span>person<span class="token punctuation">)</span>
+    
+    <span class="token keyword">def</span> <span class="token function">join_country</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>country<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>country <span class="token operator">=</span> country
+        country<span class="token punctuation">.</span>addCity<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+        
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>numPeople<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                person<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span>join_city<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+  
+
+<span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> ID<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>ID<span class="token operator">=</span>ID
+
+    <span class="token keyword">def</span> <span class="token function">join_city</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> city<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>city <span class="token operator">=</span> city
+        city<span class="token punctuation">.</span>addPerson<span class="token punctuation">(</span>self<span class="token punctuation">)</span>
+        
+    <span class="token keyword">def</span> <span class="token function">people_in_my_country</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        x<span class="token operator">=</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token builtin">len</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span>people<span class="token punctuation">)</span> <span class="token keyword">for</span> c <span class="token keyword">in</span> self<span class="token punctuation">.</span>city<span class="token punctuation">.</span>country<span class="token punctuation">.</span>cities<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> x
+        
+US<span class="token operator">=</span>Country<span class="token punctuation">(</span><span class="token punctuation">)</span>
+NYC<span class="token operator">=</span>City<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span>join_country<span class="token punctuation">(</span>US<span class="token punctuation">)</span>
+SF<span class="token operator">=</span>City<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">.</span>join_country<span class="token punctuation">(</span>US<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>US<span class="token punctuation">.</span>cities<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>people<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>people_in_my_country<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 15</span>
+
+</code></pre></div><h2 id="listing-all-class-members"><a href="#listing-all-class-members" class="header-anchor">#</a> Listing All Class Members</h2> <p>The <code>dir()</code> function can be used to get a list of the members of a class:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token builtin">dir</span><span class="token punctuation">(</span>Class<span class="token punctuation">)</span>
+
+</code></pre></div><p>For example:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token builtin">dir</span><span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token string">'__add__'</span><span class="token punctuation">,</span> <span class="token string">'__class__'</span><span class="token punctuation">,</span> <span class="token string">'__contains__'</span><span class="token punctuation">,</span> <span class="token string">'__delattr__'</span><span class="token punctuation">,</span> <span class="token string">'__delitem__'</span><span class="token punctuation">,</span> <span class="token string">'__dir__'</span><span class="token punctuation">,</span> <span class="token string">'__doc__'</span><span class="token punctuation">,</span> <span class="token string">'__eq__'</span><span class="token punctuation">,</span> <span class="token string">'__format__'</span><span class="token punctuation">,</span> <span class="token string">'__ge__'</span><span class="token punctuation">,</span> <span class="token string">'__getattribute__'</span><span class="token punctuation">,</span> <span class="token string">'__getitem__'</span><span class="token punctuation">,</span> <span class="token string">'__gt__'</span><span class="token punctuation">,</span> <span class="token string">'__hash__'</span><span class="token punctuation">,</span> <span class="token string">'__iadd__'</span><span class="token punctuation">,</span> <span class="token string">'__imul__'</span><span class="token punctuation">,</span> <span class="token string">'__init__'</span><span class="token punctuation">,</span> <span class="token string">'__iter__'</span><span class="token punctuation">,</span> <span class="token string">'__le__'</span><span class="token punctuation">,</span> <span class="token string">'__len__'</span><span class="token punctuation">,</span> <span class="token string">'__lt__'</span><span class="token punctuation">,</span> <span class="token string">'__mul__'</span><span class="token punctuation">,</span> <span class="token string">'__ne__'</span><span class="token punctuation">,</span> <span class="token string">'__new__'</span><span class="token punctuation">,</span> <span class="token string">'__reduce__'</span><span class="token punctuation">,</span> <span class="token string">'__reduce_ex__'</span><span class="token punctuation">,</span> <span class="token string">'__repr__'</span><span class="token punctuation">,</span> <span class="token string">'__reversed__'</span><span class="token punctuation">,</span> <span class="token string">'__rmul__'</span><span class="token punctuation">,</span> <span class="token string">'__setattr__'</span><span class="token punctuation">,</span> <span class="token string">'__setitem__'</span><span class="token punctuation">,</span> <span class="token string">'__sizeof__'</span><span class="token punctuation">,</span> <span class="token string">'__str__'</span><span class="token punctuation">,</span> <span class="token string">'__subclasshook__'</span><span class="token punctuation">,</span> <span class="token string">'append'</span><span class="token punctuation">,</span> <span class="token string">'clear'</span><span class="token punctuation">,</span> <span class="token string">'copy'</span><span class="token punctuation">,</span> <span class="token string">'count'</span><span class="token punctuation">,</span> <span class="token string">'extend'</span><span class="token punctuation">,</span> <span class="token string">'index'</span><span class="token punctuation">,</span> <span class="token string">'insert'</span><span class="token punctuation">,</span> <span class="token string">'pop'</span><span class="token punctuation">,</span> <span class="token string">'remove'</span><span class="token punctuation">,</span> <span class="token string">'reverse'</span><span class="token punctuation">,</span> <span class="token string">'sort'</span><span class="token punctuation">]</span>
+
+</code></pre></div><p>It is common to look only for &quot;non-magic&quot; members. This can be done using a simple comprehension that lists members with names not starting with <code>__</code>:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token operator">&gt;&gt;</span><span class="token operator">&gt;</span> <span class="token punctuation">[</span>m <span class="token keyword">for</span> m <span class="token keyword">in</span> <span class="token builtin">dir</span><span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">)</span> <span class="token keyword">if</span> <span class="token keyword">not</span> m<span class="token punctuation">.</span>startswith<span class="token punctuation">(</span><span class="token string">'__'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token string">'append'</span><span class="token punctuation">,</span> <span class="token string">'clear'</span><span class="token punctuation">,</span> <span class="token string">'copy'</span><span class="token punctuation">,</span> <span class="token string">'count'</span><span class="token punctuation">,</span> <span class="token string">'extend'</span><span class="token punctuation">,</span> <span class="token string">'index'</span><span class="token punctuation">,</span> <span class="token string">'insert'</span><span class="token punctuation">,</span> <span class="token string">'pop'</span><span class="token punctuation">,</span> <span class="token string">'remove'</span><span class="token punctuation">,</span> <span class="token string">'reverse'</span><span class="token punctuation">,</span> <span class="token string">'sort'</span><span class="token punctuation">]</span>
+
+</code></pre></div><p><strong>Caveats:</strong></p> <p>Classes can define a <code>__dir__()</code> method.  If that method exists calling <code>dir()</code> will call <code>__dir__()</code>, otherwise Python will try to create a list of members of the class.  This means that the dir function can have unexpected results.  Two quotes of importance from <a href="https://docs.python.org/3.4/library/functions.html#dir" target="_blank" rel="noopener noreferrer">the official python documentation<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>:</p> <blockquote></blockquote> <p>If the object does not provide <strong>dir</strong>(), the function tries its best to gather information from the object’s <strong>dict</strong> attribute, if defined, and from its type object. The resulting list is not necessarily complete, and may be inaccurate when the object has a custom <strong>getattr</strong>().</p> <blockquote></blockquote> <p><strong>Note:</strong> Because dir() is supplied primarily as a convenience for use at an interactive prompt, it tries to supply an interesting set of names more than it tries to supply a rigorously or consistently defined set of names, and its detailed behavior may change across releases. For example, metaclass attributes are not in the result list when the argument is a class.</p> <h2 id="singleton-class"><a href="#singleton-class" class="header-anchor">#</a> Singleton class</h2> <p>A singleton is a pattern that restricts the instantiation of a class to one instance/object. For more info on python singleton design patterns, see <a href="http://python-3-patterns-idioms-test.readthedocs.io/en/latest/Singleton.html" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Singleton</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__new__</span><span class="token punctuation">(</span>cls<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            it <span class="token operator">=</span> cls<span class="token punctuation">.</span>__it__
+        <span class="token keyword">except</span> AttributeError<span class="token punctuation">:</span>
+            it <span class="token operator">=</span> cls<span class="token punctuation">.</span>__it__ <span class="token operator">=</span> <span class="token builtin">object</span><span class="token punctuation">.</span>__new__<span class="token punctuation">(</span>cls<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> it
+
+    <span class="token keyword">def</span> <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">'&lt;{}&gt;'</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>__class__<span class="token punctuation">.</span>__name__<span class="token punctuation">.</span>upper<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__eq__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span>
+         <span class="token keyword">return</span> other <span class="token keyword">is</span> self
+
+</code></pre></div><p>Another method is to decorate your class. Following the example from this <a href="http://stackoverflow.com/a/7346105/3462319" target="_blank" rel="noopener noreferrer">answer<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> create a Singleton class:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">class</span> <span class="token class-name">Singleton</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    A non-thread-safe helper class to ease implementing singletons.
+    This should be used as a decorator -- not a metaclass -- to the
+    class that should be a singleton.
+
+    The decorated class can define one `__init__` function that
+    takes only the `self` argument. Other than that, there are
+    no restrictions that apply to the decorated class.
+
+    To get the singleton instance, use the `Instance` method. Trying
+    to use `__call__` will result in a `TypeError` being raised.
+
+    Limitations: The decorated class cannot be inherited from.
+
+    &quot;&quot;&quot;</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> decorated<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>_decorated <span class="token operator">=</span> decorated
+
+    <span class="token keyword">def</span> <span class="token function">Instance</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        Returns the singleton instance. Upon its first call, it creates a
+        new instance of the decorated class and calls its `__init__` method.
+        On all subsequent calls, the already created instance is returned.
+
+        &quot;&quot;&quot;</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span>_instance
+        <span class="token keyword">except</span> AttributeError<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>_instance <span class="token operator">=</span> self<span class="token punctuation">.</span>_decorated<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span>_instance
+
+    <span class="token keyword">def</span> <span class="token function">__call__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">raise</span> TypeError<span class="token punctuation">(</span><span class="token string">'Singletons must be accessed through `Instance()`.'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">__instancecheck__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> inst<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token builtin">isinstance</span><span class="token punctuation">(</span>inst<span class="token punctuation">,</span> self<span class="token punctuation">.</span>_decorated<span class="token punctuation">)</span>
+
+</code></pre></div><p>To use you can use the <code>Instance</code> method</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token decorator annotation punctuation">@Singleton</span>
+<span class="token keyword">class</span> <span class="token class-name">Single</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>name<span class="token operator">=</span><span class="token boolean">None</span>
+        self<span class="token punctuation">.</span>val<span class="token operator">=</span><span class="token number">0</span>
+    <span class="token keyword">def</span> <span class="token function">getName</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+
+x<span class="token operator">=</span>Single<span class="token punctuation">.</span>Instance<span class="token punctuation">(</span><span class="token punctuation">)</span>
+y<span class="token operator">=</span>Single<span class="token punctuation">.</span>Instance<span class="token punctuation">(</span><span class="token punctuation">)</span>
+x<span class="token punctuation">.</span>name<span class="token operator">=</span><span class="token string">'I\'m single'</span>
+x<span class="token punctuation">.</span>getName<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># outputs I'm single</span>
+y<span class="token punctuation">.</span>getName<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment"># outputs I'm single</span>
+
+</code></pre></div><h2 id="descriptors-and-dotted-lookups"><a href="#descriptors-and-dotted-lookups" class="header-anchor">#</a> Descriptors and Dotted Lookups</h2> <p><strong>Descriptors</strong> are objects that are (usually) attributes of classes and that have any of <code>__get__</code>, <code>__set__</code>, or <code>__delete__</code> special methods.</p> <p><strong>Data Descriptors</strong> have any of <code>__set__</code>, or <code>__delete__</code></p> <p>These can control the dotted lookup on an instance, and are used to implement functions, <code>staticmethod</code>, <code>classmethod</code>, and <code>property</code>. A dotted lookup (e.g. instance <code>foo</code> of class <code>Foo</code> looking up attribute <code>bar</code> - i.e. <code>foo.bar</code>) uses the following algorithm:</p> <li>
+`bar` is looked up in the class, `Foo`. If it is there and it is a **Data Descriptor**, then the data descriptor is used. That's how `property` is able to control access to data in an instance, and instances cannot override this. If a **Data Descriptor** is not there, then
+</li> <li>
+`bar` is looked up in the instance `__dict__`. This is why we can override or block methods being called from an instance with a dotted lookup. If `bar` exists in the instance, it is used. If not, we then
+</li> <li>
+look in the class `Foo` for `bar`. If it is a **Descriptor**, then the descriptor protocol is used. This is how functions (in this context, unbound methods), `classmethod`, and `staticmethod` are implemented. Else it simply returns the object there, or there is an `AttributeError`
+</li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/python/classes.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/python/decorators.html" class="prev">
+        Decorators
+      </a></span> <span class="next"><a href="/python/metaclasses.html">
+        Metaclasses
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2662.6be16bad.js" defer></script>
+  </body>
+</html>

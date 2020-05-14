@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Entity Framework - Code First - Fluent API</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Mapping models, Composite Primary Key, Maximum Length, Primary Key, Required properties (NOT NULL), Explict Foreign Key naming">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Entity Framework - Code First - Fluent API">
+    <meta property="og:description" content="Mapping models, Composite Primary Key, Maximum Length, Primary Key, Required properties (NOT NULL), Explict Foreign Key naming">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/entityframework/code-first-fluent-api.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Entity Framework - Code First - Fluent API">
+    <meta name="twitter:description" content="Mapping models, Composite Primary Key, Maximum Length, Primary Key, Required properties (NOT NULL), Explict Foreign Key naming">
+    <meta name="twitter:url" content="/entityframework/code-first-fluent-api.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1045.fd036f53.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Entity Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/entityframework/" class="sidebar-link">Disclaimer</a></li><li><a href="/entityframework/getting-started-with-entity-framework.html" class="sidebar-link">Getting started with Entity Framework</a></li><li><a href="/entityframework/code-first-conventions.html" class="sidebar-link">Code First Conventions</a></li><li><a href="/entityframework/code-first-dataannotations.html" class="sidebar-link">Code First DataAnnotations</a></li><li><a href="/entityframework/entity-framework-code-first.html" class="sidebar-link">Entity Framework Code First</a></li><li><a href="/entityframework/entity-framework-code-first-migrations.html" class="sidebar-link">Entity-framework Code First Migrations</a></li><li><a href="/entityframework/inheritance-with-entityframework-code-first.html" class="sidebar-link">Inheritance with EntityFramework (Code First)</a></li><li><a href="/entityframework/code-first-fluent-api.html" class="active sidebar-link">Code First - Fluent API</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/entityframework/code-first-fluent-api.html#mapping-models" class="sidebar-link">Mapping models</a></li><li class="sidebar-sub-header"><a href="/entityframework/code-first-fluent-api.html#composite-primary-key" class="sidebar-link">Composite Primary Key</a></li><li class="sidebar-sub-header"><a href="/entityframework/code-first-fluent-api.html#maximum-length" class="sidebar-link">Maximum Length</a></li><li class="sidebar-sub-header"><a href="/entityframework/code-first-fluent-api.html#primary-key" class="sidebar-link">Primary Key</a></li><li class="sidebar-sub-header"><a href="/entityframework/code-first-fluent-api.html#required-properties-not-null" class="sidebar-link">Required properties (NOT NULL)</a></li><li class="sidebar-sub-header"><a href="/entityframework/code-first-fluent-api.html#explict-foreign-key-naming" class="sidebar-link">Explict Foreign Key naming</a></li></ul></li><li><a href="/entityframework/mapping-relationship-with-entity-framework-code-first-one-to-one-and-variations.html" class="sidebar-link">Mapping relationship with Entity Framework Code First: One-to-one and variations</a></li><li><a href="/entityframework/mapping-relationship-with-entity-framework-code-first-one-to-many-and-many-to-many.html" class="sidebar-link">Mapping relationship with Entity Framework Code First: One-to-many and Many-to-many</a></li><li><a href="/entityframework/database-first-model-generation.html" class="sidebar-link">Database first model generation</a></li><li><a href="/entityframework/complex-types.html" class="sidebar-link">Complex Types</a></li><li><a href="/entityframework/database-initialisers.html" class="sidebar-link">Database Initialisers</a></li><li><a href="/entityframework/tracking-vs-no-tracking.html" class="sidebar-link">Tracking vs. No-Tracking</a></li><li><a href="/entityframework/transactions.html" class="sidebar-link">Transactions</a></li><li><a href="/entityframework/managing-entity-state.html" class="sidebar-link">Managing entity state</a></li><li><a href="/entityframework/loading-related-entities.html" class="sidebar-link">Loading related entities</a></li><li><a href="/entityframework/model-restraints.html" class="sidebar-link">Model Restraints</a></li><li><a href="/entityframework/entity-framework-with-postgresql.html" class="sidebar-link">Entity-Framework  with Postgresql</a></li><li><a href="/entityframework/entity-framework-with-sqlite.html" class="sidebar-link">Entity Framework with SQLite</a></li><li><a href="/entityframework/t4-templates-in-entity-framework.html" class="sidebar-link">.t4 templates in entity-framework</a></li><li><a href="/entityframework/advanced-mapping-scenarios-entity-splitting-table-splitting.html" class="sidebar-link">Advanced mapping scenarios: entity splitting, table splitting</a></li><li><a href="/entityframework/best-practices-for-entity-framework-simple-professional.html" class="sidebar-link">Best Practices For Entity Framework (Simple &amp; Professional)</a></li><li><a href="/entityframework/optimization-techniques-in-ef.html" class="sidebar-link">Optimization Techniques in EF</a></li><li><a href="/entityframework/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="code-first-fluent-api"><a href="#code-first-fluent-api" class="header-anchor">#</a> Code First - Fluent API</h1> <h2 id="mapping-models"><a href="#mapping-models" class="header-anchor">#</a> Mapping models</h2> <p>EntityFramewok Fluent API is a powerful and elegant way of mapping your <strong>code-first</strong> domain models to underlying database. This also can be used with <strong>code-first with existing database</strong>. You have two options when using <strong>Fluent API</strong>: you can directly map your models on <strong>OnModelCreating</strong> method or you can create mapper classes which inherits from <strong>EntityTypeConfiguration</strong> and then add that models to <strong>modelBuilder</strong> on <strong>OnModelCreating</strong> method. <strong>Second</strong> option is which I prefer and am going to show example of it.</p> <h3 id="step-one-create-model"><a href="#step-one-create-model" class="header-anchor">#</a> Step one: Create model.</h3> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Employee</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> Id <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> Surname <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>    
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> FirstName <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>    
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> LastName <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>        
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">short</span></span> Age <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>    
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">decimal</span></span> MonthlySalary <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+        
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> FullName
+    <span class="token punctuation">{</span>
+        <span class="token keyword">get</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token interpolation-string"><span class="token string">$&quot;</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">Surname</span><span class="token punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">FirstName</span><span class="token punctuation">}</span></span><span class="token string"> </span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">LastName</span><span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="step-two-create-mapper-class"><a href="#step-two-create-mapper-class" class="header-anchor">#</a> Step two: Create mapper class</h3> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EmployeeMap</span>
+    <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">EntityTypeConfiguration<span class="token punctuation">&lt;</span>Employee<span class="token punctuation">&gt;</span></span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token function">EmployeeMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// Primary key</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">HasKey</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>Id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>Id<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">HasColumnType</span><span class="token punctuation">(</span><span class="token string">&quot;int&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">HasDatabaseGeneratedOption</span><span class="token punctuation">(</span>DatabaseGeneratedOption<span class="token punctuation">.</span>Identity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+        <span class="token comment">// Properties</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>Surname<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">HasMaxLength</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>FirstName<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">IsRequired</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">HasMaxLength</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>LastName<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">HasMaxLength</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>Age<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">HasColumnType</span><span class="token punctuation">(</span><span class="token string">&quot;smallint&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>MonthlySalary<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">HasColumnType</span><span class="token punctuation">(</span><span class="token string">&quot;number&quot;</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">HasPrecision</span><span class="token punctuation">(</span><span class="token number">14</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Ignore</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>FullName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// Table &amp; column mappings</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">ToTable</span><span class="token punctuation">(</span><span class="token string">&quot;TABLE_NAME&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;SCHEMA_NAME&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>Id<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">HasColumnName</span><span class="token punctuation">(</span><span class="token string">&quot;ID&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>Surname<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">HasColumnName</span><span class="token punctuation">(</span><span class="token string">&quot;SURNAME&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>FirstName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">HasColumnName</span><span class="token punctuation">(</span><span class="token string">&quot;FIRST_NAME&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>LastName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">HasColumnName</span><span class="token punctuation">(</span><span class="token string">&quot;LAST_NAME&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>Age<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">HasColumnName</span><span class="token punctuation">(</span><span class="token string">&quot;AGE&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span>MonthlySalary<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">HasColumnName</span><span class="token punctuation">(</span><span class="token string">&quot;MONTHLY_SALARY&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Let us explain mappings:</p> <li>**HasKey** - defines the primary key. **Composite primary keys** can also be
+used. For example: **this.HasKey(m =&gt; new { m.DepartmentId, m.PositionId })**.</li>
+- **Property** - lets us to configure model properties.
+<li>**HasColumnType** - specify database level column type. Please note that,
+it can be different for different databases like Oracle and MS SQL.</li> <li>**HasDatabaseGeneratedOption** - specifies if property is calculated at
+database level. Numeric PKs are **DatabaseGeneratedOption.Identity** by
+default, you should specify **DatabaseGeneratedOption.None** if you do
+not want them to be so.</li>
+- **HasMaxLength** - limits the length of string.
+- **IsRequired** - marks the property as requiered.
+- **HasPrecision** - lets us to specify precision for decimals.
+<li>**Ignore** - Ignores property completely and does not map it to database.
+We ignored FullName, because we do not want this column at our table.</li>
+- **ToTable** - specify table name and schema name (optional) for model.
+<li>**HasColumnName** - relate property with column name. This is not needed
+when property names and column names are identical.</li> <h3 id="step-three-add-mapping-class-to-configurations"><a href="#step-three-add-mapping-class-to-configurations" class="header-anchor">#</a> Step three: Add mapping class to configurations.</h3> <p>We need to tell EntityFramework to use our mapper class. To do so, we have to add it to <strong>modelBuilder.Configurations</strong> on <strong>OnModelCreating</strong> method:</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DbContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span><span class="token string">&quot;Name=DbContext&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">OnModelCreating</span><span class="token punctuation">(</span><span class="token class-name">DbModelBuilder</span> modelBuilder<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        modelBuilder<span class="token punctuation">.</span>Configurations<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">EmployeeMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>And that is it. We are all set to go.</p> <h2 id="composite-primary-key"><a href="#composite-primary-key" class="header-anchor">#</a> Composite Primary Key</h2> <p>By using the .HasKey() method, a set of properties can be explicitly configured as the composite primary key of the entity.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Entity</span><span class="token punctuation">;</span>    
+<span class="token comment">// ..</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PersonContext</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">DbContext</span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ..</span>
+
+    <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">OnModelCreating</span><span class="token punctuation">(</span><span class="token class-name">DbModelBuilder</span> modelBuilder<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// ..</span>
+
+        modelBuilder<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Entity</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Person<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">HasKey</span><span class="token punctuation">(</span>p <span class="token operator">=&gt;</span> <span class="token keyword">new</span> <span class="token punctuation">{</span> p<span class="token punctuation">.</span>FirstName<span class="token punctuation">,</span> p<span class="token punctuation">.</span>LastName <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="maximum-length"><a href="#maximum-length" class="header-anchor">#</a> Maximum Length</h2> <p>By using the .HasMaxLength() method, the maximum character count can be configured for a property.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Entity</span><span class="token punctuation">;</span>    
+<span class="token comment">// ..</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PersonContext</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">DbContext</span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ..</span>
+
+    <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">OnModelCreating</span><span class="token punctuation">(</span><span class="token class-name">DbModelBuilder</span> modelBuilder<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// ..</span>
+
+        modelBuilder<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Entity</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Person<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>t <span class="token operator">=&gt;</span> t<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">HasMaxLength</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The resulting column with the specified column length:</p> <p><a href="http://i.stack.imgur.com/KEYue.png" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/KEYue.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="primary-key"><a href="#primary-key" class="header-anchor">#</a> Primary Key</h2> <p>By using the .HasKey() method, a property can be explicitly configured as primary key of the entity.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Entity</span><span class="token punctuation">;</span>    
+<span class="token comment">// ..</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PersonContext</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">DbContext</span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ..</span>
+
+    <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">OnModelCreating</span><span class="token punctuation">(</span><span class="token class-name">DbModelBuilder</span> modelBuilder<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// ..</span>
+
+        modelBuilder<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Entity</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Person<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">HasKey</span><span class="token punctuation">(</span>p <span class="token operator">=&gt;</span> p<span class="token punctuation">.</span>PersonKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="required-properties-not-null"><a href="#required-properties-not-null" class="header-anchor">#</a> Required properties (NOT NULL)</h2> <p>By using the .IsRequired() method, properties can be specified as mandatory, which means that the column will have a NOT NULL constraint.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">using</span> <span class="token namespace">System<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Entity</span><span class="token punctuation">;</span>    
+<span class="token comment">// ..</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PersonContext</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">DbContext</span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">// ..</span>
+
+    <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">OnModelCreating</span><span class="token punctuation">(</span><span class="token class-name">DbModelBuilder</span> modelBuilder<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">// ..</span>
+
+        modelBuilder<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Entity</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Person<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">Property</span><span class="token punctuation">(</span>t <span class="token operator">=&gt;</span> t<span class="token punctuation">.</span>Name<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">IsRequired</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The resulting column with the NOT NULL constraint:</p> <p><a href="http://i.stack.imgur.com/VJm33.png" target="_blank" rel="noopener noreferrer"><img src="http://i.stack.imgur.com/VJm33.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="explict-foreign-key-naming"><a href="#explict-foreign-key-naming" class="header-anchor">#</a> Explict Foreign Key naming</h2> <p>When a navigation property exist on a model, Entity Framework will automatically create a Foreign Key column. If a specific Foreign Key name is desired but is not contained as a property in the model, it can be set explicitly using the Fluent API. By utilizing the <code>Map</code> method while establishing the Foreign Key relationship, any unique name can be used for Foreign Keys.</p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Company</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> Id <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Employee</span>
+<span class="token punctuation">{</span>
+    property <span class="token return-type class-name"><span class="token keyword">int</span></span> Id <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    property <span class="token return-type class-name">Company</span> Employer <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EmployeeContext</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">DbContext</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">OnModelCreating</span><span class="token punctuation">(</span><span class="token class-name">DbModelBuilder</span> modelBuilder<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        modelBuilder<span class="token punctuation">.</span><span class="token generic-method"><span class="token function">Entity</span><span class="token generic class-name"><span class="token punctuation">&lt;</span>Employee<span class="token punctuation">&gt;</span></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">HasRequired</span><span class="token punctuation">(</span>x <span class="token operator">=&gt;</span> x<span class="token punctuation">.</span>Employer<span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">WithRequiredDependent</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                    <span class="token punctuation">.</span><span class="token function">Map</span><span class="token punctuation">(</span>m <span class="token operator">=&gt;</span> m<span class="token punctuation">.</span><span class="token function">MapKey</span><span class="token punctuation">(</span><span class="token string">&quot;EmployerId&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>After specifying the relationship, the <code>Map</code> method allows the Foreign Key name to be explicitly set by executing <code>MapKey</code>. In this example, what would have resulted in a column name of Employer_Id is now EmployerId.</p> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>There are two general ways of specifying HOW Entity Framework will map POCO classes to database tables, columns, etc.: <strong>Data Annotations</strong> and <strong>Fluent API</strong>.</p> <p>While Data Annotations are a simple to read and understand, they lack of certain features such as specifying the &quot;Cascade on Delete&quot; behavior for an entity. The Fluent API on the other hand is a bit more complex to use, but provides a far more advanced set of features.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/entityframework/code-first-fluent-api.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/entityframework/inheritance-with-entityframework-code-first.html" class="prev">
+        Inheritance with EntityFramework (Code First)
+      </a></span> <span class="next"><a href="/entityframework/mapping-relationship-with-entity-framework-code-first-one-to-one-and-variations.html">
+        Mapping relationship with Entity Framework Code First: One-to-one and variations
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1045.fd036f53.js" defer></script>
+  </body>
+</html>

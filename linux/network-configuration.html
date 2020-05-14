@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux - Network Configuration</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Interface details, Adding IP to an interface, Local DNS resolution, Configure DNS servers for domain name resolution, See and manipulate routes, Configure a hostname for some other system on your network">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Linux - Network Configuration">
+    <meta property="og:description" content="Interface details, Adding IP to an interface, Local DNS resolution, Configure DNS servers for domain name resolution, See and manipulate routes, Configure a hostname for some other system on your network">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/linux/network-configuration.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Linux - Network Configuration">
+    <meta name="twitter:description" content="Interface details, Adding IP to an interface, Local DNS resolution, Configure DNS servers for domain name resolution, See and manipulate routes, Configure a hostname for some other system on your network">
+    <meta name="twitter:url" content="/linux/network-configuration.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1899.75529de3.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/linux/" class="sidebar-link">Disclaimer</a></li><li><a href="/linux/getting-started-with-gnu-linux.html" class="sidebar-link">Getting started with GNU/Linux</a></li><li><a href="/linux/detecting-linux-distribution-name-and-version.html" class="sidebar-link">Detecting Linux distribution name and version</a></li><li><a href="/linux/getting-information-on-a-running-linux-kernel.html" class="sidebar-link">Getting information on a running Linux kernel</a></li><li><a href="/linux/shell.html" class="sidebar-link">Shell</a></li><li><a href="/linux/check-disk-space.html" class="sidebar-link">Check Disk Space</a></li><li><a href="/linux/getting-system-information.html" class="sidebar-link">Getting System Information</a></li><li><a href="/linux/ls-command.html" class="sidebar-link">ls command</a></li><li><a href="/linux/file-compression-with-tar-command.html" class="sidebar-link">File Compression with 'tar' command</a></li><li><a href="/linux/services.html" class="sidebar-link">Services</a></li><li><a href="/linux/managing-services.html" class="sidebar-link">Managing Services</a></li><li><a href="/linux/modifying-users.html" class="sidebar-link">Modifying Users</a></li><li><a href="/linux/lamp-stack.html" class="sidebar-link">LAMP Stack</a></li><li><a href="/linux/tee-command.html" class="sidebar-link">tee command</a></li><li><a href="/linux/secure-shell-ssh.html" class="sidebar-link">Secure Shell (SSH)</a></li><li><a href="/linux/scp.html" class="sidebar-link">SCP</a></li><li><a href="/linux/gnupg-gpg.html" class="sidebar-link">GnuPG (GPG)</a></li><li><a href="/linux/network-configuration.html" class="active sidebar-link">Network Configuration</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/linux/network-configuration.html#interface-details" class="sidebar-link">Interface details</a></li><li class="sidebar-sub-header"><a href="/linux/network-configuration.html#adding-ip-to-an-interface" class="sidebar-link">Adding IP to an interface</a></li><li class="sidebar-sub-header"><a href="/linux/network-configuration.html#local-dns-resolution" class="sidebar-link">Local DNS resolution</a></li><li class="sidebar-sub-header"><a href="/linux/network-configuration.html#configure-dns-servers-for-domain-name-resolution" class="sidebar-link">Configure DNS servers for domain name resolution</a></li><li class="sidebar-sub-header"><a href="/linux/network-configuration.html#see-and-manipulate-routes" class="sidebar-link">See and manipulate routes</a></li><li class="sidebar-sub-header"><a href="/linux/network-configuration.html#configure-a-hostname-for-some-other-system-on-your-network" class="sidebar-link">Configure a hostname for some other system on your network</a></li></ul></li><li><a href="/linux/midnight-commander.html" class="sidebar-link">Midnight Commander</a></li><li><a href="/linux/change-root-chroot.html" class="sidebar-link">Change root (chroot)</a></li><li><a href="/linux/package-managers.html" class="sidebar-link">Package Managers</a></li><li><a href="/linux/compiling-the-linux-kernel.html" class="sidebar-link">Compiling the Linux kernel</a></li><li><a href="/linux/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="network-configuration"><a href="#network-configuration" class="header-anchor">#</a> Network Configuration</h1> <h2 id="interface-details"><a href="#interface-details" class="header-anchor">#</a> Interface details</h2> <p><strong>Ifconfig</strong></p> <p>List all the interfaces available on the machine</p> <p><code>$ ifconfig -a</code></p> <p>List the details of a specific interface</p> <p>Syntax: <code>$ ifconfig &lt;interface&gt;</code></p> <p>Example:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ifconfig</span> eth0
+eth0      Link encap:Ethernet  HWaddr xx:xx:xx:xx:xx:xx  
+          inet addr:x.x.x.x  Bcast:x.x.x.x  Mask:x.x.x.x
+          inet6 addr: xxxx::xxx:xxxx:xxxx:xxxx/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:4426618 errors:0 dropped:1124 overruns:0 frame:0
+          TX packets:189171 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:382611580 <span class="token punctuation">(</span><span class="token number">382.6</span> MB<span class="token punctuation">)</span>  TX bytes:36923665 <span class="token punctuation">(</span><span class="token number">36.9</span> MB<span class="token punctuation">)</span>
+          Interrupt:16 Memory:fb5e0000-fb600000 
+
+</code></pre></div><p><strong>Ethtool - query the network driver and hardware settings</strong></p> <p>Syntax: <code>$ ethtool &lt;interface&gt;</code></p> <p>Example:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ethtool</span> eth0
+Settings <span class="token keyword">for</span> eth0:
+    Supported ports: <span class="token punctuation">[</span> TP <span class="token punctuation">]</span>
+    Supported <span class="token function">link</span> modes:   10baseT/Half 10baseT/Full 
+                            100baseT/Half 100baseT/Full 
+                            1000baseT/Full 
+    Supported pause frame use: No
+    Supports auto-negotiation: Yes
+    Advertised <span class="token function">link</span> modes:  10baseT/Half 10baseT/Full 
+                            100baseT/Half 100baseT/Full 
+                            1000baseT/Full 
+    Advertised pause frame use: No
+    Advertised auto-negotiation: Yes
+    Speed: 1000Mb/s
+    Duplex: Full
+    Port: Twisted Pair
+    PHYAD: <span class="token number">1</span>
+    Transceiver: internal
+    Auto-negotiation: on
+    MDI-X: on <span class="token punctuation">(</span>auto<span class="token punctuation">)</span>
+    Supports Wake-on: pumbg
+    Wake-on: g
+    Current message level: 0x00000007 <span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span>
+                   drv probe <span class="token function">link</span>
+    Link detected: <span class="token function">yes</span>
+
+
+</code></pre></div><p><strong>ip - show / manipulate routing, devices, policy routing and tunnels</strong></p> <p>Syntax: <code>$ ip { link | ... | route | macsec }</code> (please see <code>man ip</code> for full list of objects)</p> <p>Examples</p> <p>List network interfaces</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ip</span> <span class="token function">link</span> show    
+
+</code></pre></div><p>Rename interface eth0 to wan</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> dev eth0 name wan    
+
+</code></pre></div><p>Bring interface eth0 up (or down)</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> dev eth0 up    
+
+</code></pre></div><p>List addresses for interfaces</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ip</span> addr show    
+
+</code></pre></div><p>Add (or del) ip and mask (255.255.255.0)</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ip</span> addr <span class="token function">add</span> <span class="token number">1.2</span>.3.4/24 brd + dev eth0 
+
+</code></pre></div><h2 id="adding-ip-to-an-interface"><a href="#adding-ip-to-an-interface" class="header-anchor">#</a> Adding IP to an interface</h2> <p>An IP address to an interface could be obtained via DHCP or Static assignment</p> <p><strong>DHCP</strong>
+If you are connected to a network with a DHCP server running, <code>dhclient</code> command can get an IP address for your interface</p> <p><code>$ dhclient &lt;interface&gt;</code></p> <p>or alternatively, you could make a change to the <code>/etc/network/interfaces</code> file for the interface to be brought up on boot and obtain DHCP IP</p> <div class="language-bash extra-class"><pre class="language-bash"><code>auto eth0
+iface eth0 inet dhcp
+
+</code></pre></div><p><strong>Static configuration(Permanent Change) using <code>/etc/network/interfaces</code> file</strong></p> <p>If you want to statically configure the interface settings(permanent change), you could do so in the <code>/etc/network/interfaces</code> file.</p> <p>Example:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>auto eth0 <span class="token comment"># Bring up the interface on boot</span>
+iface eth0 inet static 
+    address <span class="token number">10.10</span>.70.10
+    netmask <span class="token number">255.255</span>.0.0
+    gateway <span class="token number">10.10</span>.1.1
+    dns-nameservers <span class="token number">10.10</span>.1.20
+    dns-nameservers <span class="token number">10.10</span>.1.30
+
+</code></pre></div><p>These changes persist even after system reboot.</p> <p><strong>Static configuration(Temporary change) using <code>ifconfig</code> utility</strong></p> <p>A static IP address could be added to an interface using the <code>ifconfig</code> utility as follows</p> <p><code>$ ifconfig &lt;interface&gt; &lt;ip-address&gt;/&lt;mask&gt; up</code></p> <p>Example:</p> <p><code>$ ifconfig eth0 10.10.50.100/16 up</code></p> <h2 id="local-dns-resolution"><a href="#local-dns-resolution" class="header-anchor">#</a> Local DNS resolution</h2> <p>File: <code>/etc/hosts</code> contains a list of hosts that are to be resolved locally(not by DNS)</p> <p>Sample contents of the file:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token number">127.0</span>.0.1         your-node-name.your-domain.com  localhost.localdomain  localhost 
+XXX.XXX.XXX.XXX   node-name
+
+</code></pre></div><p>The file format for the hosts file is specified by <a href="http://www.ietf.org/rfc/rfc0952.txt" target="_blank" rel="noopener noreferrer">RFC 952<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="configure-dns-servers-for-domain-name-resolution"><a href="#configure-dns-servers-for-domain-name-resolution" class="header-anchor">#</a> Configure DNS servers for domain name resolution</h2> <p>File: <code>/etc/resolv.conf</code> contains a list of DNS servers for domain name resolution</p> <p>Sample contents of the file:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>nameserver <span class="token number">8.8</span>.8.8 <span class="token comment"># IP address of the primary name server</span>
+nameserver <span class="token number">8.8</span>.4.4 <span class="token comment"># IP address of the secondary name server</span>
+
+</code></pre></div><p>In case internal DNS server you can validate if this server resolve DNS names properly using <code>dig</code> command:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">dig</span> google.com @your.dns.server.com +short
+
+</code></pre></div><h2 id="see-and-manipulate-routes"><a href="#see-and-manipulate-routes" class="header-anchor">#</a> See and manipulate routes</h2> <h3 id="manipulate-the-ip-routing-table-using-route"><a href="#manipulate-the-ip-routing-table-using-route" class="header-anchor">#</a> Manipulate the IP routing table using <code>route</code></h3> <p><strong>Display routing table</strong></p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ route <span class="token comment"># Displays list or routes and also resolves host names</span>
+$ route -n <span class="token comment"># Displays list of routes without resolving host names for faster results</span>
+
+</code></pre></div><p><strong>Add/Delete route</strong></p> <table><thead><tr><th>Option</th> <th>Description</th></tr></thead> <tbody><tr><td><code>add</code> or <code>del</code></td> <td>Add or delete a route</td></tr> <tr><td><code>-host x.x.x.x</code></td> <td>Add route to a single host identified by the IP address</td></tr> <tr><td><code>-net x.x.x.x</code></td> <td>Add route to a network identified by the network address</td></tr> <tr><td><code>gw x.x.x.x</code></td> <td>Specify the network gateway</td></tr> <tr><td><code>netmask x.x.x.x</code></td> <td>Specify the network netmask</td></tr> <tr><td><code>default</code></td> <td>Add a default route</td></tr></tbody></table> <p>Examples:</p> <ul><li>add route to a host <code>$ route add -host x.x.x.x eth1</code></li> <li>add route to a network <code>$ route add -net 2.2.2.0 netmask 255.255.255.0 eth0</code></li> <li>Alternatively, you could also use cidr format to add a route to network <code>route add -net 2.2.2.0/24 eth0</code></li> <li>add default gateway <code>$ route add default gw 2.2.2.1 eth0</code></li> <li>delete a route <code>$ route del -net 2.2.2.0/24</code></li></ul> <h3 id="manipulate-the-ip-routing-table-using-ip"><a href="#manipulate-the-ip-routing-table-using-ip" class="header-anchor">#</a> Manipulate the IP routing table using <code>ip</code></h3> <p><strong>Display routing table</strong></p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ip</span> route show <span class="token comment"># List routing table</span>
+
+</code></pre></div><p><strong>Add/Delete route</strong></p> <table><thead><tr><th>Option</th> <th>Description</th></tr></thead> <tbody><tr><td><code>add</code> or <code>del</code> or <code>change</code> or <code>append</code> or <code>replace</code></td> <td>Change a route</td></tr> <tr><td><code>show</code> or <code>flush</code></td> <td>the command displays the contents of the routing tables or remove it</td></tr> <tr><td><code>restore</code></td> <td>restore routing table information from stdin</td></tr> <tr><td><code>get</code></td> <td>this command gets a single route to a destination and prints its contents exactly as the kernel sees it</td></tr></tbody></table> <p>Examples:</p> <ul><li>Set default gateway to 1.2.3.254 <code>$ ip route add default via 1.2.3.254</code></li> <li>Adds a default route (for all addresses) via the local gateway 192.168.1.1 that can be reached on device eth0 <code>$ ip route add default via 192.168.1.1 dev eth0</code></li></ul> <h2 id="configure-a-hostname-for-some-other-system-on-your-network"><a href="#configure-a-hostname-for-some-other-system-on-your-network" class="header-anchor">#</a> Configure a hostname for some other system on your network</h2> <p>You can configure your Linux (or macOS) system in order to tie in an identifier <code>&lt;hostname&gt;</code> to some other system's IP address in your network. You can configure it:</p> <li>
+Systemwide. You should modify the **/etc/hosts** file. You just have to add to that file a new line containing:
+<ol>
+- the remote system's IP address `<ip_rem>`,
+- one or more blank spaces, and
+- the identifier `<hostname>`.
+</hostname></ip_rem></ol></li> <li>
+For a single user. You should modify the **~/.hosts** file --- you-d have to create it. It is not as simple as for systemwide. [Here](http://unix.stackexchange.com/questions/10438/can-i-create-a-user-specific-hosts-file-to-complement-etc-hosts) you can see an explanation.
+</li> <p>For instance, you could add this line using the <a href="https://en.wikipedia.org/wiki/Cat_(Unix)" target="_blank" rel="noopener noreferrer"><code>cat</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> Unix tool. Suppose that you want to make a <code>ping</code> to a PC in yout local network whose IP address is 192.168.1.44 and you want to refer to that IP address just by <code>remote_pc</code>. Then you must write on your shell:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">sudo</span> <span class="token function">cat</span> <span class="token number">192.168</span>.1.44 remote_pc
+
+</code></pre></div><p>Then you can make that ping just by:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>$ <span class="token function">ping</span> remote_pc
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/linux/network-configuration.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/linux/gnupg-gpg.html" class="prev">
+        GnuPG (GPG)
+      </a></span> <span class="next"><a href="/linux/midnight-commander.html">
+        Midnight Commander
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1899.75529de3.js" defer></script>
+  </body>
+</html>

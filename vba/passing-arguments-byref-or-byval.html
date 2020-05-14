@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VBA - Passing Arguments ByRef or ByVal</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Passing Simple Variables ByRef And ByVal, ByRef, ByVal">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="VBA - Passing Arguments ByRef or ByVal">
+    <meta property="og:description" content="Passing Simple Variables ByRef And ByVal, ByRef, ByVal">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/vba/passing-arguments-byref-or-byval.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="VBA - Passing Arguments ByRef or ByVal">
+    <meta name="twitter:description" content="Passing Simple Variables ByRef And ByVal, ByRef, ByVal">
+    <meta name="twitter:url" content="/vba/passing-arguments-byref-or-byval.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3432.bb9ca31e.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>VBA</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vba/" class="sidebar-link">Disclaimer</a></li><li><a href="/vba/getting-started-with-vba.html" class="sidebar-link">Getting started with VBA</a></li><li><a href="/vba/comments.html" class="sidebar-link">Comments</a></li><li><a href="/vba/string-literals-escaping-non-printable-characters-and-line-continuations.html" class="sidebar-link">String Literals - Escaping, non-printable characters and line-continuations</a></li><li><a href="/vba/vba-option-keyword.html" class="sidebar-link">VBA Option Keyword</a></li><li><a href="/vba/declaring-variables.html" class="sidebar-link">Declaring Variables</a></li><li><a href="/vba/declaring-and-assigning-strings.html" class="sidebar-link">Declaring and assigning strings</a></li><li><a href="/vba/concatenating-strings.html" class="sidebar-link">Concatenating strings</a></li><li><a href="/vba/frequently-used-string-manipulation.html" class="sidebar-link">Frequently used string manipulation</a></li><li><a href="/vba/substrings.html" class="sidebar-link">Substrings</a></li><li><a href="/vba/searching-within-strings-for-the-presence-of-substrings.html" class="sidebar-link">Searching within strings for the presence of substrings</a></li><li><a href="/vba/assigning-strings-with-repeated-characters.html" class="sidebar-link">Assigning strings with repeated characters</a></li><li><a href="/vba/measuring-the-length-of-strings.html" class="sidebar-link">Measuring the length of strings</a></li><li><a href="/vba/converting-other-types-to-strings.html" class="sidebar-link">Converting other types to strings</a></li><li><a href="/vba/date-time-manipulation.html" class="sidebar-link">Date Time Manipulation</a></li><li><a href="/vba/data-types-and-limits.html" class="sidebar-link">Data Types and Limits</a></li><li><a href="/vba/naming-conventions.html" class="sidebar-link">Naming Conventions</a></li><li><a href="/vba/data-structures.html" class="sidebar-link">Data Structures</a></li><li><a href="/vba/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/vba/copying-returning-and-passing-arrays.html" class="sidebar-link">Copying, returning and passing arrays</a></li><li><a href="/vba/collections.html" class="sidebar-link">Collections</a></li><li><a href="/vba/operators.html" class="sidebar-link">Operators</a></li><li><a href="/vba/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/vba/flow-control-structures.html" class="sidebar-link">Flow control structures</a></li><li><a href="/vba/passing-arguments-byref-or-byval.html" class="active sidebar-link">Passing Arguments ByRef or ByVal</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/vba/passing-arguments-byref-or-byval.html#passing-simple-variables-byref-and-byval" class="sidebar-link">Passing Simple Variables ByRef And ByVal</a></li><li class="sidebar-sub-header"><a href="/vba/passing-arguments-byref-or-byval.html#byref" class="sidebar-link">ByRef</a></li><li class="sidebar-sub-header"><a href="/vba/passing-arguments-byref-or-byval.html#byval" class="sidebar-link">ByVal</a></li></ul></li><li><a href="/vba/scripting-filesystemobject.html" class="sidebar-link">Scripting.FileSystemObject</a></li><li><a href="/vba/working-with-files-and-directories-without-using-filesystemobject.html" class="sidebar-link">Working With Files and Directories Without Using FileSystemObject</a></li><li><a href="/vba/reading-2gb-files-in-binary-in-vba-and-file-hashes.html" class="sidebar-link">Reading 2GB+ files in binary in VBA and File Hashes</a></li><li><a href="/vba/creating-a-procedure.html" class="sidebar-link">Creating a procedure</a></li><li><a href="/vba/procedure-calls.html" class="sidebar-link">Procedure Calls</a></li><li><a href="/vba/conditional-compilation.html" class="sidebar-link">Conditional Compilation</a></li><li><a href="/vba/object-oriented-vba.html" class="sidebar-link">Object-Oriented VBA</a></li><li><a href="/vba/creating-a-custom-class.html" class="sidebar-link">Creating a Custom Class</a></li><li><a href="/vba/interfaces.html" class="sidebar-link">Interfaces</a></li><li><a href="/vba/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/vba/events.html" class="sidebar-link">Events</a></li><li><a href="/vba/scripting-dictionary-object.html" class="sidebar-link">Scripting.Dictionary object</a></li><li><a href="/vba/working-with-ado.html" class="sidebar-link">Working with ADO</a></li><li><a href="/vba/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/vba/user-forms.html" class="sidebar-link">User Forms</a></li><li><a href="/vba/createobject-vs-getobject.html" class="sidebar-link">CreateObject vs. GetObject</a></li><li><a href="/vba/non-latin-characters.html" class="sidebar-link">Non-Latin Characters</a></li><li><a href="/vba/api-calls.html" class="sidebar-link">API Calls</a></li><li><a href="/vba/automation-or-using-other-applications-libraries.html" class="sidebar-link">Automation or Using other applications Libraries</a></li><li><a href="/vba/macro-security-and-signing-of-vba-projects-modules.html" class="sidebar-link">Macro security and signing of VBA-projects/-modules</a></li><li><a href="/vba/vba-run-time-errors.html" class="sidebar-link">VBA Run-Time Errors</a></li><li><a href="/vba/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/vba/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="passing-arguments-byref-or-byval"><a href="#passing-arguments-byref-or-byval" class="header-anchor">#</a> Passing Arguments ByRef or ByVal</h1> <p>The <code>ByRef</code> and <code>ByVal</code> modifiers are part of a procedure's signature and indicate how an argument is passed to a procedure. In VBA a parameter is passed <code>ByRef</code> unless specified otherwise (i.e. <code>ByRef</code> is implicit if absent).</p> <p><strong>Note</strong> In many other programming languages (including VB.NET), parameters are implicitly passed by value if no modifier is specified: consider specifying <code>ByRef</code> modifiers explicitly to avoid possible confusion.</p> <h2 id="passing-simple-variables-byref-and-byval"><a href="#passing-simple-variables-byref-and-byval" class="header-anchor">#</a> Passing Simple Variables ByRef And ByVal</h2> <p>Passing <code>ByRef</code> or <code>ByVal</code> indicates whether the actual value of an argument is passed to the <code>CalledProcedure</code> by the <code>CallingProcedure</code>, or whether a reference (called a pointer in some other languages) is passed to the <code>CalledProcedure</code>.</p> <p>If an argument is passed <code>ByRef</code>, the memory address of the argument is passed to the <code>CalledProcedure</code> and any modification to that parameter by the <code>CalledProcedure</code> is made to the value in the <code>CallingProcedure</code>.</p> <p>If an argument is passed <code>ByVal</code>, the actual value, not a reference to the variable, is passed to the <code>CalledProcedure</code>.</p> <p>A simple example will illustrate this clearly:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> CalledProcedure<span class="token punctuation">(</span><span class="token keyword">ByRef</span> X <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">,</span> <span class="token keyword">ByVal</span> Y <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span>
+    X <span class="token operator">=</span> <span class="token number">321</span>
+    Y <span class="token operator">=</span> <span class="token number">654</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Sub</span> CallingProcedure<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> A <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    <span class="token keyword">Dim</span> B <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    A <span class="token operator">=</span> <span class="token number">123</span>
+    B <span class="token operator">=</span> <span class="token number">456</span>
+
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;BEFORE CALL =&gt; A: &quot;</span> <span class="token operator">&amp;</span> <span class="token keyword">CStr</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;B: &quot;</span> <span class="token operator">&amp;</span> <span class="token keyword">CStr</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span>
+    <span class="token comment">''Result : BEFORE CALL =&gt; A: 123 B: 456</span>
+
+    CalledProcedure X<span class="token punctuation">:</span><span class="token operator">=</span>A<span class="token punctuation">,</span> Y<span class="token punctuation">:</span><span class="token operator">=</span>B
+
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;AFTER CALL =  A: &quot;</span> <span class="token operator">&amp;</span> <span class="token keyword">CStr</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;B: &quot;</span> <span class="token operator">&amp;</span> <span class="token keyword">CStr</span><span class="token punctuation">(</span>B<span class="token punctuation">)</span>
+    <span class="token comment">''Result : AFTER CALL =&gt; A: 321 B: 456</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Another example:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Sub</span> Main<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> IntVarByVal <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+    <span class="token keyword">Dim</span> IntVarByRef <span class="token keyword">As</span> <span class="token keyword">Integer</span>
+    
+    IntVarByVal <span class="token operator">=</span> <span class="token number">5</span>
+    IntVarByRef <span class="token operator">=</span> <span class="token number">10</span>
+    
+    SubChangeArguments IntVarByVal<span class="token punctuation">,</span> IntVarByRef <span class="token comment">'5 goes in as a &quot;copy&quot;. 10 goes in as a reference</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;IntVarByVal: &quot;</span> <span class="token operator">&amp;</span> IntVarByVal <span class="token comment">'prints 5 (no change made by SubChangeArguments)</span>
+    Debug<span class="token punctuation">.</span>Print <span class="token string">&quot;IntVarByRef: &quot;</span> <span class="token operator">&amp;</span> IntVarByRef <span class="token comment">'prints 99 (the variable was changed in SubChangeArguments)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Sub</span> SubChangeArguments<span class="token punctuation">(</span><span class="token keyword">ByVal</span> ParameterByVal <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">,</span> <span class="token keyword">ByRef</span> ParameterByRef <span class="token keyword">As</span> <span class="token keyword">Integer</span><span class="token punctuation">)</span>
+    ParameterByVal <span class="token operator">=</span> ParameterByVal <span class="token operator">+</span> <span class="token number">2</span> <span class="token comment">' 5 + 2 = 7 (changed only inside this Sub)</span>
+    ParameterByRef <span class="token operator">=</span> ParameterByRef <span class="token operator">+</span> <span class="token number">89</span> <span class="token comment">' 10 + 89 = 99 (changes the IntVarByRef itself - in the Main Sub)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><h2 id="byref"><a href="#byref" class="header-anchor">#</a> ByRef</h2> <h3 id="default-modifier"><a href="#default-modifier" class="header-anchor">#</a> Default modifier</h3> <p>If no modifier is specified for a parameter, that parameter is implicitly passed by reference.</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> DoSomething1<span class="token punctuation">(</span>foo <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> DoSomething2<span class="token punctuation">(</span><span class="token keyword">ByRef</span> foo <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The <code>foo</code> parameter is passed <code>ByRef</code> in both <code>DoSomething1</code> and <code>DoSomething2</code>.</p> <blockquote></blockquote> <p><strong>Watch out!</strong> If you're coming to VBA with experience from other languages, this is very likely the exact opposite behavior to the one you're used to. In many other programming languages (including VB.NET), the implicit/default modifier passes parameters by value.</p> <h3 id="passing-by-reference"><a href="#passing-by-reference" class="header-anchor">#</a> Passing by reference</h3> <li>
+When a **value** is passed `ByRef`, the procedure receives **a reference** to the value.
+<div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> Test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> foo <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    foo <span class="token operator">=</span> <span class="token number">42</span>
+    DoSomething foo
+    Debug<span class="token punctuation">.</span>Print foo
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token keyword">ByRef</span> foo <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span>
+    foo <span class="token operator">=</span> foo <span class="token operator">*</span> <span class="token number">2</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Calling the above <code>Test</code> procedure outputs 84. <code>DoSomething</code> is given <code>foo</code> and receives a <strong>reference</strong> to the value, and therefore works with the same memory address as the caller.
+</p></li> <li>
+When a <strong>reference</strong> is passed <code>ByRef</code>, the procedure receives <strong>a reference</strong> to the pointer.<p></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> Test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> foo <span class="token keyword">As</span> Collection
+    <span class="token keyword">Set</span> foo <span class="token operator">=</span> <span class="token keyword">New</span> Collection
+    DoSomething foo
+    Debug<span class="token punctuation">.</span>Print foo<span class="token punctuation">.</span>Count
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token keyword">ByRef</span> foo <span class="token keyword">As</span> Collection<span class="token punctuation">)</span>
+    foo<span class="token punctuation">.</span>Add <span class="token number">42</span>
+    <span class="token keyword">Set</span> foo <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The above code raises <a href="http://stackoverflow.com/documentation/vba/8917/vba-run-time-errors/27750/run-time-error-91-object-variable-or-with-block-variable-not-set#t=201702220411103495763" target="_blank" rel="noopener noreferrer">run-time error 91<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, because the caller is calling the <code>Count</code> member of an object that no longer exists, because <code>DoSomething</code> was given a <strong>reference</strong> to the object pointer and assigned it to <code>Nothing</code> before returning.
+</p></li><p></p> <h3 id="forcing-byval-at-call-site"><a href="#forcing-byval-at-call-site" class="header-anchor">#</a> Forcing ByVal at call site</h3> <p>Using parentheses at the call site, you can override <code>ByRef</code> and force an argument to be passed <code>ByVal</code>:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> Test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> foo <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    foo <span class="token operator">=</span> <span class="token number">42</span>
+    DoSomething <span class="token punctuation">(</span>foo<span class="token punctuation">)</span>
+    Debug<span class="token punctuation">.</span>Print foo
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token keyword">ByRef</span> foo <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span>
+    foo <span class="token operator">=</span> foo <span class="token operator">*</span> <span class="token number">2</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>The above code outputs 42, regardless of whether <code>ByRef</code> is specified implicitly or explicitly.</p> <blockquote></blockquote> <p><strong>Watch out!</strong> Because of this, using extraneous parentheses in procedure calls can easily introduce bugs. Pay attention to the whitespace between the procedure name and the argument list:</p> <div class="language-vb extra-class"><pre class="language-vb"><code>bar <span class="token operator">=</span> DoSomething<span class="token punctuation">(</span>foo<span class="token punctuation">)</span> <span class="token comment">'function call, no whitespace; parens are part of args list</span>
+DoSomething <span class="token punctuation">(</span>foo<span class="token punctuation">)</span> <span class="token comment">'procedure call, notice whitespace; parens are NOT part of args list</span>
+DoSomething foo <span class="token comment">'procedure call does not force the foo parameter to be ByVal</span>
+
+</code></pre></div><h2 id="byval"><a href="#byval" class="header-anchor">#</a> ByVal</h2> <h3 id="passing-by-value"><a href="#passing-by-value" class="header-anchor">#</a> Passing by value</h3> <li>
+When a **value** is passed `ByVal`, the procedure receives **a copy** of the value.
+<div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> Test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> foo <span class="token keyword">As</span> <span class="token keyword">Long</span>
+    foo <span class="token operator">=</span> <span class="token number">42</span>
+    DoSomething foo
+    Debug<span class="token punctuation">.</span>Print foo
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token keyword">ByVal</span> foo <span class="token keyword">As</span> <span class="token keyword">Long</span><span class="token punctuation">)</span>
+    foo <span class="token operator">=</span> foo <span class="token operator">*</span> <span class="token number">2</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Calling the above <code>Test</code> procedure outputs 42. <code>DoSomething</code> is given <code>foo</code> and receives <strong>a copy</strong> of the value. The copy is multiplied by 2, and then discarded when the procedure exits; the caller's copy was never altered.
+</p></li> <li>
+When a <strong>reference</strong> is passed <code>ByVal</code>, the procedure receives <strong>a copy</strong> of the pointer.<p></p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> Test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">Dim</span> foo <span class="token keyword">As</span> Collection
+    <span class="token keyword">Set</span> foo <span class="token operator">=</span> <span class="token keyword">New</span> Collection
+    DoSomething foo
+    Debug<span class="token punctuation">.</span>Print foo<span class="token punctuation">.</span>Count
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token keyword">ByVal</span> foo <span class="token keyword">As</span> Collection<span class="token punctuation">)</span>
+    foo<span class="token punctuation">.</span>Add <span class="token number">42</span>
+    <span class="token keyword">Set</span> foo <span class="token operator">=</span> <span class="token boolean">Nothing</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>Calling the above <code>Test</code> procedure outputs 1. <code>DoSomething</code> is given <code>foo</code> and receives <strong>a copy</strong> of <strong>the pointer</strong> to the <code>Collection</code> object. Because the <code>foo</code> object variable in the <code>Test</code> scope points to the same object, adding an item in <code>DoSomething</code> adds the item to the same object. Because it's <strong>a copy</strong> of the pointer, setting its reference to <code>Nothing</code> does not affect the caller's own copy.
+</p></li><p></p> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <h3 id="passing-arrays"><a href="#passing-arrays" class="header-anchor">#</a> Passing arrays</h3> <p>Arrays <strong>must</strong> be passed by reference. This code compiles, but raises run-time error 424 &quot;Object Required&quot;:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Public</span> <span class="token keyword">Sub</span> Test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    DoSomething Array<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+<span class="token keyword">Private</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token keyword">ByVal</span> foo <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">)</span>
+    foo<span class="token punctuation">.</span>Add <span class="token number">42</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>This code does not compile:</p> <div class="language-vb extra-class"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Sub</span> DoSomething<span class="token punctuation">(</span><span class="token keyword">ByVal</span> foo<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">As</span> <span class="token keyword">Variant</span><span class="token punctuation">)</span> <span class="token comment">'ByVal is illegal for arrays</span>
+    foo<span class="token punctuation">.</span>Add <span class="token number">42</span>
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/vba/passing-arguments-byref-or-byval.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vba/flow-control-structures.html" class="prev">
+        Flow control structures
+      </a></span> <span class="next"><a href="/vba/scripting-filesystemobject.html">
+        Scripting.FileSystemObject
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3432.bb9ca31e.js" defer></script>
+  </body>
+</html>

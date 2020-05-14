@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Swift - Concurrency</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Obtaining a Grand Central Dispatch (GCD) queue, Concurrent Loops, Running tasks in a Grand Central Dispatch (GCD) queue, Running Tasks in an OperationQueue, Creating High-Level Operations">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Swift - Concurrency">
+    <meta property="og:description" content="Obtaining a Grand Central Dispatch (GCD) queue, Concurrent Loops, Running tasks in a Grand Central Dispatch (GCD) queue, Running Tasks in an OperationQueue, Creating High-Level Operations">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/swift/concurrency.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Swift - Concurrency">
+    <meta name="twitter:description" content="Obtaining a Grand Central Dispatch (GCD) queue, Concurrent Loops, Running tasks in a Grand Central Dispatch (GCD) queue, Running Tasks in an OperationQueue, Creating High-Level Operations">
+    <meta name="twitter:url" content="/swift/concurrency.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3318.646f5d44.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Swift</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/swift/" class="sidebar-link">Disclaimer</a></li><li><a href="/swift/getting-started-with-swift-language.html" class="sidebar-link">Getting started with Swift Language</a></li><li><a href="/swift/variables-properties.html" class="sidebar-link">Variables &amp; Properties</a></li><li><a href="/swift/numbers.html" class="sidebar-link">Numbers</a></li><li><a href="/swift/strings-and-characters.html" class="sidebar-link">Strings and Characters</a></li><li><a href="/swift/booleans.html" class="sidebar-link">Booleans</a></li><li><a href="/swift/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/swift/tuples.html" class="sidebar-link">Tuples</a></li><li><a href="/swift/enums.html" class="sidebar-link">Enums</a></li><li><a href="/swift/structs.html" class="sidebar-link">Structs</a></li><li><a href="/swift/sets.html" class="sidebar-link">Sets</a></li><li><a href="/swift/dictionaries.html" class="sidebar-link">Dictionaries</a></li><li><a href="/swift/switch.html" class="sidebar-link">Switch</a></li><li><a href="/swift/optionals.html" class="sidebar-link">Optionals</a></li><li><a href="/swift/conditionals.html" class="sidebar-link">Conditionals</a></li><li><a href="/swift/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/swift/loops.html" class="sidebar-link">Loops</a></li><li><a href="/swift/protocols.html" class="sidebar-link">Protocols</a></li><li><a href="/swift/functions.html" class="sidebar-link">Functions</a></li><li><a href="/swift/extensions.html" class="sidebar-link">Extensions</a></li><li><a href="/swift/classes.html" class="sidebar-link">Classes</a></li><li><a href="/swift/type-casting.html" class="sidebar-link">Type Casting</a></li><li><a href="/swift/generics.html" class="sidebar-link">Generics</a></li><li><a href="/swift/optionset.html" class="sidebar-link">OptionSet</a></li><li><a href="/swift/reading-writing-json.html" class="sidebar-link">Reading &amp; Writing JSON</a></li><li><a href="/swift/advanced-operators.html" class="sidebar-link">Advanced Operators</a></li><li><a href="/swift/method-swizzling.html" class="sidebar-link">Method Swizzling</a></li><li><a href="/swift/reflection.html" class="sidebar-link">Reflection</a></li><li><a href="/swift/access-control.html" class="sidebar-link">Access Control</a></li><li><a href="/swift/closures.html" class="sidebar-link">Closures</a></li><li><a href="/swift/initializers.html" class="sidebar-link">Initializers</a></li><li><a href="/swift/associated-objects.html" class="sidebar-link">Associated Objects</a></li><li><a href="/swift/concurrency.html" class="active sidebar-link">Concurrency</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/swift/concurrency.html#obtaining-a-grand-central-dispatch-gcd-queue" class="sidebar-link">Obtaining a Grand Central Dispatch (GCD) queue</a></li><li class="sidebar-sub-header"><a href="/swift/concurrency.html#concurrent-loops" class="sidebar-link">Concurrent Loops</a></li><li class="sidebar-sub-header"><a href="/swift/concurrency.html#running-tasks-in-a-grand-central-dispatch-gcd-queue" class="sidebar-link">Running tasks in a Grand Central Dispatch (GCD) queue</a></li><li class="sidebar-sub-header"><a href="/swift/concurrency.html#running-tasks-in-an-operationqueue" class="sidebar-link">Running Tasks in an OperationQueue</a></li><li class="sidebar-sub-header"><a href="/swift/concurrency.html#creating-high-level-operations" class="sidebar-link">Creating High-Level Operations</a></li></ul></li><li><a href="/swift/getting-started-with-protocol-oriented-programming.html" class="sidebar-link">Getting Started with Protocol Oriented Programming</a></li><li><a href="/swift/functional-programming-in-swift.html" class="sidebar-link">Functional Programming in Swift</a></li><li><a href="/swift/function-as-first-class-citizens-in-swift.html" class="sidebar-link">Function as first class citizens in Swift</a></li><li><a href="/swift/blocks.html" class="sidebar-link">Blocks</a></li><li><a href="/swift/the-defer-statement.html" class="sidebar-link">The Defer Statement</a></li><li><a href="/swift/style-conventions.html" class="sidebar-link">Style Conventions</a></li><li><a href="/swift/nsregularexpression-in-swift.html" class="sidebar-link">NSRegularExpression in Swift</a></li><li><a href="/swift/rxswift.html" class="sidebar-link">RxSwift</a></li><li><a href="/swift/swift-package-manager.html" class="sidebar-link">Swift Package Manager</a></li><li><a href="/swift/working-with-c-and-objective-c.html" class="sidebar-link">Working with C and Objective-C</a></li><li><a href="/swift/documentation-markup.html" class="sidebar-link">Documentation markup</a></li><li><a href="/swift/typealias.html" class="sidebar-link">Typealias</a></li><li><a href="/swift/dependency-injection.html" class="sidebar-link">Dependency Injection</a></li><li><a href="/swift/caching-on-disk-space.html" class="sidebar-link">Caching on disk space</a></li><li><a href="/swift/algorithms-with-swift.html" class="sidebar-link">Algorithms with Swift</a></li><li><a href="/swift/swift-advance-functions.html" class="sidebar-link">Swift Advance functions</a></li><li><a href="/swift/completion-handler.html" class="sidebar-link">Completion Handler</a></li><li><a href="/swift/swift-http-server-by-kitura.html" class="sidebar-link">Swift HTTP server by Kitura</a></li><li><a href="/swift/generate-uiimage-of-initials-from-string.html" class="sidebar-link">Generate UIImage of Initials from String</a></li><li><a href="/swift/design-patterns-creational.html" class="sidebar-link">Design Patterns - Creational</a></li><li><a href="/swift/design-patterns-structural.html" class="sidebar-link">Design Patterns - Structural</a></li><li><a href="/swift/unsafe-buffer-pointers.html" class="sidebar-link">(Unsafe) Buffer Pointers</a></li><li><a href="/swift/cryptographic-hashing.html" class="sidebar-link">Cryptographic Hashing</a></li><li><a href="/swift/aes-encryption.html" class="sidebar-link">AES encryption</a></li><li><a href="/swift/pbkdf2-key-derivation.html" class="sidebar-link">PBKDF2 Key Derivation</a></li><li><a href="/swift/logging-in-swift.html" class="sidebar-link">Logging in Swift</a></li><li><a href="/swift/memory-management.html" class="sidebar-link">Memory Management</a></li><li><a href="/swift/performance.html" class="sidebar-link">Performance</a></li><li><a href="/swift/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="concurrency"><a href="#concurrency" class="header-anchor">#</a> Concurrency</h1> <h2 id="obtaining-a-grand-central-dispatch-gcd-queue"><a href="#obtaining-a-grand-central-dispatch-gcd-queue" class="header-anchor">#</a> Obtaining a Grand Central Dispatch (GCD) queue</h2> <p>Grand Central Dispatch works on the concept of &quot;Dispatch Queues&quot;. A dispatch queue executes tasks you designate in the order which they are passed. There are three types of dispatch queues:</p> <ul><li><strong>Serial Dispatch Queues</strong> (aka private dispatch queues) execute one task at a time, in order. They are frequently used to synchronize access to a resource.</li> <li><strong>Concurrent Dispatch Queues</strong> (aka global dispatch queues) execute one or more tasks concurrently.</li> <li>The <strong>Main Dispatch Queue</strong> executes tasks on the main thread.</li></ul> <p>To access the main queue:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> mainQueue <span class="token operator">=</span> <span class="token builtin">DispatchQueue</span><span class="token punctuation">.</span>main
+
+</code></pre></div><div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> mainQueue <span class="token operator">=</span> <span class="token function">dispatch_get_main_queue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>The system provides <strong>concurrent</strong> global dispatch queues (global to your application), with varying priorities. You can access these queues using the <code>DispatchQueue</code> class in Swift 3:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> globalConcurrentQueue <span class="token operator">=</span> <span class="token builtin">DispatchQueue</span><span class="token punctuation">.</span><span class="token function">global</span><span class="token punctuation">(</span>qos<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>equivalent to</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> globalConcurrentQueue <span class="token operator">=</span> <span class="token builtin">DispatchQueue</span><span class="token punctuation">.</span><span class="token function">global</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> globalConcurrentQueue <span class="token operator">=</span> <span class="token function">dispatch_get_global_queue</span><span class="token punctuation">(</span><span class="token constant">DISPATCH_QUEUE_PRIORITY_DEFAULT</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>In iOS 8 or later, the possible quality of service values which may be passed are <code>.userInteractive</code>, <code>.userInitiated</code>, <code>.default</code>, <code>.utility</code>, and <code>.background</code>. These replace the <code>DISPATCH_QUEUE_PRIORITY_</code> constants.</p> <p>You can also create your own queues with varying priorities:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> myConcurrentQueue <span class="token operator">=</span> <span class="token function">DispatchQueue</span><span class="token punctuation">(</span>label<span class="token punctuation">:</span> <span class="token string">&quot;my-concurrent-queue&quot;</span><span class="token punctuation">,</span> qos<span class="token punctuation">:</span> <span class="token punctuation">.</span>userInitiated<span class="token punctuation">,</span> attributes<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">.</span>concurrent<span class="token punctuation">]</span><span class="token punctuation">,</span> autoreleaseFrequency<span class="token punctuation">:</span> <span class="token punctuation">.</span>workItem<span class="token punctuation">,</span> target<span class="token punctuation">:</span> <span class="token constant">nil</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> mySerialQueue <span class="token operator">=</span> <span class="token function">DispatchQueue</span><span class="token punctuation">(</span>label<span class="token punctuation">:</span> <span class="token string">&quot;my-serial-queue&quot;</span><span class="token punctuation">,</span> qos<span class="token punctuation">:</span> <span class="token punctuation">.</span>background<span class="token punctuation">,</span> attributes<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> autoreleaseFrequency<span class="token punctuation">:</span> <span class="token punctuation">.</span>workItem<span class="token punctuation">,</span> target<span class="token punctuation">:</span> <span class="token constant">nil</span><span class="token punctuation">)</span>
+
+</code></pre></div><div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> myConcurrentQueue <span class="token operator">=</span> <span class="token function">dispatch_queue_create</span><span class="token punctuation">(</span><span class="token string">&quot;my-concurrent-queue&quot;</span><span class="token punctuation">,</span> <span class="token constant">DISPATCH_QUEUE_CONCURRENT</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> mySerialQueue <span class="token operator">=</span> <span class="token function">dispatch_queue_create</span><span class="token punctuation">(</span><span class="token string">&quot;my-serial-queue&quot;</span><span class="token punctuation">,</span> <span class="token constant">DISPATCH_QUEUE_SERIAL</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>In Swift 3, queues created with this initializer are serial by default, and passing <code>.workItem</code> for autorelease frequency ensures an autorelease pool is created and drained for each work item. There is also <code>.never</code>, which means you will be managing your own autorelease pools yourself, or <code>.inherit</code> which inherits the setting from the environment. In most cases you probably won't use <code>.never</code> except in cases of extreme customization.</p> <h2 id="concurrent-loops"><a href="#concurrent-loops" class="header-anchor">#</a> Concurrent Loops</h2> <p>GCD provides mechanism for performing a loop, whereby the loops happen concurrently with respect to each other. This is very useful when performing a series of computationally expensive calculations.</p> <p>Consider this loop:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">for</span> index <span class="token keyword">in</span> <span class="token number">0</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token operator">&lt;</span> iterations <span class="token punctuation">{</span>
+    <span class="token comment">// Do something computationally expensive here</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>You can perform  those calculations concurrently using <code>concurrentPerform</code> (in Swift 3) or <code>dispatch_apply</code> (in Swift 2):</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token builtin">DispatchQueue</span><span class="token punctuation">.</span><span class="token function">concurrentPerform</span><span class="token punctuation">(</span>iterations<span class="token punctuation">:</span> iterations<span class="token punctuation">)</span> <span class="token punctuation">{</span> index <span class="token keyword">in</span>
+    <span class="token comment">// Do something computationally expensive here</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><div class="language-swift extra-class"><pre class="language-swift"><code><span class="token function">dispatch_apply</span><span class="token punctuation">(</span>iterations<span class="token punctuation">,</span> queue<span class="token punctuation">)</span> <span class="token punctuation">{</span> index <span class="token keyword">in</span>
+    <span class="token comment">// Do something computationally expensive here</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The loop closure will be invoked for each <code>index</code> from <code>0</code> to, but not including, <code>iterations</code>. These iterations will be run concurrently with respect to each other, and thus the order that they run is not guaranteed. The actual number of iterations that happen concurrently at any given time is generally dictated by the capabilities of the device in question (e.g. how many cores does the device have).</p> <p>A couple of special  considerations:</p> <li>
+The `concurrentPerform`/`dispatch_apply` may run the loops concurrently with respect to each other, but this all happens synchronously with respect to the thread from which you call it. So, do not call this from the main thread, as this will block that thread until the loop is done.
+</li> <li>
+Because these loops happen concurrently with respect to each other, you are responsible for ensuring the thread-safety of the results. For example, if updating some dictionary with the results of these computationally expensive calculations, make sure to synchronize those updates yourself.
+</li> <li>
+Note, there is some overhead associated in running concurrent loops. Thus, if the calculations being performed inside the loop are not sufficiently computationally intensive, you may find that any performance gained by using concurrent loops may be diminished, if not be completely offset, by the overhead associated with the synchronizing all of these concurrent threads.
+So, you are responsible determining the correct amount of work to be performed in each iteration of the loop. If the calculations are too simple, you may employ &quot;striding&quot; to include more work per loop. For example, rather than doing a concurrent loop with 1 million trivial calculations, you may do 100 iterations in your loop, doing 10,000 calculations per loop. That way there is enough work being performed on each thread, so the overhead associated with managing these concurrent loops becomes less significant.
+</li> <h2 id="running-tasks-in-a-grand-central-dispatch-gcd-queue"><a href="#running-tasks-in-a-grand-central-dispatch-gcd-queue" class="header-anchor">#</a> Running tasks in a Grand Central Dispatch (GCD) queue</h2> <p>To run tasks on a dispatch queue, use the <code>sync</code>, <code>async</code>, and <code>after</code> methods.</p> <p>To dispatch a task to a queue asynchronously:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> queue <span class="token operator">=</span> <span class="token function">DispatchQueue</span><span class="token punctuation">(</span>label<span class="token punctuation">:</span> <span class="token string">&quot;myQueueName&quot;</span><span class="token punctuation">)</span>
+
+queue<span class="token punctuation">.</span>async <span class="token punctuation">{</span>
+    <span class="token comment">//do something</span>
+    
+    <span class="token builtin">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">.</span>async <span class="token punctuation">{</span>
+        <span class="token comment">//this will be called in main thread</span>
+        <span class="token comment">//any UI updates should be placed here</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// ... code here will execute immediately, before the task finished</span>
+
+</code></pre></div><p>To dispatch a task to a queue synchronously:</p> <div class="language-swift extra-class"><pre class="language-swift"><code>queue<span class="token punctuation">.</span>sync <span class="token punctuation">{</span>
+    <span class="token comment">// Do some task</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// ... code here will not execute until the task is finished</span>
+
+</code></pre></div><p>To dispatch a task to a queue after a certain number of seconds:</p> <div class="language-swift extra-class"><pre class="language-swift"><code>queue<span class="token punctuation">.</span><span class="token function">asyncAfter</span><span class="token punctuation">(</span>deadline<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//this will be executed in a background-thread after 3 seconds</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// ... code here will execute immediately, before the task finished</span>
+
+</code></pre></div><blockquote></blockquote> <p><strong>NOTE:</strong> Any updates of the user-interface should be called on the main thread! Make sure, that you put the code for UI updates inside <code>DispatchQueue.main.async { ... }</code></p> <p>Types of queue:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> mainQueue <span class="token operator">=</span> <span class="token function">dispatch_get_main_queue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> highQueue <span class="token operator">=</span> <span class="token function">dispatch_get_global_queue</span><span class="token punctuation">(</span><span class="token constant">DISPATCH_QUEUE_PRIORITY_HIGH</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> backgroundQueue <span class="token operator">=</span> <span class="token function">dispatch_get_global_queue</span><span class="token punctuation">(</span><span class="token constant">DISPATCH_QUEUE_PRIORITY_BACKGROUND</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+</code></pre></div><p>To dispatch a task to a queue asynchronously:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token function">dispatch_async</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Your code run run asynchronously. Code is queued and executed </span>
+    <span class="token comment">// at some point in the future.</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// Code after the async block will execute immediately</span>
+
+</code></pre></div><p>To dispatch a task to a queue synchronously:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token function">dispatch_sync</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Your sync code</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// Code after the sync block will wait until the sync task finished</span>
+
+</code></pre></div><p>To dispatch a task to after a time interval (use <code>NSEC_PER_SEC</code> to convert seconds to nanoseconds):</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token function">dispatch_after</span><span class="token punctuation">(</span><span class="token function">dispatch_time</span><span class="token punctuation">(</span><span class="token constant">DISPATCH_TIME_NOW</span><span class="token punctuation">,</span> <span class="token function">Int64</span><span class="token punctuation">(</span><span class="token number">2.5</span> <span class="token operator">*</span> <span class="token function">Double</span><span class="token punctuation">(</span><span class="token constant">NSEC_PER_SEC</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">dispatch_get_main_queue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Code to be performed in 2.5 seconds here</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>To execute a task asynchronously and than update the UI:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token function">dispatch_async</span><span class="token punctuation">(</span>queue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// Your time consuming code here</span>
+    <span class="token function">dispatch_async</span><span class="token punctuation">(</span><span class="token function">dispatch_get_main_queue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Update the UI code </span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><blockquote></blockquote> <p><strong>NOTE:</strong> Any updates of the user-interface should be called on the main thread! Make sure, that you put the code for UI updates inside <code>dispatch_async(dispatch_get_main_queue()) { ... }</code></p> <h2 id="running-tasks-in-an-operationqueue"><a href="#running-tasks-in-an-operationqueue" class="header-anchor">#</a> Running Tasks in an OperationQueue</h2> <p>You can think of an <code>OperationQueue</code> as a line of tasks waiting to be executed. Unlike dispatch queues in GCD, operation queues are not FIFO (first-in-first-out). Instead, they execute tasks as soon as they are ready to be executed, as long as there are enough system resources to allow for it.</p> <p>Get the main <code>OperationQueue</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> mainQueue <span class="token operator">=</span> <span class="token builtin">OperationQueue</span><span class="token punctuation">.</span>main
+
+</code></pre></div><p>Create a custom <code>OperationQueue</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> queue <span class="token operator">=</span> <span class="token function">OperationQueue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+queue<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">&quot;My Queue&quot;</span>
+queue<span class="token punctuation">.</span>qualityOfService <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token keyword">default</span>
+
+</code></pre></div><p>Quality of Service specifies the importance of the work, or how much the user is likely to be counting on immediate results from the task.</p> <p>Add an <code>Operation</code> to an <code>OperationQueue</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token comment">// An instance of some Operation subclass</span>
+<span class="token keyword">let</span> operation <span class="token operator">=</span> <span class="token builtin">BlockOperation</span> <span class="token punctuation">{</span>
+    <span class="token comment">// perform task here</span>
+<span class="token punctuation">}</span>
+
+queue<span class="token punctuation">.</span><span class="token function">addOperation</span><span class="token punctuation">(</span>operation<span class="token punctuation">)</span>
+
+</code></pre></div><p>Add a block to an <code>OperationQueue</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code>myQueue<span class="token punctuation">.</span>addOperation <span class="token punctuation">{</span>
+    <span class="token comment">// some task</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Add multiple <code>Operation</code>s to an <code>OperationQueue</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">let</span> operations <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token builtin">Operation</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">// Fill array with Operations</span>
+
+myQueue<span class="token punctuation">.</span><span class="token function">addOperation</span><span class="token punctuation">(</span>operations<span class="token punctuation">)</span>
+
+</code></pre></div><p>Adjust how many <code>Operation</code>s may be run concurrently within the queue:</p> <div class="language-swift extra-class"><pre class="language-swift"><code>myQueue<span class="token punctuation">.</span>maxConcurrentOperationCount <span class="token operator">=</span> <span class="token number">3</span> <span class="token comment">// 3 operations may execute at once</span>
+
+<span class="token comment">// Sets number of concurrent operations based on current system conditions</span>
+myQueue<span class="token punctuation">.</span>maxConcurrentOperationCount <span class="token operator">=</span> <span class="token builtin">NSOperationQueueDefaultMaxConcurrentOperationCount</span>
+
+</code></pre></div><p>Suspending a queue will prevent it from starting the execution of any existing, unstarted operations or of any new operations added to the queue. The way to resume this queue is to set the <code>isSuspended</code> back to <code>false</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code>myQueue<span class="token punctuation">.</span>isSuspended <span class="token operator">=</span> <span class="token boolean">true</span>
+
+<span class="token comment">// Re-enable execution</span>
+myQueue<span class="token punctuation">.</span>isSuspended <span class="token operator">=</span> <span class="token boolean">false</span>
+
+</code></pre></div><p>Suspending an <code>OperationQueue</code> does not stop or cancel operations that are already executing. One should only attempt suspending a queue that you created, not global queues or the main queue.</p> <h2 id="creating-high-level-operations"><a href="#creating-high-level-operations" class="header-anchor">#</a> Creating High-Level Operations</h2> <p>The Foundation framework provides the <code>Operation</code> type, which represents a high-level object that encapsulates a portion of work that may be executed on a queue. Not only does the queue coordinate the performance of those operations, but you can also establish dependencies between operations, create cancelable operations, constrain the degree of concurrency employed by the operation queue, etc.</p> <p><code>Operation</code>s become ready to execute when all of its dependencies are finished executing. The <code>isReady</code> property then changes to <code>true</code>.</p> <p>Create a simple non-concurrent <code>Operation</code> subclass:</p> <div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">class</span> <span class="token class-name">MyOperation</span><span class="token punctuation">:</span> <span class="token builtin">Operation</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">init</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>parameters<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Do any setup work here</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Perform the task</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><div class="language-swift extra-class"><pre class="language-swift"><code><span class="token keyword">class</span> <span class="token class-name">MyOperation</span><span class="token punctuation">:</span> <span class="token builtin">NSOperation</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">init</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>parameters<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Do any setup work here</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// Perform the task</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Add an operation to an <code>OperationQueue</code>:</p> <div class="language-swift extra-class"><pre class="language-swift"><code>myQueue<span class="token punctuation">.</span><span class="token function">addOperation</span><span class="token punctuation">(</span>operation<span class="token punctuation">)</span>
+
+</code></pre></div><p>This will execute the operation concurrently on the queue.</p> <p><strong>Manage dependencies on an <code>Operation</code>.</strong></p> <p>Dependencies define other <code>Operation</code>s that must execute on a queue before that <code>Operation</code> is considered ready to execute.</p> <div class="language-swift extra-class"><pre class="language-swift"><code>operation2<span class="token punctuation">.</span><span class="token function">addDependency</span><span class="token punctuation">(</span>operation1<span class="token punctuation">)</span>
+
+operation2<span class="token punctuation">.</span><span class="token function">removeDependency</span><span class="token punctuation">(</span>operation1<span class="token punctuation">)</span>
+
+</code></pre></div><p>Run an <code>Operation</code> without a queue:</p> <div class="language- extra-class"><pre class="language-text"><code>
+  operation.start()
+
+</code></pre></div><p>Dependencies will be ignored. If this is a concurrent operation, the task may still be executed concurrently if its <code>start</code> method offloads work to background queues.</p> <p><strong>Concurrent Operations.</strong></p> <p>If the task that an <code>Operation</code> is to perform is, itself, asynchronous, (e.g. a <code>URLSession</code> data task), you should implement the <code>Operation</code> as a concurrent operation. In this case, your <code>isAsynchronous</code> implementation should return <code>true</code>, you'd generally have <code>start</code> method that performs some setup, then calls its <code>main</code> method which actually executes the task.</p> <p>When implementing an asynchronous <code>Operation</code> begins you must implement <code>isExecuting</code>, <code>isFinished</code> methods and KVO. So, when execution starts, <code>isExecuting</code> property changes to <code>true</code>. When an <code>Operation</code> finishes its task, <code>isExecuting</code> is set to <code>false</code>, and <code>isFinished</code> is set to <code>true</code>. If the operation it is cancelled both <code>isCancelled</code> and <code>isFinished</code> change to <code>true</code>. All of these properties are key-value observable.</p> <p><strong>Cancel an <code>Operation</code>.</strong></p> <p>Calling <code>cancel</code> simply changes the <code>isCancelled</code> property to <code>true</code>. To respond to cancellation from within your own <code>Operation</code> subclass, you should check the value of <code>isCancelled</code> at least periodically within <code>main</code> and respond appropriately.</p> <div class="language-swift extra-class"><pre class="language-swift"><code>operation<span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <li>
+Swift 3.0
+</li> <li>
+DispatchQueue.main // Get the main queue
+</li> <li>
+DispatchQueue(label: &quot;my-serial-queue&quot;, attributes: [.serial, .qosBackground]) // Create your own private serial queue
+</li> <li>
+DispatchQueue.global(attributes: [.qosDefault]) // Access one of the global concurrent queues
+</li> <li>
+DispatchQueue.main.async { ... } // Dispatch a task asynchronously to the main thread
+</li> <li>
+DispatchQueue.main.sync { ... } // Dispatch a task synchronously to the main thread
+</li> <li>
+DispatchQueue.main.asyncAfter(deadline: .now() + 3) { ... } // Dispatch a task asynchronously to the main thread to be executed after x seconds
+</li> <li>
+Swift &lt; 3.0
+</li> <li>
+dispatch_get_main_queue() // Get the main queue running on the main thread
+</li> <li>
+dispatch_get_global_queue(dispatch_queue_priority_t, 0) // Get global queue with specified priority dispatch_queue_priority_t
+</li> <li>
+dispatch_async(dispatch_queue_t) { () -&gt; Void in ... } // Dispatch a task asynchronously on the specified dispatch_queue_t
+</li> <li>
+dispatch_sync(dispatch_queue_t) { () -&gt; Void in ... } // Dispatch a task synchronously on the specified dispatch_queue_t
+</li> <li>
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(nanoseconds)), dispatch_queue_t, { ... }); // Dispatch a task on the specified dispatch_queue_t after nanoseconds
+</li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/swift/concurrency.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/swift/associated-objects.html" class="prev">
+        Associated Objects
+      </a></span> <span class="next"><a href="/swift/getting-started-with-protocol-oriented-programming.html">
+        Getting Started with Protocol Oriented Programming
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3318.646f5d44.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>LaTex - Creating posters using beamer</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Orientation and size, Basic outline of a beamer poster, Full example of beamer poster">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="LaTex - Creating posters using beamer">
+    <meta property="og:description" content="Orientation and size, Basic outline of a beamer poster, Full example of beamer poster">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/latex/creating-posters-using-beamer.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="LaTex - Creating posters using beamer">
+    <meta name="twitter:description" content="Orientation and size, Basic outline of a beamer poster, Full example of beamer poster">
+    <meta name="twitter:url" content="/latex/creating-posters-using-beamer.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1871.d3e96cca.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>LaTex</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/latex/" class="sidebar-link">Disclaimer</a></li><li><a href="/latex/getting-started-with-latex.html" class="sidebar-link">Getting started with latex</a></li><li><a href="/latex/title-pages.html" class="sidebar-link">Title Pages</a></li><li><a href="/latex/header-and-footer.html" class="sidebar-link">Header and Footer</a></li><li><a href="/latex/text-formatting.html" class="sidebar-link">Text Formatting</a></li><li><a href="/latex/tables.html" class="sidebar-link">Tables</a></li><li><a href="/latex/typesetting-mathematics.html" class="sidebar-link">Typesetting mathematics</a></li><li><a href="/latex/creating-a-bibliography.html" class="sidebar-link">Creating a Bibliography</a></li><li><a href="/latex/add-citation.html" class="sidebar-link">Add Citation</a></li><li><a href="/latex/counters-if-statements-and-loops-with-latex.html" class="sidebar-link">Counters, if statements and loops with latex</a></li><li><a href="/latex/document-classes.html" class="sidebar-link">Document classes</a></li><li><a href="/latex/drawing-graphs.html" class="sidebar-link">Drawing graphs</a></li><li><a href="/latex/presentation-with-beamer-package.html" class="sidebar-link">Presentation with beamer package</a></li><li><a href="/latex/defining-macros.html" class="sidebar-link">Defining macros</a></li><li><a href="/latex/build-tools.html" class="sidebar-link">Build Tools</a></li><li><a href="/latex/accessing-documentation-of-latex-packages.html" class="sidebar-link">Accessing documentation of LaTeX packages</a></li><li><a href="/latex/creating-posters-using-beamer.html" class="active sidebar-link">Creating posters using beamer</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/latex/creating-posters-using-beamer.html#orientation-and-size" class="sidebar-link">Orientation and size</a></li><li class="sidebar-sub-header"><a href="/latex/creating-posters-using-beamer.html#basic-outline-of-a-beamer-poster" class="sidebar-link">Basic outline of a beamer poster</a></li><li class="sidebar-sub-header"><a href="/latex/creating-posters-using-beamer.html#full-example-of-beamer-poster" class="sidebar-link">Full example of beamer poster</a></li></ul></li><li><a href="/latex/engraving-sheet-music.html" class="sidebar-link">Engraving Sheet Music</a></li><li><a href="/latex/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="creating-posters-using-beamer"><a href="#creating-posters-using-beamer" class="header-anchor">#</a> Creating posters using beamer</h1> <p>Creating a poster using beamerposter package is very similar to creating a single frame. Put the content in columns. Within each column, separate the content using blocks.</p> <h2 id="orientation-and-size"><a href="#orientation-and-size" class="header-anchor">#</a> Orientation and size</h2> <p>While adding the beamerposter package, provide the required parameters.</p> <p><code>\usepackage[orientation=landscape,size=a1]{beamerposter}</code></p> <p>You can also customize the size of the poster.</p> <p><code>\usepackage[orientation=portrait,size=custom,height=110,width=80,scale=1.4]{beamerposter}</code></p> <p>The height and width dimensions here, are in cms. The <code>scale</code> is used for the font size.</p> <h2 id="basic-outline-of-a-beamer-poster"><a href="#basic-outline-of-a-beamer-poster" class="header-anchor">#</a> Basic outline of a beamer poster</h2> <p>In landscape orientation</p> <div class="language-latex extra-class"><pre class="language-latex"><code><span class="token function selector">\documentclass</span><span class="token punctuation">[</span>final,t<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">beamer</span><span class="token punctuation">}</span>
+<span class="token function selector">\mode</span>&lt;presentation&gt;
+  <span class="token punctuation">{</span>
+  <span class="token function selector">\usetheme</span><span class="token punctuation">{</span>Berlin<span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+<span class="token function selector">\usepackage</span><span class="token punctuation">[</span>orientation=landscape,size=a1,scale=1,debug<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">beamerposter</span><span class="token punctuation">}</span>
+<span class="token function selector">\usepackage</span><span class="token punctuation">{</span><span class="token keyword">lipsum</span><span class="token punctuation">}</span> <span class="token comment">% for dummy text</span>
+
+
+<span class="token function selector">\title</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\huge</span> Awesome title<span class="token punctuation">}</span>
+<span class="token function selector">\author</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\large</span> <span class="token function selector">\textbf</span><span class="token punctuation">{</span>Author Name1<span class="token punctuation">}</span> <span class="token function selector">\and</span> Author Name2 <span class="token function selector">\and</span> Author Name3<span class="token punctuation">}</span>
+<span class="token function selector">\institute</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\Large</span> Dept of XYZ, ABC Institute<span class="token punctuation">}</span>
+<span class="token function selector">\date</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">document</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">frame</span><span class="token punctuation">}</span>
+<span class="token function selector">\maketitle</span>
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">columns</span><span class="token punctuation">}</span><span class="token punctuation">[</span>t<span class="token punctuation">]</span>
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>.32<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+ 
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>     
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+
+ <span class="token comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>.32<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+ 
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>     
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+
+  
+  <span class="token comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>.32<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+ 
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>     
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">columns</span><span class="token punctuation">}</span>
+    
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">frame</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">document</span><span class="token punctuation">}</span>
+
+</code></pre></div><p><a href="https://i.stack.imgur.com/TerHq.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/TerHq.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>In portrait orientation</p> <div class="language-latex extra-class"><pre class="language-latex"><code><span class="token function selector">\documentclass</span><span class="token punctuation">[</span>final,t<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">beamer</span><span class="token punctuation">}</span>
+<span class="token function selector">\mode</span>&lt;presentation&gt;
+  <span class="token punctuation">{</span>
+  <span class="token function selector">\usetheme</span><span class="token punctuation">{</span>Berlin<span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+<span class="token function selector">\usepackage</span><span class="token punctuation">[</span>orientation=portrait,size=a1,scale=1,debug<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">beamerposter</span><span class="token punctuation">}</span>
+<span class="token function selector">\usepackage</span><span class="token punctuation">{</span><span class="token keyword">lipsum</span><span class="token punctuation">}</span> <span class="token comment">% for dummy text</span>
+
+
+<span class="token function selector">\title</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\huge</span> Awesome title<span class="token punctuation">}</span>
+<span class="token function selector">\author</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\large</span> <span class="token function selector">\textbf</span><span class="token punctuation">{</span>Author Name1<span class="token punctuation">}</span> <span class="token function selector">\and</span> Author Name2 <span class="token function selector">\and</span> Author Name3<span class="token punctuation">}</span>
+<span class="token function selector">\institute</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\Large</span> Dept of XYZ, ABC Institute<span class="token punctuation">}</span>
+<span class="token function selector">\date</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">document</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">frame</span><span class="token punctuation">}</span>
+<span class="token function selector">\maketitle</span>
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">columns</span><span class="token punctuation">}</span><span class="token punctuation">[</span>t<span class="token punctuation">]</span>
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>.45<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+ 
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>     
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+
+ <span class="token comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>.45<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+ 
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>     
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Some heading<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">columns</span><span class="token punctuation">}</span>
+    
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">frame</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">document</span><span class="token punctuation">}</span>
+
+</code></pre></div><p><a href="https://i.stack.imgur.com/Ookzl.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/Ookzl.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <h2 id="full-example-of-beamer-poster"><a href="#full-example-of-beamer-poster" class="header-anchor">#</a> Full example of beamer poster</h2> <div class="language-latex extra-class"><pre class="language-latex"><code><span class="token function selector">\documentclass</span><span class="token punctuation">[</span>final,t<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">beamer</span><span class="token punctuation">}</span>
+<span class="token function selector">\mode</span>&lt;presentation&gt;
+  <span class="token punctuation">{</span>
+  <span class="token function selector">\usetheme</span><span class="token punctuation">{</span>Berlin<span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+
+<span class="token function selector">\usepackage</span><span class="token punctuation">[</span>orientation=landscape,size=a1,scale=1,debug<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">beamerposter</span><span class="token punctuation">}</span>
+<span class="token function selector">\usepackage</span><span class="token punctuation">{</span><span class="token keyword">lipsum</span><span class="token punctuation">}</span> <span class="token comment">% for dummy text</span>
+<span class="token function selector">\usepackage</span><span class="token punctuation">{</span><span class="token keyword">graphicx</span><span class="token punctuation">}</span> <span class="token comment">% for dummy image</span>
+<span class="token function selector">\usepackage</span><span class="token punctuation">{</span><span class="token keyword">tikz</span><span class="token punctuation">}</span> <span class="token comment">% for tikzpicture</span>
+<span class="token function selector">\usepackage</span><span class="token punctuation">{</span><span class="token keyword">pgfplots</span><span class="token punctuation">}</span> <span class="token comment">% for plot</span>
+<span class="token function selector">\usetikzlibrary</span><span class="token punctuation">{</span>arrows,shapes,positioning<span class="token punctuation">}</span>
+
+
+<span class="token function selector">\title</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\huge</span> Awesome title<span class="token punctuation">}</span>
+<span class="token function selector">\author</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\large</span> <span class="token function selector">\textbf</span><span class="token punctuation">{</span>Author Name1<span class="token punctuation">}</span> <span class="token function selector">\and</span> Author Name2 <span class="token function selector">\and</span> Author Name3<span class="token punctuation">}</span>
+<span class="token function selector">\institute</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\Large</span> Dept of XYZ, ABC Institute<span class="token punctuation">}</span>
+<span class="token function selector">\date</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">document</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">frame</span><span class="token punctuation">}</span>
+<span class="token function selector">\maketitle</span>
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">columns</span><span class="token punctuation">}</span><span class="token punctuation">[</span>t<span class="token punctuation">]</span>
+
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>.32<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+ 
+ 
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>First paragraph<span class="token punctuation">}</span>
+  <span class="token function selector">\lipsum</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>First figure<span class="token punctuation">}</span>
+  Some text describing figure
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+   <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+    <span class="token function selector">\includegraphics</span><span class="token punctuation">[</span>scale=0.7<span class="token punctuation">]</span><span class="token punctuation">{</span>example-image-a<span class="token punctuation">}</span>
+    <span class="token function selector">\caption</span><span class="token punctuation">{</span>First figure caption<span class="token punctuation">}</span>
+   <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+
+  
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+    
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>First list<span class="token punctuation">}</span>
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">itemize</span><span class="token punctuation">}</span>
+   <span class="token function selector">\item</span> Nam dui ligula, fringilla a, euismod sodales, sollicitudin vel, wisi.
+   <span class="token function selector">\item</span> Morbi auctor lorem non justo.
+   <span class="token function selector">\item</span> Nam lacus libero, pretium at, lobortis vitae, ultricies et, tellus.
+   <span class="token function selector">\item</span> Donec aliquet, tortor sed accumsan bibendum, erat ligula aliquet magna, vitae ornare odio metus a mi.
+   <span class="token function selector">\item</span> Morbi ac orci et nisl hendrerit mollis.
+   <span class="token function selector">\item</span> Suspendisse ut massa.
+   <span class="token function selector">\item</span> Cras nec ante.
+   <span class="token function selector">\item</span> Pellentesque a nulla.
+   <span class="token function selector">\item</span> Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+   <span class="token function selector">\item</span> Aliquam tincidunt urna.
+   <span class="token function selector">\item</span> Nulla ullamcorper vestibulum turpis.
+   <span class="token function selector">\item</span> Pellentesque cursus luctus mauris.
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">itemize</span><span class="token punctuation">}</span>
+
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  
+   <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+ <span class="token comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>.32<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+ 
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Second list<span class="token punctuation">}</span>
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span>
+   <span class="token function selector">\item</span> Nulla malesuada porttitor diam.
+   <span class="token function selector">\item</span> Donec felis erat, congue non, volutpat at, tincidunt tristique, libero.
+   <span class="token function selector">\item</span> Vivamus viverra fermentum felis.
+   <span class="token function selector">\item</span> Donec nonummy pellentesque ante.
+   <span class="token function selector">\item</span> Phasellus adipiscing semper elit.
+   <span class="token function selector">\item</span> Proin fermentum massa ac quam.
+   <span class="token function selector">\item</span> Sed diam turpis, molestie vitae, placerat a, molestie nec, leo.
+   <span class="token function selector">\item</span> Maecenas lacinia.
+   <span class="token function selector">\item</span> Nam ipsum ligula, eleifend at, accumsan nec, suscipit a, ipsum.
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span>
+
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>First split block<span class="token punctuation">}</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">columns</span><span class="token punctuation">}</span>
+      <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>0.5<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+      
+      <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+      <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+       <span class="token function selector">\includegraphics</span><span class="token punctuation">[</span>width=0.55<span class="token function selector">\linewidth</span><span class="token punctuation">]</span><span class="token punctuation">{</span>example-image-b<span class="token punctuation">}</span>
+       <span class="token function selector">\caption</span><span class="token punctuation">{</span>Second figure caption<span class="token punctuation">}</span>
+      <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+      <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+       <span class="token function selector">\includegraphics</span><span class="token punctuation">[</span>width=0.55<span class="token function selector">\linewidth</span><span class="token punctuation">]</span><span class="token punctuation">{</span>example-image-c<span class="token punctuation">}</span>
+       <span class="token function selector">\caption</span><span class="token punctuation">{</span>Third figure caption<span class="token punctuation">}</span>
+      <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+    
+   <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+   
+   <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>0.5<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+   
+   Morbi blandit ligula feugiat magna.
+   <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">itemize</span><span class="token punctuation">}</span>
+   <span class="token function selector">\item</span> Nunc eleifend consequat lorem.
+   <span class="token function selector">\item</span> Sed lacinia nulla vitae enim.
+   <span class="token function selector">\item</span> Pellentesque tincidunt purus vel magna.
+   <span class="token function selector">\item</span> Integer non enim.
+   <span class="token function selector">\item</span> Praesent euismod nunc eu purus.
+   <span class="token function selector">\item</span> Donec bibendum quam in tellus.
+   <span class="token function selector">\item</span> Nullam cursus pulvinar lectus.
+   <span class="token function selector">\item</span> Donec et mi.
+   <span class="token function selector">\item</span> Nam vulputate metus eu enim.
+   <span class="token function selector">\item</span> Vestibulum pellentesque felis eu massa.
+   <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">itemize</span><span class="token punctuation">}</span>
+
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">columns</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>First tikz picture<span class="token punctuation">}</span>
+  Morbi blandit ligula feugiat magna. Nunc eleifend consequat lorem. Sed lacinia nulla vitae enim. Pellentesque
+tincidunt purus vel magna.
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+    
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">tikzpicture</span><span class="token punctuation">}</span>
+ 
+      <span class="token comment">% Definitions</span>
+      <span class="token function selector">\pgfmathsetmacro</span><span class="token punctuation">{</span><span class="token function selector">\b</span><span class="token punctuation">}</span><span class="token punctuation">{</span>75<span class="token punctuation">}</span>
+      <span class="token function selector">\pgfmathsetmacro</span><span class="token punctuation">{</span><span class="token function selector">\a</span><span class="token punctuation">}</span><span class="token punctuation">{</span>15<span class="token punctuation">}</span>
+      <span class="token function selector">\pgfmathsetmacro</span><span class="token punctuation">{</span><span class="token function selector">\R</span><span class="token punctuation">}</span><span class="token punctuation">{</span>2<span class="token punctuation">}</span>
+      <span class="token function selector">\pgfmathsetmacro</span><span class="token punctuation">{</span><span class="token function selector">\r</span><span class="token punctuation">}</span><span class="token punctuation">{</span>1<span class="token punctuation">}</span>
+      <span class="token function selector">\pgfmathsetmacro</span><span class="token punctuation">{</span><span class="token function selector">\P</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\R*tan</span>(<span class="token function selector">\b</span>)<span class="token punctuation">}</span>
+      <span class="token function selector">\pgfmathsetmacro</span><span class="token punctuation">{</span><span class="token function selector">\Q</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\R</span>/cos(<span class="token function selector">\b</span>)<span class="token punctuation">}</span>
+      <span class="token function selector">\pgfmathsetmacro</span><span class="token punctuation">{</span><span class="token function selector">\p</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\r</span>/tan(<span class="token function selector">\a</span>)<span class="token punctuation">}</span>
+      <span class="token function selector">\pgfmathsetmacro</span><span class="token punctuation">{</span><span class="token function selector">\q</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\r</span>/sin(<span class="token function selector">\a</span>)<span class="token punctuation">}</span>
+
+      <span class="token comment">% Pulleys</span>
+      
+      <span class="token comment">% big pulley</span>
+      <span class="token function selector">\draw</span> (0,0) circle (<span class="token function selector">\R</span>) ;
+      <span class="token function selector">\fill</span><span class="token punctuation">[</span>left color=gray!80, right color=gray!60, middle
+        color=white<span class="token punctuation">]</span> (0,0) circle (<span class="token function selector">\R</span>) ;
+      <span class="token function selector">\draw</span><span class="token punctuation">[</span>thick, white<span class="token punctuation">]</span> (0,0) circle (.8*<span class="token function selector">\R</span>);
+      <span class="token function selector">\shade</span><span class="token punctuation">[</span>ball color=white<span class="token punctuation">]</span> (0,0) circle (.3) node<span class="token punctuation">[</span>left,xshift=-5<span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token equation string">$P$</span><span class="token punctuation">}</span>;
+
+      <span class="token comment">% small pulley</span>
+      <span class="token function selector">\draw</span> (<span class="token function selector">\Q</span>+<span class="token function selector">\q</span>-.3, 0) circle (<span class="token function selector">\r</span>);
+      <span class="token function selector">\fill</span><span class="token punctuation">[</span>left color=gray!80, right color=gray!60, middle
+        color=white<span class="token punctuation">]</span> (<span class="token function selector">\Q</span>+<span class="token function selector">\q</span>-.3, 0) circle (<span class="token function selector">\r</span>) ;
+      <span class="token function selector">\draw</span><span class="token punctuation">[</span>thick, white<span class="token punctuation">]</span> (<span class="token function selector">\Q</span>+<span class="token function selector">\q</span>-.3,0) circle (.8*<span class="token function selector">\r</span>);
+      <span class="token function selector">\shade</span><span class="token punctuation">[</span>ball color=white<span class="token punctuation">]</span> (<span class="token function selector">\Q</span>+<span class="token function selector">\q</span>-.3,0) circle (.15) 
+      node<span class="token punctuation">[</span>right, xshift=2<span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token equation string">$Q$</span><span class="token punctuation">}</span>;
+
+      <span class="token comment">% belt and point labels</span>
+      <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">scope</span><span class="token punctuation">}</span><span class="token punctuation">[</span>ultra thick<span class="token punctuation">]</span>
+        <span class="token function selector">\draw</span> (<span class="token function selector">\b</span>:<span class="token function selector">\R</span>) arc (<span class="token function selector">\b</span>:360-<span class="token function selector">\b</span>:<span class="token function selector">\R</span>) ;
+        <span class="token function selector">\draw</span> (<span class="token function selector">\b</span>:<span class="token function selector">\R</span>) -- ( <span class="token function selector">\P</span>, 0 ); 
+        <span class="token function selector">\draw</span> (-<span class="token function selector">\b</span>:<span class="token function selector">\R</span>) -- ( <span class="token function selector">\P</span>, 0 );
+        <span class="token function selector">\draw</span> (<span class="token function selector">\Q</span>-.3,0) -- + (<span class="token function selector">\a</span>:<span class="token function selector">\p</span>)  arc (105:-105:<span class="token function selector">\r</span>) ;
+        <span class="token function selector">\draw</span> (<span class="token function selector">\Q</span>-.3,0) -- + (-<span class="token function selector">\a</span>:<span class="token function selector">\p</span>);
+        <span class="token comment">%\draw (\b:\R) arc (\b:360-\b:\r) ;</span>
+      <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">scope</span><span class="token punctuation">}</span>
+   
+      <span class="token function selector">\draw</span> (0,0) -- (<span class="token function selector">\b</span>:<span class="token function selector">\R</span>) node<span class="token punctuation">[</span>midway, above,sloped<span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token equation string">$R$</span><span class="token punctuation">}</span> node<span class="token punctuation">[</span>above<span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token equation string">$A$</span><span class="token punctuation">}</span>;
+      <span class="token function selector">\draw</span> (-<span class="token function selector">\b</span>:<span class="token function selector">\R</span>)--(0,0) ;
+      <span class="token function selector">\draw</span> (<span class="token function selector">\Q</span>+<span class="token function selector">\q</span>-.3,0) -- +(105:<span class="token function selector">\r</span>) node<span class="token punctuation">[</span>midway,above, sloped<span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token equation string">$r$</span><span class="token punctuation">}</span>
+        node<span class="token punctuation">[</span>above<span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token equation string">$E$</span><span class="token punctuation">}</span>;
+      <span class="token function selector">\draw</span> (<span class="token function selector">\Q</span>+<span class="token function selector">\q</span>-.3,0) -- +(-105:<span class="token function selector">\r</span>) node<span class="token punctuation">[</span>below<span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token equation string">$D$</span><span class="token punctuation">}</span>;
+      <span class="token function selector">\node</span><span class="token punctuation">[</span>below<span class="token punctuation">]</span> at (-<span class="token function selector">\b</span>:<span class="token function selector">\R</span>) <span class="token punctuation">{</span><span class="token equation string">$B$</span><span class="token punctuation">}</span>;
+      <span class="token function selector">\node</span><span class="token punctuation">[</span>below<span class="token punctuation">]</span> at (<span class="token function selector">\Q</span>-.3,0) <span class="token punctuation">{</span><span class="token equation string">$C$</span><span class="token punctuation">}</span>;
+
+      <span class="token comment">% center line</span>
+      <span class="token function selector">\draw</span><span class="token punctuation">[</span>dash pattern=on5pt off3pt<span class="token punctuation">]</span> (0,0) -- (<span class="token function selector">\Q</span>+<span class="token function selector">\q</span>-.3,0);
+
+      <span class="token comment">% angle label</span>
+      <span class="token function selector">\node</span><span class="token punctuation">[</span>fill=white<span class="token punctuation">]</span> at (0.73*<span class="token function selector">\Q</span>, 0) <span class="token punctuation">{</span><span class="token equation string">$<span class="token equation-command regex">\theta</span>$</span><span class="token punctuation">}</span> ;
+      <span class="token function selector">\draw</span> (<span class="token function selector">\Q</span>-1.8,0) arc (180:195:1.5);
+      <span class="token function selector">\draw</span> (<span class="token function selector">\Q</span>-1.8,0) arc (180:165:1.5);
+
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">tikzpicture</span><span class="token punctuation">}</span>
+  <span class="token function selector">\caption</span><span class="token punctuation">{</span>First tikz picture caption<span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+ 
+ Donec bibendum quam in tellus. Nullam cursus pulvinar lectus. Donec et mi. Nam vulputate metus eu enim. Vestibulum pellentesque felis eu massa.
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+
+  
+  <span class="token comment">%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</span>
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span><span class="token punctuation">{</span>.32<span class="token function selector">\linewidth</span><span class="token punctuation">}</span>
+ 
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Second paragraph<span class="token punctuation">}</span>
+  Fusce mauris. Vestibulum luctus nibh at lectus. Sed bibendum, nulla a faucibus semper, leo velit ultricies tellus, ac venenatis arcu wisi vel nisl. Vestibulum diam. Aliquam pellentesque, augue quis sagittis posuere, turpis lacus congue quam, in hendrerit risus eros eget felis. Maecenas eget erat in sapien mattis porttitor. Vestibulum porttitor. Nulla facilisi. Sed a turpis eu lacus commodo facilisis. Morbi fringilla, wisi in dignissim interdum, justo lectus sagittis dui, et vehicula libero dui cursus dui.
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>     
+     
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>First table<span class="token punctuation">}</span>
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span><span class="token punctuation">{</span>lrrrrrr<span class="token punctuation">}</span>
+  <span class="token function selector">\hline</span>
+  <span class="token punctuation">&amp;</span> AAA <span class="token punctuation">&amp;</span> BBB <span class="token punctuation">&amp;</span> CCC <span class="token punctuation">&amp;</span> DDD <span class="token punctuation">&amp;</span> EEE <span class="token punctuation">&amp;</span> FFF<span class="token function selector">\\</span> <span class="token function selector">\hline</span>
+  XXX <span class="token punctuation">&amp;</span> 1 <span class="token punctuation">&amp;</span> 2 <span class="token punctuation">&amp;</span> 3 <span class="token punctuation">&amp;</span> 4 <span class="token punctuation">&amp;</span> 5 <span class="token punctuation">&amp;</span> 6 <span class="token function selector">\\</span>
+  YYY <span class="token punctuation">&amp;</span> 1 <span class="token punctuation">&amp;</span> 2 <span class="token punctuation">&amp;</span> 3 <span class="token punctuation">&amp;</span> 4 <span class="token punctuation">&amp;</span> 5 <span class="token punctuation">&amp;</span> 6 <span class="token function selector">\\</span>
+  ZZZ <span class="token punctuation">&amp;</span> 1 <span class="token punctuation">&amp;</span> 2 <span class="token punctuation">&amp;</span> 3 <span class="token punctuation">&amp;</span> 4 <span class="token punctuation">&amp;</span> 5 <span class="token punctuation">&amp;</span> 6 <span class="token function selector">\\</span>
+  
+  <span class="token function selector">\hline</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">tabular</span><span class="token punctuation">}</span>
+
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>First plot<span class="token punctuation">}</span>
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">tikzpicture</span><span class="token punctuation">}</span>
+    <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">axis</span><span class="token punctuation">}</span><span class="token punctuation">[</span>
+    width=0.7<span class="token function selector">\linewidth</span>,
+    max space between ticks=50,
+    minor x tick num=2,
+    minor y tick num=1,
+    tick style=<span class="token punctuation">{</span>semithick,color=black<span class="token punctuation">}</span>,
+    xlabel=Value,
+    ylabel=Time (sec),
+    xtick=<span class="token punctuation">{</span>0, 50, 100, 150<span class="token punctuation">}</span>,
+    ytick=<span class="token punctuation">{</span>0, 2, 4, 6, 8<span class="token punctuation">}</span><span class="token punctuation">]</span>
+    
+    <span class="token function selector">\addplot</span><span class="token punctuation">[</span>smooth, blue, mark=*<span class="token punctuation">]</span> coordinates <span class="token punctuation">{</span> (1,1.48) (2,1.48) (4,1.48) (8,1.48) (16,1.49) (32,1.49) (64,1.49) (128,1.85) (136,5.87) (138,6.84) (139,7.46)<span class="token punctuation">}</span>;
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">axis</span><span class="token punctuation">}</span>
+    <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">tikzpicture</span><span class="token punctuation">}</span>
+
+      
+  <span class="token function selector">\caption</span><span class="token punctuation">{</span>First plot caption<span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">figure</span><span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">center</span><span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+  
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Third paragraph<span class="token punctuation">}</span>
+   Mauris tempor ligula sed lacus. Duis cursus enim ut augue. Cras ac magna. Cras nulla. Nulla egestas. Curabitur a leo. Quisque egestas wisi eget nunc.
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+
+  <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span><span class="token punctuation">{</span>Third list<span class="token punctuation">}</span>
+   <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span>
+    <span class="token function selector">\item</span> Nam feugiat lacus vel est.
+    <span class="token function selector">\item</span> Curabitur consectetuer.
+   <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span>
+
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">block</span><span class="token punctuation">}</span>
+
+
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">column</span><span class="token punctuation">}</span>
+  <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">columns</span><span class="token punctuation">}</span>
+    
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">frame</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">document</span><span class="token punctuation">}</span>
+
+</code></pre></div><p><a href="https://i.stack.imgur.com/XDJs7.png" target="_blank" rel="noopener noreferrer"><img src="https://i.stack.imgur.com/XDJs7.png" alt="enter image description here"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/latex/creating-posters-using-beamer.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/latex/accessing-documentation-of-latex-packages.html" class="prev">
+        Accessing documentation of LaTeX packages
+      </a></span> <span class="next"><a href="/latex/engraving-sheet-music.html">
+        Engraving Sheet Music
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1871.d3e96cca.js" defer></script>
+  </body>
+</html>

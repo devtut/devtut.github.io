@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Python - Python Lex-Yacc</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Getting Started with PLY, The Hello, World! of PLY - A Simple Calculator, Part 1: Tokenizing Input with Lex, Part 2: Parsing Tokenized Input with Yacc">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Python - Python Lex-Yacc">
+    <meta property="og:description" content="Getting Started with PLY, The Hello, World! of PLY - A Simple Calculator, Part 1: Tokenizing Input with Lex, Part 2: Parsing Tokenized Input with Yacc">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/python/python-lex-yacc.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Python - Python Lex-Yacc">
+    <meta name="twitter:description" content="Getting Started with PLY, The Hello, World! of PLY - A Simple Calculator, Part 1: Tokenizing Input with Lex, Part 2: Parsing Tokenized Input with Yacc">
+    <meta name="twitter:url" content="/python/python-lex-yacc.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2783.c2ccc4fc.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Python</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/python/" class="sidebar-link">Disclaimer</a></li><li><a href="/python/getting-started-with-python-language.html" class="sidebar-link">Getting started with Python Language</a></li><li><a href="/python/python-data-types.html" class="sidebar-link">Python Data Types</a></li><li><a href="/python/indentation.html" class="sidebar-link">Indentation</a></li><li><a href="/python/comments-and-documentation.html" class="sidebar-link">Comments and Documentation</a></li><li><a href="/python/date-and-time.html" class="sidebar-link">Date and Time</a></li><li><a href="/python/enum.html" class="sidebar-link">Enum</a></li><li><a href="/python/set.html" class="sidebar-link">Set</a></li><li><a href="/python/simple-mathematical-operators.html" class="sidebar-link">Simple Mathematical Operators</a></li><li><a href="/python/bitwise-operators.html" class="sidebar-link">Bitwise Operators</a></li><li><a href="/python/boolean-operators.html" class="sidebar-link">Boolean Operators</a></li><li><a href="/python/operator-precedence.html" class="sidebar-link">Operator Precedence</a></li><li><a href="/python/variable-scope-and-binding.html" class="sidebar-link">Variable Scope and Binding</a></li><li><a href="/python/conditionals.html" class="sidebar-link">Conditionals</a></li><li><a href="/python/comparisons.html" class="sidebar-link">Comparisons</a></li><li><a href="/python/loops.html" class="sidebar-link">Loops</a></li><li><a href="/python/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/python/multidimensional-arrays.html" class="sidebar-link">Multidimensional arrays</a></li><li><a href="/python/dictionary.html" class="sidebar-link">Dictionary</a></li><li><a href="/python/list.html" class="sidebar-link">List</a></li><li><a href="/python/list-comprehensions.html" class="sidebar-link">List Comprehensions</a></li><li><a href="/python/list-slicing-selecting-parts-of-lists.html" class="sidebar-link">List slicing (selecting parts of lists)</a></li><li><a href="/python/groupby.html" class="sidebar-link">groupby()</a></li><li><a href="/python/linked-lists.html" class="sidebar-link">Linked lists</a></li><li><a href="/python/linked-list-node.html" class="sidebar-link">Linked List Node</a></li><li><a href="/python/filter.html" class="sidebar-link">Filter</a></li><li><a href="/python/heapq.html" class="sidebar-link">Heapq</a></li><li><a href="/python/tuple.html" class="sidebar-link">Tuple</a></li><li><a href="/python/basic-input-and-output.html" class="sidebar-link">Basic Input and Output</a></li><li><a href="/python/files-folders-i-o.html" class="sidebar-link">Files &amp; Folders I/O</a></li><li><a href="/python/os-path.html" class="sidebar-link">os.path</a></li><li><a href="/python/iterables-and-iterators.html" class="sidebar-link">Iterables and Iterators</a></li><li><a href="/python/functions.html" class="sidebar-link">Functions</a></li><li><a href="/python/defining-functions-with-list-arguments.html" class="sidebar-link">Defining functions with list arguments</a></li><li><a href="/python/functional-programming-in-python.html" class="sidebar-link">Functional Programming in Python</a></li><li><a href="/python/partial-functions.html" class="sidebar-link">Partial functions</a></li><li><a href="/python/decorators.html" class="sidebar-link">Decorators</a></li><li><a href="/python/classes.html" class="sidebar-link">Classes</a></li><li><a href="/python/metaclasses.html" class="sidebar-link">Metaclasses</a></li><li><a href="/python/string-formatting.html" class="sidebar-link">String Formatting</a></li><li><a href="/python/string-methods.html" class="sidebar-link">String Methods</a></li><li><a href="/python/using-loops-within-functions.html" class="sidebar-link">Using loops within functions</a></li><li><a href="/python/importing-modules.html" class="sidebar-link">Importing modules</a></li><li><a href="/python/difference-between-module-and-package.html" class="sidebar-link">Difference between Module and Package</a></li><li><a href="/python/math-module.html" class="sidebar-link">Math Module</a></li><li><a href="/python/complex-math.html" class="sidebar-link">Complex math</a></li><li><a href="/python/collections-module.html" class="sidebar-link">Collections module</a></li><li><a href="/python/operator-module.html" class="sidebar-link">Operator module</a></li><li><a href="/python/json-module.html" class="sidebar-link">JSON Module</a></li><li><a href="/python/sqlite3-module.html" class="sidebar-link">Sqlite3 Module</a></li><li><a href="/python/the-os-module.html" class="sidebar-link">The os Module</a></li><li><a href="/python/the-locale-module.html" class="sidebar-link">The locale Module</a></li><li><a href="/python/itertools-module.html" class="sidebar-link">Itertools Module</a></li><li><a href="/python/asyncio-module.html" class="sidebar-link">Asyncio Module</a></li><li><a href="/python/random-module.html" class="sidebar-link">Random module</a></li><li><a href="/python/functools-module.html" class="sidebar-link">Functools Module</a></li><li><a href="/python/the-dis-module.html" class="sidebar-link">The dis module</a></li><li><a href="/python/the-base64-module.html" class="sidebar-link">The base64 Module</a></li><li><a href="/python/queue-module.html" class="sidebar-link">Queue Module</a></li><li><a href="/python/deque-module.html" class="sidebar-link">Deque Module</a></li><li><a href="/python/webbrowser-module.html" class="sidebar-link">Webbrowser Module</a></li><li><a href="/python/tkinter.html" class="sidebar-link">tkinter</a></li><li><a href="/python/pyautogui-module.html" class="sidebar-link">pyautogui module</a></li><li><a href="/python/indexing-and-slicing.html" class="sidebar-link">Indexing and Slicing</a></li><li><a href="/python/plotting-with-matplotlib.html" class="sidebar-link">Plotting with Matplotlib</a></li><li><a href="/python/graph-tool.html" class="sidebar-link">graph-tool</a></li><li><a href="/python/generators.html" class="sidebar-link">Generators</a></li><li><a href="/python/reduce.html" class="sidebar-link">Reduce</a></li><li><a href="/python/map-function.html" class="sidebar-link">Map Function</a></li><li><a href="/python/exponentiation.html" class="sidebar-link">Exponentiation</a></li><li><a href="/python/searching.html" class="sidebar-link">Searching</a></li><li><a href="/python/sorting-minimum-and-maximum.html" class="sidebar-link">Sorting, Minimum and Maximum</a></li><li><a href="/python/counting.html" class="sidebar-link">Counting</a></li><li><a href="/python/the-print-function.html" class="sidebar-link">The Print Function</a></li><li><a href="/python/regular-expressions-regex.html" class="sidebar-link">Regular Expressions (Regex)</a></li><li><a href="/python/copying-data.html" class="sidebar-link">Copying data</a></li><li><a href="/python/context-managers-with-statement.html" class="sidebar-link">Context Managers (“with” Statement)</a></li><li><a href="/python/the-name-special-variable.html" class="sidebar-link">The _name_ special variable</a></li><li><a href="/python/checking-path-existence-and-permissions.html" class="sidebar-link">Checking Path Existence and Permissions</a></li><li><a href="/python/creating-python-packages.html" class="sidebar-link">Creating Python packages</a></li><li><a href="/python/usage-of-pip-module-pypi-package-manager.html" class="sidebar-link">Usage of &quot;pip&quot; module: PyPI Package Manager</a></li><li><a href="/python/pip-pypi-package-manager.html" class="sidebar-link">pip: PyPI Package Manager</a></li><li><a href="/python/parsing-command-line-arguments.html" class="sidebar-link">Parsing Command Line arguments</a></li><li><a href="/python/subprocess-library.html" class="sidebar-link">Subprocess Library</a></li><li><a href="/python/setup-py.html" class="sidebar-link">setup.py</a></li><li><a href="/python/recursion.html" class="sidebar-link">Recursion</a></li><li><a href="/python/type-hints.html" class="sidebar-link">Type Hints</a></li><li><a href="/python/exceptions.html" class="sidebar-link">Exceptions</a></li><li><a href="/python/raise-custom-errors-exceptions.html" class="sidebar-link">Raise Custom Errors / Exceptions</a></li><li><a href="/python/commonwealth-exceptions.html" class="sidebar-link">Commonwealth Exceptions</a></li><li><a href="/python/urllib.html" class="sidebar-link">urllib</a></li><li><a href="/python/web-scraping-with-python.html" class="sidebar-link">Web scraping with Python</a></li><li><a href="/python/html-parsing.html" class="sidebar-link">HTML Parsing</a></li><li><a href="/python/manipulating-xml.html" class="sidebar-link">Manipulating XML</a></li><li><a href="/python/python-requests-post.html" class="sidebar-link">Python Requests Post</a></li><li><a href="/python/distribution.html" class="sidebar-link">Distribution</a></li><li><a href="/python/property-objects.html" class="sidebar-link">Property Objects</a></li><li><a href="/python/overloading.html" class="sidebar-link">Overloading</a></li><li><a href="/python/polymorphism.html" class="sidebar-link">Polymorphism</a></li><li><a href="/python/method-overriding.html" class="sidebar-link">Method Overriding</a></li><li><a href="/python/user-defined-methods.html" class="sidebar-link">User-Defined Methods</a></li><li><a href="/python/string-representations-of-class-instances-str-and-repr-methods.html" class="sidebar-link">String representations of class instances: _str and repr_ methods</a></li><li><a href="/python/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/python/reading-and-writing-csv.html" class="sidebar-link">Reading and Writing CSV</a></li><li><a href="/python/writing-to-csv-from-string-or-list.html" class="sidebar-link">Writing to CSV from String or List</a></li><li><a href="/python/dynamic-code-execution-with-exec-and-eval.html" class="sidebar-link">Dynamic code execution with exec and eval</a></li><li><a href="/python/pyinstaller-distributing-python-code.html" class="sidebar-link">PyInstaller - Distributing Python Code</a></li><li><a href="/python/data-visualization-with-python.html" class="sidebar-link">Data Visualization with Python</a></li><li><a href="/python/the-interpreter-command-line-console.html" class="sidebar-link">The Interpreter (Command Line Console)</a></li><li><a href="/python/args-and-kwargs.html" class="sidebar-link">args and *kwargs</a></li><li><a href="/python/garbage-collection.html" class="sidebar-link">Garbage Collection</a></li><li><a href="/python/pickle-data-serialisation.html" class="sidebar-link">Pickle data serialisation</a></li><li><a href="/python/binary-data.html" class="sidebar-link">Binary Data</a></li><li><a href="/python/idioms.html" class="sidebar-link">Idioms</a></li><li><a href="/python/data-serialization.html" class="sidebar-link">Data Serialization</a></li><li><a href="/python/multiprocessing.html" class="sidebar-link">Multiprocessing</a></li><li><a href="/python/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/python/processes-and-threads.html" class="sidebar-link">Processes and Threads</a></li><li><a href="/python/python-concurrency.html" class="sidebar-link">Python concurrency</a></li><li><a href="/python/parallel-computation.html" class="sidebar-link">Parallel computation</a></li><li><a href="/python/sockets.html" class="sidebar-link">Sockets</a></li><li><a href="/python/websockets.html" class="sidebar-link">Websockets</a></li><li><a href="/python/sockets-and-message-encryption-decryption-between-client-and-server.html" class="sidebar-link">Sockets And Message Encryption/Decryption Between Client and Server</a></li><li><a href="/python/python-networking.html" class="sidebar-link">Python Networking</a></li><li><a href="/python/python-http-server.html" class="sidebar-link">Python HTTP Server</a></li><li><a href="/python/flask.html" class="sidebar-link">Flask</a></li><li><a href="/python/introduction-to-rabbitmq-using-amqpstorm.html" class="sidebar-link">Introduction to RabbitMQ using AMQPStorm</a></li><li><a href="/python/descriptor.html" class="sidebar-link">Descriptor</a></li><li><a href="/python/tempfile-namedtemporaryfile.html" class="sidebar-link">tempfile NamedTemporaryFile</a></li><li><a href="/python/input-subset-and-output-external-data-files-using-pandas.html" class="sidebar-link">Input, Subset and Output External Data Files using Pandas</a></li><li><a href="/python/unzipping-files.html" class="sidebar-link">Unzipping Files</a></li><li><a href="/python/working-with-zip-archives.html" class="sidebar-link">Working with ZIP archives</a></li><li><a href="/python/getting-start-with-gzip.html" class="sidebar-link">getting start with GZip</a></li><li><a href="/python/stack.html" class="sidebar-link">Stack</a></li><li><a href="/python/working-around-the-global-interpreter-lock-gil.html" class="sidebar-link">Working around the Global Interpreter Lock (GIL)</a></li><li><a href="/python/deployment.html" class="sidebar-link">Deployment</a></li><li><a href="/python/logging.html" class="sidebar-link">Logging</a></li><li><a href="/python/web-server-gateway-interface-wsgi.html" class="sidebar-link">Web Server Gateway Interface (WSGI)</a></li><li><a href="/python/python-server-sent-events.html" class="sidebar-link">Python Server Sent Events</a></li><li><a href="/python/alternatives-to-switch-statement-from-other-languages.html" class="sidebar-link">Alternatives to switch statement from other languages</a></li><li><a href="/python/list-destructuring-aka-packing-and-unpacking.html" class="sidebar-link">List destructuring (aka packing and unpacking)</a></li><li><a href="/python/accessing-python-source-code-and-bytecode.html" class="sidebar-link">Accessing Python source code and bytecode</a></li><li><a href="/python/mixins.html" class="sidebar-link">Mixins</a></li><li><a href="/python/attribute-access.html" class="sidebar-link">Attribute Access</a></li><li><a href="/python/arcpy.html" class="sidebar-link">ArcPy</a></li><li><a href="/python/abstract-base-classes-abc.html" class="sidebar-link">Abstract Base Classes (abc)</a></li><li><a href="/python/plugin-and-extension-classes.html" class="sidebar-link">Plugin and Extension Classes</a></li><li><a href="/python/immutable-datatypes-int-float-str-tuple-and-frozensets.html" class="sidebar-link">Immutable datatypes(int, float, str, tuple and frozensets)</a></li><li><a href="/python/incompatibilities-moving-from-python-2-to-python-3.html" class="sidebar-link">Incompatibilities moving from Python 2 to Python 3</a></li><li><a href="/python/2to3-tool.html" class="sidebar-link">2to3 tool</a></li><li><a href="/python/non-official-python-implementations.html" class="sidebar-link">Non-official Python implementations</a></li><li><a href="/python/abstract-syntax-tree.html" class="sidebar-link">Abstract syntax tree</a></li><li><a href="/python/unicode-and-bytes.html" class="sidebar-link">Unicode and bytes</a></li><li><a href="/python/python-serial-communication-pyserial.html" class="sidebar-link">Python Serial Communication (pyserial)</a></li><li><a href="/python/neo4j-and-cypher-using-py2neo.html" class="sidebar-link">Neo4j and Cypher using Py2Neo</a></li><li><a href="/python/basic-curses-with-python.html" class="sidebar-link">Basic Curses with Python</a></li><li><a href="/python/templates-in-python.html" class="sidebar-link">Templates in python</a></li><li><a href="/python/pillow.html" class="sidebar-link">Pillow</a></li><li><a href="/python/the-pass-statement.html" class="sidebar-link">The pass statement</a></li><li><a href="/python/cli-subcommands-with-precise-help-output.html" class="sidebar-link">CLI subcommands with precise help output</a></li><li><a href="/python/database-access.html" class="sidebar-link">Database Access</a></li><li><a href="/python/connecting-python-to-sql-server.html" class="sidebar-link">Connecting Python to SQL Server</a></li><li><a href="/python/postgresql.html" class="sidebar-link">PostgreSQL</a></li><li><a href="/python/python-and-excel.html" class="sidebar-link">Python and Excel</a></li><li><a href="/python/turtle-graphics.html" class="sidebar-link">Turtle Graphics</a></li><li><a href="/python/python-persistence.html" class="sidebar-link">Python Persistence</a></li><li><a href="/python/design-patterns.html" class="sidebar-link">Design Patterns</a></li><li><a href="/python/hashlib.html" class="sidebar-link">hashlib</a></li><li><a href="/python/creating-a-windows-service-using-python.html" class="sidebar-link">Creating a Windows service using Python</a></li><li><a href="/python/mutable-vs-immutable-and-hashable-in-python.html" class="sidebar-link">Mutable vs Immutable (and Hashable) in Python</a></li><li><a href="/python/configparser.html" class="sidebar-link">configparser</a></li><li><a href="/python/optical-character-recognition.html" class="sidebar-link">Optical Character Recognition</a></li><li><a href="/python/virtual-environments.html" class="sidebar-link">Virtual environments</a></li><li><a href="/python/python-virtual-environment-virtualenv.html" class="sidebar-link">Python Virtual Environment - virtualenv</a></li><li><a href="/python/virtual-environment-with-virtualenvwrapper.html" class="sidebar-link">virtual environment with virtualenvwrapper</a></li><li><a href="/python/create-virtual-environment-with-virtualenvwrapper-in-windows.html" class="sidebar-link">Create virtual environment with virtualenvwrapper in windows</a></li><li><a href="/python/sys.html" class="sidebar-link">sys</a></li><li><a href="/python/chempy-python-package.html" class="sidebar-link">ChemPy - python package</a></li><li><a href="/python/pygame.html" class="sidebar-link">pygame</a></li><li><a href="/python/pyglet.html" class="sidebar-link">Pyglet</a></li><li><a href="/python/audio.html" class="sidebar-link">Audio</a></li><li><a href="/python/pyaudio.html" class="sidebar-link">pyaudio</a></li><li><a href="/python/shelve.html" class="sidebar-link">shelve</a></li><li><a href="/python/iot-programming-with-python-and-raspberry-pi.html" class="sidebar-link">IoT Programming with Python and Raspberry PI</a></li><li><a href="/python/kivy-cross-platform-python-framework-for-nui-development.html" class="sidebar-link">kivy - Cross-platform Python Framework for NUI Development</a></li><li><a href="/python/pandas-transform-preform-operations-on-groups-and-concatenate-the-results.html" class="sidebar-link">Pandas Transform: Preform operations on groups and concatenate the results</a></li><li><a href="/python/similarities-in-syntax-differences-in-meaning-python-vs-javascript.html" class="sidebar-link">Similarities in syntax, Differences in meaning: Python vs. JavaScript</a></li><li><a href="/python/call-python-from-c.html" class="sidebar-link">Call Python from C#</a></li><li><a href="/python/ctypes.html" class="sidebar-link">ctypes</a></li><li><a href="/python/writing-extensions.html" class="sidebar-link">Writing extensions</a></li><li><a href="/python/python-lex-yacc.html" class="active sidebar-link">Python Lex-Yacc</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/python/python-lex-yacc.html#getting-started-with-ply" class="sidebar-link">Getting Started with PLY</a></li><li class="sidebar-sub-header"><a href="/python/python-lex-yacc.html#the-hello-world-of-ply-a-simple-calculator" class="sidebar-link">The &quot;Hello, World!&quot; of PLY - A Simple Calculator</a></li><li class="sidebar-sub-header"><a href="/python/python-lex-yacc.html#part-1-tokenizing-input-with-lex" class="sidebar-link">Part 1: Tokenizing Input with Lex</a></li><li class="sidebar-sub-header"><a href="/python/python-lex-yacc.html#part-2-parsing-tokenized-input-with-yacc" class="sidebar-link">Part 2: Parsing Tokenized Input with Yacc</a></li></ul></li><li><a href="/python/unit-testing.html" class="sidebar-link">Unit Testing</a></li><li><a href="/python/py-test.html" class="sidebar-link">py.test</a></li><li><a href="/python/profiling.html" class="sidebar-link">Profiling</a></li><li><a href="/python/python-speed-of-program.html" class="sidebar-link">Python speed of program</a></li><li><a href="/python/performance-optimization.html" class="sidebar-link">Performance optimization</a></li><li><a href="/python/security-and-cryptography.html" class="sidebar-link">Security and Cryptography</a></li><li><a href="/python/secure-shell-connection-in-python.html" class="sidebar-link">Secure Shell Connection in Python</a></li><li><a href="/python/python-anti-patterns.html" class="sidebar-link">Python Anti-Patterns</a></li><li><a href="/python/common-pitfalls.html" class="sidebar-link">Common Pitfalls</a></li><li><a href="/python/hidden-features.html" class="sidebar-link">Hidden Features</a></li><li><a href="/python/date-formatting.html" class="sidebar-link">Date Formatting</a></li><li><a href="/python/ijson.html" class="sidebar-link">ijson</a></li><li><a href="/python/django.html" class="sidebar-link">Django</a></li><li><a href="/python/code-blocks-execution-frames-and-namespaces.html" class="sidebar-link">Code blocks, execution frames, and namespaces</a></li><li><a href="/python/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="python-lex-yacc"><a href="#python-lex-yacc" class="header-anchor">#</a> Python Lex-Yacc</h1> <p>PLY is a pure-Python implementation of the popular compiler construction tools lex and yacc.</p> <h2 id="getting-started-with-ply"><a href="#getting-started-with-ply" class="header-anchor">#</a> Getting Started with PLY</h2> <p>To install PLY on your machine for python2/3, follow the steps outlined below:</p> <ol><li>Download the source code from <a href="http://www.dabeaz.com/ply/ply-3.10.tar.gz" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</li> <li>Unzip the downloaded zip file</li> <li>Navigate into the unzipped <code>ply-3.10</code> folder</li> <li>Run the following command in your terminal: <code>python setup.py install</code></li></ol> <p>If you completed all the above, you should now be able to use the PLY module. You can test it out by opening a python interpreter and typing <code>import ply.lex</code>.</p> <p>Note: Do <strong>not</strong> use <code>pip</code> to install PLY, it will install a broken distribution on your machine.</p> <h2 id="the-hello-world-of-ply-a-simple-calculator"><a href="#the-hello-world-of-ply-a-simple-calculator" class="header-anchor">#</a> The &quot;Hello, World!&quot; of PLY - A Simple Calculator</h2> <p>Let's demonstrate the power of PLY with a simple example: this program will take an arithmetic expression as a string input, and attempt to solve it.</p> <p>Open up your favourite editor and copy the following code:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">from</span> ply <span class="token keyword">import</span> lex
+<span class="token keyword">import</span> ply<span class="token punctuation">.</span>yacc <span class="token keyword">as</span> yacc
+
+tokens <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token string">'PLUS'</span><span class="token punctuation">,</span>
+    <span class="token string">'MINUS'</span><span class="token punctuation">,</span>
+    <span class="token string">'TIMES'</span><span class="token punctuation">,</span>
+    <span class="token string">'DIV'</span><span class="token punctuation">,</span>
+    <span class="token string">'LPAREN'</span><span class="token punctuation">,</span>
+    <span class="token string">'RPAREN'</span><span class="token punctuation">,</span>
+    <span class="token string">'NUMBER'</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+
+t_ignore <span class="token operator">=</span> <span class="token string">' \t'</span>
+
+t_PLUS    <span class="token operator">=</span> <span class="token string">r'\+'</span>
+t_MINUS   <span class="token operator">=</span> <span class="token string">r'-'</span>
+t_TIMES   <span class="token operator">=</span> <span class="token string">r'\*'</span>
+t_DIV     <span class="token operator">=</span> <span class="token string">r'/'</span>
+t_LPAREN  <span class="token operator">=</span> <span class="token string">r'\('</span>
+t_RPAREN  <span class="token operator">=</span> <span class="token string">r'\)'</span>
+
+<span class="token keyword">def</span> <span class="token function">t_NUMBER</span><span class="token punctuation">(</span> t <span class="token punctuation">)</span> <span class="token punctuation">:</span>
+    <span class="token string">r'[0-9]+'</span>
+    t<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span> t<span class="token punctuation">.</span>value <span class="token punctuation">)</span>
+    <span class="token keyword">return</span> t
+
+<span class="token keyword">def</span> <span class="token function">t_newline</span><span class="token punctuation">(</span> t <span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token string">r'\n+'</span>
+  t<span class="token punctuation">.</span>lexer<span class="token punctuation">.</span>lineno <span class="token operator">+=</span> <span class="token builtin">len</span><span class="token punctuation">(</span> t<span class="token punctuation">.</span>value <span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">t_error</span><span class="token punctuation">(</span> t <span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Invalid Token:&quot;</span><span class="token punctuation">,</span>t<span class="token punctuation">.</span>value<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+  t<span class="token punctuation">.</span>lexer<span class="token punctuation">.</span>skip<span class="token punctuation">(</span> <span class="token number">1</span> <span class="token punctuation">)</span>
+
+lexer <span class="token operator">=</span> lex<span class="token punctuation">.</span>lex<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+precedence <span class="token operator">=</span> <span class="token punctuation">(</span>
+    <span class="token punctuation">(</span> <span class="token string">'left'</span><span class="token punctuation">,</span> <span class="token string">'PLUS'</span><span class="token punctuation">,</span> <span class="token string">'MINUS'</span> <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span> <span class="token string">'left'</span><span class="token punctuation">,</span> <span class="token string">'TIMES'</span><span class="token punctuation">,</span> <span class="token string">'DIV'</span> <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span> <span class="token string">'nonassoc'</span><span class="token punctuation">,</span> <span class="token string">'UMINUS'</span> <span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">p_add</span><span class="token punctuation">(</span> p <span class="token punctuation">)</span> <span class="token punctuation">:</span>
+    <span class="token string">'expr : expr PLUS expr'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_sub</span><span class="token punctuation">(</span> p <span class="token punctuation">)</span> <span class="token punctuation">:</span>
+    <span class="token string">'expr : expr MINUS expr'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_expr2uminus</span><span class="token punctuation">(</span> p <span class="token punctuation">)</span> <span class="token punctuation">:</span>
+    <span class="token string">'expr : MINUS expr %prec UMINUS'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_mult_div</span><span class="token punctuation">(</span> p <span class="token punctuation">)</span> <span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">'''expr : expr TIMES expr
+            | expr DIV expr'''</span>
+
+    <span class="token keyword">if</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'*'</span> <span class="token punctuation">:</span>
+        p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+    <span class="token keyword">else</span> <span class="token punctuation">:</span>
+        <span class="token keyword">if</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Can't divide by 0&quot;</span><span class="token punctuation">)</span>
+            <span class="token keyword">raise</span> ZeroDivisionError<span class="token punctuation">(</span><span class="token string">'integer division by 0'</span><span class="token punctuation">)</span>
+        p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">/</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_expr2NUM</span><span class="token punctuation">(</span> p <span class="token punctuation">)</span> <span class="token punctuation">:</span>
+    <span class="token string">'expr : NUMBER'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_parens</span><span class="token punctuation">(</span> p <span class="token punctuation">)</span> <span class="token punctuation">:</span>
+    <span class="token string">'expr : LPAREN expr RPAREN'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_error</span><span class="token punctuation">(</span> p <span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Syntax error in input!&quot;</span><span class="token punctuation">)</span>
+
+parser <span class="token operator">=</span> yacc<span class="token punctuation">.</span>yacc<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> parser<span class="token punctuation">.</span>parse<span class="token punctuation">(</span><span class="token string">&quot;-4*-(3-5)&quot;</span><span class="token punctuation">)</span> <span class="token comment"># the input</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+
+</code></pre></div><p>Save this file as <code>calc.py</code> and run it.</p> <p>Output:</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token operator">-</span><span class="token number">8</span>
+
+</code></pre></div><p>Which is the right answer for <code>-4 * - (3 - 5)</code>.</p> <h2 id="part-1-tokenizing-input-with-lex"><a href="#part-1-tokenizing-input-with-lex" class="header-anchor">#</a> Part 1: Tokenizing Input with Lex</h2> <p>There are two steps that the code from example 1 carried out: one was <strong>tokenizing</strong> the input, which means it looked for symbols that constitute the arithmetic expression, and the second step was <strong>parsing</strong>, which involves analysing the extracted tokens and evaluating the result.</p> <p>This section provides a simple example of how to <strong>tokenize</strong> user input, and then breaks it down line by line.</p> <div class="language- extra-class"><pre class="language-text"><code>
+   import ply.lex as lex
+
+    # List of token names. This is always required
+    tokens = [
+       'NUMBER',
+       'PLUS',
+       'MINUS',
+       'TIMES',
+       'DIVIDE',
+       'LPAREN',
+       'RPAREN',
+    ]
+
+    # Regular expression rules for simple tokens
+    t_PLUS    = r'\+'
+    t_MINUS   = r'-'
+    t_TIMES   = r'\*'
+    t_DIVIDE  = r'/'
+    t_LPAREN  = r'\('
+    t_RPAREN  = r'\)'
+
+    # A regular expression rule with some action code
+    def t_NUMBER(t):
+        r'\d+'
+        t.value = int(t.value)    
+        return t
+
+    # Define a rule so we can track line numbers
+    def t_newline(t):
+        r'\n+'
+        t.lexer.lineno += len(t.value)
+
+    # A string containing ignored characters (spaces and tabs)
+    t_ignore  = ' \t'
+
+    # Error handling rule
+    def t_error(t):
+        print(&quot;Illegal character '%s'&quot; % t.value[0])
+        t.lexer.skip(1)
+
+    # Build the lexer
+    lexer = lex.lex()
+
+    # Give the lexer some input
+    lexer.input(data)
+
+    # Tokenize
+    while True:
+        tok = lexer.token()
+        if not tok: 
+            break      # No more input
+        print(tok)
+
+</code></pre></div><p>Save this file as <code>calclex.py</code>. We'll be using this when building our Yacc parser.</p> <h3 id="breakdown"><a href="#breakdown" class="header-anchor">#</a> Breakdown</h3> <li>
+Import the module using `import ply.lex`
+</li> <li>
+All lexers must provide a list called `tokens` that defines all of the possible token names that can be produced by the lexer. This list is always required.
+<div class="language-py extra-class"><pre class="language-py"><code> tokens <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'NUMBER'</span><span class="token punctuation">,</span>
+    <span class="token string">'PLUS'</span><span class="token punctuation">,</span>
+    <span class="token string">'MINUS'</span><span class="token punctuation">,</span>
+    <span class="token string">'TIMES'</span><span class="token punctuation">,</span>
+    <span class="token string">'DIVIDE'</span><span class="token punctuation">,</span>
+    <span class="token string">'LPAREN'</span><span class="token punctuation">,</span>
+    <span class="token string">'RPAREN'</span><span class="token punctuation">,</span>
+ <span class="token punctuation">]</span>
+
+</code></pre></div></li> <p><code>tokens</code> could also be a tuple of strings (rather than a string), where each string denotes a token as before.</p> <li>
+The regex rule for each string may be defined either as a string or as a function. In either case, the variable name should be prefixed by t_ to denote it is a rule for matching tokens.
+<ul><li>
+For simple tokens, the regular expression can be specified as strings: `t_PLUS = r'\+'`
+</li> <li>
+If some kind of action needs to be performed, a token rule can be specified as a function.
+<div class="language-py extra-class"><pre class="language-py"><code>   <span class="token keyword">def</span> <span class="token function">t_NUMBER</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       <span class="token string">r'\d+'</span>
+       t<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+       <span class="token keyword">return</span> t
+
+</code></pre></div><p>Note, the rule is specified as a doc string within the function. The function accepts one argument which is an instance of <code>LexToken</code>, performs some action and then returns back the argument.
+If you want to use an external string as the regex rule for the function instead of specifying a doc string, consider the following example:</p> <div class="language-py extra-class"><pre class="language-py"><code>   <span class="token decorator annotation punctuation">@TOKEN</span><span class="token punctuation">(</span>identifier<span class="token punctuation">)</span>         <span class="token comment"># identifier is a string holding the regex</span>
+   <span class="token keyword">def</span> <span class="token function">t_ID</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>      <span class="token comment"># actions</span>
+
+</code></pre></div></li> <li>
+An instance of `LexToken` object (let's call this object `t`) has the following attributes:
+<ol>
+1. `t.type` which is the token type (as a string) (eg: `'NUMBER'`, `'PLUS'`, etc). By default, `t.type` is set to the name following the `t_` prefix.
+1. `t.value` which is the lexeme (the actual text matched)
+1. `t.lineno` which is the current line number (this is not automatically updated, as the lexer knows nothing of line numbers). Update lineno using a function called `t_newline`.
+<li>
+For simple tokens, the regular expression can be specified as strings: `t_PLUS = r'\+'`
+</li> <li>
+If some kind of action needs to be performed, a token rule can be specified as a function.
+<div class="language-py extra-class"><pre class="language-py"><code>   <span class="token keyword">def</span> <span class="token function">t_NUMBER</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       <span class="token string">r'\d+'</span>
+       t<span class="token punctuation">.</span>value <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+       <span class="token keyword">return</span> t
+
+</code></pre></div><p>Note, the rule is specified as a doc string within the function. The function accepts one argument which is an instance of <code>LexToken</code>, performs some action and then returns back the argument.
+If you want to use an external string as the regex rule for the function instead of specifying a doc string, consider the following example:</p> <div class="language-py extra-class"><pre class="language-py"><code>   <span class="token decorator annotation punctuation">@TOKEN</span><span class="token punctuation">(</span>identifier<span class="token punctuation">)</span>         <span class="token comment"># identifier is a string holding the regex</span>
+   <span class="token keyword">def</span> <span class="token function">t_ID</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>      <span class="token comment"># actions</span>
+
+</code></pre></div></li> <li>
+An instance of `LexToken` object (let's call this object `t`) has the following attributes:
+<ol>
+- `t.type` which is the token type (as a string) (eg: `'NUMBER'`, `'PLUS'`, etc). By default, `t.type` is set to the name following the `t_` prefix.
+- `t.value` which is the lexeme (the actual text matched)
+- `t.lineno` which is the current line number (this is not automatically updated, as the lexer knows nothing of line numbers). Update lineno using a function called `t_newline`.
+</ol> <h3></h3> <div class="language-py extra-class"><pre class="language-py"><code>  <span class="token keyword">def</span> <span class="token function">t_newline</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token string">r'\n+'</span>
+      t<span class="token punctuation">.</span>lexer<span class="token punctuation">.</span>lineno <span class="token operator">+=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>t<span class="token punctuation">.</span>value<span class="token punctuation">)</span>
+
+</code></pre></div><h3></h3> <ol start="4">
+- `t.lexpos` which is the position of the token relative to the beginning of the input text.
+</ol></li> <h3 id=""><a href="#" class="header-anchor">#</a></h3> <li>
+If nothing is returned from a regex rule function, the token is discarded. If you want to discard a token, you can alternatively add t_ignore_ prefix to a regex rule variable instead of defining a function for the same rule.
+<div class="language-py extra-class"><pre class="language-py"><code>   <span class="token keyword">def</span> <span class="token function">t_COMMENT</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       <span class="token string">r'\#.*'</span>
+       <span class="token keyword">pass</span>
+       <span class="token comment"># No return value. Token discarded</span>
+
+</code></pre></div><p>...Is the same as:</p> <div class="language-py extra-class"><pre class="language-py"><code>   t_ignore_COMMENT <span class="token operator">=</span> <span class="token string">r'\#.*'</span>
+
+</code></pre></div><h3></h3> <sup>This is of course invalid if you're carrying out some action when you see a comment. In which case, use a function to define the regex rule.</sup>
+If you haven't defined a token for some characters but still want to ignore it, use `t_ignore = &quot;<characters to="" ignore="">&quot;` (these prefixes are necessary):
+<div class="language-py extra-class"><pre class="language-py"><code>   t_ignore_COMMENT <span class="token operator">=</span> <span class="token string">r'\#.*'</span>
+   t_ignore  <span class="token operator">=</span> <span class="token string">' \t'</span>    <span class="token comment"># ignores spaces and tabs</span>
+
+</code></pre></div><h3></h3></characters></li> <li>
+When building the master regex, lex will add the regexes specified in the file as follows:
+<ol>
+- Tokens defined by functions are added in the same order as they appear in the file.
+- Tokens defined by strings are added in decreasing order of the string length of the string defining the regex for that token.
+</ol>
+If you are matching `==` and `=` in the same file, take advantage of these rules.
+</li> <h3 id="-2"><a href="#-2" class="header-anchor">#</a></h3> <h3 id="-3"><a href="#-3" class="header-anchor">#</a></h3> <li><p>Literals are tokens that are returned as they are. Both `t.type` and `t.value` will be set to the character itself.
+Define a list of literals as such:</p> <div class="language-py extra-class"><pre class="language-py"><code>literals <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">'+'</span><span class="token punctuation">,</span> <span class="token string">'-'</span><span class="token punctuation">,</span> <span class="token string">'*'</span><span class="token punctuation">,</span> <span class="token string">'/'</span> <span class="token punctuation">]</span>
+
+</code></pre></div><p>or,</p> <div class="language-py extra-class"><pre class="language-py"><code>literals <span class="token operator">=</span> <span class="token string">&quot;+-*/&quot;</span>
+
+</code></pre></div><h3></h3>
+It is possible to write token functions that perform additional actions when literals are matched. However, you'll need to set the token type appropriately. For example:
+<div class="language-py extra-class"><pre class="language-py"><code>literals <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token string">'{'</span><span class="token punctuation">,</span> <span class="token string">'}'</span> <span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">t_lbrace</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">r'\{'</span>
+    t<span class="token punctuation">.</span><span class="token builtin">type</span> <span class="token operator">=</span> <span class="token string">'{'</span>  <span class="token comment"># Set token type to the expected literal (ABSOLUTE MUST if this is a literal)</span>
+    <span class="token keyword">return</span> t
+
+</code></pre></div></li> <h3 id="-4"><a href="#-4" class="header-anchor">#</a></h3> <li>
+Handle errors with t_error function.
+<div class="language-py extra-class"><pre class="language-py"><code><span class="token comment"># Error handling rule</span>
+<span class="token keyword">def</span> <span class="token function">t_error</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Illegal character '%s'&quot;</span> <span class="token operator">%</span> t<span class="token punctuation">.</span>value<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    t<span class="token punctuation">.</span>lexer<span class="token punctuation">.</span>skip<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment"># skip the illegal token (don't process it)</span>
+
+</code></pre></div><p>In general, <code>t.lexer.skip(n)</code> skips n characters in the input string.
+</p></li><p></p> <p>Final preparations:</p> <p>Build the lexer using <code>lexer = lex.lex()</code>.</p> <h3 id="-5"><a href="#-5" class="header-anchor">#</a></h3> <p>You can also put everything inside a class and call use instance of the class to define the lexer. Eg:</p> <h3 id="-6"><a href="#-6" class="header-anchor">#</a></h3> <div class="language- extra-class"><pre class="language-text"><code>
+import ply.lex as lex  
+ class MyLexer(object):            
+       ...     # everything relating to token rules and error handling comes here as usual 
+
+       # Build the lexer
+       def build(self, **kwargs):
+           self.lexer = lex.lex(module=self, **kwargs)
+
+       def test(self, data):
+           self.lexer.input(data)
+           for token in self.lexer.token():
+               print(token)
+
+       # Build the lexer and try it out
+
+ m = MyLexer()
+ m.build()           # Build the lexer
+ m.test(&quot;3 + 4&quot;)     #
+
+</code></pre></div><p>Provide input using <code>lexer.input(data)</code> where data is a string</p> <p>To get the tokens, use <code>lexer.token()</code> which returns tokens matched. You can iterate over lexer in a loop as in:</p> <h3 id="-7"><a href="#-7" class="header-anchor">#</a></h3> <div class="language-py extra-class"><pre class="language-py"><code><span class="token keyword">for</span> i <span class="token keyword">in</span> lexer<span class="token punctuation">:</span> 
+    <span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+
+</code></pre></div><h2 id="part-2-parsing-tokenized-input-with-yacc"><a href="#part-2-parsing-tokenized-input-with-yacc" class="header-anchor">#</a> Part 2: Parsing Tokenized Input with Yacc</h2> <p>This section explains how the tokenized input from Part 1 is processed - it is done using Context Free Grammars (CFGs). The grammar must be specified, and the tokens are processed according to the grammar. Under the hood, the parser uses an LALR parser.</p> <div class="language-py extra-class"><pre class="language-py"><code><span class="token comment"># Yacc example</span>
+
+<span class="token keyword">import</span> ply<span class="token punctuation">.</span>yacc <span class="token keyword">as</span> yacc
+
+<span class="token comment"># Get the token map from the lexer. This is required.</span>
+<span class="token keyword">from</span> calclex <span class="token keyword">import</span> tokens
+
+<span class="token keyword">def</span> <span class="token function">p_expression_plus</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">'expression : expression PLUS term'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_expression_minus</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">'expression : expression MINUS term'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_expression_term</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">'expression : term'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_term_times</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">'term : term TIMES factor'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_term_div</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">'term : term DIVIDE factor'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">/</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_term_factor</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">'term : factor'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_factor_num</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">'factor : NUMBER'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+
+<span class="token keyword">def</span> <span class="token function">p_factor_expr</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token string">'factor : LPAREN expression RPAREN'</span>
+    p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span>
+
+<span class="token comment"># Error rule for syntax errors</span>
+<span class="token keyword">def</span> <span class="token function">p_error</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;Syntax error in input!&quot;</span><span class="token punctuation">)</span>
+
+<span class="token comment"># Build the parser</span>
+parser <span class="token operator">=</span> yacc<span class="token punctuation">.</span>yacc<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+   <span class="token keyword">try</span><span class="token punctuation">:</span>
+       s <span class="token operator">=</span> <span class="token builtin">raw_input</span><span class="token punctuation">(</span><span class="token string">'calc &gt; '</span><span class="token punctuation">)</span>
+   <span class="token keyword">except</span> EOFError<span class="token punctuation">:</span>
+       <span class="token keyword">break</span>
+   <span class="token keyword">if</span> <span class="token keyword">not</span> s<span class="token punctuation">:</span> <span class="token keyword">continue</span>
+   result <span class="token operator">=</span> parser<span class="token punctuation">.</span>parse<span class="token punctuation">(</span>s<span class="token punctuation">)</span>
+   <span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span>
+
+</code></pre></div><h3 id="breakdown-2"><a href="#breakdown-2" class="header-anchor">#</a> Breakdown</h3> <li>
+Each grammar rule is defined by a function where the docstring to that function contains the appropriate context-free grammar specification. The statements that make up the function body implement the semantic actions of the rule. Each function accepts a single argument p that is a sequence containing the values of each grammar symbol in the corresponding rule. The values of `p[i]` are mapped to grammar symbols as shown here:
+<div class="language-py extra-class"><pre class="language-py"><code>  <span class="token keyword">def</span> <span class="token function">p_expression_plus</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token string">'expression : expression PLUS term'</span>
+      <span class="token comment">#   ^            ^        ^    ^</span>
+      <span class="token comment">#  p[0]         p[1]     p[2] p[3]</span>
+
+      p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+</code></pre></div></li> <li>
+For tokens, the &quot;value&quot; of the corresponding `p[i]` is the same as the `p.value` attribute assigned in the lexer module. So, `PLUS` will have the value `+`.
+</li> <li><p>For non-terminals, the value is determined by whatever is placed in `p[0]`. If nothing is placed, the value is None.
+Also, `p[-1]` is not the same as `p[3]`, since `p` is not a simple list (`p[-1]` can specify embedded actions (not discussed here)).</p></li> <p>Note that the function can have any name, as long as it is preceeded by <code>p_</code>.</p> <li>
+The `p_error(p)` rule is defined to catch syntax errors (same as `yyerror` in yacc/bison).
+</li> <li>
+Multiple grammar rules can be combined into a single function, which is a good idea if productions have a similar structure.
+<div class="language-py extra-class"><pre class="language-py"><code>  <span class="token keyword">def</span> <span class="token function">p_binary_operators</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token triple-quoted-string string">'''expression : expression PLUS term
+                    | expression MINUS term
+         term       : term TIMES factor
+                    | term DIVIDE factor'''</span>
+      <span class="token keyword">if</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'+'</span><span class="token punctuation">:</span>
+          p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+      <span class="token keyword">elif</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'-'</span><span class="token punctuation">:</span>
+          p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+      <span class="token keyword">elif</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'*'</span><span class="token punctuation">:</span>
+          p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+      <span class="token keyword">elif</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'/'</span><span class="token punctuation">:</span>
+          p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">/</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span> 
+
+</code></pre></div></li> <li>
+Character literals can be used instead of tokens.
+<div class="language-py extra-class"><pre class="language-py"><code>  <span class="token keyword">def</span> <span class="token function">p_binary_operators</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">:</span>
+      <span class="token triple-quoted-string string">'''expression : expression '+' term
+                    | expression '-' term
+         term       : term '*' factor
+                    | term '/' factor'''</span>
+      <span class="token keyword">if</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'+'</span><span class="token punctuation">:</span>
+          p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+      <span class="token keyword">elif</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'-'</span><span class="token punctuation">:</span>
+          p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">-</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+      <span class="token keyword">elif</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'*'</span><span class="token punctuation">:</span>
+          p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+      <span class="token keyword">elif</span> p<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'/'</span><span class="token punctuation">:</span>
+          p<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> p<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">/</span> p<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span>
+
+</code></pre></div><p>Of course, the literals must be specified in the lexer module.
+</p></li> <li>
+Empty productions have the form <code>'''symbol : '''</code></li> <li>
+To explicitly set the start symbol, use <code>start = 'foo'</code>, where <code>foo</code> is some non-terminal.
+</li> <li>
+Setting precedence and associativity can be done using the precedence variable.
+<h3></h3><p></p> <div class="language-py extra-class"><pre class="language-py"><code>  precedence <span class="token operator">=</span> <span class="token punctuation">(</span>
+      <span class="token punctuation">(</span><span class="token string">'nonassoc'</span><span class="token punctuation">,</span> <span class="token string">'LESSTHAN'</span><span class="token punctuation">,</span> <span class="token string">'GREATERTHAN'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment"># Nonassociative operators</span>
+      <span class="token punctuation">(</span><span class="token string">'left'</span><span class="token punctuation">,</span> <span class="token string">'PLUS'</span><span class="token punctuation">,</span> <span class="token string">'MINUS'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">(</span><span class="token string">'left'</span><span class="token punctuation">,</span> <span class="token string">'TIMES'</span><span class="token punctuation">,</span> <span class="token string">'DIVIDE'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+      <span class="token punctuation">(</span><span class="token string">'right'</span><span class="token punctuation">,</span> <span class="token string">'UMINUS'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>            <span class="token comment"># Unary minus operator</span>
+  <span class="token punctuation">)</span>
+
+</code></pre></div><p>Tokens are ordered from lowest to highest precedence. <code>nonassoc</code> means that those tokens do not associate. This means that something like <code>a &lt; b &lt; c</code> is illegal whereas <code>a &lt; b</code> is still legal.
+</p></li> <li><code>parser.out</code> is a debugging file that is created when the yacc program is executed for the first time. Whenever a shift/reduce conflict occurs, the parser always shifts.
+</li><p></p> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>Additional links:</p> <ol><li><a href="http://www.dabeaz.com/ply/" target="_blank" rel="noopener noreferrer">Official docs<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://github.com/dabeaz/ply" target="_blank" rel="noopener noreferrer">Github<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ol></ol></li></ul></li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/python/python-lex-yacc.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/python/writing-extensions.html" class="prev">
+        Writing extensions
+      </a></span> <span class="next"><a href="/python/unit-testing.html">
+        Unit Testing
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2783.c2ccc4fc.js" defer></script>
+  </body>
+</html>

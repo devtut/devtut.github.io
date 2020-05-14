@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Angular 2 - ngrx</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Complete example : Login/logout a user">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Angular 2 - ngrx">
+    <meta property="og:description" content="Complete example : Login/logout a user">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/angular2/ngrx.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Angular 2 - ngrx">
+    <meta name="twitter:description" content="Complete example : Login/logout a user">
+    <meta name="twitter:url" content="/angular2/ngrx.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/398.64d26b4f.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Angular 2</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/angular2/" class="sidebar-link">Disclaimer</a></li><li><a href="/angular2/getting-started-with-angular-2.html" class="sidebar-link">Getting started with Angular 2</a></li><li><a href="/angular2/components.html" class="sidebar-link">Components</a></li><li><a href="/angular2/component-interactions.html" class="sidebar-link">Component interactions</a></li><li><a href="/angular2/directives.html" class="sidebar-link">Directives</a></li><li><a href="/angular2/page-title.html" class="sidebar-link">Page title</a></li><li><a href="/angular2/templates.html" class="sidebar-link">Templates</a></li><li><a href="/angular2/commonly-built-in-directives-and-services.html" class="sidebar-link">Commonly built-in directives and services</a></li><li><a href="/angular2/directives-components-input-output.html" class="sidebar-link">Directives &amp; components : @Input @Output</a></li><li><a href="/angular2/attribute-directives-to-affect-the-value-of-properties-on-the-host-node-by-using-the-hostbinding-decorator.html" class="sidebar-link">Attribute directives to affect the value of properties on the host node by using the @HostBinding decorator.</a></li><li><a href="/angular2/how-to-use-ngif.html" class="sidebar-link">How to Use ngif</a></li><li><a href="/angular2/how-to-use-ngfor.html" class="sidebar-link">How to use ngfor</a></li><li><a href="/angular2/angular-forloop.html" class="sidebar-link">Angular - ForLoop</a></li><li><a href="/angular2/modules.html" class="sidebar-link">Modules</a></li><li><a href="/angular2/pipes.html" class="sidebar-link">Pipes</a></li><li><a href="/angular2/orderby-pipe.html" class="sidebar-link">OrderBy Pipe</a></li><li><a href="/angular2/angular2-custom-validations.html" class="sidebar-link">Angular2 Custom Validations</a></li><li><a href="/angular2/routing.html" class="sidebar-link">Routing</a></li><li><a href="/angular2/routing-3-0-0.html" class="sidebar-link">Routing (3.0.0+)</a></li><li><a href="/angular2/dynamically-add-components-using-viewcontainerref-createcomponent.html" class="sidebar-link">Dynamically add components using ViewContainerRef.createComponent</a></li><li><a href="/angular2/installing-3rd-party-plugins-with-angular-cli-1-0-0-beta-10.html" class="sidebar-link">Installing 3rd party plugins with angular-cli@1.0.0-beta.10</a></li><li><a href="/angular2/lifecycle-hooks.html" class="sidebar-link">Lifecycle Hooks</a></li><li><a href="/angular2/angular-rxjs-subjects-and-observables-with-api-requests.html" class="sidebar-link">Angular RXJS Subjects and Observables with API requests</a></li><li><a href="/angular2/services-and-dependency-injection.html" class="sidebar-link">Services and Dependency Injection</a></li><li><a href="/angular2/service-worker.html" class="sidebar-link">Service Worker</a></li><li><a href="/angular2/eventemitter-service.html" class="sidebar-link">EventEmitter Service</a></li><li><a href="/angular2/optimizing-rendering-using-changedetectionstrategy.html" class="sidebar-link">Optimizing rendering using ChangeDetectionStrategy</a></li><li><a href="/angular2/angular-2-forms-update.html" class="sidebar-link">Angular 2 Forms Update</a></li><li><a href="/angular2/detecting-resize-events.html" class="sidebar-link">Detecting resize events</a></li><li><a href="/angular2/testing-ngmodel.html" class="sidebar-link">Testing ngModel</a></li><li><a href="/angular2/feature-modules.html" class="sidebar-link">Feature Modules</a></li><li><a href="/angular2/bootstrap-empty-module-in-angular-2.html" class="sidebar-link">Bootstrap Empty module in angular 2</a></li><li><a href="/angular2/lazy-loading-a-module.html" class="sidebar-link">Lazy loading a module</a></li><li><a href="/angular2/advanced-component-examples.html" class="sidebar-link">Advanced Component Examples</a></li><li><a href="/angular2/bypassing-sanitizing-for-trusted-values.html" class="sidebar-link">Bypassing Sanitizing for trusted values</a></li><li><a href="/angular2/angular-2-data-driven-forms.html" class="sidebar-link">Angular 2 Data Driven Forms</a></li><li><a href="/angular2/angular2-in-memory-web-api.html" class="sidebar-link">Angular2 In Memory Web API</a></li><li><a href="/angular2/ahead-of-time-aot-compilation-with-angular-2.html" class="sidebar-link">Ahead-of-time (AOT) compilation with Angular 2</a></li><li><a href="/angular2/crud-in-angular2-with-restful-api.html" class="sidebar-link">CRUD in Angular2 with Restful API</a></li><li><a href="/angular2/use-native-webcomponents-in-angular-2.html" class="sidebar-link">Use native webcomponents in Angular 2</a></li><li><a href="/angular2/update-typings.html" class="sidebar-link">Update typings</a></li><li><a href="/angular2/mocking-ngrx-store.html" class="sidebar-link">Mocking @ngrx/Store</a></li><li><a href="/angular2/ngrx.html" class="active sidebar-link">ngrx</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/angular2/ngrx.html#complete-example-login-logout-a-user" class="sidebar-link">Complete example : Login/logout a user</a></li></ul></li><li><a href="/angular2/http-interceptor.html" class="sidebar-link">Http Interceptor</a></li><li><a href="/angular2/animation.html" class="sidebar-link">Animation</a></li><li><a href="/angular2/zone-js.html" class="sidebar-link">Zone.js</a></li><li><a href="/angular2/angular2-animations.html" class="sidebar-link">Angular2 Animations</a></li><li><a href="/angular2/create-an-angular-2-npm-package.html" class="sidebar-link">Create an Angular 2+ NPM package</a></li><li><a href="/angular2/angular2-canactivate.html" class="sidebar-link">Angular2 CanActivate</a></li><li><a href="/angular2/angular-2-protractor.html" class="sidebar-link">Angular  2 - Protractor</a></li><li><a href="/angular2/example-for-routes-such-as-route-subroute-for-static-urls.html" class="sidebar-link">Example for routes such as /route/subroute for static urls</a></li><li><a href="/angular2/angular2-input-output.html" class="sidebar-link">Angular2 Input() output()</a></li><li><a href="/angular2/angular-cli.html" class="sidebar-link">Angular-cli</a></li><li><a href="/angular2/angular-2-change-detection-and-manual-triggering.html" class="sidebar-link">Angular 2 Change detection and manual triggering</a></li><li><a href="/angular2/angular2-databinding.html" class="sidebar-link">Angular2 Databinding</a></li><li><a href="/angular2/brute-force-upgrading.html" class="sidebar-link">Brute Force Upgrading</a></li><li><a href="/angular2/angular2-provide-external-data-to-app-before-bootstrap.html" class="sidebar-link">Angular2 provide external data to App before bootstrap</a></li><li><a href="/angular2/custom-ngx-bootstrap-datepicker-input.html" class="sidebar-link">custom ngx-bootstrap datepicker + input</a></li><li><a href="/angular2/using-third-party-libraries-like-jquery-in-angular-2.html" class="sidebar-link">Using third party libraries like jQuery in Angular 2</a></li><li><a href="/angular2/configuring-asp-net-core-application-to-work-with-angular-2-and-typescript.html" class="sidebar-link">Configuring ASP.net Core application to work with Angular 2 and TypeScript</a></li><li><a href="/angular2/angular2-using-webpack.html" class="sidebar-link">Angular2 using webpack</a></li><li><a href="/angular2/angular-material-design.html" class="sidebar-link">Angular material design</a></li><li><a href="/angular2/dropzone-in-angular2.html" class="sidebar-link">Dropzone in Angular2</a></li><li><a href="/angular2/angular-redux.html" class="sidebar-link">angular redux</a></li><li><a href="/angular2/creating-an-angular-npm-library.html" class="sidebar-link">Creating an Angular npm library</a></li><li><a href="/angular2/barrel.html" class="sidebar-link">Barrel</a></li><li><a href="/angular2/testing-an-angular-2-app.html" class="sidebar-link">Testing an Angular 2 App</a></li><li><a href="/angular2/angular-cli-test-coverage.html" class="sidebar-link">angular-cli test coverage</a></li><li><a href="/angular2/debugging-angular2-typescript-application-using-visual-studio-code.html" class="sidebar-link">Debugging Angular2 typescript application using Visual Studio Code</a></li><li><a href="/angular2/unit-testing.html" class="sidebar-link">unit testing</a></li><li><a href="/angular2/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="ngrx"><a href="#ngrx" class="header-anchor">#</a> ngrx</h1> <h2 id="complete-example-login-logout-a-user"><a href="#complete-example-login-logout-a-user" class="header-anchor">#</a> Complete example : Login/logout a user</h2> <p><strong>Prerequisites</strong></p> <p>This topic is <strong>not</strong> about Redux and/or Ngrx :</p> <ul><li>You need to be comfortable with Redux</li> <li>At least understand the basics of RxJs and Observable pattern</li></ul> <p>First, let's define an example from the very beginning and play with some code :</p> <p>As a developer, I want to :</p> <ol><li>Have an <code>IUser</code> interface that defines the properties of a <code>User</code></li> <li>Declare the actions that we'll use later to manipulate the <code>User</code> in the <code>Store</code></li> <li>Define the initial state of the <code>UserReducer</code></li> <li>Create the reducer <code>UserReducer</code></li> <li>Import our <code>UserReducer</code> into our main module to build the <code>Store</code></li> <li>Use data from the <code>Store</code> to display information in our view</li></ol> <p><strong>Spoiler alert</strong> : If you want to try the demo right away or read the code before we even get started, here's a Plunkr (<a href="http://embed.plnkr.co/gS41jX/" target="_blank" rel="noopener noreferrer">embed view<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> or <a href="http://run.plnkr.co/ci8I1LviF0GCyugW/" target="_blank" rel="noopener noreferrer">run view<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>).</p> <h3 id="_1-define-iuser-interface"><a href="#_1-define-iuser-interface" class="header-anchor">#</a> 1) Define <code>IUser</code> interface</h3> <p>I like to split my interfaces in two parts :</p> <ul><li>The properties we'll get from a server</li> <li>The properties we define only for the UI (should a button be spinning for example)</li></ul> <p>And here's the interface <code>IUser</code> we'll be using :</p> <p><code>user.interface.ts</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">IUser</span> <span class="token punctuation">{</span>
+  <span class="token comment">// from server</span>
+  username<span class="token operator">:</span> string<span class="token punctuation">;</span>
+  email<span class="token operator">:</span> string<span class="token punctuation">;</span>
+  
+  <span class="token comment">// for UI</span>
+  isConnecting<span class="token operator">:</span> boolean<span class="token punctuation">;</span>
+  isConnected<span class="token operator">:</span> boolean<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="_2-declare-the-actions-to-manipulate-the-user"><a href="#_2-declare-the-actions-to-manipulate-the-user" class="header-anchor">#</a> 2) Declare the actions to manipulate the <code>User</code></h3> <p>Now we've got to think about what kind of actions our <strong><strong>reducers</strong></strong> are supposed to handle.<br>
+Let say here :</p> <p><code>user.actions.ts</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">const</span> UserActions <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">// when the user clicks on login button, before we launch the HTTP request</span>
+  <span class="token comment">// this will allow us to disable the login button during the request</span>
+  <span class="token constant">USR_IS_CONNECTING</span><span class="token operator">:</span> <span class="token string">'USR_IS_CONNECTING'</span><span class="token punctuation">,</span>
+  <span class="token comment">// this allows us to save the username and email of the user</span>
+  <span class="token comment">// we assume those data were fetched in the previous request</span>
+  <span class="token constant">USR_IS_CONNECTED</span><span class="token operator">:</span> <span class="token string">'USR_IS_CONNECTED'</span><span class="token punctuation">,</span>
+
+  <span class="token comment">// same pattern for disconnecting the user</span>
+  <span class="token constant">USR_IS_DISCONNECTING</span><span class="token operator">:</span> <span class="token string">'USR_IS_DISCONNECTING'</span><span class="token punctuation">,</span>
+  <span class="token constant">USR_IS_DISCONNECTED</span><span class="token operator">:</span> <span class="token string">'USR_IS_DISCONNECTED'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>But before we use those actions, let me explain why we're going to need a service to dispatch <strong>some</strong> of those actions for us :</p> <p>Let say that we want to connect a user. So we'll be clicking on a login button and here's what's going to happen :</p> <ul><li>Click on the button</li> <li>The component catch the event and call <code>userService.login</code></li> <li><code>userService.login</code> method <code>dispatch</code> an event to update our store property : <code>user.isConnecting</code></li> <li>An HTTP call is fired (we'll use a <code>setTimeout</code> in the demo to simulate the <strong>async behaviour</strong>)</li> <li>Once the <code>HTTP</code> call is finished, we'll dispatch another action to warn our store that a user is logged</li></ul> <p><code>user.service.ts</code></p> <div class="language-js extra-class"><pre class="language-js"><code>@<span class="token function">Injectable</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">UserService</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">public</span> store$<span class="token operator">:</span> Store<span class="token operator">&lt;</span>AppState<span class="token operator">&gt;</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+  <span class="token function">login</span><span class="token punctuation">(</span><span class="token parameter">username<span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// first, dispatch an action saying that the user's tyring to connect</span>
+    <span class="token comment">// so we can lock the button until the HTTP request finish</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>store$<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> UserActions<span class="token punctuation">.</span><span class="token constant">USR_IS_CONNECTING</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// simulate some delay like we would have with an HTTP request</span>
+    <span class="token comment">// by using a timeout</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token comment">// some email (or data) that you'd have get as HTTP response</span>
+      <span class="token keyword">let</span> email <span class="token operator">=</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>username<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">@email.com</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">;</span>
+
+      <span class="token keyword">this</span><span class="token punctuation">.</span>store$<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> UserActions<span class="token punctuation">.</span><span class="token constant">USR_IS_CONNECTED</span><span class="token punctuation">,</span> payload<span class="token operator">:</span> <span class="token punctuation">{</span> username<span class="token punctuation">,</span> email <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// first, dispatch an action saying that the user's tyring to connect</span>
+    <span class="token comment">// so we can lock the button until the HTTP request finish</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>store$<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> UserActions<span class="token punctuation">.</span><span class="token constant">USR_IS_DISCONNECTING</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// simulate some delay like we would have with an HTTP request</span>
+    <span class="token comment">// by using a timeout</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>store$<span class="token punctuation">.</span><span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> type<span class="token operator">:</span> UserActions<span class="token punctuation">.</span><span class="token constant">USR_IS_DISCONNECTED</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="_3-define-the-initial-state-of-the-userreducer"><a href="#_3-define-the-initial-state-of-the-userreducer" class="header-anchor">#</a> 3) Define the initial state of the <code>UserReducer</code></h3> <p><code>user.state.ts</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">const</span> UserFactory<span class="token operator">:</span> <span class="token function-variable function">IUser</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">{</span>
+    <span class="token comment">// from server</span>
+    username<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    email<span class="token operator">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// for UI</span>
+    isConnecting<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    isConnected<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    isDisconnecting<span class="token operator">:</span> <span class="token boolean">false</span>
+  <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="_4-create-the-reducer-userreducer"><a href="#_4-create-the-reducer-userreducer" class="header-anchor">#</a> 4) Create the reducer <code>UserReducer</code></h3> <p>A reducer takes 2 arguments :</p> <ul><li>The current state</li> <li>An <code>Action</code> of type <code>Action&lt;{type: string, payload: any}&gt;</code></li></ul> <h3 id="reminder-a-reducer-needs-to-be-initialized-at-some-point"><a href="#reminder-a-reducer-needs-to-be-initialized-at-some-point" class="header-anchor">#</a> <strong>Reminder :</strong> A reducer needs to be initialized at some point</h3> <p>As we defined the default state of our reducer in part 3), we'll be able to use it like that :</p> <p><code>user.reducer.ts</code></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">const</span> UserReducer<span class="token operator">:</span> ActionReducer<span class="token operator">&lt;</span>IUser<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">user<span class="token operator">:</span> IUser<span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>user <span class="token operator">===</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">userFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Hopefully, there's an easier way to write that by using our <code>factory</code> function to return an object and within the reducer use an (ES6) <a href="http://es6-features.org/#DefaultParameterValues" target="_blank" rel="noopener noreferrer">default parameters value<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> :</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">const</span> UserReducer<span class="token operator">:</span> ActionReducer<span class="token operator">&lt;</span>IUser<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">user<span class="token operator">:</span> IUser <span class="token operator">=</span> <span class="token function">UserFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// ...</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>Then, we need to handle every actions in our reducer :
+<strong><strong>TIP</strong></strong>: Use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign" target="_blank" rel="noopener noreferrer">ES6 <code>Object.assign</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> function to keep our state immutable</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">export</span> <span class="token keyword">const</span> UserReducer<span class="token operator">:</span> ActionReducer<span class="token operator">&lt;</span>IUser<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">user<span class="token operator">:</span> IUser <span class="token operator">=</span> <span class="token function">UserFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> action<span class="token operator">:</span> Action</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token keyword">switch</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>type<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">case</span> UserActions<span class="token punctuation">.</span><span class="token constant">USR_IS_CONNECTING</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> user<span class="token punctuation">,</span> <span class="token punctuation">{</span> isConnecting<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">case</span> UserActions<span class="token punctuation">.</span><span class="token constant">USR_IS_CONNECTED</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> user<span class="token punctuation">,</span> <span class="token punctuation">{</span> isConnecting<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> isConnected<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> username<span class="token operator">:</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">.</span>username <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">case</span> UserActions<span class="token punctuation">.</span><span class="token constant">USR_IS_DISCONNECTING</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> user<span class="token punctuation">,</span> <span class="token punctuation">{</span> isDisconnecting<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">case</span> UserActions<span class="token punctuation">.</span><span class="token constant">USR_IS_DISCONNECTED</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> user<span class="token punctuation">,</span> <span class="token punctuation">{</span> isDisconnecting<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> isConnected<span class="token operator">:</span> <span class="token boolean">false</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">default</span><span class="token operator">:</span>
+      <span class="token keyword">return</span> user<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="_5-import-our-userreducer-into-our-main-module-to-build-the-store"><a href="#_5-import-our-userreducer-into-our-main-module-to-build-the-store" class="header-anchor">#</a> 5) Import our <code>UserReducer</code> into our main module to build the <code>Store</code></h3> <p><code>app.module.ts</code></p> <div class="language-js extra-class"><pre class="language-js"><code>@<span class="token function">NgModule</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    declarations<span class="token operator">:</span> <span class="token punctuation">[</span>
+    AppComponent
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    imports<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token comment">// angular modules</span>
+    <span class="token comment">// ...</span>
+
+    <span class="token comment">// declare your store by providing your reducers</span>
+    <span class="token comment">// (every reducer should return a default state)</span>
+    StoreModule<span class="token punctuation">.</span><span class="token function">provideStore</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+        user<span class="token operator">:</span> UserReducer<span class="token punctuation">,</span>
+        <span class="token comment">// of course, you can put as many reducers here as you want</span>
+        <span class="token comment">// ...</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+
+    <span class="token comment">// other modules to import</span>
+    <span class="token comment">// ...</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="_6-use-data-from-the-store-to-display-information-in-our-view"><a href="#_6-use-data-from-the-store-to-display-information-in-our-view" class="header-anchor">#</a> 6) Use data from the <code>Store</code> to display information in our view</h3> <p>Everything is now ready on logic side and we just have to display what we want in two components :</p> <ul><li><code>UserComponent</code>: <strong>[Dumb component]</strong> We'll just pass the user object from the store using <code>@Input</code> property and <code>async</code> pipe. This way, the component will receive the user only once it's available (and the <code>user</code> will be of type <code>IUser</code> and not of type <code>Observable&lt;IUser&gt;</code> !)</li> <li><code>LoginComponent</code> <strong>[Smart component]</strong> We'll directly inject the <code>Store</code> into this component and work only on <code>user</code> as an <code>Observable</code>.</li></ul> <p><code>user.component.ts</code></p> <div class="language-js extra-class"><pre class="language-js"><code>@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token operator">:</span> <span class="token string">'user'</span><span class="token punctuation">,</span>
+  styles<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">'.table { max-width: 250px; }'</span><span class="token punctuation">,</span>
+    <span class="token string">'.truthy { color: green; font-weight: bold; }'</span><span class="token punctuation">,</span>
+    <span class="token string">'.falsy { color: red; }'</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  template<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+    &lt;h2&gt;User information :&lt;/h2&gt;
+
+    &lt;table class=&quot;table&quot;&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Property&lt;/th&gt;
+        &lt;th&gt;Value&lt;/th&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td&gt;username&lt;/td&gt;
+        &lt;td [class.truthy]=&quot;user.username&quot; [class.falsy]=&quot;!user.username&quot;&gt;
+          {{ user.username ? user.username : 'null' }}
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td&gt;email&lt;/td&gt;
+        &lt;td [class.truthy]=&quot;user.email&quot; [class.falsy]=&quot;!user.email&quot;&gt;
+          {{ user.email ? user.email : 'null' }}
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td&gt;isConnecting&lt;/td&gt;
+        &lt;td [class.truthy]=&quot;user.isConnecting&quot; [class.falsy]=&quot;!user.isConnecting&quot;&gt;
+          {{ user.isConnecting }}
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td&gt;isConnected&lt;/td&gt;
+        &lt;td [class.truthy]=&quot;user.isConnected&quot; [class.falsy]=&quot;!user.isConnected&quot;&gt;
+          {{ user.isConnected }}
+        &lt;/td&gt;
+      &lt;/tr&gt;
+
+      &lt;tr&gt;
+        &lt;td&gt;isDisconnecting&lt;/td&gt;
+        &lt;td [class.truthy]=&quot;user.isDisconnecting&quot; [class.falsy]=&quot;!user.isDisconnecting&quot;&gt;
+          {{ user.isDisconnecting }}
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  </span><span class="token template-punctuation string">`</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">UserComponent</span> <span class="token punctuation">{</span>
+  @<span class="token function">Input</span><span class="token punctuation">(</span><span class="token punctuation">)</span> user<span class="token punctuation">;</span>
+
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><code>login.component.ts</code></p> <div class="language-js extra-class"><pre class="language-js"><code>@<span class="token function">Component</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  selector<span class="token operator">:</span> <span class="token string">'login'</span><span class="token punctuation">,</span>
+  template<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">
+    &lt;form
+      *ngIf=&quot;!(user | async).isConnected&quot;
+      #loginForm=&quot;ngForm&quot;
+      (ngSubmit)=&quot;login(loginForm.value.username)&quot;
+    &gt;
+      &lt;input
+        type=&quot;text&quot;
+        name=&quot;username&quot;
+        placeholder=&quot;Username&quot;
+        [disabled]=&quot;(user | async).isConnecting&quot;
+        ngModel
+      &gt;
+ 
+      &lt;button
+        type=&quot;submit&quot;
+        [disabled]=&quot;(user | async).isConnecting || (user | async).isConnected&quot;
+      &gt;Log me in&lt;/button&gt;
+    &lt;/form&gt;
+ 
+    &lt;button
+      *ngIf=&quot;(user | async).isConnected&quot;
+      (click)=&quot;logout()&quot;
+      [disabled]=&quot;(user | async).isDisconnecting&quot;
+    &gt;Log me out&lt;/button&gt;
+  </span><span class="token template-punctuation string">`</span></span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">LoginComponent</span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span> user<span class="token operator">:</span> Observable<span class="token operator">&lt;</span>IUser<span class="token operator">&gt;</span><span class="token punctuation">;</span>
+ 
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter"><span class="token keyword">public</span> store$<span class="token operator">:</span> Store<span class="token operator">&lt;</span>AppState<span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token keyword">private</span> userService<span class="token operator">:</span> UserService</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>user <span class="token operator">=</span> store$<span class="token punctuation">.</span><span class="token function">select</span><span class="token punctuation">(</span><span class="token string">'user'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+ 
+  <span class="token function">login</span><span class="token punctuation">(</span><span class="token parameter">username<span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>userService<span class="token punctuation">.</span><span class="token function">login</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+ 
+  <span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>userService<span class="token punctuation">.</span><span class="token function">logout</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>As <code>Ngrx</code> is a merge of <code>Redux</code> and <code>RxJs</code> concepts, it can be quite hard to understand the ins an outs at the beginning. But this is a powerful pattern that allows you as we've seen in this example to have a <strong>reactive app</strong> and were you can easily share your data. Don't forget that there's a <a href="http://plnkr.co/edit/gS41jX?p=preview" target="_blank" rel="noopener noreferrer">Plunkr<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> available and you can fork it to make your own tests !</p> <p>I hope it was helpful even tho the topic is quite long, cheers !</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/angular2/ngrx.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/angular2/mocking-ngrx-store.html" class="prev">
+        Mocking @ngrx/Store
+      </a></span> <span class="next"><a href="/angular2/http-interceptor.html">
+        Http Interceptor
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/398.64d26b4f.js" defer></script>
+  </body>
+</html>

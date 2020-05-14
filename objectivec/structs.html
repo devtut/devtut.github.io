@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Objective C - Structs</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="CGPoint, Defining a Structure and Accessing Structure Members">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Objective C - Structs">
+    <meta property="og:description" content="CGPoint, Defining a Structure and Accessing Structure Members">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/objectivec/structs.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Objective C - Structs">
+    <meta name="twitter:description" content="CGPoint, Defining a Structure and Accessing Structure Members">
+    <meta name="twitter:url" content="/objectivec/structs.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2321.2c89be37.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Objective-C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/objectivec/" class="sidebar-link">Disclaimer</a></li><li><a href="/objectivec/getting-started-with-objective-c-language.html" class="sidebar-link">Getting started with Objective-C Language</a></li><li><a href="/objectivec/basic-data-types.html" class="sidebar-link">Basic Data Types</a></li><li><a href="/objectivec/enums.html" class="sidebar-link">Enums</a></li><li><a href="/objectivec/structs.html" class="active sidebar-link">Structs</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/objectivec/structs.html#cgpoint" class="sidebar-link">CGPoint</a></li><li class="sidebar-sub-header"><a href="/objectivec/structs.html#defining-a-structure-and-accessing-structure-members" class="sidebar-link">Defining a Structure and Accessing Structure Members</a></li></ul></li><li><a href="/objectivec/classes-and-objects.html" class="sidebar-link">Classes  and Objects</a></li><li><a href="/objectivec/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/objectivec/methods.html" class="sidebar-link">Methods</a></li><li><a href="/objectivec/properties.html" class="sidebar-link">Properties</a></li><li><a href="/objectivec/random-integer.html" class="sidebar-link">Random Integer</a></li><li><a href="/objectivec/bool-bool-boolean-nscfboolean.html" class="sidebar-link">BOOL / bool / Boolean / NSCFBoolean</a></li><li><a href="/objectivec/continue-and-break.html" class="sidebar-link">Continue and Break!</a></li><li><a href="/objectivec/key-value-coding-key-value-observing.html" class="sidebar-link">Key Value Coding / Key Value Observing</a></li><li><a href="/objectivec/nsstring.html" class="sidebar-link">NSString</a></li><li><a href="/objectivec/nsarray.html" class="sidebar-link">NSArray</a></li><li><a href="/objectivec/nsmutablearray.html" class="sidebar-link">NSMutableArray</a></li><li><a href="/objectivec/nsdictionary.html" class="sidebar-link">NSDictionary</a></li><li><a href="/objectivec/nsmutabledictionary.html" class="sidebar-link">NSMutableDictionary</a></li><li><a href="/objectivec/nsdate.html" class="sidebar-link">NSDate</a></li><li><a href="/objectivec/nsurl.html" class="sidebar-link">NSURL</a></li><li><a href="/objectivec/nsurl-send-a-post-request.html" class="sidebar-link">NSUrl send a post request</a></li><li><a href="/objectivec/nsdata.html" class="sidebar-link">NSData</a></li><li><a href="/objectivec/nspredicate.html" class="sidebar-link">NSPredicate</a></li><li><a href="/objectivec/nsregularexpression.html" class="sidebar-link">NSRegularExpression</a></li><li><a href="/objectivec/nsjsonserialization.html" class="sidebar-link">NSJSONSerialization</a></li><li><a href="/objectivec/nscalendar.html" class="sidebar-link">NSCalendar</a></li><li><a href="/objectivec/nsattributedstring.html" class="sidebar-link">NSAttributedString</a></li><li><a href="/objectivec/nstimer.html" class="sidebar-link">NSTimer</a></li><li><a href="/objectivec/nsobject.html" class="sidebar-link">NSObject</a></li><li><a href="/objectivec/nssortdescriptor.html" class="sidebar-link">NSSortDescriptor</a></li><li><a href="/objectivec/nstextattachment.html" class="sidebar-link">NSTextAttachment</a></li><li><a href="/objectivec/nscache.html" class="sidebar-link">NSCache</a></li><li><a href="/objectivec/nsuserdefaults.html" class="sidebar-link">NSUserDefaults</a></li><li><a href="/objectivec/subscripting.html" class="sidebar-link">Subscripting</a></li><li><a href="/objectivec/low-level-runtime-environment.html" class="sidebar-link">Low-level Runtime Environment</a></li><li><a href="/objectivec/fast-enumeration.html" class="sidebar-link">Fast Enumeration</a></li><li><a href="/objectivec/categories.html" class="sidebar-link">Categories</a></li><li><a href="/objectivec/protocols.html" class="sidebar-link">Protocols</a></li><li><a href="/objectivec/protocols-and-delegates.html" class="sidebar-link">Protocols and Delegates</a></li><li><a href="/objectivec/blocks.html" class="sidebar-link">Blocks</a></li><li><a href="/objectivec/xml-parsing.html" class="sidebar-link">XML parsing</a></li><li><a href="/objectivec/declare-class-method-and-instance-method.html" class="sidebar-link">Declare class method and instance method</a></li><li><a href="/objectivec/predefined-macros.html" class="sidebar-link">Predefined Macros</a></li><li><a href="/objectivec/grand-central-dispatch.html" class="sidebar-link">Grand Central Dispatch</a></li><li><a href="/objectivec/format-specifiers.html" class="sidebar-link">Format-Specifiers</a></li><li><a href="/objectivec/logging.html" class="sidebar-link">Logging</a></li><li><a href="/objectivec/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/objectivec/modern-objective-c.html" class="sidebar-link">Modern Objective-C</a></li><li><a href="/objectivec/singletons.html" class="sidebar-link">Singletons</a></li><li><a href="/objectivec/multi-threading.html" class="sidebar-link">Multi-Threading</a></li><li><a href="/objectivec/unit-testing-using-xcode.html" class="sidebar-link">Unit testing using Xcode</a></li><li><a href="/objectivec/memory-management.html" class="sidebar-link">Memory Management</a></li><li><a href="/objectivec/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="structs"><a href="#structs" class="header-anchor">#</a> Structs</h1> <h2 id="cgpoint"><a href="#cgpoint" class="header-anchor">#</a> CGPoint</h2> <p>One really good example of a struct is <code>CGPoint</code>; it's a simple value that represents a 2-dimensional point. It has 2 properties, <code>x</code> and <code>y</code>, and can be written as</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">typedef</span> <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+    CGFloat x<span class="token punctuation">;</span>
+    CGFloat y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> CGPoint<span class="token punctuation">;</span>
+
+</code></pre></div><p>If you used Objective-C for Mac or iOS app development before, you've almost certainly come across <code>CGPoint</code>; <code>CGPoint</code>s hold the position of pretty much everything on screen, from views and controls to objects in a game to changes in a gradient. This means that <code>CGPoint</code>s are used a lot. This is even more true with really performance-heavy games; these games tend to have a lot of objects, and all of these objects need positions. These positions are often either <code>CGPoint</code>s, or some other type of struct that conveys a point (such as a 3-dimensional point for 3d games).</p> <p>Points like <code>CGPoint</code> could easily be represented as objects, like</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">@interface</span> CGPoint <span class="token punctuation">{</span>
+    CGFloat x<span class="token punctuation">;</span>
+    CGFloat y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token comment">//Point-related methods (e.g. add, isEqualToPoint, etc.)</span>
+
+<span class="token keyword">@property</span><span class="token punctuation">(</span>nonatomic<span class="token punctuation">,</span> assign<span class="token punctuation">)</span>CGFloat x<span class="token punctuation">;</span>
+<span class="token keyword">@property</span><span class="token punctuation">(</span>nonatomic<span class="token punctuation">,</span> assign<span class="token punctuation">)</span>CGFloat y<span class="token punctuation">;</span>
+
+<span class="token keyword">@end</span>
+
+<span class="token keyword">@implementation</span> CGPoint
+
+<span class="token keyword">@synthesize</span> x<span class="token punctuation">,</span> y<span class="token punctuation">;</span>
+
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+
+<span class="token keyword">@end</span>
+
+</code></pre></div><p>However, if <code>CGPoint</code> was used in this way it would take a lot longer to create and manipulate points. In smaller, faster programs this wouldn't really cause a difference, and in those cases it would be OK or maybe even better to use object points. But in large programs where points are be used a lot, using objects as points can really hurt performance, making the program slower, and also waste memory, which could force the program to crash.</p> <h2 id="defining-a-structure-and-accessing-structure-members"><a href="#defining-a-structure-and-accessing-structure-members" class="header-anchor">#</a> Defining a Structure and Accessing Structure Members</h2> <p>The format of the struct statement is this:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">struct</span> <span class="token punctuation">[</span>structure tag<span class="token punctuation">]</span>
+<span class="token punctuation">{</span>
+   member definition<span class="token punctuation">;</span>
+   member definition<span class="token punctuation">;</span>
+   <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+   member definition<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">[</span>one or more structure variables<span class="token punctuation">]</span><span class="token punctuation">;</span> 
+
+</code></pre></div><p>Example: declare the ThreeFloats structure:</p> <div class="language- extra-class"><pre class="language-text"><code>
+  typedef struct {
+    float x, y, z;
+} ThreeFloats;
+
+@interface MyClass
+- (void)setThreeFloats:(ThreeFloats)threeFloats;
+- (ThreeFloats)threeFloats;
+@end
+
+</code></pre></div><p>Sending an instance of MyClass the message valueForKey: with the parameter @&quot;threeFloats&quot; will invoke the MyClass method threeFloats and return the result wrapped in an NSValue.</p> <h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>typedef struct { <strong>typeA propertyA</strong>; <strong>typeB propertyB</strong>; ... } <strong>StructName</strong></li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>In Objective C, you should almost always use an object instead of a struct. However, there are still cases where using a struct is better, such as:</p> <ul><li>When you're going to be creating and destroying a lot of values of the (struct) type, so you need good performance and small memory usage</li></ul> <blockquote></blockquote> <ul>
+- Structs are faster to create and use because when calling a method on an object, the method has to be determined at runtime
+- Structs take up less size because objects have an extra property `isa`, which holds their class
+</ul> <ul><li>When the value has only a couple of properties and a small total size (take <code>CGSize</code>; it has 2 floats which are 4 bytes each, so it can take up 8 bytes), and is going to be used a lot (ties in with the first point)</li> <li>When you could use <a href="http://stackoverflow.com/documentation/c/1119/structs-unions-and-enums#t=201607251849213065581" target="_blank" rel="noopener noreferrer">unions<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> or <a href="http://stackoverflow.com/documentation/c/1930/bitfields#t=201607251847447438382" target="_blank" rel="noopener noreferrer">bitfields<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, and importantly, <strong>need the size saved by them</strong> because you need small memory usage (ties in with the first point)</li> <li>When you <strong>really</strong> want to store an array inside of the struct, since Objective-C objects can't directly store C-arrays. However, note that you can still &quot;indirectly&quot; get an array in an Objective-C object by making it a reference (i.e. <code>type *</code> in place of the C-array <code>type[]</code>)</li> <li>When you need to communicate with some other code, such as a library, that's coded in C; structs are fully implemented in C but objects are not</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/objectivec/structs.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/objectivec/enums.html" class="prev">
+        Enums
+      </a></span> <span class="next"><a href="/objectivec/classes-and-objects.html">
+        Classes  and Objects
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2321.2c89be37.js" defer></script>
+  </body>
+</html>

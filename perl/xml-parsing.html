@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Perl - XML Parsing</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Parsing with XML::Twig, Consuming XML with XML::Rabbit, Parsing with XML::LibXML">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Perl - XML Parsing">
+    <meta property="og:description" content="Parsing with XML::Twig, Consuming XML with XML::Rabbit, Parsing with XML::LibXML">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/perl/xml-parsing.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Perl - XML Parsing">
+    <meta name="twitter:description" content="Parsing with XML::Twig, Consuming XML with XML::Rabbit, Parsing with XML::LibXML">
+    <meta name="twitter:url" content="/perl/xml-parsing.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2413.81df4e3e.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Perl</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/perl/" class="sidebar-link">Disclaimer</a></li><li><a href="/perl/getting-started-with-perl-language.html" class="sidebar-link">Getting started with Perl Language</a></li><li><a href="/perl/comments.html" class="sidebar-link">Comments</a></li><li><a href="/perl/variables.html" class="sidebar-link">Variables</a></li><li><a href="/perl/interpolation-in-perl.html" class="sidebar-link">Interpolation in Perl</a></li><li><a href="/perl/true-and-false.html" class="sidebar-link">True and false</a></li><li><a href="/perl/dates-and-time.html" class="sidebar-link">Dates and Time</a></li><li><a href="/perl/control-statements.html" class="sidebar-link">Control Statements</a></li><li><a href="/perl/subroutines.html" class="sidebar-link">Subroutines</a></li><li><a href="/perl/debug-output.html" class="sidebar-link">Debug Output</a></li><li><a href="/perl/lists.html" class="sidebar-link">Lists</a></li><li><a href="/perl/sorting.html" class="sidebar-link">Sorting</a></li><li><a href="/perl/file-i-o-reading-and-writing-files.html" class="sidebar-link">File I/O (reading and writing files)</a></li><li><a href="/perl/reading-a-file-s-content-into-a-variable.html" class="sidebar-link">Reading a file's content into a variable</a></li><li><a href="/perl/strings-and-quoting-methods.html" class="sidebar-link">Strings and quoting methods</a></li><li><a href="/perl/split-a-string-on-unquoted-separators.html" class="sidebar-link">Split a string on unquoted separators</a></li><li><a href="/perl/object-oriented-perl.html" class="sidebar-link">Object-oriented Perl</a></li><li><a href="/perl/exception-handling.html" class="sidebar-link">Exception handling</a></li><li><a href="/perl/regular-expressions.html" class="sidebar-link">Regular Expressions</a></li><li><a href="/perl/xml-parsing.html" class="active sidebar-link">XML Parsing</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/perl/xml-parsing.html#parsing-with-xml-twig" class="sidebar-link">Parsing with XML::Twig</a></li><li class="sidebar-sub-header"><a href="/perl/xml-parsing.html#consuming-xml-with-xml-rabbit" class="sidebar-link">Consuming XML with XML::Rabbit</a></li><li class="sidebar-sub-header"><a href="/perl/xml-parsing.html#parsing-with-xml-libxml" class="sidebar-link">Parsing with XML::LibXML</a></li></ul></li><li><a href="/perl/unicode.html" class="sidebar-link">Unicode</a></li><li><a href="/perl/perl-one-liners.html" class="sidebar-link">Perl one-liners</a></li><li><a href="/perl/randomness.html" class="sidebar-link">Randomness</a></li><li><a href="/perl/special-variables.html" class="sidebar-link">Special variables</a></li><li><a href="/perl/dates-and-time.html" class="sidebar-link">Dates and Time</a></li><li><a href="/perl/packages-and-modules.html" class="sidebar-link">Packages and modules</a></li><li><a href="/perl/install-perl-modules-via-cpan.html" class="sidebar-link">Install Perl modules via CPAN</a></li><li><a href="/perl/easy-way-to-check-installed-modules-on-mac-and-ubuntu.html" class="sidebar-link">Easy way to check installed modules on Mac and Ubuntu</a></li><li><a href="/perl/pack-and-unpack.html" class="sidebar-link">Pack and unpack</a></li><li><a href="/perl/perl-commands-for-windows-excel-with-win32-ole-module.html" class="sidebar-link">Perl commands for Windows Excel with Win32::OLE module</a></li><li><a href="/perl/simple-interaction-with-database-via-dbi-module.html" class="sidebar-link">Simple interaction with database via DBI module</a></li><li><a href="/perl/perl-testing.html" class="sidebar-link">Perl Testing</a></li><li><a href="/perl/dancer.html" class="sidebar-link">Dancer</a></li><li><a href="/perl/attributed-text.html" class="sidebar-link">Attributed Text</a></li><li><a href="/perl/gui-applications-in-perl.html" class="sidebar-link">GUI Applications in Perl</a></li><li><a href="/perl/memory-usage-optimization.html" class="sidebar-link">Memory usage optimization</a></li><li><a href="/perl/perl-script-debugging.html" class="sidebar-link">Perl script debugging</a></li><li><a href="/perl/perlbrew.html" class="sidebar-link">Perlbrew</a></li><li><a href="/perl/installation-of-perl.html" class="sidebar-link">Installation of Perl</a></li><li><a href="/perl/compile-perl-cpan-module-sapnwrfc-from-source-code.html" class="sidebar-link">Compile Perl cpan module sapnwrfc from source code</a></li><li><a href="/perl/best-practices.html" class="sidebar-link">Best Practices</a></li><li><a href="/perl/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="xml-parsing"><a href="#xml-parsing" class="header-anchor">#</a> XML Parsing</h1> <h2 id="parsing-with-xml-twig"><a href="#parsing-with-xml-twig" class="header-anchor">#</a> Parsing with XML::Twig</h2> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token comment">#!/usr/bin/env perl</span>
+
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> warnings <span class="token string">'all'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">use</span> XML<span class="token punctuation">:</span><span class="token punctuation">:</span>Twig<span class="token punctuation">;</span>
+
+<span class="token keyword">my</span> <span class="token variable">$twig</span> <span class="token operator">=</span> XML<span class="token punctuation">:</span><span class="token punctuation">:</span>Twig<span class="token operator">-&gt;</span>parse<span class="token punctuation">(</span> <span class="token operator">\</span><span class="token variable">*DATA</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">#we can use the 'root' method to find the root of the XML.</span>
+<span class="token keyword">my</span> <span class="token variable">$root</span> <span class="token operator">=</span> <span class="token variable">$twig</span><span class="token operator">-&gt;</span>root<span class="token punctuation">;</span>
+
+<span class="token comment">#first_child finds the first child element matching a value.</span>
+<span class="token keyword">my</span> <span class="token variable">$title</span> <span class="token operator">=</span> <span class="token variable">$root</span><span class="token operator">-&gt;</span>first_child<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">#text reads the text of the element.</span>
+<span class="token keyword">my</span> <span class="token variable">$title_text</span> <span class="token operator">=</span> <span class="token variable">$title</span><span class="token operator">-&gt;</span>text<span class="token punctuation">;</span>
+
+<span class="token keyword">print</span> <span class="token string">&quot;Title is: &quot;</span><span class="token punctuation">,</span> <span class="token variable">$title_text</span><span class="token punctuation">,</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">#The above could be combined:</span>
+<span class="token keyword">print</span> <span class="token variable">$twig</span> <span class="token operator">-&gt;</span>root<span class="token operator">-&gt;</span>first_child_text<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">## You can use the 'children' method to iterate multiple items:</span>
+<span class="token keyword">my</span> <span class="token variable">$list</span> <span class="token operator">=</span> <span class="token variable">$twig</span><span class="token operator">-&gt;</span>root<span class="token operator">-&gt;</span>first_child<span class="token punctuation">(</span><span class="token string">'list'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">#children can optionally take an element 'tag' - otherwise it just returns all of them.</span>
+<span class="token keyword">foreach</span> <span class="token keyword">my</span> <span class="token variable">$element</span> <span class="token punctuation">(</span> <span class="token variable">$list</span><span class="token operator">-&gt;</span>children <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+   <span class="token comment">#the 'att' method reads an attribute</span>
+   <span class="token keyword">print</span> <span class="token string">&quot;Element with ID: &quot;</span><span class="token punctuation">,</span> <span class="token variable">$element</span><span class="token operator">-&gt;</span>att<span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span> <span class="token operator">//</span> <span class="token string">'none here'</span><span class="token punctuation">,</span> <span class="token string">&quot; is &quot;</span><span class="token punctuation">,</span> <span class="token variable">$element</span><span class="token operator">-&gt;</span>text<span class="token punctuation">,</span>
+     <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">#And if we need to do something more complicated, we an use 'xpath'.</span>
+<span class="token comment">#get_xpath or findnodes do the same thing:</span>
+<span class="token comment">#return a list of matches, or if you specify a second numeric argument, just that numbered match.</span>
+
+<span class="token comment">#xpath syntax is fairly extensive, but in this one - we search:</span>
+<span class="token comment"># anywhere in the tree: //</span>
+<span class="token comment">#nodes called 'item'</span>
+<span class="token comment">#with an id attribute [@id]</span>
+<span class="token comment">#and with that id attribute equal to &quot;1000&quot;. </span>
+<span class="token comment">#by specifying '0' we say 'return just the first match'.</span>
+
+<span class="token keyword">print</span> <span class="token string">&quot;Item 1000 is: &quot;</span><span class="token punctuation">,</span> <span class="token variable">$twig</span><span class="token operator">-&gt;</span>get_xpath<span class="token punctuation">(</span> <span class="token string">'//item[@id=&quot;1000&quot;]'</span><span class="token punctuation">,</span> <span class="token number">0</span> <span class="token punctuation">)</span><span class="token operator">-&gt;</span>text<span class="token punctuation">,</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+
+<span class="token comment">#this combines quite well with `map` to e.g. do the same thing on multiple items</span>
+<span class="token keyword">print</span> <span class="token string">&quot;All IDs:\n&quot;</span><span class="token punctuation">,</span> join <span class="token punctuation">(</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">,</span> map <span class="token punctuation">{</span> <span class="token variable">$_</span> <span class="token operator">-&gt;</span> att<span class="token punctuation">(</span><span class="token string">'id'</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token variable">$twig</span> <span class="token operator">-&gt;</span> get_xpath<span class="token punctuation">(</span><span class="token string">'//item'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">#note how this also finds the item under 'summary', because of //</span>
+
+__DATA__
+<span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">&quot;1.0&quot;</span> encoding<span class="token operator">=</span><span class="token string">&quot;utf-8&quot;</span><span class="token operator">?</span><span class="token operator">&gt;</span>
+<span class="token filehandle symbol">&lt;root&gt;</span>
+  <span class="token filehandle symbol">&lt;title&gt;</span>some sample xml<span class="token filehandle symbol">&lt;/title&gt;</span>
+  <span class="token operator">&lt;</span>first key<span class="token operator">=</span><span class="token string">&quot;value&quot;</span> key2<span class="token operator">=</span><span class="token string">&quot;value2&quot;</span><span class="token operator">&gt;</span>
+    <span class="token filehandle symbol">&lt;second&gt;</span>Some text<span class="token filehandle symbol">&lt;/second&gt;</span>
+  <span class="token filehandle symbol">&lt;/first&gt;</span>
+  <span class="token filehandle symbol">&lt;third&gt;</span>
+    <span class="token operator">&lt;</span>fourth key3<span class="token operator">=</span><span class="token string">&quot;value&quot;</span><span class="token operator">&gt;</span>Text here too<span class="token filehandle symbol">&lt;/fourth&gt;</span>
+  <span class="token filehandle symbol">&lt;/third&gt;</span>
+  <span class="token filehandle symbol">&lt;list&gt;</span>
+     <span class="token operator">&lt;</span>item id<span class="token operator">=</span><span class="token string">&quot;1&quot;</span><span class="token operator">&gt;</span>Item1<span class="token filehandle symbol">&lt;/item&gt;</span>
+     <span class="token operator">&lt;</span>item id<span class="token operator">=</span><span class="token string">&quot;2&quot;</span><span class="token operator">&gt;</span>Item2<span class="token filehandle symbol">&lt;/item&gt;</span>
+     <span class="token operator">&lt;</span>item id<span class="token operator">=</span><span class="token string">&quot;3&quot;</span><span class="token operator">&gt;</span>Item3<span class="token filehandle symbol">&lt;/item&gt;</span>
+     <span class="token operator">&lt;</span>item id<span class="token operator">=</span><span class="token string">&quot;66&quot;</span><span class="token operator">&gt;</span>Item66<span class="token filehandle symbol">&lt;/item&gt;</span>
+     <span class="token operator">&lt;</span>item id<span class="token operator">=</span><span class="token string">&quot;88&quot;</span><span class="token operator">&gt;</span>Item88<span class="token filehandle symbol">&lt;/item&gt;</span>
+     <span class="token operator">&lt;</span>item id<span class="token operator">=</span><span class="token string">&quot;100&quot;</span><span class="token operator">&gt;</span>Item100<span class="token filehandle symbol">&lt;/item&gt;</span>
+     <span class="token operator">&lt;</span>item id<span class="token operator">=</span><span class="token string">&quot;1000&quot;</span><span class="token operator">&gt;</span>Item1000<span class="token filehandle symbol">&lt;/item&gt;</span>
+     <span class="token filehandle symbol">&lt;notanitem&gt;</span>Not an item at all really<span class="token operator">.</span><span class="token filehandle symbol">&lt;/notanitem&gt;</span>
+  <span class="token filehandle symbol">&lt;/list&gt;</span>
+  <span class="token filehandle symbol">&lt;summary&gt;</span>
+     <span class="token operator">&lt;</span>item id<span class="token operator">=</span><span class="token string">&quot;no_id&quot;</span><span class="token operator">&gt;</span>Test<span class="token filehandle symbol">&lt;/item&gt;</span>
+  <span class="token filehandle symbol">&lt;/summary&gt;</span>
+<span class="token filehandle symbol">&lt;/root&gt;</span>
+
+</code></pre></div><h2 id="consuming-xml-with-xml-rabbit"><a href="#consuming-xml-with-xml-rabbit" class="header-anchor">#</a> Consuming XML with XML::Rabbit</h2> <p>With <a href="http://search.cpan.org/%7Erobins/XML-Rabbit/lib/XML/Rabbit.pm" target="_blank" rel="noopener noreferrer"><code>XML::Rabbit</code><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> it is possible to consume XML files easily. You <strong>define</strong> in a declarative way and with an XPath syntax what you are looking for in the XML and <code>XML::Rabbit</code> will return objects according to the given definition.</p> <p><strong>Definition:</strong></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">package</span> Bookstore<span class="token punctuation">;</span>
+<span class="token keyword">use</span> XML<span class="token punctuation">:</span><span class="token punctuation">:</span>Rabbit<span class="token punctuation">:</span><span class="token punctuation">:</span>Root<span class="token punctuation">;</span>
+has_xpath_object_list books <span class="token operator">=&gt;</span> <span class="token string">'./book'</span> <span class="token operator">=&gt;</span> <span class="token string">'Bookstore::Book'</span><span class="token punctuation">;</span>
+finalize_class<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+<span class="token keyword">package</span> Bookstore<span class="token punctuation">:</span><span class="token punctuation">:</span>Book<span class="token punctuation">;</span>
+<span class="token keyword">use</span> XML<span class="token punctuation">:</span><span class="token punctuation">:</span>Rabbit<span class="token punctuation">;</span>
+has_xpath_value bookid <span class="token operator">=&gt;</span> <span class="token string">'./@id'</span><span class="token punctuation">;</span>
+has_xpath_value author <span class="token operator">=&gt;</span> <span class="token string">'./author'</span><span class="token punctuation">;</span>
+has_xpath_value title <span class="token operator">=&gt;</span> <span class="token string">'./title'</span><span class="token punctuation">;</span>
+has_xpath_value genre <span class="token operator">=&gt;</span> <span class="token string">'./genre'</span><span class="token punctuation">;</span>
+has_xpath_value price <span class="token operator">=&gt;</span> <span class="token string">'./price'</span><span class="token punctuation">;</span>
+has_xpath_value publish_date <span class="token operator">=&gt;</span> <span class="token string">'./publish_date'</span><span class="token punctuation">;</span>
+has_xpath_value description <span class="token operator">=&gt;</span> <span class="token string">'./description'</span><span class="token punctuation">;</span>
+has_xpath_object purchase_data <span class="token operator">=&gt;</span> <span class="token string">'./purchase_data'</span> <span class="token operator">=&gt;</span> <span class="token string">'Bookstore::Purchase'</span><span class="token punctuation">;</span>
+finalize_class<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">package</span> Bookstore<span class="token punctuation">:</span><span class="token punctuation">:</span>Purchase<span class="token punctuation">;</span>
+<span class="token keyword">use</span> XML<span class="token punctuation">:</span><span class="token punctuation">:</span>Rabbit<span class="token punctuation">;</span>
+has_xpath_value price <span class="token operator">=&gt;</span> <span class="token string">'./price'</span><span class="token punctuation">;</span>
+has_xpath_value date <span class="token operator">=&gt;</span> <span class="token string">'./date'</span><span class="token punctuation">;</span>
+finalize_class<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>XML Consumption:</strong></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> warnings<span class="token punctuation">;</span>
+<span class="token keyword">use</span> utf8<span class="token punctuation">;</span>
+  
+<span class="token keyword">package</span> Library<span class="token punctuation">;</span>
+<span class="token keyword">use</span> feature <span class="token string">qw(say)</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> Carp<span class="token punctuation">;</span>
+<span class="token keyword">use</span> autodie<span class="token punctuation">;</span>
+ 
+<span class="token keyword">say</span> <span class="token string">&quot;Showing data information&quot;</span><span class="token punctuation">;</span>
+<span class="token keyword">my</span> <span class="token variable">$bookstore</span> <span class="token operator">=</span> Bookstore<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span> file <span class="token operator">=&gt;</span> <span class="token string">'./sample.xml'</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+<span class="token keyword">foreach</span> <span class="token keyword">my</span> <span class="token variable">$book</span><span class="token punctuation">(</span> <span class="token variable">@</span><span class="token punctuation">{</span><span class="token variable">$bookstore</span><span class="token operator">-&gt;</span>books<span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">say</span> <span class="token string">&quot;ID: &quot;</span> <span class="token operator">.</span> <span class="token variable">$book</span><span class="token operator">-&gt;</span>bookid<span class="token punctuation">;</span>
+    <span class="token keyword">say</span> <span class="token string">&quot;Title: &quot;</span> <span class="token operator">.</span> <span class="token variable">$book</span><span class="token operator">-&gt;</span>title<span class="token punctuation">;</span>
+    <span class="token keyword">say</span> <span class="token string">&quot;Author: &quot;</span> <span class="token operator">.</span> <span class="token variable">$book</span><span class="token operator">-&gt;</span>author<span class="token punctuation">,</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Notes:</strong></p> <p>Please be careful with the following:</p> <li>
+The first class has to be `XML::Rabbit::Root`. It will place you inside the main tag of the XML document. In our case it will place us inside `<catalog>`
+</catalog></li> <li>
+Nested classes which are optional. Those classes need to be accessed via a try/catch (or `eval / $@` check) block. Optional fields will simply return `null`. For example, for `purchase_data` the loop would be:
+</li> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token keyword">foreach</span> <span class="token keyword">my</span> <span class="token variable">$book</span><span class="token punctuation">(</span> <span class="token variable">@</span><span class="token punctuation">{</span><span class="token variable">$bookstore</span><span class="token operator">-&gt;</span>books<span class="token punctuation">}</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">say</span> <span class="token string">&quot;ID: &quot;</span> <span class="token operator">.</span> <span class="token variable">$book</span><span class="token operator">-&gt;</span>bookid<span class="token punctuation">;</span>
+    <span class="token keyword">say</span> <span class="token string">&quot;Title: &quot;</span> <span class="token operator">.</span> <span class="token variable">$book</span><span class="token operator">-&gt;</span>title<span class="token punctuation">;</span>
+    <span class="token keyword">say</span> <span class="token string">&quot;Author: &quot;</span> <span class="token operator">.</span> <span class="token variable">$book</span><span class="token operator">-&gt;</span>author<span class="token punctuation">;</span>
+    try <span class="token punctuation">{</span>
+        <span class="token keyword">say</span> <span class="token string">&quot;Purchase price: &quot;</span><span class="token operator">.</span> <span class="token variable">$book</span><span class="token operator">-&gt;</span>purchase_data<span class="token operator">-&gt;</span>price<span class="token punctuation">,</span> <span class="token string">&quot;\n&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> catch <span class="token punctuation">{</span>
+        <span class="token keyword">say</span> <span class="token string">&quot;No purchase price available\n&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>sample.xml</strong></p> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">&quot;1.0&quot;</span><span class="token operator">?</span><span class="token operator">&gt;</span>
+<span class="token filehandle symbol">&lt;catalog&gt;</span>
+   <span class="token operator">&lt;</span>book id<span class="token operator">=</span><span class="token string">&quot;bk101&quot;</span><span class="token operator">&gt;</span>
+      <span class="token filehandle symbol">&lt;author&gt;</span>Gambardella<span class="token punctuation">,</span> Matthew<span class="token filehandle symbol">&lt;/author&gt;</span>
+      <span class="token filehandle symbol">&lt;title&gt;</span>XML Developer's Guide<span class="token filehandle symbol">&lt;/title&gt;</span>
+      <span class="token filehandle symbol">&lt;genre&gt;Computer&lt;/genre&gt;</span>
+      <span class="token filehandle symbol">&lt;price&gt;44.95&lt;/price&gt;</span>
+      <span class="token filehandle symbol">&lt;publish_date&gt;2000-10-01&lt;/publish_date&gt;</span>
+      <span class="token filehandle symbol">&lt;description&gt;</span>An in<span class="token operator">-</span>depth look at creating applications 
+      with XML<span class="token operator">.</span><span class="token filehandle symbol">&lt;/description&gt;</span>
+   <span class="token filehandle symbol">&lt;/book&gt;</span>
+   <span class="token operator">&lt;</span>book id<span class="token operator">=</span><span class="token string">&quot;bk102&quot;</span><span class="token operator">&gt;</span>
+      <span class="token filehandle symbol">&lt;author&gt;</span>Ralls<span class="token punctuation">,</span> Kim<span class="token filehandle symbol">&lt;/author&gt;</span>
+      <span class="token filehandle symbol">&lt;title&gt;</span>Midnight Rain<span class="token filehandle symbol">&lt;/title&gt;</span>
+      <span class="token filehandle symbol">&lt;genre&gt;Fantasy&lt;/genre&gt;</span>
+      <span class="token filehandle symbol">&lt;price&gt;5.95&lt;/price&gt;</span>
+      <span class="token filehandle symbol">&lt;publish_date&gt;2000-12-16&lt;/publish_date&gt;</span>
+      <span class="token filehandle symbol">&lt;description&gt;</span>A former architect battles corporate zombies<span class="token punctuation">,</span> 
+      an evil sorceress<span class="token punctuation">,</span> <span class="token operator">and</span> her own childhood to become queen 
+      of the world<span class="token operator">.</span><span class="token filehandle symbol">&lt;/description&gt;</span>
+   <span class="token filehandle symbol">&lt;/book&gt;</span>
+   <span class="token operator">&lt;</span>book id<span class="token operator">=</span><span class="token string">&quot;bk103&quot;</span><span class="token operator">&gt;</span>
+      <span class="token filehandle symbol">&lt;author&gt;</span>Corets<span class="token punctuation">,</span> Eva<span class="token filehandle symbol">&lt;/author&gt;</span>
+      <span class="token filehandle symbol">&lt;title&gt;</span>Maeve Ascendant<span class="token filehandle symbol">&lt;/title&gt;</span>
+      <span class="token filehandle symbol">&lt;genre&gt;Fantasy&lt;/genre&gt;</span>
+      <span class="token filehandle symbol">&lt;price&gt;5.95&lt;/price&gt;</span>
+      <span class="token filehandle symbol">&lt;publish_date&gt;2000-11-17&lt;/publish_date&gt;</span>
+      <span class="token filehandle symbol">&lt;description&gt;</span>After the collapse of a nanotechnology 
+      society in England<span class="token punctuation">,</span> the young survivors lay the 
+      foundation <span class="token keyword">for</span> a new society<span class="token operator">.</span><span class="token filehandle symbol">&lt;/description&gt;</span>
+   <span class="token filehandle symbol">&lt;/book&gt;</span>
+   <span class="token operator">&lt;</span>book id<span class="token operator">=</span><span class="token string">&quot;bk104&quot;</span><span class="token operator">&gt;</span>
+      <span class="token filehandle symbol">&lt;author&gt;</span>Corets<span class="token punctuation">,</span> Eva<span class="token filehandle symbol">&lt;/author&gt;</span>
+      <span class="token filehandle symbol">&lt;title&gt;</span>Oberon's Legacy<span class="token filehandle symbol">&lt;/title&gt;</span>
+      <span class="token filehandle symbol">&lt;genre&gt;Fantasy&lt;/genre&gt;</span>
+      <span class="token filehandle symbol">&lt;price&gt;5.95&lt;/price&gt;</span>
+      <span class="token filehandle symbol">&lt;publish_date&gt;2001-03-10&lt;/publish_date&gt;</span>
+      <span class="token filehandle symbol">&lt;description&gt;</span>In post<span class="token operator">-</span>apocalypse England<span class="token punctuation">,</span> the mysterious 
+      agent known only as Oberon helps to create a new life 
+      <span class="token keyword">for</span> the inhabitants of London<span class="token operator">.</span> Sequel to Maeve 
+      Ascendant<span class="token operator">.</span><span class="token filehandle symbol">&lt;/description&gt;</span>
+      <span class="token filehandle symbol">&lt;purchase_data&gt;</span>
+        <span class="token filehandle symbol">&lt;date&gt;2001-12-21&lt;/date&gt;</span>
+        <span class="token filehandle symbol">&lt;price&gt;20&lt;/price&gt;</span>
+      <span class="token filehandle symbol">&lt;/purchase_data&gt;</span>
+   <span class="token filehandle symbol">&lt;/book&gt;</span>
+<span class="token filehandle symbol">&lt;/catalog&gt;</span>
+
+</code></pre></div><h2 id="parsing-with-xml-libxml"><a href="#parsing-with-xml-libxml" class="header-anchor">#</a> Parsing with XML::LibXML</h2> <div class="language-perl extra-class"><pre class="language-perl"><code><span class="token comment"># This uses the 'sample.xml' given in the XML::Twig example.    </span>
+
+<span class="token comment"># Module requirements (1.70 and above for use of load_xml)</span>
+<span class="token keyword">use</span> XML<span class="token punctuation">:</span><span class="token punctuation">:</span>LibXML <span class="token string">'1.70'</span><span class="token punctuation">;</span>
+
+<span class="token comment"># let's be a good perl dev</span>
+<span class="token keyword">use</span> strict<span class="token punctuation">;</span>
+<span class="token keyword">use</span> warnings <span class="token string">'all'</span><span class="token punctuation">;</span>
+
+<span class="token comment"># Create the LibXML Document Object</span>
+<span class="token keyword">my</span> <span class="token variable">$xml</span> <span class="token operator">=</span> XML<span class="token punctuation">:</span><span class="token punctuation">:</span>LibXML<span class="token operator">-&gt;</span>new<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment"># Where we are retrieving the XML from</span>
+<span class="token keyword">my</span> <span class="token variable">$file</span> <span class="token operator">=</span> <span class="token string">'sample.xml'</span><span class="token punctuation">;</span>
+
+<span class="token comment"># Load the XML from the file</span>
+<span class="token keyword">my</span> <span class="token variable">$dom</span> <span class="token operator">=</span> XML<span class="token punctuation">:</span><span class="token punctuation">:</span>LibXML<span class="token operator">-&gt;</span>load_xml<span class="token punctuation">(</span>
+    location <span class="token operator">=&gt;</span> <span class="token variable">$file</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment"># get the docroot</span>
+<span class="token keyword">my</span> <span class="token variable">$root</span> <span class="token operator">=</span> <span class="token variable">$dom</span><span class="token operator">-&gt;</span>getDocumentElement<span class="token punctuation">;</span>
+
+<span class="token comment"># if the document has children</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$root</span><span class="token operator">-&gt;</span>hasChildNodes<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment"># getElementsByLocalName returns a node list of all elements who's</span>
+    <span class="token comment"># localname matches 'title', and we want the first occurrence</span>
+    <span class="token comment"># (via get_node(1))</span>
+    <span class="token keyword">my</span> <span class="token variable">$title</span> <span class="token operator">=</span> <span class="token variable">$root</span><span class="token operator">-&gt;</span>getElementsByLocalName<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>defined <span class="token variable">$title</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment"># Get the first matched node out of the nodeList</span>
+        <span class="token keyword">my</span> <span class="token variable">$node</span> <span class="token operator">=</span> <span class="token variable">$title</span><span class="token operator">-&gt;</span>get_node<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment"># Get the text of the target node</span>
+        <span class="token keyword">my</span> <span class="token variable">$title_text</span> <span class="token operator">=</span> <span class="token variable">$node</span><span class="token operator">-&gt;</span>textContent<span class="token punctuation">;</span>
+
+        <span class="token keyword">print</span> <span class="token string">&quot;The first node with name 'title' contains: $title_text\n&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment"># The above calls can be combined, but is possibly prone to errors</span>
+    <span class="token comment"># (if the getElementsByLocalName() failed to match a node).</span>
+    <span class="token comment">#</span>
+    <span class="token comment"># my $title_text = $root-&gt;getElementsByLocalName('title')-&gt;get_node(1)-&gt;textContent;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment"># Using Xpath, get the price of the book with id 'bk104'</span>
+<span class="token comment">#</span>
+
+<span class="token comment"># Set our xpath</span>
+<span class="token keyword">my</span> <span class="token variable">$xpath</span> <span class="token operator">=</span> <span class="token string">q!/catalog/book[@id='bk104']/price!</span><span class="token punctuation">;</span>
+
+<span class="token comment"># Does that xpath exist?</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token variable">$root</span><span class="token operator">-&gt;</span>exists<span class="token punctuation">(</span><span class="token variable">$xpath</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment"># Pull in the twig</span>
+    <span class="token keyword">my</span> <span class="token variable">$match</span> <span class="token operator">=</span> <span class="token variable">$root</span><span class="token operator">-&gt;</span>find<span class="token punctuation">(</span><span class="token variable">$xpath</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">if</span><span class="token punctuation">(</span>defined <span class="token variable">$match</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment"># Get the first matched node out of the nodeList</span>
+        <span class="token keyword">my</span> <span class="token variable">$node</span> <span class="token operator">=</span> <span class="token variable">$match</span><span class="token operator">-&gt;</span>get_node<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment"># pull in the text of that node</span>
+        <span class="token keyword">my</span> <span class="token variable">$match_text</span> <span class="token operator">=</span> <span class="token variable">$node</span><span class="token operator">-&gt;</span>textContent<span class="token punctuation">;</span>
+
+        <span class="token keyword">print</span> <span class="token string">&quot;The price of the book with id bk104 is: $match_text\n&quot;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/perl/xml-parsing.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/perl/regular-expressions.html" class="prev">
+        Regular Expressions
+      </a></span> <span class="next"><a href="/perl/unicode.html">
+        Unicode
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2413.81df4e3e.js" defer></script>
+  </body>
+</html>

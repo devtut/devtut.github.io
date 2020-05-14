@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MATLAB - For loops</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Iterate over columns of matrix, Notice: Weird same counter nested loops., Iterate over elements of vector, Loop 1 to n, Loop over indexes, Nested Loops">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="MATLAB - For loops">
+    <meta property="og:description" content="Iterate over columns of matrix, Notice: Weird same counter nested loops., Iterate over elements of vector, Loop 1 to n, Loop over indexes, Nested Loops">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/matlab/for-loops.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="MATLAB - For loops">
+    <meta name="twitter:description" content="Iterate over columns of matrix, Notice: Weird same counter nested loops., Iterate over elements of vector, Loop 1 to n, Loop over indexes, Nested Loops">
+    <meta name="twitter:url" content="/matlab/for-loops.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1915.9e272ccc.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>MATLAB</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matlab/" class="sidebar-link">Disclaimer</a></li><li><a href="/matlab/getting-started-with-matlab-language.html" class="sidebar-link">Getting started with MATLAB Language</a></li><li><a href="/matlab/initializing-matrices-or-arrays.html" class="sidebar-link">Initializing Matrices or arrays</a></li><li><a href="/matlab/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/matlab/functions.html" class="sidebar-link">Functions</a></li><li><a href="/matlab/set-operations.html" class="sidebar-link">Set operations</a></li><li><a href="/matlab/documenting-functions.html" class="sidebar-link">Documenting functions</a></li><li><a href="/matlab/using-functions-with-logical-output.html" class="sidebar-link">Using functions with logical output</a></li><li><a href="/matlab/for-loops.html" class="active sidebar-link">For loops</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/matlab/for-loops.html#iterate-over-columns-of-matrix" class="sidebar-link">Iterate over columns of matrix</a></li><li class="sidebar-sub-header"><a href="/matlab/for-loops.html#notice-weird-same-counter-nested-loops" class="sidebar-link">Notice: Weird same counter nested loops.</a></li><li class="sidebar-sub-header"><a href="/matlab/for-loops.html#iterate-over-elements-of-vector" class="sidebar-link">Iterate over elements of vector</a></li><li class="sidebar-sub-header"><a href="/matlab/for-loops.html#loop-1-to-n" class="sidebar-link">Loop 1 to n</a></li><li class="sidebar-sub-header"><a href="/matlab/for-loops.html#loop-over-indexes" class="sidebar-link">Loop over indexes</a></li><li class="sidebar-sub-header"><a href="/matlab/for-loops.html#nested-loops" class="sidebar-link">Nested Loops</a></li></ul></li><li><a href="/matlab/object-oriented-programming.html" class="sidebar-link">Object-Oriented Programming</a></li><li><a href="/matlab/vectorization.html" class="sidebar-link">Vectorization</a></li><li><a href="/matlab/matrix-decompositions.html" class="sidebar-link">Matrix decompositions</a></li><li><a href="/matlab/graphics-2d-line-plots.html" class="sidebar-link">Graphics: 2D Line Plots</a></li><li><a href="/matlab/graphics-2d-and-3d-transformations.html" class="sidebar-link">Graphics: 2D and 3D Transformations</a></li><li><a href="/matlab/controlling-subplot-coloring-in-matlab.html" class="sidebar-link">Controlling Subplot coloring in Matlab</a></li><li><a href="/matlab/image-processing.html" class="sidebar-link">Image processing</a></li><li><a href="/matlab/drawing.html" class="sidebar-link">Drawing</a></li><li><a href="/matlab/financial-applications.html" class="sidebar-link">Financial Applications</a></li><li><a href="/matlab/fourier-transforms-and-inverse-fourier-transforms.html" class="sidebar-link">Fourier Transforms and Inverse Fourier Transforms</a></li><li><a href="/matlab/ordinary-differential-equations-ode-solvers.html" class="sidebar-link">Ordinary Differential Equations (ODE) Solvers</a></li><li><a href="/matlab/interpolation-with-matlab.html" class="sidebar-link">Interpolation with MATLAB</a></li><li><a href="/matlab/integration.html" class="sidebar-link">Integration</a></li><li><a href="/matlab/reading-large-files.html" class="sidebar-link">Reading large files</a></li><li><a href="/matlab/usage-of-accumarray-function.html" class="sidebar-link">Usage of accumarray() Function</a></li><li><a href="/matlab/introduction-to-mex-api.html" class="sidebar-link">Introduction to MEX API</a></li><li><a href="/matlab/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/matlab/performance-and-benchmarking.html" class="sidebar-link">Performance and Benchmarking</a></li><li><a href="/matlab/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/matlab/using-serial-ports.html" class="sidebar-link">Using serial ports</a></li><li><a href="/matlab/undocumented-features.html" class="sidebar-link">Undocumented Features</a></li><li><a href="/matlab/matlab-best-practices.html" class="sidebar-link">MATLAB Best Practices</a></li><li><a href="/matlab/matlab-user-interfaces.html" class="sidebar-link">MATLAB User Interfaces</a></li><li><a href="/matlab/useful-tricks.html" class="sidebar-link">Useful tricks</a></li><li><a href="/matlab/common-mistakes-and-errors.html" class="sidebar-link">Common mistakes and errors</a></li><li><a href="/matlab/programming-utilities.html" class="sidebar-link">Programming Utilities</a></li><li><a href="/matlab/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="for-loops"><a href="#for-loops" class="header-anchor">#</a> For loops</h1> <h2 id="iterate-over-columns-of-matrix"><a href="#iterate-over-columns-of-matrix" class="header-anchor">#</a> Iterate over columns of matrix</h2> <p>If the right-hand side of the assignment is a matrix, then in each iteration the variable is assigned subsequent columns of this matrix.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>some_matrix <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">% 2 by 3 matrix</span>
+<span class="token keyword">for</span> some_column <span class="token operator">=</span> some_matrix
+    <span class="token function">display</span><span class="token punctuation">(</span>some_column<span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>(The row vector version is a normal case of this, because in Matlab a row vector is just a matrix whose columns are size 1.)</p> <p>The output would display</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token number">1</span>
+<span class="token number">4</span>
+<span class="token number">2</span>
+<span class="token number">5</span>
+<span class="token number">3</span>
+<span class="token number">6</span>
+
+</code></pre></div><p>i.e. each column of the iterated matrix displayed, each column printed on each call of <code>display</code>.</p> <h2 id="notice-weird-same-counter-nested-loops"><a href="#notice-weird-same-counter-nested-loops" class="header-anchor">#</a> Notice: Weird same counter nested loops.</h2> <p>This is not something you will see in other programming environments. I came across it some years back and I couldn't understand why it was happening, but after working with MATLAB for some time I was able to figure it out. Look at the code snippet below:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token keyword">for</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">10</span>
+    <span class="token keyword">for</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">10</span>
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token string">'%d,'</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>you wouldn't expect this to work properly but it does, producing the following output:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+<span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span>
+
+</code></pre></div><p>The reason is that, as with everything else in MATLAB, the <code>x</code> counter is also a matrix—a vector to be precise. As such, <code>x</code> is only a reference to an 'array' (a coherent, consecutive memory structure) which is appropriatelly referenced with every consequent loop (nested or not). The fact that the nested loop uses the same identifier makes no difference to how values from that array are referenced. The only problem is that within the nested loop the outer <code>x</code> is hidden by the nested (local) <code>x</code> and therefore cannot be referenced. However, the functionality of the nested loop structure remains intact.</p> <h2 id="iterate-over-elements-of-vector"><a href="#iterate-over-elements-of-vector" class="header-anchor">#</a> Iterate over elements of vector</h2> <p>The right-hand side of the assignment in a <code>for</code> loop can be any row vector. The left-hand side of the assignment can be any valid variable name. The <code>for</code> loop assigns a different element of this vector to the variable each run.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>other_row_vector <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> any_name <span class="token operator">=</span> other_row_vector
+    <span class="token function">display</span><span class="token punctuation">(</span>any_name<span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>The output would display</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token number">4</span>
+<span class="token number">3</span>
+<span class="token number">5</span>
+<span class="token number">1</span>
+<span class="token number">2</span>
+
+</code></pre></div><p>(The <code>1:n</code> version is a normal case of this, because in Matlab <code>1:n</code> is just syntax for constructing a row vector of <code>[1, 2, ..., n]</code>.)</p> <p>Hence, the two following blocks of code are identical:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> x <span class="token operator">=</span> A
+  <span class="token function">disp</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>and</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token keyword">for</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">5</span>
+  <span class="token function">disp</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>And the following are identical as well:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>A <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">3</span> <span class="token number">5</span> <span class="token number">7</span> <span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> x <span class="token operator">=</span> A
+  <span class="token function">disp</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>and</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token keyword">for</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">2</span><span class="token operator">:</span><span class="token number">9</span>
+  <span class="token function">disp</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Any row vector will do. They don't have to be numbers.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>my_characters <span class="token operator">=</span> <span class="token string">'abcde'</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> my_char <span class="token operator">=</span> my_characters
+    <span class="token function">disp</span><span class="token punctuation">(</span>my_char<span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>will output</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>a
+b
+c
+d
+e
+
+</code></pre></div><h2 id="loop-1-to-n"><a href="#loop-1-to-n" class="header-anchor">#</a> Loop 1 to n</h2> <p>The simplest case is just preforming a task for a fixed known number of times. Say we want to display the numbers between 1 to n, we can write:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>n <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span>n
+    <span class="token function">display</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>The loop will execute the inner statement(s), everything between the <code>for</code> and the <code>end</code>, for <code>n</code> times (5 in this example):</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token number">1</span>
+<span class="token number">2</span>
+<span class="token number">3</span>
+<span class="token number">4</span>
+<span class="token number">5</span>
+
+</code></pre></div><p>Here is another example:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>n <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span>n
+    <span class="token function">disp</span><span class="token punctuation">(</span>n<span class="token operator">-</span>k<span class="token operator">+</span><span class="token number">1</span><span class="token operator">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token comment">% DISP uses more &quot;clean&quot; way to print on the screen</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>this time we use both the <code>n</code> and <code>k</code> in the loop, to create a &quot;nested&quot; display:</p> <div class="language- extra-class"><pre class="language-text"><code>
+5     4     3     2     1
+
+ 4     3     2     1
+
+ 3     2     1
+
+ 2     1
+
+ 1
+
+</code></pre></div><h2 id="loop-over-indexes"><a href="#loop-over-indexes" class="header-anchor">#</a> Loop over indexes</h2> <div class="language-matlab extra-class"><pre class="language-matlab"><code>my_vector <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token number">i</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token function">numel</span><span class="token punctuation">(</span>my_vector<span class="token punctuation">)</span>
+    <span class="token function">my_vector</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">my_vector</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Most simple things done with <code>for</code> loops can be done faster and easier by vectorized operations. For example, the above loop can be replaced by <code>my_vector = my_vector + 1</code>.</p> <h2 id="nested-loops"><a href="#nested-loops" class="header-anchor">#</a> Nested Loops</h2> <p>Loops can be nested, to preform iterated task within another iterated task. Consider the following loops:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>ch <span class="token operator">=</span> <span class="token string">'abc'</span><span class="token punctuation">;</span>
+m <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> c <span class="token operator">=</span> ch
+    <span class="token keyword">for</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span>m
+        <span class="token function">disp</span><span class="token punctuation">(</span><span class="token punctuation">[</span>c <span class="token function">num2str</span><span class="token punctuation">(</span>k<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">% NUM2STR converts the number stored in k to a charachter,</span>
+                             <span class="token comment">% so it can be concataneted with the letter in c</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>we use 2 iterators to display all combinations of elements from <code>abc</code> and <code>1:m</code>, which yields:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>a1
+a2
+a3
+b1
+b2
+b3
+c1
+c2
+c3
+
+</code></pre></div><p>We can also use nested loops to combine between tasks to be done each time, and tasks to be done once in a several iterations:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>N <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+n <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+a1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">% the first element in Fibonacci series</span>
+a2 <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">% the secound element in Fibonacci series</span>
+<span class="token keyword">for</span> <span class="token number">j</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span>N
+    <span class="token keyword">for</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span>n
+        an <span class="token operator">=</span> a1 <span class="token operator">+</span> a2<span class="token punctuation">;</span> <span class="token comment">% compute the next element in Fibonacci series</span>
+        a1 <span class="token operator">=</span> a2<span class="token punctuation">;</span>      <span class="token comment">% save the previous element for the next iteration</span>
+        a2 <span class="token operator">=</span> an<span class="token punctuation">;</span>      <span class="token comment">% save ht new element for the next iteration</span>
+    <span class="token keyword">end</span>
+    <span class="token function">disp</span><span class="token punctuation">(</span>an<span class="token punctuation">)</span> <span class="token comment">% display every n'th element</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Here we want to compute all the <a href="https://en.wikipedia.org/wiki/Fibonacci_number" target="_blank" rel="noopener noreferrer">Fibonacci series<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, but to display only the <code>n</code>th element each time, so we get</p> <div class="language- extra-class"><pre class="language-text"><code>
+  3
+   13
+   55
+   233
+   987
+   4181
+   17711
+   75025
+   317811
+   1346269
+
+</code></pre></div><p>Another thing we can do is to use the first (outer) iterator within the inner loop. Here is another example:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>N <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
+gap <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token number">j</span> <span class="token operator">=</span> gap
+    <span class="token keyword">for</span> k <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">j</span><span class="token operator">:</span>N
+        <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token string">'%d '</span><span class="token punctuation">,</span>k<span class="token punctuation">)</span> <span class="token comment">% FPRINTF prints the number k proceeding to the next the line</span>
+    <span class="token keyword">end</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span><span class="token string">'\n'</span><span class="token punctuation">)</span>        <span class="token comment">% go to the next line</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>This time we use the nested loop to format the output, and brake the line only when a new gap (<code>j</code>) between the elements was introduced. We loop through the gap width in the outer loop and use it within the inner loop to iterate through the vector:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span> <span class="token number">7</span> <span class="token number">8</span> <span class="token number">9</span> <span class="token number">10</span> <span class="token number">11</span> <span class="token number">12</span> 
+<span class="token number">1</span> <span class="token number">3</span> <span class="token number">5</span> <span class="token number">7</span> <span class="token number">9</span> <span class="token number">11</span> 
+<span class="token number">1</span> <span class="token number">4</span> <span class="token number">7</span> <span class="token number">10</span> 
+<span class="token number">1</span> <span class="token number">5</span> <span class="token number">9</span> 
+<span class="token number">1</span> <span class="token number">7</span> 
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <h3 id="iterate-over-column-vector"><a href="#iterate-over-column-vector" class="header-anchor">#</a> Iterate over column vector</h3> <p>A common source of bugs is trying to loop over the elements of a column vector. A column vector is treated like a matrix with one column. (There is actually no distinction in Matlab.) The <code>for</code> loop runs once with the loop variable set to the column.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token comment">% Prints once: [3, 1]</span>
+my_vector <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">;</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token number">i</span> <span class="token operator">=</span> my_vector
+    <span class="token function">display</span><span class="token punctuation">(</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h3 id="altering-the-iteration-variable"><a href="#altering-the-iteration-variable" class="header-anchor">#</a> Altering the iteration variable</h3> <p>Altering the iteration variable changes its value for the current iteration, but has no impact on its value in subsequent iterations.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token comment">% Prints 1, 2, 3, 4, 5</span>
+<span class="token keyword">for</span> <span class="token number">i</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">5</span>
+    <span class="token function">display</span><span class="token punctuation">(</span><span class="token number">i</span><span class="token punctuation">)</span>
+    <span class="token number">i</span> <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span> <span class="token comment">% Fail at trying to terminate the loop</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><h3 id="special-case-performance-of-a-b-in-right-hand-side"><a href="#special-case-performance-of-a-b-in-right-hand-side" class="header-anchor">#</a> Special case performance of <code>a:b</code> in right-hand side</h3> <p>The basic example treats <code>1:n</code> as a normal instance of creating a row vector and then iterating over it. For performance reasons, Matlab actually treats any <code>a:b</code> or <code>a:c:b</code> specially by not creating the row vector entirely, but instead creating each element one at a time.</p> <p>This can be detected by slightly altering the syntax.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token comment">% Loops forever</span>
+<span class="token keyword">for</span> <span class="token number">i</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">1e50</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token comment">% Crashes immediately</span>
+<span class="token keyword">for</span> <span class="token number">i</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">1e50</span><span class="token punctuation">]</span>
+<span class="token keyword">end</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/matlab/for-loops.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matlab/using-functions-with-logical-output.html" class="prev">
+        Using functions with logical output
+      </a></span> <span class="next"><a href="/matlab/object-oriented-programming.html">
+        Object-Oriented Programming
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1915.9e272ccc.js" defer></script>
+  </body>
+</html>

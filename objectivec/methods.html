@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Objective C - Methods</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Class methods, Method parameters, Create a basic method, Return values, Calling methods, Instance methods, Pass by value parameter passing, Pass by reference parameter passing">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Objective C - Methods">
+    <meta property="og:description" content="Class methods, Method parameters, Create a basic method, Return values, Calling methods, Instance methods, Pass by value parameter passing, Pass by reference parameter passing">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/objectivec/methods.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Objective C - Methods">
+    <meta name="twitter:description" content="Class methods, Method parameters, Create a basic method, Return values, Calling methods, Instance methods, Pass by value parameter passing, Pass by reference parameter passing">
+    <meta name="twitter:url" content="/objectivec/methods.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2292.894308ce.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Objective-C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/objectivec/" class="sidebar-link">Disclaimer</a></li><li><a href="/objectivec/getting-started-with-objective-c-language.html" class="sidebar-link">Getting started with Objective-C Language</a></li><li><a href="/objectivec/basic-data-types.html" class="sidebar-link">Basic Data Types</a></li><li><a href="/objectivec/enums.html" class="sidebar-link">Enums</a></li><li><a href="/objectivec/structs.html" class="sidebar-link">Structs</a></li><li><a href="/objectivec/classes-and-objects.html" class="sidebar-link">Classes  and Objects</a></li><li><a href="/objectivec/inheritance.html" class="sidebar-link">Inheritance</a></li><li><a href="/objectivec/methods.html" class="active sidebar-link">Methods</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/objectivec/methods.html#class-methods" class="sidebar-link">Class methods</a></li><li class="sidebar-sub-header"><a href="/objectivec/methods.html#method-parameters" class="sidebar-link">Method parameters</a></li><li class="sidebar-sub-header"><a href="/objectivec/methods.html#create-a-basic-method" class="sidebar-link">Create a basic method</a></li><li class="sidebar-sub-header"><a href="/objectivec/methods.html#return-values" class="sidebar-link">Return values</a></li><li class="sidebar-sub-header"><a href="/objectivec/methods.html#calling-methods" class="sidebar-link">Calling methods</a></li><li class="sidebar-sub-header"><a href="/objectivec/methods.html#instance-methods" class="sidebar-link">Instance methods</a></li><li class="sidebar-sub-header"><a href="/objectivec/methods.html#pass-by-value-parameter-passing" class="sidebar-link">Pass by value parameter passing</a></li><li class="sidebar-sub-header"><a href="/objectivec/methods.html#pass-by-reference-parameter-passing" class="sidebar-link">Pass by reference parameter passing</a></li></ul></li><li><a href="/objectivec/properties.html" class="sidebar-link">Properties</a></li><li><a href="/objectivec/random-integer.html" class="sidebar-link">Random Integer</a></li><li><a href="/objectivec/bool-bool-boolean-nscfboolean.html" class="sidebar-link">BOOL / bool / Boolean / NSCFBoolean</a></li><li><a href="/objectivec/continue-and-break.html" class="sidebar-link">Continue and Break!</a></li><li><a href="/objectivec/key-value-coding-key-value-observing.html" class="sidebar-link">Key Value Coding / Key Value Observing</a></li><li><a href="/objectivec/nsstring.html" class="sidebar-link">NSString</a></li><li><a href="/objectivec/nsarray.html" class="sidebar-link">NSArray</a></li><li><a href="/objectivec/nsmutablearray.html" class="sidebar-link">NSMutableArray</a></li><li><a href="/objectivec/nsdictionary.html" class="sidebar-link">NSDictionary</a></li><li><a href="/objectivec/nsmutabledictionary.html" class="sidebar-link">NSMutableDictionary</a></li><li><a href="/objectivec/nsdate.html" class="sidebar-link">NSDate</a></li><li><a href="/objectivec/nsurl.html" class="sidebar-link">NSURL</a></li><li><a href="/objectivec/nsurl-send-a-post-request.html" class="sidebar-link">NSUrl send a post request</a></li><li><a href="/objectivec/nsdata.html" class="sidebar-link">NSData</a></li><li><a href="/objectivec/nspredicate.html" class="sidebar-link">NSPredicate</a></li><li><a href="/objectivec/nsregularexpression.html" class="sidebar-link">NSRegularExpression</a></li><li><a href="/objectivec/nsjsonserialization.html" class="sidebar-link">NSJSONSerialization</a></li><li><a href="/objectivec/nscalendar.html" class="sidebar-link">NSCalendar</a></li><li><a href="/objectivec/nsattributedstring.html" class="sidebar-link">NSAttributedString</a></li><li><a href="/objectivec/nstimer.html" class="sidebar-link">NSTimer</a></li><li><a href="/objectivec/nsobject.html" class="sidebar-link">NSObject</a></li><li><a href="/objectivec/nssortdescriptor.html" class="sidebar-link">NSSortDescriptor</a></li><li><a href="/objectivec/nstextattachment.html" class="sidebar-link">NSTextAttachment</a></li><li><a href="/objectivec/nscache.html" class="sidebar-link">NSCache</a></li><li><a href="/objectivec/nsuserdefaults.html" class="sidebar-link">NSUserDefaults</a></li><li><a href="/objectivec/subscripting.html" class="sidebar-link">Subscripting</a></li><li><a href="/objectivec/low-level-runtime-environment.html" class="sidebar-link">Low-level Runtime Environment</a></li><li><a href="/objectivec/fast-enumeration.html" class="sidebar-link">Fast Enumeration</a></li><li><a href="/objectivec/categories.html" class="sidebar-link">Categories</a></li><li><a href="/objectivec/protocols.html" class="sidebar-link">Protocols</a></li><li><a href="/objectivec/protocols-and-delegates.html" class="sidebar-link">Protocols and Delegates</a></li><li><a href="/objectivec/blocks.html" class="sidebar-link">Blocks</a></li><li><a href="/objectivec/xml-parsing.html" class="sidebar-link">XML parsing</a></li><li><a href="/objectivec/declare-class-method-and-instance-method.html" class="sidebar-link">Declare class method and instance method</a></li><li><a href="/objectivec/predefined-macros.html" class="sidebar-link">Predefined Macros</a></li><li><a href="/objectivec/grand-central-dispatch.html" class="sidebar-link">Grand Central Dispatch</a></li><li><a href="/objectivec/format-specifiers.html" class="sidebar-link">Format-Specifiers</a></li><li><a href="/objectivec/logging.html" class="sidebar-link">Logging</a></li><li><a href="/objectivec/error-handling.html" class="sidebar-link">Error Handling</a></li><li><a href="/objectivec/modern-objective-c.html" class="sidebar-link">Modern Objective-C</a></li><li><a href="/objectivec/singletons.html" class="sidebar-link">Singletons</a></li><li><a href="/objectivec/multi-threading.html" class="sidebar-link">Multi-Threading</a></li><li><a href="/objectivec/unit-testing-using-xcode.html" class="sidebar-link">Unit testing using Xcode</a></li><li><a href="/objectivec/memory-management.html" class="sidebar-link">Memory Management</a></li><li><a href="/objectivec/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="methods"><a href="#methods" class="header-anchor">#</a> Methods</h1> <h2 id="class-methods"><a href="#class-methods" class="header-anchor">#</a> Class methods</h2> <p>A class method is called on the class the method belongs to, not an instance of it. This is possible because Objective-C classes are also objects. To denote a method as a class method, change the <code>-</code> to a <code>+</code>:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token operator">+</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>hello <span class="token punctuation">{</span>
+  <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;Hello World&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="method-parameters"><a href="#method-parameters" class="header-anchor">#</a> Method parameters</h2> <p>If you want to pass in values to a method when it is called, you use parameters:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>addInt<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>intOne toInt<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>intTwo <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> intOne <span class="token operator">+</span> intTwo<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The colon (<code>:</code>) separates the parameter from the method name.</p> <p>The parameter type goes in the parentheses <code>(int)</code>.</p> <p>The parameter name goes after the parameter type.</p> <h2 id="create-a-basic-method"><a href="#create-a-basic-method" class="header-anchor">#</a> Create a basic method</h2> <p>This is how to create a basic method that logs 'Hello World&quot; to the console:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>hello <span class="token punctuation">{</span>
+  <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;Hello World&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The <code>-</code> at the beginning denotes this method as an instance method.</p> <p>The <code>(void)</code> denotes the return type. This method doesn't return anything, so you enter <code>void</code>.</p> <p>The 'hello' is the name of the method.</p> <p>Everything in the <code>{}</code> is the code run when the method is called.</p> <h2 id="return-values"><a href="#return-values" class="header-anchor">#</a> Return values</h2> <p>When you want to return a value from a method, you put the type you want to return in the first set of parentheses.</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token operator">-</span> <span class="token punctuation">(</span>NSString<span class="token punctuation">)</span>returnHello <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token string">@&quot;Hello World&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>The value you want to return goes after the <code>return</code> keyword;</p> <h2 id="calling-methods"><a href="#calling-methods" class="header-anchor">#</a> Calling methods</h2> <p>Calling an instance method:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token punctuation">[</span>classInstance hello<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">@interface</span> Sample
+ <span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>hello<span class="token punctuation">;</span> <span class="token comment">// exposing the class Instance method</span>
+ <span class="token keyword">@end</span>
+
+ <span class="token keyword">@implementation</span> Sample
+     <span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>hello<span class="token punctuation">{</span>
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;hello&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+ <span class="token keyword">@end</span>
+
+</code></pre></div><p>Calling an instance method on the current instance:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token punctuation">[</span><span class="token keyword">self</span> hello<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">@implementation</span> Sample
+
+     <span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>otherMethod<span class="token punctuation">{</span>
+       <span class="token punctuation">[</span><span class="token keyword">self</span> hello<span class="token punctuation">]</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+
+     <span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>hello<span class="token punctuation">{</span>
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;hello&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+ <span class="token keyword">@end</span>
+
+</code></pre></div><p>Calling a method that takes arguments:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token punctuation">[</span>classInstance addInt<span class="token punctuation">:</span><span class="token number">1</span> toInt<span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">@implementation</span> Sample
+     <span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>add<span class="token punctuation">:</span><span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>add to<span class="token punctuation">:</span><span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>to
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;sum = %d&quot;</span><span class="token punctuation">,</span><span class="token punctuation">(</span>add<span class="token operator">+</span>to<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+ <span class="token keyword">@end</span>
+
+</code></pre></div><p>Calling a class method:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token punctuation">[</span>Class hello<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+ <span class="token keyword">@interface</span> Sample
+ <span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>hello<span class="token punctuation">;</span> <span class="token comment">// exposing the class method</span>
+ <span class="token keyword">@end</span>
+
+ <span class="token keyword">@implementation</span> Sample
+     <span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>hello<span class="token punctuation">{</span>
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;hello&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+ <span class="token keyword">@end</span>
+
+</code></pre></div><h2 id="instance-methods"><a href="#instance-methods" class="header-anchor">#</a> Instance methods</h2> <p>An instance method is a method that's available on a particular instance of a class, after the instance has been instantiated:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code>MyClass <span class="token operator">*</span>instance <span class="token operator">=</span> <span class="token punctuation">[</span>MyClass new<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>instance someInstanceMethod<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Here's how you define one:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">@interface</span> MyClass <span class="token punctuation">:</span> NSObject
+
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>someInstanceMethod<span class="token punctuation">;</span> <span class="token comment">// &quot;-&quot; denotes an instance method</span>
+
+<span class="token keyword">@end</span>
+
+<span class="token keyword">@implementation</span> MyClass
+
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>someInstanceMethod <span class="token punctuation">{</span>
+    <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;Whose idea was it to have a method called \&quot;someInstanceMethod\&quot;?&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">@end</span>
+
+</code></pre></div><h2 id="pass-by-value-parameter-passing"><a href="#pass-by-value-parameter-passing" class="header-anchor">#</a> Pass by value parameter passing</h2> <p>In pass by value of parameter passing to a method, actual parameter value is copied to formal parameter value. So actual parameter value will not change after returning from called function.</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">@interface</span> SwapClass <span class="token punctuation">:</span> NSObject
+
+<span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> swap<span class="token punctuation">:</span><span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>num1 andNum2<span class="token punctuation">:</span><span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>num2<span class="token punctuation">;</span>
+
+<span class="token keyword">@end</span>
+
+<span class="token keyword">@implementation</span> SwapClass
+
+<span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> num<span class="token punctuation">:</span><span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>num1 andNum2<span class="token punctuation">:</span><span class="token punctuation">(</span>NSInteger<span class="token punctuation">)</span>num2<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> temp<span class="token punctuation">;</span>
+    temp <span class="token operator">=</span> num1<span class="token punctuation">;</span>
+    num1 <span class="token operator">=</span> num2<span class="token punctuation">;</span>
+    num2 <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">@end</span>
+
+</code></pre></div><p>Calling the methods:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code>NSInteger a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> b <span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">;</span>
+SwapClass <span class="token operator">*</span>swap <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>SwapClass alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;Before calling swap: a=%d,b=%d&quot;</span><span class="token punctuation">,</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>swap num<span class="token punctuation">:</span>a andNum2<span class="token punctuation">:</span>b<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;After calling swap: a=%d,b=%d&quot;</span><span class="token punctuation">,</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Output:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token number">2016</span><span class="token operator">-</span><span class="token number">07</span><span class="token operator">-</span><span class="token number">30</span> <span class="token number">23</span><span class="token punctuation">:</span><span class="token number">55</span><span class="token punctuation">:</span><span class="token number">41.870</span> Test<span class="token punctuation">[</span><span class="token number">5214</span><span class="token punctuation">:</span><span class="token number">81162</span><span class="token punctuation">]</span> Before calling swap<span class="token punctuation">:</span> a<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span>b<span class="token operator">=</span><span class="token number">20</span>
+<span class="token number">2016</span><span class="token operator">-</span><span class="token number">07</span><span class="token operator">-</span><span class="token number">30</span> <span class="token number">23</span><span class="token punctuation">:</span><span class="token number">55</span><span class="token punctuation">:</span><span class="token number">41.871</span> Test<span class="token punctuation">[</span><span class="token number">5214</span><span class="token punctuation">:</span><span class="token number">81162</span><span class="token punctuation">]</span> After calling swap<span class="token punctuation">:</span> a<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span>b<span class="token operator">=</span><span class="token number">20</span>
+
+</code></pre></div><h2 id="pass-by-reference-parameter-passing"><a href="#pass-by-reference-parameter-passing" class="header-anchor">#</a> Pass by reference parameter passing</h2> <p>In pass by reference of parameter passing to a method, address of actual parameter is passed to formal parameter. So actual parameter value will be changed after returning from called function.</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">@interface</span> SwapClass <span class="token punctuation">:</span> NSObject
+
+<span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> swap<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>num1 andNum2<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>num2<span class="token punctuation">;</span>
+
+<span class="token keyword">@end</span>
+
+<span class="token keyword">@implementation</span> SwapClass
+
+<span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> num<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span>num1 andNum2<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token operator">*</span><span class="token punctuation">)</span>num2<span class="token punctuation">{</span>
+    <span class="token keyword">int</span> temp<span class="token punctuation">;</span>
+    temp <span class="token operator">=</span> <span class="token operator">*</span>num1<span class="token punctuation">;</span>
+    <span class="token operator">*</span>num1 <span class="token operator">=</span> <span class="token operator">*</span>num2<span class="token punctuation">;</span>
+    <span class="token operator">*</span>num2 <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">@end</span>
+
+</code></pre></div><p>Calling the methods:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> b <span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">;</span>
+SwapClass <span class="token operator">*</span>swap <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>SwapClass alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;Before calling swap: a=%d,b=%d&quot;</span><span class="token punctuation">,</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span>swap num<span class="token punctuation">:</span><span class="token operator">&amp;</span>a andNum2<span class="token punctuation">:</span><span class="token operator">&amp;</span>b<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;After calling swap: a=%d,b=%d&quot;</span><span class="token punctuation">,</span>a<span class="token punctuation">,</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>Output:</p> <div class="language-objectivec extra-class"><pre class="language-objectivec"><code><span class="token number">2016</span><span class="token operator">-</span><span class="token number">07</span><span class="token operator">-</span><span class="token number">31</span> <span class="token number">00</span><span class="token punctuation">:</span><span class="token number">01</span><span class="token punctuation">:</span><span class="token number">47.067</span> Test<span class="token punctuation">[</span><span class="token number">5260</span><span class="token punctuation">:</span><span class="token number">83491</span><span class="token punctuation">]</span> Before calling swap<span class="token punctuation">:</span> a<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">,</span>b<span class="token operator">=</span><span class="token number">20</span>
+<span class="token number">2016</span><span class="token operator">-</span><span class="token number">07</span><span class="token operator">-</span><span class="token number">31</span> <span class="token number">00</span><span class="token punctuation">:</span><span class="token number">01</span><span class="token punctuation">:</span><span class="token number">47.070</span> Test<span class="token punctuation">[</span><span class="token number">5260</span><span class="token punctuation">:</span><span class="token number">83491</span><span class="token punctuation">]</span> After calling swap<span class="token punctuation">:</span> a<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">,</span>b<span class="token operator">=</span><span class="token number">10</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <li>
+`-` or `+`: The type of method. Instance or class?
+</li> <li>
+(): Where the return type goes. Use void if you don't want to return anything!
+</li> <li>
+Next is the name of the method. Use camelCase and make the name easy to remember an understand.
+</li> <li>
+If your method needs parameters, now is the time! The first parameter come right after the name of the function like this `:(type)parameterName`. All the other parameters are done this way `parameterLabel:(type)parameterName`
+</li> <li>
+What does your method do? Put it all here, in the curly braces {}!
+</li></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/objectivec/methods.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/objectivec/inheritance.html" class="prev">
+        Inheritance
+      </a></span> <span class="next"><a href="/objectivec/properties.html">
+        Properties
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2292.894308ce.js" defer></script>
+  </body>
+</html>

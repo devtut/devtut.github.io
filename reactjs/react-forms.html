@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ReactJS - React Forms</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Controlled Components">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="ReactJS - React Forms">
+    <meta property="og:description" content="Controlled Components">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/reactjs/react-forms.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="ReactJS - React Forms">
+    <meta name="twitter:description" content="Controlled Components">
+    <meta name="twitter:url" content="/reactjs/react-forms.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3001.0f794eba.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>ReactJS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/reactjs/" class="sidebar-link">Disclaimer</a></li><li><a href="/reactjs/getting-started-with-react.html" class="sidebar-link">Getting started with React</a></li><li><a href="/reactjs/components.html" class="sidebar-link">Components</a></li><li><a href="/reactjs/using-reactjs-with-typescript.html" class="sidebar-link">Using ReactJS with Typescript</a></li><li><a href="/reactjs/state-in-react.html" class="sidebar-link">State in React</a></li><li><a href="/reactjs/props-in-react.html" class="sidebar-link">Props in React</a></li><li><a href="/reactjs/react-component-lifecycle.html" class="sidebar-link">React Component Lifecycle</a></li><li><a href="/reactjs/forms-and-user-input.html" class="sidebar-link">Forms and User Input</a></li><li><a href="/reactjs/react-boilerplate-react-babel-webpack.html" class="sidebar-link">React Boilerplate [React + Babel + Webpack]</a></li><li><a href="/reactjs/using-reactjs-with-jquery.html" class="sidebar-link">Using ReactJS with jQuery</a></li><li><a href="/reactjs/react-routing.html" class="sidebar-link">React Routing</a></li><li><a href="/reactjs/communicate-between-components.html" class="sidebar-link">Communicate Between Components</a></li><li><a href="/reactjs/how-to-setup-a-basic-webpack-react-and-babel-environment.html" class="sidebar-link">How to setup a basic webpack, react and babel environment</a></li><li><a href="/reactjs/react-createclass-vs-extends-react-component.html" class="sidebar-link">React.createClass vs extends React.Component</a></li><li><a href="/reactjs/react-ajax-call.html" class="sidebar-link">React AJAX call</a></li><li><a href="/reactjs/communication-between-components.html" class="sidebar-link">Communication Between Components</a></li><li><a href="/reactjs/stateless-functional-components.html" class="sidebar-link">Stateless Functional Components</a></li><li><a href="/reactjs/performance.html" class="sidebar-link">Performance</a></li><li><a href="/reactjs/introduction-to-server-side-rendering.html" class="sidebar-link">Introduction to Server-Side Rendering</a></li><li><a href="/reactjs/setting-up-react-environment.html" class="sidebar-link">Setting Up React Environment</a></li><li><a href="/reactjs/using-react-with-flow.html" class="sidebar-link">Using React with Flow</a></li><li><a href="/reactjs/jsx.html" class="sidebar-link">JSX</a></li><li><a href="/reactjs/react-forms.html" class="active sidebar-link">React Forms</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/reactjs/react-forms.html#controlled-components" class="sidebar-link">Controlled Components</a></li></ul></li><li><a href="/reactjs/user-interface-solutions.html" class="sidebar-link">User interface solutions</a></li><li><a href="/reactjs/using-reactjs-in-flux-way.html" class="sidebar-link">Using ReactJS in Flux way</a></li><li><a href="/reactjs/react-webpack-typescript-installation.html" class="sidebar-link">React, Webpack &amp; Typescript installation</a></li><li><a href="/reactjs/how-and-why-to-use-keys-in-react.html" class="sidebar-link">How and why to use keys in React</a></li><li><a href="/reactjs/keys-in-react.html" class="sidebar-link">Keys in react</a></li><li><a href="/reactjs/higher-order-components.html" class="sidebar-link">Higher Order Components</a></li><li><a href="/reactjs/react-with-redux.html" class="sidebar-link">React with Redux</a></li><li><a href="/reactjs/installation.html" class="sidebar-link">Installation</a></li><li><a href="/reactjs/react-tools.html" class="sidebar-link">React Tools</a></li><li><a href="/reactjs/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="react-forms"><a href="#react-forms" class="header-anchor">#</a> React Forms</h1> <h2 id="controlled-components"><a href="#controlled-components" class="header-anchor">#</a> Controlled Components</h2> <p>A controlled component is bound to a value and its changes get handled in code using event based callbacks.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">class</span> <span class="token class-name">CustomForm</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+<span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+        person<span class="token operator">:</span> <span class="token punctuation">{</span>
+            firstName<span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+            lastName<span class="token operator">:</span> <span class="token string">''</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">handleChange</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> person <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>person<span class="token punctuation">;</span>
+    person<span class="token punctuation">[</span>event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>person<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+        <span class="token operator">&lt;</span>form<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span>input 
+            type<span class="token operator">=</span><span class="token string">&quot;text&quot;</span>
+            name<span class="token operator">=</span><span class="token string">&quot;firstName&quot;</span>
+            value<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>firstName<span class="token punctuation">}</span>
+            onChange<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handleChange</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+
+            <span class="token operator">&lt;</span>input 
+            type<span class="token operator">=</span><span class="token string">&quot;text&quot;</span>
+            name<span class="token operator">=</span><span class="token string">&quot;lastName&quot;</span>
+            value<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>lastName<span class="token punctuation">}</span>
+            onChange<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handleChange</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>form<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>}</p> <p>In this example we initialize state with an empty person object. We then bind the values of the 2 inputs to the individual keys of the person object. Then as the user types, we capture each value in the <code>handleChange</code> function. Since the values of the components are bound to state we can rerender as the user types by calling <code>setState()</code>.</p> <p><strong>NOTE:</strong>  Not calling <code>setState()</code> when dealing with controlled components, will
+cause the user to type, but not see the input because React only renders changes when it is told to do so.</p> <p>It's also important to note that the names of the inputs are same as the names of the keys in the person object. This allows us to capture the value in dictionary form as seen here.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">handleChange</span><span class="token punctuation">(</span><span class="token parameter">event</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> person <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>person<span class="token punctuation">;</span>
+    person<span class="token punctuation">[</span>event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>name<span class="token punctuation">]</span> <span class="token operator">=</span> event<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>person<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><code>person[event.target.name]</code> is the same is a <code>person.firstName || person.lastName</code>. Of course this would depend on which input is currently being typed in.
+Since we don't know where the user will be typing, using a dictionary and matching the input names to the names of the keys, allows us to capture the user input no matter where the onChange is being called from.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/reactjs/react-forms.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/reactjs/jsx.html" class="prev">
+        JSX
+      </a></span> <span class="next"><a href="/reactjs/user-interface-solutions.html">
+        User interface solutions
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3001.0f794eba.js" defer></script>
+  </body>
+</html>

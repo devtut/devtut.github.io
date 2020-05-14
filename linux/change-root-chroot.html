@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux - Change root (chroot)</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Manually changing root in a directory, Requirements, Reasons to use chroot">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Linux - Change root (chroot)">
+    <meta property="og:description" content="Manually changing root in a directory, Requirements, Reasons to use chroot">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/linux/change-root-chroot.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Linux - Change root (chroot)">
+    <meta name="twitter:description" content="Manually changing root in a directory, Requirements, Reasons to use chroot">
+    <meta name="twitter:url" content="/linux/change-root-chroot.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1884.ea57d7c5.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/linux/" class="sidebar-link">Disclaimer</a></li><li><a href="/linux/getting-started-with-gnu-linux.html" class="sidebar-link">Getting started with GNU/Linux</a></li><li><a href="/linux/detecting-linux-distribution-name-and-version.html" class="sidebar-link">Detecting Linux distribution name and version</a></li><li><a href="/linux/getting-information-on-a-running-linux-kernel.html" class="sidebar-link">Getting information on a running Linux kernel</a></li><li><a href="/linux/shell.html" class="sidebar-link">Shell</a></li><li><a href="/linux/check-disk-space.html" class="sidebar-link">Check Disk Space</a></li><li><a href="/linux/getting-system-information.html" class="sidebar-link">Getting System Information</a></li><li><a href="/linux/ls-command.html" class="sidebar-link">ls command</a></li><li><a href="/linux/file-compression-with-tar-command.html" class="sidebar-link">File Compression with 'tar' command</a></li><li><a href="/linux/services.html" class="sidebar-link">Services</a></li><li><a href="/linux/managing-services.html" class="sidebar-link">Managing Services</a></li><li><a href="/linux/modifying-users.html" class="sidebar-link">Modifying Users</a></li><li><a href="/linux/lamp-stack.html" class="sidebar-link">LAMP Stack</a></li><li><a href="/linux/tee-command.html" class="sidebar-link">tee command</a></li><li><a href="/linux/secure-shell-ssh.html" class="sidebar-link">Secure Shell (SSH)</a></li><li><a href="/linux/scp.html" class="sidebar-link">SCP</a></li><li><a href="/linux/gnupg-gpg.html" class="sidebar-link">GnuPG (GPG)</a></li><li><a href="/linux/network-configuration.html" class="sidebar-link">Network Configuration</a></li><li><a href="/linux/midnight-commander.html" class="sidebar-link">Midnight Commander</a></li><li><a href="/linux/change-root-chroot.html" class="active sidebar-link">Change root (chroot)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/linux/change-root-chroot.html#manually-changing-root-in-a-directory" class="sidebar-link">Manually changing root in a directory</a></li><li class="sidebar-sub-header"><a href="/linux/change-root-chroot.html#requirements" class="sidebar-link">Requirements</a></li><li class="sidebar-sub-header"><a href="/linux/change-root-chroot.html#reasons-to-use-chroot" class="sidebar-link">Reasons to use chroot</a></li></ul></li><li><a href="/linux/package-managers.html" class="sidebar-link">Package Managers</a></li><li><a href="/linux/compiling-the-linux-kernel.html" class="sidebar-link">Compiling the Linux kernel</a></li><li><a href="/linux/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="change-root-chroot"><a href="#change-root-chroot" class="header-anchor">#</a> Change root (chroot)</h1> <p>Change root (chroot) is an operation that changes the apparent root directory for the current running process and their children. A program that is run in such a modified environment cannot access files and commands outside that environmental directory tree.</p> <h2 id="manually-changing-root-in-a-directory"><a href="#manually-changing-root-in-a-directory" class="header-anchor">#</a> Manually changing root in a directory</h2> <li>
+Ensure you met all requirements, as per Requirements
+</li> <li>
+Mount the temporary API filesystems:
+<div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /location/of/new/root
+<span class="token function">mount</span> -t proc proc proc/
+<span class="token function">mount</span> --rbind /sys sys/
+<span class="token function">mount</span> --rbind /dev dev/
+<span class="token function">mount</span> --rbind /run run/ <span class="token punctuation">(</span>optionally<span class="token punctuation">)</span>
+
+</code></pre></div></li> <li>
+If you need to use an internet connection in the chroot environment, copy over the DNS details:
+<div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">cp</span> /etc/resolv.conf etc/resolv.conf
+
+</code></pre></div></li> <li>
+Change root into /location/of/new/root, specifying the shell (`/bin/bash` in this example):
+<div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">chroot</span> /location/of/new/root /bin/bash
+
+</code></pre></div></li> <li>
+After chrooting it may be necessary to load the local bash configuration:
+<div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">source</span> /etc/profile
+<span class="token builtin class-name">source</span> ~/.bashrc
+
+</code></pre></div></li> <li>
+Optionally, create a unique prompt to be able to differentiate your chroot environment:
+<div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">&quot;(chroot) <span class="token environment constant">$PS1</span>&quot;</span>
+
+</code></pre></div></li> <li>
+When finished with the chroot, you can exit it via:
+<div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">exit</span>
+
+</code></pre></div></li> <li>
+Unmount the temporary file systems:
+<div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> /
+<span class="token function">umount</span> --recursive /location/of/new/root
+
+</code></pre></div></li> <h2 id="requirements"><a href="#requirements" class="header-anchor">#</a> Requirements</h2> <ul><li>root privileges</li> <li>another working Linux environment,such as Live CD boot or an existing distribution</li> <li>matching environment architectures of <code>chroot</code> source and destination (check current environment architecture with <code>uname -m</code>)</li> <li>kernel modules which you may need in <code>chroot</code> environment must be loaded (for example, with <code>modprobe</code>)</li></ul> <h2 id="reasons-to-use-chroot"><a href="#reasons-to-use-chroot" class="header-anchor">#</a> Reasons to use chroot</h2> <p>Changing root is commonly done for performing system maintenance on systems where booting and/or logging in is no longer possible.</p> <p>Common examples are:</p> <ul><li>reinstalling the bootloader</li> <li>rebuilding the initramfs image</li> <li>upgrading or downgrading packages</li> <li>resetting a forgotten password</li> <li>building software in a clean root environment</li></ul> <h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>chroot [destination path] [shell or command]</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/linux/change-root-chroot.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/linux/midnight-commander.html" class="prev">
+        Midnight Commander
+      </a></span> <span class="next"><a href="/linux/package-managers.html">
+        Package Managers
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1884.ea57d7c5.js" defer></script>
+  </body>
+</html>

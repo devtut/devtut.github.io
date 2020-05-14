@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring Boot - Connecting a spring-boot application to MySQL</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Spring-boot sample using MySQL">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Spring Boot - Connecting a spring-boot application to MySQL">
+    <meta property="og:description" content="Spring-boot sample using MySQL">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/spring/connecting-a-spring-boot-application-to-mysql.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Spring Boot - Connecting a spring-boot application to MySQL">
+    <meta name="twitter:description" content="Spring-boot sample using MySQL">
+    <meta name="twitter:url" content="/spring/connecting-a-spring-boot-application-to-mysql.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/3198.1417f422.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Spring Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/spring/" class="sidebar-link">Disclaimer</a></li><li><a href="/spring/getting-started-with-spring.html" class="sidebar-link">Getting started with spring</a></li><li><a href="/spring/spring-core.html" class="sidebar-link">Spring Core</a></li><li><a href="/spring/spring-expression-language-spel.html" class="sidebar-link">Spring Expression Language (SpEL)</a></li><li><a href="/spring/obtaining-a-sqlrowset-from-simplejdbccall.html" class="sidebar-link">Obtaining a SqlRowSet from SimpleJdbcCall</a></li><li><a href="/spring/creating-and-using-beans.html" class="sidebar-link">Creating and using beans</a></li><li><a href="/spring/bean-scopes.html" class="sidebar-link">Bean scopes</a></li><li><a href="/spring/conditional-bean-registration-in-spring.html" class="sidebar-link">Conditional bean registration in Spring</a></li><li><a href="/spring/spring-jsr-303-bean-validation.html" class="sidebar-link">Spring JSR 303 Bean Validation</a></li><li><a href="/spring/applicationcontext-configuration.html" class="sidebar-link">ApplicationContext Configuration</a></li><li><a href="/spring/resttemplate.html" class="sidebar-link">RestTemplate</a></li><li><a href="/spring/task-execution-and-scheduling.html" class="sidebar-link">Task Execution and Scheduling</a></li><li><a href="/spring/spring-lazy-initialization.html" class="sidebar-link">Spring Lazy Initialization</a></li><li><a href="/spring/property-source.html" class="sidebar-link">Property Source</a></li><li><a href="/spring/dependency-injection-di-and-inversion-of-control-ioc.html" class="sidebar-link">Dependency Injection (DI) and Inversion of Control (IoC)</a></li><li><a href="/spring/jdbctemplate.html" class="sidebar-link">JdbcTemplate</a></li><li><a href="/spring/soap-ws-consumption.html" class="sidebar-link">SOAP WS Consumption</a></li><li><a href="/spring/spring-profile.html" class="sidebar-link">Spring profile</a></li><li><a href="/spring/understanding-the-dispatcher-servlet-xml.html" class="sidebar-link">Understanding the dispatcher-servlet.xml</a></li><li><a href="/spring/getting-started-with-spring-mvc.html" class="sidebar-link">Getting started with spring-mvc</a></li><li><a href="/spring/spring-mvc-with-annotations.html" class="sidebar-link">Spring-MVC with annotations</a></li><li><a href="/spring/spring-mvc-validation.html" class="sidebar-link">Spring MVC Validation</a></li><li><a href="/spring/file-upload.html" class="sidebar-link">File Upload</a></li><li><a href="/spring/exception-handling.html" class="sidebar-link">Exception Handling</a></li><li><a href="/spring/global-exception-handling.html" class="sidebar-link">Global Exception Handling</a></li><li><a href="/spring/getting-started-with-spring-boot.html" class="sidebar-link">Getting started with spring-boot</a></li><li><a href="/spring/installing-the-spring-boot-cli.html" class="sidebar-link">Installing the Spring Boot CLI</a></li><li><a href="/spring/controllers.html" class="sidebar-link">Controllers</a></li><li><a href="/spring/package-scanning.html" class="sidebar-link">Package scanning</a></li><li><a href="/spring/rest-services.html" class="sidebar-link">REST Services</a></li><li><a href="/spring/create-and-use-of-multiple-application-properties-files.html" class="sidebar-link">Create and Use of multiple application.properties files</a></li><li><a href="/spring/threadpooltaskexecutor-configuration-and-usage.html" class="sidebar-link">ThreadPoolTaskExecutor: configuration and usage</a></li><li><a href="/spring/fully-responsive-spring-boot-web-application-with-jhipster.html" class="sidebar-link">Fully-Responsive Spring Boot Web Application with JHipster</a></li><li><a href="/spring/connecting-a-spring-boot-application-to-mysql.html" class="active sidebar-link">Connecting a spring-boot application to MySQL</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/spring/connecting-a-spring-boot-application-to-mysql.html#spring-boot-sample-using-mysql" class="sidebar-link">Spring-boot sample using MySQL</a></li></ul></li><li><a href="/spring/caching-with-redis-using-spring-boot-for-mongodb.html" class="sidebar-link">Caching with Redis Using Spring Boot for MongoDB</a></li><li><a href="/spring/deploying-sample-application-using-spring-boot-on-amazon-elastic-beanstalk.html" class="sidebar-link">Deploying Sample application using Spring-boot on Amazon Elastic Beanstalk</a></li><li><a href="/spring/testing-in-spring-boot.html" class="sidebar-link">Testing in Spring Boot</a></li><li><a href="/spring/spring-boot-hibernate-web-ui-thymeleaf.html" class="sidebar-link">Spring boot + Hibernate + Web UI (Thymeleaf)</a></li><li><a href="/spring/spring-boot-hibernate-rest-integration.html" class="sidebar-link">Spring Boot- Hibernate-REST Integration</a></li><li><a href="/spring/spring-boot-microservice-with-jpa.html" class="sidebar-link">Spring-Boot Microservice with JPA</a></li><li><a href="/spring/spring-boot-jpa-rest.html" class="sidebar-link">Spring Boot + JPA + REST</a></li><li><a href="/spring/spring-boot-jdbc.html" class="sidebar-link">Spring-Boot + JDBC</a></li><li><a href="/spring/spring-boot-jpa-mongodb.html" class="sidebar-link">Spring boot + JPA + mongoDB</a></li><li><a href="/spring/spring-boot-spring-data-elasticsearch.html" class="sidebar-link">Spring Boot + Spring Data Elasticsearch</a></li><li><a href="/spring/spring-boot-spring-data-jpa.html" class="sidebar-link">Spring boot + Spring Data JPA</a></li><li><a href="/spring/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="connecting-a-spring-boot-application-to-mysql"><a href="#connecting-a-spring-boot-application-to-mysql" class="header-anchor">#</a> Connecting a spring-boot application to MySQL</h1> <p>We know that spring-boot by default runs using H2 database. In this article, we will see how to tweak the default configuration to work with MySQL database.</p> <h2 id="spring-boot-sample-using-mysql"><a href="#spring-boot-sample-using-mysql" class="header-anchor">#</a> Spring-boot sample using MySQL</h2> <p>We will follow the <a href="https://spring.io/guides/gs/accessing-data-jpa/" target="_blank" rel="noopener noreferrer">official guide for spring-boot and spring-data-jpa<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. We will be building the application using gradle.</p> <li>
+**Create the gradle build file**
+build.gradle
+<div class="language-java extra-class"><pre class="language-java"><code>buildscript <span class="token punctuation">{</span>
+    repositories <span class="token punctuation">{</span>
+        <span class="token function">mavenCentral</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+    dependencies <span class="token punctuation">{</span>
+        <span class="token function">classpath</span><span class="token punctuation">(</span><span class="token string">&quot;org.springframework.boot:spring-boot-gradle-plugin:1.4.3.RELEASE&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+apply plugin<span class="token operator">:</span> <span class="token string">'java'</span>
+apply plugin<span class="token operator">:</span> <span class="token string">'eclipse'</span>
+apply plugin<span class="token operator">:</span> <span class="token string">'idea'</span>
+apply plugin<span class="token operator">:</span> <span class="token string">'org.springframework.boot'</span>
+
+jar <span class="token punctuation">{</span>
+    baseName <span class="token operator">=</span> <span class="token string">'gs-accessing-data-jpa'</span>
+    version <span class="token operator">=</span>  <span class="token string">'0.1.0'</span>
+<span class="token punctuation">}</span>
+
+repositories <span class="token punctuation">{</span>
+    <span class="token function">mavenCentral</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    maven <span class="token punctuation">{</span> url <span class="token string">&quot;https://repository.jboss.org/nexus/content/repositories/releases&quot;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+sourceCompatibility <span class="token operator">=</span> <span class="token number">1.8</span>
+targetCompatibility <span class="token operator">=</span> <span class="token number">1.8</span>
+
+dependencies <span class="token punctuation">{</span>
+    <span class="token function">compile</span><span class="token punctuation">(</span><span class="token string">&quot;org.springframework.boot:spring-boot-starter-data-jpa&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">runtime</span><span class="token punctuation">(</span><span class="token string">'mysql:mysql-connector-java'</span><span class="token punctuation">)</span>
+    <span class="token function">testCompile</span><span class="token punctuation">(</span><span class="token string">&quot;junit:junit&quot;</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></li> <li>
+**Create the customer entity**
+src/main/java/hello/Customer.java
+<div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Entity</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Customer</span> <span class="token punctuation">{</span>
+
+    <span class="token annotation punctuation">@Id</span>
+    <span class="token annotation punctuation">@GeneratedValue</span><span class="token punctuation">(</span>strategy<span class="token operator">=</span><span class="token class-name">GenerationType</span><span class="token punctuation">.</span>AUTO<span class="token punctuation">)</span>
+    <span class="token keyword">private</span> <span class="token class-name">Long</span> id<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> firstName<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> lastName<span class="token punctuation">;</span>
+
+    <span class="token keyword">protected</span> <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token class-name">String</span> firstName<span class="token punctuation">,</span> <span class="token class-name">String</span> lastName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>firstName <span class="token operator">=</span> firstName<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>lastName <span class="token operator">=</span> lastName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>
+                <span class="token string">&quot;Customer[id=%d, firstName='%s', lastName='%s']&quot;</span><span class="token punctuation">,</span>
+                id<span class="token punctuation">,</span> firstName<span class="token punctuation">,</span> lastName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></li> <li>
+**Create Repositories**
+src/main/java/hello/CustomerRepository.java
+<div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span><span class="token class-name">List</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>data<span class="token punctuation">.</span>repository</span><span class="token punctuation">.</span><span class="token class-name">CrudRepository</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">CustomerRepository</span> <span class="token keyword">extends</span> <span class="token class-name">CrudRepository</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Customer</span><span class="token punctuation">,</span> <span class="token class-name">Long</span><span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Customer</span><span class="token punctuation">&gt;</span></span> <span class="token function">findByLastName</span><span class="token punctuation">(</span><span class="token class-name">String</span> lastName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div></li> <li>
+**Create application.properties file**
+<div class="language-java extra-class"><pre class="language-java"><code>################### <span class="token class-name">DataSource</span> <span class="token class-name">Configuration</span> ##########################
+jdbc<span class="token punctuation">.</span>driverClassName<span class="token operator">=</span>com<span class="token punctuation">.</span>mysql<span class="token punctuation">.</span>jdbc<span class="token punctuation">.</span><span class="token class-name">Driver</span>
+jdbc<span class="token punctuation">.</span>url<span class="token operator">=</span>jdbc<span class="token operator">:</span>mysql<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>localhost<span class="token operator">:</span><span class="token number">3306</span><span class="token operator">/</span>your_database_name
+jdbc<span class="token punctuation">.</span>username<span class="token operator">=</span>username
+jdbc<span class="token punctuation">.</span>password<span class="token operator">=</span>password
+
+init<span class="token operator">-</span>db<span class="token operator">=</span><span class="token boolean">false</span>
+
+################### <span class="token class-name">Hibernate</span> <span class="token class-name">Configuration</span> ##########################
+
+hibernate<span class="token punctuation">.</span>dialect<span class="token operator">=</span>org<span class="token punctuation">.</span>hibernate<span class="token punctuation">.</span>dialect<span class="token punctuation">.</span><span class="token class-name">MySQLDialect</span>
+hibernate<span class="token punctuation">.</span>show_sql<span class="token operator">=</span><span class="token boolean">true</span>
+hibernate<span class="token punctuation">.</span>hbm2ddl<span class="token punctuation">.</span>auto<span class="token operator">=</span>update
+
+</code></pre></div></li> <li>
+**Create the PersistenceConfig.java file**
+</li> <blockquote></blockquote> <p>In step 5, we will be defining how the datasource will be loaded and
+how our application connects to MySQL. The above snippet is the bare
+minimum configuration we need to connect to MySQL. Here we provide two
+beans:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@Configuration</span>
+<span class="token annotation punctuation">@EnableTransactionManagement</span>
+<span class="token annotation punctuation">@EnableJpaRepositories</span><span class="token punctuation">(</span>basePackages<span class="token operator">=</span><span class="token string">&quot;hello&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PersistenceConfig</span> 
+<span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">Environment</span> env<span class="token punctuation">;</span>
+ 
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">LocalContainerEntityManagerFactoryBean</span> <span class="token function">entityManagerFactory</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name">LocalContainerEntityManagerFactoryBean</span> factory <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LocalContainerEntityManagerFactoryBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+        <span class="token class-name">HibernateJpaVendorAdapter</span> vendorAdapter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HibernateJpaVendorAdapter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vendorAdapter<span class="token punctuation">.</span><span class="token function">setGenerateDdl</span><span class="token punctuation">(</span><span class="token class-name">Boolean</span><span class="token punctuation">.</span>TRUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vendorAdapter<span class="token punctuation">.</span><span class="token function">setShowSql</span><span class="token punctuation">(</span><span class="token class-name">Boolean</span><span class="token punctuation">.</span>TRUE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+        factory<span class="token punctuation">.</span><span class="token function">setDataSource</span><span class="token punctuation">(</span><span class="token function">dataSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        factory<span class="token punctuation">.</span><span class="token function">setJpaVendorAdapter</span><span class="token punctuation">(</span>vendorAdapter<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        factory<span class="token punctuation">.</span><span class="token function">setPackagesToScan</span><span class="token punctuation">(</span><span class="token string">&quot;hello&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+        <span class="token class-name">Properties</span> jpaProperties <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Properties</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        jpaProperties<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;hibernate.hbm2ddl.auto&quot;</span><span class="token punctuation">,</span> env<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">&quot;hibernate.hbm2ddl.auto&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        factory<span class="token punctuation">.</span><span class="token function">setJpaProperties</span><span class="token punctuation">(</span>jpaProperties<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+        factory<span class="token punctuation">.</span><span class="token function">afterPropertiesSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        factory<span class="token punctuation">.</span><span class="token function">setLoadTimeWeaver</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">InstrumentationLoadTimeWeaver</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> factory<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+     
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> <span class="token class-name">DataSource</span> <span class="token function">dataSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name">DriverManagerDataSource</span> dataSource <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DriverManagerDataSource</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dataSource<span class="token punctuation">.</span><span class="token function">setDriverClassName</span><span class="token punctuation">(</span>env<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">&quot;jdbc.driverClassName&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dataSource<span class="token punctuation">.</span><span class="token function">setUrl</span><span class="token punctuation">(</span>env<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">&quot;jdbc.url&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dataSource<span class="token punctuation">.</span><span class="token function">setUsername</span><span class="token punctuation">(</span>env<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">&quot;jdbc.username&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        dataSource<span class="token punctuation">.</span><span class="token function">setPassword</span><span class="token punctuation">(</span>env<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span><span class="token string">&quot;jdbc.password&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> dataSource<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+      
+<span class="token punctuation">}</span>
+
+</code></pre></div><li>****LocalContainerEntityManagerFactoryBean****
+This gives us an handle over the EntityManagerFactory configurations and allows us to do customizations. It also allows us to inject the PersistenceContext in our components as below:</li> <div class="language-java extra-class"><pre class="language-java"><code><span class="token annotation punctuation">@PersistenceContext</span>
+<span class="token keyword">private</span> <span class="token class-name">EntityManager</span> em<span class="token punctuation">;</span>
+
+</code></pre></div><li>****DataSource****
+Here we return an instance of the `DriverManagerDataSource`. It is a simple implementation of the standard JDBC DataSource interface, configuring a plain old JDBC Driver via bean properties, and returning a new Connection for every getConnection call. Note that I recommend to use this strictly for testing purposes as there are better alternatives like `BasicDataSource` available. Refer [here](https://mytechrepo.wordpress.com/2015/02/17/drivermanagerdatasource-vs-basicdatasource/) for more details</li> <li>
+**Create an Application class**
+src/main/java/hello/Application.java
+<div class="language-java extra-class"><pre class="language-java"><code> <span class="token annotation punctuation">@SpringBootApplication</span>
+ <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Application</span> <span class="token punctuation">{</span>
+
+     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">Logger</span> log <span class="token operator">=</span> <span class="token class-name">LoggerFactory</span><span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token class-name">Application</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+     <span class="token annotation punctuation">@Autowired</span>
+     <span class="token keyword">private</span> <span class="token class-name">CustomerRepository</span> repository<span class="token punctuation">;</span>
+ 
+     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token class-name">SpringApplication</span><span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token class-name">TestCoreApplication</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+ 
+     <span class="token annotation punctuation">@Bean</span>
+     <span class="token keyword">public</span> <span class="token class-name">CommandLineRunner</span> <span class="token function">demo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token keyword">return</span> <span class="token punctuation">(</span>args<span class="token punctuation">)</span> <span class="token operator">-&gt;</span> <span class="token punctuation">{</span>
+             <span class="token comment">// save a couple of customers</span>
+             repository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token string">&quot;Jack&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Bauer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             repository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token string">&quot;Chloe&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;O'Brian&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             repository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token string">&quot;Kim&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Bauer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             repository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token string">&quot;David&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Palmer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             repository<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Customer</span><span class="token punctuation">(</span><span class="token string">&quot;Michelle&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Dessler&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+             <span class="token comment">// fetch all customers</span>
+             log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;Customers found with findAll():&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;-------------------------------&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Customer</span> customer <span class="token operator">:</span> repository<span class="token punctuation">.</span><span class="token function">findAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                 log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span>customer<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token punctuation">}</span>
+             log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+             <span class="token comment">// fetch an individual customer by ID</span>
+             <span class="token class-name">Customer</span> customer <span class="token operator">=</span> repository<span class="token punctuation">.</span><span class="token function">findOne</span><span class="token punctuation">(</span><span class="token number">1L</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;Customer found with findOne(1L):&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;--------------------------------&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span>customer<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+             <span class="token comment">// fetch customers by last name</span>
+             log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;Customer found with findByLastName('Bauer'):&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;--------------------------------------------&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+             <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Customer</span> bauer <span class="token operator">:</span> repository<span class="token punctuation">.</span><span class="token function">findByLastName</span><span class="token punctuation">(</span><span class="token string">&quot;Bauer&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                 log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span>bauer<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token punctuation">}</span>
+         log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+
+</code></pre></div><p>}
+</p></li> <li><strong>Running the application</strong></li><p></p> <p><strong>If you are using an IDE like STS</strong>, you can simply right click your project -&gt; Run As -&gt; Gradle (STS) Build...
+In the tasks list, type bootRun and Run.</p> <p><strong>If you are using gradle on command line</strong>, you can simply run the application as follows:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token punctuation">.</span>/gradlew bootRun
+
+</code></pre></div><p>You should see something like this:</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token operator">==</span> <span class="token class-name">Customers</span> found <span class="token keyword">with</span> <span class="token function">findAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+<span class="token class-name">Customer</span><span class="token punctuation">[</span>id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> firstName<span class="token operator">=</span><span class="token string">'Jack'</span><span class="token punctuation">,</span> lastName<span class="token operator">=</span><span class="token string">'Bauer'</span><span class="token punctuation">]</span>
+<span class="token class-name">Customer</span><span class="token punctuation">[</span>id<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> firstName<span class="token operator">=</span><span class="token string">'Chloe'</span><span class="token punctuation">,</span> lastName<span class="token operator">=</span><span class="token string">'O'</span><span class="token class-name">Brian</span>'<span class="token punctuation">]</span>
+<span class="token class-name">Customer</span><span class="token punctuation">[</span>id<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> firstName<span class="token operator">=</span><span class="token string">'Kim'</span><span class="token punctuation">,</span> lastName<span class="token operator">=</span><span class="token string">'Bauer'</span><span class="token punctuation">]</span>
+<span class="token class-name">Customer</span><span class="token punctuation">[</span>id<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">,</span> firstName<span class="token operator">=</span><span class="token string">'David'</span><span class="token punctuation">,</span> lastName<span class="token operator">=</span><span class="token string">'Palmer'</span><span class="token punctuation">]</span>
+<span class="token class-name">Customer</span><span class="token punctuation">[</span>id<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">,</span> firstName<span class="token operator">=</span><span class="token string">'Michelle'</span><span class="token punctuation">,</span> lastName<span class="token operator">=</span><span class="token string">'Dessler'</span><span class="token punctuation">]</span>
+
+<span class="token operator">==</span> <span class="token class-name">Customer</span> found <span class="token keyword">with</span> <span class="token function">findOne</span><span class="token punctuation">(</span><span class="token number">1L</span><span class="token punctuation">)</span><span class="token operator">:</span>
+<span class="token class-name">Customer</span><span class="token punctuation">[</span>id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> firstName<span class="token operator">=</span><span class="token string">'Jack'</span><span class="token punctuation">,</span> lastName<span class="token operator">=</span><span class="token string">'Bauer'</span><span class="token punctuation">]</span>
+
+<span class="token operator">==</span> <span class="token class-name">Customer</span> found <span class="token keyword">with</span> <span class="token function">findByLastName</span><span class="token punctuation">(</span><span class="token string">'Bauer'</span><span class="token punctuation">)</span><span class="token operator">:</span>
+<span class="token class-name">Customer</span><span class="token punctuation">[</span>id<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> firstName<span class="token operator">=</span><span class="token string">'Jack'</span><span class="token punctuation">,</span> lastName<span class="token operator">=</span><span class="token string">'Bauer'</span><span class="token punctuation">]</span>
+<span class="token class-name">Customer</span><span class="token punctuation">[</span>id<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> firstName<span class="token operator">=</span><span class="token string">'Kim'</span><span class="token punctuation">,</span> lastName<span class="token operator">=</span><span class="token string">'Bauer'</span><span class="token punctuation">]</span>
+
+</code></pre></div><h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>As a pre-requisite, make sure that MySQL is already running on port 3306 and has your database created.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/spring/connecting-a-spring-boot-application-to-mysql.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/spring/fully-responsive-spring-boot-web-application-with-jhipster.html" class="prev">
+        Fully-Responsive Spring Boot Web Application with JHipster
+      </a></span> <span class="next"><a href="/spring/caching-with-redis-using-spring-boot-for-mongodb.html">
+        Caching with Redis Using Spring Boot for MongoDB
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/3198.1417f422.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux - Check Disk Space</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Checking Disk Space, Investigate Directories For Disk Usage">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Linux - Check Disk Space">
+    <meta property="og:description" content="Checking Disk Space, Investigate Directories For Disk Usage">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/linux/check-disk-space.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Linux - Check Disk Space">
+    <meta name="twitter:description" content="Checking Disk Space, Investigate Directories For Disk Usage">
+    <meta name="twitter:url" content="/linux/check-disk-space.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1885.56f283bd.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Linux</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/linux/" class="sidebar-link">Disclaimer</a></li><li><a href="/linux/getting-started-with-gnu-linux.html" class="sidebar-link">Getting started with GNU/Linux</a></li><li><a href="/linux/detecting-linux-distribution-name-and-version.html" class="sidebar-link">Detecting Linux distribution name and version</a></li><li><a href="/linux/getting-information-on-a-running-linux-kernel.html" class="sidebar-link">Getting information on a running Linux kernel</a></li><li><a href="/linux/shell.html" class="sidebar-link">Shell</a></li><li><a href="/linux/check-disk-space.html" class="active sidebar-link">Check Disk Space</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/linux/check-disk-space.html#checking-disk-space" class="sidebar-link">Checking Disk Space</a></li><li class="sidebar-sub-header"><a href="/linux/check-disk-space.html#investigate-directories-for-disk-usage" class="sidebar-link">Investigate Directories For Disk Usage</a></li></ul></li><li><a href="/linux/getting-system-information.html" class="sidebar-link">Getting System Information</a></li><li><a href="/linux/ls-command.html" class="sidebar-link">ls command</a></li><li><a href="/linux/file-compression-with-tar-command.html" class="sidebar-link">File Compression with 'tar' command</a></li><li><a href="/linux/services.html" class="sidebar-link">Services</a></li><li><a href="/linux/managing-services.html" class="sidebar-link">Managing Services</a></li><li><a href="/linux/modifying-users.html" class="sidebar-link">Modifying Users</a></li><li><a href="/linux/lamp-stack.html" class="sidebar-link">LAMP Stack</a></li><li><a href="/linux/tee-command.html" class="sidebar-link">tee command</a></li><li><a href="/linux/secure-shell-ssh.html" class="sidebar-link">Secure Shell (SSH)</a></li><li><a href="/linux/scp.html" class="sidebar-link">SCP</a></li><li><a href="/linux/gnupg-gpg.html" class="sidebar-link">GnuPG (GPG)</a></li><li><a href="/linux/network-configuration.html" class="sidebar-link">Network Configuration</a></li><li><a href="/linux/midnight-commander.html" class="sidebar-link">Midnight Commander</a></li><li><a href="/linux/change-root-chroot.html" class="sidebar-link">Change root (chroot)</a></li><li><a href="/linux/package-managers.html" class="sidebar-link">Package Managers</a></li><li><a href="/linux/compiling-the-linux-kernel.html" class="sidebar-link">Compiling the Linux kernel</a></li><li><a href="/linux/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="check-disk-space"><a href="#check-disk-space" class="header-anchor">#</a> Check Disk Space</h1> <h2 id="checking-disk-space"><a href="#checking-disk-space" class="header-anchor">#</a> Checking Disk Space</h2> <p>It's quite common to want to check the status of the various partitions/drives on your server/computer to see how full they are. The following command is the one you'll want to run:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">df</span> -h
+
+</code></pre></div><p>This will produce output similar to the following:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token punctuation">[</span>root@mail ~<span class="token punctuation">]</span><span class="token comment"># df -h</span>
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup-lv_root
+                       19G  <span class="token number">1</span>.6G   16G   <span class="token number">9</span>% /
+tmpfs                 245M     <span class="token number">0</span>  245M   <span class="token number">0</span>% /dev/shm
+/dev/sda1             485M   47M  413M  <span class="token number">11</span>% /boot
+
+</code></pre></div><p>In this basic example, we can see that the <code>/</code> partition only has <code>9%</code> used.</p> <p>For a more complex example that also covers using <code>df</code> to see various mountpoints, see below:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token punctuation">[</span>root@mail ~<span class="token punctuation">]</span><span class="token comment"># df -h</span>
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/VG-root   <span class="token number">1</span>.9T  <span class="token number">1</span>.7T   89G  <span class="token number">95</span>% /
+/dev/mapper/VG-var    431G  145G  264G  <span class="token number">36</span>% /var
+devtmpfs              <span class="token number">7</span>.8G  204K  <span class="token number">7</span>.8G   <span class="token number">1</span>% /dev
+tmpfs                 <span class="token number">7</span>.8G  <span class="token number">4</span>.0K  <span class="token number">7</span>.8G   <span class="token number">1</span>% /dev/shm
+/dev/md1              495M  126M  344M  <span class="token number">27</span>% /boot
+ku.example.com:9421   <span class="token number">2</span>.5T  487G  <span class="token number">2</span>.0T  <span class="token number">20</span>% /mnt/test
+tmpfs                 500M   86M  415M  <span class="token number">18</span>% /var/ngx_pagespeed_cache
+
+</code></pre></div><p>In this example, we have a <code>/</code> partition that's <code>95%</code> full along with an additional <code>/var</code> partition that's only <code>36%</code> full.</p> <p>It's got an external network mount of <code>2T</code> that's mounted on <code>/mnt/test</code> and a ramdisk/tmpfs mount of 500M mounted on <code>/var/ngx_pagespeed_cache</code>.</p> <h2 id="investigate-directories-for-disk-usage"><a href="#investigate-directories-for-disk-usage" class="header-anchor">#</a> Investigate Directories For Disk Usage</h2> <p>Sometimes it may be required to find out which directory consuming how much disk space especially when you are used <code>df -h</code> and realized your available disk space is low.</p> <p><strong>du:</strong></p> <p><code>du</code> command summarizes disk usage of the set of FILEs, recursively for directories.</p> <p>It's often uses with <code>-sh</code> option:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>-s, --summarize
+              display only a total <span class="token keyword">for</span> each argument
+-h, --human-readable
+              print sizes <span class="token keyword">in</span> human readable <span class="token function">format</span> <span class="token punctuation">(</span>e.g., 1K 234M 2G<span class="token punctuation">)</span>
+
+</code></pre></div><p>For summarizing disk usages of the files in the current directory we use:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">du</span> -sh *
+
+</code></pre></div><p>Example output:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>572K    Documents
+208M    Downloads
+<span class="token number">4</span>,0K    Music
+724K    Pictures
+<span class="token number">4</span>,0K    Public
+<span class="token number">4</span>,0K    Templates
+<span class="token number">4</span>,0K    Videos
+
+</code></pre></div><p>We can also include hidden files with using:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">du</span> -sh .<span class="token punctuation">[</span><span class="token operator">!</span>.<span class="token punctuation">]</span>* *
+
+</code></pre></div><p>Example output:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token number">6</span>,3M    .atom
+<span class="token number">4</span>,0K    .bash_history
+<span class="token number">4</span>,0K    .bash_logout
+<span class="token number">8</span>,0K    .bashrc
+350M    .cache
+195M    .config
+12K    .dbus
+<span class="token number">4</span>,0K    .dmrc
+44K    .gconf
+60K    .gem
+520K    .gimp-2.8
+28K    .gnome
+<span class="token number">4</span>,0K    .ICEauthority
+<span class="token number">8</span>,3M    .local
+<span class="token number">8</span>,0K    .nano
+404K    .nv
+36K    .pki
+<span class="token number">4</span>,0K    .profile
+<span class="token number">8</span>,0K    .ssh
+<span class="token number">0</span>    .sudo_as_admin_successful
+<span class="token number">4</span>,0K    .Xauthority
+<span class="token number">4</span>,0K    .xsession-errors
+<span class="token number">4</span>,0K    .xsession-errors.old
+572K    Documents
+208M    Downloads
+<span class="token number">4</span>,0K    Music
+724K    Pictures
+<span class="token number">4</span>,0K    Public
+<span class="token number">4</span>,0K    Templates
+<span class="token number">4</span>,0K    Videos
+
+</code></pre></div><p>Thirdly, you can add total to the output by adding ,-c, option:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">du</span> -sch .<span class="token punctuation">[</span><span class="token operator">!</span>.<span class="token punctuation">]</span>* *
+
+</code></pre></div><p>Result:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">.</span>
+<span class="token builtin class-name">.</span>
+<span class="token builtin class-name">.</span>
+<span class="token number">4</span>,0K    Templates
+<span class="token number">4</span>,0K    Videos
+769M    total
+
+</code></pre></div><p><strong>Most importantly</strong> using <code>du</code> command properly on the root directory is a life saving action to find out what application/service or user is consuming your disk space wildly. For example, in case of a ridiculously low level of disk space availability for a web and mail server, the reason could be a spam attack to your mail service and you can diagnose it just by using <code>du</code> command.</p> <p>Investigate root directory for disk usage:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">du</span> -sch /.<span class="token punctuation">[</span><span class="token operator">!</span>.<span class="token punctuation">]</span>* /*
+
+</code></pre></div><p>Example output:</p> <div class="language-bash extra-class"><pre class="language-bash"><code>16K    /.VolumeIcon.icns
+24K    /.VolumeIcon.png
+13M    /bin
+57M    /boot
+<span class="token number">4</span>,0K    /cdrom
+620K    /dev
+13M    /etc
+779M    /home
+<span class="token number">0</span>    /initrd.img
+406M    /lib
+<span class="token number">3</span>,9M    /lib32
+<span class="token number">4</span>,0K    /lib64
+16K    /lost+found
+<span class="token number">4</span>,0K    /media
+<span class="token number">4</span>,0K    /mnt
+367M    /opt
+du: cannot access <span class="token string">'/proc/18221/task/18221/fd/4'</span><span class="token builtin class-name">:</span> No such <span class="token function">file</span> or directory
+du: cannot access <span class="token string">'/proc/18221/task/18221/fdinfo/4'</span><span class="token builtin class-name">:</span> No such <span class="token function">file</span> or directory
+du: cannot access <span class="token string">'/proc/18221/fd/4'</span><span class="token builtin class-name">:</span> No such <span class="token function">file</span> or directory
+du: cannot access <span class="token string">'/proc/18221/fdinfo/4'</span><span class="token builtin class-name">:</span> No such <span class="token function">file</span> or directory
+<span class="token number">0</span>    /proc
+20K    /root
+du: cannot access <span class="token string">'/run/user/1000/gvfs'</span><span class="token builtin class-name">:</span> Permission denied
+<span class="token number">9</span>,4M    /run
+13M    /sbin
+<span class="token number">4</span>,0K    /srv
+<span class="token number">0</span>    /sys
+72K    /tmp
+<span class="token number">3</span>,5G    /usr
+639M    /var
+<span class="token number">0</span>    /vmlinuz
+<span class="token number">5</span>,8G    total
+
+</code></pre></div><p>Lastly, the best method forms when you add a threshold size value for directories to ignore small ones. This command will only show folders with more than 1GB in size which located under root directory up to the farthermost branch of the whole directory tree in your file system:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">sudo</span> <span class="token function">du</span> --threshold<span class="token operator">=</span>1G -ch /.<span class="token punctuation">[</span><span class="token operator">!</span>.<span class="token punctuation">]</span>* /*
+
+</code></pre></div><p>Example output:</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token number">1</span>,4G    /usr/lib
+<span class="token number">1</span>,8G    /usr/share
+<span class="token number">3</span>,5G    /usr
+<span class="token number">5</span>,8G    total
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/linux/check-disk-space.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/linux/shell.html" class="prev">
+        Shell
+      </a></span> <span class="next"><a href="/linux/getting-system-information.html">
+        Getting System Information
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1885.56f283bd.js" defer></script>
+  </body>
+</html>

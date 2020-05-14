@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>jQuery - jQuery Deferred objects and Promises</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="jQuery ajax() success, error  VS  .done(), .fail(), Basic promise creation, Get the current state of a promise, Asynchronous Promises Chaining">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="jQuery - jQuery Deferred objects and Promises">
+    <meta property="og:description" content="jQuery ajax() success, error  VS  .done(), .fail(), Basic promise creation, Get the current state of a promise, Asynchronous Promises Chaining">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/jquery/jquery-deferred-objects-and-promises.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="jQuery - jQuery Deferred objects and Promises">
+    <meta name="twitter:description" content="jQuery ajax() success, error  VS  .done(), .fail(), Basic promise creation, Get the current state of a promise, Asynchronous Promises Chaining">
+    <meta name="twitter:url" content="/jquery/jquery-deferred-objects-and-promises.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1820.77cdbf77.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>jQuery</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/jquery/" class="sidebar-link">Disclaimer</a></li><li><a href="/jquery/getting-started-with-jquery.html" class="sidebar-link">Getting started with jQuery</a></li><li><a href="/jquery/selectors.html" class="sidebar-link">Selectors</a></li><li><a href="/jquery/each-function.html" class="sidebar-link">Each function</a></li><li><a href="/jquery/attributes.html" class="sidebar-link">Attributes</a></li><li><a href="/jquery/document-ready-event.html" class="sidebar-link">document-ready event</a></li><li><a href="/jquery/events.html" class="sidebar-link">Events</a></li><li><a href="/jquery/dom-manipulation.html" class="sidebar-link">DOM Manipulation</a></li><li><a href="/jquery/dom-traversing.html" class="sidebar-link">DOM Traversing</a></li><li><a href="/jquery/css-manipulation.html" class="sidebar-link">CSS Manipulation</a></li><li><a href="/jquery/element-visibility.html" class="sidebar-link">Element Visibility</a></li><li><a href="/jquery/append.html" class="sidebar-link">Append</a></li><li><a href="/jquery/prepend.html" class="sidebar-link">Prepend</a></li><li><a href="/jquery/getting-and-setting-width-and-height-of-an-element.html" class="sidebar-link">Getting and setting width and height of an element</a></li><li><a href="/jquery/jquery-animate-method.html" class="sidebar-link">jQuery .animate() Method</a></li><li><a href="/jquery/jquery-deferred-objects-and-promises.html" class="active sidebar-link">jQuery Deferred objects and Promises</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/jquery/jquery-deferred-objects-and-promises.html#jquery-ajax-success-error-vs-done-fail" class="sidebar-link">jQuery ajax() success, error  VS  .done(), .fail()</a></li><li class="sidebar-sub-header"><a href="/jquery/jquery-deferred-objects-and-promises.html#basic-promise-creation" class="sidebar-link">Basic promise creation</a></li><li class="sidebar-sub-header"><a href="/jquery/jquery-deferred-objects-and-promises.html#get-the-current-state-of-a-promise" class="sidebar-link">Get the current state of a promise</a></li><li class="sidebar-sub-header"><a href="/jquery/jquery-deferred-objects-and-promises.html#asynchronous-promises-chaining" class="sidebar-link">Asynchronous Promises Chaining</a></li></ul></li><li><a href="/jquery/ajax.html" class="sidebar-link">Ajax</a></li><li><a href="/jquery/checkbox-select-all-with-automatic-check-uncheck-on-other-checkbox-change.html" class="sidebar-link">Checkbox Select all with automatic check/uncheck on other checkbox change</a></li><li><a href="/jquery/plugins.html" class="sidebar-link">Plugins</a></li><li><a href="/jquery/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="jquery-deferred-objects-and-promises"><a href="#jquery-deferred-objects-and-promises" class="header-anchor">#</a> jQuery Deferred objects and Promises</h1> <h2 id="jquery-ajax-success-error-vs-done-fail"><a href="#jquery-ajax-success-error-vs-done-fail" class="header-anchor">#</a> jQuery ajax() success, error  VS  .done(), .fail()</h2> <p><strong>success and Error :</strong>
+A <strong>success</strong> callback that gets invoked upon successful completion of an Ajax request.</p> <p>A <strong>failure</strong> callback that gets invoked in case there is any error while making the request.</p> <p><strong>Example:</strong></p> <div class="language- extra-class"><pre class="language-text"><code>
+$.ajax({
+        url: 'URL',
+        type: 'POST',
+        data: yourData,
+        datatype: 'json',
+        success: function (data) { successFunction(data); },
+        error: function (jqXHR, textStatus, errorThrown) { errorFunction(); }
+    });
+
+</code></pre></div><p><strong>.done() and .fail() :</strong></p> <p>.ajax().done(function(data, textStatus, jqXHR){});
+Replaces method .success() which was deprecated in jQuery 1.8.This is an alternative construct for the success callback function above.</p> <p>.ajax().fail(function(jqXHR, textStatus, errorThrown){});
+Replaces method .error() which was deprecated in jQuery 1.8.This is an alternative construct for the complete callback function above.</p> <p><strong>Example:</strong></p> <div class="language-js extra-class"><pre class="language-js"><code>$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    url<span class="token operator">:</span> <span class="token string">'URL'</span><span class="token punctuation">,</span>
+    type<span class="token operator">:</span> <span class="token string">'POST'</span><span class="token punctuation">,</span>
+    data<span class="token operator">:</span> yourData<span class="token punctuation">,</span>
+    datatype<span class="token operator">:</span> <span class="token string">'json'</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">successFunction</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">fail</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">jqXHR<span class="token punctuation">,</span> textStatus<span class="token punctuation">,</span> errorThrown</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token function">serrorFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="basic-promise-creation"><a href="#basic-promise-creation" class="header-anchor">#</a> Basic promise creation</h2> <p>Here is a very simple example of a function that &quot;<strong>promises</strong> to proceed when a given time elapses&quot;. It does that by creating a new <code>Deferred</code> object, that is resolved later and returning the Deferred's promise:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">waitPromise</span><span class="token punctuation">(</span><span class="token parameter">milliseconds</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+   <span class="token comment">// Create a new Deferred object using the jQuery static method</span>
+   <span class="token keyword">var</span> def <span class="token operator">=</span> $<span class="token punctuation">.</span><span class="token function">Deferred</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// Do some asynchronous work - in this case a simple timer </span>
+   <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+       <span class="token comment">// Work completed... resolve the deferred, so it's promise will proceed</span>
+       def<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span class="token punctuation">,</span> milliseconds<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token comment">// Immediately return a &quot;promise to proceed when the wait time ends&quot;</span>
+   <span class="token keyword">return</span> def<span class="token punctuation">.</span><span class="token function">promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>And use like this:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token function">waitPromise</span><span class="token punctuation">(</span><span class="token number">2000</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;I have waited long enough&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="get-the-current-state-of-a-promise"><a href="#get-the-current-state-of-a-promise" class="header-anchor">#</a> Get the current state of a promise</h2> <p>By default the state of a promise is pending when it is created. The state of a promise is changed when the deferred object which created the promise either resolves/rejects it.</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> deferred <span class="token operator">=</span> <span class="token keyword">new</span> $<span class="token punctuation">.</span><span class="token function">Deferred</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> d1<span class="token operator">=</span> deferred<span class="token punctuation">.</span><span class="token function">promise</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    prop<span class="token operator">:</span> <span class="token string">&quot;value&quot;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> d2<span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">&quot;div&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> d3<span class="token operator">=</span> <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">&quot;div&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hide</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">promise</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>d1<span class="token punctuation">.</span><span class="token function">state</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &quot;pending&quot;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>d2<span class="token punctuation">.</span><span class="token function">state</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &quot;resolved&quot;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>d3<span class="token punctuation">.</span><span class="token function">state</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &quot;pending&quot;</span>
+
+</code></pre></div><h2 id="asynchronous-promises-chaining"><a href="#asynchronous-promises-chaining" class="header-anchor">#</a> Asynchronous Promises Chaining</h2> <p>If you have multiple asynchronous tasks that needs to occur one after the other, you will need to chain together their promise objects. Here is a simple example:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">First</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Calling Function First&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> $<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;/ajax/GetFunction/First&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">Second</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Calling Function Second&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> $<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;/ajax/GetFunction/Second&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">function</span> <span class="token function">Third</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Calling Function Third&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> $<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">&quot;/ajax/GetFunction/Third&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">function</span> <span class="token function">log</span><span class="token punctuation">(</span><span class="token parameter">results</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;Result from previous AJAX call: &quot;</span> <span class="token operator">+</span> results<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token function">First</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span>log<span class="token punctuation">)</span>
+       <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>Second<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span>log<span class="token punctuation">)</span>
+       <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>Third<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">done</span><span class="token punctuation">(</span>log<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/jquery/jquery-deferred-objects-and-promises.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/jquery/jquery-animate-method.html" class="prev">
+        jQuery .animate() Method
+      </a></span> <span class="next"><a href="/jquery/ajax.html">
+        Ajax
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1820.77cdbf77.js" defer></script>
+  </body>
+</html>

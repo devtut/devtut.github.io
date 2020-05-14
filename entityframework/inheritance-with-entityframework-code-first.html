@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Entity Framework - Inheritance with EntityFramework (Code First)</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Table per hierarchy, Table per type">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="Entity Framework - Inheritance with EntityFramework (Code First)">
+    <meta property="og:description" content="Table per hierarchy, Table per type">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/entityframework/inheritance-with-entityframework-code-first.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="Entity Framework - Inheritance with EntityFramework (Code First)">
+    <meta name="twitter:description" content="Table per hierarchy, Table per type">
+    <meta name="twitter:url" content="/entityframework/inheritance-with-entityframework-code-first.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1055.26187c6c.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Entity Framework</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/entityframework/" class="sidebar-link">Disclaimer</a></li><li><a href="/entityframework/getting-started-with-entity-framework.html" class="sidebar-link">Getting started with Entity Framework</a></li><li><a href="/entityframework/code-first-conventions.html" class="sidebar-link">Code First Conventions</a></li><li><a href="/entityframework/code-first-dataannotations.html" class="sidebar-link">Code First DataAnnotations</a></li><li><a href="/entityframework/entity-framework-code-first.html" class="sidebar-link">Entity Framework Code First</a></li><li><a href="/entityframework/entity-framework-code-first-migrations.html" class="sidebar-link">Entity-framework Code First Migrations</a></li><li><a href="/entityframework/inheritance-with-entityframework-code-first.html" class="active sidebar-link">Inheritance with EntityFramework (Code First)</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/entityframework/inheritance-with-entityframework-code-first.html#table-per-hierarchy" class="sidebar-link">Table per hierarchy</a></li><li class="sidebar-sub-header"><a href="/entityframework/inheritance-with-entityframework-code-first.html#table-per-type" class="sidebar-link">Table per type</a></li></ul></li><li><a href="/entityframework/code-first-fluent-api.html" class="sidebar-link">Code First - Fluent API</a></li><li><a href="/entityframework/mapping-relationship-with-entity-framework-code-first-one-to-one-and-variations.html" class="sidebar-link">Mapping relationship with Entity Framework Code First: One-to-one and variations</a></li><li><a href="/entityframework/mapping-relationship-with-entity-framework-code-first-one-to-many-and-many-to-many.html" class="sidebar-link">Mapping relationship with Entity Framework Code First: One-to-many and Many-to-many</a></li><li><a href="/entityframework/database-first-model-generation.html" class="sidebar-link">Database first model generation</a></li><li><a href="/entityframework/complex-types.html" class="sidebar-link">Complex Types</a></li><li><a href="/entityframework/database-initialisers.html" class="sidebar-link">Database Initialisers</a></li><li><a href="/entityframework/tracking-vs-no-tracking.html" class="sidebar-link">Tracking vs. No-Tracking</a></li><li><a href="/entityframework/transactions.html" class="sidebar-link">Transactions</a></li><li><a href="/entityframework/managing-entity-state.html" class="sidebar-link">Managing entity state</a></li><li><a href="/entityframework/loading-related-entities.html" class="sidebar-link">Loading related entities</a></li><li><a href="/entityframework/model-restraints.html" class="sidebar-link">Model Restraints</a></li><li><a href="/entityframework/entity-framework-with-postgresql.html" class="sidebar-link">Entity-Framework  with Postgresql</a></li><li><a href="/entityframework/entity-framework-with-sqlite.html" class="sidebar-link">Entity Framework with SQLite</a></li><li><a href="/entityframework/t4-templates-in-entity-framework.html" class="sidebar-link">.t4 templates in entity-framework</a></li><li><a href="/entityframework/advanced-mapping-scenarios-entity-splitting-table-splitting.html" class="sidebar-link">Advanced mapping scenarios: entity splitting, table splitting</a></li><li><a href="/entityframework/best-practices-for-entity-framework-simple-professional.html" class="sidebar-link">Best Practices For Entity Framework (Simple &amp; Professional)</a></li><li><a href="/entityframework/optimization-techniques-in-ef.html" class="sidebar-link">Optimization Techniques in EF</a></li><li><a href="/entityframework/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="inheritance-with-entityframework-code-first"><a href="#inheritance-with-entityframework-code-first" class="header-anchor">#</a> Inheritance with EntityFramework (Code First)</h1> <h2 id="table-per-hierarchy"><a href="#table-per-hierarchy" class="header-anchor">#</a> Table per hierarchy</h2> <p>This approach will generate one table on the database to represent all the inheritance structure.</p> <p><strong>Example:</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Person</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> Id <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> Name <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">DateTime</span> BirthDate <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Employee</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Person</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">DateTime</span> AdmissionDate <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> JobDescription <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Customer</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Person</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">DateTime</span> LastPurchaseDate <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> TotalVisits <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// On DbContext</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">DbSet<span class="token punctuation">&lt;</span>Person<span class="token punctuation">&gt;</span></span> People <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">DbSet<span class="token punctuation">&lt;</span>Employee<span class="token punctuation">&gt;</span></span> Employees <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">DbSet<span class="token punctuation">&lt;</span>Customer<span class="token punctuation">&gt;</span></span> Customers <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>The table generated will be:</strong></p> <p>Table: People
+Fields:
+Id
+Name
+BirthDate
+Discrimitator
+AdmissionDate
+JobDescription
+LastPurchaseDate
+TotalVisits</p> <p>Where 'Discriminator' will hold the name of the subclass on the inheritance and 'AdmissionDate', 'JobDescription', 'LastPurchaseDate', 'TotalVisits' are nullable.</p> <p><strong>Advantages</strong></p> <ul><li>Better performance since no joins are required although for to many columns the database might require many paging operations.</li> <li>Simple to use and create</li> <li>Easy to add more subclasses and fields</li></ul> <p><strong>Disadvantages</strong></p> <ul><li>Violates the 3rd Normal Form <a href="https://en.wikipedia.org/wiki/Third_normal_form" target="_blank" rel="noopener noreferrer">Wikipedia: Third normal form<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li>Creates lots of nullable fields</li></ul> <h2 id="table-per-type"><a href="#table-per-type" class="header-anchor">#</a> Table per type</h2> <p>This approach will generate (n+1) tables on the database to represent all the inheritance structure where n is the number of subclasses.</p> <p><strong>How to:</strong></p> <div class="language-cs extra-class"><pre class="language-cs"><code><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">Person</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> Id <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> Name <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">DateTime</span> BirthDate <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Table</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;Employees&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Employee</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Person</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">DateTime</span> AdmissionDate <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> JobDescription <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Table</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;Customers&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Customer</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Person</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">DateTime</span> LastPurchaseDate <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">int</span></span> TotalVisits <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// On DbContext</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">DbSet<span class="token punctuation">&lt;</span>Person<span class="token punctuation">&gt;</span></span> People <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">DbSet<span class="token punctuation">&lt;</span>Employee<span class="token punctuation">&gt;</span></span> Employees <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">DbSet<span class="token punctuation">&lt;</span>Customer<span class="token punctuation">&gt;</span></span> Customers <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>The table generated will be:</strong></p> <p>Table: People
+Fields:
+Id
+Name
+BirthDate</p> <p>Table: Employees
+Fields:
+PersonId
+AdmissionDate
+JobDescription</p> <p>Table: Customers:
+Fields:
+PersonId
+LastPurchaseDate
+TotalVisits</p> <p>Where 'PersonId' on all tables will be a primary key and a constraint to People.Id</p> <p><strong>Advantages</strong></p> <ul><li>Normalized tables</li> <li>Easy to add columns and subclasses</li> <li>No nullable columns</li></ul> <p><strong>Disadvantages</strong></p> <ul><li>Join is required to retrieve the data</li> <li>Subclass inference is more expensive</li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/entityframework/inheritance-with-entityframework-code-first.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/entityframework/entity-framework-code-first-migrations.html" class="prev">
+        Entity-framework Code First Migrations
+      </a></span> <span class="next"><a href="/entityframework/code-first-fluent-api.html">
+        Code First - Fluent API
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1055.26187c6c.js" defer></script>
+  </body>
+</html>

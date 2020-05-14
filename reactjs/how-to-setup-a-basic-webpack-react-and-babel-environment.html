@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ReactJS - How to setup a basic webpack, react and babel environment</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="How to build a pipeline for a customized Hello world with images.">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="ReactJS - How to setup a basic webpack, react and babel environment">
+    <meta property="og:description" content="How to build a pipeline for a customized Hello world with images.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/reactjs/how-to-setup-a-basic-webpack-react-and-babel-environment.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="ReactJS - How to setup a basic webpack, react and babel environment">
+    <meta name="twitter:description" content="How to build a pipeline for a customized Hello world with images.">
+    <meta name="twitter:url" content="/reactjs/how-to-setup-a-basic-webpack-react-and-babel-environment.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/2990.98ea2642.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>ReactJS</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/reactjs/" class="sidebar-link">Disclaimer</a></li><li><a href="/reactjs/getting-started-with-react.html" class="sidebar-link">Getting started with React</a></li><li><a href="/reactjs/components.html" class="sidebar-link">Components</a></li><li><a href="/reactjs/using-reactjs-with-typescript.html" class="sidebar-link">Using ReactJS with Typescript</a></li><li><a href="/reactjs/state-in-react.html" class="sidebar-link">State in React</a></li><li><a href="/reactjs/props-in-react.html" class="sidebar-link">Props in React</a></li><li><a href="/reactjs/react-component-lifecycle.html" class="sidebar-link">React Component Lifecycle</a></li><li><a href="/reactjs/forms-and-user-input.html" class="sidebar-link">Forms and User Input</a></li><li><a href="/reactjs/react-boilerplate-react-babel-webpack.html" class="sidebar-link">React Boilerplate [React + Babel + Webpack]</a></li><li><a href="/reactjs/using-reactjs-with-jquery.html" class="sidebar-link">Using ReactJS with jQuery</a></li><li><a href="/reactjs/react-routing.html" class="sidebar-link">React Routing</a></li><li><a href="/reactjs/communicate-between-components.html" class="sidebar-link">Communicate Between Components</a></li><li><a href="/reactjs/how-to-setup-a-basic-webpack-react-and-babel-environment.html" class="active sidebar-link">How to setup a basic webpack, react and babel environment</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/reactjs/how-to-setup-a-basic-webpack-react-and-babel-environment.html#how-to-build-a-pipeline-for-a-customized-hello-world-with-images" class="sidebar-link">How to build a pipeline for a customized &quot;Hello world&quot; with images.</a></li></ul></li><li><a href="/reactjs/react-createclass-vs-extends-react-component.html" class="sidebar-link">React.createClass vs extends React.Component</a></li><li><a href="/reactjs/react-ajax-call.html" class="sidebar-link">React AJAX call</a></li><li><a href="/reactjs/communication-between-components.html" class="sidebar-link">Communication Between Components</a></li><li><a href="/reactjs/stateless-functional-components.html" class="sidebar-link">Stateless Functional Components</a></li><li><a href="/reactjs/performance.html" class="sidebar-link">Performance</a></li><li><a href="/reactjs/introduction-to-server-side-rendering.html" class="sidebar-link">Introduction to Server-Side Rendering</a></li><li><a href="/reactjs/setting-up-react-environment.html" class="sidebar-link">Setting Up React Environment</a></li><li><a href="/reactjs/using-react-with-flow.html" class="sidebar-link">Using React with Flow</a></li><li><a href="/reactjs/jsx.html" class="sidebar-link">JSX</a></li><li><a href="/reactjs/react-forms.html" class="sidebar-link">React Forms</a></li><li><a href="/reactjs/user-interface-solutions.html" class="sidebar-link">User interface solutions</a></li><li><a href="/reactjs/using-reactjs-in-flux-way.html" class="sidebar-link">Using ReactJS in Flux way</a></li><li><a href="/reactjs/react-webpack-typescript-installation.html" class="sidebar-link">React, Webpack &amp; Typescript installation</a></li><li><a href="/reactjs/how-and-why-to-use-keys-in-react.html" class="sidebar-link">How and why to use keys in React</a></li><li><a href="/reactjs/keys-in-react.html" class="sidebar-link">Keys in react</a></li><li><a href="/reactjs/higher-order-components.html" class="sidebar-link">Higher Order Components</a></li><li><a href="/reactjs/react-with-redux.html" class="sidebar-link">React with Redux</a></li><li><a href="/reactjs/installation.html" class="sidebar-link">Installation</a></li><li><a href="/reactjs/react-tools.html" class="sidebar-link">React Tools</a></li><li><a href="/reactjs/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="how-to-setup-a-basic-webpack-react-and-babel-environment"><a href="#how-to-setup-a-basic-webpack-react-and-babel-environment" class="header-anchor">#</a> How to setup a basic webpack, react and babel environment</h1> <h2 id="how-to-build-a-pipeline-for-a-customized-hello-world-with-images"><a href="#how-to-build-a-pipeline-for-a-customized-hello-world-with-images" class="header-anchor">#</a> How to build a pipeline for a customized &quot;Hello world&quot; with images.</h2> <p><strong>Step 1: Install Node.js</strong></p> <p>The build pipeline you will be building is based in Node.js so you must ensure in the first instance that you have this installed. For instructions on how to install Node.js you can checkout the SO docs for that <a href="http://stackoverflow.com/documentation/node.js/1294/installing-node-js#t=2016090414320258735" target="_blank" rel="noopener noreferrer">here<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p><strong>Step 2: Initialise your project as an node module</strong></p> <p>Open your project folder on the command line and use the following command:</p> <div class="language-js extra-class"><pre class="language-js"><code>npm init
+
+</code></pre></div><p>For the purposes of this example you can feel free to take the defaults or if you'd like more info on what all this means you can check out <a href="http://stackoverflow.com/documentation/node.js/482/npm/2257/setting-up-a-package-configuration#t=201609041437481449862" target="_blank" rel="noopener noreferrer">this<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> SO doc on setting up package configuration.</p> <p><strong>Step 3: Install necessary npm packages</strong></p> <p>Run the following command on the command line to install the packages necessary for this example:</p> <div class="language-js extra-class"><pre class="language-js"><code>npm install <span class="token operator">--</span>save react react<span class="token operator">-</span>dom
+
+</code></pre></div><p>Then for the dev dependencies run this command:</p> <div class="language-js extra-class"><pre class="language-js"><code>npm install <span class="token operator">--</span>save<span class="token operator">-</span>dev babel<span class="token operator">-</span>core babel<span class="token operator">-</span>preset<span class="token operator">-</span>react babel<span class="token operator">-</span>preset<span class="token operator">-</span>es2015 webpack babel<span class="token operator">-</span>loader css<span class="token operator">-</span>loader style<span class="token operator">-</span>loader file<span class="token operator">-</span>loader image<span class="token operator">-</span>webpack<span class="token operator">-</span>loader 
+
+</code></pre></div><p>Finally webpack and webpack-dev-server are things that are worth installing globally rather than as a dependency of your project, if you'd prefer to add it as a dependency then that will work to, I don't. Here is the command to run:</p> <div class="language-js extra-class"><pre class="language-js"><code>npm install <span class="token operator">--</span>global webpack webpack<span class="token operator">-</span>dev<span class="token operator">-</span>server 
+
+</code></pre></div><p><strong>Step 3: Add a .babelrc file to the root of your project</strong></p> <p>This will setup babel to use the presets you've just installed. Your .babelrc file should look like this:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+  <span class="token string">&quot;presets&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;react&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;es2015&quot;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>Step 4: Setup project directory structure</strong></p> <p>Set yourself up a directory stucture that looks like the below in the root of your directory:</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">|</span><span class="token operator">-</span> node_modules
+<span class="token operator">|</span><span class="token operator">-</span> src<span class="token operator">/</span>
+  <span class="token operator">|</span><span class="token operator">-</span> components<span class="token operator">/</span>
+  <span class="token operator">|</span><span class="token operator">-</span> images<span class="token operator">/</span>
+  <span class="token operator">|</span><span class="token operator">-</span> styles<span class="token operator">/</span>
+  <span class="token operator">|</span><span class="token operator">-</span> index<span class="token punctuation">.</span>html
+  <span class="token operator">|</span><span class="token operator">-</span> index<span class="token punctuation">.</span>jsx
+<span class="token operator">|</span><span class="token operator">-</span> <span class="token punctuation">.</span>babelrc
+<span class="token operator">|</span><span class="token operator">-</span> <span class="token keyword">package</span><span class="token punctuation">.</span>json
+
+</code></pre></div><p>NOTE: The <code>node_modules</code>, <code>.babelrc</code> and <code>package.json</code> should all have already been there from previous steps I just included them so you can see where they fit.</p> <p><strong>Step 5: Populate the project with the Hello World project files</strong></p> <p>This isn't really important to the process of building a pipeline so I'll just give you the code for these and you can copy paste them in:</p> <p><strong>src/components/HelloWorldComponent.jsx</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">HelloWorldComponent</span> <span class="token keyword">extends</span> <span class="token class-name">Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token parameter">props</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token string">'Student'</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>handleChange <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">handleChange</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">handleChange</span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span>name<span class="token operator">:</span> e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>div className<span class="token operator">=</span><span class="token string">&quot;image-container&quot;</span><span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span>img src<span class="token operator">=</span><span class="token string">&quot;./images/myImage.gif&quot;</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>div className<span class="token operator">=</span><span class="token string">&quot;form&quot;</span><span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">&quot;text&quot;</span> onChange<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>handleChange<span class="token punctuation">}</span> <span class="token operator">/</span><span class="token operator">&gt;</span>
+          <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+            My name is <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>name<span class="token punctuation">}</span> and <span class="token constant">I</span>'m a clever cloggs because <span class="token constant">I</span> built a React build pipeline
+          <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> HelloWorldComponent<span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>src/images/myImage.gif</strong></p> <p>Feel free to substitute this with any image you'd like it's simply there to prove the point that we can bundle up images as well. If you provide your own image and you name it something different then you'll have to update the <code>HelloWorldComponent.jsx</code> to reflect your changes. Equally if you choose an image with a different file extension then you need to modify the <code>test</code> property of the image loader in the webpack.config.js with appropriate regex to match your new file extension..</p> <p><strong>src/styles/styles.css</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">.</span>form <span class="token punctuation">{</span>
+  margin<span class="token operator">:</span> <span class="token number">25</span>px<span class="token punctuation">;</span>
+  padding<span class="token operator">:</span> <span class="token number">25</span>px<span class="token punctuation">;</span>
+  border<span class="token operator">:</span> <span class="token number">1</span>px solid #ddd<span class="token punctuation">;</span>
+  background<span class="token operator">-</span>color<span class="token operator">:</span> #eaeaea<span class="token punctuation">;</span>
+  border<span class="token operator">-</span>radius<span class="token operator">:</span> <span class="token number">10</span>px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span>form div <span class="token punctuation">{</span>
+  padding<span class="token operator">-</span>top<span class="token operator">:</span> <span class="token number">25</span>px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span>image<span class="token operator">-</span>container <span class="token punctuation">{</span>
+  display<span class="token operator">:</span> flex<span class="token punctuation">;</span>
+  justify<span class="token operator">-</span>content<span class="token operator">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p><strong>index.html</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token constant">DOCTYPE</span> html<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>html lang<span class="token operator">=</span><span class="token string">&quot;en&quot;</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>head<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>meta charset<span class="token operator">=</span><span class="token string">&quot;UTF-8&quot;</span><span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>title<span class="token operator">&gt;</span>Learning to build a react pipeline<span class="token operator">&lt;</span><span class="token operator">/</span>title<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>head<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>body<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">&quot;content&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>script src<span class="token operator">=</span><span class="token string">&quot;app.js&quot;</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>body<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>html<span class="token operator">&gt;</span>
+
+</code></pre></div><p><strong>index.jsx</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">'react'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> render <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-dom'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> HelloWorldComponent <span class="token keyword">from</span> <span class="token string">'./components/HelloWorldComponent.jsx'</span><span class="token punctuation">;</span>
+
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./images/myImage.gif'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./styles/styles.css'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'./index.html'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token function">render</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>HelloWorldComponent <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token punctuation">,</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'content'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>Step 6: Create webpack configuration</strong></p> <p>Create a file called webpack.config.js in the root of your project and copy this code into it:</p> <p><strong>webpack.config.js</strong></p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+  context<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">'/src'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  entry<span class="token operator">:</span> <span class="token string">'./index.jsx'</span><span class="token punctuation">,</span>
+  output<span class="token operator">:</span> <span class="token punctuation">{</span>
+    filename<span class="token operator">:</span> <span class="token string">'app.js'</span><span class="token punctuation">,</span>
+    path<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">'/dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  devServer<span class="token operator">:</span> <span class="token punctuation">{</span>
+    contentBase<span class="token operator">:</span> path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname <span class="token operator">+</span> <span class="token string">'/dist'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    port<span class="token operator">:</span> <span class="token number">3000</span><span class="token punctuation">,</span>
+    open<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  module<span class="token operator">:</span> <span class="token punctuation">{</span>
+    loaders<span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.(js|jsx)$/</span><span class="token punctuation">,</span>
+        exclude<span class="token operator">:</span> <span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">'babel-loader'</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">&quot;style!css&quot;</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        test<span class="token operator">:</span> <span class="token regex">/\.gif$/</span><span class="token punctuation">,</span>
+        loaders<span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token string">'file?name=[path][name].[ext]'</span><span class="token punctuation">,</span>
+          <span class="token string">'image-webpack'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> test<span class="token operator">:</span> <span class="token regex">/\.(html)$/</span><span class="token punctuation">,</span>
+        loader<span class="token operator">:</span> <span class="token string">&quot;file?name=[path][name].[ext]&quot;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> config<span class="token punctuation">;</span>
+
+</code></pre></div><p><strong>Step 7: Create npm tasks for your pipeline</strong></p> <p>To do this you will need to add two properties to the scripts key of the JSON defined in the package.json file in the root of your project. Make your scripts key look like this:</p> <div class="language- extra-class"><pre class="language-text"><code>
+ &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;webpack-dev-server&quot;,
+    &quot;build&quot;: &quot;webpack&quot;,
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+
+</code></pre></div><p>The <code>test</code> script will have already been there and you can choose whether to keep it or not, it's not important to this example.</p> <p><strong>Step 8: Use the pipeline</strong></p> <p>From the command line, if you are in the project root directory you should now be able to run the command:</p> <div class="language-js extra-class"><pre class="language-js"><code>npm run build
+
+</code></pre></div><p>This will bundle up the little application you've built and place it in the <code>dist/</code> directory that it will create in the root of your project folder.</p> <p>If you run the command:</p> <div class="language-js extra-class"><pre class="language-js"><code>npm start
+
+</code></pre></div><p>Then the application you've built will be served up in your default web browser inside of a webpack dev server instance.</p> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>This build pipeline is not exactly what you would call &quot;production ready&quot; but it does give a solid start for you to add on to it the things that you need in order to get the development experience you're looking for. The approach that some people take (including myself at times) is to take a fully built up pipeline of Yeoman.io or somewhere else and then strip off the things they don't want until it suits there style. There's nothing wrong with this but perhaps with the example above you could opt for the opposite approach and build up from bare bones.</p> <p>Some things you might like to add are things like a testing framework and coverage statistics like Karma with Mocha or Jasmine. Linting with ESLint. Hot module replacement in webpack-dev-server so that you can get that Ctrl+S, F5 development experience. Also the current pipeline only builds in dev mode so a production build task would be good.</p> <p><strong>Gotchas!</strong></p> <p>Notice in the context property of the <code>webpack.config.js</code> we have used the node path module to define our path rather than just concatenating <code>__dirname</code> to the string <code>/src</code> this is because <a href="https://webpack.github.io/docs/troubleshooting.html#windows-paths" target="_blank" rel="noopener noreferrer">windows hates forward slashses<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. So to make the solution more cross platform compatible use leverage node to help us.</p> <p><strong>Explanation of webpack.config.js properties</strong></p> <p><strong>context</strong></p> <p>This is the filepath for which webpack will use as it's root path for the purposes of resolving relative file paths. So in index.jsx where we use <code>require('./index.html')</code> that dot actually resolves to the <code>src/</code> directory because we've defined it as such in this property.</p> <p><strong>entry</strong></p> <p>Where webpack looks first to begin bundling the solution. This is why you'll see that in the index.jsx we are stitching together the solution with requires and imports.</p> <p><strong>output</strong></p> <p>This is where we define where webpack should be dropping the file files it has found to bundle. We have also defined a name for the file in which our bundled javascript and styles will be dropped.</p> <p><strong>devServer</strong></p> <p>These are settings specific to webpack-dev-server. The <code>contentBase</code> defines where the server should make it's root, we've defined the <code>dist/</code> folder as our base here. The <code>port</code> is the port that the server will be hosted on. <code>open</code> is what is used to instruct webpack-dev-server to open your default browser for you once it's spun up the server.</p> <p><strong>module &gt; loaders</strong></p> <p>This defines a mapping for webpack to use so that is knows what to do when it finds different files. The <code>test</code> property gives regex for webpack to use to determine if it should apply this module, in most cases we've matches on file extensions. <code>loader</code> or <code>loaders</code> give the name of the loader module that we'd like to use to load the file into webpack and let that loader take care of the bundling of that file type. There is also a <code>query</code> property on the javascript, this just provides a query string to the loader, so we could have probably used a query property on the html loader as well if we wanted to. It's just a different way of doing things.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/reactjs/how-to-setup-a-basic-webpack-react-and-babel-environment.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/reactjs/communicate-between-components.html" class="prev">
+        Communicate Between Components
+      </a></span> <span class="next"><a href="/reactjs/react-createclass-vs-extends-react-component.html">
+        React.createClass vs extends React.Component
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/2990.98ea2642.js" defer></script>
+  </body>
+</html>

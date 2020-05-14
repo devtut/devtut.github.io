@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MATLAB - Object-Oriented Programming</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Value vs Handle classes, Defining a class, Constructors, Inheriting from classes and abstract classes">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="MATLAB - Object-Oriented Programming">
+    <meta property="og:description" content="Value vs Handle classes, Defining a class, Constructors, Inheriting from classes and abstract classes">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/matlab/object-oriented-programming.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="MATLAB - Object-Oriented Programming">
+    <meta name="twitter:description" content="Value vs Handle classes, Defining a class, Constructors, Inheriting from classes and abstract classes">
+    <meta name="twitter:url" content="/matlab/object-oriented-programming.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/1930.0da6011f.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>MATLAB</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/matlab/" class="sidebar-link">Disclaimer</a></li><li><a href="/matlab/getting-started-with-matlab-language.html" class="sidebar-link">Getting started with MATLAB Language</a></li><li><a href="/matlab/initializing-matrices-or-arrays.html" class="sidebar-link">Initializing Matrices or arrays</a></li><li><a href="/matlab/conditions.html" class="sidebar-link">Conditions</a></li><li><a href="/matlab/functions.html" class="sidebar-link">Functions</a></li><li><a href="/matlab/set-operations.html" class="sidebar-link">Set operations</a></li><li><a href="/matlab/documenting-functions.html" class="sidebar-link">Documenting functions</a></li><li><a href="/matlab/using-functions-with-logical-output.html" class="sidebar-link">Using functions with logical output</a></li><li><a href="/matlab/for-loops.html" class="sidebar-link">For loops</a></li><li><a href="/matlab/object-oriented-programming.html" class="active sidebar-link">Object-Oriented Programming</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/matlab/object-oriented-programming.html#value-vs-handle-classes" class="sidebar-link">Value vs Handle classes</a></li><li class="sidebar-sub-header"><a href="/matlab/object-oriented-programming.html#defining-a-class" class="sidebar-link">Defining a class</a></li><li class="sidebar-sub-header"><a href="/matlab/object-oriented-programming.html#constructors" class="sidebar-link">Constructors</a></li><li class="sidebar-sub-header"><a href="/matlab/object-oriented-programming.html#inheriting-from-classes-and-abstract-classes" class="sidebar-link">Inheriting from classes and abstract classes</a></li></ul></li><li><a href="/matlab/vectorization.html" class="sidebar-link">Vectorization</a></li><li><a href="/matlab/matrix-decompositions.html" class="sidebar-link">Matrix decompositions</a></li><li><a href="/matlab/graphics-2d-line-plots.html" class="sidebar-link">Graphics: 2D Line Plots</a></li><li><a href="/matlab/graphics-2d-and-3d-transformations.html" class="sidebar-link">Graphics: 2D and 3D Transformations</a></li><li><a href="/matlab/controlling-subplot-coloring-in-matlab.html" class="sidebar-link">Controlling Subplot coloring in Matlab</a></li><li><a href="/matlab/image-processing.html" class="sidebar-link">Image processing</a></li><li><a href="/matlab/drawing.html" class="sidebar-link">Drawing</a></li><li><a href="/matlab/financial-applications.html" class="sidebar-link">Financial Applications</a></li><li><a href="/matlab/fourier-transforms-and-inverse-fourier-transforms.html" class="sidebar-link">Fourier Transforms and Inverse Fourier Transforms</a></li><li><a href="/matlab/ordinary-differential-equations-ode-solvers.html" class="sidebar-link">Ordinary Differential Equations (ODE) Solvers</a></li><li><a href="/matlab/interpolation-with-matlab.html" class="sidebar-link">Interpolation with MATLAB</a></li><li><a href="/matlab/integration.html" class="sidebar-link">Integration</a></li><li><a href="/matlab/reading-large-files.html" class="sidebar-link">Reading large files</a></li><li><a href="/matlab/usage-of-accumarray-function.html" class="sidebar-link">Usage of accumarray() Function</a></li><li><a href="/matlab/introduction-to-mex-api.html" class="sidebar-link">Introduction to MEX API</a></li><li><a href="/matlab/debugging.html" class="sidebar-link">Debugging</a></li><li><a href="/matlab/performance-and-benchmarking.html" class="sidebar-link">Performance and Benchmarking</a></li><li><a href="/matlab/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/matlab/using-serial-ports.html" class="sidebar-link">Using serial ports</a></li><li><a href="/matlab/undocumented-features.html" class="sidebar-link">Undocumented Features</a></li><li><a href="/matlab/matlab-best-practices.html" class="sidebar-link">MATLAB Best Practices</a></li><li><a href="/matlab/matlab-user-interfaces.html" class="sidebar-link">MATLAB User Interfaces</a></li><li><a href="/matlab/useful-tricks.html" class="sidebar-link">Useful tricks</a></li><li><a href="/matlab/common-mistakes-and-errors.html" class="sidebar-link">Common mistakes and errors</a></li><li><a href="/matlab/programming-utilities.html" class="sidebar-link">Programming Utilities</a></li><li><a href="/matlab/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="object-oriented-programming"><a href="#object-oriented-programming" class="header-anchor">#</a> Object-Oriented Programming</h1> <h2 id="value-vs-handle-classes"><a href="#value-vs-handle-classes" class="header-anchor">#</a> Value vs Handle classes</h2> <p>Classes in MATLAB are divided into two major categories: value classes and handle classes. The major difference is that when copying an instance of a value class, the underlying data is copied to the new instance, while for handle classes the new instance points to the original data and changing values in new instance changes them in the original. A class can be defined as a handle by inheriting from the <code>handle</code> class.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef valueClass
+    properties
+        data
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>and</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef handleClass <span class="token operator">&lt;</span> handle
+    properties
+        data
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>then</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token operator">&gt;</span><span class="token operator">&gt;</span> v1 <span class="token operator">=</span> valueClass<span class="token punctuation">;</span>
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> v1<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> v2 <span class="token operator">=</span> v1<span class="token punctuation">;</span>
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> v2<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> v1<span class="token punctuation">.</span>data
+ans <span class="token operator">=</span>
+     <span class="token number">5</span>
+
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> h1 <span class="token operator">=</span> handleClass<span class="token punctuation">;</span>
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> h1<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">;</span>
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> h2 <span class="token operator">=</span> h1<span class="token punctuation">;</span>
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> h2<span class="token punctuation">.</span>data <span class="token operator">=</span> <span class="token number">7</span><span class="token punctuation">;</span>
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> h1<span class="token punctuation">.</span>data
+ans <span class="token operator">=</span>
+     <span class="token number">7</span>
+
+</code></pre></div><h2 id="defining-a-class"><a href="#defining-a-class" class="header-anchor">#</a> Defining a class</h2> <p>A class can be defined using <code>classdef</code> in an <code>.m</code> file with the same name as the class. The file can contain the <code>classdef</code>...<code>end</code> block and local functions for use within class methods.</p> <p>The most general MATLAB class definition has the following structure:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token function">classdef</span> <span class="token punctuation">(</span>ClassAttribute <span class="token operator">=</span> expression<span class="token punctuation">,</span> <span class="token punctuation">...</span><span class="token punctuation">)</span> ClassName <span class="token operator">&lt;</span> ParentClass1 <span class="token operator">&amp;</span> ParentClass2 <span class="token operator">&amp;</span> <span class="token punctuation">...</span>
+
+   <span class="token function">properties</span> <span class="token punctuation">(</span>PropertyAttributes<span class="token punctuation">)</span> 
+      PropertyName
+   <span class="token keyword">end</span> 
+
+   <span class="token function">methods</span> <span class="token punctuation">(</span>MethodAttributes<span class="token punctuation">)</span> 
+      <span class="token keyword">function</span> obj <span class="token operator">=</span> <span class="token function">methodName</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span>arg2<span class="token punctuation">,</span><span class="token punctuation">...</span><span class="token punctuation">)</span>
+         <span class="token punctuation">...</span>
+      <span class="token keyword">end</span>
+   <span class="token keyword">end</span>
+
+   <span class="token function">events</span> <span class="token punctuation">(</span>EventAttributes<span class="token punctuation">)</span> 
+      EventName
+   <span class="token keyword">end</span>
+
+   enumeration
+      EnumName
+   <span class="token keyword">end</span>
+
+<span class="token keyword">end</span>
+
+</code></pre></div><p>MATLAB Documentation: <a href="http://www.mathworks.com/help/matlab/matlab_oop/class-attributes.html" target="_blank" rel="noopener noreferrer">Class attributes<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, <a href="http://www.mathworks.com/help/matlab/matlab_oop/property-attributes.html" target="_blank" rel="noopener noreferrer">Property attributes<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, <a href="http://www.mathworks.com/help/matlab/matlab_oop/method-attributes.html" target="_blank" rel="noopener noreferrer">Method attributes<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, <a href="http://www.mathworks.com/help/matlab/matlab_oop/event-attributes.html" target="_blank" rel="noopener noreferrer">Event attributes<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>, <a href="http://www.mathworks.com/help/matlab/matlab_oop/enumeration-class-restrictions.html" target="_blank" rel="noopener noreferrer">Enumeration class restrictions<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <h3 id="example-class"><a href="#example-class" class="header-anchor">#</a> Example class:</h3> <p>A class called <code>Car</code> can be defined in file <code>Car.m</code> as</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef Car <span class="token operator">&lt;</span> handle <span class="token comment">% handle class so properties persist</span>
+    properties
+        make
+        model
+        mileage <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span>
+
+    methods
+        <span class="token keyword">function</span> obj <span class="token operator">=</span> <span class="token function">Car</span><span class="token punctuation">(</span>make<span class="token punctuation">,</span> model<span class="token punctuation">)</span>
+            obj<span class="token punctuation">.</span>make <span class="token operator">=</span> make<span class="token punctuation">;</span>
+            obj<span class="token punctuation">.</span>model <span class="token operator">=</span> model<span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+        <span class="token keyword">function</span> <span class="token function">drive</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> milesDriven<span class="token punctuation">)</span>
+            obj<span class="token punctuation">.</span>mileage <span class="token operator">=</span> obj<span class="token punctuation">.</span>mileage <span class="token operator">+</span> milesDriven<span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Note that the constructor is a method with the same name as the class.
+&lt;A constructor is a special method of a class or structure in object-oriented programming that initializes an object of that type. A constructor is an instance method that usually has the same name as the class, and can be used to set the values of the members of an object, either to default or to user-defined values.&gt;</p> <p>An instance of this class can be created by calling the constructor;</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token operator">&gt;</span><span class="token operator">&gt;</span> myCar <span class="token operator">=</span> <span class="token function">Car</span><span class="token punctuation">(</span><span class="token string">'Ford'</span><span class="token punctuation">,</span> <span class="token string">'Mustang'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">/</span><span class="token operator">/</span>creating an instance of car class 
+
+</code></pre></div><p>Calling the <code>drive</code> method will increment the mileage</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token operator">&gt;</span><span class="token operator">&gt;</span> myCar<span class="token punctuation">.</span>mileage 
+    
+    ans <span class="token operator">=</span> 
+            <span class="token number">0</span>
+
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> myCar<span class="token punctuation">.</span><span class="token function">drive</span><span class="token punctuation">(</span><span class="token number">450</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token operator">&gt;</span><span class="token operator">&gt;</span> myCar<span class="token punctuation">.</span>mileage
+    
+   ans <span class="token operator">=</span> 
+            <span class="token number">450</span>
+
+</code></pre></div><h2 id="constructors"><a href="#constructors" class="header-anchor">#</a> Constructors</h2> <p>A <a href="http://uk.mathworks.com/help/matlab/matlab_oop/class-constructor-methods.html?requestedDomain=www.mathworks.com" target="_blank" rel="noopener noreferrer">constructor<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> is a special method in a class that is called when an instance of an object is created. It is a regular MATLAB function that accepts input parameters but it also must follow certain <a href="http://uk.mathworks.com/help/matlab/matlab_oop/class-constructor-methods.html?requestedDomain=www.mathworks.com" target="_blank" rel="noopener noreferrer">rules<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>.</p> <p>Constructors are not required as MATLAB creates a default one. In practice, however, this is a place to define a state of an object. For example, properties can be restricted by specifying <a href="http://uk.mathworks.com/help/matlab/matlab_oop/property-attributes.html" target="_blank" rel="noopener noreferrer">attributes<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>. Then, a constructor can <a href="http://uk.mathworks.com/help/matlab/matlab_oop/specifying-properties.html#brqy3km-10" target="_blank" rel="noopener noreferrer">initalize<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> such properties by default or user defined values which in fact can sent by input parameters of a constructor.</p> <p><strong>Calling a constructor of a simple class</strong></p> <p>This is a simple class <code>Person</code>.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef Person
+    properties
+        name
+        surname
+        address
+    <span class="token keyword">end</span>
+    
+    methods
+        <span class="token keyword">function</span> obj <span class="token operator">=</span> <span class="token function">Person</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span>surname<span class="token punctuation">,</span>address<span class="token punctuation">)</span>
+            obj<span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+            obj<span class="token punctuation">.</span>surname <span class="token operator">=</span> surname<span class="token punctuation">;</span>
+            obj<span class="token punctuation">.</span>address <span class="token operator">=</span> address<span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>The name of a constructor is the same the name of a class. Consequently, constructors are called by the name of its class. A class <code>Person</code> can be created as follows:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token operator">&gt;</span><span class="token operator">&gt;</span> p <span class="token operator">=</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token string">'John'</span><span class="token punctuation">,</span><span class="token string">'Smith'</span><span class="token punctuation">,</span><span class="token string">'London'</span><span class="token punctuation">)</span>
+p <span class="token operator">=</span> 
+  Person with properties<span class="token operator">:</span>
+
+       name<span class="token operator">:</span> <span class="token string">'John'</span>
+    surname<span class="token operator">:</span> <span class="token string">'Smith'</span>
+    address<span class="token operator">:</span> <span class="token string">'London'</span>
+
+</code></pre></div><p><strong>Calling a constructor of a child class</strong></p> <p>Classes can be inherited from parent classes if the share common properties or methods. When a class is inherited from another, it is likely that a constructor of a parent class has to be called.</p> <p>A class <code>Member</code> inherits from a class <code>Person</code> because <code>Member</code> uses the same properties as the class Person but it also adds <code>payment</code> to its definition.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef Member <span class="token operator">&lt;</span> Person
+    properties
+        payment
+    <span class="token keyword">end</span>
+
+    methods
+        <span class="token keyword">function</span> obj <span class="token operator">=</span> <span class="token function">Member</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span>surname<span class="token punctuation">,</span>address<span class="token punctuation">,</span>payment<span class="token punctuation">)</span>
+            obj <span class="token operator">=</span> obj<span class="token operator">@</span><span class="token function">Person</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span>surname<span class="token punctuation">,</span>address<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            obj<span class="token punctuation">.</span>payment <span class="token operator">=</span> payment<span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Similarly to the class <code>Person</code>, <code>Member</code> is created by calling its constructor:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code><span class="token operator">&gt;</span><span class="token operator">&gt;</span> m <span class="token operator">=</span> <span class="token function">Member</span><span class="token punctuation">(</span><span class="token string">'Adam'</span><span class="token punctuation">,</span><span class="token string">'Woodcock'</span><span class="token punctuation">,</span><span class="token string">'Manchester'</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span>
+m <span class="token operator">=</span> 
+  Member with properties<span class="token operator">:</span>
+
+    payment<span class="token operator">:</span> <span class="token number">20</span>
+       name<span class="token operator">:</span> <span class="token string">'Adam'</span>
+    surname<span class="token operator">:</span> <span class="token string">'Woodcock'</span>
+    address<span class="token operator">:</span> <span class="token string">'Manchester'</span>
+
+</code></pre></div><p>A constructor of <code>Person</code> requires three input parameters. <code>Member</code> must respect this fact and therefore call a constructor of the class <code>Person</code> with three parameters. It is fulfilled by the line:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>obj <span class="token operator">=</span> obj<span class="token operator">@</span><span class="token function">Person</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span>surname<span class="token punctuation">,</span>address<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The example above shows the case when a child class needs information for its parent class. This is why a constructor of <code>Member</code> requires four parameters: three for its parent class and one for itself.</p> <h2 id="inheriting-from-classes-and-abstract-classes"><a href="#inheriting-from-classes-and-abstract-classes" class="header-anchor">#</a> Inheriting from classes and abstract classes</h2> <p>Disclaimer: the examples presented here are only for the purpose of showing the use of abstract classes and inheritance and may not necessarily be of a practical use. Also, there is no sich thing as polymorphic in MATLAB and therefore the use of abstract classes is limited. This example is to show who to create a class, inherit from another class and apply an abstract class to define a common interface.</p> <p>The use of abstract classes is rather limited in MATLAB but it still can come useful on a couple of occasions.</p> <p>Let's say we want a message logger. We might create a class similar to the one below:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef ScreenLogger
+    <span class="token function">properties</span><span class="token punctuation">(</span>Access<span class="token operator">=</span>protected<span class="token punctuation">)</span>
+        scrh<span class="token punctuation">;</span>
+    <span class="token keyword">end</span>
+    
+    methods
+        <span class="token keyword">function</span> obj <span class="token operator">=</span> <span class="token function">ScreenLogger</span><span class="token punctuation">(</span>screenhandler<span class="token punctuation">)</span>
+            obj<span class="token punctuation">.</span>scrh <span class="token operator">=</span> screenhandler<span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+        
+        <span class="token keyword">function</span> <span class="token function">LogMessage</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> varargin<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token operator">~</span><span class="token function">isempty</span><span class="token punctuation">(</span>varargin<span class="token punctuation">)</span>
+                varargin<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">num2str</span><span class="token punctuation">(</span>varargin<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">fprintf</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>scrh<span class="token punctuation">,</span> <span class="token string">'%s\n'</span><span class="token punctuation">,</span> <span class="token function">sprintf</span><span class="token punctuation">(</span>varargin<span class="token punctuation">{</span><span class="token operator">:</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">end</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p><strong>Properties and methods</strong></p> <p>In short, properties hold a state of an object whilst methods are like interface and define actions on objects.</p> <p>The property <code>scrh</code> is protected. This is why it must be initialized in a constructor. There are other methods (getters) to access this property but it is out of cope of this example. Properties and methods can be access via a variable that holds a reference to an object by using dot notation followed by a name of a method or a property:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>mylogger <span class="token operator">=</span> <span class="token function">ScreenLogger</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                         <span class="token comment">% OK</span>
+mylogger<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span><span class="token string">'My %s %d message'</span><span class="token punctuation">,</span> <span class="token string">'very'</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">% OK</span>
+mylogger<span class="token punctuation">.</span>scrh <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>                                  <span class="token comment">% ERROR!!! Access denied</span>
+
+</code></pre></div><p>Properties and methods can be public, private, or protected. In this case, protected means that I will be able to access to <code>scrh</code> from an inherited class but not from outside. By default all properties and methods are public. Therefore <code>LogMessage()</code> can freely be used outside the class definition. Also <code>LogMessage</code> defines an interface meaning this is what we must call when we want an object to log our custom messages.</p> <p><strong>Application</strong></p> <p>Let's say I have a script where I utilize my logger:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>clc<span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger <span class="token operator">=</span> <span class="token function">ScreenLogger</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>If I have multiple places where I use the same logger and then want to change it to something more sophisticated, such as write a message in a file, I would have to create another object:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef DeepLogger
+    <span class="token function">properties</span><span class="token punctuation">(</span>SetAccess<span class="token operator">=</span>protected<span class="token punctuation">)</span>
+        FileName
+    <span class="token keyword">end</span>
+    methods
+        <span class="token keyword">function</span> obj <span class="token operator">=</span> <span class="token function">DeepLogger</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span>
+            obj<span class="token punctuation">.</span>FileName <span class="token operator">=</span> filename<span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+        
+        <span class="token keyword">function</span> <span class="token function">LogMessage</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> varargin<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token operator">~</span><span class="token function">isempty</span><span class="token punctuation">(</span>varargin<span class="token punctuation">)</span>
+                varargin<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">num2str</span><span class="token punctuation">(</span>varargin<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                fid <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>fullfname<span class="token punctuation">,</span> <span class="token string">'a+t'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">fprintf</span><span class="token punctuation">(</span>fid<span class="token punctuation">,</span> <span class="token string">'%s\n'</span><span class="token punctuation">,</span> <span class="token function">sprintf</span><span class="token punctuation">(</span>varargin<span class="token punctuation">{</span><span class="token operator">:</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">fclose</span><span class="token punctuation">(</span>fid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">end</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span> 
+<span class="token keyword">end</span>
+
+</code></pre></div><p>and just change one line of a code into this:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>clc<span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger <span class="token operator">=</span> <span class="token function">DeepLogger</span><span class="token punctuation">(</span><span class="token string">'mymessages.log'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>The above method will simply open a file, append a message at the end of the file and close it. At the moment, to be consistent with my interface, I need to remember that the name of a method is <code>LogMessage()</code> but it could equally be anything else. MATLAB can force developper to stick to the same name by using abstract classes. Let's say we define a common interface for any logger:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef MessageLogger
+    <span class="token function">methods</span><span class="token punctuation">(</span>Abstract<span class="token operator">=</span>true<span class="token punctuation">)</span>
+        <span class="token function">LogMessage</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> varargin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Now, if both <code>ScreenLogger</code> and <code>DeepLogger</code> inherit from this class, MATLAB will generate an error if <code>LogMessage()</code> is not defined. Abstract classes help to build similar classes which can use the same interface.</p> <p>For the sake of this exmaple, I will make slightly different change. I am going to assume that DeepLogger will do both logging message on a screen and in a file at the same time. Because <code>ScreenLogger</code> already log messages on screen, I am going to inherit <code>DeepLogger</code> from the <code>ScreenLoggger</code> to avoid repetition. <code>ScreenLogger</code> doesn't change at all apart from the first line:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef ScreenLogger <span class="token operator">&lt;</span> MessageLogger
+<span class="token operator">/</span><span class="token operator">/</span> the rest of previous code 
+
+</code></pre></div><p>However, <code>DeepLogger</code> needs more changes in the <code>LogMessage</code> method:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef DeepLogger <span class="token operator">&lt;</span> MessageLogger <span class="token operator">&amp;</span> ScreenLogger
+    <span class="token function">properties</span><span class="token punctuation">(</span>SetAccess<span class="token operator">=</span>protected<span class="token punctuation">)</span>
+        FileName
+        Path
+    <span class="token keyword">end</span>
+    methods
+        <span class="token keyword">function</span> obj <span class="token operator">=</span> <span class="token function">DeepLogger</span><span class="token punctuation">(</span>screenhandler<span class="token punctuation">,</span> filename<span class="token punctuation">)</span>
+            <span class="token punctuation">[</span>path<span class="token punctuation">,</span>filen<span class="token punctuation">,</span>ext<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">fileparts</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            obj<span class="token punctuation">.</span>FileName <span class="token operator">=</span> <span class="token punctuation">[</span>filen ext<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            pbj<span class="token punctuation">.</span>Path     <span class="token operator">=</span> pathn<span class="token punctuation">;</span>
+            obj <span class="token operator">=</span> obj<span class="token operator">@</span><span class="token function">ScreenLogger</span><span class="token punctuation">(</span>screenhandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+        <span class="token keyword">function</span> <span class="token function">LogMessage</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> varargin<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token operator">~</span><span class="token function">isempty</span><span class="token punctuation">(</span>varargin<span class="token punctuation">)</span>
+                varargin<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">num2str</span><span class="token punctuation">(</span>varargin<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                LogMessage<span class="token operator">@</span><span class="token function">ScreenLogger</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> varargin<span class="token punctuation">{</span><span class="token operator">:</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                fid <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>fullfname<span class="token punctuation">,</span> <span class="token string">'a+t'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">fprintf</span><span class="token punctuation">(</span>fid<span class="token punctuation">,</span> <span class="token string">'%s\n'</span><span class="token punctuation">,</span> <span class="token function">sprintf</span><span class="token punctuation">(</span>varargin<span class="token punctuation">{</span><span class="token operator">:</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">fclose</span><span class="token punctuation">(</span>fid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">end</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div><p>Firstly, I simply initialize properties in the constructor. Secondly, because this class inherits from <code>ScreenLogger</code> I have to initialize this parrent object as well. This line is even more important because <code>ScreenLogger</code> constructor requires one parameter to initalize its own object. This line:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>obj <span class="token operator">=</span> obj<span class="token operator">@</span><span class="token function">ScreenLogger</span><span class="token punctuation">(</span>screenhandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>simply says &quot;call the consructor of ScreenLogger and initalize it with a screen handler&quot;. It is worth noting here that I have defined <code>scrh</code> as protected. Therefore, I could equally access this property from <code>DeepLogger</code>. If the property was defined as private. The only way to intialize it would be using consuctor.</p> <p>Another change is in section <code>methods</code>. Again to avoid repetition, I call <code>LogMessage()</code> from a parent class to log a message on a screen. If I had to change anything to make improvements in screen logging, now I have to do it in one place. The rest code is the same as it is a part of <code>DeepLogger</code>.</p> <p>Because this class also inherits from an abstract class <code>MessageLogger</code> I had to make sure that <code>LogMessage()</code> inside <code>DeepLogger</code> is also defined. Inheritting from <code>MessageLogger</code> is a little bit tricky here. I think it cases redefinition of <code>LogMessage</code> mandatory--my guess.</p> <p>In terms of the code where the a logger is applied, thanks to a common interface in classes, I can rest assure ther changin this one line in the whole code would not make any issues. The same messages will be log on screen as before but additionally the code will write such messages to a file.</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>clc<span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger <span class="token operator">=</span> <span class="token function">DeepLogger</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'mylogfile.log'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">% ... a code</span>
+logger<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span><span class="token string">'something'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><p>I hope these examples explained the use of classes, the use of inheritance, and the use of abstract classes.</p> <p>PS. The solution for the above problem is one of many. Another solution, less complex, would be to make <code>ScreenLoger</code> to be a component of another logger like <code>FileLogger</code> etc. <code>ScreenLogger</code> would be held in one of the properties. Its <code>LogMessage</code> would simply call <code>LogMessage</code> of the <code>ScreenLogger</code> and show text on a screen. I have chosen more complex approach to rather show how classes work in MATLAB. The example code below:</p> <div class="language-matlab extra-class"><pre class="language-matlab"><code>classdef DeepLogger <span class="token operator">&lt;</span> MessageLogger
+    <span class="token function">properties</span><span class="token punctuation">(</span>SetAccess<span class="token operator">=</span>protected<span class="token punctuation">)</span>
+        FileName
+        Path
+        ScrLogger
+    <span class="token keyword">end</span>
+    methods
+        <span class="token keyword">function</span> obj <span class="token operator">=</span> <span class="token function">DeepLogger</span><span class="token punctuation">(</span>screenhandler<span class="token punctuation">,</span> filename<span class="token punctuation">)</span>
+            <span class="token punctuation">[</span>path<span class="token punctuation">,</span>filen<span class="token punctuation">,</span>ext<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">fileparts</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            obj<span class="token punctuation">.</span>FileName     <span class="token operator">=</span> <span class="token punctuation">[</span>filen ext<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            obj<span class="token punctuation">.</span>Path         <span class="token operator">=</span> pathn<span class="token punctuation">;</span>
+            obj<span class="token punctuation">.</span>ScrLogger    <span class="token operator">=</span> <span class="token function">ScreenLogger</span><span class="token punctuation">(</span>screenhandler<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">end</span>
+        <span class="token keyword">function</span> <span class="token function">LogMessage</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> varargin<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> <span class="token operator">~</span><span class="token function">isempty</span><span class="token punctuation">(</span>varargin<span class="token punctuation">)</span>
+                varargin<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">num2str</span><span class="token punctuation">(</span>varargin<span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                obj<span class="token punctuation">.</span><span class="token function">LogMessage</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>ScrLogger<span class="token punctuation">,</span> varargin<span class="token punctuation">{</span><span class="token operator">:</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">% &lt;-------- thechange here</span>
+                fid <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>fullfname<span class="token punctuation">,</span> <span class="token string">'a+t'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">fprintf</span><span class="token punctuation">(</span>fid<span class="token punctuation">,</span> <span class="token string">'%s\n'</span><span class="token punctuation">,</span> <span class="token function">sprintf</span><span class="token punctuation">(</span>varargin<span class="token punctuation">{</span><span class="token operator">:</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">fclose</span><span class="token punctuation">(</span>fid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">end</span>
+        <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span>
+
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/matlab/object-oriented-programming.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/matlab/for-loops.html" class="prev">
+        For loops
+      </a></span> <span class="next"><a href="/matlab/vectorization.html">
+        Vectorization
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/1930.0da6011f.js" defer></script>
+  </body>
+</html>

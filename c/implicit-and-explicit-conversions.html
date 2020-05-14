@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>C - Implicit and Explicit Conversions</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="description" content="Integer Conversions in Function Calls, Pointer Conversions in Function Calls">
+    <meta property="og:site_name" content="DevTut">
+    <meta property="og:title" content="C - Implicit and Explicit Conversions">
+    <meta property="og:description" content="Integer Conversions in Function Calls, Pointer Conversions in Function Calls">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="/c/implicit-and-explicit-conversions.html">
+    <meta property="og:image" content="/logo.png">
+    <meta name="twitter:title" content="C - Implicit and Explicit Conversions">
+    <meta name="twitter:description" content="Integer Conversions in Function Calls, Pointer Conversions in Function Calls">
+    <meta name="twitter:url" content="/c/implicit-and-explicit-conversions.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="msapplication-TileImage" content="/mstile-150x150.png">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="google-site-verification" content="76_rKXgwMVIjd-axJC_1zPV9OS4mEjvtgjYOWVkAdnQ">
+    <link rel="preload" href="/assets/css/0.styles.8b877eb8.css" as="style"><link rel="preload" href="/assets/js/app.ced448ab.js" as="script"><link rel="preload" href="/assets/js/3.f1d73125.js" as="script"><link rel="preload" href="/assets/js/572.cf0549c1.js" as="script">
+    <link rel="stylesheet" href="/assets/css/0.styles.8b877eb8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">DevTut</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"> <a href="https://github.com/devtut/generate" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>C</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/c/" class="sidebar-link">Disclaimer</a></li><li><a href="/c/getting-started-with-c-language.html" class="sidebar-link">Getting started with C Language</a></li><li><a href="/c/comments.html" class="sidebar-link">Comments</a></li><li><a href="/c/data-types.html" class="sidebar-link">Data Types</a></li><li><a href="/c/operators.html" class="sidebar-link">Operators</a></li><li><a href="/c/boolean.html" class="sidebar-link">Boolean</a></li><li><a href="/c/strings.html" class="sidebar-link">Strings</a></li><li><a href="/c/literals-for-numbers-characters-and-strings.html" class="sidebar-link">Literals for numbers, characters and strings</a></li><li><a href="/c/compound-literals.html" class="sidebar-link">Compound Literals</a></li><li><a href="/c/bit-fields.html" class="sidebar-link">Bit-fields</a></li><li><a href="/c/arrays.html" class="sidebar-link">Arrays</a></li><li><a href="/c/linked-lists.html" class="sidebar-link">Linked lists</a></li><li><a href="/c/enumerations.html" class="sidebar-link">Enumerations</a></li><li><a href="/c/structs.html" class="sidebar-link">Structs</a></li><li><a href="/c/standard-math.html" class="sidebar-link">Standard Math</a></li><li><a href="/c/iteration-statements-loops-for-while-do-while.html" class="sidebar-link">Iteration Statements/Loops: for, while, do-while</a></li><li><a href="/c/selection-statements.html" class="sidebar-link">Selection Statements</a></li><li><a href="/c/initialization.html" class="sidebar-link">Initialization</a></li><li><a href="/c/declaration-vs-definition.html" class="sidebar-link">Declaration vs Definition</a></li><li><a href="/c/files-and-i-o-streams.html" class="sidebar-link">Files and I/O streams</a></li><li><a href="/c/formatted-input-output.html" class="sidebar-link">Formatted Input/Output</a></li><li><a href="/c/pointers.html" class="sidebar-link">Pointers</a></li><li><a href="/c/sequence-points.html" class="sidebar-link">Sequence points</a></li><li><a href="/c/function-pointers.html" class="sidebar-link">Function Pointers</a></li><li><a href="/c/function-parameters.html" class="sidebar-link">Function Parameters</a></li><li><a href="/c/pass-2d-arrays-to-functions.html" class="sidebar-link">Pass 2D-arrays to functions</a></li><li><a href="/c/error-handling.html" class="sidebar-link">Error handling</a></li><li><a href="/c/undefined-behavior.html" class="sidebar-link">Undefined behavior</a></li><li><a href="/c/random-number-generation.html" class="sidebar-link">Random Number Generation</a></li><li><a href="/c/preprocessor-and-macros.html" class="sidebar-link">Preprocessor and Macros</a></li><li><a href="/c/signal-handling.html" class="sidebar-link">Signal handling</a></li><li><a href="/c/variable-arguments.html" class="sidebar-link">Variable arguments</a></li><li><a href="/c/assertion.html" class="sidebar-link">Assertion</a></li><li><a href="/c/generic-selection.html" class="sidebar-link">Generic selection</a></li><li><a href="/c/x-macros.html" class="sidebar-link">X-macros</a></li><li><a href="/c/aliasing-and-effective-type.html" class="sidebar-link">Aliasing and effective type</a></li><li><a href="/c/compilation.html" class="sidebar-link">Compilation</a></li><li><a href="/c/identifier-scope.html" class="sidebar-link">Identifier Scope</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/implicit-and-explicit-conversions.html" class="active sidebar-link">Implicit and Explicit Conversions</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/c/implicit-and-explicit-conversions.html#integer-conversions-in-function-calls" class="sidebar-link">Integer Conversions in Function Calls</a></li><li class="sidebar-sub-header"><a href="/c/implicit-and-explicit-conversions.html#pointer-conversions-in-function-calls" class="sidebar-link">Pointer Conversions in Function Calls</a></li></ul></li><li><a href="/c/type-qualifiers.html" class="sidebar-link">Type Qualifiers</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/typedef.html" class="sidebar-link">Typedef</a></li><li><a href="/c/storage-classes.html" class="sidebar-link">Storage Classes</a></li><li><a href="/c/declarations.html" class="sidebar-link">Declarations</a></li><li><a href="/c/inline-assembly.html" class="sidebar-link">Inline assembly</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/structure-padding-and-packing.html" class="sidebar-link">Structure Padding and Packing</a></li><li><a href="/c/memory-management.html" class="sidebar-link">Memory management</a></li><li><a href="/c/implementation-defined-behaviour.html" class="sidebar-link">Implementation-defined behaviour</a></li><li><a href="/c/atomics.html" class="sidebar-link">Atomics</a></li><li><a href="/c/jump-statements.html" class="sidebar-link">Jump Statements</a></li><li><a href="/c/create-and-include-header-files.html" class="sidebar-link">Create and include header files</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/ctype-h-character-classification-conversion.html" class="sidebar-link">— character classification &amp; conversion</a></li><li><a href="/c/side-effects.html" class="sidebar-link">Side Effects</a></li><li><a href="/c/multi-character-character-sequence.html" class="sidebar-link">Multi-Character Character Sequence</a></li><li><a href="/c/constraints.html" class="sidebar-link">Constraints</a></li><li><a href="/c/inlining.html" class="sidebar-link">Inlining</a></li><li><a href="/c/unions.html" class="sidebar-link">Unions</a></li><li><a href="/c/threads-native.html" class="sidebar-link">Threads (native)</a></li><li><a href="/c/multithreading.html" class="sidebar-link">Multithreading</a></li><li><a href="/c/interprocess-communication-ipc.html" class="sidebar-link">Interprocess Communication (IPC)</a></li><li><a href="/c/testing-frameworks.html" class="sidebar-link">Testing frameworks</a></li><li><a href="/c/valgrind.html" class="sidebar-link">Valgrind</a></li><li><a href="/c/common-c-programming-idioms-and-developer-practices.html" class="sidebar-link">Common C programming idioms and developer practices</a></li><li><a href="/c/common-pitfalls.html" class="sidebar-link">Common pitfalls</a></li><li><a href="/c/contributors.html" class="sidebar-link">The Contributors</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="implicit-and-explicit-conversions"><a href="#implicit-and-explicit-conversions" class="header-anchor">#</a> Implicit and Explicit Conversions</h1> <h2 id="integer-conversions-in-function-calls"><a href="#integer-conversions-in-function-calls" class="header-anchor">#</a> Integer Conversions in Function Calls</h2> <p>Given that the function has a proper prototype, integers are widened for calls to functions according to the rules of integer conversion, C11 6.3.1.3.</p> <blockquote></blockquote> <p>**6.3.1.3 Signed and unsigned integers**<br>
+When a value with integer type is converted to another integer type other than _Bool, if the value can
+be represented by the new type, it is unchanged.</p> <p>Otherwise, if the new type is unsigned, the value is converted by
+repeatedly adding or subtracting one more than the maximum value that
+can be represented in the new type until the value is in the range of
+the new type.</p> <p>Otherwise, the new type is signed and the value cannot be represented
+in it; either the result is implementation-defined or an
+implementation-defined signal is raised.</p> <p>Usually you should not truncate a wide signed type to a narrower signed type, because obviously the values can't fit and there is no clear meaning that this should have. The C standard cited above defines these cases to be &quot;implementation-defined&quot;, that is, they are not portable.</p> <p>The following example supposes that <code>int</code> is 32 bit wide.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdint.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">param_u8</span><span class="token punctuation">(</span>uint8_t val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s val is %d\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* val is promoted to int */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">param_u16</span><span class="token punctuation">(</span>uint16_t val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s val is %d\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* val is promoted to int */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">param_u32</span><span class="token punctuation">(</span>uint32_t val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s val is %u\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* here val fits into unsigned */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">param_u64</span><span class="token punctuation">(</span>uint64_t val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s val is &quot;</span> PRI64u <span class="token string">&quot;\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* Fixed with format string */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">param_s8</span><span class="token punctuation">(</span>int8_t val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s val is %d\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* val is promoted to int */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">param_s16</span><span class="token punctuation">(</span>int16_t val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s val is %d\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* val is promoted to int */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">param_s32</span><span class="token punctuation">(</span>int32_t val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s val is %d\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* val has same width as int */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">param_s64</span><span class="token punctuation">(</span>int64_t val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s val is &quot;</span> PRI64d <span class="token string">&quot;\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> val<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* Fixed with format string */</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/* Declare integers of various widths */</span>
+    uint8_t  u8  <span class="token operator">=</span> <span class="token number">127</span><span class="token punctuation">;</span>
+    uint8_t  s64  <span class="token operator">=</span> INT64_MAX<span class="token punctuation">;</span>
+
+    <span class="token comment">/* Integer argument is widened when function parameter is wider */</span>
+    <span class="token function">param_u8</span><span class="token punctuation">(</span>u8<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">/* param_u8 val is 127 */</span>
+    <span class="token function">param_u16</span><span class="token punctuation">(</span>u8<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* param_u16 val is 127 */</span>
+    <span class="token function">param_u32</span><span class="token punctuation">(</span>u8<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* param_u32 val is 127 */</span>
+    <span class="token function">param_u64</span><span class="token punctuation">(</span>u8<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* param_u64 val is 127 */</span>
+    <span class="token function">param_s8</span><span class="token punctuation">(</span>u8<span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">/* param_s8 val is 127 */</span>
+    <span class="token function">param_s16</span><span class="token punctuation">(</span>u8<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* param_s16 val is 127 */</span>
+    <span class="token function">param_s32</span><span class="token punctuation">(</span>u8<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* param_s32 val is 127 */</span>
+    <span class="token function">param_s64</span><span class="token punctuation">(</span>u8<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* param_s64 val is 127 */</span>
+
+    <span class="token comment">/* Integer argument is truncated when function parameter is narrower */</span>
+    <span class="token function">param_u8</span><span class="token punctuation">(</span>s64<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* param_u8 val is 255 */</span>
+    <span class="token function">param_u16</span><span class="token punctuation">(</span>s64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* param_u16 val is 65535 */</span>
+    <span class="token function">param_u32</span><span class="token punctuation">(</span>s64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* param_u32 val is 4294967295 */</span>
+    <span class="token function">param_u64</span><span class="token punctuation">(</span>s64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* param_u64 val is 9223372036854775807 */</span>
+    <span class="token function">param_s8</span><span class="token punctuation">(</span>s64<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">/* param_s8 val is implementation defined */</span>
+    <span class="token function">param_s16</span><span class="token punctuation">(</span>s64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* param_s16 val is implementation defined */</span>
+    <span class="token function">param_s32</span><span class="token punctuation">(</span>s64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* param_s32 val is implementation defined */</span>
+    <span class="token function">param_s64</span><span class="token punctuation">(</span>s64<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* param_s64 val is 9223372036854775807 */</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="pointer-conversions-in-function-calls"><a href="#pointer-conversions-in-function-calls" class="header-anchor">#</a> Pointer Conversions in Function Calls</h2> <p>Pointer conversions to <code>void*</code> are implicit, but any other pointer conversion must be explicit. While the compiler allows an explicit conversion from any pointer-to-data type to any other pointer-to-data type,  accessing an object through a wrongly typed pointer is erroneous and leads to undefined behavior. The only case that these are allowed are if the types are compatible or if the pointer with which your are looking at the object is a character type.</p> <div class="language-c extra-class"><pre class="language-c"><code><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h&gt;</span></span>
+
+<span class="token keyword">void</span> <span class="token function">func_voidp</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span> voidp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s Address of ptr is %p\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> voidp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Structures have same shape, but not same type */</span>
+<span class="token keyword">struct</span> <span class="token class-name">struct_a</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> data_a<span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> <span class="token class-name">struct_b</span> <span class="token punctuation">{</span>
+    <span class="token keyword">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> data_b<span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">func_struct_b</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">struct_b</span><span class="token operator">*</span> bp<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">&quot;%s Address of ptr is %p\n&quot;</span><span class="token punctuation">,</span> <span class="token constant">__func__</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span> bp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+
+    <span class="token comment">/* Implicit ptr conversion allowed for void* */</span>
+    <span class="token function">func_voidp</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>data_a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/*
+     * Explicit ptr conversion for other types
+     *
+     * Note that here although the have identical definitions,
+     * the types are not compatible, and that the this call is
+     * erroneous and leads to undefined behavior on execution.
+     */</span>
+    <span class="token function">func_struct_b</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">struct</span> <span class="token class-name">struct_b</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>data_a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/* My output shows: */</span>
+    <span class="token comment">/* func_charp Address of ptr is 0x601030 */</span>
+    <span class="token comment">/* func_voidp Address of ptr is 0x601030 */</span>
+    <span class="token comment">/* func_struct_b Address of ptr is 0x601030 */</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h4 id="syntax"><a href="#syntax" class="header-anchor">#</a> Syntax</h4> <ul><li>Explicit Conversion (aka &quot;Casting&quot;): (type) expression</li></ul> <h4 id="remarks"><a href="#remarks" class="header-anchor">#</a> Remarks</h4> <p>&quot;<strong>Explicit conversion</strong>&quot; is also commonly referred to as &quot;casting&quot;.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/devtut/generate/edit/master/docs/c/implicit-and-explicit-conversions.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/c/common-pitfalls.html" class="prev">
+        Common pitfalls
+      </a></span> <span class="next"><a href="/c/type-qualifiers.html">
+        Type Qualifiers
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.ced448ab.js" defer></script><script src="/assets/js/3.f1d73125.js" defer></script><script src="/assets/js/572.cf0549c1.js" defer></script>
+  </body>
+</html>
