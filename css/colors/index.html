@@ -1,0 +1,1164 @@
+<!DOCTYPE html><html lang="en" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-bguv2lll"> <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Colors | DevTut</title><link rel="canonical" href="https://devtut.github.io/css/colors/"/><link rel="sitemap" href="/sitemap-index.xml"/><link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/><meta name="generator" content="Astro v6.4.2"/><meta name="generator" content="Starlight v0.39.2"/><meta property="og:title" content="Colors"/><meta property="og:type" content="article"/><meta property="og:url" content="https://devtut.github.io/css/colors/"/><meta property="og:locale" content="en"/><meta property="og:description" content="currentColor, Color Keywords, Hexadecimal Value, rgb() Notation, rgba() Notation, hsl() Notation, hsla() Notation"/><meta property="og:site_name" content="DevTut"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="currentColor, Color Keywords, Hexadecimal Value, rgb() Notation, rgba() Notation, hsl() Notation, hsla() Notation"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/_astro/print.DNXP8c50.css" media="print"><link rel="stylesheet" href="/_astro/common.RRtJxfmr.css"><script type="module" src="/_astro/page.B_tncCx8.js"></script></head> <body class="astro-bguv2lll"> <a href="#_top" class="astro-7q3lir66">Skip to content</a> <div class="page sl-flex astro-vrdttmbt"> <header class="header astro-vrdttmbt"><div class="header astro-kmkmnagf"> <div class="title-wrapper sl-flex astro-kmkmnagf"> <a href="/" class="site-title sl-flex astro-m46x6ez3">  <img class="astro-m46x6ez3" alt src="/_astro/logo.Clk3QVna.png" width="512" height="512">  <span class="astro-m46x6ez3" translate="no"> DevTut </span> </a> </div> <div class="sl-flex print:hidden astro-kmkmnagf"> <site-search class="astro-kmkmnagf astro-v37mnknz" data-translations="{&quot;placeholder&quot;:&quot;Search&quot;}"> <button data-open-modal disabled aria-label="Search" aria-keyshortcuts="Control+K" class="astro-v37mnknz"> <svg aria-hidden="true" class="astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg> <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">Search</span> <kbd class="sl-hidden md:sl-flex astro-v37mnknz" style="display: none;"> <kbd class="astro-v37mnknz">Ctrl</kbd><kbd class="astro-v37mnknz">K</kbd> </kbd> </button> <dialog style="padding:0" aria-label="Search" class="astro-v37mnknz"> <div class="dialog-frame sl-flex astro-v37mnknz">  <button data-close-modal class="sl-flex md:sl-hidden astro-v37mnknz"> Cancel </button> <div class="search-container astro-v37mnknz"> <div id="starlight__search" class="astro-v37mnknz"></div> </div> </div> </dialog> </site-search>  <script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script> <script type="module" src="/_astro/Search.astro_astro_type_script_index_0_lang.Rw77DzG6.js"></script>  </div> <div class="sl-hidden md:sl-flex print:hidden right-group astro-kmkmnagf"> <div class="sl-flex social-icons astro-kmkmnagf"> <a href="https://github.com/devtut/generate" rel="me" class="sl-flex astro-wy4te6ga"><span class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true" class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a> </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label> </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script> <script type="module">const r="starlight-theme",o=e=>e==="auto"||e==="dark"||e==="light"?e:"auto",c=()=>o(typeof localStorage<"u"&&localStorage.getItem(r));function n(e){typeof localStorage<"u"&&localStorage.setItem(r,e==="light"||e==="dark"?e:"")}const l=()=>matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function t(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e==="auto"?l():e,n(e)}matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{c()==="auto"&&t("auto")});class s extends HTMLElement{constructor(){super(),t(c()),this.querySelector("select")?.addEventListener("change",a=>{a.currentTarget instanceof HTMLSelectElement&&t(o(a.currentTarget.value))})}}customElements.define("starlight-theme-select",s);</script> <script type="module">class s extends HTMLElement{constructor(){super();const e=this.querySelector("select");e&&(e.addEventListener("change",t=>{t.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=t.currentTarget.value)}),window.addEventListener("pageshow",t=>{if(!t.persisted)return;const n=e.querySelector("option[selected]")?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}}customElements.define("starlight-lang-select",s);</script> </div> </div></header> <nav class="sidebar print:hidden astro-vrdttmbt" aria-label="Main"> <starlight-menu-button class="print:hidden astro-jif73yzw"> <button aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-jif73yzw"> <svg aria-hidden="true" class="open-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg> <svg aria-hidden="true" class="close-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg> </button> </starlight-menu-button> <script type="module">class s extends HTMLElement{constructor(){super(),this.btn=this.querySelector("button"),this.btn.addEventListener("click",()=>this.toggleExpanded());const t=this.closest("nav");t&&t.addEventListener("keyup",e=>this.closeOnEscape(e))}setExpanded(t){this.setAttribute("aria-expanded",String(t)),document.body.toggleAttribute("data-mobile-menu-expanded",t)}toggleExpanded(){this.setExpanded(this.getAttribute("aria-expanded")!=="true")}closeOnEscape(t){t.code==="Escape"&&(this.setExpanded(!1),this.btn.focus())}}customElements.define("starlight-menu-button",s);</script>  <div id="starlight__sidebar" class="sidebar-pane astro-vrdttmbt"> <div class="sidebar-content sl-flex astro-vrdttmbt"> <sl-sidebar-state-persist data-hash="1vm72s0" class="astro-kku4brbg"> <script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script>  <ul class="top-level astro-3ii7xxms"> <li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">CSS</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="0"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/css/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Disclaimer</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/getting-started-with-css/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Getting started with CSS</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/structure-and-formatting-of-a-css-rule/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Structure and Formatting of a CSS Rule</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/comments/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Comments</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/selectors/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Selectors</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/backgrounds/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Backgrounds</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/centering/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Centering</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/the-box-model/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">The Box Model</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/margins/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Margins</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/padding/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Padding</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/border/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Border</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/outlines/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Outlines</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/overflow/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Overflow</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/media-queries/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Media Queries</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/floats/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Floats</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/typography/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Typography</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/flexible-box-layout-flexbox/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Flexible Box Layout (Flexbox)</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/cascading-and-specificity/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Cascading and Specificity</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/colors/" aria-current="page" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Colors</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/opacity/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Opacity</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/length-units/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Length Units</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/pseudo-elements/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Pseudo-Elements</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/positioning/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Positioning</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/layout-control/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Layout Control</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/grid/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Grid</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/tables/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Tables</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/transitions/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Transitions</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/animations/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Animations</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/2d-transforms/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">2D Transforms</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/3d-transforms/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">3D Transforms</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/filter-property/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Filter Property</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/cursor-styling/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Cursor Styling</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/box-shadow/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">box-shadow</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/shapes-for-floats/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Shapes for Floats</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/list-styles/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">List Styles</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/counters/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Counters</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/functions/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Functions</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/custom-properties-variables/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Custom Properties (Variables)</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/single-element-shapes/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Single Element Shapes</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/columns/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Columns</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/multiple-columns/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Multiple columns</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/inline-block-layout/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Inline-Block Layout</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/inheritance/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Inheritance</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/css-image-sprites/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">CSS Image Sprites</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/clipping-and-masking/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Clipping and Masking</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/fragmentation/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Fragmentation</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/css-object-model-cssom/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">CSS Object Model (CSSOM)</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/feature-queries/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Feature Queries</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/stacking-context/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Stacking Context</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/block-formatting-contexts/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Block Formatting Contexts</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/vertical-centering/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Vertical Centering</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/object-fit-and-placement/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Object Fit and Placement</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/css-design-patterns/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">CSS design patterns</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/browser-support-prefixes/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Browser Support &amp; Prefixes</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/normalizing-browser-styles/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Normalizing Browser Styles</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/internet-explorer-hacks/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Internet Explorer Hacks</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/performance/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Performance</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/css/contributors/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">The Contributors</span>  </a> </li> </ul> </details> </li> </ul>  <script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script> </sl-sidebar-state-persist> <div class="md:sl-hidden"> <div class="mobile-preferences sl-flex astro-wu23bvmt"> <div class="social-icons astro-wu23bvmt"> <a href="https://github.com/devtut/generate" rel="me" class="sl-flex astro-wy4te6ga"><span class="sr-only astro-wy4te6ga">GitHub</span><svg aria-hidden="true" class="astro-wy4te6ga astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.08 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/></svg></a> </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Select theme</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Dark</option><option value="light" class="astro-4yphtoen">Light</option><option value="auto" selected class="astro-4yphtoen">Auto</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label> </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div> </div> </div> </div> </nav> <div class="main-frame astro-vrdttmbt">  <script type="module">const a=document.getElementById("starlight__sidebar"),n=a?.querySelector("sl-sidebar-state-persist"),o="sl-sidebar-state",i=()=>{let t=[];const e=n?.dataset.hash||"";try{const s=sessionStorage.getItem(o),r=JSON.parse(s||"{}");Array.isArray(r.open)&&r.hash===e&&(t=r.open)}catch{}return{hash:e,open:t,scroll:a?.scrollTop||0}},c=t=>{try{sessionStorage.setItem(o,JSON.stringify(t))}catch{}},d=()=>c(i()),l=(t,e)=>{const s=i();s.open[e]=t,c(s)};n?.addEventListener("click",t=>{if(!(t.target instanceof Element))return;const e=t.target.closest("summary")?.closest("details");if(!e)return;const s=e.querySelector("sl-sidebar-restore"),r=parseInt(s?.dataset.index||"");isNaN(r)||l(!e.open,r)});addEventListener("visibilitychange",()=>{document.visibilityState==="hidden"&&d()});addEventListener("pageHide",d);</script> <div class="lg:sl-flex astro-67yu43on"> <aside class="right-sidebar-container print:hidden astro-67yu43on"> <div class="right-sidebar astro-67yu43on"> <div class="lg:sl-hidden astro-pb3aqygn"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-doynk5tl"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-doynk5tl"><details id="starlight__mobile-toc" class="astro-doynk5tl"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-doynk5tl"><span class="toggle sl-flex astro-doynk5tl">On this page<svg aria-hidden="true" class="caret astro-doynk5tl astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-doynk5tl"></span></summary><div class="dropdown astro-doynk5tl"><ul class="isMobile astro-gnoq344e" style="--depth: 0;"> <li class="astro-gnoq344e" style="--depth: 0;"> <a href="#_top" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#currentcolor" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">currentColor</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#use-in-same-element" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Use in same element</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#inherited-from-parent-element" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Inherited from parent element</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#color-keywords" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Color Keywords</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#color-keywords-1" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Color Keywords</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#hexadecimal-value" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Hexadecimal Value</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#background" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Background</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#rgb-notation" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">rgb() Notation</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax-1" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#rgba-notation" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">rgba() Notation</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax-2" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#hsl-notation" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">hsl() Notation</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax-3" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#notes" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Notes</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#hsla-notation" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">hsla() Notation</span> </a> <ul class="isMobile astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax-4" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li> </ul> </li> </ul></div></details></nav></mobile-starlight-toc><script type="module" src="/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.hwBsy0Mo.js"></script></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-pb3aqygn"><div class="sl-container astro-pb3aqygn"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">On this page</h2><ul class="astro-gnoq344e" style="--depth: 0;"> <li class="astro-gnoq344e" style="--depth: 0;"> <a href="#_top" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Overview</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#currentcolor" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">currentColor</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#use-in-same-element" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Use in same element</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#inherited-from-parent-element" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Inherited from parent element</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#color-keywords" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Color Keywords</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#color-keywords-1" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Color Keywords</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#hexadecimal-value" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">Hexadecimal Value</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#background" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Background</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#rgb-notation" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">rgb() Notation</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax-1" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#rgba-notation" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">rgba() Notation</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax-2" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#hsl-notation" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">hsl() Notation</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax-3" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li><li class="astro-gnoq344e" style="--depth: 1;"> <a href="#notes" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Notes</span> </a>  </li> </ul> </li><li class="astro-gnoq344e" style="--depth: 0;"> <a href="#hsla-notation" class="astro-gnoq344e" style="--depth: 0;"> <span class="astro-gnoq344e" style="--depth: 0;">hsla() Notation</span> </a> <ul class="astro-gnoq344e" style="--depth: 1;"> <li class="astro-gnoq344e" style="--depth: 1;"> <a href="#syntax-4" class="astro-gnoq344e" style="--depth: 1;"> <span class="astro-gnoq344e" style="--depth: 1;">Syntax</span> </a>  </li> </ul> </li> </ul></nav></starlight-toc><script type="module" src="/_astro/TableOfContents.astro_astro_type_script_index_0_lang.FuRcXuRY.js"></script></div></div> </div> </aside> <div class="main-pane astro-67yu43on">  <main data-pagefind-body class="astro-bguv2lll" lang="en" dir="ltr">    <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <h1 id="_top" class="astro-j6tvhyss">Colors</h1> </div> </div> <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <div class="sl-markdown-content"> <div class="sl-heading-wrapper level-h2"><h2 id="currentcolor">currentColor</h2><a class="sl-anchor-link" href="#currentcolor"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “currentColor”</span></a></div>
+<p><code dir="auto">currentColor</code> returns the computed color value of the current element.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="use-in-same-element">Use in same element</h3><a class="sl-anchor-link" href="#use-in-same-element"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Use in same element”</span></a></div>
+<p>Here currentColor evaluates to red since the <code dir="auto">color</code> property is set to <code dir="auto">red</code>:</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.v4551.css"><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#FF6D6D;--1:#984E4D">div</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#7FDBCA;--1:#096E72">red</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">border</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--1:#AA0982"><span style="--0:#F78C6C">5</span><span style="--0:#FFEB95">px</span></span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6D6D;--1:#984E4D">solid</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">currentColor</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">box-shadow</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--1:#AA0982"><span style="--0:#F78C6C">5</span><span style="--0:#FFEB95">px</span></span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">currentColor</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="div {  color: red;  border: 5px solid currentColor;  box-shadow: 0 0 5px currentColor;}"><div></div></button></div></figure></div>
+<p>In this case, specifying currentColor for the border is most likely redundant because omitting it should produce identical results. Only use currentColor inside the border property within the same element if it would be overwritten otherwise due to a <a href="http://stackoverflow.com/documentation/css/450/cascading-and-specificity/2253/calculating-selector-specificity#t=201607221033325129018">more specific</a> selector.</p>
+<p>Since it’s the computed color, the border will be green in the following example due to the second rule overriding the first:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#FF6D6D;--1:#984E4D">div</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#7FDBCA;--1:#096E72">blue</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">border</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--1:#AA0982"><span style="--0:#F78C6C">3</span><span style="--0:#FFEB95">px</span></span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#FF6D6D;--1:#984E4D">solid</span><span style="--0:#D6DEEB;--1:#403F53"> </span><span style="--0:#7FDBCA;--1:#096E72">currentColor</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#7FDBCA;--1:#096E72">green</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="div {  color: blue;  border: 3px solid currentColor;  color: green;}"><div></div></button></div></figure></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="inherited-from-parent-element">Inherited from parent element</h3><a class="sl-anchor-link" href="#inherited-from-parent-element"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Inherited from parent element”</span></a></div>
+<p>The parent’s color is inherited, here currentColor evaluates to ‘blue’, making the child element’s border-color blue.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.parent-class</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#7FDBCA;--1:#096E72">blue</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.parent-class</span><span style="--0:#C792EA;--1:#8844AE"> </span><span style="--0:#C5E478;--1:#3B61B0">.child-class</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">border-color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#7FDBCA;--1:#096E72">currentColor</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code=".parent-class {  color: blue;}.parent-class .child-class {  border-color: currentColor;}"><div></div></button></div></figure></div>
+<p>currentColor can also be used by other rules which normally would not inherit from the color property, such as background-color. The example below shows the children using the color set in the parent as its background:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.parent-class</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#7FDBCA;--1:#096E72">blue</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.parent-class</span><span style="--0:#C792EA;--1:#8844AE"> </span><span style="--0:#C5E478;--1:#3B61B0">.child-class</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">background-color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#7FDBCA;--1:#096E72">currentColor</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code=".parent-class {  color: blue;}.parent-class .child-class {  background-color: currentColor;}"><div></div></button></div></figure></div>
+<p><strong>Possible Result:</strong></p>
+<p><a href="https://i.stack.imgur.com/rkkXo.gif"><img src="https://i.stack.imgur.com/rkkXo.gif" alt="enter image description here"></a></p>
+<div class="sl-heading-wrapper level-h2"><h2 id="color-keywords">Color Keywords</h2><a class="sl-anchor-link" href="#color-keywords"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Color Keywords”</span></a></div>
+<p>Most browsers support using color keywords to specify a color. For example, to set the <code dir="auto">color</code> of an element to blue, use the <code dir="auto">blue</code> keyword:</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.some-class</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#7FDBCA;--1:#096E72">blue</span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code=".some-class {  color: blue;}"><div></div></button></div></figure></div>
+<p>CSS keywords are not case sensitive—<code dir="auto">blue</code>, <code dir="auto">Blue</code> and <code dir="auto">BLUE</code> will all result in <code dir="auto">#0000FF</code>.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="color-keywords-1">Color Keywords</h3><a class="sl-anchor-link" href="#color-keywords-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Color Keywords”</span></a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Color name</th><th>Hex value</th><th>RGB values</th><th>Color</th></tr></thead><tbody><tr><td>AliceBlue</td><td>#F0F8FF</td><td>rgb(240,248,255)</td><td><a href="https://i.stack.imgur.com/dVsBW.png"><img src="https://i.stack.imgur.com/dVsBW.png" alt="AliceBlue"></a></td></tr><tr><td>AntiqueWhite</td><td>#FAEBD7</td><td>rgb(250,235,215)</td><td><a href="https://i.stack.imgur.com/jvOLr.png"><img src="https://i.stack.imgur.com/jvOLr.png" alt="AntiqueWhite"></a></td></tr><tr><td>Aqua</td><td>#00FFFF</td><td>rgb(0,255,255)</td><td><a href="https://i.stack.imgur.com/vvCsT.png"><img src="https://i.stack.imgur.com/vvCsT.png" alt="Aqua"></a></td></tr><tr><td>Aquamarine</td><td>#7FFFD4</td><td>rgb(127,255,212)</td><td><a href="https://i.stack.imgur.com/3grSN.png"><img src="https://i.stack.imgur.com/3grSN.png" alt="Aquamarine"></a></td></tr><tr><td>Azure</td><td>#F0FFFF</td><td>rgb(240,255,255)</td><td><a href="https://i.stack.imgur.com/bH1ms.png"><img src="https://i.stack.imgur.com/bH1ms.png" alt="Azure"></a></td></tr><tr><td>Beige</td><td>#F5F5DC</td><td>rgb(245,245,220)</td><td><a href="https://i.stack.imgur.com/fUpj6.png"><img src="https://i.stack.imgur.com/fUpj6.png" alt="Beige"></a></td></tr><tr><td>Bisque</td><td>#FFE4C4</td><td>rgb(255,228,196)</td><td><a href="https://i.stack.imgur.com/brQkJ.png"><img src="https://i.stack.imgur.com/brQkJ.png" alt="Bisque"></a></td></tr><tr><td>Black</td><td>#000000</td><td>rgb(0,0,0)</td><td><a href="https://i.stack.imgur.com/cr64Z.png"><img src="https://i.stack.imgur.com/cr64Z.png" alt="Black"></a></td></tr><tr><td>BlanchedAlmond</td><td>#FFEBCD</td><td>rgb(255,235,205)</td><td><a href="https://i.stack.imgur.com/WwRQg.png"><img src="https://i.stack.imgur.com/WwRQg.png" alt="BlanchedAlmond"></a></td></tr><tr><td>Blue</td><td>#0000FF</td><td>rgb(0,0,255)</td><td><a href="https://i.stack.imgur.com/Pn17o.png"><img src="https://i.stack.imgur.com/Pn17o.png" alt="Blue"></a></td></tr><tr><td>BlueViolet</td><td>#8A2BE2</td><td>rgb(138,43,226)</td><td><a href="https://i.stack.imgur.com/X7cq0.png"><img src="https://i.stack.imgur.com/X7cq0.png" alt="BlueViolet"></a></td></tr><tr><td>Brown</td><td>#A52A2A</td><td>rgb(165,42,42)</td><td><a href="https://i.stack.imgur.com/pgKFN.png"><img src="https://i.stack.imgur.com/pgKFN.png" alt="Brown"></a></td></tr><tr><td>BurlyWood</td><td>#DEB887</td><td>rgb(222,184,135)</td><td><a href="https://i.stack.imgur.com/GGAHU.png"><img src="https://i.stack.imgur.com/GGAHU.png" alt="BurlyWood"></a></td></tr><tr><td>CadetBlue</td><td>#5F9EA0</td><td>rgb(95,158,160)</td><td><a href="https://i.stack.imgur.com/Fx9ga.png"><img src="https://i.stack.imgur.com/Fx9ga.png" alt="CadetBlue"></a></td></tr><tr><td>Chartreuse</td><td>#7FFF00</td><td>rgb(127,255,0)</td><td><a href="https://i.stack.imgur.com/dVCUd.png"><img src="https://i.stack.imgur.com/dVCUd.png" alt="Chartreuse"></a></td></tr><tr><td>Chocolate</td><td>#D2691E</td><td>rgb(210,105,30)</td><td><a href="https://i.stack.imgur.com/U0eMw.png"><img src="https://i.stack.imgur.com/U0eMw.png" alt="Chocolate"></a></td></tr><tr><td>Coral</td><td>#FF7F50</td><td>rgb(255,127,80)</td><td><a href="https://i.stack.imgur.com/QEETt.png"><img src="https://i.stack.imgur.com/QEETt.png" alt="Coral"></a></td></tr><tr><td>CornflowerBlue</td><td>#6495ED</td><td>rgb(100,149,237)</td><td><a href="https://i.stack.imgur.com/gI2Wv.png"><img src="https://i.stack.imgur.com/gI2Wv.png" alt="CornflowerBlue"></a></td></tr><tr><td>Cornsilk</td><td>#FFF8DC</td><td>rgb(255,248,220)</td><td><a href="https://i.stack.imgur.com/9U0uV.png"><img src="https://i.stack.imgur.com/9U0uV.png" alt="Cornsilk"></a></td></tr><tr><td>Crimson</td><td>#DC143C</td><td>rgb(220,20,60)</td><td><a href="https://i.stack.imgur.com/ub3mh.png"><img src="https://i.stack.imgur.com/ub3mh.png" alt="Crimson"></a></td></tr><tr><td>Cyan</td><td>#00FFFF</td><td>rgb(0,255,255)</td><td><a href="https://i.stack.imgur.com/MM0cY.png"><img src="https://i.stack.imgur.com/MM0cY.png" alt="Cyan"></a></td></tr><tr><td>DarkBlue</td><td>#00008B</td><td>rgb(0,0,139)</td><td><a href="https://i.stack.imgur.com/YtKOx.png"><img src="https://i.stack.imgur.com/YtKOx.png" alt="DarkBlue"></a></td></tr><tr><td>DarkCyan</td><td>#008B8B</td><td>rgb(0,139,139)</td><td><a href="https://i.stack.imgur.com/qzL44.png"><img src="https://i.stack.imgur.com/qzL44.png" alt="DarkCyan"></a></td></tr><tr><td>DarkGoldenRod</td><td>#B8860B</td><td>rgb(184,134,11)</td><td><a href="https://i.stack.imgur.com/Cuf10.png"><img src="https://i.stack.imgur.com/Cuf10.png" alt="DarkGoldenRod"></a></td></tr><tr><td>DarkGray</td><td>#A9A9A9</td><td>rgb(169,169,169)</td><td><a href="https://i.stack.imgur.com/W83Ip.png"><img src="https://i.stack.imgur.com/W83Ip.png" alt="DarkGray"></a></td></tr><tr><td>DarkGrey</td><td>#A9A9A9</td><td>rgb(169,169,169)</td><td><a href="https://i.stack.imgur.com/wfBJS.png"><img src="https://i.stack.imgur.com/wfBJS.png" alt="DarkGrey"></a></td></tr><tr><td>DarkGreen</td><td>#006400</td><td>rgb(0,100,0)</td><td><a href="https://i.stack.imgur.com/jfMqO.png"><img src="https://i.stack.imgur.com/jfMqO.png" alt="DarkGreen"></a></td></tr><tr><td>DarkKhaki</td><td>#BDB76B</td><td>rgb(189,183,107)</td><td><a href="https://i.stack.imgur.com/ZdZMD.png"><img src="https://i.stack.imgur.com/ZdZMD.png" alt="DarkKhaki"></a></td></tr><tr><td>DarkMagenta</td><td>#8B008B</td><td>rgb(139,0,139)</td><td><a href="https://i.stack.imgur.com/oxUBA.png"><img src="https://i.stack.imgur.com/oxUBA.png" alt="DarkMagenta"></a></td></tr><tr><td>DarkOliveGreen</td><td>#556B2F</td><td>rgb(85,107,47)</td><td><a href="https://i.stack.imgur.com/zuMtq.png"><img src="https://i.stack.imgur.com/zuMtq.png" alt="DarkOliveGreen"></a></td></tr><tr><td>DarkOrange</td><td>#FF8C00</td><td>rgb(255,140,0)</td><td><a href="https://i.stack.imgur.com/HL4wv.png"><img src="https://i.stack.imgur.com/HL4wv.png" alt="DarkOrange"></a></td></tr><tr><td>DarkOrchid</td><td>#9932CC</td><td>rgb(153,50,204)</td><td><a href="https://i.stack.imgur.com/DEL6o.png"><img src="https://i.stack.imgur.com/DEL6o.png" alt="DarkOrchid"></a></td></tr><tr><td>DarkRed</td><td>#8B0000</td><td>rgb(139,0,0)</td><td><a href="https://i.stack.imgur.com/kB7Ws.png"><img src="https://i.stack.imgur.com/kB7Ws.png" alt="DarkRed"></a></td></tr><tr><td>DarkSalmon</td><td>#E9967A</td><td>rgb(233,150,122)</td><td><a href="https://i.stack.imgur.com/1ANMl.png"><img src="https://i.stack.imgur.com/1ANMl.png" alt="DarkSalmon"></a></td></tr><tr><td>DarkSeaGreen</td><td>#8FBC8F</td><td>rgb(143,188,143)</td><td><a href="https://i.stack.imgur.com/YnJo6.png"><img src="https://i.stack.imgur.com/YnJo6.png" alt="DarkSeaGreen"></a></td></tr><tr><td>DarkSlateBlue</td><td>#483D8B</td><td>rgb(72,61,139)</td><td><a href="https://i.stack.imgur.com/Ui2ao.png"><img src="https://i.stack.imgur.com/Ui2ao.png" alt="DarkSlateBlue"></a></td></tr><tr><td>DarkSlateGray</td><td>#2F4F4F</td><td>rgb(47,79,79)</td><td><a href="https://i.stack.imgur.com/RQKDI.png"><img src="https://i.stack.imgur.com/RQKDI.png" alt="DarkSlateGray"></a></td></tr><tr><td>DarkSlateGrey</td><td>#2F4F4F</td><td>rgb(47,79,79)</td><td><a href="https://i.stack.imgur.com/dnrhi.png"><img src="https://i.stack.imgur.com/dnrhi.png" alt="DarkSlateGrey"></a></td></tr><tr><td>DarkTurquoise</td><td>#00CED1</td><td>rgb(0,206,209)</td><td><a href="https://i.stack.imgur.com/5hFAA.png"><img src="https://i.stack.imgur.com/5hFAA.png" alt="DarkTurquoise"></a></td></tr><tr><td>DarkViolet</td><td>#9400D3</td><td>rgb(148,0,211)</td><td><a href="https://i.stack.imgur.com/Mz1e8.png"><img src="https://i.stack.imgur.com/Mz1e8.png" alt="DarkViolet"></a></td></tr><tr><td>DeepPink</td><td>#FF1493</td><td>rgb(255,20,147)</td><td><a href="https://i.stack.imgur.com/dsQkM.png"><img src="https://i.stack.imgur.com/dsQkM.png" alt="DeepPink"></a></td></tr><tr><td>DeepSkyBlue</td><td>#00BFFF</td><td>rgb(0,191,255)</td><td><a href="https://i.stack.imgur.com/St8cI.png"><img src="https://i.stack.imgur.com/St8cI.png" alt="DeepSkyBlue"></a></td></tr><tr><td>DimGray</td><td>#696969</td><td>rgb(105,105,105)</td><td><a href="https://i.stack.imgur.com/Q0jnZ.png"><img src="https://i.stack.imgur.com/Q0jnZ.png" alt="DimGray"></a></td></tr><tr><td>DimGrey</td><td>#696969</td><td>rgb(105,105,105)</td><td><a href="https://i.stack.imgur.com/YVu2z.png"><img src="https://i.stack.imgur.com/YVu2z.png" alt="DimGrey"></a></td></tr><tr><td>DodgerBlue</td><td>#1E90FF</td><td>rgb(30,144,255)</td><td><a href="https://i.stack.imgur.com/woYd8.png"><img src="https://i.stack.imgur.com/woYd8.png" alt="DodgerBlue"></a></td></tr><tr><td>FireBrick</td><td>#B22222</td><td>rgb(178,34,34)</td><td><a href="https://i.stack.imgur.com/UauLn.png"><img src="https://i.stack.imgur.com/UauLn.png" alt="FireBrick"></a></td></tr><tr><td>FloralWhite</td><td>#FFFAF0</td><td>rgb(255,250,240)</td><td><a href="https://i.stack.imgur.com/TZoP1.png"><img src="https://i.stack.imgur.com/TZoP1.png" alt="FloralWhite"></a></td></tr><tr><td>ForestGreen</td><td>#228B22</td><td>rgb(34,139,34)</td><td><a href="https://i.stack.imgur.com/mU5Ao.png"><img src="https://i.stack.imgur.com/mU5Ao.png" alt="ForestGreen"></a></td></tr><tr><td>Fuchsia</td><td>#FF00FF</td><td>rgb(255,0,255)</td><td><a href="https://i.stack.imgur.com/kUZUE.png"><img src="https://i.stack.imgur.com/kUZUE.png" alt="Fuchsia"></a></td></tr><tr><td>Gainsboro</td><td>#DCDCDC</td><td>rgb(220,220,220)</td><td><a href="https://i.stack.imgur.com/oAq7U.png"><img src="https://i.stack.imgur.com/oAq7U.png" alt="Gainsboro"></a></td></tr><tr><td>GhostWhite</td><td>#F8F8FF</td><td>rgb(248,248,255)</td><td><a href="https://i.stack.imgur.com/t3EEP.png"><img src="https://i.stack.imgur.com/t3EEP.png" alt="GhostWhite"></a></td></tr><tr><td>Gold</td><td>#FFD700</td><td>rgb(255,215,0)</td><td><a href="https://i.stack.imgur.com/T2jzS.png"><img src="https://i.stack.imgur.com/T2jzS.png" alt="Gold"></a></td></tr><tr><td>GoldenRod</td><td>#DAA520</td><td>rgb(218,165,32)</td><td><a href="https://i.stack.imgur.com/XSTBL.png"><img src="https://i.stack.imgur.com/XSTBL.png" alt="GoldenRod"></a></td></tr><tr><td>Gray</td><td>#808080</td><td>rgb(128,128,128)</td><td><a href="https://i.stack.imgur.com/67NpE.png"><img src="https://i.stack.imgur.com/67NpE.png" alt="Gray"></a></td></tr><tr><td>Grey</td><td>#808080</td><td>rgb(128,128,128)</td><td><a href="https://i.stack.imgur.com/mj8Uh.png"><img src="https://i.stack.imgur.com/mj8Uh.png" alt="Grey"></a></td></tr><tr><td>Green</td><td>#008000</td><td>rgb(0,128,0)</td><td><a href="https://i.stack.imgur.com/U0T5D.png"><img src="https://i.stack.imgur.com/U0T5D.png" alt="Green"></a></td></tr><tr><td>GreenYellow</td><td>#ADFF2F</td><td>rgb(173,255,47)</td><td><a href="https://i.stack.imgur.com/BtLwR.png"><img src="https://i.stack.imgur.com/BtLwR.png" alt="GreenYellow"></a></td></tr><tr><td>HoneyDew</td><td>#F0FFF0</td><td>rgb(240,255,240)</td><td><a href="https://i.stack.imgur.com/rvbJk.png"><img src="https://i.stack.imgur.com/rvbJk.png" alt="HoneyDew"></a></td></tr><tr><td>HotPink</td><td>#FF69B4</td><td>rgb(255,105,180)</td><td><a href="https://i.stack.imgur.com/fIn2e.png"><img src="https://i.stack.imgur.com/fIn2e.png" alt="HotPink"></a></td></tr><tr><td>IndianRed</td><td>#CD5C5C</td><td>rgb(205,92,92)</td><td><a href="https://i.stack.imgur.com/xZV1l.png"><img src="https://i.stack.imgur.com/xZV1l.png" alt="IndianRed"></a></td></tr><tr><td>Indigo</td><td>#4B0082</td><td>rgb(75,0,130)</td><td><a href="https://i.stack.imgur.com/Y9Sn4.png"><img src="https://i.stack.imgur.com/Y9Sn4.png" alt="Indigo"></a></td></tr><tr><td>Ivory</td><td>#FFFFF0</td><td>rgb(255,255,240)</td><td><a href="https://i.stack.imgur.com/prMC1.png"><img src="https://i.stack.imgur.com/prMC1.png" alt="Ivory"></a></td></tr><tr><td>Khaki</td><td>#F0E68C</td><td>rgb(240,230,140)</td><td><a href="https://i.stack.imgur.com/YPrh0.png"><img src="https://i.stack.imgur.com/YPrh0.png" alt="Khaki"></a></td></tr><tr><td>Lavender</td><td>#E6E6FA</td><td>rgb(230,230,250)</td><td><a href="https://i.stack.imgur.com/giHoF.png"><img src="https://i.stack.imgur.com/giHoF.png" alt="Lavender"></a></td></tr><tr><td>LavenderBlush</td><td>#FFF0F5</td><td>rgb(255,240,245)</td><td><a href="https://i.stack.imgur.com/aZGQE.png"><img src="https://i.stack.imgur.com/aZGQE.png" alt="LavenderBlush"></a></td></tr><tr><td>LawnGreen</td><td>#7CFC00</td><td>rgb(124,252,0)</td><td><a href="https://i.stack.imgur.com/adxCj.png"><img src="https://i.stack.imgur.com/adxCj.png" alt="LawnGreen"></a></td></tr><tr><td>LemonChiffon</td><td>#FFFACD</td><td>rgb(255,250,205)</td><td><a href="https://i.stack.imgur.com/38Fr3.png"><img src="https://i.stack.imgur.com/38Fr3.png" alt="LemonChiffon"></a></td></tr><tr><td>LightBlue</td><td>#ADD8E6</td><td>rgb(173,216,230)</td><td><a href="https://i.stack.imgur.com/TWZb7.png"><img src="https://i.stack.imgur.com/TWZb7.png" alt="LightBlue"></a></td></tr><tr><td>LightCoral</td><td>#F08080</td><td>rgb(240,128,128)</td><td><a href="https://i.stack.imgur.com/8Yun8.png"><img src="https://i.stack.imgur.com/8Yun8.png" alt="LightCoral"></a></td></tr><tr><td>LightCyan</td><td>#E0FFFF</td><td>rgb(224,255,255)</td><td><a href="https://i.stack.imgur.com/hC4eY.png"><img src="https://i.stack.imgur.com/hC4eY.png" alt="LightCyan"></a></td></tr><tr><td>LightGoldenRodYellow</td><td>#FAFAD2</td><td>rgb(250,250,210)</td><td><a href="https://i.stack.imgur.com/D3scU.png"><img src="https://i.stack.imgur.com/D3scU.png" alt="LightGoldenRodYellow"></a></td></tr><tr><td>LightGray</td><td>#D3D3D3</td><td>rgb(211,211,211)</td><td><a href="https://i.stack.imgur.com/5A6Ef.png"><img src="https://i.stack.imgur.com/5A6Ef.png" alt="LightGray"></a></td></tr><tr><td>LightGrey</td><td>#D3D3D3</td><td>rgb(211,211,211)</td><td><a href="https://i.stack.imgur.com/gLPoR.png"><img src="https://i.stack.imgur.com/gLPoR.png" alt="LightGrey"></a></td></tr><tr><td>LightGreen</td><td>#90EE90</td><td>rgb(144,238,144)</td><td><a href="https://i.stack.imgur.com/2VvNK.png"><img src="https://i.stack.imgur.com/2VvNK.png" alt="LightGreen"></a></td></tr><tr><td>LightPink</td><td>#FFB6C1</td><td>rgb(255,182,193)</td><td><a href="https://i.stack.imgur.com/Ekikz.png"><img src="https://i.stack.imgur.com/Ekikz.png" alt="LightPink"></a></td></tr><tr><td>LightSalmon</td><td>#FFA07A</td><td>rgb(255,160,122)</td><td><a href="https://i.stack.imgur.com/JxzwJ.png"><img src="https://i.stack.imgur.com/JxzwJ.png" alt="LightSalmon"></a></td></tr><tr><td>LightSeaGreen</td><td>#20B2AA</td><td>rgb(32,178,170)</td><td><a href="https://i.stack.imgur.com/XsjW4.png"><img src="https://i.stack.imgur.com/XsjW4.png" alt="LightSeaGreen"></a></td></tr><tr><td>LightSkyBlue</td><td>#87CEFA</td><td>rgb(135,206,250)</td><td><a href="https://i.stack.imgur.com/txw7K.png"><img src="https://i.stack.imgur.com/txw7K.png" alt="LightSkyBlue"></a></td></tr><tr><td>LightSlateGray</td><td>#778899</td><td>rgb(119,136,153)</td><td><a href="https://i.stack.imgur.com/x2SLs.png"><img src="https://i.stack.imgur.com/x2SLs.png" alt="LightSlateGray"></a></td></tr><tr><td>LightSlateGrey</td><td>#778899</td><td>rgb(119,136,153)</td><td><a href="https://i.stack.imgur.com/k8Y23.png"><img src="https://i.stack.imgur.com/k8Y23.png" alt="LightSlateGrey"></a></td></tr><tr><td>LightSteelBlue</td><td>#B0C4DE</td><td>rgb(176,196,222)</td><td><a href="https://i.stack.imgur.com/8wsSt.png"><img src="https://i.stack.imgur.com/8wsSt.png" alt="LightSteelBlue"></a></td></tr><tr><td>LightYellow</td><td>#FFFFE0</td><td>rgb(255,255,224)</td><td><a href="https://i.stack.imgur.com/QGEjh.png"><img src="https://i.stack.imgur.com/QGEjh.png" alt="LightYellow"></a></td></tr><tr><td>Lime</td><td>#00FF00</td><td>rgb(0,255,0)</td><td><a href="https://i.stack.imgur.com/etPK7.png"><img src="https://i.stack.imgur.com/etPK7.png" alt="Lime"></a></td></tr><tr><td>LimeGreen</td><td>#32CD32</td><td>rgb(50,205,50)</td><td><a href="https://i.stack.imgur.com/IIA3t.png"><img src="https://i.stack.imgur.com/IIA3t.png" alt="LimeGreen"></a></td></tr><tr><td>Linen</td><td>#FAF0E6</td><td>rgb(250,240,230)</td><td><a href="https://i.stack.imgur.com/OSEq5.png"><img src="https://i.stack.imgur.com/OSEq5.png" alt="Linen"></a></td></tr><tr><td>Magenta</td><td>#FF00FF</td><td>rgb(255,0,255)</td><td><a href="https://i.stack.imgur.com/UL5lW.png"><img src="https://i.stack.imgur.com/UL5lW.png" alt="Magenta"></a></td></tr><tr><td>Maroon</td><td>#800000</td><td>rgb(128,0,0)</td><td><a href="https://i.stack.imgur.com/hMH8V.png"><img src="https://i.stack.imgur.com/hMH8V.png" alt="Maroon"></a></td></tr><tr><td>MediumAquaMarine</td><td>#66CDAA</td><td>rgb(102,205,170)</td><td><a href="https://i.stack.imgur.com/6WAqo.png"><img src="https://i.stack.imgur.com/6WAqo.png" alt="MediumAquaMarine"></a></td></tr><tr><td>MediumBlue</td><td>#0000CD</td><td>rgb(0,0,205)</td><td><a href="https://i.stack.imgur.com/6PWeI.png"><img src="https://i.stack.imgur.com/6PWeI.png" alt="MediumBlue"></a></td></tr><tr><td>MediumOrchid</td><td>#BA55D3</td><td>rgb(186,85,211)</td><td><a href="https://i.stack.imgur.com/op66E.png"><img src="https://i.stack.imgur.com/op66E.png" alt="MediumOrchid"></a></td></tr><tr><td>MediumPurple</td><td>#9370DB</td><td>rgb(147,112,219)</td><td><a href="https://i.stack.imgur.com/IKsEM.png"><img src="https://i.stack.imgur.com/IKsEM.png" alt="MediumPurple"></a></td></tr><tr><td>MediumSeaGreen</td><td>#3CB371</td><td>rgb(60,179,113)</td><td><a href="https://i.stack.imgur.com/jweG4.png"><img src="https://i.stack.imgur.com/jweG4.png" alt="MediumSeaGreen"></a></td></tr><tr><td>MediumSlateBlue</td><td>#7B68EE</td><td>rgb(123,104,238)</td><td><a href="https://i.stack.imgur.com/OX3RE.png"><img src="https://i.stack.imgur.com/OX3RE.png" alt="MediumSlateBlue"></a></td></tr><tr><td>MediumSpringGreen</td><td>#00FA9A</td><td>rgb(0,250,154)</td><td><a href="https://i.stack.imgur.com/3B3P5.png"><img src="https://i.stack.imgur.com/3B3P5.png" alt="MediumSpringGreen"></a></td></tr><tr><td>MediumTurquoise</td><td>#48D1CC</td><td>rgb(72,209,204)</td><td><a href="https://i.stack.imgur.com/Eymkn.png"><img src="https://i.stack.imgur.com/Eymkn.png" alt="MediumTurquoise"></a></td></tr><tr><td>MediumVioletRed</td><td>#C71585</td><td>rgb(199,21,133)</td><td><a href="https://i.stack.imgur.com/llyIE.png"><img src="https://i.stack.imgur.com/llyIE.png" alt="MediumTurquoise"></a></td></tr><tr><td>MidnightBlue</td><td>#191970</td><td>rgb(25,25,112)</td><td><a href="https://i.stack.imgur.com/2DJyF.png"><img src="https://i.stack.imgur.com/2DJyF.png" alt="MidnightBlue"></a></td></tr><tr><td>MintCream</td><td>#F5FFFA</td><td>rgb(245,255,250)</td><td><a href="https://i.stack.imgur.com/kdsyq.png"><img src="https://i.stack.imgur.com/kdsyq.png" alt="MintCream"></a></td></tr><tr><td>MistyRose</td><td>#FFE4E1</td><td>rgb(255,228,225)</td><td><a href="https://i.stack.imgur.com/74kMX.png"><img src="https://i.stack.imgur.com/74kMX.png" alt="MistyRose"></a></td></tr><tr><td>Moccasin</td><td>#FFE4B5</td><td>rgb(255,228,181)</td><td><a href="https://i.stack.imgur.com/rN1Vt.png"><img src="https://i.stack.imgur.com/rN1Vt.png" alt="Moccasin"></a></td></tr><tr><td>NavajoWhite</td><td>#FFDEAD</td><td>rgb(255,222,173)</td><td><a href="https://i.stack.imgur.com/YPIiR.png"><img src="https://i.stack.imgur.com/YPIiR.png" alt="NavajoWhite"></a></td></tr><tr><td>Navy</td><td>#000080</td><td>rgb(0,0,128)</td><td><a href="https://i.stack.imgur.com/crswN.png"><img src="https://i.stack.imgur.com/crswN.png" alt="Navy"></a></td></tr><tr><td>OldLace</td><td>#FDF5E6</td><td>rgb(253,245,230)</td><td><a href="https://i.stack.imgur.com/6KGAc.png"><img src="https://i.stack.imgur.com/6KGAc.png" alt="OldLace"></a></td></tr><tr><td>Olive</td><td>#808000</td><td>rgb(128,128,0)</td><td><a href="https://i.stack.imgur.com/iC0zi.png"><img src="https://i.stack.imgur.com/iC0zi.png" alt="Olive"></a></td></tr><tr><td>OliveDrab</td><td>#6B8E23</td><td>rgb(107,142,35)</td><td><a href="https://i.stack.imgur.com/QWYbj.png"><img src="https://i.stack.imgur.com/QWYbj.png" alt="OliveDrab"></a></td></tr><tr><td>Orange</td><td>#FFA500</td><td>rgb(255,165,0)</td><td><a href="https://i.stack.imgur.com/PLSrS.png"><img src="https://i.stack.imgur.com/PLSrS.png" alt="Orange"></a></td></tr><tr><td>OrangeRed</td><td>#FF4500</td><td>rgb(255,69,0)</td><td><a href="https://i.stack.imgur.com/CpUCV.png"><img src="https://i.stack.imgur.com/CpUCV.png" alt="OrangeRed"></a></td></tr><tr><td>Orchid</td><td>#DA70D6</td><td>rgb(218,112,214)</td><td><a href="https://i.stack.imgur.com/BtICR.png"><img src="https://i.stack.imgur.com/BtICR.png" alt="Orchid"></a></td></tr><tr><td>PaleGoldenRod</td><td>#EEE8AA</td><td>rgb(238,232,170)</td><td><a href="https://i.stack.imgur.com/B7grq.png"><img src="https://i.stack.imgur.com/B7grq.png" alt="PaleGoldenRod"></a></td></tr><tr><td>PaleGreen</td><td>#98FB98</td><td>rgb(152,251,152)</td><td><a href="https://i.stack.imgur.com/MywLd.png"><img src="https://i.stack.imgur.com/MywLd.png" alt="PaleGreen"></a></td></tr><tr><td>PaleTurquoise</td><td>#AFEEEE</td><td>rgb(175,238,238)</td><td><a href="https://i.stack.imgur.com/0IYp9.png"><img src="https://i.stack.imgur.com/0IYp9.png" alt="PaleTurquoise"></a></td></tr><tr><td>PaleVioletRed</td><td>#DB7093</td><td>rgb(219,112,147)</td><td><a href="https://i.stack.imgur.com/NTY24.png"><img src="https://i.stack.imgur.com/NTY24.png" alt="PaleVioletRed"></a></td></tr><tr><td>PapayaWhip</td><td>#FFEFD5</td><td>rgb(255,239,213)</td><td><a href="https://i.stack.imgur.com/3dl4v.png"><img src="https://i.stack.imgur.com/3dl4v.png" alt="PapayaWhip"></a></td></tr><tr><td>PeachPuff</td><td>#FFDAB9</td><td>rgb(255,218,185)</td><td><a href="https://i.stack.imgur.com/cYrOX.png"><img src="https://i.stack.imgur.com/cYrOX.png" alt="PeachPuff"></a></td></tr><tr><td>Peru</td><td>#CD853F</td><td>rgb(205,133,63)</td><td><a href="https://i.stack.imgur.com/0TaRO.png"><img src="https://i.stack.imgur.com/0TaRO.png" alt="Peru"></a></td></tr><tr><td>Pink</td><td>#FFC0CB</td><td>rgb(255,192,203)</td><td><a href="https://i.stack.imgur.com/2sr8O.png"><img src="https://i.stack.imgur.com/2sr8O.png" alt="Pink"></a></td></tr><tr><td>Plum</td><td>#DDA0DD</td><td>rgb(221,160,221)</td><td><a href="https://i.stack.imgur.com/NNjmo.png"><img src="https://i.stack.imgur.com/NNjmo.png" alt="Plum"></a></td></tr><tr><td>PowderBlue</td><td>#B0E0E6</td><td>rgb(176,224,230)</td><td><a href="https://i.stack.imgur.com/2v6DK.png"><img src="https://i.stack.imgur.com/2v6DK.png" alt="PowderBlue"></a></td></tr><tr><td>Purple</td><td>#800080</td><td>rgb(128,0,128)</td><td><a href="https://i.stack.imgur.com/qD3Ou.png"><img src="https://i.stack.imgur.com/qD3Ou.png" alt="Purple"></a></td></tr><tr><td>RebeccaPurple</td><td>#663399</td><td>rgb(102,51,153)</td><td><a href="https://i.stack.imgur.com/lBOwr.png"><img src="https://i.stack.imgur.com/lBOwr.png" alt="RebeccaPurple"></a></td></tr><tr><td>Red</td><td>#FF0000</td><td>rgb(255,0,0)</td><td><a href="https://i.stack.imgur.com/uiBYF.png"><img src="https://i.stack.imgur.com/uiBYF.png" alt="Red"></a></td></tr><tr><td>RosyBrown</td><td>#BC8F8F</td><td>rgb(188,143,143)</td><td><a href="https://i.stack.imgur.com/PJFid.png"><img src="https://i.stack.imgur.com/PJFid.png" alt="RosyBrown"></a></td></tr><tr><td>RoyalBlue</td><td>#4169E1</td><td>rgb(65,105,225)</td><td><a href="https://i.stack.imgur.com/nt8Is.png"><img src="https://i.stack.imgur.com/nt8Is.png" alt="RoyalBlue"></a></td></tr><tr><td>SaddleBrown</td><td>#8B4513</td><td>rgb(139,69,19)</td><td><a href="https://i.stack.imgur.com/wOUue.png"><img src="https://i.stack.imgur.com/wOUue.png" alt="SaddleBrown"></a></td></tr><tr><td>Salmon</td><td>#FA8072</td><td>rgb(250,128,114)</td><td><a href="https://i.stack.imgur.com/eJ0bG.png"><img src="https://i.stack.imgur.com/eJ0bG.png" alt="Salmon"></a></td></tr><tr><td>SandyBrown</td><td>#F4A460</td><td>rgb(244,164,96)</td><td><a href="https://i.stack.imgur.com/75qiD.png"><img src="https://i.stack.imgur.com/75qiD.png" alt="SandyBrown"></a></td></tr><tr><td>SeaGreen</td><td>#2E8B57</td><td>rgb(46,139,87)</td><td><a href="https://i.stack.imgur.com/xZIev.png"><img src="https://i.stack.imgur.com/xZIev.png" alt="SeaGreen"></a></td></tr><tr><td>SeaShell</td><td>#FFF5EE</td><td>rgb(255,245,238)</td><td><a href="https://i.stack.imgur.com/TyMam.png"><img src="https://i.stack.imgur.com/TyMam.png" alt="SeaShell"></a></td></tr><tr><td>Sienna</td><td>#A0522D</td><td>rgb(160,82,45)</td><td><a href="https://i.stack.imgur.com/x8Jrq.png"><img src="https://i.stack.imgur.com/x8Jrq.png" alt="Sienna"></a></td></tr><tr><td>Silver</td><td>#C0C0C0</td><td>rgb(192,192,192)</td><td><a href="https://i.stack.imgur.com/hh4eT.png"><img src="https://i.stack.imgur.com/hh4eT.png" alt="Silver"></a></td></tr><tr><td>SkyBlue</td><td>#87CEEB</td><td>rgb(135,206,235)</td><td><a href="https://i.stack.imgur.com/tnrm5.png"><img src="https://i.stack.imgur.com/tnrm5.png" alt="SkyBlue"></a></td></tr><tr><td>SlateBlue</td><td>#6A5ACD</td><td>rgb(106,90,205)</td><td><a href="https://i.stack.imgur.com/ubuww.png"><img src="https://i.stack.imgur.com/ubuww.png" alt="SlateBlue"></a></td></tr><tr><td>SlateGray</td><td>#708090</td><td>rgb(112,128,144)</td><td><a href="https://i.stack.imgur.com/pHN1B.png"><img src="https://i.stack.imgur.com/pHN1B.png" alt="SlateGray"></a></td></tr><tr><td>SlateGrey</td><td>#708090</td><td>rgb(112,128,144)</td><td><a href="https://i.stack.imgur.com/uGW3Z.png"><img src="https://i.stack.imgur.com/uGW3Z.png" alt="SlateGrey"></a></td></tr><tr><td>Snow</td><td>#FFFAFA</td><td>rgb(255,250,250)</td><td><a href="https://i.stack.imgur.com/ls53F.png"><img src="https://i.stack.imgur.com/ls53F.png" alt="Snow"></a></td></tr><tr><td>SpringGreen</td><td>#00FF7F</td><td>rgb(0,255,127)</td><td><a href="https://i.stack.imgur.com/SWuAT.png"><img src="https://i.stack.imgur.com/SWuAT.png" alt="SpringGreen"></a></td></tr><tr><td>SteelBlue</td><td>#4682B4</td><td>rgb(70,130,180)</td><td><a href="https://i.stack.imgur.com/gK6oL.png"><img src="https://i.stack.imgur.com/gK6oL.png" alt="SteelBlue"></a></td></tr><tr><td>Tan</td><td>#D2B48C</td><td>rgb(210,180,140)</td><td><a href="https://i.stack.imgur.com/UOatT.png"><img src="https://i.stack.imgur.com/UOatT.png" alt="tan"></a></td></tr><tr><td>Teal</td><td>#008080</td><td>rgb(0,128,128)</td><td><a href="https://i.stack.imgur.com/jIYOb.png"><img src="https://i.stack.imgur.com/jIYOb.png" alt="Teal"></a></td></tr><tr><td>Thistle</td><td>#D8BFD8</td><td>rgb(216,191,216)</td><td><a href="https://i.stack.imgur.com/5EamN.png"><img src="https://i.stack.imgur.com/5EamN.png" alt="Thistle"></a></td></tr><tr><td>Tomato</td><td>#FF6347</td><td>rgb(255,99,71)</td><td><a href="https://i.stack.imgur.com/IChJO.png"><img src="https://i.stack.imgur.com/IChJO.png" alt="Tomato"></a></td></tr><tr><td>Turquoise</td><td>#40E0D0</td><td>rgb(64,224,208)</td><td><a href="https://i.stack.imgur.com/vPdms.png"><img src="https://i.stack.imgur.com/vPdms.png" alt="Turquoise"></a></td></tr><tr><td>Violet</td><td>#EE82EE</td><td>rgb(238,130,238)</td><td><a href="https://i.stack.imgur.com/eWWnU.png"><img src="https://i.stack.imgur.com/eWWnU.png" alt="Violet"></a></td></tr><tr><td>Wheat</td><td>#F5DEB3</td><td>rgb(245,222,179)</td><td><a href="https://i.stack.imgur.com/XN0kJ.png"><img src="https://i.stack.imgur.com/XN0kJ.png" alt="Wheat"></a></td></tr><tr><td>White</td><td>#FFFFFF</td><td>rgb(255,255,255)</td><td><a href="https://i.stack.imgur.com/hpQVN.png"><img src="https://i.stack.imgur.com/hpQVN.png" alt="White"></a></td></tr><tr><td>WhiteSmoke</td><td>#F5F5F5</td><td>rgb(245,245,245)</td><td><a href="https://i.stack.imgur.com/cAQ4D.png"><img src="https://i.stack.imgur.com/cAQ4D.png" alt="WhiteSmoke"></a></td></tr><tr><td>Yellow</td><td>#FFFF00</td><td>rgb(255,255,0)</td><td><a href="https://i.stack.imgur.com/3fAnQ.png"><img src="https://i.stack.imgur.com/3fAnQ.png" alt="Yellow"></a></td></tr><tr><td>YellowGreen</td><td>#9ACD32</td><td>rgb(154,205,50)</td><td><a href="https://i.stack.imgur.com/q7mKa.png"><img src="https://i.stack.imgur.com/q7mKa.png" alt="YellowGreen"></a></td></tr></tbody></table>
+<p>In addition to the named colors, there is also the keyword <code dir="auto">transparent</code>, which represents a fully-transparent black: <code dir="auto">rgba(0,0,0,0)</code></p>
+<div class="sl-heading-wrapper level-h2"><h2 id="hexadecimal-value">Hexadecimal Value</h2><a class="sl-anchor-link" href="#hexadecimal-value"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Hexadecimal Value”</span></a></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="background">Background</h3><a class="sl-anchor-link" href="#background"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Background”</span></a></div>
+<p>CSS colors may also be represented as a hex triplet, where the members represent the red, green and blue components of a color. Each of these values represents a number in the range of <code dir="auto">00</code> to <code dir="auto">FF</code>, or <code dir="auto">0</code> to <code dir="auto">255</code> in decimal notation. Uppercase and/or lowercase Hexidecimal values may be used (i.e. <code dir="auto">#3fc</code> = <code dir="auto">#3FC</code> = <code dir="auto">#33ffCC</code>). The browser interprets <code dir="auto">#369</code> as <code dir="auto">#336699</code>. If that is not what you intended but rather wanted <code dir="auto">#306090</code>, you need to specify that explicitly.</p>
+<p>The total number of colors that can be represented with hex notation is 256 ^ 3 or 16,777,216.</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="syntax">Syntax</h3><a class="sl-anchor-link" href="#syntax"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Syntax”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">color: </span><span style="--0:#FFFFFF;--1:#984E4D">#rrggbb;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">color: </span><span style="--0:#FFFFFF;--1:#984E4D">#rgb;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="color: #rrggbb;color: #rgb;"><div></div></button></div></figure></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">rr</code></td><td><code dir="auto">00</code> - <code dir="auto">FF</code> for the amount of red</td></tr><tr><td><code dir="auto">gg</code></td><td><code dir="auto">00</code> - <code dir="auto">FF</code> for the amount of green</td></tr><tr><td><code dir="auto">bb</code></td><td><code dir="auto">00</code> - <code dir="auto">FF</code> for the amount of blue</td></tr></tbody></table>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.some-class</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#919F9F;--1:#5F636F">/* This is equivalent to using the color keyword 'blue' */</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--1:#AA0982"><span style="--0:#F78C6C">#</span><span style="--0:#FFEB95">0000ff</span></span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.also-blue</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#919F9F;--1:#5F636F">/* If you want to specify each range value with a single number, you can!</span></div></div><div class="ec-line"><div class="code"><span class="indent"><span style="--0:#919F9F;--1:#5F636F">       </span></span><span style="--0:#919F9F;--1:#5F636F">This is equivalent to '#0000FF' (and 'blue') */</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--1:#AA0982"><span style="--0:#F78C6C">#</span><span style="--0:#FFEB95">00f</span></span><span style="--0:#D6DEEB;--1:#403F53">;</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code=".some-class {  /* This is equivalent to using the color keyword &#x27;blue&#x27; */  color: #0000ff;}.also-blue {  /* If you want to specify each range value with a single number, you can!       This is equivalent to &#x27;#0000FF&#x27; (and &#x27;blue&#x27;) */  color: #00f;}"><div></div></button></div></figure></div>
+<p><a href="https://en.wikipedia.org/wiki/Hexadecimal">Hexadecimal notation</a> is used to specify color values in the RGB color format, per the <a href="https://www.w3.org/TR/css3-color/#numerical">W3C’s ‘Numerical color values’</a>.</p>
+<p>There are a lot of tools available on the Internet for looking up hexadecimal (or simply hex) color values.</p>
+<p>Search for “<strong>hex color palette</strong>” or “<strong>hex color picker</strong>” with your favorite web browser to find a bunch of options!</p>
+<p>Hex values always start with a pound sign (#), are up to six “digits” long, and are case-insensitive: that is, they don’t care about capitalization. <code dir="auto">#FFC125</code> and <code dir="auto">#ffc125</code> are the same color.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="rgb-notation">rgb() Notation</h2><a class="sl-anchor-link" href="#rgb-notation"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “rgb() Notation”</span></a></div>
+<p>RGB is an additive color model which represents colors as mixtures of red, green, and blue light. In essence, the RGB representation is the decimal equivalent of the Hexadecimal Notation. In Hexadecimal each number ranges from 00-FF which is equivalent to 0-255 in decimal and 0%-100% in percentages.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.some-class</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#919F9F;--1:#5F636F">/* Scalar RGB, equivalent to 'blue'*/</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">rgb</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">255</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.also-blue</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#919F9F;--1:#5F636F">/* Percentile RGB values*/</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">rgb</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--1:#AA0982"><span style="--0:#F78C6C">0</span><span style="--0:#FFEB95">%</span></span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--1:#AA0982"><span style="--0:#F78C6C">0</span><span style="--0:#FFEB95">%</span></span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--1:#AA0982"><span style="--0:#F78C6C">100</span><span style="--0:#FFEB95">%</span></span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code=".some-class {  /* Scalar RGB, equivalent to &#x27;blue&#x27;*/  color: rgb(0, 0, 255);}.also-blue {  /* Percentile RGB values*/  color: rgb(0%, 0%, 100%);}"><div></div></button></div></figure></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="syntax-1">Syntax</h3><a class="sl-anchor-link" href="#syntax-1"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Syntax”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">rgb(&#x3C;red</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">, &#x3C;green</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">, &#x3C;blue</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#D6DEEB;--1:#403F53">)</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="rgb(<red>, <green>, <blue>)"><div></div></button></div></figure></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">&#x3C;red></code></td><td>an integer from 0 - 255 or percentage from 0 - 100%</td></tr><tr><td><code dir="auto">&#x3C;green></code></td><td>an integer from 0 - 255 or percentage from 0 - 100%</td></tr><tr><td><code dir="auto">&#x3C;blue></code></td><td>an integer from 0 - 255 or percentage from 0 - 100%</td></tr></tbody></table>
+<div class="sl-heading-wrapper level-h2"><h2 id="rgba-notation">rgba() Notation</h2><a class="sl-anchor-link" href="#rgba-notation"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “rgba() Notation”</span></a></div>
+<p>Similar to <a href="http://stackoverflow.com/documentation/css/644/colors/2101/rgb-notation">rgb() notation</a>, but with an additional alpha (opacity) value.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.red</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#919F9F;--1:#5F636F">/* Opaque red */</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">rgba</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">255</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">1</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div><div class="ec-line"><div class="code">
+</div></div><div class="ec-line"><div class="code"><span style="--0:#C5E478;--1:#3B61B0">.red-50p</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#919F9F;--1:#5F636F">/* Half-translucent red. */</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">rgba</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">255</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--0:#F78C6C;--1:#AA0982">0.5</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code=".red {  /* Opaque red */  color: rgba(255, 0, 0, 1);}.red-50p {  /* Half-translucent red. */  color: rgba(255, 0, 0, 0.5);}"><div></div></button></div></figure></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="syntax-2">Syntax</h3><a class="sl-anchor-link" href="#syntax-2"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Syntax”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">rgba(&#x3C;red</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">, &#x3C;green</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">, &#x3C;blue</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">, &#x3C;alpha</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="rgba(<red>, <green>, <blue>, <alpha>);"><div></div></button></div></figure></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">&#x3C;red></code></td><td>an integer from 0 - 255 or percentage from 0 - 100%</td></tr><tr><td><code dir="auto">&#x3C;green></code></td><td>an integer from 0 - 255 or percentage from 0 - 100%</td></tr><tr><td><code dir="auto">&#x3C;blue></code></td><td>an integer from 0 - 255 or percentage from 0 - 100%</td></tr><tr><td><code dir="auto">&#x3C;alpha></code></td><td>a number from 0 - 1, where 0.0 is fully transparent and 1.0 is fully opaque</td></tr></tbody></table>
+<div class="sl-heading-wrapper level-h2"><h2 id="hsl-notation">hsl() Notation</h2><a class="sl-anchor-link" href="#hsl-notation"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “hsl() Notation”</span></a></div>
+<p>HSL stands for <strong>hue</strong> (“which color”), <strong>saturation</strong> (“how much color”) and <strong>lightness</strong> (“how much white”).</p>
+<p>Hue is represented as an angle from 0° to 360° (without units), while saturation and lightness are represented as percentages.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#FF6D6D;--1:#984E4D">p</span><span style="--0:#D6DEEB;--1:#403F53"> {</span></div></div><div class="ec-line"><div class="code"><span class="indent">  </span><span style="--0:#80CBC4;--1:#096E72">color</span><span style="--0:#D6DEEB;--1:#403F53">: </span><span style="--0:#C5E478;--1:#3B61B0">hsl</span><span style="--0:#D6DEEB;--1:#403F53">(</span><span style="--0:#F78C6C;--1:#AA0982">240</span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--1:#AA0982"><span style="--0:#F78C6C">100</span><span style="--0:#FFEB95">%</span></span><span style="--0:#D6DEEB;--1:#403F53">, </span><span style="--1:#AA0982"><span style="--0:#F78C6C">50</span><span style="--0:#FFEB95">%</span></span><span style="--0:#D6DEEB;--1:#403F53">); </span><span style="--0:#919F9F;--1:#5F636F">/* Blue */</span></div></div><div class="ec-line"><div class="code"><span style="--0:#D6DEEB;--1:#403F53">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="p {  color: hsl(240, 100%, 50%); /* Blue */}"><div></div></button></div></figure></div>
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/c/cb/HSL_color_solid_cylinder_alpha_lowgamma.png"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cb/HSL_color_solid_cylinder_alpha_lowgamma.png" alt="The HSL Color Wheel"></a></p>
+<div class="sl-heading-wrapper level-h3"><h3 id="syntax-3">Syntax</h3><a class="sl-anchor-link" href="#syntax-3"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Syntax”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">color: hsl(&#x3C;hue</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">, &#x3C;saturation</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">%, &#x3C;lightness</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">%</span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="color: hsl(<hue>, <saturation>%, <lightness>%);"><div></div></button></div></figure></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">&#x3C;hue></code></td><td>specified in degrees around the color wheel (without units), where 0° is red, 60° is yellow, 120° is green, 180° is cyan, 240° is blue, 300° is magenta, and 360° is red</td></tr><tr><td><code dir="auto">&#x3C;saturation></code></td><td>specified in percentage where 0% is fully desaturated (grayscale) and 100% is fully saturated (vividly colored)</td></tr><tr><td><code dir="auto">&#x3C;lightness></code></td><td>specified in percentage where 0% is fully black and 100% is fully white</td></tr></tbody></table>
+<div class="sl-heading-wrapper level-h3"><h3 id="notes">Notes</h3><a class="sl-anchor-link" href="#notes"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Notes”</span></a></div>
+<li>
+A saturation of 0% always produces a grayscale color; changing the hue has no effect.
+</li>
+<li>
+A lightness of 0% always produces black, and 100% always produces white; changing the hue or saturation has no effect.
+</li>
+<div class="sl-heading-wrapper level-h2"><h2 id="hsla-notation">hsla() Notation</h2><a class="sl-anchor-link" href="#hsla-notation"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “hsla() Notation”</span></a></div>
+<p>Similar to <a href="http://stackoverflow.com/documentation/css/644/colors/2102/hsl-notation">hsl() notation</a>, but with an added alpha (opacity) value.</p>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">hsla(240, 100%, 50%, 0</span><span style="--0:#D6DEEB;--1:#403F53">)     </span><span style="--0:#919F9F;--1:#5F636F">/* transparent */</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">hsla(240, 100%, 50%, 0</span><span style="--0:#C5E478;--1:#3B61B0">.5</span><span style="--0:#D6DEEB;--1:#403F53">)   </span><span style="--0:#919F9F;--1:#5F636F">/* half-translucent blue */</span></div></div><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">hsla(240, 100%, 50%, 1</span><span style="--0:#D6DEEB;--1:#403F53">)     </span><span style="--0:#919F9F;--1:#5F636F">/* fully opaque blue */</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="hsla(240, 100%, 50%, 0)     /* transparent */hsla(240, 100%, 50%, 0.5)   /* half-translucent blue */hsla(240, 100%, 50%, 1)     /* fully opaque blue */"><div></div></button></div></figure></div>
+<div class="sl-heading-wrapper level-h3"><h3 id="syntax-4">Syntax</h3><a class="sl-anchor-link" href="#syntax-4"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Syntax”</span></a></div>
+<div class="expressive-code"><figure class="frame not-content"><figcaption class="header"></figcaption><pre data-language="css"><code><div class="ec-line"><div class="code"><span style="--0:#C792EA;--1:#8844AE">hsla(&#x3C;hue</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">, &#x3C;saturation</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">%, &#x3C;lightness</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#C792EA;--1:#8844AE">%, &#x3C;alpha</span><span style="--0:#7FDBCA;--1:#096E72">></span><span style="--0:#D6DEEB;--1:#403F53">);</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="hsla(<hue>, <saturation>%, <lightness>%, <alpha>);"><div></div></button></div></figure></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Value</th><th>Description</th></tr></thead><tbody><tr><td><code dir="auto">&#x3C;hue></code></td><td>specified in degrees around the color wheel (without units), where 0° is red, 60° is yellow, 120° is green, 180° is cyan, 240° is blue, 300° is magenta, and 360° is red</td></tr><tr><td><code dir="auto">&#x3C;saturation></code></td><td>percentage where 0% is fully desaturated (grayscale) and 100% is fully saturated (vividly colored)</td></tr><tr><td><code dir="auto">&#x3C;lightness></code></td><td>percentage where 0% is fully black and 100% is fully white</td></tr><tr><td><code dir="auto">&#x3C;alpha></code></td><td>a number from 0 - 1 where 0 is fully transparent and 1 is fully opaque</td></tr></tbody></table>
+<div class="sl-heading-wrapper level-h4"><h4 id="syntax-5">Syntax</h4><a class="sl-anchor-link" href="#syntax-5"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Section titled “Syntax”</span></a></div>
+<ul>
+<li>color: #rgb</li>
+<li>color: #rrggbb</li>
+<li>color: rgb[a](<red>, <green>, <blue>[, <alpha>])</alpha></blue></green></red></li>
+<li>color: hsl[a](<hue>, &#x3C;saturation%>, &#x3C;lightness%>[, <alpha>])</alpha></hue></li>
+<li>color: <a href="http://stackoverflow.com/documentation/css/644/colors/2099/color-name">colorkeyword</a> /_ green, blue, yellow, orange, red, ..etc _/</li>
+</ul> </div> <footer class="sl-flex astro-3yyafb3n"> <div class="meta sl-flex astro-3yyafb3n">   </div> <div class="pagination-links print:hidden astro-u2l5gyhi" dir="ltr"> <a href="/css/cascading-and-specificity/" rel="prev" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg> <span class="astro-u2l5gyhi"> Previous <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">Cascading and Specificity</span> </span> </a> <a href="/css/opacity/" rel="next" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"/></svg> <span class="astro-u2l5gyhi"> Next <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">Opacity</span> </span> </a> </div>  </footer> </div> </div>  </main> </div> </div> </div> </div> </body></html>
